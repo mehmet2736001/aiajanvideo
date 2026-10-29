@@ -5,10 +5,15 @@ Comprehensive Turkish & Quranic Word Stitching and Subtitle Alignment Engine.
 Solves Whisper AI BPE tokenizer artifacts where words with apostrophes (' / ’)
 or glottal stops (e.g. Kur'an, Kur'an-ı Kerim, Allah'ın, Türkiye'de) are
 erroneously split into multiple tokens/words (e.g. "Kur'" and "an").
+
+Also provides Forced Alignment between custom user-pasted scripts and audio
+duration, ensuring 100% fidelity to the user's exact words without relying
+blindly on Whisper AI transcription.
 """
 
+import difflib
 import re
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 
 # All possible apostrophe / glottal stop characters
 APOSTROPHES = ("'", "’", "‘", "ʼ", "`", "´")
@@ -205,3 +210,185 @@ def build_subtitle_chunks(
         i += len(chunk)
 
     return subtitles
+
+
+def normalize_for_match(token: str) -> str:
+    """Normalizes token for fuzzy phonetic/sequence comparison."""
+    t = token.lower()
+    t = re.sub(r"['’‘ʼ`´\-]", "", t)
+    t = re.sub(r"[^\w\s]", "", t)
+    return t.strip()
+
+
+def token_similarity(a: str, b: str) -> float:
+    """Computes similarity ratio between two normalized tokens."""
+    if a == b:
+        return 1.0
+    if not a or not b:
+        return 0.0
+    if a.startswith(b) or b.startswith(a):
+        return 0.85
+    return difflib.SequenceMatcher(None, a, b).ratio()
+
+
+def distribute_words_by_duration(
+    tokens: List[str],
+    start_time: float,
+    end_time: float
+) -> List[Dict[str, Any]]:
+    """
+    Distributes tokens proportionally across a time window [start_time, end_time],
+    weighted by character length so longer words receive appropriately more time.
+    """
+    if not tokens:
+        return []
+    total_dur = max(0.3, end_time - start_time)
+    weights = [max(2, len(t)) for t in tokens]
+    total_weight = sum(weights)
+
+    words = []
+    cur_t = start_time
+    for t, w in zip(tokens, weights):
+        word_dur = total_dur * (w / total_weight)
+        s = round(cur_t, 2)
+        e = round(min(end_time, cur_t + word_dur), 2)
+        words.append({
+            "word": t,
+            "text": t,
+            "start": s,
+            "end": e
+        })
+        cur_t += word_dur
+
+    return words
+
+
+def align_custom_transcript_to_audio(
+    user_text: str,
+    audio_duration: float,
+    whisper_words: Optional[List[Dict[str, Any]]] = None
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+    """
+    FORCED ALIGNMENT ENGINE:
+    Aligns the user's exact pasted script to the audio duration and acoustic Whisper timestamps.
+    
+    GUARANTEES:
+    1. Every single word in the resulting subtitles is 100% the user's exact text
+       (preserving spelling, capitalization, punctuation, apostrophes like Kur'an, Allah'ın).
+    2. Whisper AI is used strictly as an acoustic timing guide; Whisper's misheard words,
+       hallucinations, and spelling mistakes NEVER leak onto the screen.
+    3. If Whisper is unavailable or fails, user words are smoothly distributed across the audio.
+    4. Returns (words, subtitles) ready for Remotion & web timeline rendering.
+    """
+    cleaned_text = clean_text_apostrophes(user_text)
+    user_tokens = [w for w in cleaned_text.split() if w]
+    if not user_tokens:
+        return [], []
+
+    audio_duration = max(1.0, float(audio_duration))
+    total_words = len(user_tokens)
+
+    # If no whisper words provided or whisper failed, distribute by character-length weights
+    if not whisper_words:
+        aligned_words = distribute_words_by_duration(user_tokens, 0.2, audio_duration - 0.2)
+        subtitles = build_subtitle_chunks(aligned_words, chunk_size=3)
+        return aligned_words, subtitles
+
+    # First stitch Whisper tokens to avoid fragmented acoustic references
+    stitched_whisper = stitch_whisper_word_tokens(whisper_words)
+
+    # 1. Prepare normalized token lists
+    u_norm = [normalize_for_match(w) for w in user_tokens]
+    w_norm = [normalize_for_match(w.get("word") or w.get("text") or "") for w in stitched_whisper]
+
+    # 2. Monotonic greedy / sequence alignment
+    matched_whisper: Dict[int, int] = {}
+    last_w_idx = -1
+
+    for u_idx, u_w in enumerate(u_norm):
+        if not u_w:
+            continue
+        best_w_idx = -1
+        best_score = 0.0
+
+        # Look in a window around expected relative position
+        expected_w = int((u_idx / total_words) * len(w_norm))
+        search_start = max(last_w_idx + 1, expected_w - 7)
+        search_end = min(len(w_norm), expected_w + 8)
+
+        for w_idx in range(search_start, search_end):
+            score = token_similarity(u_w, w_norm[w_idx])
+            if score > best_score and score >= 0.70:
+                best_score = score
+                best_w_idx = w_idx
+
+        if best_w_idx != -1:
+            matched_whisper[u_idx] = best_w_idx
+            last_w_idx = best_w_idx
+
+    # If matching ratio is too low (< 15%), fallback to pure proportional distribution within speech bounds
+    if len(matched_whisper) < max(1, total_words * 0.15):
+        first_t = float(stitched_whisper[0].get("start", 0.2)) if stitched_whisper else 0.2
+        last_t = float(stitched_whisper[-1].get("end", audio_duration - 0.2)) if stitched_whisper else (audio_duration - 0.2)
+        aligned_words = distribute_words_by_duration(user_tokens, max(0.1, first_t), min(audio_duration - 0.1, last_t))
+        subtitles = build_subtitle_chunks(aligned_words, chunk_size=3)
+        return aligned_words, subtitles
+
+    # 3. Build timestamp anchors for each user token
+    anchor_times: Dict[int, Tuple[float, float]] = {}
+    for u_idx, w_idx in matched_whisper.items():
+        w_obj = stitched_whisper[w_idx]
+        anchor_times[u_idx] = (float(w_obj.get("start", 0.0)), float(w_obj.get("end", 0.0)))
+
+    # 4. Interpolate missing user tokens
+    result_words: List[Dict[str, Any]] = []
+    i = 0
+    while i < total_words:
+        if i in anchor_times:
+            s, e = anchor_times[i]
+            result_words.append({
+                "word": user_tokens[i],
+                "text": user_tokens[i],
+                "start": round(s, 2),
+                "end": round(max(s + 0.15, e), 2)
+            })
+            i += 1
+        else:
+            # Find run of unanchored words: i ... next_anchor - 1
+            start_run = i
+            while i < total_words and i not in anchor_times:
+                i += 1
+            end_run = i  # exclusive
+
+            # Determine boundary times [t_start, t_end]
+            if start_run == 0:
+                # Preceding run before first anchor
+                next_start = anchor_times[end_run][0]
+                run_dur_est = sum(max(2, len(user_tokens[k])) for k in range(start_run, end_run)) * 0.05
+                t_start = max(0.1, next_start - run_dur_est)
+                t_end = next_start
+            elif end_run == total_words:
+                # Trailing run after last anchor
+                prev_end = anchor_times[start_run - 1][1]
+                t_start = prev_end
+                t_end = min(audio_duration - 0.1, prev_end + sum(max(2, len(user_tokens[k])) for k in range(start_run, end_run)) * 0.06)
+            else:
+                prev_end = anchor_times[start_run - 1][1]
+                next_start = anchor_times[end_run][0]
+                t_start = prev_end
+                t_end = max(prev_end + 0.15 * (end_run - start_run), next_start)
+
+            sub_words = distribute_words_by_duration(user_tokens[start_run:end_run], t_start, t_end)
+            result_words.extend(sub_words)
+
+    # Final monotonicity and overlap adjustment pass
+    for idx in range(1, len(result_words)):
+        if result_words[idx]["start"] < result_words[idx - 1]["end"]:
+            mid = (result_words[idx - 1]["end"] + result_words[idx]["start"]) / 2
+            result_words[idx - 1]["end"] = round(mid, 2)
+            result_words[idx]["start"] = round(mid, 2)
+            if result_words[idx]["end"] <= result_words[idx]["start"]:
+                result_words[idx]["end"] = round(result_words[idx]["start"] + 0.18, 2)
+
+    subtitles = build_subtitle_chunks(result_words, chunk_size=3)
+    return result_words, subtitles

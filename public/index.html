@@ -286,18 +286,18 @@
             </div>
           </div>
 
-          <!-- Card 4: Ses ile Otomatik Kurgu -->
-          <div onclick="document.getElementById('dash-audio-upload').click()" class="group p-5 bg-[#0d1322] hover:bg-[#121a2d] border border-slate-800 hover:border-purple-400/60 rounded-3xl cursor-pointer transition transform hover:-translate-y-1 shadow-xl flex flex-col justify-between">
+          <!-- Card 4: Ses ve Metin ile Otomatik Kurgu -->
+          <div onclick="openAudioUploadModal()" class="group p-5 bg-[#0d1322] hover:bg-[#121a2d] border border-slate-800 hover:border-purple-400/60 rounded-3xl cursor-pointer transition transform hover:-translate-y-1 shadow-xl flex flex-col justify-between">
             <div>
               <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
                 <i class="fa-solid fa-microphone-lines"></i>
               </div>
-              <div class="font-extrabold text-sm text-white group-hover:text-purple-300 transition">Ses Aktararak Kurgula</div>
-              <p class="text-xs text-slate-400 mt-1 leading-relaxed">Kendi ses kaydınızı yükleyin; Whisper altyazıları çıkarsın ve sahneleri otomatik dizsin.</p>
+              <div class="font-extrabold text-sm text-white group-hover:text-purple-300 transition">Ses & Metin ile Kurgula</div>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">Kendi sesinizi yükleyin; metninizi yapıştırın. Yapıştırdığınız metin ekranda hatasız ve birebir aksın.</p>
               <input type="file" id="dash-audio-upload" accept="audio/*" class="hidden" onchange="uploadDashboardAudio(this.files[0])">
             </div>
             <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-purple-400 font-bold">
-              <span>Ses Dosyası Seç</span>
+              <span>Ses ve Metin Ekle</span>
               <i class="fa-solid fa-cloud-arrow-up group-hover:translate-x-1 transition"></i>
             </div>
           </div>
@@ -471,23 +471,58 @@
         <!-- Ses Katmanı (Timeline Audio Upload Box) -->
         <div class="p-3 bg-[#070a12] border border-slate-800 rounded-2xl space-y-2.5">
           <div class="flex items-center justify-between">
-            <div class="font-bold text-white flex items-center gap-1.5">
+            <div class="font-bold text-white flex items-center gap-1.5 text-xs">
               <i class="fa-solid fa-microphone-lines text-amber-400"></i>
-              <span>Zaman Tüneli Ses Kaydı</span>
+              <span>Zaman Tüneli Ses & Metin</span>
             </div>
             <span id="audio-duration-badge" class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">00:15.0</span>
           </div>
 
           <p class="text-[11px] text-slate-400 leading-relaxed">
-            Kendi sesinizi (MP3/WAV) doğrudan zaman tüneline aktarın. Whisper yapay zekâsı otomatik heceler & sahneleri hizalar.
+            Sesinizi yükleyin; metninizi buraya yapıştırırsanız altyazıda birebir kendi metniniz zamana göre akar.
           </p>
 
-          <!-- Audio Upload Input -->
-          <label class="w-full flex items-center justify-center gap-2 p-3 bg-slate-800/60 hover:bg-slate-800 border border-dashed border-slate-700 hover:border-amber-400 text-slate-200 rounded-xl cursor-pointer transition font-bold text-xs">
-            <i class="fa-solid fa-cloud-arrow-up text-amber-400"></i>
-            <span id="audio-upload-text">Ses Dosyası Seç / Yükle</span>
-            <input type="file" id="timeline-audio-input" accept="audio/*" class="hidden" onchange="uploadTimelineAudioFile(this.files[0])">
-          </label>
+          <!-- Quick Text Input right inside the sidebar -->
+          <div class="space-y-1.5 pt-0.5">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold flex items-center gap-1 text-slate-200">
+                <i class="fa-solid fa-align-left text-amber-400 text-xs"></i>
+                <span>Ses Metni (Önerilen):</span>
+              </span>
+              <span class="text-[10px] text-emerald-400 font-mono bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">Birebir Altyazı</span>
+            </div>
+            <textarea
+              id="sidebar-audio-transcript"
+              rows="2"
+              placeholder="Seslendirilen metni buraya yapıştırın (Whisper hatalarını önler, kendi metniniz akar)..."
+              class="w-full bg-[#0b101c] border border-slate-800 focus:border-amber-400 rounded-xl p-2.5 text-[11px] text-slate-200 placeholder-slate-500 focus:outline-none transition leading-relaxed resize-none"
+            ></textarea>
+            
+            <div class="flex items-center justify-between gap-1.5 pt-0.5">
+              <span class="text-[10px] text-slate-400 flex items-center gap-1">
+                <i class="fa-solid fa-check text-emerald-400 text-[9px]"></i> Kendi metnin akar
+              </span>
+              <button onclick="realignSidebarTranscript()" id="btn-realign-transcript" class="text-[10px] text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 transition px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">
+                <i class="fa-solid fa-arrows-rotate"></i> Metni Yeniden Hizala
+              </button>
+            </div>
+          </div>
+
+          <!-- Upload Buttons Grid -->
+          <div class="grid grid-cols-2 gap-2">
+            <!-- Audio Upload Input -->
+            <label class="flex items-center justify-center gap-1.5 p-2 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 hover:border-amber-400 text-slate-200 rounded-xl cursor-pointer transition font-bold text-[11px] text-center">
+              <i class="fa-solid fa-cloud-arrow-up text-amber-400"></i>
+              <span id="audio-upload-text">Ses Dosyası Seç</span>
+              <input type="file" id="timeline-audio-input" accept="audio/*" class="hidden" onchange="uploadTimelineAudioFile(this.files[0])">
+            </label>
+
+            <!-- Detailed Panel Button -->
+            <button onclick="openAudioUploadModal()" class="flex items-center justify-center gap-1.5 p-2 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 text-purple-300 rounded-xl transition font-bold text-[11px] text-center">
+              <i class="fa-solid fa-sliders text-purple-400"></i>
+              <span>Ses & Metin Modalı</span>
+            </button>
+          </div>
 
           <!-- Mini Waveform Preview -->
           <div id="mini-waveform-box" class="h-6 w-full bg-[#0b101c] rounded-lg overflow-hidden flex items-center gap-[2px] px-1">
@@ -1173,6 +1208,104 @@
         <button onclick="closeNewProjectModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold text-xs transition">İptal</button>
         <button onclick="submitCreateNewProject()" class="px-5 py-2 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold rounded-xl text-xs transition flex items-center gap-1.5 shadow-lg shadow-amber-500/20">
           <i class="fa-solid fa-play"></i> Projeyi Başlat & Düzenle
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= AUDIO & CUSTOM TRANSCRIPT UPLOAD MODAL ================= -->
+  <div id="modal-audio-upload" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0d1322] border border-amber-500/40 rounded-3xl max-w-xl w-full p-6 space-y-5 shadow-2xl relative overflow-hidden">
+      <!-- Glow background decoration -->
+      <div class="absolute -top-24 -right-24 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-500 to-amber-500 text-white flex items-center justify-center text-lg font-bold shadow-lg shadow-purple-500/20">
+            <i class="fa-solid fa-microphone-lines"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-extrabold text-white">Ses & Metin ile Otomatik Kurgu</h3>
+            <p class="text-[11px] text-slate-400">Kendi ses dosyanızı yükleyin; metninizi yapıştırın, ekranda hatasız aksın.</p>
+          </div>
+        </div>
+        <button onclick="closeAudioUploadModal()" class="text-slate-400 hover:text-white transition w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- File Dropzone -->
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-slate-300 flex items-center justify-between">
+          <span>1. Ses Dosyası (MP3, WAV, M4A)</span>
+          <span id="upload-modal-file-info" class="text-[11px] text-amber-400 font-mono hidden"></span>
+        </label>
+        
+        <div id="upload-modal-dropzone" onclick="document.getElementById('upload-modal-file-input').click()" class="border-2 border-dashed border-slate-700 hover:border-amber-400/80 bg-[#070a12] rounded-2xl p-4 text-center cursor-pointer transition group flex flex-col items-center justify-center gap-2">
+          <div class="w-10 h-10 rounded-xl bg-slate-800 text-amber-400 group-hover:scale-110 group-hover:bg-amber-400/10 transition flex items-center justify-center text-lg">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <div id="upload-modal-drop-text" class="text-xs text-slate-300 font-medium">
+            <span class="font-bold text-white group-hover:text-amber-300 transition">Ses dosyası seçmek için tıklayın</span> veya sürükleyip bırakın
+          </div>
+          <span class="text-[10px] text-slate-500">Maksimum 100MB • MP3, WAV, AAC, M4A</span>
+          <input type="file" id="upload-modal-file-input" accept="audio/*" class="hidden" onchange="handleModalAudioSelected(this.files[0])">
+        </div>
+      </div>
+
+      <!-- Textarea for Custom Transcript -->
+      <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+            <i class="fa-solid fa-align-left text-amber-400"></i>
+            <span>2. Ses Metni / Senaryo Transkripti (Önerilen)</span>
+          </label>
+          <span id="upload-modal-word-count" class="text-[10px] font-mono text-slate-400 bg-slate-800/80 px-2 py-0.5 rounded-full">0 kelime</span>
+        </div>
+        
+        <textarea
+          id="upload-modal-transcript"
+          rows="4"
+          oninput="updateModalTranscriptCount(this.value)"
+          placeholder="Ses dosyanızda seslendirilen metni buraya yapıştırın... (Örn: Yüce Kur'an-ı Kerim, kalplere şifa ve akıllara nur saçar. Allah'ın kelamıdır.)"
+          class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-2xl p-3 text-xs text-slate-200 placeholder-slate-500 focus:outline-none transition leading-relaxed resize-none"
+        ></textarea>
+        
+        <!-- Info Banner -->
+        <div class="p-2.5 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-start gap-2 text-[11px] text-amber-300/90 leading-relaxed">
+          <i class="fa-solid fa-shield-halved text-amber-400 mt-0.5 text-xs flex-shrink-0"></i>
+          <span>
+            <strong>Birebir Koruma Garantisi:</strong> Buraya yapıştırdığınız metin %100 korunur. Whisper AI yalnızca zamanlamayı yakalamak için kullanılır; kelime bölünmesi ("Kur'", "an") veya yanlış anlama riski tamamen sıfırlanır.
+          </span>
+        </div>
+      </div>
+
+      <!-- Option Switch: Use Custom Text as Subtitles -->
+      <div class="flex items-center justify-between p-3 bg-[#070a12] border border-slate-800 rounded-xl">
+        <div class="flex items-center gap-2.5">
+          <input type="checkbox" id="upload-modal-use-custom" checked class="w-4 h-4 accent-amber-500 rounded cursor-pointer">
+          <label for="upload-modal-use-custom" class="text-xs text-slate-200 font-semibold cursor-pointer select-none">
+            Yapıştırdığım metni ekranda altyazı olarak zamana göre akıt
+          </label>
+        </div>
+        <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Varsayılan: Açık</span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center justify-end gap-3 pt-2 border-t border-slate-800/80">
+        <button onclick="closeAudioUploadModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">
+          Vazgeç
+        </button>
+        <button
+          id="btn-upload-modal-submit"
+          onclick="submitModalAudioAndTranscript()"
+          disabled
+          class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 font-extrabold text-xs flex items-center gap-2 shadow-lg shadow-amber-500/20 transition"
+        >
+          <i class="fa-solid fa-play"></i>
+          <span>Kurguyu ve Altyazıyı Başlat</span>
         </button>
       </div>
     </div>
@@ -1931,16 +2064,123 @@
       }
     }
 
+    // Audio & Transcript Modal Helpers
+    let selectedModalAudioFile = null;
+
+    function openAudioUploadModal() {
+      const modal = document.getElementById('modal-audio-upload');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+
+      const sidebarText = document.getElementById('sidebar-audio-transcript')?.value;
+      const modalText = document.getElementById('upload-modal-transcript');
+      if (modalText && !modalText.value && sidebarText) {
+        modalText.value = sidebarText;
+        updateModalTranscriptCount(sidebarText);
+      }
+    }
+
+    function closeAudioUploadModal() {
+      const modal = document.getElementById('modal-audio-upload');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function handleModalAudioSelected(file) {
+      if (!file) return;
+      selectedModalAudioFile = file;
+      const dropText = document.getElementById('upload-modal-drop-text');
+      const fileInfo = document.getElementById('upload-modal-file-info');
+      const submitBtn = document.getElementById('btn-upload-modal-submit');
+
+      if (dropText) {
+        dropText.innerHTML = `<span class="font-bold text-emerald-400 flex items-center justify-center gap-1.5"><i class="fa-solid fa-check"></i> ${file.name}</span>`;
+      }
+      if (fileInfo) {
+        fileInfo.innerText = `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
+        fileInfo.classList.remove('hidden');
+      }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+      }
+    }
+
+    function updateModalTranscriptCount(val) {
+      const words = (val || '').trim().split(/\s+/).filter(Boolean).length;
+      const countEl = document.getElementById('upload-modal-word-count');
+      if (countEl) {
+        countEl.innerText = `${words} kelime`;
+      }
+    }
+
+    async function submitModalAudioAndTranscript() {
+      if (!selectedModalAudioFile) {
+        showToast('Lütfen önce bir ses dosyası seçin.', 'warning');
+        return;
+      }
+
+      const transcriptInput = document.getElementById('upload-modal-transcript');
+      const useCustom = document.getElementById('upload-modal-use-custom')?.checked ?? true;
+      const text = (useCustom && transcriptInput) ? transcriptInput.value.trim() : '';
+
+      const sidebarText = document.getElementById('sidebar-audio-transcript');
+      if (sidebarText && text) sidebarText.value = text;
+
+      closeAudioUploadModal();
+
+      const ok = await uploadTimelineAudioFile(selectedModalAudioFile, text);
+      if (ok) {
+        switchAppView('editor');
+      }
+    }
+
+    async function realignSidebarTranscript() {
+      const text = document.getElementById('sidebar-audio-transcript')?.value?.trim();
+      if (!text) {
+        showToast('Lütfen önce metin alanına bir yazı girin.', 'warning');
+        return;
+      }
+      try {
+        showToast('Kendi metniniz sesle hizalanıyor...', 'info');
+        const res = await fetch('/api/timeline/realign-transcript', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ transcript: text })
+        });
+        const d = await res.json();
+        if (!res.ok) throw new Error(d.detail || 'Hizalama başarısız');
+
+        videoData.subtitles = d.subtitles || [];
+        videoData.words = d.words || [];
+        videoData.narration = d.narration || text;
+        if (d.scenes) scenes = d.scenes;
+
+        renderTimeline();
+        renderSceneInspector();
+        renderLeftScenesList();
+        renderLivePreviewCanvas();
+        showToast('Altyazılar kendi metninizle başarıyla yeniden hizalandı!', 'success');
+      } catch (err) {
+        showToast('Hizalama hatası: ' + err.message, 'error');
+      }
+    }
+
+    window.openAudioUploadModal = openAudioUploadModal;
+    window.closeAudioUploadModal = closeAudioUploadModal;
+    window.handleModalAudioSelected = handleModalAudioSelected;
+    window.updateModalTranscriptCount = updateModalTranscriptCount;
+    window.submitModalAudioAndTranscript = submitModalAudioAndTranscript;
+    window.realignSidebarTranscript = realignSidebarTranscript;
+
     // Audio Progress Modal Helpers
     let audioProgressTimer = null;
-    function openAudioProgressModal(fileName) {
+    function openAudioProgressModal(fileName, hasCustom = false) {
       const modal = document.getElementById('modal-audio-progress');
       if (!modal) return;
       modal.classList.remove('hidden');
-      updateAudioProgress(12, '1/3 Ses sunucuya aktarılıyor ve doğrulanıyor...', 1);
+      updateAudioProgress(12, '1/3 Ses sunucuya aktarılıyor ve doğrulanıyor...', 1, hasCustom);
     }
 
-    function updateAudioProgress(pct, statusText, stepNum) {
+    function updateAudioProgress(pct, statusText, stepNum, hasCustom = false) {
       const bar = document.getElementById('audio-progress-bar');
       const pctText = document.getElementById('audio-progress-pct');
       const stepLabel = document.getElementById('audio-progress-step');
@@ -1953,6 +2193,9 @@
       const step2 = document.getElementById('audio-step-2');
       const step3 = document.getElementById('audio-step-3');
 
+      const step2Title = hasCustom ? 'Kendi metniniz sesle ve dalga formuyla birebir hizalanıyor' : 'Whisper AI konuşmayı transkribe ediyor ve kelimeleri hizalıyor';
+      const step2Done = hasCustom ? 'Kendi metniniz %100 doğrulukla senkronize edildi' : 'Whisper AI transkripsiyonu tamamlandı';
+
       if (stepNum === 1) {
         if (step1) {
           step1.className = 'flex items-center gap-2 text-amber-300 font-medium';
@@ -1960,7 +2203,7 @@
         }
         if (step2) {
           step2.className = 'flex items-center gap-2 text-slate-500 font-medium';
-          step2.innerHTML = `<i class="fa-regular fa-circle text-[10px]"></i><span>Whisper AI konuşmayı transkribe ediyor ve kelimeleri hizalıyor</span>`;
+          step2.innerHTML = `<i class="fa-regular fa-circle text-[10px]"></i><span>${step2Title}</span>`;
         }
         if (step3) {
           step3.className = 'flex items-center gap-2 text-slate-500 font-medium';
@@ -1973,7 +2216,7 @@
         }
         if (step2) {
           step2.className = 'flex items-center gap-2 text-amber-300 font-medium';
-          step2.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-[10px]"></i><span>Whisper AI konuşmayı transkribe ediyor ve kelimeleri hizalıyor</span>`;
+          step2.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-[10px]"></i><span>${step2Title}</span>`;
         }
         if (step3) {
           step3.className = 'flex items-center gap-2 text-slate-500 font-medium';
@@ -1986,7 +2229,7 @@
         }
         if (step2) {
           step2.className = 'flex items-center gap-2 text-emerald-400 font-medium';
-          step2.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>Whisper AI transkripsiyonu tamamlandı</span>`;
+          step2.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>${step2Done}</span>`;
         }
         if (step3) {
           step3.className = 'flex items-center gap-2 text-amber-300 font-medium';
@@ -1999,7 +2242,7 @@
         }
         if (step2) {
           step2.className = 'flex items-center gap-2 text-emerald-400 font-medium';
-          step2.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>Whisper AI transkripsiyonu tamamlandı</span>`;
+          step2.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>${step2Done}</span>`;
         }
         if (step3) {
           step3.className = 'flex items-center gap-2 text-emerald-400 font-medium';
@@ -2090,10 +2333,8 @@
 
     async function uploadDashboardAudio(file) {
       if (!file) return;
-      const ok = await uploadTimelineAudioFile(file);
-      if (ok) {
-        switchAppView('editor');
-      }
+      openAudioUploadModal();
+      handleModalAudioSelected(file);
     }
 
     async function loadDashboardPresets() {
@@ -2183,6 +2424,12 @@
         // Ensure activeSceneId is valid
         if (!scenes.find(s => s.id === activeSceneId) && scenes.length > 0) {
           activeSceneId = scenes[0].id;
+        }
+
+        // Sync custom transcript in sidebar
+        if (videoData.narration) {
+          const sideTx = document.getElementById('sidebar-audio-transcript');
+          if (sideTx) sideTx.value = videoData.narration;
         }
 
         renderTimeline();
@@ -2726,30 +2973,42 @@
     }
 
     // 6. AUDIO UPLOAD & WAVEFORM ENGINE
-    async function uploadTimelineAudioFile(file) {
+    async function uploadTimelineAudioFile(file, customTranscript = null) {
       if (!file) return false;
       const uploadText = document.getElementById('audio-upload-text');
-      if (uploadText) uploadText.innerText = 'Yükleniyor & Whisper Hizalanıyor...';
+      if (uploadText) uploadText.innerText = 'Yükleniyor & Hizalanıyor...';
 
-      openAudioProgressModal(file.name);
+      if (customTranscript === null) {
+        const sidebarText = document.getElementById('sidebar-audio-transcript')?.value;
+        if (sidebarText && sidebarText.trim()) {
+          customTranscript = sidebarText.trim();
+        }
+      }
+
+      const hasCustom = Boolean(customTranscript && customTranscript.trim());
+      openAudioProgressModal(file.name, hasCustom);
 
       let currentPct = 14;
       if (audioProgressTimer) clearInterval(audioProgressTimer);
       audioProgressTimer = setInterval(() => {
         if (currentPct < 40) {
           currentPct += 4;
-          updateAudioProgress(currentPct, '1/3 Ses sunucuya aktarılıyor ve doğrulanıyor...', 1);
+          updateAudioProgress(currentPct, '1/3 Ses sunucuya aktarılıyor ve doğrulanıyor...', 1, hasCustom);
         } else if (currentPct < 85) {
           currentPct += 3;
-          updateAudioProgress(currentPct, '2/3 Whisper yapay zeka transkripsiyonu çalışıyor...', 2);
+          const msg = hasCustom ? '2/3 Kendi metniniz sesle ve dalga formuyla hizalanıyor...' : '2/3 Whisper yapay zeka transkripsiyonu çalışıyor...';
+          updateAudioProgress(currentPct, msg, 2, hasCustom);
         } else if (currentPct < 96) {
           currentPct += 1;
-          updateAudioProgress(currentPct, '3/3 Kelimeler, dalga formu ve sahneler hizalanıyor...', 3);
+          updateAudioProgress(currentPct, '3/3 Altyazı kartları ve zaman tüneli sahneleri üretiliyor...', 3, hasCustom);
         }
       }, 350);
 
       const formData = new FormData();
       formData.append('file', file);
+      if (hasCustom) {
+        formData.append('transcript', customTranscript.trim());
+      }
 
       try {
         const res = await fetch('/api/timeline/audio', {
@@ -2765,13 +3024,18 @@
           audioProgressTimer = null;
         }
 
-        updateAudioProgress(100, 'Tamamlandı! Zaman tüneli hazırlandı.', 4);
+        updateAudioProgress(100, 'Tamamlandı! Zaman tüneli hazırlandı.', 4, hasCustom);
 
         waveformPeaks = data.waveform || [];
         timelineDuration = data.duration || 15.0;
         scenes = data.scenes || [];
         videoData.subtitles = data.subtitles || [];
         videoData.words = data.words || [];
+        if (data.narration) {
+          videoData.narration = data.narration;
+          const sideTx = document.getElementById('sidebar-audio-transcript');
+          if (sideTx) sideTx.value = data.narration;
+        }
 
         // Reload audio element
         if (audioEl) {
@@ -2787,12 +3051,15 @@
 
         if (uploadText) {
           uploadText.innerText = 'Ses Başarıyla Eklendi ✓';
-          setTimeout(() => uploadText.innerText = 'Ses Dosyası Seç / Yükle', 3000);
+          setTimeout(() => uploadText.innerText = 'Ses Dosyası Seç', 3000);
         }
 
         await new Promise(resolve => setTimeout(resolve, 600));
         closeAudioProgressModal();
-        showToast('Ses dosyası başarıyla yüklendi ve sahneler hizalandı!', 'success');
+        const successMsg = hasCustom
+          ? 'Ses ve metniniz başarıyla hizalandı! Altyazılarda birebir kendi metniniz akıyor.'
+          : 'Ses dosyası başarıyla yüklendi ve sahneler hizalandı!';
+        showToast(successMsg, 'success');
         return true;
       } catch (e) {
         if (audioProgressTimer) {
@@ -2801,7 +3068,7 @@
         }
         closeAudioProgressModal();
         showToast('Ses yükleme hatası: ' + e.message, 'error');
-        if (uploadText) uploadText.innerText = 'Ses Dosyası Seç / Yükle';
+        if (uploadText) uploadText.innerText = 'Ses Dosyası Seç';
         return false;
       }
     }

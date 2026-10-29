@@ -55,7 +55,8 @@ from scripts.audio_cleaner import clean_audio_and_realign
 from scripts.subtitle_cleaner import (
     clean_text_apostrophes,
     stitch_whisper_word_tokens,
-    build_subtitle_chunks
+    build_subtitle_chunks,
+    align_custom_transcript_to_audio
 )
 
 app = FastAPI(title="Notebook Video AI Studio Pro", version="4.0.0")
@@ -784,6 +785,7 @@ def probe_audio_duration(file_path: str) -> float:
 @app.post("/api/audio/upload")
 async def upload_audio_and_generate_multiscene(
     file: UploadFile = File(...),
+    transcript: Optional[str] = Form(None),
     model: Optional[str] = Form(DEFAULT_MODEL),
     theme: Optional[str] = Form(None),
     mode: Optional[str] = Form("auto"),
@@ -854,21 +856,27 @@ async def upload_audio_and_generate_multiscene(
                     "end": round(w["end"], 2)
                 })
 
-    whisper_words = stitch_whisper_word_tokens(raw_whisper_words)
-    full_transcript = " ".join([w["word"] for w in whisper_words]).strip()
-    if not full_transcript:
-        full_transcript = clean_text_apostrophes(w_res.get("text", "").strip()) or "Kullanıcının yüklediği ses kaydı"
-
-    if (total_duration <= 0 or total_duration < 4.0) and whisper_words:
-        total_duration = whisper_words[-1]["end"] + 1.0
-    total_duration = max(8.0, round(total_duration, 2))
-
-    # 5. Build 3-word subtitle chunks for live karaoke & video subtitles
-    if whisper_words:
-        subtitles = build_subtitle_chunks(whisper_words, chunk_size=3)
+    user_transcript = (transcript or "").strip()
+    if user_transcript:
+        clean_user_text = clean_text_apostrophes(user_transcript)
+        whisper_words, subtitles = align_custom_transcript_to_audio(clean_user_text, total_duration, raw_whisper_words)
+        full_transcript = clean_user_text
     else:
-        # Fallback if whisper returned text without word timestamps
-        subtitles = generate_subtitles_fallback(full_transcript, total_duration)
+        whisper_words = stitch_whisper_word_tokens(raw_whisper_words)
+        full_transcript = " ".join([w["word"] for w in whisper_words]).strip()
+        if not full_transcript:
+            full_transcript = clean_text_apostrophes(w_res.get("text", "").strip()) or "Kullanıcının yüklediği ses kaydı"
+
+        if (total_duration <= 0 or total_duration < 4.0) and whisper_words:
+            total_duration = whisper_words[-1]["end"] + 1.0
+        total_duration = max(8.0, round(total_duration, 2))
+
+        # 5. Build 3-word subtitle chunks for live karaoke & video subtitles
+        if whisper_words:
+            subtitles = build_subtitle_chunks(whisper_words, chunk_size=3)
+        else:
+            # Fallback if whisper returned text without word timestamps
+            subtitles = generate_subtitles_fallback(full_transcript, total_duration)
 
     # 6. Segment into 10-14 second sequential scenes
     sec_per_scene = max(8.0, min(16.0, float(scene_duration or 12)))
@@ -1703,7 +1711,10 @@ def get_timeline_data():
     }
 
 @app.post("/api/timeline/audio")
-async def upload_timeline_audio(file: UploadFile = File(...)):
+async def upload_timeline_audio(
+    file: UploadFile = File(...),
+    transcript: Optional[str] = Form(None)
+):
     """Upload custom voiceover / audio directly from timeline, extract waveform, transcribe with Whisper & align scenes."""
     temp_path = os.path.join(PUBLIC_DIR, f"temp_{uuid.uuid4().hex}_{file.filename}")
     final_audio_path = os.path.join(PUBLIC_DIR, "audio.mp3")
@@ -1738,16 +1749,17 @@ async def upload_timeline_audio(file: UploadFile = File(...)):
     # Extract waveform
     waveform = extract_audio_waveform(final_audio_path, num_peaks=120)
     
-    # Whisper AI alignment
+    # Check if custom transcript was provided by the user
+    user_transcript = (transcript or "").strip()
+    
+    # Whisper AI alignment (acoustic guide)
     w_model = get_whisper()
-    subtitles = []
-    words = []
-    full_text = ""
+    raw_words = []
+    whisper_full_text = ""
     if w_model is not None:
         try:
             whisper_res = w_model.transcribe(final_audio_path, word_timestamps=True)
-            full_text = clean_text_apostrophes(whisper_res.get("text", "").strip())
-            raw_words = []
+            whisper_full_text = clean_text_apostrophes(whisper_res.get("text", "").strip())
             for seg in whisper_res.get("segments", []):
                 for w in seg.get("words", []):
                     w_text = w.get("word", "").strip()
@@ -1758,14 +1770,23 @@ async def upload_timeline_audio(file: UploadFile = File(...)):
                             "start": round(w.get("start", 0), 2),
                             "end": round(w.get("end", 0), 2)
                         })
-            # Intelligently stitch tokens so Kur'an, Allah'ın etc. are never split
-            words = stitch_whisper_word_tokens(raw_words)
-            subtitles = build_subtitle_chunks(words, chunk_size=3)
         except Exception as e:
             print(f"Whisper transcription error: {e}")
-            
-    if not subtitles:
-        subtitles = generate_subtitles_fallback(full_text or "Kendi eklediğiniz ses kaydı", duration)
+
+    # Determine final words & subtitles
+    if user_transcript:
+        # USER PROVIDED EXACT TEXT: Guarantee 100% fidelity to user's text!
+        clean_user_text = clean_text_apostrophes(user_transcript)
+        words, subtitles = align_custom_transcript_to_audio(clean_user_text, duration, raw_words)
+        full_text = clean_user_text
+    else:
+        # Fall back to Whisper transcription
+        words = stitch_whisper_word_tokens(raw_words)
+        if words:
+            subtitles = build_subtitle_chunks(words, chunk_size=3)
+        else:
+            subtitles = generate_subtitles_fallback(whisper_full_text or "Kendi eklediğiniz ses kaydı", duration)
+        full_text = whisper_full_text or "Kendi eklediğiniz ses kaydı"
 
     # Update generatedData.json
     data_file = os.path.join(SRC_DIR, "generatedData.json")
@@ -1784,15 +1805,23 @@ async def upload_timeline_audio(file: UploadFile = File(...)):
     if full_text:
         video_data["narration"] = full_text
         
-    # Adjust scenes to fit new duration
+    # Adjust scenes to fit new duration & populate scene text from user words
     scenes = ensure_scenes_structure(video_data)
     num_scenes = len(scenes)
     slice_dur = duration / max(1, num_scenes)
     cur = 0.0
     for idx, sc in enumerate(scenes):
-        sc["startTime"] = round(cur, 2)
+        sc_st = round(cur, 2)
         cur += slice_dur
-        sc["endTime"] = round(cur if idx < num_scenes - 1 else duration, 2)
+        sc_en = round(cur if idx < num_scenes - 1 else duration, 2)
+        sc["startTime"] = sc_st
+        sc["endTime"] = sc_en
+        # Align scene narrative text with words in this interval
+        words_in_window = [w["text"] for w in words if (w["start"] >= sc_st - 0.4 and w["end"] <= sc_en + 0.4)]
+        if words_in_window:
+            sc["text"] = " ".join(words_in_window)
+            sc["narration"] = sc["text"]
+            
     video_data["scenes"] = scenes
     
     with open(data_file, "w", encoding="utf-8") as f:
@@ -1805,6 +1834,8 @@ async def upload_timeline_audio(file: UploadFile = File(...)):
         "scenes": scenes,
         "subtitles": subtitles,
         "words": words,
+        "narration": full_text,
+        "custom_transcript_used": bool(user_transcript),
         "video_data": video_data
     }
 
@@ -1986,6 +2017,50 @@ def api_update_subtitles(req: SubtitleUpdateRequest):
     with open(data_file, "w", encoding="utf-8") as f:
         json.dump(video_data, f, ensure_ascii=False, indent=2)
     return {"success": True, "subtitles": cleaned_subtitles}
+
+class RealignTranscriptRequest(BaseModel):
+    transcript: str
+
+@app.post("/api/timeline/realign-transcript")
+def api_realign_transcript(req: RealignTranscriptRequest):
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        video_data = json.load(f)
+
+    user_text = clean_text_apostrophes(req.transcript.strip())
+    if not user_text:
+        raise HTTPException(status_code=400, detail="Lütfen geçerli bir metin girin.")
+
+    duration = float(video_data.get("totalDuration", 15.0))
+    existing_words = video_data.get("words", [])
+
+    words, subtitles = align_custom_transcript_to_audio(user_text, duration, existing_words)
+    video_data["narration"] = user_text
+    video_data["words"] = words
+    video_data["subtitles"] = subtitles
+
+    scenes = video_data.get("scenes", [])
+    for sc in scenes:
+        st = sc.get("startTime", 0.0)
+        en = sc.get("endTime", duration)
+        words_in_window = [w["text"] for w in words if (w["start"] >= st - 0.4 and w["end"] <= en + 0.4)]
+        if words_in_window:
+            sc["text"] = " ".join(words_in_window)
+            sc["narration"] = sc["text"]
+
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(video_data, f, ensure_ascii=False, indent=2)
+
+    return {
+        "success": True,
+        "narration": user_text,
+        "words": words,
+        "subtitles": subtitles,
+        "scenes": scenes,
+        "video_data": video_data
+    }
 
 @app.post("/api/audio/auto-cut")
 def api_audio_auto_cut(req: AudioAutoCutRequest):
