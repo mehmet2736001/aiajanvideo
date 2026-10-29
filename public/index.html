@@ -313,16 +313,42 @@
             <span id="dash-project-count" class="text-xs bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded-full font-mono font-bold">0 Proje</span>
           </div>
 
-          <!-- Search Filter -->
-          <div class="relative w-full sm:w-72">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
-            <input
-              type="text"
-              id="dash-search-input"
-              oninput="filterDashboardProjects(this.value)"
-              placeholder="Projelerimde ara..."
-              class="w-full bg-[#0d1322] border border-slate-800 focus:border-amber-400 rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none"
-            />
+          <!-- Search Filter & Multi-Select Toggle -->
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <div class="relative flex-1 sm:w-64">
+              <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
+              <input
+                type="text"
+                id="dash-search-input"
+                oninput="filterDashboardProjects(this.value)"
+                placeholder="Projelerimde ara..."
+                class="w-full bg-[#0d1322] border border-slate-800 focus:border-amber-400 rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 focus:outline-none"
+              />
+            </div>
+            <button id="dash-btn-multiselect" onclick="toggleDashboardMultiSelect()" class="px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-xs font-bold text-slate-200 flex items-center gap-1.5 transition whitespace-nowrap shadow-sm">
+              <i class="fa-regular fa-square-check text-amber-400"></i>
+              <span id="dash-multiselect-label">Çoklu Seç</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Multi-Select Bulk Actions Toolbar (Shown when multi-select active or items selected) -->
+        <div id="dash-bulk-actions-bar" class="hidden flex flex-wrap items-center justify-between gap-3 bg-[#0d1322] border border-amber-500/40 rounded-2xl p-3 px-4 shadow-xl">
+          <div class="flex items-center gap-3">
+            <span class="text-xs font-extrabold text-amber-300 flex items-center gap-2">
+              <i class="fa-solid fa-check-double text-amber-400"></i>
+              <span><span id="dash-selected-count" class="font-mono font-black text-white text-sm">0</span> Proje Seçildi</span>
+            </span>
+            <span class="text-slate-600">|</span>
+            <button onclick="selectAllDashboardProjects()" class="text-xs font-bold text-slate-300 hover:text-white underline underline-offset-4">Tümünü Seç</button>
+            <button onclick="clearSelectedDashboardProjects()" class="text-xs text-slate-400 hover:text-slate-200">Seçimi Temizle</button>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="cancelDashboardMultiSelect()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">Vazgeç</button>
+            <button onclick="bulkDeleteProjects()" id="dash-btn-bulk-delete" disabled class="px-4 py-1.5 rounded-xl bg-red-600 hover:bg-red-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-extrabold text-xs flex items-center gap-2 shadow-lg shadow-red-900/40 transition">
+              <i class="fa-solid fa-trash-can"></i>
+              <span>Seçilenleri Sil (<span id="dash-bulk-delete-count">0</span>)</span>
+            </button>
           </div>
         </div>
 
@@ -1152,6 +1178,66 @@
     </div>
   </div>
 
+  <!-- ================= AUDIO UPLOAD & WHISPER PROGRESS MODAL ================= -->
+  <div id="modal-audio-progress" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0d1322] border border-amber-500/40 rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl relative overflow-hidden">
+      <!-- Glow background decoration -->
+      <div class="absolute -top-20 -right-20 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Icon & Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-400 to-amber-600 text-slate-950 flex items-center justify-center text-xl font-bold shadow-lg shadow-amber-500/20 animate-pulse">
+          <i class="fa-solid fa-waveform-lines"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-white">Ses Yükleniyor & İşleniyor</h3>
+          <p class="text-[11px] text-slate-400">Whisper yapay zeka ile otomatik zamanlama ve sahneleme</p>
+        </div>
+      </div>
+
+      <!-- Visual Equalizer Animation -->
+      <div class="bg-[#070a12] border border-slate-800 rounded-2xl p-4 flex items-center justify-center gap-1.5 h-16">
+        <div class="w-1.5 bg-amber-400 rounded-full animate-bounce h-6" style="animation-delay: 0.1s;"></div>
+        <div class="w-1.5 bg-amber-400 rounded-full animate-bounce h-10" style="animation-delay: 0.2s;"></div>
+        <div class="w-1.5 bg-amber-400 rounded-full animate-bounce h-12" style="animation-delay: 0.3s;"></div>
+        <div class="w-1.5 bg-amber-400 rounded-full animate-bounce h-7" style="animation-delay: 0.4s;"></div>
+        <div class="w-1.5 bg-amber-400 rounded-full animate-bounce h-11" style="animation-delay: 0.2s;"></div>
+        <div class="w-1.5 bg-amber-400 rounded-full animate-bounce h-5" style="animation-delay: 0.5s;"></div>
+        <div class="w-1.5 bg-amber-400 rounded-full animate-bounce h-9" style="animation-delay: 0.35s;"></div>
+      </div>
+
+      <!-- Progress Percentage & Stage Info -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-xs">
+          <span id="audio-progress-step" class="font-bold text-slate-200">1/3 Ses sunucuya aktarılıyor...</span>
+          <span id="audio-progress-pct" class="font-mono font-extrabold text-amber-400">15%</span>
+        </div>
+
+        <!-- Progress bar track -->
+        <div class="w-full h-3 bg-slate-900 border border-slate-800 rounded-full overflow-hidden p-0.5">
+          <div id="audio-progress-bar" class="h-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-300 rounded-full transition-all duration-300 ease-out" style="width: 15%;"></div>
+        </div>
+      </div>
+
+      <!-- Stage Checklist -->
+      <div class="bg-[#070a12]/70 border border-slate-800/80 rounded-xl p-3 space-y-1.5 text-[11px]">
+        <div id="audio-step-1" class="flex items-center gap-2 text-amber-300 font-medium">
+          <i class="fa-solid fa-spinner fa-spin text-[10px]"></i>
+          <span>Ses dosyası yükleniyor ve formatı analiz ediliyor</span>
+        </div>
+        <div id="audio-step-2" class="flex items-center gap-2 text-slate-500 font-medium">
+          <i class="fa-regular fa-circle text-[10px]"></i>
+          <span>Whisper AI konuşmayı transkribe ediyor ve kelimeleri hizalıyor</span>
+        </div>
+        <div id="audio-step-3" class="flex items-center gap-2 text-slate-500 font-medium">
+          <i class="fa-regular fa-circle text-[10px]"></i>
+          <span>Zaman tüneli dalga formu (waveform) ve sahneler üretiliyor</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= EXPORT MODAL (TOP RIGHT "📤 EXPORT" BUTTON CLICK) ================= -->
   <div id="modal-export" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
     <div class="bg-[#0d1322] border border-slate-800 rounded-3xl max-w-xl w-full p-6 space-y-5 shadow-2xl">
@@ -1481,6 +1567,10 @@
     // DASHBOARD & PROJECT HUB CONTROLS
     // ==========================================
     let cachedProjectsList = [];
+    let currentFilteredProjects = [];
+    let isDashboardMultiSelect = false;
+    let selectedProjectIds = new Set();
+
     window.loadVideoData = function() { return loadTimelineData(); };
 
     function switchAppView(view) {
@@ -1516,6 +1606,7 @@
         if (!res.ok) throw new Error('Projeler alınamadı');
         const projects = await res.json();
         cachedProjectsList = projects;
+        currentFilteredProjects = projects;
         if (countBadge) countBadge.innerText = `${projects.length} Proje`;
 
         renderDashboardProjects(projects);
@@ -1524,10 +1615,119 @@
       }
     }
 
+    function toggleDashboardMultiSelect() {
+      isDashboardMultiSelect = !isDashboardMultiSelect;
+      const btn = document.getElementById('dash-btn-multiselect');
+      const label = document.getElementById('dash-multiselect-label');
+      const bar = document.getElementById('dash-bulk-actions-bar');
+      
+      if (isDashboardMultiSelect) {
+        if (btn) btn.className = 'px-3 py-1.5 rounded-xl border border-amber-500 bg-amber-500/20 text-xs font-bold text-amber-300 flex items-center gap-1.5 transition whitespace-nowrap shadow-sm shadow-amber-500/20';
+        if (label) label.innerText = 'Seçimi Kapat';
+        if (bar) bar.classList.remove('hidden');
+      } else {
+        selectedProjectIds.clear();
+        if (btn) btn.className = 'px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-xs font-bold text-slate-200 flex items-center gap-1.5 transition whitespace-nowrap shadow-sm';
+        if (label) label.innerText = 'Çoklu Seç';
+        if (bar) bar.classList.add('hidden');
+      }
+      updateBulkActionButtons();
+      renderDashboardProjects(currentFilteredProjects.length ? currentFilteredProjects : cachedProjectsList);
+    }
+
+    function cancelDashboardMultiSelect() {
+      isDashboardMultiSelect = false;
+      selectedProjectIds.clear();
+      const btn = document.getElementById('dash-btn-multiselect');
+      const label = document.getElementById('dash-multiselect-label');
+      const bar = document.getElementById('dash-bulk-actions-bar');
+      if (btn) btn.className = 'px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-xs font-bold text-slate-200 flex items-center gap-1.5 transition whitespace-nowrap shadow-sm';
+      if (label) label.innerText = 'Çoklu Seç';
+      if (bar) bar.classList.add('hidden');
+      updateBulkActionButtons();
+      renderDashboardProjects(currentFilteredProjects.length ? currentFilteredProjects : cachedProjectsList);
+    }
+
+    function toggleProjectSelection(projectId, e) {
+      if (e) e.stopPropagation();
+      const pid = String(projectId);
+      if (selectedProjectIds.has(pid)) {
+        selectedProjectIds.delete(pid);
+      } else {
+        selectedProjectIds.add(pid);
+      }
+
+      // Automatically show toolbar if user checks an item
+      if (!isDashboardMultiSelect && selectedProjectIds.size > 0) {
+        isDashboardMultiSelect = true;
+        const btn = document.getElementById('dash-btn-multiselect');
+        const label = document.getElementById('dash-multiselect-label');
+        const bar = document.getElementById('dash-bulk-actions-bar');
+        if (btn) btn.className = 'px-3 py-1.5 rounded-xl border border-amber-500 bg-amber-500/20 text-xs font-bold text-amber-300 flex items-center gap-1.5 transition whitespace-nowrap shadow-sm shadow-amber-500/20';
+        if (label) label.innerText = 'Seçimi Kapat';
+        if (bar) bar.classList.remove('hidden');
+      }
+
+      updateBulkActionButtons();
+      renderDashboardProjects(currentFilteredProjects.length ? currentFilteredProjects : cachedProjectsList);
+    }
+
+    function selectAllDashboardProjects() {
+      const list = currentFilteredProjects.length ? currentFilteredProjects : cachedProjectsList;
+      list.forEach(p => {
+        if (p && p.id) selectedProjectIds.add(String(p.id));
+      });
+      updateBulkActionButtons();
+      renderDashboardProjects(list);
+    }
+
+    function clearSelectedDashboardProjects() {
+      selectedProjectIds.clear();
+      updateBulkActionButtons();
+      renderDashboardProjects(currentFilteredProjects.length ? currentFilteredProjects : cachedProjectsList);
+    }
+
+    function updateBulkActionButtons() {
+      const count = selectedProjectIds.size;
+      const countSpan = document.getElementById('dash-selected-count');
+      const deleteCountSpan = document.getElementById('dash-bulk-delete-count');
+      const deleteBtn = document.getElementById('dash-btn-bulk-delete');
+      if (countSpan) countSpan.innerText = count;
+      if (deleteCountSpan) deleteCountSpan.innerText = count;
+      if (deleteBtn) {
+        deleteBtn.disabled = count === 0;
+      }
+    }
+
+    async function bulkDeleteProjects() {
+      const count = selectedProjectIds.size;
+      if (count === 0) return;
+      if (!confirm(`Seçilen ${count} adet projeyi kalıcı olarak silmek istediğinize emin misiniz?`)) return;
+
+      try {
+        showToast(`${count} proje siliniyor...`, 'info');
+        const ids = Array.from(selectedProjectIds);
+        const res = await fetch('/api/history/bulk-delete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ids: ids })
+        });
+        if (!res.ok) throw new Error('Toplu silme başarısız oldu.');
+        const d = await res.json();
+        showToast(`${d.deleted_count || count} proje başarıyla silindi!`, 'success');
+        selectedProjectIds.clear();
+        cancelDashboardMultiSelect();
+        await loadDashboardProjects();
+      } catch (err) {
+        showToast('Hata: ' + err.message, 'error');
+      }
+    }
+
     function renderDashboardProjects(projects) {
       const grid = document.getElementById('dash-projects-grid');
       if (!grid) return;
       grid.innerHTML = '';
+      currentFilteredProjects = projects;
 
       if (projects.length === 0) {
         grid.innerHTML = `
@@ -1546,8 +1746,20 @@
       }
 
       projects.forEach((p) => {
+        const pid = String(p.id);
+        const isSelected = selectedProjectIds.has(pid);
         const card = document.createElement('div');
-        card.className = 'group p-3.5 bg-[#0d1322] hover:bg-[#121a2d] border border-slate-800 hover:border-slate-700 rounded-2xl transition flex flex-col justify-between space-y-3 shadow-md hover:shadow-xl';
+        card.className = `group p-3.5 relative border rounded-2xl transition flex flex-col justify-between space-y-3 shadow-md hover:shadow-xl cursor-pointer ${
+          isSelected 
+            ? 'bg-[#141e34] border-amber-400 ring-2 ring-amber-400/50 shadow-amber-500/10' 
+            : 'bg-[#0d1322] hover:bg-[#121a2d] border-slate-800 hover:border-slate-700'
+        }`;
+
+        card.onclick = (e) => {
+          if (isDashboardMultiSelect) {
+            toggleProjectSelection(pid, e);
+          }
+        };
 
         const thumb = p.thumbnail_url || '/out/thumbnail.png';
         const title = p.topic || p.headerMain || 'İsimsiz Proje';
@@ -1561,11 +1773,21 @@
             <div class="relative w-full h-36 bg-[#080c14] rounded-xl overflow-hidden border border-slate-800/80 mb-2.5 flex items-center justify-center group-hover:scale-[1.01] transition">
               <img src="${thumb}?t=${Date.now()}" onerror="this.src='/out/thumbnail.png'" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 transition" />
               <!-- Badges -->
-              <div class="absolute top-2 left-2 flex items-center gap-1">
+              <div class="absolute top-2 left-2 flex items-center gap-1 z-10">
                 <span class="text-[9px] font-mono font-bold bg-black/70 text-amber-300 backdrop-blur-sm px-1.5 py-0.5 rounded border border-amber-500/30">${format}</span>
                 <span class="text-[9px] bg-black/70 text-slate-300 backdrop-blur-sm px-1.5 py-0.5 rounded border border-slate-700">${theme}</span>
               </div>
-              <button onclick="event.stopPropagation(); openProjectById('${p.id}')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2 text-white font-bold text-xs">
+
+              <!-- Selection Checkbox Button -->
+              <button type="button" onclick="toggleProjectSelection('${pid}', event)" title="${isSelected ? 'Seçimi Kaldır' : 'Projeyi Seç'}" class="absolute top-2 right-2 z-20 w-7 h-7 rounded-xl transition flex items-center justify-center shadow-lg ${
+                isSelected 
+                  ? 'bg-amber-400 text-slate-950 font-black ring-2 ring-amber-300' 
+                  : (isDashboardMultiSelect ? 'bg-slate-900/90 text-slate-400 hover:text-white border border-slate-700' : 'bg-black/60 opacity-0 group-hover:opacity-100 text-slate-300 hover:text-white border border-slate-700/80')
+              }">
+                <i class="fa-solid ${isSelected ? 'fa-check text-xs' : 'fa-check text-[10px] opacity-30'}"></i>
+              </button>
+
+              <button onclick="event.stopPropagation(); openProjectById('${pid}')" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2 text-white font-bold text-xs ${isDashboardMultiSelect ? 'pointer-events-none' : ''}">
                 <span class="w-9 h-9 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center shadow-lg"><i class="fa-solid fa-play ml-0.5"></i></span>
               </button>
             </div>
@@ -1579,14 +1801,14 @@
 
           <!-- Actions Footer -->
           <div class="pt-2 border-t border-slate-800/60 flex items-center justify-between">
-            <button onclick="openProjectById('${p.id}')" class="px-3 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-lg text-[11px] font-bold flex items-center gap-1 transition">
+            <button onclick="event.stopPropagation(); openProjectById('${pid}')" class="px-3 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-lg text-[11px] font-bold flex items-center gap-1 transition">
               <i class="fa-solid fa-pen-to-square"></i> Düzenle
             </button>
             <div class="flex items-center gap-1">
-              <button onclick="cloneProjectById('${p.id}')" title="Kopyala / Çoğalt" class="w-6 h-6 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center text-[10px] transition">
+              <button onclick="event.stopPropagation(); cloneProjectById('${pid}')" title="Kopyala / Çoğalt" class="w-6 h-6 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center text-[10px] transition">
                 <i class="fa-regular fa-copy"></i>
               </button>
-              <button onclick="deleteProjectById('${p.id}')" title="Projeyi Sil" class="w-6 h-6 rounded-lg hover:bg-red-950/40 text-slate-400 hover:text-red-400 flex items-center justify-center text-[10px] transition">
+              <button onclick="event.stopPropagation(); deleteProjectById('${pid}')" title="Projeyi Sil" class="w-6 h-6 rounded-lg hover:bg-red-950/40 text-slate-400 hover:text-red-400 flex items-center justify-center text-[10px] transition">
                 <i class="fa-solid fa-trash-can"></i>
               </button>
             </div>
@@ -1647,6 +1869,92 @@
       }
     }
 
+    // Audio Progress Modal Helpers
+    let audioProgressTimer = null;
+    function openAudioProgressModal(fileName) {
+      const modal = document.getElementById('modal-audio-progress');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      updateAudioProgress(12, '1/3 Ses sunucuya aktarılıyor ve doğrulanıyor...', 1);
+    }
+
+    function updateAudioProgress(pct, statusText, stepNum) {
+      const bar = document.getElementById('audio-progress-bar');
+      const pctText = document.getElementById('audio-progress-pct');
+      const stepLabel = document.getElementById('audio-progress-step');
+
+      if (bar) bar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+      if (pctText) pctText.innerText = `${Math.min(100, Math.max(0, pct))}%`;
+      if (stepLabel) stepLabel.innerText = statusText;
+
+      const step1 = document.getElementById('audio-step-1');
+      const step2 = document.getElementById('audio-step-2');
+      const step3 = document.getElementById('audio-step-3');
+
+      if (stepNum === 1) {
+        if (step1) {
+          step1.className = 'flex items-center gap-2 text-amber-300 font-medium';
+          step1.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-[10px]"></i><span>Ses dosyası yükleniyor ve formatı analiz ediliyor</span>`;
+        }
+        if (step2) {
+          step2.className = 'flex items-center gap-2 text-slate-500 font-medium';
+          step2.innerHTML = `<i class="fa-regular fa-circle text-[10px]"></i><span>Whisper AI konuşmayı transkribe ediyor ve kelimeleri hizalıyor</span>`;
+        }
+        if (step3) {
+          step3.className = 'flex items-center gap-2 text-slate-500 font-medium';
+          step3.innerHTML = `<i class="fa-regular fa-circle text-[10px]"></i><span>Zaman tüneli dalga formu (waveform) ve sahneler üretiliyor</span>`;
+        }
+      } else if (stepNum === 2) {
+        if (step1) {
+          step1.className = 'flex items-center gap-2 text-emerald-400 font-medium';
+          step1.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>Ses dosyası yüklendi ve doğrulandı</span>`;
+        }
+        if (step2) {
+          step2.className = 'flex items-center gap-2 text-amber-300 font-medium';
+          step2.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-[10px]"></i><span>Whisper AI konuşmayı transkribe ediyor ve kelimeleri hizalıyor</span>`;
+        }
+        if (step3) {
+          step3.className = 'flex items-center gap-2 text-slate-500 font-medium';
+          step3.innerHTML = `<i class="fa-regular fa-circle text-[10px]"></i><span>Zaman tüneli dalga formu (waveform) ve sahneler üretiliyor</span>`;
+        }
+      } else if (stepNum === 3) {
+        if (step1) {
+          step1.className = 'flex items-center gap-2 text-emerald-400 font-medium';
+          step1.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>Ses dosyası yüklendi ve doğrulandı</span>`;
+        }
+        if (step2) {
+          step2.className = 'flex items-center gap-2 text-emerald-400 font-medium';
+          step2.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>Whisper AI transkripsiyonu tamamlandı</span>`;
+        }
+        if (step3) {
+          step3.className = 'flex items-center gap-2 text-amber-300 font-medium';
+          step3.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-[10px]"></i><span>Zaman tüneli dalga formu (waveform) ve sahneler üretiliyor</span>`;
+        }
+      } else if (stepNum >= 4) {
+        if (step1) {
+          step1.className = 'flex items-center gap-2 text-emerald-400 font-medium';
+          step1.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>Ses dosyası yüklendi ve doğrulandı</span>`;
+        }
+        if (step2) {
+          step2.className = 'flex items-center gap-2 text-emerald-400 font-medium';
+          step2.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>Whisper AI transkripsiyonu tamamlandı</span>`;
+        }
+        if (step3) {
+          step3.className = 'flex items-center gap-2 text-emerald-400 font-medium';
+          step3.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>Zaman tüneli dalga formu ve sahneler hazırlandı</span>`;
+        }
+      }
+    }
+
+    function closeAudioProgressModal() {
+      if (audioProgressTimer) {
+        clearInterval(audioProgressTimer);
+        audioProgressTimer = null;
+      }
+      const modal = document.getElementById('modal-audio-progress');
+      if (modal) modal.classList.add('hidden');
+    }
+
     function openNewProjectModal(defaultFormat = '9:16') {
       const modal = document.getElementById('modal-new-project');
       if (!modal) return;
@@ -1703,9 +2011,10 @@
 
     async function uploadDashboardAudio(file) {
       if (!file) return;
-      showToast('Ses yükleniyor ve zaman tüneline kurgulanıyor...', 'info');
-      await uploadTimelineAudioFile(file);
-      switchAppView('editor');
+      const ok = await uploadTimelineAudioFile(file);
+      if (ok) {
+        switchAppView('editor');
+      }
     }
 
     async function loadDashboardPresets() {
@@ -2328,9 +2637,26 @@
 
     // 6. AUDIO UPLOAD & WAVEFORM ENGINE
     async function uploadTimelineAudioFile(file) {
-      if (!file) return;
+      if (!file) return false;
       const uploadText = document.getElementById('audio-upload-text');
-      uploadText.innerText = 'Yükleniyor & Whisper Hizalanıyor...';
+      if (uploadText) uploadText.innerText = 'Yükleniyor & Whisper Hizalanıyor...';
+
+      openAudioProgressModal(file.name);
+
+      let currentPct = 14;
+      if (audioProgressTimer) clearInterval(audioProgressTimer);
+      audioProgressTimer = setInterval(() => {
+        if (currentPct < 40) {
+          currentPct += 4;
+          updateAudioProgress(currentPct, '1/3 Ses sunucuya aktarılıyor ve doğrulanıyor...', 1);
+        } else if (currentPct < 85) {
+          currentPct += 3;
+          updateAudioProgress(currentPct, '2/3 Whisper yapay zeka transkripsiyonu çalışıyor...', 2);
+        } else if (currentPct < 96) {
+          currentPct += 1;
+          updateAudioProgress(currentPct, '3/3 Kelimeler, dalga formu ve sahneler hizalanıyor...', 3);
+        }
+      }, 350);
 
       const formData = new FormData();
       formData.append('file', file);
@@ -2340,8 +2666,16 @@
           method: 'POST',
           body: formData
         });
+
         if (!res.ok) throw new Error('Ses yüklenemedi.');
         const data = await res.json();
+
+        if (audioProgressTimer) {
+          clearInterval(audioProgressTimer);
+          audioProgressTimer = null;
+        }
+
+        updateAudioProgress(100, 'Tamamlandı! Zaman tüneli hazırlandı.', 4);
 
         waveformPeaks = data.waveform || [];
         timelineDuration = data.duration || 15.0;
@@ -2350,19 +2684,35 @@
         videoData.words = data.words || [];
 
         // Reload audio element
-        audioEl.src = `/public/audio.mp3?t=${Date.now()}`;
-        audioEl.load();
+        if (audioEl) {
+          audioEl.src = `/public/audio.mp3?t=${Date.now()}`;
+          audioEl.load();
+        }
 
         renderTimeline();
         renderSceneInspector();
         renderLeftScenesList();
         renderLivePreviewCanvas();
         updateTimeDisplays();
-        uploadText.innerText = 'Ses Başarıyla Eklendi ✓';
-        setTimeout(() => uploadText.innerText = 'Ses Dosyası Seç / Yükle', 3000);
+
+        if (uploadText) {
+          uploadText.innerText = 'Ses Başarıyla Eklendi ✓';
+          setTimeout(() => uploadText.innerText = 'Ses Dosyası Seç / Yükle', 3000);
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 600));
+        closeAudioProgressModal();
+        showToast('Ses dosyası başarıyla yüklendi ve sahneler hizalandı!', 'success');
+        return true;
       } catch (e) {
-        alert('Ses yükleme hatası: ' + e.message);
-        uploadText.innerText = 'Ses Dosyası Seç / Yükle';
+        if (audioProgressTimer) {
+          clearInterval(audioProgressTimer);
+          audioProgressTimer = null;
+        }
+        closeAudioProgressModal();
+        showToast('Ses yükleme hatası: ' + e.message, 'error');
+        if (uploadText) uploadText.innerText = 'Ses Dosyası Seç / Yükle';
+        return false;
       }
     }
 

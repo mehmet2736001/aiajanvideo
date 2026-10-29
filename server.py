@@ -198,6 +198,9 @@ class CreateProjectRequest(BaseModel):
     layoutType: Optional[str] = "pip_split"
     topic: Optional[str] = None
 
+class BulkDeleteRequest(BaseModel):
+    ids: List[str]
+
 class GitBackupRequest(BaseModel):
     message: Optional[str] = None
     push: Optional[bool] = True
@@ -421,6 +424,15 @@ def delete_history_item(item_id: str):
     history = [h for h in history if h.get("id") != item_id]
     save_history(history)
     return {"success": True}
+
+@app.post("/api/history/bulk-delete")
+def bulk_delete_history_items(req: BulkDeleteRequest):
+    history = load_history()
+    to_delete = set(str(i) for i in req.ids)
+    before_len = len(history)
+    history = [h for h in history if str(h.get("id")) not in to_delete]
+    save_history(history)
+    return {"success": True, "deleted_count": before_len - len(history)}
 
 @app.post("/api/history/{item_id}/load")
 def load_history_project(item_id: str):
