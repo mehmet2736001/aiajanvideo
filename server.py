@@ -861,7 +861,7 @@ async def upload_audio_and_generate_multiscene(
     if user_transcript:
         clean_user_text = fix_turkish_orthography_and_compounds(user_transcript)
         whisper_words, subtitles = align_custom_transcript_to_audio(clean_user_text, total_duration, raw_whisper_words)
-        full_transcript = clean_user_text
+        full_transcript = " ".join([w.get("text") or w.get("word") or "" for w in whisper_words]).strip() or clean_user_text
     else:
         whisper_words = stitch_whisper_word_tokens(raw_whisper_words)
         full_transcript = " ".join([w["word"] for w in whisper_words]).strip()
@@ -1779,7 +1779,7 @@ async def upload_timeline_audio(
         # USER PROVIDED EXACT TEXT: Guarantee 100% fidelity to user's text!
         clean_user_text = fix_turkish_orthography_and_compounds(user_transcript)
         words, subtitles = align_custom_transcript_to_audio(clean_user_text, duration, raw_words)
-        full_text = clean_user_text
+        full_text = " ".join([w.get("text") or w.get("word") or "" for w in words]).strip() or clean_user_text
     else:
         # Fall back to Whisper transcription
         words = stitch_whisper_word_tokens(raw_words)
@@ -2036,9 +2036,12 @@ def api_realign_transcript(req: RealignTranscriptRequest):
 
     duration = float(video_data.get("totalDuration", 15.0))
     existing_words = video_data.get("words", [])
+    if not existing_words and video_data.get("subtitles"):
+        existing_words = [w for s in video_data["subtitles"] for w in s.get("words", [])]
 
     words, subtitles = align_custom_transcript_to_audio(user_text, duration, existing_words)
-    video_data["narration"] = user_text
+    full_narration = " ".join([w.get("text") or w.get("word") or "" for w in words]).strip() or user_text
+    video_data["narration"] = full_narration
     video_data["words"] = words
     video_data["subtitles"] = subtitles
 
@@ -2056,7 +2059,7 @@ def api_realign_transcript(req: RealignTranscriptRequest):
 
     return {
         "success": True,
-        "narration": user_text,
+        "narration": full_narration,
         "words": words,
         "subtitles": subtitles,
         "scenes": scenes,

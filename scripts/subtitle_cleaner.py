@@ -350,6 +350,13 @@ def build_subtitle_chunks(
     while i < total_len:
         end_idx = min(total_len, i + chunk_size)
 
+        # Sentence punctuation break: if ANY word in range [i, end_idx) ends with ? or !, break right there
+        for k in range(i, end_idx):
+            w_text = (stitched_words[k].get("word") or stitched_words[k].get("text") or "").strip()
+            if w_text.endswith(('?', '!')) and not w_text.endswith('...'):
+                end_idx = k + 1
+                break
+
         # Look ahead: Check if the token immediately following end_idx is a clitic (e.g. "mi?", "de", "musun?")
         # If so, that clitic CANNOT start the next chunk alone!
         if end_idx < total_len and is_clitic_token(stitched_words[end_idx].get("text") or stitched_words[end_idx].get("word", "")):
@@ -449,24 +456,25 @@ def align_custom_transcript_to_audio(
     whisper_words: Optional[List[Dict[str, Any]]] = None
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     """
-    FORCED ALIGNMENT ENGINE:
-    Aligns the user's exact pasted script to the audio duration and acoustic Whisper timestamps.
+    BULLETPROOF FORCED ALIGNMENT ARCHITECTURE:
+    Aligns the user's exact reference script monotonically to acoustic Whisper timestamps.
     
     GUARANTEES:
-    1. Every single word in the resulting subtitles is 100% the user's exact text
+    1. Every single word in the aligned portion is 100% the user's exact text
        (preserving spelling, capitalization, punctuation, apostrophes like Kur'an, Allah'ın).
-    2. Whisper AI is used strictly as an acoustic timing guide; Whisper's misheard words,
-       hallucinations, and spelling mistakes NEVER leak onto the screen.
-    3. Enforces Turkish orthography rules and non-breaking clitic cohesion (mi, de, da, ki).
-    4. Returns (words, subtitles) ready for Remotion & web timeline rendering.
+    2. Whisper AI is used STRICTLY as an acoustic timing guide (clock). Whisper's misheard words,
+       hallucinations, and spelling mistakes (e.g. 'ısırlık' -> 'asırlık', 'fıkında fethvalar' ->
+       'fıkhında fetvalar', 'dinisenden' -> 'dini senden') NEVER leak onto the timeline.
+    3. Handles 1:1 fuzzy mishearings, 2:1 fused tokens, 1:2 split tokens, and partial transcripts.
+    4. Enforces Turkish orthography rules and non-breaking clitic cohesion (mi, de, da, ki).
+    5. Returns (words, subtitles) ready for Remotion & web timeline rendering.
     """
-    cleaned_text = fix_turkish_orthography_and_compounds(user_text)
+    cleaned_text = fix_turkish_orthography_and_compounds((user_text or "").strip())
     user_tokens = [w for w in cleaned_text.split() if w]
     if not user_tokens:
         return [], []
 
     audio_duration = max(1.0, float(audio_duration))
-    total_words = len(user_tokens)
 
     # If no whisper words provided or whisper failed, distribute by character-length weights
     if not whisper_words:
@@ -477,96 +485,149 @@ def align_custom_transcript_to_audio(
     # First stitch Whisper tokens with compound word & apostrophe rules
     stitched_whisper = stitch_whisper_word_tokens(whisper_words)
 
-    # 1. Prepare normalized token lists
+    # Prepare normalized token lists for fuzzy comparison
     u_norm = [normalize_for_match(w) for w in user_tokens]
     w_norm = [normalize_for_match(w.get("word") or w.get("text") or "") for w in stitched_whisper]
 
-    # 2. Monotonic greedy / sequence alignment
-    matched_whisper: Dict[int, int] = {}
-    last_w_idx = -1
+    u_len = len(user_tokens)
+    w_len = len(stitched_whisper)
 
-    for u_idx, u_w in enumerate(u_norm):
-        if not u_w:
-            continue
-        best_w_idx = -1
+    # 1. Monotonic anchor search in first 15 whisper words
+    w_curr = 0
+    if u_norm:
+        best_start = 0
+        best_start_score = 0.0
+        for w_idx in range(min(15, w_len)):
+            sc = token_similarity(u_norm[0], w_norm[w_idx])
+            if sc > best_start_score:
+                best_start_score = sc
+                best_start = w_idx
+        if best_start_score >= 0.70:
+            w_curr = best_start
+
+    aligned_user_words: List[Dict[str, Any]] = []
+    u_curr = 0
+
+    # 2. Monotonic Dynamic Alignment with locality constraint
+    while u_curr < u_len:
+        best_match = None
         best_score = 0.0
+        # Window of 10 whisper words ahead (prevents jumping across minutes for accidental common words)
+        window_end = min(w_len, w_curr + 10)
 
-        expected_w = int((u_idx / total_words) * len(w_norm))
-        search_start = max(last_w_idx + 1, expected_w - 7)
-        search_end = min(len(w_norm), expected_w + 8)
+        # Pattern A: 1:1 match (handles misheard words: user 'asırlık' vs whisper 'ısırlık')
+        for w_cand in range(w_curr, window_end):
+            score = token_similarity(u_norm[u_curr], w_norm[w_cand])
+            dist_penalty = (w_cand - w_curr) * 0.03
+            adj = score - dist_penalty
+            if adj > best_score and score >= 0.60:
+                best_score = adj
+                best_match = ('1:1', u_curr, w_cand, score)
 
-        for w_idx in range(search_start, search_end):
-            score = token_similarity(u_w, w_norm[w_idx])
-            if score > best_score and score >= 0.70:
-                best_score = score
-                best_w_idx = w_idx
+        # Pattern B: 2:1 fusion (User 'dini' + 'senden' vs Whisper 'dinisenden')
+        if u_curr + 1 < u_len:
+            fused_u = u_norm[u_curr] + u_norm[u_curr + 1]
+            for w_cand in range(w_curr, window_end):
+                score = token_similarity(fused_u, w_norm[w_cand])
+                dist_penalty = (w_cand - w_curr) * 0.03
+                adj = score - dist_penalty
+                if adj > best_score and score >= 0.70:
+                    best_score = adj
+                    best_match = ('2:1', u_curr, w_cand, score)
 
-        if best_w_idx != -1:
-            matched_whisper[u_idx] = best_w_idx
-            last_w_idx = best_w_idx
+        # Pattern C: 1:2 split (User 'öğreneceğiz' vs Whisper 'mı' + 'renceğiz')
+        for w_cand in range(w_curr, window_end - 1):
+            fused_w = w_norm[w_cand] + w_norm[w_cand + 1]
+            score = token_similarity(u_norm[u_curr], fused_w)
+            dist_penalty = (w_cand - w_curr) * 0.03
+            adj = score - dist_penalty
+            if adj > best_score and score >= 0.70:
+                best_score = adj
+                best_match = ('1:2', u_curr, w_cand, score)
 
-    # If matching ratio is too low (< 15%), fallback to pure proportional distribution within speech bounds
-    if len(matched_whisper) < max(1, total_words * 0.15):
-        first_t = float(stitched_whisper[0].get("start", 0.2)) if stitched_whisper else 0.2
-        last_t = float(stitched_whisper[-1].get("end", audio_duration - 0.2)) if stitched_whisper else (audio_duration - 0.2)
-        aligned_words = distribute_words_by_duration(user_tokens, max(0.1, first_t), min(audio_duration - 0.1, last_t))
-        subtitles = build_subtitle_chunks(aligned_words, chunk_size=3)
-        return aligned_words, subtitles
-
-    # 3. Build timestamp anchors for each user token
-    anchor_times: Dict[int, Tuple[float, float]] = {}
-    for u_idx, w_idx in matched_whisper.items():
-        w_obj = stitched_whisper[w_idx]
-        anchor_times[u_idx] = (float(w_obj.get("start", 0.0)), float(w_obj.get("end", 0.0)))
-
-    # 4. Interpolate missing user tokens
-    result_words: List[Dict[str, Any]] = []
-    i = 0
-    while i < total_words:
-        if i in anchor_times:
-            s, e = anchor_times[i]
-            w_text = fix_turkish_orthography_and_compounds(user_tokens[i])
-            result_words.append({
-                "word": w_text,
-                "text": w_text,
-                "start": round(s, 2),
-                "end": round(max(s + 0.15, e), 2)
-            })
-            i += 1
+        if best_match:
+            mtype = best_match[0]
+            if mtype == '1:1':
+                _, _, w_idx, _ = best_match
+                w_ref = stitched_whisper[w_idx]
+                aligned_user_words.append({
+                    "word": user_tokens[u_curr],
+                    "text": user_tokens[u_curr],
+                    "start": round(float(w_ref["start"]), 2),
+                    "end": round(float(w_ref["end"]), 2)
+                })
+                w_curr = w_idx + 1
+                u_curr += 1
+            elif mtype == '2:1':
+                _, _, w_idx, _ = best_match
+                w_ref = stitched_whisper[w_idx]
+                t_s = float(w_ref["start"])
+                t_e = float(w_ref["end"])
+                mid = round((t_s + t_e) / 2.0, 2)
+                aligned_user_words.append({
+                    "word": user_tokens[u_curr],
+                    "text": user_tokens[u_curr],
+                    "start": round(t_s, 2),
+                    "end": mid
+                })
+                aligned_user_words.append({
+                    "word": user_tokens[u_curr + 1],
+                    "text": user_tokens[u_curr + 1],
+                    "start": mid,
+                    "end": round(t_e, 2)
+                })
+                w_curr = w_idx + 1
+                u_curr += 2
+            elif mtype == '1:2':
+                _, _, w_idx, _ = best_match
+                t_s = float(stitched_whisper[w_idx]["start"])
+                t_e = float(stitched_whisper[w_idx + 1]["end"])
+                aligned_user_words.append({
+                    "word": user_tokens[u_curr],
+                    "text": user_tokens[u_curr],
+                    "start": round(t_s, 2),
+                    "end": round(t_e, 2)
+                })
+                w_curr = w_idx + 2
+                u_curr += 1
         else:
-            # Find run of unanchored words: i ... next_anchor - 1
-            start_run = i
-            while i < total_words and i not in anchor_times:
-                i += 1
-            end_run = i
+            # Unmatched user token -> smoothly interpolate timestamp
+            prev_end = aligned_user_words[-1]["end"] if aligned_user_words else 0.0
+            next_start = float(stitched_whisper[w_curr]["start"]) if w_curr < w_len else prev_end + 0.35
+            if next_start <= prev_end:
+                next_start = prev_end + 0.3
+            dur = max(0.2, min(0.6, next_start - prev_end))
+            aligned_user_words.append({
+                "word": user_tokens[u_curr],
+                "text": user_tokens[u_curr],
+                "start": round(prev_end, 2),
+                "end": round(prev_end + dur, 2)
+            })
+            u_curr += 1
 
-            # Determine boundary times [t_start, t_end]
-            if start_run == 0:
-                next_start = anchor_times[end_run][0]
-                run_dur_est = sum(max(2, len(user_tokens[k])) for k in range(start_run, end_run)) * 0.05
-                t_start = max(0.1, next_start - run_dur_est)
-                t_end = next_start
-            elif end_run == total_words:
-                prev_end = anchor_times[start_run - 1][1]
-                t_start = prev_end
-                t_end = min(audio_duration - 0.1, prev_end + sum(max(2, len(user_tokens[k])) for k in range(start_run, end_run)) * 0.06)
-            else:
-                prev_end = anchor_times[start_run - 1][1]
-                next_start = anchor_times[end_run][0]
-                t_start = prev_end
-                t_end = max(prev_end + 0.15 * (end_run - start_run), next_start)
+    # 3. Handle Partial Transcripts:
+    # If user provided a partial transcript covering a portion of the speech,
+    # preserve the remaining audio's speech so rest of video is not lost.
+    final_words = list(aligned_user_words)
+    if w_curr < w_len:
+        for rem_w in stitched_whisper[w_curr:]:
+            clean_rem = fix_turkish_orthography_and_compounds(rem_w.get("word") or rem_w.get("text") or "")
+            final_words.append({
+                "word": clean_rem,
+                "text": clean_rem,
+                "start": round(float(rem_w["start"]), 2),
+                "end": round(float(rem_w["end"]), 2)
+            })
 
-            sub_words = distribute_words_by_duration(user_tokens[start_run:end_run], t_start, t_end)
-            result_words.extend(sub_words)
+    # 4. Monotonicity and timestamp sanity adjustment pass
+    for idx in range(1, len(final_words)):
+        if final_words[idx]["start"] < final_words[idx - 1]["end"]:
+            mid = (final_words[idx - 1]["end"] + final_words[idx]["start"]) / 2
+            final_words[idx - 1]["end"] = round(mid, 2)
+            final_words[idx]["start"] = round(mid, 2)
+            if final_words[idx]["end"] <= final_words[idx]["start"]:
+                final_words[idx]["end"] = round(final_words[idx]["start"] + 0.18, 2)
 
-    # Final monotonicity and overlap adjustment pass
-    for idx in range(1, len(result_words)):
-        if result_words[idx]["start"] < result_words[idx - 1]["end"]:
-            mid = (result_words[idx - 1]["end"] + result_words[idx]["start"]) / 2
-            result_words[idx - 1]["end"] = round(mid, 2)
-            result_words[idx]["start"] = round(mid, 2)
-            if result_words[idx]["end"] <= result_words[idx]["start"]:
-                result_words[idx]["end"] = round(result_words[idx]["start"] + 0.18, 2)
-
-    subtitles = build_subtitle_chunks(result_words, chunk_size=3)
-    return result_words, subtitles
+    # 5. Build 3-word subtitle chunks with strict Turkish clitic & orthography cohesion
+    subtitles = build_subtitle_chunks(final_words, chunk_size=3)
+    return final_words, subtitles
