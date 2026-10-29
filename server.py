@@ -191,6 +191,13 @@ class AudioAutoCutRequest(BaseModel):
 class RenderMultiFormatRequest(BaseModel):
     formats: Optional[List[str]] = ["9:16"]
 
+class CreateProjectRequest(BaseModel):
+    title: Optional[str] = "Yeni Proje"
+    format: Optional[str] = "9:16"
+    theme: Optional[str] = "notebook"
+    layoutType: Optional[str] = "pip_split"
+    topic: Optional[str] = None
+
 class GitBackupRequest(BaseModel):
     message: Optional[str] = None
     push: Optional[bool] = True
@@ -414,6 +421,118 @@ def delete_history_item(item_id: str):
     history = [h for h in history if h.get("id") != item_id]
     save_history(history)
     return {"success": True}
+
+@app.post("/api/history/{item_id}/load")
+def load_history_project(item_id: str):
+    history = load_history()
+    target = next((h for h in history if h.get("id") == item_id), None)
+    if not target:
+        raise HTTPException(status_code=404, detail="Proje bulunamadı.")
+    
+    v_data = target.get("video_data")
+    if not v_data:
+        v_data = {
+            "topic": target.get("topic", "Yeni Proje"),
+            "headerLine1": target.get("headerMain", "BAŞLIK"),
+            "narration": target.get("narration", ""),
+            "theme": target.get("theme", "notebook"),
+            "layoutType": target.get("layoutType", "pip_split"),
+            "scenes": target.get("scenes", [
+                {
+                    "id": "scene_1",
+                    "headerSubtitle": "Bölüm 1",
+                    "headerLine1": target.get("headerMain", "BAŞLIK"),
+                    "circledWord": "İLK",
+                    "headerLine2": "",
+                    "highlightedText": "",
+                    "layoutType": target.get("layoutType", "pip_split"),
+                    "startTime": 0.0,
+                    "endTime": 10.0,
+                    "duration": 10.0
+                }
+            ]),
+            "subtitles": target.get("subtitles", []),
+            "totalDuration": target.get("duration", 10.0)
+        }
+    
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(v_data, f, ensure_ascii=False, indent=2)
+        
+    return {"success": True, "project": target, "video_data": v_data}
+
+@app.post("/api/history/{item_id}/clone")
+def clone_history_project(item_id: str):
+    history = load_history()
+    target = next((h for h in history if h.get("id") == item_id), None)
+    if not target:
+        raise HTTPException(status_code=404, detail="Proje bulunamadı.")
+    
+    cloned = json.loads(json.dumps(target))
+    cloned["id"] = str(uuid.uuid4())[:8]
+    cloned["topic"] = f"{target.get('topic', 'Proje')} (Kopya)"
+    if "video_data" in cloned and isinstance(cloned["video_data"], dict):
+        cloned["video_data"]["topic"] = cloned["topic"]
+    cloned["created_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    history.insert(0, cloned)
+    save_history(history[:30])
+    return {"success": True, "project": cloned}
+
+@app.post("/api/projects/new")
+def create_new_blank_project(req: CreateProjectRequest):
+    new_id = str(uuid.uuid4())[:8]
+    title = req.title or req.topic or "Yeni Proje"
+    default_scene = {
+        "id": "scene_1",
+        "headerSubtitle": "Bölüm 1",
+        "headerLine1": title.upper(),
+        "circledWord": "İLK",
+        "headerLine2": "Fikrini Buraya Yaz",
+        "highlightedText": "Önemli Nokta",
+        "layoutType": req.layoutType or "pip_split",
+        "startTime": 0.0,
+        "endTime": 10.0,
+        "duration": 10.0
+    }
+    new_data = {
+        "topic": title,
+        "theme": req.theme or "notebook",
+        "format": req.format or "9:16",
+        "headerSubtitle": "Bölüm 1",
+        "headerLine1": title.upper(),
+        "circledWord": "İLK",
+        "headerLine2": "Fikrini Buraya Yaz",
+        "highlightedText": "Önemli Nokta",
+        "layoutType": req.layoutType or "pip_split",
+        "scenes": [default_scene],
+        "subtitles": [
+            {"text": title, "start": 0.0, "end": 2.5},
+            {"text": "kurgulamaya hemen başla", "start": 2.5, "end": 5.0}
+        ],
+        "totalDuration": 10.0,
+        "created_at": time.strftime("%Y-%m-%d %H:%M:%S")
+    }
+    
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(new_data, f, ensure_ascii=False, indent=2)
+        
+    history = load_history()
+    new_hist_item = {
+        "id": new_id,
+        "topic": title,
+        "theme": req.theme or "notebook",
+        "layoutType": req.layoutType or "pip_split",
+        "durationMode": "10s",
+        "created_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "headerMain": title.upper(),
+        "thumbnail_url": "/out/thumbnail.png",
+        "video_data": new_data
+    }
+    history.insert(0, new_hist_item)
+    save_history(history[:30])
+    
+    return {"success": True, "project_id": new_id, "video_data": new_data, "project": new_hist_item}
 
 # VIRAL PRESETS ENDPOINT
 @app.get("/api/presets")

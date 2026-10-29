@@ -18,152 +18,152 @@
     "atom",
     "hourglass"
   ],
-  "headerSubtitle": "Orta Çağın Sırrı",
-  "headerLine1": "İBN-İ SİNA",
-  "circledWord": "40 KEZ",
-  "headerLine2": "OKUDUĞU HALDE",
-  "highlightedText": "NEDEN ANLAMADI?",
+  "headerSubtitle": "Orta Çağ'ın Sırrı",
+  "headerLine1": "TIBBIN",
+  "circledWord": "KANUNU",
+  "headerLine2": "İBN-İ SİNA",
+  "highlightedText": "ASIRLARA YÖN VEREN DEHA",
   "strikeWord": "TESADÜF",
   "layoutType": "pip_split",
   "cards": [
     {
       "id": "1",
-      "label": "The Canon",
-      "value": "5 Volumes",
+      "label": "El-Kanun",
+      "value": "5 Cilt",
       "icon": "book",
       "color": "#1e3a8a",
       "iconAssetPath": "assets/icons/book.svg"
     },
     {
       "id": "2",
-      "label": "Modern Med",
-      "value": "Cornerstone",
+      "label": "Modern Tıp",
+      "value": "Temel Taş",
       "icon": "scale",
       "color": "#15803d",
       "iconAssetPath": "assets/icons/scale.svg"
     },
     {
       "id": "3",
-      "label": "Diagnosis",
-      "value": "Quarantine",
+      "label": "Teşhis",
+      "value": "Karantina",
       "icon": "atom",
       "color": "#d97706",
       "iconAssetPath": "assets/icons/atom.svg"
     }
   ],
   "vsData": {
-    "leftTitle": "Western Med (Scholastic)",
-    "leftSubtitle": "Superstitions",
+    "leftTitle": "Batı Tıbbı (Skolastik)",
+    "leftSubtitle": "Batıl İnançlar",
     "leftPoints": [
-      "Blaming illness on spirits",
-      "No concept of quarantine",
-      "Dogma overriding experiment"
+      "Hastalığı cinlere bağlama",
+      "Karantina bilinci yok",
+      "Deneyden uzak dogma"
     ],
     "leftColor": "#dc2626",
-    "rightTitle": "Avicenna's Medicine",
-    "rightSubtitle": "Scientific Method",
+    "rightTitle": "İbn-i Sina Tıbbı",
+    "rightSubtitle": "Bilimsel Metot",
     "rightPoints": [
-      "Pathways of contagion (germs)",
-      "Quarantine & hygiene",
-      "Clinical trials & observation"
+      "Hastalığın bulaş yolu (mikrop)",
+      "Karantina ve hijyen",
+      "Klinik deney ve gözlem"
     ],
     "rightColor": "#16a34a",
-    "verdict": "Avicenna laid the foundations of modern medicine and the scientific method centuries ago."
+    "verdict": "İbn-i Sina, modern tıbbın ve deneysel metodun temellerini yüz yıllar önce attı."
   },
   "flowchartSteps": [
     {
       "stepNumber": 1,
-      "badge": "Step 1",
-      "title": "Observation",
-      "desc": "Meticulously studied the nature of diseases.",
+      "badge": "1. Adım",
+      "title": "Gözlem",
+      "desc": "Hastalıkların doğasını titizlikle inceledi.",
       "color": "#1e3a8a"
     },
     {
       "stepNumber": 2,
-      "badge": "Step 2",
-      "title": "Quarantine",
-      "desc": "Pioneered isolation methods for contagious outbreaks.",
+      "badge": "2. Adım",
+      "title": "Karantina",
+      "desc": "Bulaşıcı hastalıklar için tecrit yöntemini buldu.",
       "color": "#d97706"
     },
     {
       "stepNumber": 3,
-      "badge": "Step 3",
-      "title": "Compendium",
-      "desc": "His works served as textbooks in Europe for centuries.",
+      "badge": "3. Adım",
+      "title": "Külliyat",
+      "desc": "Yazdığı eserler Avrupa'da yüzyıllarca ders kitabı oldu.",
       "color": "#15803d"
     }
   ],
   "quoteSpotlight": {
-    "speaker": "Avicenna",
-    "title": "THE CANON OF MEDICINE",
-    "quoteText": "Medicine is the science by which we learn the various states of the human body, in health and when not in health, in order to preserve good health and restore it when lost.",
-    "sourceRef": "The Canon, Introduction"
+    "speaker": "İbn-i Sina",
+    "title": "EL-KANUN Fİ'T-TIBB",
+    "quoteText": "Tıp, insan bedeninin sağlık ve hastalık hallerini konu edinen, bu sayede sağlığın korunduğu ve kaybedildiğinde yeniden getirildiği ilimdir.",
+    "sourceRef": "Tıbbın Kanunu, Giriş"
   },
   "metricImpact": {
     "bigNumber": "600+",
-    "bigLabel": "YEARS",
-    "subheading": "Main Textbook in European Universities",
-    "keyTakeaway": "The light of the East illuminated the darkness of the West."
+    "bigLabel": "YIL BOYUNCA",
+    "subheading": "Avrupa Üniversitelerinde Ana Kitap",
+    "keyTakeaway": "Doğu'nun ışığı Batı'nın karanlığını aydınlattı."
   },
   "gridExplosion": {
-    "title": "PILLARS OF SCIENCE",
-    "subtitle": "Hundreds of Miraculous Cures in The Canon of Medicine",
+    "title": "BİLİMİN KÖŞETAŞLARI",
+    "subtitle": "Tıbbın Kanunu'nda Yer Alan Yüzlerce Mucizevi Tedavi",
     "iconType": "book",
     "itemCount": 9,
-    "badgeText": "UNIVERSAL HERITAGE",
+    "badgeText": "EVRENSEL MİRAS",
     "iconAssetPath": "assets/icons/book.svg"
   },
   "triConcept": {
-    "badge": "INNOVATIVE APPROACH",
+    "badge": "YENİLİKÇİ YAKLAŞIM",
     "concept1": {
-      "title": "PHARMACOLOGY",
-      "subtitle": "Herbal Remedies",
+      "title": "FARMAKOLOJİ",
+      "subtitle": "Bitkisel İlaçlar",
       "icon": "atom",
       "color": "#38bdf8",
       "iconAssetPath": "assets/icons/atom.svg"
     },
     "concept2": {
-      "title": "PSYCHOSOMATIC",
-      "subtitle": "Mind & Body",
+      "title": "PSİKOSOMATİK",
+      "subtitle": "Ruh ve Beden",
       "icon": "brain",
       "color": "#ef4444",
       "iconAssetPath": "assets/icons/brain.svg"
     },
     "concept3": {
-      "title": "SURGERY",
-      "subtitle": "Precise Care",
+      "title": "CERRAHİ",
+      "subtitle": "Hassas Müdahale",
       "icon": "scale",
       "color": "#facc15",
       "iconAssetPath": "assets/icons/scale.svg"
     },
-    "bottomNote": "MODERN MEDICINE IS BUILT ON HIS METHODS"
+    "bottomNote": "MODERN TIP ONUN METOTLARININ ÜZERİNE KURULDU"
   },
   "timeline": {
-    "startYear": "980 AD",
-    "endYear": "1037 AD",
-    "durationLabel": "Lifespan",
-    "title": "Age of a Genius",
+    "startYear": "MS 980",
+    "endYear": "MS 1037",
+    "durationLabel": "Ömür",
+    "title": "Bir Dâhinin Çağı",
     "ayahArabic": "",
-    "ayahTranslation": "Knowledge and wisdom are the lost property of the believer; wherever he finds them, he has more right to them.",
-    "ayahRef": "Hadith"
+    "ayahTranslation": "Bilgi ve hikmet müminin yitik malıdır, onu nerede bulursa almalıdır.",
+    "ayahRef": "Hadis-i Şerif"
   },
-  "narration": "Ortaça'nın karandığında yükselen bir meşale. İbni sınağı, yazdığı elkanın fititip kitabıyla sadece kendi çağını değil. Yüz yıllar sonraki modern tip burada şekillerindirdi. Peki ama bu büyük hikimin sürü neydi?",
+  "narration": "Orta Çağ'ın karanlığında yükselen bir meşale... İbn-i Sina, yazdığı El-Kanun fi't-Tıbb kitabı ile sadece kendi çağını değil, yüzyıllar sonraki modern tıbbı da şekillendirdi. Peki ama bu büyük hekimin sırrı neydi?",
   "viral": {
     "hookScore": 98,
     "viralTitles": [
-      "The Hidden Secret Inside Avicenna's Canon of Medicine!",
-      "The Genius Whose Medical Text Ruled Europe for Centuries"
+      "İbn-i Sina'nın Tıbbın Kanunu'ndaki Gizli Sır!",
+      "Avrupa'nın Yüzyıllarca Ders Kitabı Olarak Okuttuğu Deha"
     ],
     "hashtags": [
-      "#avicenna",
-      "#medicine",
-      "#history",
-      "#documentary",
-      "#science",
+      "#ibnisina",
+      "#tıp",
+      "#tarih",
+      "#belgesel",
+      "#bilim",
       "#shorts"
     ],
-    "loopEnding": "and that's why medical history...",
-    "description": "Revolutionary medical breakthroughs by Avicenna and the secrets of The Canon of Medicine."
+    "loopEnding": "ve işte bu yüzden tıp tarihi onu...",
+    "description": "İbn-i Sina'nın tıbba kazandırdığı devrim niteliğindeki yenilikler ve El-Kanun fi't-Tıbb'ın sırrı."
   },
   "theme": "parchment",
   "durationMode": "quick",
@@ -174,13 +174,13 @@
   "lightLeaks": "auto",
   "cameraMotion": "handheld",
   "accentType": "none",
-  "socialHandle": "@quickstory",
+  "socialHandle": "@birkissa",
   "musicTrack": "ambient_mystic.wav",
   "ttsProvider": "edge_tts",
   "voiceId": "en-US-AndrewMultilingualNeural",
   "emotionTone": "documentary",
-  "illustrationUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80",
-  "illustrationCaption": "El-Kanun fi't-Tıbb",
+  "illustrationUrl": "illustrations/ill_69d0e8fe.jpg",
+  "illustrationCaption": "İbn-i Sina & Tıbbın Kanunu",
   "illustrationStyle": "polaroid",
   "brollType": "ink",
   "brollOpacity": 0.18,
@@ -223,280 +223,357 @@
   ],
   "subtitles": [
     {
-      "text": "Ortaça 'nın karandığında",
+      "text": "Ortaçan karanlığında yükselen",
       "start": 0.0,
-      "end": 1.46
+      "end": 2.0,
+      "words": [
+        {
+          "word": "Ortaçan",
+          "start": 0.0,
+          "end": 0.66
+        },
+        {
+          "word": "karanlığında",
+          "start": 0.66,
+          "end": 1.34
+        },
+        {
+          "word": "yükselen",
+          "start": 1.34,
+          "end": 2.0
+        }
+      ]
     },
     {
-      "text": "yükselen bir meşale.",
-      "start": 1.46,
-      "end": 2.82
+      "text": "bir meşale. İbnisina,",
+      "start": 2.0,
+      "end": 3.76,
+      "words": [
+        {
+          "word": "bir",
+          "start": 2.0,
+          "end": 2.16
+        },
+        {
+          "word": "meşale.",
+          "start": 2.16,
+          "end": 2.72
+        },
+        {
+          "word": "İbnisina,",
+          "start": 3.16,
+          "end": 3.76
+        }
+      ]
     },
     {
-      "text": "İbni sınağı, yazdığı",
-      "start": 2.92,
-      "end": 4.25
+      "text": "yazdığı elkanın fititip",
+      "start": 4.26,
+      "end": 5.78,
+      "words": [
+        {
+          "word": "yazdığı",
+          "start": 4.26,
+          "end": 4.72
+        },
+        {
+          "word": "elkanın",
+          "start": 4.72,
+          "end": 5.3
+        },
+        {
+          "word": "fititip",
+          "start": 5.3,
+          "end": 5.78
+        }
+      ]
     },
     {
-      "text": "elkanın fititip kitabıyla",
-      "start": 4.25,
-      "end": 5.99
+      "text": "kitabıyla sadece kendi",
+      "start": 5.78,
+      "end": 7.46,
+      "words": [
+        {
+          "word": "kitabıyla",
+          "start": 5.78,
+          "end": 6.28
+        },
+        {
+          "word": "sadece",
+          "start": 6.28,
+          "end": 7.0
+        },
+        {
+          "word": "kendi",
+          "start": 7.0,
+          "end": 7.46
+        }
+      ]
     },
     {
-      "text": "sadece kendi çağını",
-      "start": 5.99,
-      "end": 7.35
+      "text": "çağını değil. Yüz",
+      "start": 7.46,
+      "end": 8.74,
+      "words": [
+        {
+          "word": "çağını",
+          "start": 7.46,
+          "end": 7.84
+        },
+        {
+          "word": "değil.",
+          "start": 7.84,
+          "end": 8.06
+        },
+        {
+          "word": "Yüz",
+          "start": 8.54,
+          "end": 8.74
+        }
+      ]
     },
     {
-      "text": "değil. Yüz yıllar",
-      "start": 7.35,
-      "end": 8.67
+      "text": "yıllar sonraki modern",
+      "start": 8.74,
+      "end": 9.96,
+      "words": [
+        {
+          "word": "yıllar",
+          "start": 8.74,
+          "end": 9.06
+        },
+        {
+          "word": "sonraki",
+          "start": 9.06,
+          "end": 9.58
+        },
+        {
+          "word": "modern",
+          "start": 9.58,
+          "end": 9.96
+        }
+      ]
     },
     {
-      "text": "sonraki modern tip",
-      "start": 8.67,
-      "end": 9.85
+      "text": "tıp bu da",
+      "start": 9.96,
+      "end": 10.6,
+      "words": [
+        {
+          "word": "tıp",
+          "start": 9.96,
+          "end": 10.3
+        },
+        {
+          "word": "bu",
+          "start": 10.3,
+          "end": 10.48
+        },
+        {
+          "word": "da",
+          "start": 10.48,
+          "end": 10.6
+        }
+      ]
     },
     {
-      "text": "burada şekillerindirdi. Peki",
-      "start": 9.85,
-      "end": 11.25
+      "text": "şekillendirdi. Peki ama",
+      "start": 10.6,
+      "end": 12.38,
+      "words": [
+        {
+          "word": "şekillendirdi.",
+          "start": 10.6,
+          "end": 11.42
+        },
+        {
+          "word": "Peki",
+          "start": 11.9,
+          "end": 12.1
+        },
+        {
+          "word": "ama",
+          "start": 12.1,
+          "end": 12.38
+        }
+      ]
     },
     {
-      "text": "ama bu büyük",
-      "start": 11.25,
-      "end": 12.13
+      "text": "bu büyük hekimin",
+      "start": 12.38,
+      "end": 13.38,
+      "words": [
+        {
+          "word": "bu",
+          "start": 12.38,
+          "end": 12.62
+        },
+        {
+          "word": "büyük",
+          "start": 12.62,
+          "end": 12.94
+        },
+        {
+          "word": "hekimin",
+          "start": 12.94,
+          "end": 13.38
+        }
+      ]
     },
     {
-      "text": "hikimin sürü neydi?",
-      "start": 12.13,
-      "end": 13.27
+      "text": "sürüneydi.",
+      "start": 13.38,
+      "end": 14.12,
+      "words": [
+        {
+          "word": "sürüneydi.",
+          "start": 13.38,
+          "end": 14.12
+        }
+      ]
     }
   ],
   "words": [
     {
-      "word": "Ortaça",
+      "word": "Ortaçan",
       "start": 0.0,
-      "end": 0.68
+      "end": 0.66
     },
     {
-      "word": "'nın",
-      "start": 0.68,
-      "end": 0.82
-    },
-    {
-      "word": "karandığında",
-      "start": 0.82,
-      "end": 1.46
+      "word": "karanlığında",
+      "start": 0.66,
+      "end": 1.34
     },
     {
       "word": "yükselen",
-      "start": 1.46,
-      "end": 2.1
+      "start": 1.34,
+      "end": 2.0
     },
     {
       "word": "bir",
-      "start": 2.1,
-      "end": 2.26
+      "start": 2.0,
+      "end": 2.16
     },
     {
       "word": "meşale.",
-      "start": 2.26,
-      "end": 2.82
+      "start": 2.16,
+      "end": 2.72
     },
     {
-      "word": "İbni",
-      "start": 3.22,
-      "end": 3.52
-    },
-    {
-      "word": "sınağı,",
-      "start": 3.52,
-      "end": 4.36
+      "word": "İbnisina,",
+      "start": 3.16,
+      "end": 3.76
     },
     {
       "word": "yazdığı",
-      "start": 4.4,
-      "end": 4.82
+      "start": 4.26,
+      "end": 4.72
     },
     {
       "word": "elkanın",
-      "start": 4.82,
-      "end": 5.42
+      "start": 4.72,
+      "end": 5.3
     },
     {
       "word": "fititip",
-      "start": 5.42,
-      "end": 5.88
+      "start": 5.3,
+      "end": 5.78
     },
     {
       "word": "kitabıyla",
-      "start": 5.88,
-      "end": 6.56
+      "start": 5.78,
+      "end": 6.28
     },
     {
       "word": "sadece",
-      "start": 6.56,
-      "end": 7.1
+      "start": 6.28,
+      "end": 7.0
     },
     {
       "word": "kendi",
-      "start": 7.1,
-      "end": 7.54
+      "start": 7.0,
+      "end": 7.46
     },
     {
       "word": "çağını",
-      "start": 7.54,
-      "end": 7.92
+      "start": 7.46,
+      "end": 7.84
     },
     {
       "word": "değil.",
-      "start": 7.92,
-      "end": 8.32
+      "start": 7.84,
+      "end": 8.06
     },
     {
       "word": "Yüz",
-      "start": 8.64,
-      "end": 8.8
+      "start": 8.54,
+      "end": 8.74
     },
     {
       "word": "yıllar",
-      "start": 8.8,
-      "end": 9.24
+      "start": 8.74,
+      "end": 9.06
     },
     {
       "word": "sonraki",
-      "start": 9.24,
-      "end": 9.74
+      "start": 9.06,
+      "end": 9.58
     },
     {
       "word": "modern",
-      "start": 9.74,
-      "end": 10.14
+      "start": 9.58,
+      "end": 9.96
     },
     {
-      "word": "tip",
-      "start": 10.14,
-      "end": 10.42
-    },
-    {
-      "word": "burada",
-      "start": 10.42,
-      "end": 10.7
-    },
-    {
-      "word": "şekillerindirdi.",
-      "start": 10.7,
-      "end": 11.54
-    },
-    {
-      "word": "Peki",
-      "start": 11.96,
-      "end": 12.16
-    },
-    {
-      "word": "ama",
-      "start": 12.16,
-      "end": 12.52
+      "word": "tıp",
+      "start": 9.96,
+      "end": 10.3
     },
     {
       "word": "bu",
-      "start": 12.52,
-      "end": 12.78
+      "start": 10.3,
+      "end": 10.48
+    },
+    {
+      "word": "da",
+      "start": 10.48,
+      "end": 10.6
+    },
+    {
+      "word": "şekillendirdi.",
+      "start": 10.6,
+      "end": 11.42
+    },
+    {
+      "word": "Peki",
+      "start": 11.9,
+      "end": 12.1
+    },
+    {
+      "word": "ama",
+      "start": 12.1,
+      "end": 12.38
+    },
+    {
+      "word": "bu",
+      "start": 12.38,
+      "end": 12.62
     },
     {
       "word": "büyük",
-      "start": 12.78,
-      "end": 13.04
+      "start": 12.62,
+      "end": 12.94
     },
     {
-      "word": "hikimin",
-      "start": 13.04,
-      "end": 13.52
+      "word": "hekimin",
+      "start": 12.94,
+      "end": 13.38
     },
     {
-      "word": "sürü",
-      "start": 13.52,
-      "end": 13.82
-    },
-    {
-      "word": "neydi?",
-      "start": 13.82,
-      "end": 14.18
+      "word": "sürüneydi.",
+      "start": 13.38,
+      "end": 14.12
     }
   ],
-  "audioUrl": "/public/audio.mp3",
-  "language": "en",
-  "direction": "ltr",
-  "isRTL": false,
-  "totalDuration": 13.58,
-  "scenes": [
-    {
-      "id": "scene_1",
-      "startTime": 0.0,
-      "endTime": 4.26,
-      "layoutType": "pip_split",
-      "headerSubtitle": "Orta Çağın Sırrı",
-      "headerLine1": "İBN-İ SİNA",
-      "circledWord": "40 KEZ",
-      "headerLine2": "OKUDUĞU HALDE",
-      "highlightedText": "NEDEN ANLAMADI?",
-      "strikeWord": "TESADÜF",
-      "doodleType": "galaxy",
-      "illustrationUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80",
-      "illustrationCaption": "El-Kanun fi't-Tıbb",
-      "illustrationStyle": "polaroid",
-      "brollType": "night_sky",
-      "brollOpacity": 0.18
-    },
-    {
-      "id": "scene_2",
-      "startTime": 4.26,
-      "endTime": 9.08,
-      "layoutType": "cards",
-      "headerSubtitle": "Büyük Eserin Doğuşu",
-      "headerLine1": "5 CİLTLİK",
-      "circledWord": "ŞAHESER",
-      "headerLine2": "KÜTÜPHANELERİN BAŞTACI",
-      "highlightedText": "MODERN TIBBIN TEMELİ",
-      "strikeWord": "",
-      "doodleType": "book",
-      "cards": [
-        {
-          "id": "1",
-          "label": "Karantina",
-          "value": "Bulaşıcı hastalıklarda ilk izolasyon yöntemi",
-          "color": "#1e3a8a"
-        },
-        {
-          "id": "2",
-          "label": "Gözlem",
-          "value": "Deneye ve klinik takibe dayalı teşhis",
-          "color": "#15803d"
-        }
-      ],
-      "brollType": "macro_dust",
-      "brollOpacity": 0.2
-    },
-    {
-      "id": "scene_3",
-      "startTime": 9.08,
-      "endTime": 13.57,
-      "layoutType": "quote_spotlight",
-      "headerSubtitle": "Asırları Aşan Mesaj",
-      "headerLine1": "HAKİKATİN",
-      "circledWord": "ANAHTARI",
-      "headerLine2": "DOĞRU REHBERDİR",
-      "highlightedText": "İLMİN ZİRVESİ SABIRDIR",
-      "strikeWord": "",
-      "doodleType": "lightbulb",
-      "quoteSpotlight": {
-        "speaker": "İbn-i Sina",
-        "title": "Hekimlerin Sultanı",
-        "quoteText": "Tıp ilmi, insan bedeninin hangi hallerde sağlıklı, hangi hallerde sıhhatsiz olduğunu bilmektir."
-      },
-      "brollType": "ink_water",
-      "brollOpacity": 0.22
-    }
-  ]
+  "audioUrl": "audio.mp3"
 }
