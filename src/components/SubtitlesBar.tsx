@@ -2,6 +2,26 @@ import React from 'react';
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { SubtitleWord } from '../types';
 
+// Turkish clitics that must NEVER wrap alone or be separated from their host word
+const TURKISH_CLITICS = new Set([
+  'mi', 'mı', 'mu', 'mü',
+  'misin', 'mısın', 'musun', 'müsün',
+  'miyiz', 'mıyız', 'muyuz', 'müyüz',
+  'miydi', 'mıydı', 'muydu', 'müydü',
+  'miymiş', 'mıymış', 'muymuş', 'müymüş',
+  'midir', 'mıdır', 'mudur', 'müdür',
+  'miyim', 'mıyım',
+  'misiniz', 'mısınız', 'musunuz', 'müsünüz',
+  'miler', 'mılar',
+  'de', 'da', 'ki', 'ise', 'bile', 'dahi'
+]);
+
+const isCliticToken = (token: string): boolean => {
+  if (!token) return false;
+  const clean = token.toLowerCase().replace(/[^a-zçğıöşü]/g, '');
+  return TURKISH_CLITICS.has(clean);
+};
+
 interface SubtitlesBarProps {
   subtitles?: SubtitleWord[];
   socialHandle?: string;
@@ -139,6 +159,18 @@ export const SubtitlesBar: React.FC<SubtitlesBarProps> = ({
     Math.floor((elapsed / chunkDuration) * wordsCount)
   );
 
+  // Group clitic words with their preceding host word into visual nowrap groups
+  // e.g. ["Sen", "de"] -> group, ["gördün", "mü?"] -> group
+  const visualGroups: Array<Array<{ word: string; wIdx: number }>> = [];
+  for (let i = 0; i < words.length; i++) {
+    const w = words[i];
+    if (i > 0 && isCliticToken(w) && visualGroups.length > 0) {
+      visualGroups[visualGroups.length - 1].push({ word: w, wIdx: i });
+    } else {
+      visualGroups.push([{ word: w, wIdx: i }]);
+    }
+  }
+
   return (
     <div
       style={{
@@ -204,42 +236,54 @@ export const SubtitlesBar: React.FC<SubtitlesBarProps> = ({
               flexWrap: 'wrap',
             }}
           >
-            {words.map((word, wIdx) => {
-              const isWordActive = wIdx === activeWordIndex;
-              const hasBeenSpoken = wIdx <= activeWordIndex;
+            {visualGroups.map((group, gIdx) => (
+              <span
+                key={`group-${gIdx}`}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: isDarkMotion ? 10 : 12,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {group.map(({ word, wIdx }) => {
+                  const isWordActive = wIdx === activeWordIndex;
+                  const hasBeenSpoken = wIdx <= activeWordIndex;
 
-              return (
-                <span
-                  key={`${word}-${wIdx}`}
-                  style={{
-                    fontSize: isDarkMotion ? (isWordActive ? 48 : 44) : (isWordActive ? 56 : 52),
-                    fontWeight: 900,
-                    color: isWordActive
-                      ? highlightColor
-                      : hasBeenSpoken
-                      ? defaultTextColor
-                      : isDarkMotion
-                      ? 'rgba(255,255,255,0.6)'
-                      : '#64748b',
-                    letterSpacing: isDarkMotion ? 2 : 1.5,
-                    textTransform: isDarkMotion ? 'uppercase' : 'none',
-                    transform: isWordActive ? 'scale(1.12)' : 'scale(1)',
-                    transition: 'transform 0.1s ease, color 0.1s ease',
-                    textShadow: isWordActive
-                      ? isDarkMotion
-                        ? `0 2px 10px rgba(0,0,0,0.9), 0 0 16px ${highlightColor}`
-                        : isChalkboard
-                        ? '0 0 12px rgba(134, 239, 172, 0.7)'
-                        : isBlueprint
-                        ? '0 0 14px rgba(56, 189, 248, 0.7)'
-                        : '0 2px 4px rgba(0,0,0,0.2)'
-                      : undefined,
-                  }}
-                >
-                  {word}
-                </span>
-              );
-            })}
+                  return (
+                    <span
+                      key={`${word}-${wIdx}`}
+                      style={{
+                        fontSize: isDarkMotion ? (isWordActive ? 48 : 44) : (isWordActive ? 56 : 52),
+                        fontWeight: 900,
+                        color: isWordActive
+                          ? highlightColor
+                          : hasBeenSpoken
+                          ? defaultTextColor
+                          : isDarkMotion
+                          ? 'rgba(255,255,255,0.6)'
+                          : '#64748b',
+                        letterSpacing: isDarkMotion ? 2 : 1.5,
+                        textTransform: isDarkMotion ? 'uppercase' : 'none',
+                        transform: isWordActive ? 'scale(1.12)' : 'scale(1)',
+                        transition: 'transform 0.1s ease, color 0.1s ease',
+                        textShadow: isWordActive
+                          ? isDarkMotion
+                            ? `0 2px 10px rgba(0,0,0,0.9), 0 0 16px ${highlightColor}`
+                            : isChalkboard
+                            ? '0 0 12px rgba(134, 239, 172, 0.7)'
+                            : isBlueprint
+                            ? '0 0 14px rgba(56, 189, 248, 0.7)'
+                            : '0 2px 4px rgba(0,0,0,0.2)'
+                          : undefined,
+                      }}
+                    >
+                      {word}
+                    </span>
+                  );
+                })}
+              </span>
+            ))}
           </div>
         </div>
       )}

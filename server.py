@@ -54,6 +54,7 @@ from scripts.git_manager import (
 from scripts.audio_cleaner import clean_audio_and_realign
 from scripts.subtitle_cleaner import (
     clean_text_apostrophes,
+    fix_turkish_orthography_and_compounds,
     stitch_whisper_word_tokens,
     build_subtitle_chunks,
     align_custom_transcript_to_audio
@@ -256,7 +257,7 @@ def get_whisper():
     return whisper_model
 
 def generate_subtitles_fallback(text: str, total_duration: float):
-    cleaned_text = clean_text_apostrophes(text)
+    cleaned_text = fix_turkish_orthography_and_compounds(text)
     words = cleaned_text.split()
     if not words:
         return []
@@ -858,7 +859,7 @@ async def upload_audio_and_generate_multiscene(
 
     user_transcript = (transcript or "").strip()
     if user_transcript:
-        clean_user_text = clean_text_apostrophes(user_transcript)
+        clean_user_text = fix_turkish_orthography_and_compounds(user_transcript)
         whisper_words, subtitles = align_custom_transcript_to_audio(clean_user_text, total_duration, raw_whisper_words)
         full_transcript = clean_user_text
     else:
@@ -1776,7 +1777,7 @@ async def upload_timeline_audio(
     # Determine final words & subtitles
     if user_transcript:
         # USER PROVIDED EXACT TEXT: Guarantee 100% fidelity to user's text!
-        clean_user_text = clean_text_apostrophes(user_transcript)
+        clean_user_text = fix_turkish_orthography_and_compounds(user_transcript)
         words, subtitles = align_custom_transcript_to_audio(clean_user_text, duration, raw_words)
         full_text = clean_user_text
     else:
@@ -2029,7 +2030,7 @@ def api_realign_transcript(req: RealignTranscriptRequest):
     with open(data_file, "r", encoding="utf-8") as f:
         video_data = json.load(f)
 
-    user_text = clean_text_apostrophes(req.transcript.strip())
+    user_text = fix_turkish_orthography_and_compounds(req.transcript.strip())
     if not user_text:
         raise HTTPException(status_code=400, detail="Lütfen geçerli bir metin girin.")
 

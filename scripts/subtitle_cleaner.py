@@ -1,14 +1,24 @@
 """
 scripts/subtitle_cleaner.py
 
-Comprehensive Turkish & Quranic Word Stitching and Subtitle Alignment Engine.
-Solves Whisper AI BPE tokenizer artifacts where words with apostrophes (' / ’)
-or glottal stops (e.g. Kur'an, Kur'an-ı Kerim, Allah'ın, Türkiye'de) are
-erroneously split into multiple tokens/words (e.g. "Kur'" and "an").
+Comprehensive Turkish & Quranic Word Stitching, Orthography Correction,
+Clitic Cohesion, and Subtitle Alignment Engine.
 
-Also provides Forced Alignment between custom user-pasted scripts and audio
-duration, ensuring 100% fidelity to the user's exact words without relying
-blindly on Whisper AI transcription.
+Solves:
+1. Whisper AI BPE tokenizer artifacts where words with apostrophes (' / ’)
+   or glottal stops (e.g. Kur'an, Kur'an-ı Kerim, Allah'ın, Türkiye'de) are
+   erroneously split into multiple tokens/words (e.g. "Kur'" and "an").
+2. Turkish spelling rules (TDK) where compound words, prefixes, and suffixes
+   must be written together (bitişik):
+   - "birkaç", "birtakım", "hiçbir", "herhangi", "birbiri", "bugün", "biraz", "herkes", "herhalde"
+   - "-ki" eki: "evdeki", "oradaki", "sendeki", "dünkü", "bugünkü", "akşamki"
+   - "-de / -da / -te / -ta" bulunma eki: "evde", "okulda", "yolda", "kitapta", "Kur'an'da", "Allah'ta"
+   - Kurallı birleşik fiiller: "yapabilir", "yapıverdi", "bakakaldı", "gidedursun"
+   - Kalıplaşmış -ki bağlaçları: "oysaki", "mademki", "meğerki", "halbuki", "illaki"
+3. Clitic cohesion (mi soru edatı, de/da bağlacı):
+   - Soru edatları ("mi", "mı", "mu", "mü", "misin", "musun"...) ve "de / da / ki" bağlaçları
+     ASLA kendisinden önceki kelimeden ayrılarak yeni bir altyazı kartına tek başına atılamaz.
+   - Her zaman önceki kelimeyle aynı altyazı kartında ve aynı satırda kalır.
 """
 
 import difflib
@@ -33,6 +43,32 @@ TURKISH_SUFFIXES = {
     "nız", "niz", "nuz", "nüz",
     "ce", "ca"
 }
+# Suffixes that are never conjunctions (excluding de/da)
+TURKISH_SUFFIXES_EXCLUSIVE = TURKISH_SUFFIXES - {"de", "da", "te", "ta"}
+
+# Clitics that must NEVER be orphaned onto a new subtitle card or start a chunk alone
+TURKISH_CLITICS = {
+    # Soru edatları ve şahıs/zaman ekleri
+    "mi", "mı", "mu", "mü",
+    "misin", "mısın", "musun", "müsün",
+    "miyiz", "mıyız", "muyuz", "müyüz",
+    "miydi", "mıydı", "muydu", "müydü",
+    "miymiş", "mıymış", "muymuş", "müymüş",
+    "midir", "mıdır", "mudur", "müdür",
+    "miyim", "mıyım",
+    "misiniz", "mısınız", "musunuz", "müsünüz",
+    "miler", "mılar",
+    # Bağlaçlar (ayrı yazılır ama önceki kelimeden asla koparılmaz)
+    "de", "da", "ki", "ise", "bile", "dahi"
+}
+
+
+def is_clitic_token(token: str) -> bool:
+    """Checks if a given word token is a Turkish question particle or cohesion clitic."""
+    if not token:
+        return False
+    clean = re.sub(r"[^\wçğıöşüÇĞİÖŞÜ]", "", token.lower()).strip()
+    return clean in TURKISH_CLITICS
 
 
 def clean_text_apostrophes(text: str) -> str:
@@ -67,6 +103,71 @@ def clean_text_apostrophes(text: str) -> str:
     return text
 
 
+def fix_turkish_orthography_and_compounds(text: str) -> str:
+    """
+    Enforces Turkish Language Association (TDK) orthography rules:
+    Stitches words that must be written compound/bitişik:
+    - Belgisiz sıfat/zamirler: birkaç, birtakım, hiçbir, herhangi, birbiri, bugün, biraz, herkes, herhalde
+    - Bitişik -ki eki: evdeki, oradaki, sendeki, dünkü, bugünkü, akşamki
+    - İsmin bulunma hali (-de / -da): evde, okulda, yolda, kitapta, Kur'an'da, Allah'ta
+    - Kurallı birleşik fiiller: yapabilir, yapıverdi, bakakaldı, gidedursun
+    - Kalıplaşmış -ki bağlaçları: oysaki, mademki, meğerki, halbuki, illaki
+    """
+    if not text:
+        return ""
+
+    # First clean apostrophes
+    text = clean_text_apostrophes(text)
+
+    # 1. Belgisiz Zamir ve Sıfatlar (Daima bitişik)
+    text = re.sub(r"\b(bir)\s+(kaç[a-zçğıöşü]*)\b", r"bir\2", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(bir)\s+(takım)\b", r"birtakım", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(hiç)\s+(bir[a-zçğıöşü]*)\b", r"hiç\2", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(her)\s+(hangi)\b", r"herhangi", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(bir)\s+(biri[a-zçğıöşü]*)\b", r"bir\2", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(bu)\s+(gün[a-zçğıöşü]*)\b", r"bu\2", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(bir)\s+(az[a-zçğıöşü]*)\b", r"bir\2", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(her)\s+(kes[a-zçğıöşü]*)\b", r"her\2", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(her)\s+(halde)\b", r"herhalde", text, flags=re.IGNORECASE)
+
+    # 2. Kalıplaşmış -ki bağlaçları (SOMBAHÇEMİ)
+    text = re.sub(r"\b(oysa)\s+(ki)\b", r"oysaki", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(madem)\s+(ki)\b", r"mademki", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(meğer)\s+(ki)\b", r"meğerki", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(halbu)\s+(ki)\b", r"halbuki", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(illa)\s+(ki)\b", r"illaki", text, flags=re.IGNORECASE)
+
+    # 3. İsmin Bulunma Hali (-de / -da / -te / -ta)
+    locative_nouns = "ev|okul|yol|kitap|cami|oda|el|yer|gök|şehir|sokak|dünya|ahiret|cennet|cehennem"
+    text = re.sub(rf"\b({locative_nouns})\s+(de|da|te|ta)\b", r"\1\2", text, flags=re.IGNORECASE)
+    # Proper nouns: Kur'an da -> Kur'an'da, Allah ta -> Allah'ta
+    text = re.sub(r"\b(Kur'an|Kuran|Allah|Türkiye|İstanbul|Ankara|İslam)\s+(da|de|ta|te)\b", r"\1'\2", text, flags=re.IGNORECASE)
+
+    # 4. Sıfat ve İlgi Zamiri Yapan -ki Eki (Daima bitişik)
+    ki_hosts = (
+        "evde|okulda|odada|camide|şehirde|sokakta|dünyada|ahirette|cennette|cehennemde|"
+        "orada|burada|şurada|sende|bende|onda|bizde|sizde|onlarda|"
+        "dün|bugün|akşam|sabah|yarın|masada|yolda|kalpte|gökte|yerde"
+    )
+    text = re.sub(rf"\b({ki_hosts})\s+(ki)\b", r"\1ki", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bdünki\b", "dünkü", text, flags=re.IGNORECASE)
+
+    # 5. Kurallı Birleşik Fiiller (-ebilmek, -ivermek, -ekalmak, -edurmak)
+    # yapa bilir -> yapabilir, gide bilir -> gidebilir, ola bilir -> olabilir
+    text = re.sub(r"\b([A-Za-zÇĞİÖŞÜçğıöşü]+[ae])\s+(bilir(?:[a-zçğıöşü]*)?|bilmek|bildi(?:[a-zçğıöşü]*)?|bilse(?:[a-zçğıöşü]*)?)\b", r"\1\2", text, flags=re.IGNORECASE)
+    # yapı verdi -> yapıverdi, geli verdi -> geliverdi
+    text = re.sub(r"\b([A-Za-zÇĞİÖŞÜçğıöşü]+[ıiuü])\s+(ver(?:di|miş|ir|elim|sin|di[a-zçğıöşü]*)?|vermek)\b", r"\1\2", text, flags=re.IGNORECASE)
+    # baka kaldı -> bakakaldı, gide dursun -> gidedursun
+    text = re.sub(r"\b([A-Za-zÇĞİÖŞÜçğıöşü]+[ae])\s+(kal(?:dı|mış|ır|an)?|dur(?:du|sun|ur)?)\b", r"\1\2", text, flags=re.IGNORECASE)
+
+    # 6. Vasıta Eki (-le / -la / -yle / -yla)
+    text = re.sub(r"\b(senin|onun|benim|bizim|sizin|araba|sevgi|hız|kolaylık)\s+(la|le|yla|yle)\b", r"\1\2", text, flags=re.IGNORECASE)
+
+    # Clean double spaces
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
 def stitch_whisper_word_tokens(raw_words: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
     Takes raw word-level output from Whisper AI transcribe(word_timestamps=True)
@@ -75,7 +176,8 @@ def stitch_whisper_word_tokens(raw_words: List[Dict[str, Any]]) -> List[Dict[str
     Guarantees:
     - "Kur'" and "an" are ALWAYS stitched into a single atomic word token "Kur'an".
     - "Allah'" and "ın" are stitched into "Allah'ın".
-    - Hyphenated compounds like "Kur'an-" and "ı" are stitched into "Kur'an-ı".
+    - Bitişik yazılması gereken kelimeler ("bir" + "kaç" -> "birkaç", "hiç" + "bir" -> "hiçbir",
+      "yapa" + "bilir" -> "yapabilir", "ev" + "de" -> "evde") birleştirilir.
     - Start timestamp of the first token and End timestamp of the last token are preserved.
     """
     if not raw_words:
@@ -84,6 +186,29 @@ def stitch_whisper_word_tokens(raw_words: List[Dict[str, Any]]) -> List[Dict[str
     stitched: List[Dict[str, Any]] = []
     i = 0
     n = len(raw_words)
+
+    # List of known prefixes for compound word joining
+    COMPOUND_PREFIX_MAP = {
+        "bir": ("kaç", "takım", "biri", "birisi", "az"),
+        "hiç": ("bir", "biri", "birisi"),
+        "her": ("hangi", "kes", "halde"),
+        "bu": ("gün",),
+        "oysa": ("ki",),
+        "madem": ("ki",),
+        "meğer": ("ki",),
+        "halbu": ("ki",),
+        "illa": ("ki",),
+    }
+
+    LOCATIVE_BASE_NOUNS = {
+        "ev", "okul", "yol", "kitap", "cami", "oda", "el", "yer", "gök", "şehir", "sokak"
+    }
+
+    KI_ATTACH_HOSTS = {
+        "evde", "okulda", "odada", "camide", "sokakta", "dünyada",
+        "orada", "burada", "şurada", "sende", "bende", "onda", "bizde", "sizde",
+        "dün", "bugün", "akşam", "sabah", "yarın", "masada", "yolda"
+    }
 
     while i < n:
         cur = dict(raw_words[i])
@@ -139,13 +264,39 @@ def stitch_whisper_word_tokens(raw_words: List[Dict[str, Any]]) -> List[Dict[str
                 should_merge = True
                 merged_text = "Kur'an-ı"
 
-            # Case E: Proper noun ending in vowel/consonant and next token is standalone Turkish suffix
-            elif (next_end - cur_start <= 1.2) and next_lower in TURKISH_SUFFIXES and (
+            # Case E: Proper noun ending in vowel/consonant and next token is standalone Turkish suffix (excluding de/da conjunctions)
+            elif (next_end - cur_start <= 1.2) and next_lower in TURKISH_SUFFIXES_EXCLUSIVE and (
                 cur_text and (cur_text[0].isupper() or any(cur_text.endswith(ap) for ap in APOSTROPHES))
             ):
                 should_merge = True
                 c_clean = cur_text.rstrip("".join(APOSTROPHES))
                 merged_text = f"{c_clean}'{next_lower}"
+
+            # Case F: TDK Compound words (birkaç, hiçbir, herhangi, bugün, biraz, herkes)
+            elif (next_end - cur_start <= 1.2) and (cur_lower in COMPOUND_PREFIX_MAP) and any(next_lower.startswith(s) for s in COMPOUND_PREFIX_MAP[cur_lower]):
+                should_merge = True
+                merged_text = f"{cur_text}{next_text}"
+
+            # Case G: Suffix -ki attached to host words (evdeki, oradaki, dünkü)
+            elif (next_end - cur_start <= 1.0) and (cur_lower in KI_ATTACH_HOSTS) and next_lower == "ki":
+                should_merge = True
+                merged_text = f"{cur_text}ki"
+
+            # Case H: Locative case suffix attached to base nouns (evde, okulda, yolda)
+            elif (next_end - cur_start <= 0.8) and (cur_lower in LOCATIVE_BASE_NOUNS) and next_lower in ["de", "da", "te", "ta"]:
+                should_merge = True
+                merged_text = f"{cur_text}{next_lower}"
+
+            # Case I: Kurallı birleşik fiiller (yapa + bilir -> yapabilir, yapı + verdi -> yapıverdi)
+            elif (next_end - cur_start <= 1.0) and cur_lower.endswith(("a", "e")) and next_lower.startswith(("bilir", "bilmek", "bildi", "bilse")):
+                should_merge = True
+                merged_text = f"{cur_text}{next_text}"
+            elif (next_end - cur_start <= 1.0) and cur_lower.endswith(("ı", "i", "u", "ü")) and next_lower.startswith(("verdi", "vermiş", "verir", "vermek")):
+                should_merge = True
+                merged_text = f"{cur_text}{next_text}"
+            elif (next_end - cur_start <= 1.0) and cur_lower.endswith(("a", "e")) and next_lower.startswith(("kaldı", "kalmış", "durdu", "dursun")):
+                should_merge = True
+                merged_text = f"{cur_text}{next_text}"
 
             if should_merge:
                 cur_text = merged_text
@@ -158,8 +309,8 @@ def stitch_whisper_word_tokens(raw_words: List[Dict[str, Any]]) -> List[Dict[str
             else:
                 break
 
-        # Final cleanup on word text
-        final_word = clean_text_apostrophes(cur_text)
+        # Final orthography cleanup
+        final_word = fix_turkish_orthography_and_compounds(cur_text)
         stitched.append({
             "word": final_word,
             "text": final_word,
@@ -174,16 +325,22 @@ def stitch_whisper_word_tokens(raw_words: List[Dict[str, Any]]) -> List[Dict[str
 def build_subtitle_chunks(
     words: List[Dict[str, Any]],
     chunk_size: int = 3,
-    max_duration: float = 2.8
+    max_duration: float = 3.2
 ) -> List[Dict[str, Any]]:
     """
     Groups atomic stitched words into punchy, perfectly readable subtitle chunks.
-    Ensures that no word is ever split across subtitles.
+    
+    GUARANTEES:
+    1. No word is ever split across subtitles.
+    2. Question particles ("mi", "mı", "mu", "mü", "misin", "musun"...) and
+       conjunctions ("de", "da", "ki") are NEVER orphaned onto a separate chunk!
+       They are strictly kept on the same card with the word they qualify.
+    3. Maximum duration and chunk size constraints are respected dynamically.
     """
     if not words:
         return []
 
-    # First stitch all word tokens
+    # First stitch all word tokens with compound word & apostrophe rules
     stitched_words = stitch_whisper_word_tokens(words)
 
     subtitles = []
@@ -191,14 +348,36 @@ def build_subtitle_chunks(
     total_len = len(stitched_words)
 
     while i < total_len:
-        chunk = stitched_words[i:i + chunk_size]
-        
-        # Don't let a chunk exceed max_duration if it contains > 1 word
-        if len(chunk) > 1 and (chunk[-1]["end"] - chunk[0]["start"] > max_duration):
-            chunk = chunk[:max(1, len(chunk) - 1)]
+        end_idx = min(total_len, i + chunk_size)
 
-        chunk_text = " ".join(clean_text_apostrophes(w.get("word") or w.get("text") or "") for w in chunk)
-        chunk_text = clean_text_apostrophes(chunk_text)
+        # Look ahead: Check if the token immediately following end_idx is a clitic (e.g. "mi?", "de", "musun?")
+        # If so, that clitic CANNOT start the next chunk alone!
+        if end_idx < total_len and is_clitic_token(stitched_words[end_idx].get("text") or stitched_words[end_idx].get("word", "")):
+            cand_dur = stitched_words[end_idx]["end"] - stitched_words[i]["start"]
+            if (end_idx - i <= 3) and cand_dur <= max_duration:
+                # Include the clitic in the current chunk!
+                end_idx += 1
+                # If there is another clitic (e.g. "de mi?"), include that too!
+                if end_idx < total_len and is_clitic_token(stitched_words[end_idx].get("text") or stitched_words[end_idx].get("word", "")) and (end_idx - i <= 4):
+                    end_idx += 1
+            else:
+                # Chunk would exceed duration -> Move host word to the next chunk
+                # so the host word + clitic start the next chunk together!
+                if end_idx - i > 1:
+                    end_idx -= 1
+
+        # Check duration limit
+        while (end_idx - i > 1) and (stitched_words[end_idx - 1]["end"] - stitched_words[i]["start"] > max_duration):
+            end_idx -= 1
+
+        # Prevent leaving a host word at the end if its clitic couldn't be included
+        if end_idx < total_len and is_clitic_token(stitched_words[end_idx].get("text") or stitched_words[end_idx].get("word", "")):
+            if end_idx - i > 1:
+                end_idx -= 1
+
+        chunk = stitched_words[i:end_idx]
+        chunk_text = " ".join(fix_turkish_orthography_and_compounds(w.get("word") or w.get("text") or "") for w in chunk)
+        chunk_text = fix_turkish_orthography_and_compounds(chunk_text)
 
         sub_obj = {
             "text": chunk_text,
@@ -207,7 +386,7 @@ def build_subtitle_chunks(
             "words": chunk
         }
         subtitles.append(sub_obj)
-        i += len(chunk)
+        i = end_idx
 
     return subtitles
 
@@ -252,9 +431,10 @@ def distribute_words_by_duration(
         word_dur = total_dur * (w / total_weight)
         s = round(cur_t, 2)
         e = round(min(end_time, cur_t + word_dur), 2)
+        clean_w = fix_turkish_orthography_and_compounds(t)
         words.append({
-            "word": t,
-            "text": t,
+            "word": clean_w,
+            "text": clean_w,
             "start": s,
             "end": e
         })
@@ -277,10 +457,10 @@ def align_custom_transcript_to_audio(
        (preserving spelling, capitalization, punctuation, apostrophes like Kur'an, Allah'ın).
     2. Whisper AI is used strictly as an acoustic timing guide; Whisper's misheard words,
        hallucinations, and spelling mistakes NEVER leak onto the screen.
-    3. If Whisper is unavailable or fails, user words are smoothly distributed across the audio.
+    3. Enforces Turkish orthography rules and non-breaking clitic cohesion (mi, de, da, ki).
     4. Returns (words, subtitles) ready for Remotion & web timeline rendering.
     """
-    cleaned_text = clean_text_apostrophes(user_text)
+    cleaned_text = fix_turkish_orthography_and_compounds(user_text)
     user_tokens = [w for w in cleaned_text.split() if w]
     if not user_tokens:
         return [], []
@@ -294,7 +474,7 @@ def align_custom_transcript_to_audio(
         subtitles = build_subtitle_chunks(aligned_words, chunk_size=3)
         return aligned_words, subtitles
 
-    # First stitch Whisper tokens to avoid fragmented acoustic references
+    # First stitch Whisper tokens with compound word & apostrophe rules
     stitched_whisper = stitch_whisper_word_tokens(whisper_words)
 
     # 1. Prepare normalized token lists
@@ -311,7 +491,6 @@ def align_custom_transcript_to_audio(
         best_w_idx = -1
         best_score = 0.0
 
-        # Look in a window around expected relative position
         expected_w = int((u_idx / total_words) * len(w_norm))
         search_start = max(last_w_idx + 1, expected_w - 7)
         search_end = min(len(w_norm), expected_w + 8)
@@ -346,9 +525,10 @@ def align_custom_transcript_to_audio(
     while i < total_words:
         if i in anchor_times:
             s, e = anchor_times[i]
+            w_text = fix_turkish_orthography_and_compounds(user_tokens[i])
             result_words.append({
-                "word": user_tokens[i],
-                "text": user_tokens[i],
+                "word": w_text,
+                "text": w_text,
                 "start": round(s, 2),
                 "end": round(max(s + 0.15, e), 2)
             })
@@ -358,17 +538,15 @@ def align_custom_transcript_to_audio(
             start_run = i
             while i < total_words and i not in anchor_times:
                 i += 1
-            end_run = i  # exclusive
+            end_run = i
 
             # Determine boundary times [t_start, t_end]
             if start_run == 0:
-                # Preceding run before first anchor
                 next_start = anchor_times[end_run][0]
                 run_dur_est = sum(max(2, len(user_tokens[k])) for k in range(start_run, end_run)) * 0.05
                 t_start = max(0.1, next_start - run_dur_est)
                 t_end = next_start
             elif end_run == total_words:
-                # Trailing run after last anchor
                 prev_end = anchor_times[start_run - 1][1]
                 t_start = prev_end
                 t_end = min(audio_duration - 0.1, prev_end + sum(max(2, len(user_tokens[k])) for k in range(start_run, end_run)) * 0.06)

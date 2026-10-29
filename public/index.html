@@ -3495,11 +3495,21 @@
       videoData.subtitles.forEach((s, i) => {
         let t = (s.text || '').trim();
         if (t.length > 0) {
-          // Stitch split apostrophe words like Kur'an, Allah'ın etc.
+          // Stitch split apostrophe words and TDK compound words
           t = t.replace(/([A-Za-zÇĞİÖŞÜçğıöşü]+)\s*['’‘ʼ`´]\s*([A-Za-zÇĞİÖŞÜçğıöşü]+)/g, "$1'$2")
                .replace(/\bKur\s+an\b/gi, "Kur'an")
                .replace(/\bKur\s+an'([a-zçğıöşü]+)\b/gi, "Kur'an'$1")
                .replace(/Kur'an[\s\-]+ı\s+Kerim/gi, "Kur'an-ı Kerim")
+               .replace(/\b(bir)\s+(kaç[a-zçğıöşü]*)\b/gi, "bir$2")
+               .replace(/\b(bir)\s+(takım)\b/gi, "birtakım")
+               .replace(/\b(hiç)\s+(bir[a-zçğıöşü]*)\b/gi, "hiç$2")
+               .replace(/\b(her)\s+(hangi)\b/gi, "herhangi")
+               .replace(/\b(bu)\s+(gün[a-zçğıöşü]*)\b/gi, "bu$2")
+               .replace(/\b(bir)\s+(az[a-zçğıöşü]*)\b/gi, "bir$2")
+               .replace(/\b(her)\s+(kes[a-zçğıöşü]*)\b/gi, "her$2")
+               .replace(/\b(oysa|madem|meğer|halbu|illa)\s+(ki)\b/gi, "$1ki")
+               .replace(/\b(evde|orada|burada|şurada|sende|bende|dün|bugün|akşam|sabah)\s+(ki)\b/gi, "$1ki")
+               .replace(/\b(senin|onun|benim|bizim)\s+(le|la|yle|yla)\b/gi, "$1$2")
                .replace(/\s+/g, ' ');
           if (i === 0 || t.length > 3) {
             t = t.charAt(0).toUpperCase() + t.slice(1);
