@@ -279,6 +279,9 @@
         <button onclick="switchLeftTab('theme')" id="ltab-theme-btn" class="flex-1 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center justify-center gap-1">
           <i class="fa-solid fa-palette text-cyan-400"></i> Tema
         </button>
+        <button onclick="switchLeftTab('subs')" id="ltab-subs-btn" class="flex-1 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center justify-center gap-1" title="Altyazı ve Karaoke Düzenleyici">
+          <i class="fa-solid fa-closed-captioning text-emerald-400"></i> Altyazı
+        </button>
       </div>
 
       <!-- TAB 1: MEDIA & TIMELINE ASSETS -->
@@ -484,6 +487,34 @@
         <input type="hidden" id="selected-theme-val" value="notebook">
       </div>
 
+      <!-- TAB 5: SUBTITLES & KARAOKE (CapCut Style) -->
+      <div id="ltab-content-subs" class="p-4 space-y-4 text-xs hidden">
+        <div class="p-3 bg-[#070a12] border border-slate-800 rounded-2xl space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="font-bold text-white flex items-center gap-1.5">
+              <i class="fa-solid fa-closed-captioning text-emerald-400"></i>
+              <span>Altyazı ve Kelimeler</span>
+            </div>
+            <span id="subs-count-badge" class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">0 Kelime</span>
+          </div>
+          <p class="text-[11px] text-slate-400">
+            Kelimeler ses ile milisaniye senkronludur. Kelimeyi kutuda düzenleyip Enter'a basarak anında kaydedebilirsiniz.
+          </p>
+          <div class="flex items-center gap-2">
+            <button onclick="autoFormatSubtitles()" class="flex-1 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl transition text-[11px] font-bold flex items-center justify-center gap-1">
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> İmla Düzelt
+            </button>
+            <button onclick="addNewSubtitleChunk()" class="py-1.5 px-3 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 rounded-xl transition text-[11px] font-bold flex items-center justify-center gap-1">
+              <i class="fa-solid fa-plus"></i> Ekle
+            </button>
+          </div>
+        </div>
+
+        <!-- Subtitles List Container -->
+        <div id="subs-list-container" class="space-y-2 max-h-[calc(100vh-340px)] overflow-y-auto pr-1">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
     </aside>
 
     <!-- CENTER PREVIEW MONITOR & TRANSPORT CONTROLS (FLEX-1) -->
@@ -1393,13 +1424,14 @@
       });
     }
 
-    // TRACK 4: SUBTITLES & WORDS
+    // TRACK 4: SUBTITLES & WORDS (CapCut Style Interactive)
     function renderSubtitlesTrack(pxPerSec) {
       const track = document.getElementById('track-subtitles');
+      if (!track) return;
       track.innerHTML = '';
 
       const subs = videoData.subtitles || [];
-      subs.forEach((sub) => {
+      subs.forEach((sub, idx) => {
         const start = sub.start || 0;
         const end = sub.end || (start + 1.5);
         const dur = Math.max(0.5, end - start);
@@ -1407,10 +1439,24 @@
         const width = dur * pxPerSec;
 
         const chip = document.createElement('div');
-        chip.className = 'absolute top-1 bottom-1 rounded-md bg-blue-950/40 border border-blue-500/20 px-1.5 flex items-center text-[9px] font-medium text-blue-200 truncate select-none';
+        chip.className = 'absolute top-1 bottom-1 rounded-md bg-blue-950/50 border border-blue-500/30 px-1.5 flex items-center text-[9px] font-medium text-blue-200 truncate select-none hover:border-amber-400 hover:bg-blue-900/60 cursor-pointer transition shadow-sm';
         chip.style.left = `${left}px`;
         chip.style.width = `${Math.max(30, width - 2)}px`;
         chip.innerText = sub.text || '';
+        chip.title = `"${sub.text}" (${start.toFixed(1)}s - ${end.toFixed(1)}s) - Düzenlemek için tıklayın`;
+        chip.onclick = () => {
+          switchLeftTab('subs');
+          audioEl.currentTime = start;
+          updatePlayheadPosition();
+          setTimeout(() => {
+            const input = document.getElementById(`sub-input-${idx}`);
+            if (input) {
+              input.focus();
+              input.select();
+              input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }, 150);
+        };
         track.appendChild(chip);
       });
     }
@@ -2021,7 +2067,7 @@
 
     // 9. THEME & DRAWER CONTROLS
     function switchLeftTab(tab) {
-      ['media', 'prompt', 'sfx', 'theme'].forEach(t => {
+      ['media', 'prompt', 'sfx', 'theme', 'subs'].forEach(t => {
         const content = document.getElementById(`ltab-content-${t}`);
         const btn = document.getElementById(`ltab-${t}-btn`);
         if (content) content.classList.add('hidden');
@@ -2037,6 +2083,139 @@
         targetBtn.classList.add('bg-slate-800', 'text-white', 'font-bold');
         targetBtn.classList.remove('text-slate-400');
       }
+      if (tab === 'subs') {
+        renderSubtitlesDrawerList();
+      }
+    }
+
+    // SPRINT 2: CAPCUT STYLE INLINE SUBTITLE EDITOR
+    function renderSubtitlesDrawerList() {
+      const container = document.getElementById('subs-list-container');
+      if (!container) return;
+      container.innerHTML = '';
+      const subs = videoData.subtitles || [];
+      const badge = document.getElementById('subs-count-badge');
+      if (badge) badge.innerText = `${subs.length} Parça`;
+
+      if (subs.length === 0) {
+        container.innerHTML = '<div class="text-slate-500 text-center py-6 text-xs">Henüz altyazı bulunmuyor.</div>';
+        return;
+      }
+
+      subs.forEach((sub, idx) => {
+        const card = document.createElement('div');
+        card.id = `sub-card-${idx}`;
+        card.className = 'p-2.5 bg-[#070a12] border border-slate-800 rounded-xl space-y-1.5 hover:border-slate-700 transition';
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <button onclick="playFromTime(${sub.start})" class="text-[10px] font-mono text-emerald-400 hover:text-emerald-300 flex items-center gap-1 bg-emerald-950/30 px-1.5 py-0.5 rounded border border-emerald-500/20" title="Bu saniyeden dinle">
+              <i class="fa-solid fa-play text-[8px]"></i> ${sub.start.toFixed(1)}s - ${sub.end.toFixed(1)}s
+            </button>
+            <button onclick="deleteSubtitleItem(${idx})" class="w-5 h-5 rounded hover:bg-red-950/40 text-slate-500 hover:text-red-400 flex items-center justify-center text-[10px] transition" title="Altyazıyı Sil">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+          <input
+            id="sub-input-${idx}"
+            type="text"
+            value="${(sub.text || '').replace(/"/g, '&quot;')}"
+            onchange="updateSubtitleText(${idx}, this.value)"
+            onkeydown="if(event.key === 'Enter') { this.blur(); }"
+            class="w-full bg-slate-900/90 border border-slate-700/80 focus:border-amber-400 rounded-lg px-2.5 py-1 text-slate-100 text-xs font-semibold focus:outline-none"
+            placeholder="Altyazı metni..."
+          />
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    async function updateSubtitleText(index, newText) {
+      if (!videoData.subtitles || !videoData.subtitles[index]) return;
+      videoData.subtitles[index].text = newText.trim();
+      try {
+        const res = await fetch('/api/timeline/subtitles', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ subtitles: videoData.subtitles })
+        });
+        const d = await res.json();
+        if (!res.ok) throw new Error(d.detail || 'Altyazı kaydedilemedi');
+        renderSubtitlesTrack(40 * timelineZoom);
+        showToast('Altyazı güncellendi!', 'success');
+      } catch (err) {
+        showToast('Hata: ' + err.message, 'error');
+      }
+    }
+
+    async function deleteSubtitleItem(index) {
+      if (!videoData.subtitles) return;
+      videoData.subtitles.splice(index, 1);
+      try {
+        await fetch('/api/timeline/subtitles', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ subtitles: videoData.subtitles })
+        });
+        renderSubtitlesDrawerList();
+        renderSubtitlesTrack(40 * timelineZoom);
+        showToast('Altyazı silindi!', 'success');
+      } catch (err) {
+        showToast('Hata: ' + err.message, 'error');
+      }
+    }
+
+    async function addNewSubtitleChunk() {
+      if (!videoData.subtitles) videoData.subtitles = [];
+      const cur = audioEl.currentTime || 0;
+      videoData.subtitles.push({
+        text: 'Yeni Altyazı',
+        start: Number(cur.toFixed(2)),
+        end: Number((cur + 1.5).toFixed(2))
+      });
+      videoData.subtitles.sort((a, b) => a.start - b.start);
+      try {
+        await fetch('/api/timeline/subtitles', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ subtitles: videoData.subtitles })
+        });
+        renderSubtitlesDrawerList();
+        renderSubtitlesTrack(40 * timelineZoom);
+        showToast('Yeni altyazı eklendi!', 'success');
+      } catch (err) {
+        showToast('Hata: ' + err.message, 'error');
+      }
+    }
+
+    async function autoFormatSubtitles() {
+      if (!videoData.subtitles || videoData.subtitles.length === 0) return;
+      videoData.subtitles.forEach((s, i) => {
+        let t = s.text.trim();
+        if (t.length > 0) {
+          if (i === 0 || t.length > 3) {
+            t = t.charAt(0).toUpperCase() + t.slice(1);
+          }
+        }
+        s.text = t;
+      });
+      try {
+        await fetch('/api/timeline/subtitles', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ subtitles: videoData.subtitles })
+        });
+        renderSubtitlesDrawerList();
+        renderSubtitlesTrack(40 * timelineZoom);
+        showToast('Altyazılar otomatik düzenlendi!', 'success');
+      } catch (err) {
+        showToast('Hata: ' + err.message, 'error');
+      }
+    }
+
+    function playFromTime(timeSec) {
+      audioEl.currentTime = timeSec;
+      updatePlayheadPosition();
+      audioEl.play();
     }
 
     // CAPCUT & VN FEATURES
