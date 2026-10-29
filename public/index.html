@@ -149,6 +149,47 @@
       box-shadow: 0 0 0 2px #eab308, 0 4px 14px rgba(234, 179, 8, 0.35);
       z-index: 10;
     }
+    .trim-handle {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      width: 7px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.22);
+      cursor: ew-resize;
+      transition: background 0.15s, transform 0.15s;
+      z-index: 20;
+    }
+    .trim-handle:hover {
+      background: #eab308;
+      transform: scaleY(1.1);
+    }
+    .trim-left { left: 2px; }
+    .trim-right { right: 2px; }
+    .transition-badge {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      background: #0f172a;
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 30;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      transition: all 0.15s;
+    }
+    .transition-badge:hover {
+      background: #38bdf8;
+      color: #080c14;
+      transform: translate(-50%, -50%) scale(1.15);
+    }
   </style>
 </head>
 <body class="bg-[#080c14] text-slate-200 min-h-screen font-sans flex flex-col antialiased selection:bg-amber-500 selection:text-black overflow-x-hidden">
@@ -226,13 +267,16 @@
       
       <!-- Drawer Tabs -->
       <div class="flex border-b border-slate-800 text-xs font-semibold p-2 gap-1 bg-[#090d16]">
-        <button onclick="switchLeftTab('media')" id="ltab-media-btn" class="flex-1 py-1.5 rounded-xl bg-slate-800 text-white font-bold transition flex items-center justify-center gap-1.5">
-          <i class="fa-solid fa-folder"></i> Medya & Katman
+        <button onclick="switchLeftTab('media')" id="ltab-media-btn" class="flex-1 py-1.5 rounded-xl bg-slate-800 text-white font-bold transition flex items-center justify-center gap-1">
+          <i class="fa-solid fa-folder"></i> Medya
         </button>
-        <button onclick="switchLeftTab('prompt')" id="ltab-prompt-btn" class="flex-1 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5">
-          <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> AI İstemi
+        <button onclick="switchLeftTab('prompt')" id="ltab-prompt-btn" class="flex-1 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center justify-center gap-1">
+          <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> İstem
         </button>
-        <button onclick="switchLeftTab('theme')" id="ltab-theme-btn" class="flex-1 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5">
+        <button onclick="switchLeftTab('sfx')" id="ltab-sfx-btn" class="flex-1 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center justify-center gap-1">
+          <i class="fa-solid fa-music text-purple-400"></i> SFX
+        </button>
+        <button onclick="switchLeftTab('theme')" id="ltab-theme-btn" class="flex-1 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center justify-center gap-1">
           <i class="fa-solid fa-palette text-cyan-400"></i> Tema
         </button>
       </div>
@@ -331,7 +375,84 @@
         </button>
       </div>
 
-      <!-- TAB 3: THEME PICKER -->
+      <!-- TAB 3: ASMR & SFX DRAWER (CAPCUT / VN STİLİ) -->
+      <div id="ltab-content-sfx" class="hidden p-4 space-y-3 text-xs">
+        <div>
+          <div class="font-bold text-white flex items-center gap-1.5 mb-1">
+            <i class="fa-solid fa-music text-purple-400"></i>
+            <span>ASMR & Ses Efektleri</span>
+          </div>
+          <p class="text-[11px] text-slate-400">Tıklayıp dinleyin veya doğrudan oynatma iğnesinin olduğu saniyeye ekleyin.</p>
+        </div>
+
+        <div class="space-y-2">
+          <!-- Page Turn -->
+          <div class="p-2.5 bg-[#070a12] border border-slate-800 rounded-xl flex items-center justify-between hover:border-slate-700 transition">
+            <div class="flex items-center gap-2">
+              <button onclick="previewSfx('/public/sfx/page_turn.wav')" title="Dinle" class="w-7 h-7 rounded-lg bg-purple-950/50 hover:bg-purple-800 text-purple-300 flex items-center justify-center transition">
+                <i class="fa-solid fa-play text-[10px]"></i>
+              </button>
+              <div>
+                <div class="font-bold text-white text-[11px]">Sayfa Çevirme</div>
+                <div class="text-[9px] text-slate-400 font-mono">ASMR Kağıt Hışırtısı</div>
+              </div>
+            </div>
+            <button onclick="addSfxAtPlayhead('page_turn.wav', 'Sayfa Çevirme')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg text-[10px] font-bold transition">
+              + İğneye Ekle
+            </button>
+          </div>
+
+          <!-- Pen Draw -->
+          <div class="p-2.5 bg-[#070a12] border border-slate-800 rounded-xl flex items-center justify-between hover:border-slate-700 transition">
+            <div class="flex items-center gap-2">
+              <button onclick="previewSfx('/public/sfx/pen_draw.wav')" title="Dinle" class="w-7 h-7 rounded-lg bg-emerald-950/50 hover:bg-emerald-800 text-emerald-300 flex items-center justify-center transition">
+                <i class="fa-solid fa-play text-[10px]"></i>
+              </button>
+              <div>
+                <div class="font-bold text-white text-[11px]">Kalem Çizimi</div>
+                <div class="text-[9px] text-slate-400 font-mono">Kurşun Kalem Sürtünmesi</div>
+              </div>
+            </div>
+            <button onclick="addSfxAtPlayhead('pen_draw.wav', 'Kalem Çizimi')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg text-[10px] font-bold transition">
+              + İğneye Ekle
+            </button>
+          </div>
+
+          <!-- Marker Sweep -->
+          <div class="p-2.5 bg-[#070a12] border border-slate-800 rounded-xl flex items-center justify-between hover:border-slate-700 transition">
+            <div class="flex items-center gap-2">
+              <button onclick="previewSfx('/public/sfx/marker_sweep.wav')" title="Dinle" class="w-7 h-7 rounded-lg bg-amber-950/50 hover:bg-amber-800 text-amber-300 flex items-center justify-center transition">
+                <i class="fa-solid fa-play text-[10px]"></i>
+              </button>
+              <div>
+                <div class="font-bold text-white text-[11px]">Fosforlu Vurgu</div>
+                <div class="text-[9px] text-slate-400 font-mono">Highlighter Kalemi</div>
+              </div>
+            </div>
+            <button onclick="addSfxAtPlayhead('marker_sweep.wav', 'Fosforlu Kalem')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg text-[10px] font-bold transition">
+              + İğneye Ekle
+            </button>
+          </div>
+
+          <!-- Pop -->
+          <div class="p-2.5 bg-[#070a12] border border-slate-800 rounded-xl flex items-center justify-between hover:border-slate-700 transition">
+            <div class="flex items-center gap-2">
+              <button onclick="previewSfx('/public/sfx/pop.wav')" title="Dinle" class="w-7 h-7 rounded-lg bg-pink-950/50 hover:bg-pink-800 text-pink-300 flex items-center justify-center transition">
+                <i class="fa-solid fa-play text-[10px]"></i>
+              </button>
+              <div>
+                <div class="font-bold text-white text-[11px]">Baloncuk Pop</div>
+                <div class="text-[9px] text-slate-400 font-mono">Dinamik İkon Patlaması</div>
+              </div>
+            </div>
+            <button onclick="addSfxAtPlayhead('pop.wav', 'Pop Sesi')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg text-[10px] font-bold transition">
+              + İğneye Ekle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: THEME PICKER -->
       <div id="ltab-content-theme" class="hidden p-4 space-y-3 text-xs">
         <label class="block font-bold text-white mb-1">Defter Estetiği & Kağıt Teması</label>
         <div class="grid grid-cols-2 gap-2">
@@ -444,6 +565,37 @@
             </div>
 
           </div>
+
+          <!-- TikTok / Shorts Safe Zone Overlay (CapCut / TikTok Standardı) -->
+          <div id="safe-zone-overlay" class="hidden absolute inset-0 pointer-events-none z-30 flex flex-col justify-between p-3 select-none">
+            <!-- Top Safe Area (Leave header visible) -->
+            <div class="h-6 border-b border-dashed border-red-500/50 flex items-center justify-between px-2 text-[8px] font-mono text-red-400 bg-red-950/20">
+              <span>⚠️ ÜST GÜVENLİ BÖLGE</span>
+              <span>Shorts / Reels</span>
+            </div>
+
+            <!-- Right Buttons Column (TikTok / Shorts Icons) -->
+            <div class="absolute right-2 bottom-16 flex flex-col items-center gap-2 text-slate-300">
+              <div class="w-7 h-7 rounded-full bg-slate-900/80 border border-slate-700 flex items-center justify-center text-[10px] text-white">
+                <i class="fa-solid fa-heart text-red-500"></i>
+              </div>
+              <div class="w-7 h-7 rounded-full bg-slate-900/80 border border-slate-700 flex items-center justify-center text-[10px] text-white">
+                <i class="fa-solid fa-comment"></i>
+              </div>
+              <div class="w-7 h-7 rounded-full bg-slate-900/80 border border-slate-700 flex items-center justify-center text-[10px] text-white">
+                <i class="fa-solid fa-share"></i>
+              </div>
+              <div class="w-6 h-6 rounded-full bg-slate-900 border border-amber-400 flex items-center justify-center text-[9px] animate-spin">
+                <i class="fa-solid fa-compact-disc text-amber-400"></i>
+              </div>
+            </div>
+
+            <!-- Bottom Safe Area (Channel Name & Sound) -->
+            <div class="mt-auto h-14 border-t border-dashed border-yellow-500/50 flex flex-col justify-end p-1.5 text-[8px] font-mono text-yellow-400 bg-yellow-950/25 max-w-[210px] rounded-lg">
+              <span class="font-bold">⚠️ ALT GÜVENLİ ALAN (@kanal & başlık)</span>
+              <span class="text-[7px] text-slate-300">Bu alanın altına metin yerleştirmeyin!</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -479,8 +631,11 @@
           </button>
         </div>
 
-        <!-- Right: Speed & Fullscreen -->
+        <!-- Right: Safe Zone, Speed & Cache Refresh -->
         <div class="flex items-center gap-2">
+          <button onclick="toggleSafeZone()" id="btn-toggle-safe-zone" title="TikTok / Shorts Güvenli Alan Izgarası" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-amber-300 rounded-lg font-mono font-bold text-[11px] transition flex items-center gap-1">
+            <i class="fa-solid fa-shield-halved text-[10px] text-amber-400"></i> <span class="hidden sm:inline">Safe Zone</span>
+          </button>
           <button onclick="cyclePlaybackSpeed()" id="btn-playback-speed" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-mono font-bold text-[11px] transition">
             1.0x
           </button>
@@ -525,6 +680,21 @@
           <option value="flowchart">🗺️ Akış Şeması</option>
           <option value="quote_spotlight">💬 Alıntı & Söz</option>
           <option value="metricImpact">📊 Büyük Metrik / Rakam</option>
+        </select>
+      </div>
+
+      <!-- Transition Selector for Scene (CapCut / VN Stili) -->
+      <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+          <label class="block font-bold text-slate-300">Geçiş Efekti (Transition)</label>
+          <span class="text-[9px] bg-cyan-950/40 text-cyan-400 border border-cyan-800 px-1.5 py-0.2 rounded font-mono">⧗ CapCut</span>
+        </div>
+        <select id="inspect-transition-type" onchange="updateActiveSceneField('transitionType', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
+          <option value="page_turn" selected>📖 Defter Sayfası Çevirme (3D Turn)</option>
+          <option value="paper_tear">📄 Kağıt Yırtılması (Tear Dissolve)</option>
+          <option value="ink_bleed">🖋️ Mürekkep Yayılması (Ink Splash)</option>
+          <option value="zoom_punch">⚡ Zoom Punch & Flaş</option>
+          <option value="cut">🚫 Düz Kesim (Cut)</option>
         </select>
       </div>
 
@@ -1071,7 +1241,7 @@
       }
     }
 
-    // TRACK 1: VIDEO (AI SCENES)
+    // TRACK 1: VIDEO (AI SCENES + CAPCUT TRIM HANDLES & TRANSITIONS)
     function renderVideoTrack(pxPerSec) {
       const track = document.getElementById('track-video');
       track.innerHTML = '';
@@ -1085,7 +1255,7 @@
         const isActive = s.id === activeSceneId;
 
         const block = document.createElement('div');
-        block.className = `scene-block absolute top-1 bottom-1 rounded-xl border flex items-center justify-between px-2.5 cursor-pointer shadow-md ${
+        block.className = `scene-block absolute top-1 bottom-1 rounded-xl border flex items-center justify-between px-2 cursor-pointer shadow-md ${
           isActive 
             ? 'bg-gradient-to-r from-amber-950/70 via-slate-900 to-indigo-950/70 border-amber-400 active' 
             : 'bg-slate-900/90 border-slate-700/80 hover:border-slate-500'
@@ -1097,7 +1267,10 @@
         const title = s.headerLine1 || s.headerSubtitle || `Sahne ${sceneNum}`;
 
         block.innerHTML = `
-          <div class="flex items-center gap-2 overflow-hidden">
+          <!-- CapCut Style Left Trim Handle -->
+          <div class="trim-handle trim-left" title="Klip Başlangıcını Kırp"></div>
+
+          <div class="flex items-center gap-2 overflow-hidden ml-1">
             <span class="w-5 h-5 rounded-md ${isActive ? 'bg-amber-400 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'} flex items-center justify-center text-[10px] shrink-0 font-mono">
               ${sceneNum}
             </span>
@@ -1106,7 +1279,8 @@
               <div class="text-[9px] text-slate-400 font-mono truncate">${dur.toFixed(1)}s · ${s.layoutType || 'pip_split'}</div>
             </div>
           </div>
-          <div class="flex items-center gap-1 shrink-0">
+
+          <div class="flex items-center gap-1 shrink-0 mr-1">
             <button onclick="event.stopPropagation(); quickRegenScene('${s.id}')" title="Yeniden Üret" class="w-5 h-5 rounded hover:bg-slate-700 text-slate-400 hover:text-amber-300 flex items-center justify-center text-[10px] transition">
               <i class="fa-solid fa-arrows-rotate"></i>
             </button>
@@ -1114,10 +1288,29 @@
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </div>
+
+          <!-- CapCut Style Right Trim Handle -->
+          <div class="trim-handle trim-right" title="Klip Bitişini Kırp"></div>
         `;
 
         block.onclick = () => selectScene(s.id);
         track.appendChild(block);
+
+        // CapCut / VN Transition Button Between Scenes
+        if (idx < scenes.length - 1) {
+          const transBtn = document.createElement('button');
+          transBtn.className = 'transition-badge';
+          transBtn.style.left = `${end * pxPerSec}px`;
+          transBtn.title = `Geçiş Efekti Değiştir (Şu an: ${s.transitionType || 'page_turn'})`;
+          transBtn.innerHTML = '⧗';
+          transBtn.onclick = (e) => {
+            e.stopPropagation();
+            cycleSceneTransition(s.id);
+          };
+          track.appendChild(transBtn);
+        }
+      });
+    }
       });
     }
 
@@ -1179,6 +1372,16 @@
         fxBlock.style.width = `${Math.max(40, width - 4)}px`;
         fxBlock.innerHTML = `<i class="fa-solid fa-image text-amber-400 mr-1"></i> ${s.illustrationStyle || 'polaroid'}`;
         track.appendChild(fxBlock);
+      });
+
+      // Render user added SFX markers (CapCut / VN SFX Track)
+      sfxMarkers.forEach((m) => {
+        const left = m.time * pxPerSec;
+        const sfxChip = document.createElement('div');
+        sfxChip.className = 'absolute top-1 bottom-1 rounded bg-purple-900/80 border border-purple-400 text-purple-200 px-1.5 flex items-center text-[9px] font-mono shadow z-20';
+        sfxChip.style.left = `${left}px`;
+        sfxChip.innerHTML = `<i class="fa-solid fa-music text-[8px] mr-1 text-purple-300"></i> ${m.label}`;
+        track.appendChild(sfxChip);
       });
     }
 
@@ -1364,6 +1567,9 @@
       document.getElementById('inspect-ill-style').value = s.illustrationStyle || 'polaroid';
       document.getElementById('inspect-doodle').value = s.doodleType || 'galaxy';
       document.getElementById('inspect-ill-caption').value = s.illustrationCaption || '';
+      if (document.getElementById('inspect-transition-type')) {
+        document.getElementById('inspect-transition-type').value = s.transitionType || 'page_turn';
+      }
     }
 
     async function updateActiveSceneField(field, value) {
@@ -1692,15 +1898,84 @@
 
     // 9. THEME & DRAWER CONTROLS
     function switchLeftTab(tab) {
-      ['media', 'prompt', 'theme'].forEach(t => {
-        document.getElementById(`ltab-content-${t}`).classList.add('hidden');
-        document.getElementById(`ltab-${t}-btn`).classList.remove('bg-slate-800', 'text-white', 'font-bold');
-        document.getElementById(`ltab-${t}-btn`).classList.add('text-slate-400');
+      ['media', 'prompt', 'sfx', 'theme'].forEach(t => {
+        const content = document.getElementById(`ltab-content-${t}`);
+        const btn = document.getElementById(`ltab-${t}-btn`);
+        if (content) content.classList.add('hidden');
+        if (btn) {
+          btn.classList.remove('bg-slate-800', 'text-white', 'font-bold');
+          btn.classList.add('text-slate-400');
+        }
       });
-      document.getElementById(`ltab-content-${tab}`).classList.remove('hidden');
-      const b = document.getElementById(`ltab-${tab}-btn`);
-      b.classList.add('bg-slate-800', 'text-white', 'font-bold');
-      b.classList.remove('text-slate-400');
+      const targetContent = document.getElementById(`ltab-content-${tab}`);
+      const targetBtn = document.getElementById(`ltab-${tab}-btn`);
+      if (targetContent) targetContent.classList.remove('hidden');
+      if (targetBtn) {
+        targetBtn.classList.add('bg-slate-800', 'text-white', 'font-bold');
+        targetBtn.classList.remove('text-slate-400');
+      }
+    }
+
+    // CAPCUT & VN FEATURES
+    let safeZoneActive = false;
+    function toggleSafeZone() {
+      safeZoneActive = !safeZoneActive;
+      const overlay = document.getElementById('safe-zone-overlay');
+      const btn = document.getElementById('btn-toggle-safe-zone');
+      if (safeZoneActive) {
+        overlay.classList.remove('hidden');
+        btn.classList.add('bg-amber-500/20', 'text-amber-300', 'border', 'border-amber-500/40');
+      } else {
+        overlay.classList.add('hidden');
+        btn.classList.remove('bg-amber-500/20', 'text-amber-300', 'border', 'border-amber-500/40');
+      }
+    }
+
+    let activeSfxAudio = null;
+    function previewSfx(url) {
+      if (activeSfxAudio) {
+        activeSfxAudio.pause();
+      }
+      activeSfxAudio = new Audio(url);
+      activeSfxAudio.play().catch(e => console.log('SFX preview error:', e));
+    }
+
+    let sfxMarkers = [];
+    function addSfxAtPlayhead(file, label) {
+      sfxMarkers.push({
+        time: playheadTime,
+        file: file,
+        label: label
+      });
+      previewSfx(`/public/sfx/${file}`);
+      renderFxTrack(40 * timelineZoom);
+      alert(`🎵 '${label}' SFX efekti ${playheadTime.toFixed(1)}s noktasına eklendi!`);
+    }
+
+    function cycleSceneTransition(sceneId) {
+      const transitions = ['page_turn', 'paper_tear', 'ink_bleed', 'zoom_punch', 'cut'];
+      const transNames = {
+        'page_turn': '📖 Defter Sayfası Çevirme (3D)',
+        'paper_tear': '📄 Kağıt Yırtılması',
+        'ink_bleed': '🖋️ Mürekkep Yayılması',
+        'zoom_punch': '⚡ Zoom Punch & Flaş',
+        'cut': '🚫 Düz Kesim'
+      };
+
+      const s = scenes.find(sc => sc.id === sceneId);
+      if (!s) return;
+
+      const cur = s.transitionType || 'page_turn';
+      const next = transitions[(transitions.indexOf(cur) + 1) % transitions.length];
+      s.transitionType = next;
+
+      if (s.id === activeSceneId) {
+        const sel = document.getElementById('inspect-transition-type');
+        if (sel) sel.value = next;
+      }
+
+      renderTimeline();
+      alert(`⧗ Geçiş Efekti Değiştirildi: ${transNames[next]}`);
     }
 
     function toggleMediaDrawer() {
