@@ -1,6 +1,9 @@
-# Notebook Video AI (Defter Notu Shorts / Reel Video Oluşturucu) 🎬📖
+# Notebook Video AI · Pro Video Editor & Shorts Stüdyosu 🎬📖
 
-Yapay zekâ destekli, **"Spiral Not Defteri / Explain-Like-I'm-5"** estetiğinde dikey (1080x1920) YouTube Shorts, Instagram Reels ve TikTok videoları üreten tam otomatik video oluşturucu.
+> 🔗 **Canlı GitHub Deposu:** [https://github.com/mehmet2736001/aivideomaker](https://github.com/mehmet2736001/aivideomaker)  
+> 🔄 **Otomatik Yedekleme:** Aktif (Her kod değişikliğinde otomatik commit & push)
+
+Yapay zekâ destekli, çok kanallı zaman tüneli (multi-track timeline), Whisper ses senkronizasyonu ve **'Spiral Not Defteri'** estetiğinde dikey (1080x1920) YouTube Shorts, Instagram Reels ve TikTok videoları üreten tam otomatik video oluşturucu ve profesyonel editör.
 
 ---
 
