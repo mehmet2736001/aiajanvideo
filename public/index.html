@@ -1294,6 +1294,16 @@
         `;
 
         block.onclick = () => selectScene(s.id);
+
+        const leftHandle = block.querySelector('.trim-left');
+        const rightHandle = block.querySelector('.trim-right');
+        if (leftHandle) {
+          leftHandle.addEventListener('mousedown', (e) => initTrimDrag(e, s, 'left', block));
+        }
+        if (rightHandle) {
+          rightHandle.addEventListener('mousedown', (e) => initTrimDrag(e, s, 'right', block));
+        }
+
         track.appendChild(block);
 
         // CapCut / VN Transition Button Between Scenes
@@ -1301,7 +1311,7 @@
           const transBtn = document.createElement('button');
           transBtn.className = 'transition-badge';
           transBtn.style.left = `${end * pxPerSec}px`;
-          transBtn.title = `Geçiş Efekti Değiştir (Şu an: ${s.transitionType || 'page_turn'})`;
+          transBtn.title = `Geçiş Efekti: ${s.transitionType || 'page_turn'}`;
           transBtn.innerHTML = '⧗';
           transBtn.onclick = (e) => {
             e.stopPropagation();
@@ -1309,8 +1319,6 @@
           };
           track.appendChild(transBtn);
         }
-      });
-    }
       });
     }
 
@@ -1848,6 +1856,114 @@
       document.getElementById('preview-scene-pill').innerText = `Sahne ${curIdx} / ${scenes.length} (${s.startTime?.toFixed(0)}s - ${s.endTime?.toFixed(0)}s)`;
     }
 
+    // SPRINT 1: TIMELINE DRAG-TO-TRIM & DRAG-TO-REORDER
+    let isTrimming = false;
+    let trimTooltipEl = null;
+
+    function getOrCreateTrimTooltip() {
+      if (!trimTooltipEl) {
+        trimTooltipEl = document.createElement('div');
+        trimTooltipEl.id = 'trim-tooltip';
+        trimTooltipEl.className = 'fixed z-50 pointer-events-none px-2.5 py-1 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs shadow-2xl font-mono hidden border border-amber-300/60';
+        document.body.appendChild(trimTooltipEl);
+      }
+      return trimTooltipEl;
+    }
+
+    function initTrimDrag(e, scene, side, blockEl) {
+      e.stopPropagation();
+      e.preventDefault();
+      isTrimming = true;
+      const startX = e.clientX;
+      const origStart = scene.startTime || 0;
+      const origEnd = scene.endTime || (origStart + 10);
+      const origLeft = origStart * pxPerSec;
+      const origWidth = (origEnd - origStart) * pxPerSec;
+      const tooltip = getOrCreateTrimTooltip();
+      tooltip.style.display = 'block';
+
+      let currentNewStart = origStart;
+      let currentNewEnd = origEnd;
+
+      function onMouseMove(moveEvt) {
+        const deltaX = moveEvt.clientX - startX;
+        const deltaSec = deltaX / pxPerSec;
+
+        tooltip.style.left = `${moveEvt.clientX + 14}px`;
+        tooltip.style.top = `${moveEvt.clientY - 32}px`;
+
+        if (side === 'left') {
+          currentNewStart = Math.max(0, Math.min(origEnd - 1.0, origStart + deltaSec));
+          const newW = (origEnd - currentNewStart) * pxPerSec;
+          blockEl.style.left = `${currentNewStart * pxPerSec}px`;
+          blockEl.style.width = `${Math.max(40, newW - 4)}px`;
+          tooltip.innerText = `Başlangıç: ${currentNewStart.toFixed(2)}s | Süre: ${(origEnd - currentNewStart).toFixed(2)}s`;
+        } else {
+          currentNewEnd = Math.max(origStart + 1.0, origEnd + deltaSec);
+          const newW = (currentNewEnd - origStart) * pxPerSec;
+          blockEl.style.width = `${Math.max(40, newW - 4)}px`;
+          tooltip.innerText = `Bitiş: ${currentNewEnd.toFixed(2)}s | Süre: ${(currentNewEnd - origStart).toFixed(2)}s`;
+        }
+      }
+
+      async function onMouseUp() {
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+        tooltip.style.display = 'none';
+        isTrimming = false;
+
+        const payload = {
+          scene_id: scene.id,
+          ripple: true
+        };
+        if (side === 'left') {
+          if (Math.abs(currentNewStart - origStart) < 0.05) return;
+          payload.new_start = Number(currentNewStart.toFixed(2));
+        } else {
+          if (Math.abs(currentNewEnd - origEnd) < 0.05) return;
+          payload.new_end = Number(currentNewEnd.toFixed(2));
+        }
+
+        try {
+          showToast('Klip kırpılıyor ve zaman tüneli kaydırılıyor...', 'info');
+          const res = await fetch('/api/timeline/scenes/trim', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const d = await res.json();
+          if (!res.ok) throw new Error(d.detail || 'Kırpma hatası');
+          
+          await loadVideoData();
+          showToast(`Klip kırpıldı (${payload.new_start !== undefined ? 'Başlangıç: ' + payload.new_start + 's' : 'Bitiş: ' + payload.new_end + 's'})`, 'success');
+        } catch (err) {
+          showToast(`Kırpma başarısız: ${err.message}`, 'error');
+          renderTimeline();
+        }
+      }
+
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+    }
+
+    async function reorderScene(sceneId, newIndex) {
+      try {
+        showToast('Sahne sırası değiştiriliyor...', 'info');
+        const res = await fetch('/api/timeline/scenes/reorder', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ scene_id: sceneId, new_index: newIndex })
+        });
+        const d = await res.json();
+        if (!res.ok) throw new Error(d.detail || 'Sıralama hatası');
+
+        await loadVideoData();
+        showToast('Sahne sırası güncellendi!', 'success');
+      } catch (err) {
+        showToast(`Sıralama başarısız: ${err.message}`, 'error');
+      }
+    }
+
     function renderLeftScenesList() {
       const list = document.getElementById('media-scenes-list');
       if (!list) return;
@@ -1870,7 +1986,14 @@
               <div class="text-[10px] text-slate-500 font-mono">${s.startTime?.toFixed(1)}s - ${s.endTime?.toFixed(1)}s</div>
             </div>
           </div>
-          <i class="fa-solid fa-chevron-right text-[10px] text-slate-600"></i>
+          <div class="flex items-center gap-1 shrink-0">
+            <button onclick="event.stopPropagation(); reorderScene('${s.id}', ${i - 1})" ${i === 0 ? 'disabled' : ''} class="w-5 h-5 rounded hover:bg-slate-800 disabled:opacity-20 text-slate-400 hover:text-amber-300 flex items-center justify-center text-[10px] transition" title="Yukarı Taşı">
+              <i class="fa-solid fa-arrow-up"></i>
+            </button>
+            <button onclick="event.stopPropagation(); reorderScene('${s.id}', ${i + 1})" ${i === scenes.length - 1 ? 'disabled' : ''} class="w-5 h-5 rounded hover:bg-slate-800 disabled:opacity-20 text-slate-400 hover:text-amber-300 flex items-center justify-center text-[10px] transition" title="Aşağı Taşı">
+              <i class="fa-solid fa-arrow-down"></i>
+            </button>
+          </div>
         `;
         item.onclick = () => selectScene(s.id);
         list.appendChild(item);

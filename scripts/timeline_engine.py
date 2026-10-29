@@ -340,3 +340,110 @@ def add_scene_to_timeline(video_data: Dict[str, Any], duration: float = 10.0) ->
         json.dump(video_data, f, ensure_ascii=False, indent=2)
 
     return video_data
+
+
+
+def trim_scene_on_timeline(
+    video_data: Dict[str, Any],
+    scene_id: str,
+    new_start: Optional[float] = None,
+    new_end: Optional[float] = None,
+    ripple: bool = True
+) -> Dict[str, Any]:
+    """
+    Trims a scene's start or end boundary with optional ripple edit.
+    If ripple is True, subsequent scenes automatically shift forward or backward to eliminate gaps.
+    """
+    scenes = ensure_scenes_structure(video_data)
+    idx = None
+    for i, s in enumerate(scenes):
+        if s.get("id") == scene_id:
+            idx = i
+            break
+
+    if idx is None:
+        raise ValueError(f"'{scene_id}' sahnesi bulunamadı.")
+
+    target = scenes[idx]
+    orig_start = target.get("startTime", 0.0)
+    orig_end = target.get("endTime", 12.0)
+
+    start = round(new_start if new_start is not None else orig_start, 2)
+    end = round(new_end if new_end is not None else orig_end, 2)
+
+    if end - start < 1.0:
+        raise ValueError("Sahne süresi en az 1.0 saniye olmalıdır.")
+
+    target["startTime"] = max(0.0, start)
+    target["endTime"] = end
+
+    if ripple:
+        cur = target["endTime"]
+        for next_i in range(idx + 1, len(scenes)):
+            sc = scenes[next_i]
+            dur = max(1.5, sc.get("endTime", 10.0) - sc.get("startTime", 0.0))
+            sc["startTime"] = round(cur, 2)
+            cur += dur
+            sc["endTime"] = round(cur, 2)
+
+        video_data["totalDuration"] = round(cur, 2)
+    else:
+        video_data["totalDuration"] = max([s.get("endTime", 12.0) for s in scenes])
+
+    if idx == 0:
+        for k in ["headerSubtitle", "headerLine1", "circledWord", "headerLine2", "highlightedText", "strikeWord", "layoutType"]:
+            if k in target:
+                video_data[k] = target[k]
+
+    with open(GENERATED_DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(video_data, f, ensure_ascii=False, indent=2)
+
+    return video_data
+
+
+def reorder_scenes_on_timeline(
+    video_data: Dict[str, Any],
+    scene_id: str,
+    new_index: int
+) -> Dict[str, Any]:
+    """
+    Moves a scene to a new position index in the timeline and smoothly ripples timestamps.
+    """
+    scenes = ensure_scenes_structure(video_data)
+    idx = None
+    for i, s in enumerate(scenes):
+        if s.get("id") == scene_id:
+            idx = i
+            break
+
+    if idx is None:
+        raise ValueError(f"'{scene_id}' sahnesi bulunamadı.")
+
+    new_index = max(0, min(len(scenes) - 1, new_index))
+    if idx == new_index:
+        return video_data
+
+    target = scenes.pop(idx)
+    scenes.insert(new_index, target)
+
+    cur = 0.0
+    for i, sc in enumerate(scenes):
+        dur = max(1.5, sc.get("endTime", 10.0) - sc.get("startTime", 0.0))
+        sc["id"] = f"scene_{i + 1}"
+        sc["startTime"] = round(cur, 2)
+        cur += dur
+        sc["endTime"] = round(cur, 2)
+
+    video_data["scenes"] = scenes
+    video_data["totalDuration"] = round(cur, 2)
+
+    if scenes:
+        s0 = scenes[0]
+        for k in ["headerSubtitle", "headerLine1", "circledWord", "headerLine2", "highlightedText", "strikeWord", "layoutType", "illustrationUrl", "illustrationCaption", "illustrationStyle"]:
+            if k in s0:
+                video_data[k] = s0[k]
+
+    with open(GENERATED_DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(video_data, f, ensure_ascii=False, indent=2)
+
+    return video_data
