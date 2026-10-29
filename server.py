@@ -42,6 +42,13 @@ from scripts.timeline_engine import (
     split_scene_on_timeline,
     add_scene_to_timeline
 )
+from scripts.git_manager import (
+    get_git_status,
+    create_git_backup,
+    list_git_history,
+    rollback_to_commit,
+    run_git
+)
 
 app = FastAPI(title="Notebook Video AI Studio Pro", version="4.0.0")
 
@@ -159,6 +166,16 @@ class SceneSplitRequest(BaseModel):
 
 class TimelineUpdateScenesRequest(BaseModel):
     scenes: List[Dict[str, Any]]
+
+class GitBackupRequest(BaseModel):
+    message: Optional[str] = None
+    push: Optional[bool] = True
+
+class GitRemoteRequest(BaseModel):
+    remote_url: str
+
+class GitRollbackRequest(BaseModel):
+    commit_hash: str
 
 class YouTubeCredentialsRequest(BaseModel):
     client_id: str
@@ -1756,6 +1773,40 @@ def update_single_scene(scene_id: str, scene_patch: Dict[str, Any]):
     with open(data_file, "w", encoding="utf-8") as f:
         json.dump(video_data, f, ensure_ascii=False, indent=2)
     return {"success": True, "scene": target, "video_data": video_data}
+
+# ==========================================
+# GIT & GITHUB INSTANT BACKUP & ROLLBACK API
+# ==========================================
+@app.get("/api/backup/status")
+def api_get_backup_status():
+    status = get_git_status()
+    history = list_git_history(10)
+    return {"status": status, "history": history}
+
+@app.post("/api/backup/commit")
+def api_create_backup(req: GitBackupRequest):
+    res = create_git_backup(commit_message=req.message, push_to_remote=req.push or False)
+    return res
+
+@app.post("/api/backup/remote")
+def api_set_remote(req: GitRemoteRequest):
+    url = req.remote_url.strip()
+    check = run_git(["remote", "get-url", "origin"])
+    if check.returncode == 0:
+        res = run_git(["remote", "set-url", "origin", url])
+    else:
+        res = run_git(["remote", "add", "origin", url])
+    if res.returncode == 0:
+        return {"success": True, "remote_url": url}
+    else:
+        raise HTTPException(status_code=400, detail=res.stderr)
+
+@app.post("/api/backup/rollback")
+def api_rollback(req: GitRollbackRequest):
+    res = rollback_to_commit(req.commit_hash)
+    if not res.get("success"):
+        raise HTTPException(status_code=400, detail=res.get("message"))
+    return res
 
 # 3. AUTOPILOT SCHEDULER & CONTENT FACTORY
 def run_autopilot_pipeline(topic: str, layout: str, theme: str, job: dict):

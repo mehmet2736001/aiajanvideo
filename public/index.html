@@ -198,6 +198,9 @@
       <button onclick="openKeyPoolModal()" class="px-3 py-1.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5">
         <i class="fa-solid fa-key text-amber-400"></i> Key Havuzu (<span id="top-key-count">136</span>)
       </button>
+      <button onclick="openBackupModal()" class="px-3 py-1.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-brands fa-github text-white"></i> GitHub Yedekle
+      </button>
     </div>
 
     <!-- RIGHT: Green Fast Render & Prominent Gold Export Button (Matching Screenshot) -->
@@ -896,6 +899,80 @@
       <div class="flex justify-end pt-2 border-t border-slate-800">
         <button onclick="closeKeyPoolModal()" class="px-4 py-1.5 bg-slate-800 text-slate-300 rounded-xl font-bold">Kapat</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ================= GITHUB BACKUP & ROLLBACK MODAL ================= -->
+  <div id="modal-backup" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0d1322] border border-slate-800 rounded-3xl max-w-xl w-full p-6 space-y-4 shadow-2xl text-xs">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-white text-base shadow">
+            <i class="fa-brands fa-github"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-extrabold text-white">GitHub Anlık Yedekleme & Geri Alma</h3>
+            <p class="text-[11px] text-slate-400">Tek tıkla versiyon oluşturun, GitHub'a gönderin ve dilediğiniz ana geri dönün.</p>
+          </div>
+        </div>
+        <button onclick="closeBackupModal()" class="text-slate-500 hover:text-white transition"><i class="fa-solid fa-xmark text-base"></i></button>
+      </div>
+
+      <!-- Git Status Box -->
+      <div class="p-3.5 bg-[#070a12] border border-slate-800 rounded-2xl space-y-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="font-bold text-white">Git Deposu: <span id="git-branch" class="text-amber-300 font-mono">main</span></span>
+          </div>
+          <span id="git-status-badge" class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-mono">Temiz</span>
+        </div>
+
+        <!-- Remote URL Setting -->
+        <div class="pt-1">
+          <label class="block text-slate-400 text-[11px] mb-1">GitHub Depo URL'si (Remote Origin)</label>
+          <div class="flex items-center gap-2">
+            <input type="text" id="git-remote-url" placeholder="https://github.com/kullaniciadi/notebook-video-ai.git" class="flex-1 bg-[#0c1220] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs font-mono">
+            <button onclick="saveGitRemote()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold rounded-xl transition">
+              Kaydet
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Instant Backup Action -->
+      <div class="p-3.5 bg-[#070a12] border border-slate-800 rounded-2xl space-y-2.5">
+        <label class="block font-bold text-white">Yedekleme Notu / Açıklaması</label>
+        <div class="flex items-center gap-2">
+          <input type="text" id="git-commit-msg" placeholder="Örn: Pro Video Editör zaman tüneli ve ses ekleme" class="flex-1 bg-[#0c1220] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs">
+          <button onclick="triggerGitBackup()" id="btn-git-backup" class="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold rounded-xl transition flex items-center gap-1.5 shadow whitespace-nowrap">
+            <i class="fa-solid fa-cloud-arrow-up"></i> <span>Şimdi Yedekle</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Backup History & Rollback List -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          <span>📜 Önceki Yedekleme Noktaları (Geri Dönmek İçin Seçin)</span>
+          <button onclick="loadGitStatusAndHistory()" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1">
+            <i class="fa-solid fa-arrows-rotate"></i> Yenile
+          </button>
+        </div>
+        <div id="git-history-list" class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-2 border-t border-slate-800">
+        <div class="text-[11px] text-slate-500">
+          💡 Klasördeki <code class="text-amber-300">YEDEKLE.bat</code> ve <code class="text-amber-300">GERI_AL.bat</code> dosyalarına çift tıklayarak da yapabilirsiniz.
+        </div>
+        <button onclick="closeBackupModal()" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold text-xs">Kapat</button>
+      </div>
+
     </div>
   </div>
 
@@ -1747,6 +1824,131 @@
       audioEl.src = `/public/audio.mp3?t=${Date.now()}`;
       audioEl.load();
       loadTimelineData();
+    }
+
+    // 13. GITHUB BACKUP & ROLLBACK MODAL
+    async function openBackupModal() {
+      document.getElementById('modal-backup').classList.remove('hidden');
+      await loadGitStatusAndHistory();
+    }
+
+    function closeBackupModal() {
+      document.getElementById('modal-backup').classList.add('hidden');
+    }
+
+    async function loadGitStatusAndHistory() {
+      try {
+        const res = await fetch('/api/backup/status');
+        const data = await res.json();
+        const st = data.status || {};
+        const hist = data.history || [];
+
+        document.getElementById('git-branch').innerText = st.branch || 'main';
+        if (st.remote_url) {
+          document.getElementById('git-remote-url').value = st.remote_url;
+        }
+
+        const badge = document.getElementById('git-status-badge');
+        if (st.has_uncommitted_changes) {
+          badge.className = 'text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-full font-mono';
+          badge.innerText = `${st.changed_files_count} Değişiklik Var`;
+        } else {
+          badge.className = 'text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-mono';
+          badge.innerText = 'Temiz (Güncel)';
+        }
+
+        const list = document.getElementById('git-history-list');
+        list.innerHTML = '';
+        if (hist.length === 0) {
+          list.innerHTML = '<div class="text-slate-500 text-center py-2">Henüz yedekleme bulunmuyor.</div>';
+          return;
+        }
+
+        hist.forEach((c) => {
+          const item = document.createElement('div');
+          item.className = 'p-2 bg-[#0c1220] border border-slate-800 rounded-xl flex items-center justify-between hover:border-slate-700 transition';
+          item.innerHTML = `
+            <div class="overflow-hidden pr-2">
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-[10px] bg-slate-800 text-amber-300 px-1.5 py-0.5 rounded">${c.hash}</span>
+                <span class="font-bold text-white truncate text-[11px]">${c.message}</span>
+              </div>
+              <div class="text-[10px] text-slate-500 font-mono mt-0.5">${c.date || c.relative} · ${c.author}</div>
+            </div>
+            <button onclick="rollbackToCommit('${c.hash}')" title="Bu versiyona geri dön" class="px-2.5 py-1 bg-slate-800 hover:bg-amber-600/30 text-slate-300 hover:text-amber-300 rounded-lg font-bold text-[10px] transition shrink-0 flex items-center gap-1">
+              <i class="fa-solid fa-clock-rotate-left"></i> Geri Dön
+            </button>
+          `;
+          list.appendChild(item);
+        });
+      } catch (e) {
+        console.error('Git status error:', e);
+      }
+    }
+
+    async function saveGitRemote() {
+      const url = document.getElementById('git-remote-url').value.trim();
+      if (!url) return alert('Lütfen geçerli bir GitHub depo URL\'si girin.');
+
+      try {
+        const res = await fetch('/api/backup/remote', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ remote_url: url })
+        });
+        if (!res.ok) throw new Error('Remote URL kaydedilemedi.');
+        alert('✓ GitHub deposu başarıyla bağlandı!');
+        await loadGitStatusAndHistory();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    async function triggerGitBackup() {
+      const msgInput = document.getElementById('git-commit-msg');
+      const msg = msgInput.value.trim();
+      const btn = document.getElementById('btn-git-backup');
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Yedekleniyor...</span>';
+
+      try {
+        const res = await fetch('/api/backup/commit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg, push: true })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.message || 'Yedekleme başarısız.');
+
+        alert(`✅ ${data.message}`);
+        msgInput.value = '';
+        await loadGitStatusAndHistory();
+      } catch (e) {
+        alert('Yedekleme uyarısı: ' + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> <span>Şimdi Yedekle</span>';
+      }
+    }
+
+    async function rollbackToCommit(hash) {
+      if (!confirm(`Bu projeyi '${hash}' numaralı sürüme geri döndürmek istediğinize emin misiniz?`)) return;
+
+      try {
+        const res = await fetch('/api/backup/rollback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ commit_hash: hash })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Geri dönüş başarısız.');
+
+        alert(`⏪ ${data.message} Sayfa yenileniyor...`);
+        location.reload();
+      } catch (e) {
+        alert('Geri dönüş hatası: ' + e.message);
+      }
     }
   </script>
 </body>
