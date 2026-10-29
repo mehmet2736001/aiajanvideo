@@ -1,0 +1,108 @@
+{
+  "icons": {
+    "crescent": {
+      "path": "assets/icons/crescent.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "kaaba": {
+      "path": "assets/icons/kaaba.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "islamic_star": {
+      "path": "assets/icons/islamic_star.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "fingerprint": {
+      "path": "assets/icons/fingerprint.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "dna": {
+      "path": "assets/icons/dna.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "atom": {
+      "path": "assets/icons/atom.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "brain": {
+      "path": "assets/icons/brain.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "heart": {
+      "path": "assets/icons/heart.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "eye": {
+      "path": "assets/icons/eye.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "scale": {
+      "path": "assets/icons/scale.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "hourglass": {
+      "path": "assets/icons/hourglass.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "book": {
+      "path": "assets/icons/book.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "lightbulb": {
+      "path": "assets/icons/lightbulb.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "compass": {
+      "path": "assets/icons/compass.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "shield": {
+      "path": "assets/icons/shield.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "infinity": {
+      "path": "assets/icons/infinity.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    }
+  },
+  "watermarks": {
+    "islamic_geometric": {
+      "path": "assets/watermarks/islamic_geometric.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "fingerprint": {
+      "path": "assets/watermarks/fingerprint.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "dna": {
+      "path": "assets/watermarks/dna.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    },
+    "cosmic": {
+      "path": "assets/watermarks/cosmic.svg",
+      "type": "vector_svg",
+      "source": "curated_core"
+    }
+  },
+  "sfx": {},
+  "last_updated": ""
+}

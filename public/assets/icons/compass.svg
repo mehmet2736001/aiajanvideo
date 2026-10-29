@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.5">
+  <circle cx="50" cy="50" r="38" stroke-width="4"/>
+  <polygon points="50 20, 58 46, 50 50, 42 46" fill="#ef4444" stroke="#ef4444"/>
+  <polygon points="50 80, 58 54, 50 50, 42 54" fill="currentColor" fill-opacity="0.4"/>
+  <circle cx="50" cy="50" r="4" fill="#ffffff" stroke="currentColor" stroke-width="2"/>
+  <text x="50" y="15" text-anchor="middle" font-size="10" font-weight="bold" fill="currentColor">K</text>
+</svg>

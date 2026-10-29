@@ -1,0 +1,18 @@
+[
+  {
+    "id": "job_sample_1",
+    "title": "Akşam Bülteni (Viral Bilim & Hikmet)",
+    "enabled": false,
+    "frequency": "daily",
+    "time": "19:00",
+    "topic_source": "bank",
+    "theme": "random",
+    "layout": "auto",
+    "auto_upload": true,
+    "privacy": "private",
+    "webhook_url": "",
+    "created_at": "2026-10-27 20:50",
+    "last_run": null,
+    "run_count": 0
+  }
+]

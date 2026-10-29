@@ -1,0 +1,6155 @@
+[
+  {
+    "id": "35d26582",
+    "topic": "İbn-i Sina ve Tıbbın Kanunu: Orta Çağ'ın En Büyük Hekiminin Sırrı",
+    "theme": "parchment",
+    "layoutType": "pip_split",
+    "durationMode": "quick",
+    "created_at": "2026-10-29 01:02",
+    "headerMain": "TIBBIN KANUNU ASIRLARA YÖN VEREN DEHA",
+    "narration": "Orta Çağ'ın karanlığında yükselen bir meşale... İbn-i Sina, yazdığı El-Kanun fi't-Tıbb kitabı ile sadece kendi çağını değil, yüzyıllar sonraki modern tıbbı da şekillendirdi. Peki ama bu büyük hekimin sırrı neydi?",
+    "hookScore": 98,
+    "key_used": "asdxcxc005@gmail.com",
+    "model_used": "gemini-3.5-flash-lite",
+    "thumbnail_url": "/out/thumbnail.png?t=1793224925",
+    "video_data": {
+      "directorDecision": {
+        "theme": "parchment",
+        "layoutType": "pip_split",
+        "illustrationPrompt": "Vintage oil painting of Ibn Sina in a medieval library surrounded by ancient medical manuscripts, anatomical scrolls, glass flasks, dramatic golden hour lighting, cinematic composition, 8k resolution",
+        "illustrationCaption": "El-Kanun fi't-Tıbb",
+        "brollType": "ink",
+        "durationMode": "quick",
+        "particles": "dust",
+        "ambientPattern": "islamic_geometric",
+        "doodleType": "book",
+        "directorReason": "Orta Çağ tıbbının tarihi ve felsefi derinliğini yansıtmak için parşömen tema ve pip_split görsel kurgusu seçildi."
+      },
+      "requiredIcons": [
+        "book",
+        "scale",
+        "brain",
+        "atom",
+        "hourglass"
+      ],
+      "headerSubtitle": "Orta Çağ'ın Sırrı",
+      "headerLine1": "TIBBIN",
+      "circledWord": "KANUNU",
+      "headerLine2": "İBN-İ SİNA",
+      "highlightedText": "ASIRLARA YÖN VEREN DEHA",
+      "strikeWord": "TESADÜF",
+      "layoutType": "pip_split",
+      "cards": [
+        {
+          "id": "1",
+          "label": "El-Kanun",
+          "value": "5 Cilt",
+          "icon": "book",
+          "color": "#1e3a8a",
+          "iconAssetPath": "assets/icons/book.svg"
+        },
+        {
+          "id": "2",
+          "label": "Modern Tıp",
+          "value": "Temel Taş",
+          "icon": "scale",
+          "color": "#15803d",
+          "iconAssetPath": "assets/icons/scale.svg"
+        },
+        {
+          "id": "3",
+          "label": "Teşhis",
+          "value": "Karantina",
+          "icon": "atom",
+          "color": "#d97706",
+          "iconAssetPath": "assets/icons/atom.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "Batı Tıbbı (Skolastik)",
+        "leftSubtitle": "Batıl İnançlar",
+        "leftPoints": [
+          "Hastalığı cinlere bağlama",
+          "Karantina bilinci yok",
+          "Deneyden uzak dogma"
+        ],
+        "leftColor": "#dc2626",
+        "rightTitle": "İbn-i Sina Tıbbı",
+        "rightSubtitle": "Bilimsel Metot",
+        "rightPoints": [
+          "Hastalığın bulaş yolu (mikrop)",
+          "Karantina ve hijyen",
+          "Klinik deney ve gözlem"
+        ],
+        "rightColor": "#16a34a",
+        "verdict": "İbn-i Sina, modern tıbbın ve deneysel metodun temellerini yüz yıllar önce attı."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Adım",
+          "title": "Gözlem",
+          "desc": "Hastalıkların doğasını titizlikle inceledi.",
+          "color": "#1e3a8a"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Adım",
+          "title": "Karantina",
+          "desc": "Bulaşıcı hastalıklar için tecrit yöntemini buldu.",
+          "color": "#d97706"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Adım",
+          "title": "Külliyat",
+          "desc": "Yazdığı eserler Avrupa'da yüzyıllarca ders kitabı oldu.",
+          "color": "#15803d"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "İbn-i Sina",
+        "title": "EL-KANUN Fİ'T-TIBB",
+        "quoteText": "Tıp, insan bedeninin sağlık ve hastalık hallerini konu edinen, bu sayede sağlığın korunduğu ve kaybedildiğinde yeniden getirildiği ilimdir.",
+        "sourceRef": "Tıbbın Kanunu, Giriş"
+      },
+      "metricImpact": {
+        "bigNumber": "600+",
+        "bigLabel": "YIL BOYUNCA",
+        "subheading": "Avrupa Üniversitelerinde Ana Kitap",
+        "keyTakeaway": "Doğu'nun ışığı Batı'nın karanlığını aydınlattı."
+      },
+      "gridExplosion": {
+        "title": "BİLİMİN KÖŞETAŞLARI",
+        "subtitle": "Tıbbın Kanunu'nda Yer Alan Yüzlerce Mucizevi Tedavi",
+        "iconType": "book",
+        "itemCount": 9,
+        "badgeText": "EVRENSEL MİRAS",
+        "iconAssetPath": "assets/icons/book.svg"
+      },
+      "triConcept": {
+        "badge": "YENİLİKÇİ YAKLAŞIM",
+        "concept1": {
+          "title": "FARMAKOLOJİ",
+          "subtitle": "Bitkisel İlaçlar",
+          "icon": "atom",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        "concept2": {
+          "title": "PSİKOSOMATİK",
+          "subtitle": "Ruh ve Beden",
+          "icon": "brain",
+          "color": "#ef4444",
+          "iconAssetPath": "assets/icons/brain.svg"
+        },
+        "concept3": {
+          "title": "CERRAHİ",
+          "subtitle": "Hassas Müdahale",
+          "icon": "scale",
+          "color": "#facc15",
+          "iconAssetPath": "assets/icons/scale.svg"
+        },
+        "bottomNote": "MODERN TIP ONUN METOTLARININ ÜZERİNE KURULDU"
+      },
+      "timeline": {
+        "startYear": "MS 980",
+        "endYear": "MS 1037",
+        "durationLabel": "Ömür",
+        "title": "Bir Dâhinin Çağı",
+        "ayahArabic": "",
+        "ayahTranslation": "Bilgi ve hikmet müminin yitik malıdır, onu nerede bulursa almalıdır.",
+        "ayahRef": "Hadis-i Şerif"
+      },
+      "narration": "Orta Çağ'ın karanlığında yükselen bir meşale... İbn-i Sina, yazdığı El-Kanun fi't-Tıbb kitabı ile sadece kendi çağını değil, yüzyıllar sonraki modern tıbbı da şekillendirdi. Peki ama bu büyük hekimin sırrı neydi?",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "İbn-i Sina'nın Tıbbın Kanunu'ndaki Gizli Sır!",
+          "Avrupa'nın Yüzyıllarca Ders Kitabı Olarak Okuttuğu Deha"
+        ],
+        "hashtags": [
+          "#ibnisina",
+          "#tıp",
+          "#tarih",
+          "#belgesel",
+          "#bilim",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden tıp tarihi onu...",
+        "description": "İbn-i Sina'nın tıbba kazandırdığı devrim niteliğindeki yenilikler ve El-Kanun fi't-Tıbb'ın sırrı."
+      },
+      "theme": "parchment",
+      "durationMode": "quick",
+      "particles": "none",
+      "ambientPattern": "none",
+      "doodleType": "auto",
+      "filmGrain": "subtle",
+      "lightLeaks": "auto",
+      "cameraMotion": "handheld",
+      "accentType": "none",
+      "socialHandle": "@birkissa",
+      "musicTrack": "ambient_mystic.wav",
+      "ttsProvider": "edge_tts",
+      "voiceId": "en-US-AndrewMultilingualNeural",
+      "emotionTone": "documentary",
+      "illustrationUrl": "illustrations/ill_69d0e8fe.jpg",
+      "illustrationCaption": "İbn-i Sina & Tıbbın Kanunu",
+      "illustrationStyle": "polaroid",
+      "brollType": "ink",
+      "brollOpacity": 0.18,
+      "_acquired_assets": [
+        {
+          "name": "book",
+          "type": "grid_icon",
+          "path": "assets/icons/book.svg"
+        },
+        {
+          "name": "atom",
+          "type": "concept_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "brain",
+          "type": "concept_icon",
+          "path": "assets/icons/brain.svg"
+        },
+        {
+          "name": "scale",
+          "type": "concept_icon",
+          "path": "assets/icons/scale.svg"
+        },
+        {
+          "name": "book",
+          "type": "card_icon",
+          "path": "assets/icons/book.svg"
+        },
+        {
+          "name": "scale",
+          "type": "card_icon",
+          "path": "assets/icons/scale.svg"
+        },
+        {
+          "name": "atom",
+          "type": "card_icon",
+          "path": "assets/icons/atom.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "Ortaçan karanlığında yükselen",
+          "start": 0.0,
+          "end": 2.0,
+          "words": [
+            {
+              "word": "Ortaçan",
+              "start": 0.0,
+              "end": 0.66
+            },
+            {
+              "word": "karanlığında",
+              "start": 0.66,
+              "end": 1.34
+            },
+            {
+              "word": "yükselen",
+              "start": 1.34,
+              "end": 2.0
+            }
+          ]
+        },
+        {
+          "text": "bir meşale. İbnisina,",
+          "start": 2.0,
+          "end": 3.76,
+          "words": [
+            {
+              "word": "bir",
+              "start": 2.0,
+              "end": 2.16
+            },
+            {
+              "word": "meşale.",
+              "start": 2.16,
+              "end": 2.72
+            },
+            {
+              "word": "İbnisina,",
+              "start": 3.16,
+              "end": 3.76
+            }
+          ]
+        },
+        {
+          "text": "yazdığı elkanın fititip",
+          "start": 4.26,
+          "end": 5.78,
+          "words": [
+            {
+              "word": "yazdığı",
+              "start": 4.26,
+              "end": 4.72
+            },
+            {
+              "word": "elkanın",
+              "start": 4.72,
+              "end": 5.3
+            },
+            {
+              "word": "fititip",
+              "start": 5.3,
+              "end": 5.78
+            }
+          ]
+        },
+        {
+          "text": "kitabıyla sadece kendi",
+          "start": 5.78,
+          "end": 7.46,
+          "words": [
+            {
+              "word": "kitabıyla",
+              "start": 5.78,
+              "end": 6.28
+            },
+            {
+              "word": "sadece",
+              "start": 6.28,
+              "end": 7.0
+            },
+            {
+              "word": "kendi",
+              "start": 7.0,
+              "end": 7.46
+            }
+          ]
+        },
+        {
+          "text": "çağını değil. Yüz",
+          "start": 7.46,
+          "end": 8.74,
+          "words": [
+            {
+              "word": "çağını",
+              "start": 7.46,
+              "end": 7.84
+            },
+            {
+              "word": "değil.",
+              "start": 7.84,
+              "end": 8.06
+            },
+            {
+              "word": "Yüz",
+              "start": 8.54,
+              "end": 8.74
+            }
+          ]
+        },
+        {
+          "text": "yıllar sonraki modern",
+          "start": 8.74,
+          "end": 9.96,
+          "words": [
+            {
+              "word": "yıllar",
+              "start": 8.74,
+              "end": 9.06
+            },
+            {
+              "word": "sonraki",
+              "start": 9.06,
+              "end": 9.58
+            },
+            {
+              "word": "modern",
+              "start": 9.58,
+              "end": 9.96
+            }
+          ]
+        },
+        {
+          "text": "tıp bu da",
+          "start": 9.96,
+          "end": 10.6,
+          "words": [
+            {
+              "word": "tıp",
+              "start": 9.96,
+              "end": 10.3
+            },
+            {
+              "word": "bu",
+              "start": 10.3,
+              "end": 10.48
+            },
+            {
+              "word": "da",
+              "start": 10.48,
+              "end": 10.6
+            }
+          ]
+        },
+        {
+          "text": "şekillendirdi. Peki ama",
+          "start": 10.6,
+          "end": 12.38,
+          "words": [
+            {
+              "word": "şekillendirdi.",
+              "start": 10.6,
+              "end": 11.42
+            },
+            {
+              "word": "Peki",
+              "start": 11.9,
+              "end": 12.1
+            },
+            {
+              "word": "ama",
+              "start": 12.1,
+              "end": 12.38
+            }
+          ]
+        },
+        {
+          "text": "bu büyük hekimin",
+          "start": 12.38,
+          "end": 13.38,
+          "words": [
+            {
+              "word": "bu",
+              "start": 12.38,
+              "end": 12.62
+            },
+            {
+              "word": "büyük",
+              "start": 12.62,
+              "end": 12.94
+            },
+            {
+              "word": "hekimin",
+              "start": 12.94,
+              "end": 13.38
+            }
+          ]
+        },
+        {
+          "text": "sürüneydi.",
+          "start": 13.38,
+          "end": 14.12,
+          "words": [
+            {
+              "word": "sürüneydi.",
+              "start": 13.38,
+              "end": 14.12
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "word": "Ortaçan",
+          "start": 0.0,
+          "end": 0.66
+        },
+        {
+          "word": "karanlığında",
+          "start": 0.66,
+          "end": 1.34
+        },
+        {
+          "word": "yükselen",
+          "start": 1.34,
+          "end": 2.0
+        },
+        {
+          "word": "bir",
+          "start": 2.0,
+          "end": 2.16
+        },
+        {
+          "word": "meşale.",
+          "start": 2.16,
+          "end": 2.72
+        },
+        {
+          "word": "İbnisina,",
+          "start": 3.16,
+          "end": 3.76
+        },
+        {
+          "word": "yazdığı",
+          "start": 4.26,
+          "end": 4.72
+        },
+        {
+          "word": "elkanın",
+          "start": 4.72,
+          "end": 5.3
+        },
+        {
+          "word": "fititip",
+          "start": 5.3,
+          "end": 5.78
+        },
+        {
+          "word": "kitabıyla",
+          "start": 5.78,
+          "end": 6.28
+        },
+        {
+          "word": "sadece",
+          "start": 6.28,
+          "end": 7.0
+        },
+        {
+          "word": "kendi",
+          "start": 7.0,
+          "end": 7.46
+        },
+        {
+          "word": "çağını",
+          "start": 7.46,
+          "end": 7.84
+        },
+        {
+          "word": "değil.",
+          "start": 7.84,
+          "end": 8.06
+        },
+        {
+          "word": "Yüz",
+          "start": 8.54,
+          "end": 8.74
+        },
+        {
+          "word": "yıllar",
+          "start": 8.74,
+          "end": 9.06
+        },
+        {
+          "word": "sonraki",
+          "start": 9.06,
+          "end": 9.58
+        },
+        {
+          "word": "modern",
+          "start": 9.58,
+          "end": 9.96
+        },
+        {
+          "word": "tıp",
+          "start": 9.96,
+          "end": 10.3
+        },
+        {
+          "word": "bu",
+          "start": 10.3,
+          "end": 10.48
+        },
+        {
+          "word": "da",
+          "start": 10.48,
+          "end": 10.6
+        },
+        {
+          "word": "şekillendirdi.",
+          "start": 10.6,
+          "end": 11.42
+        },
+        {
+          "word": "Peki",
+          "start": 11.9,
+          "end": 12.1
+        },
+        {
+          "word": "ama",
+          "start": 12.1,
+          "end": 12.38
+        },
+        {
+          "word": "bu",
+          "start": 12.38,
+          "end": 12.62
+        },
+        {
+          "word": "büyük",
+          "start": 12.62,
+          "end": 12.94
+        },
+        {
+          "word": "hekimin",
+          "start": 12.94,
+          "end": 13.38
+        },
+        {
+          "word": "sürüneydi.",
+          "start": 13.38,
+          "end": 14.12
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "88f7ccd2",
+    "topic": "Zaman ve Görelilik: Neden Geleceğe Yolculuk Mümkün?",
+    "theme": "neon_cyber",
+    "layoutType": "flowchart",
+    "durationMode": "deep",
+    "created_at": "2026-10-29 00:44",
+    "headerMain": "GELECEĞE YOLCULUK ASLA ZAMANIN GÖRELİLİĞİ",
+    "narration": "Zamanın her yerde aynı akmadığını biliyor muydunuz? Albert Einstein'ın görelilik teorisine göre, bir gün ışık hızına yakın seyahat edebilen uzay gemileri yaparsak, geleceğe gitmek hayal olmaktan çıkar. Sizin için sadece haftalar geçerken, dünyada yüzyıllar akıp gidebilir. Geleceğe yolculuk matematiksel olarak mümkündür; soru 'nasıl', değil 'ne zaman'.",
+    "hookScore": 98,
+    "key_used": "asdxcxc005@gmail.com",
+    "model_used": "gemini-3.5-flash-lite",
+    "thumbnail_url": "/out/thumbnail.png?t=1793223876",
+    "video_data": {
+      "directorDecision": {
+        "theme": "neon_cyber",
+        "layoutType": "flowchart",
+        "durationMode": "deep",
+        "particles": "stars",
+        "ambientPattern": "cosmic",
+        "doodleType": "hourglass",
+        "directorReason": "Zaman, görelilik ve geleceğe yolculuk teması için uzay-zaman sürekliliğini temsil eden 'neon_cyber' tema ve 'flowchart' şablonu seçildi."
+      },
+      "requiredIcons": [
+        "hourglass",
+        "atom",
+        "infinity",
+        "compass",
+        "lightbulb"
+      ],
+      "headerSubtitle": "Zamanın Ötesinde",
+      "headerLine1": "GELECEĞE YOLCULUK",
+      "circledWord": "ASLA",
+      "headerLine2": "İMKANSIZ DEĞİL",
+      "highlightedText": "ZAMANIN GÖRELİLİĞİ",
+      "strikeWord": "HAYAL",
+      "layoutType": "flowchart",
+      "cards": [
+        {
+          "id": "1",
+          "label": "Işık Hızı",
+          "value": "300.000 km/s",
+          "icon": "atom",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        {
+          "id": "2",
+          "label": "Zaman Dilimi",
+          "value": "Bükülebilir",
+          "icon": "hourglass",
+          "color": "#a855f7",
+          "iconAssetPath": "assets/icons/hourglass.svg"
+        },
+        {
+          "id": "3",
+          "label": "İkizler Paradoksu",
+          "value": "Farklı Yaş",
+          "icon": "infinity",
+          "color": "#facc15",
+          "iconAssetPath": "assets/icons/infinity.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "Klasik Fizik",
+        "leftSubtitle": "Mutlak Zaman",
+        "leftPoints": [
+          "Her yerde aynı akan saniyeler",
+          "Sabit ve evrensel saat",
+          "Değişmez geçmiş ve gelecek"
+        ],
+        "leftColor": "#ef4444",
+        "rightTitle": "Einstein Göreliliği",
+        "rightSubtitle": "Esnek Zaman-Uzay",
+        "rightPoints": [
+          "Hızlandıkça yavaşlayan saatler",
+          "Çekim gücüyle bükülen uzay",
+          "Geleceğe bilet: Işık hızı"
+        ],
+        "rightColor": "#3b82f6",
+        "verdict": "Albert Einstein'ın teorisi, zamanın mutlak değil, hıza bağlı göreceli bir akış olduğunu kanıtladı."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Adım",
+          "title": "Işık Hızına Yaklaşmak",
+          "desc": "Uzay geminiz ışık hızının %99'una ulaştığında dış dünyada yıllar geçer.",
+          "color": "#38bdf8"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Adım",
+          "title": "Zamanın Yavaşlaması",
+          "desc": "Sizin için sadece aylar geçerken, Dünya'da nesiller değişir.",
+          "color": "#a855f7"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Adım",
+          "title": "Geleceğe Varış",
+          "desc": "Gemiye geri döndüğünüzde kendinizi yıllar sonrasının dünyasında bulursunuz.",
+          "color": "#22c55e"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Albert Einstein",
+        "title": "İzafiyet Teorisi",
+        "quoteText": "Zaman, algıladığımızdan çok daha esnektir. Hız ve kütle, saatin tik taklarını yavaşlatabilir.",
+        "sourceRef": "Özel Görelilik Kuramı"
+      },
+      "metricImpact": {
+        "bigNumber": "%99.9",
+        "bigLabel": "IŞIK HIZI",
+        "subheading": "Zamanı Durdurmanın veya Geleceğe Gitmenin Anahtarı",
+        "keyTakeaway": "Geleceğe yolculuk bilimsel olarak mümkündür; tek sınır teknolojimiz."
+      },
+      "gridExplosion": {
+        "title": "ZAMAN BÜKÜLMESİ",
+        "subtitle": "Evrenin En Büyük Gizemi",
+        "iconType": "atom",
+        "itemCount": 9,
+        "badgeText": "KOD: RELATIVITY",
+        "iconAssetPath": "assets/icons/atom.svg"
+      },
+      "triConcept": {
+        "badge": "ZAMANIN ÜÇ BOYUTU",
+        "concept1": {
+          "title": "HIZ",
+          "subtitle": "Zamanı Yavaşlatır",
+          "icon": "atom",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        "concept2": {
+          "title": "KÜTLE ÇEKİM",
+          "subtitle": "Saatleri Büker",
+          "icon": "hourglass",
+          "color": "#facc15",
+          "iconAssetPath": "assets/icons/hourglass.svg"
+        },
+        "concept3": {
+          "title": "GELECEK",
+          "subtitle": "Bugünün Yolculuğu",
+          "icon": "infinity",
+          "color": "#a855f7",
+          "iconAssetPath": "assets/icons/infinity.svg"
+        },
+        "bottomNote": "EINSTEIN'IN EVRENİNDE GEÇMİŞE DÖNÜŞ YOKTUR, AMA GELECEK AÇIKTIR"
+      },
+      "timeline": {
+        "startYear": "Şimdi",
+        "endYear": "100 Yıl Sonra",
+        "durationLabel": "Işık Hızı Yolculuğu",
+        "title": "Geleceğe Yolculuk Süreci",
+        "ayahArabic": "",
+        "ayahTranslation": "Zaman, gözlemcinin konumuna ve hızına göre şekillenir.",
+        "ayahRef": "Modern Fizik Prensibi"
+      },
+      "narration": "Zamanın her yerde aynı akmadığını biliyor muydunuz? Albert Einstein'ın görelilik teorisine göre, bir gün ışık hızına yakın seyahat edebilen uzay gemileri yaparsak, geleceğe gitmek hayal olmaktan çıkar. Sizin için sadece haftalar geçerken, dünyada yüzyıllar akıp gidebilir. Geleceğe yolculuk matematiksel olarak mümkündür; soru 'nasıl', değil 'ne zaman'.",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Geleceğe Gitmek Neden Mümkün? Zamanın Gizli Yüzü!",
+          "Einstein Haklıydı: Zamanı Bükmek ve Geleceğe Yolculuk!"
+        ],
+        "hashtags": [
+          "#bilim",
+          "#fizik",
+          "#einstein",
+          "#zaman",
+          "#gelecek",
+          "#shorts",
+          "#keşfet"
+        ],
+        "loopEnding": "ve işte bu yüzden zaman sadece...",
+        "description": "Zamanın göreliliği, ışık hızı ve geleceğe yolculuğun ardındaki büyüleyici bilimsel gerçekler."
+      },
+      "theme": "neon_cyber",
+      "durationMode": "deep",
+      "particles": "stars",
+      "ambientPattern": "cosmic",
+      "doodleType": "hourglass",
+      "filmGrain": "subtle",
+      "lightLeaks": "auto",
+      "cameraMotion": "handheld",
+      "accentType": "none",
+      "socialHandle": "@bilgikosesi",
+      "musicTrack": "ambient_documentary.wav",
+      "ttsProvider": "edge_tts",
+      "voiceId": "en-US-AndrewMultilingualNeural",
+      "emotionTone": "documentary",
+      "_acquired_assets": [
+        {
+          "name": "cosmic",
+          "type": "watermark",
+          "path": "assets/watermarks/cosmic.svg"
+        },
+        {
+          "name": "atom",
+          "type": "grid_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "atom",
+          "type": "concept_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "concept_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "infinity",
+          "type": "concept_icon",
+          "path": "assets/icons/infinity.svg"
+        },
+        {
+          "name": "atom",
+          "type": "card_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "card_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "infinity",
+          "type": "card_icon",
+          "path": "assets/icons/infinity.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "Zamanın her yerde",
+          "start": 0.0,
+          "end": 1.44,
+          "words": [
+            {
+              "word": "Zamanın",
+              "start": 0.0,
+              "end": 0.78
+            },
+            {
+              "word": "her",
+              "start": 0.78,
+              "end": 1.0
+            },
+            {
+              "word": "yerde",
+              "start": 1.0,
+              "end": 1.44
+            }
+          ]
+        },
+        {
+          "text": "aynı akmadığını biliyor",
+          "start": 1.44,
+          "end": 3.08,
+          "words": [
+            {
+              "word": "aynı",
+              "start": 1.44,
+              "end": 1.84
+            },
+            {
+              "word": "akmadığını",
+              "start": 1.84,
+              "end": 2.6
+            },
+            {
+              "word": "biliyor",
+              "start": 2.6,
+              "end": 3.08
+            }
+          ]
+        },
+        {
+          "text": "muydunuz. Albert Einstein",
+          "start": 3.08,
+          "end": 5.38,
+          "words": [
+            {
+              "word": "muydunuz.",
+              "start": 3.08,
+              "end": 3.9
+            },
+            {
+              "word": "Albert",
+              "start": 4.36,
+              "end": 4.68
+            },
+            {
+              "word": "Einstein",
+              "start": 4.68,
+              "end": 5.38
+            }
+          ]
+        },
+        {
+          "text": "'ın görellilik teorisine",
+          "start": 5.38,
+          "end": 7.22,
+          "words": [
+            {
+              "word": "'ın",
+              "start": 5.38,
+              "end": 5.96
+            },
+            {
+              "word": "görellilik",
+              "start": 5.96,
+              "end": 6.62
+            },
+            {
+              "word": "teorisine",
+              "start": 6.62,
+              "end": 7.22
+            }
+          ]
+        },
+        {
+          "text": "göre bir gün",
+          "start": 7.22,
+          "end": 8.74,
+          "words": [
+            {
+              "word": "göre",
+              "start": 7.22,
+              "end": 7.82
+            },
+            {
+              "word": "bir",
+              "start": 7.82,
+              "end": 8.38
+            },
+            {
+              "word": "gün",
+              "start": 8.38,
+              "end": 8.74
+            }
+          ]
+        },
+        {
+          "text": "ışık hızına yakın",
+          "start": 8.74,
+          "end": 10.0,
+          "words": [
+            {
+              "word": "ışık",
+              "start": 8.74,
+              "end": 9.18
+            },
+            {
+              "word": "hızına",
+              "start": 9.18,
+              "end": 9.58
+            },
+            {
+              "word": "yakın",
+              "start": 9.58,
+              "end": 10.0
+            }
+          ]
+        },
+        {
+          "text": "seyahat edebilen uzay",
+          "start": 10.0,
+          "end": 11.56,
+          "words": [
+            {
+              "word": "seyahat",
+              "start": 10.0,
+              "end": 10.56
+            },
+            {
+              "word": "edebilen",
+              "start": 10.56,
+              "end": 11.18
+            },
+            {
+              "word": "uzay",
+              "start": 11.18,
+              "end": 11.56
+            }
+          ]
+        },
+        {
+          "text": "gemileri yaparsak. Geleceği",
+          "start": 11.56,
+          "end": 14.06,
+          "words": [
+            {
+              "word": "gemileri",
+              "start": 11.56,
+              "end": 12.04
+            },
+            {
+              "word": "yaparsak.",
+              "start": 12.04,
+              "end": 13.08
+            },
+            {
+              "word": "Geleceği",
+              "start": 13.4,
+              "end": 14.06
+            }
+          ]
+        },
+        {
+          "text": "gitmek hayal olmaktan",
+          "start": 14.06,
+          "end": 15.74,
+          "words": [
+            {
+              "word": "gitmek",
+              "start": 14.06,
+              "end": 14.54
+            },
+            {
+              "word": "hayal",
+              "start": 14.54,
+              "end": 15.06
+            },
+            {
+              "word": "olmaktan",
+              "start": 15.06,
+              "end": 15.74
+            }
+          ]
+        },
+        {
+          "text": "çıkar. Sizin için",
+          "start": 15.74,
+          "end": 17.62,
+          "words": [
+            {
+              "word": "çıkar.",
+              "start": 15.74,
+              "end": 16.12
+            },
+            {
+              "word": "Sizin",
+              "start": 16.82,
+              "end": 17.32
+            },
+            {
+              "word": "için",
+              "start": 17.32,
+              "end": 17.62
+            }
+          ]
+        },
+        {
+          "text": "sadece haftalar geçerken",
+          "start": 17.62,
+          "end": 19.88,
+          "words": [
+            {
+              "word": "sadece",
+              "start": 17.62,
+              "end": 18.18
+            },
+            {
+              "word": "haftalar",
+              "start": 18.18,
+              "end": 18.92
+            },
+            {
+              "word": "geçerken",
+              "start": 18.92,
+              "end": 19.88
+            }
+          ]
+        },
+        {
+          "text": "dünyada yüz yıllar",
+          "start": 19.88,
+          "end": 21.9,
+          "words": [
+            {
+              "word": "dünyada",
+              "start": 19.88,
+              "end": 21.02
+            },
+            {
+              "word": "yüz",
+              "start": 21.02,
+              "end": 21.3
+            },
+            {
+              "word": "yıllar",
+              "start": 21.3,
+              "end": 21.9
+            }
+          ]
+        },
+        {
+          "text": "akıp gidebilir. Geleceği",
+          "start": 21.9,
+          "end": 24.08,
+          "words": [
+            {
+              "word": "akıp",
+              "start": 21.9,
+              "end": 22.34
+            },
+            {
+              "word": "gidebilir.",
+              "start": 22.34,
+              "end": 22.88
+            },
+            {
+              "word": "Geleceği",
+              "start": 23.38,
+              "end": 24.08
+            }
+          ]
+        },
+        {
+          "text": "yolculuk matematiksel olarak",
+          "start": 24.08,
+          "end": 26.12,
+          "words": [
+            {
+              "word": "yolculuk",
+              "start": 24.08,
+              "end": 24.76
+            },
+            {
+              "word": "matematiksel",
+              "start": 24.76,
+              "end": 25.68
+            },
+            {
+              "word": "olarak",
+              "start": 25.68,
+              "end": 26.12
+            }
+          ]
+        },
+        {
+          "text": "mümkündür. Soru nasıl",
+          "start": 26.12,
+          "end": 28.8,
+          "words": [
+            {
+              "word": "mümkündür.",
+              "start": 26.12,
+              "end": 27.12
+            },
+            {
+              "word": "Soru",
+              "start": 27.12,
+              "end": 28.22
+            },
+            {
+              "word": "nasıl",
+              "start": 28.22,
+              "end": 28.8
+            }
+          ]
+        },
+        {
+          "text": "dayı ne zaman?",
+          "start": 28.8,
+          "end": 30.32,
+          "words": [
+            {
+              "word": "dayı",
+              "start": 28.8,
+              "end": 29.74
+            },
+            {
+              "word": "ne",
+              "start": 29.74,
+              "end": 29.96
+            },
+            {
+              "word": "zaman?",
+              "start": 29.96,
+              "end": 30.32
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "word": "Zamanın",
+          "start": 0.0,
+          "end": 0.78
+        },
+        {
+          "word": "her",
+          "start": 0.78,
+          "end": 1.0
+        },
+        {
+          "word": "yerde",
+          "start": 1.0,
+          "end": 1.44
+        },
+        {
+          "word": "aynı",
+          "start": 1.44,
+          "end": 1.84
+        },
+        {
+          "word": "akmadığını",
+          "start": 1.84,
+          "end": 2.6
+        },
+        {
+          "word": "biliyor",
+          "start": 2.6,
+          "end": 3.08
+        },
+        {
+          "word": "muydunuz.",
+          "start": 3.08,
+          "end": 3.9
+        },
+        {
+          "word": "Albert",
+          "start": 4.36,
+          "end": 4.68
+        },
+        {
+          "word": "Einstein",
+          "start": 4.68,
+          "end": 5.38
+        },
+        {
+          "word": "'ın",
+          "start": 5.38,
+          "end": 5.96
+        },
+        {
+          "word": "görellilik",
+          "start": 5.96,
+          "end": 6.62
+        },
+        {
+          "word": "teorisine",
+          "start": 6.62,
+          "end": 7.22
+        },
+        {
+          "word": "göre",
+          "start": 7.22,
+          "end": 7.82
+        },
+        {
+          "word": "bir",
+          "start": 7.82,
+          "end": 8.38
+        },
+        {
+          "word": "gün",
+          "start": 8.38,
+          "end": 8.74
+        },
+        {
+          "word": "ışık",
+          "start": 8.74,
+          "end": 9.18
+        },
+        {
+          "word": "hızına",
+          "start": 9.18,
+          "end": 9.58
+        },
+        {
+          "word": "yakın",
+          "start": 9.58,
+          "end": 10.0
+        },
+        {
+          "word": "seyahat",
+          "start": 10.0,
+          "end": 10.56
+        },
+        {
+          "word": "edebilen",
+          "start": 10.56,
+          "end": 11.18
+        },
+        {
+          "word": "uzay",
+          "start": 11.18,
+          "end": 11.56
+        },
+        {
+          "word": "gemileri",
+          "start": 11.56,
+          "end": 12.04
+        },
+        {
+          "word": "yaparsak.",
+          "start": 12.04,
+          "end": 13.08
+        },
+        {
+          "word": "Geleceği",
+          "start": 13.4,
+          "end": 14.06
+        },
+        {
+          "word": "gitmek",
+          "start": 14.06,
+          "end": 14.54
+        },
+        {
+          "word": "hayal",
+          "start": 14.54,
+          "end": 15.06
+        },
+        {
+          "word": "olmaktan",
+          "start": 15.06,
+          "end": 15.74
+        },
+        {
+          "word": "çıkar.",
+          "start": 15.74,
+          "end": 16.12
+        },
+        {
+          "word": "Sizin",
+          "start": 16.82,
+          "end": 17.32
+        },
+        {
+          "word": "için",
+          "start": 17.32,
+          "end": 17.62
+        },
+        {
+          "word": "sadece",
+          "start": 17.62,
+          "end": 18.18
+        },
+        {
+          "word": "haftalar",
+          "start": 18.18,
+          "end": 18.92
+        },
+        {
+          "word": "geçerken",
+          "start": 18.92,
+          "end": 19.88
+        },
+        {
+          "word": "dünyada",
+          "start": 19.88,
+          "end": 21.02
+        },
+        {
+          "word": "yüz",
+          "start": 21.02,
+          "end": 21.3
+        },
+        {
+          "word": "yıllar",
+          "start": 21.3,
+          "end": 21.9
+        },
+        {
+          "word": "akıp",
+          "start": 21.9,
+          "end": 22.34
+        },
+        {
+          "word": "gidebilir.",
+          "start": 22.34,
+          "end": 22.88
+        },
+        {
+          "word": "Geleceği",
+          "start": 23.38,
+          "end": 24.08
+        },
+        {
+          "word": "yolculuk",
+          "start": 24.08,
+          "end": 24.76
+        },
+        {
+          "word": "matematiksel",
+          "start": 24.76,
+          "end": 25.68
+        },
+        {
+          "word": "olarak",
+          "start": 25.68,
+          "end": 26.12
+        },
+        {
+          "word": "mümkündür.",
+          "start": 26.12,
+          "end": 27.12
+        },
+        {
+          "word": "Soru",
+          "start": 27.12,
+          "end": 28.22
+        },
+        {
+          "word": "nasıl",
+          "start": 28.22,
+          "end": 28.8
+        },
+        {
+          "word": "dayı",
+          "start": 28.8,
+          "end": 29.74
+        },
+        {
+          "word": "ne",
+          "start": 29.74,
+          "end": 29.96
+        },
+        {
+          "word": "zaman?",
+          "start": 29.96,
+          "end": 30.32
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "8d5fbdf1",
+    "topic": "Zaman ve Görelilik: Neden Geleceğe Yolculuk Mümkün?",
+    "theme": "neon_cyber",
+    "layoutType": "flowchart",
+    "durationMode": "deep",
+    "created_at": "2026-10-29 00:40",
+    "headerMain": "ZAMAN VE GÖRELİLİK GELECEK IŞIK HIZI VE BÜKÜLEN ZAMAN",
+    "narration": "Zamanın akıp gittiğini sanırız; oysa zaman, hızlandıkça esneyen elastik bir dokudur. Einstein'ın kanıtladığı gibi, eğer ışık hızına yakın seyahat edebilirseniz, sizin için birkaç ay sürerken dünyada yıllar geçecektir. Geleceğe yolculuk imkansız değil; sadece fizik kurallarını doğru okumaktan ibaret.",
+    "hookScore": 98,
+    "key_used": "asdxcxc005@gmail.com",
+    "model_used": "gemini-3.5-flash-lite",
+    "thumbnail_url": "/out/thumbnail.png?t=1793223645",
+    "video_data": {
+      "directorDecision": {
+        "theme": "neon_cyber",
+        "layoutType": "flowchart",
+        "durationMode": "deep",
+        "particles": "stars",
+        "ambientPattern": "cosmic",
+        "doodleType": "hourglass",
+        "directorReason": "Zaman ve görelilik konsepti için neon siber tuval, kozmik arka plan ve akış şeması düzeni seçildi."
+      },
+      "requiredIcons": [
+        "hourglass",
+        "atom",
+        "infinity",
+        "compass"
+      ],
+      "headerSubtitle": "Kozmik Hakikat",
+      "headerLine1": "ZAMAN VE GÖRELİLİK",
+      "circledWord": "GELECEK",
+      "headerLine2": "MÜMKÜN MÜ?",
+      "highlightedText": "IŞIK HIZI VE BÜKÜLEN ZAMAN",
+      "strikeWord": "İMKANSIZ",
+      "layoutType": "flowchart",
+      "cards": [
+        {
+          "id": "1",
+          "label": "Işık Hızı",
+          "value": "300.000 km/s",
+          "icon": "atom",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        {
+          "id": "2",
+          "label": "Zaman Genleşmesi",
+          "value": "Yavaşlama",
+          "icon": "hourglass",
+          "color": "#8b5cf6",
+          "iconAssetPath": "assets/icons/hourglass.svg"
+        },
+        {
+          "id": "3",
+          "label": "Gelecek",
+          "value": "Mutlak Yolculuk",
+          "icon": "infinity",
+          "color": "#ec4899",
+          "iconAssetPath": "assets/icons/infinity.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "Klasik Algı",
+        "leftSubtitle": "Hız Her Yerde Aynı",
+        "leftPoints": [
+          "Zaman herkes için aynı akar",
+          "Geçmiş geride kalmıştır",
+          "Gelecek erişilemezdir"
+        ],
+        "leftColor": "#64748b",
+        "rightTitle": "Einstein'ın Göreliliği",
+        "rightSubtitle": "Zaman Esnektir",
+        "rightPoints": [
+          "Hız arttıkça zaman yavaşlar",
+          "Yerçekimi zamanı büker",
+          "Geleceğe gitmek fiziksel olarak mümkündür"
+        ],
+        "rightColor": "#38bdf8",
+        "verdict": "Zaman mutlak değil, görelidir; yeterince hızlı hareket ederseniz geleceğe bilet alabilirsiniz."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Adım",
+          "title": "Mutlak Zamanın Sonu",
+          "desc": "Einstein, zamanın herkes için aynı akmadığını kanıtladı.",
+          "color": "#38bdf8"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Adım",
+          "title": "Işık Hızına Yaklaşmak",
+          "desc": "Hızlandıkça uzay-zaman dokusu bükülür, saatler yavaşlar.",
+          "color": "#8b5cf6"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Adım",
+          "title": "Gelecekte Uyanmak",
+          "desc": "Yüksek hızlı bir seyahatten dönen astronot, dünyadakilere göre geleceğe gitmiştir.",
+          "color": "#ec4899"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Albert Einstein",
+        "title": "GÖRELİLİK TEORİSİ",
+        "quoteText": "Zaman, saatlerin ölçtüğü şeyden ibarettir ve gözlemcinin hızına göre bükülür.",
+        "sourceRef": "Özel Görelilik, 1905"
+      },
+      "metricImpact": {
+        "bigNumber": "%99.9",
+        "bigLabel": "IŞIK HIZI",
+        "subheading": "Zamanın Durma Noktasına Yaklaştığı An",
+        "keyTakeaway": "Geleceğe yolculuk bir bilim kurgu değil, matematiğin ve fiziğin kesin emridir."
+      },
+      "gridExplosion": {
+        "title": "ZAMANIN BOYUTLARI",
+        "subtitle": "Evrenin Dokusunda Saklı Görelilik",
+        "iconType": "atom",
+        "itemCount": 9,
+        "badgeText": "KOZMİK KANUN",
+        "iconAssetPath": "assets/icons/atom.svg"
+      },
+      "triConcept": {
+        "badge": "FİZİKSEL GERÇEKLİK",
+        "concept1": {
+          "title": "HIZ",
+          "subtitle": "Zamanı Yavaşlatır",
+          "icon": "atom",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        "concept2": {
+          "title": "KÜTLE",
+          "subtitle": "Uzay-Zamanı Büker",
+          "icon": "hourglass",
+          "color": "#a855f7",
+          "iconAssetPath": "assets/icons/hourglass.svg"
+        },
+        "concept3": {
+          "title": "GELECEK",
+          "subtitle": "Ulaşılaiblir Hedef",
+          "icon": "infinity",
+          "color": "#f43f5e",
+          "iconAssetPath": "assets/icons/infinity.svg"
+        },
+        "bottomNote": "GÖRELİLİK GELECEĞİN KAPISINI ARALAR"
+      },
+      "timeline": {
+        "startYear": "1905",
+        "endYear": "Gelecek",
+        "durationLabel": "Işık Hızı",
+        "title": "Zamanın Bükülmesi",
+        "ayahArabic": "",
+        "ayahTranslation": "Zaman bükülür, hız artar ve gelecek bugüne dönüşür.",
+        "ayahRef": "Modern Fizik"
+      },
+      "narration": "Zamanın akıp gittiğini sanırız; oysa zaman, hızlandıkça esneyen elastik bir dokudur. Einstein'ın kanıtladığı gibi, eğer ışık hızına yakın seyahat edebilirseniz, sizin için birkaç ay sürerken dünyada yıllar geçecektir. Geleceğe yolculuk imkansız değil; sadece fizik kurallarını doğru okumaktan ibaret.",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Geleceğe Yolculuk Neden Mümkün? Einstein'ın Gizli Teorisi!",
+          "Işık Hızına Ulaşırsanız Ne Olur? Zaman Bükülmesi!"
+        ],
+        "hashtags": [
+          "#fizik",
+          "#einstein",
+          "#zaman",
+          "#uzay",
+          "#bilim",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden zaman...",
+        "description": "Zamanın göreceli yapısı ve geleceğe seyahat etmenin fiziksel imkanları üzerine etkileyici bir inceleme."
+      },
+      "theme": "neon_cyber",
+      "durationMode": "deep",
+      "particles": "stars",
+      "ambientPattern": "cosmic",
+      "doodleType": "hourglass",
+      "filmGrain": "subtle",
+      "lightLeaks": "auto",
+      "cameraMotion": "handheld",
+      "accentType": "none",
+      "socialHandle": "@bilgikosesi",
+      "musicTrack": "ambient_documentary.wav",
+      "ttsProvider": "edge_tts",
+      "voiceId": "en-US-AndrewMultilingualNeural",
+      "emotionTone": "documentary",
+      "_acquired_assets": [
+        {
+          "name": "cosmic",
+          "type": "watermark",
+          "path": "assets/watermarks/cosmic.svg"
+        },
+        {
+          "name": "atom",
+          "type": "grid_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "atom",
+          "type": "concept_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "concept_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "infinity",
+          "type": "concept_icon",
+          "path": "assets/icons/infinity.svg"
+        },
+        {
+          "name": "atom",
+          "type": "card_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "card_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "infinity",
+          "type": "card_icon",
+          "path": "assets/icons/infinity.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "Zamanın akıp gittiğiniz",
+          "start": 0.0,
+          "end": 1.86,
+          "words": [
+            {
+              "word": "Zamanın",
+              "start": 0.0,
+              "end": 0.84
+            },
+            {
+              "word": "akıp",
+              "start": 0.84,
+              "end": 1.24
+            },
+            {
+              "word": "gittiğiniz",
+              "start": 1.24,
+              "end": 1.86
+            }
+          ]
+        },
+        {
+          "text": "sanırız, oysa zaman,",
+          "start": 1.86,
+          "end": 3.66,
+          "words": [
+            {
+              "word": "sanırız,",
+              "start": 1.86,
+              "end": 2.58
+            },
+            {
+              "word": "oysa",
+              "start": 2.76,
+              "end": 3.2
+            },
+            {
+              "word": "zaman,",
+              "start": 3.2,
+              "end": 3.66
+            }
+          ]
+        },
+        {
+          "text": "hızlandıkça esneyen elastik",
+          "start": 4.18,
+          "end": 6.48,
+          "words": [
+            {
+              "word": "hızlandıkça",
+              "start": 4.18,
+              "end": 5.06
+            },
+            {
+              "word": "esneyen",
+              "start": 5.06,
+              "end": 5.74
+            },
+            {
+              "word": "elastik",
+              "start": 5.74,
+              "end": 6.48
+            }
+          ]
+        },
+        {
+          "text": "bir dokudur. Aynı",
+          "start": 6.48,
+          "end": 8.18,
+          "words": [
+            {
+              "word": "bir",
+              "start": 6.48,
+              "end": 6.72
+            },
+            {
+              "word": "dokudur.",
+              "start": 6.72,
+              "end": 7.46
+            },
+            {
+              "word": "Aynı",
+              "start": 7.9,
+              "end": 8.18
+            }
+          ]
+        },
+        {
+          "text": "şi tayinın kanıtladığı",
+          "start": 8.18,
+          "end": 9.7,
+          "words": [
+            {
+              "word": "şi",
+              "start": 8.18,
+              "end": 8.38
+            },
+            {
+              "word": "tayinın",
+              "start": 8.38,
+              "end": 8.94
+            },
+            {
+              "word": "kanıtladığı",
+              "start": 8.94,
+              "end": 9.7
+            }
+          ]
+        },
+        {
+          "text": "gibi, eğer ışık",
+          "start": 9.7,
+          "end": 11.22,
+          "words": [
+            {
+              "word": "gibi,",
+              "start": 9.7,
+              "end": 10.04
+            },
+            {
+              "word": "eğer",
+              "start": 10.44,
+              "end": 10.84
+            },
+            {
+              "word": "ışık",
+              "start": 10.84,
+              "end": 11.22
+            }
+          ]
+        },
+        {
+          "text": "hızına yakın seyahat",
+          "start": 11.22,
+          "end": 12.62,
+          "words": [
+            {
+              "word": "hızına",
+              "start": 11.22,
+              "end": 11.64
+            },
+            {
+              "word": "yakın",
+              "start": 11.64,
+              "end": 12.06
+            },
+            {
+              "word": "seyahat",
+              "start": 12.06,
+              "end": 12.62
+            }
+          ]
+        },
+        {
+          "text": "edebilirsiniz. Sizin için",
+          "start": 12.62,
+          "end": 14.94,
+          "words": [
+            {
+              "word": "edebilirsiniz.",
+              "start": 12.62,
+              "end": 13.64
+            },
+            {
+              "word": "Sizin",
+              "start": 14.16,
+              "end": 14.64
+            },
+            {
+              "word": "için",
+              "start": 14.64,
+              "end": 14.94
+            }
+          ]
+        },
+        {
+          "text": "birkaç ay sürerken",
+          "start": 14.94,
+          "end": 16.46,
+          "words": [
+            {
+              "word": "birkaç",
+              "start": 14.94,
+              "end": 15.66
+            },
+            {
+              "word": "ay",
+              "start": 15.66,
+              "end": 15.78
+            },
+            {
+              "word": "sürerken",
+              "start": 15.78,
+              "end": 16.46
+            }
+          ]
+        },
+        {
+          "text": "dünyada yıllar geçecektir.",
+          "start": 16.46,
+          "end": 18.72,
+          "words": [
+            {
+              "word": "dünyada",
+              "start": 16.46,
+              "end": 17.22
+            },
+            {
+              "word": "yıllar",
+              "start": 17.22,
+              "end": 17.68
+            },
+            {
+              "word": "geçecektir.",
+              "start": 17.68,
+              "end": 18.72
+            }
+          ]
+        },
+        {
+          "text": "Geleceği yolculuk imkansız",
+          "start": 19.18,
+          "end": 21.36,
+          "words": [
+            {
+              "word": "Geleceği",
+              "start": 19.18,
+              "end": 19.86
+            },
+            {
+              "word": "yolculuk",
+              "start": 19.86,
+              "end": 20.54
+            },
+            {
+              "word": "imkansız",
+              "start": 20.54,
+              "end": 21.36
+            }
+          ]
+        },
+        {
+          "text": "değil, sadece fizik",
+          "start": 21.36,
+          "end": 23.32,
+          "words": [
+            {
+              "word": "değil,",
+              "start": 21.36,
+              "end": 21.78
+            },
+            {
+              "word": "sadece",
+              "start": 22.28,
+              "end": 22.6
+            },
+            {
+              "word": "fizik",
+              "start": 22.6,
+              "end": 23.32
+            }
+          ]
+        },
+        {
+          "text": "kurallarını doğru okumaktan",
+          "start": 23.32,
+          "end": 25.24,
+          "words": [
+            {
+              "word": "kurallarını",
+              "start": 23.32,
+              "end": 24.04
+            },
+            {
+              "word": "doğru",
+              "start": 24.04,
+              "end": 24.36
+            },
+            {
+              "word": "okumaktan",
+              "start": 24.36,
+              "end": 25.24
+            }
+          ]
+        },
+        {
+          "text": "ibaret.",
+          "start": 25.24,
+          "end": 25.72,
+          "words": [
+            {
+              "word": "ibaret.",
+              "start": 25.24,
+              "end": 25.72
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "word": "Zamanın",
+          "start": 0.0,
+          "end": 0.84
+        },
+        {
+          "word": "akıp",
+          "start": 0.84,
+          "end": 1.24
+        },
+        {
+          "word": "gittiğiniz",
+          "start": 1.24,
+          "end": 1.86
+        },
+        {
+          "word": "sanırız,",
+          "start": 1.86,
+          "end": 2.58
+        },
+        {
+          "word": "oysa",
+          "start": 2.76,
+          "end": 3.2
+        },
+        {
+          "word": "zaman,",
+          "start": 3.2,
+          "end": 3.66
+        },
+        {
+          "word": "hızlandıkça",
+          "start": 4.18,
+          "end": 5.06
+        },
+        {
+          "word": "esneyen",
+          "start": 5.06,
+          "end": 5.74
+        },
+        {
+          "word": "elastik",
+          "start": 5.74,
+          "end": 6.48
+        },
+        {
+          "word": "bir",
+          "start": 6.48,
+          "end": 6.72
+        },
+        {
+          "word": "dokudur.",
+          "start": 6.72,
+          "end": 7.46
+        },
+        {
+          "word": "Aynı",
+          "start": 7.9,
+          "end": 8.18
+        },
+        {
+          "word": "şi",
+          "start": 8.18,
+          "end": 8.38
+        },
+        {
+          "word": "tayinın",
+          "start": 8.38,
+          "end": 8.94
+        },
+        {
+          "word": "kanıtladığı",
+          "start": 8.94,
+          "end": 9.7
+        },
+        {
+          "word": "gibi,",
+          "start": 9.7,
+          "end": 10.04
+        },
+        {
+          "word": "eğer",
+          "start": 10.44,
+          "end": 10.84
+        },
+        {
+          "word": "ışık",
+          "start": 10.84,
+          "end": 11.22
+        },
+        {
+          "word": "hızına",
+          "start": 11.22,
+          "end": 11.64
+        },
+        {
+          "word": "yakın",
+          "start": 11.64,
+          "end": 12.06
+        },
+        {
+          "word": "seyahat",
+          "start": 12.06,
+          "end": 12.62
+        },
+        {
+          "word": "edebilirsiniz.",
+          "start": 12.62,
+          "end": 13.64
+        },
+        {
+          "word": "Sizin",
+          "start": 14.16,
+          "end": 14.64
+        },
+        {
+          "word": "için",
+          "start": 14.64,
+          "end": 14.94
+        },
+        {
+          "word": "birkaç",
+          "start": 14.94,
+          "end": 15.66
+        },
+        {
+          "word": "ay",
+          "start": 15.66,
+          "end": 15.78
+        },
+        {
+          "word": "sürerken",
+          "start": 15.78,
+          "end": 16.46
+        },
+        {
+          "word": "dünyada",
+          "start": 16.46,
+          "end": 17.22
+        },
+        {
+          "word": "yıllar",
+          "start": 17.22,
+          "end": 17.68
+        },
+        {
+          "word": "geçecektir.",
+          "start": 17.68,
+          "end": 18.72
+        },
+        {
+          "word": "Geleceği",
+          "start": 19.18,
+          "end": 19.86
+        },
+        {
+          "word": "yolculuk",
+          "start": 19.86,
+          "end": 20.54
+        },
+        {
+          "word": "imkansız",
+          "start": 20.54,
+          "end": 21.36
+        },
+        {
+          "word": "değil,",
+          "start": 21.36,
+          "end": 21.78
+        },
+        {
+          "word": "sadece",
+          "start": 22.28,
+          "end": 22.6
+        },
+        {
+          "word": "fizik",
+          "start": 22.6,
+          "end": 23.32
+        },
+        {
+          "word": "kurallarını",
+          "start": 23.32,
+          "end": 24.04
+        },
+        {
+          "word": "doğru",
+          "start": 24.04,
+          "end": 24.36
+        },
+        {
+          "word": "okumaktan",
+          "start": 24.36,
+          "end": 25.24
+        },
+        {
+          "word": "ibaret.",
+          "start": 25.24,
+          "end": 25.72
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "c9402306",
+    "topic": "🎙️ Ses Yükleme: zamanın herkes için aynı aktığınız sanıyorsunuz yanılıyorsun...",
+    "theme": "neon_cyber",
+    "layoutType": "quote_spotlight",
+    "durationMode": "4 Sahne (37s)",
+    "created_at": "2026-10-28 22:31",
+    "headerMain": "ZAMANIN AKIŞI YANILGI Albert Einstein Genel Görelilik",
+    "narration": "zamanın herkes için aynı aktığınız sanıyorsunuz yanılıyorsunuz. Albert Einstein şey taynın genel göreli kurumina göre kötüle çekimi artık çazaman yavaşlar. Yani dünyanın merkezine daha yakın olan deniz seviyesinde zaman daha yavaş akarken. Evir istli bir yüksek dağların zirvesinde kötüle çekimi azı aldığı için zaman daha hızlı akar. Atomik saatlerle doğrulanan bu sıra göre yüksek dağlar da yaşayanlar deniz seviyesinde kileri göre. Nili saniyelerce daha hızlı yaşlanmaktadır.",
+    "hookScore": 96,
+    "key_used": "asdxcxc005@gmail.com",
+    "model_used": "gemini-3.5-flash-lite",
+    "thumbnail_url": "/out/thumbnail.png?t=1793215908",
+    "video_data": {
+      "directorDecision": {
+        "theme": "neon_cyber",
+        "particles": "dust",
+        "ambientPattern": "atom",
+        "directorReason": "Albert Einstein'ın genel görelilik kuramı ve zamanın göreceliği teması için 'neon_cyber' ve bilimsel verileri vurgulayan şablonlar seçilmiştir."
+      },
+      "requiredIcons": [
+        "hourglass",
+        "atom",
+        "compass",
+        "infinity"
+      ],
+      "scenes": [
+        {
+          "id": "scene_1",
+          "startTime": 0.0,
+          "endTime": 9.19,
+          "layoutType": "quote_spotlight",
+          "headerSubtitle": "01 / GÖRELİLİK",
+          "headerLine1": "ZAMANIN AKIŞI",
+          "circledWord": "YANILGI",
+          "headerLine2": "",
+          "highlightedText": "Albert Einstein Genel Görelilik",
+          "strikeWord": "AYNI",
+          "cards": null,
+          "vsData": null,
+          "flowchartSteps": null,
+          "quoteSpotlight": {
+            "author": "Albert Einstein",
+            "quote": "Zamanın herkes için aynı aktığını sanıyorsunuz, yanılıyorsunuz.",
+            "badge": "FİZİK",
+            "highlightWords": [
+              "zaman",
+              "aynı",
+              "yanılıyorsunuz"
+            ]
+          },
+          "metricImpact": null,
+          "gridExplosion": null,
+          "triConcept": null,
+          "timeline": null
+        },
+        {
+          "id": "scene_2",
+          "startTime": 9.19,
+          "endTime": 18.39,
+          "layoutType": "metric_impact",
+          "headerSubtitle": "02 / ÇEKİM KUVVETİ",
+          "headerLine1": "KÜTLE ÇEKİMİ",
+          "circledWord": "YAVAŞLAR",
+          "headerLine2": "",
+          "highlightedText": "Deniz Seviyesi ve Zaman",
+          "strikeWord": "SABİT",
+          "cards": null,
+          "vsData": null,
+          "flowchartSteps": null,
+          "quoteSpotlight": null,
+          "metricImpact": {
+            "mainMetric": "%0",
+            "label": "Zamanın Sabitliği",
+            "description": "Dünyanın merkezine yakın yerlerde kütle çekimi nedeniyle zaman daha yavaş akar.",
+            "trend": "down"
+          },
+          "gridExplosion": null,
+          "triConcept": null,
+          "timeline": null
+        },
+        {
+          "id": "scene_3",
+          "startTime": 18.39,
+          "endTime": 27.58,
+          "layoutType": "vs_split",
+          "headerSubtitle": "03 / RTK & DAĞLAR",
+          "headerLine1": "YÜKSEK ZİRVELER",
+          "circledWord": "HIZLI",
+          "headerLine2": "",
+          "highlightedText": "Dağ Zirvelerinde Zaman",
+          "strikeWord": "AYNI",
+          "cards": null,
+          "vsData": {
+            "leftTitle": "DENİZ SEVİYESİ",
+            "leftValue": "Yavaş Zaman",
+            "rightTitle": "YÜKSEK DAĞLAR",
+            "rightValue": "Hızlı Zaman",
+            "winner": "right"
+          },
+          "flowchartSteps": null,
+          "quoteSpotlight": null,
+          "metricImpact": null,
+          "gridExplosion": null,
+          "triConcept": null,
+          "timeline": null
+        },
+        {
+          "id": "scene_4",
+          "startTime": 27.58,
+          "endTime": 36.77,
+          "layoutType": "flowchart",
+          "headerSubtitle": "04 / ATOMİK SAAT",
+          "headerLine1": "KESİN KANIT",
+          "circledWord": "MİLİSANİYE",
+          "headerLine2": "",
+          "highlightedText": "Atomik Saatler İle Doğrulama",
+          "strikeWord": "HAYAL",
+          "cards": null,
+          "vsData": null,
+          "flowchartSteps": [
+            {
+              "stepNumber": "1",
+              "title": "Ölçüm",
+              "description": "Atomik saatler ile hassas testler"
+            },
+            {
+              "stepNumber": "2",
+              "title": "Fark",
+              "description": "Yüksekte yaşayanlar daha hızlı yaşlanır"
+            },
+            {
+              "stepNumber": "3",
+              "title": "Sonuç",
+              "description": "Milisaniyelerle ölçülen gerçeklik"
+            }
+          ],
+          "quoteSpotlight": null,
+          "metricImpact": null,
+          "gridExplosion": null,
+          "triConcept": null,
+          "timeline": null
+        }
+      ],
+      "viral": {
+        "hookScore": 96,
+        "viralTitles": [
+          "Zaman Herkes İçin Aynı Akmıyor! ⏳",
+          "Dağda Yaşayanlar Daha Hızlı Yaşlanıyor!"
+        ],
+        "hashtags": [
+          "#einstein",
+          "#fizik",
+          "#zaman",
+          "#bilim",
+          "#shorts"
+        ],
+        "loopEnding": "...ve bu yüzden zaman herkes için farklı akar.",
+        "description": "Albert Einstein'ın genel görelilik teorisi ve kütle çekiminin zaman üzerindeki etkisini anlatan viral kısa video."
+      },
+      "theme": "neon_cyber",
+      "particles": "dust",
+      "ambientPattern": "atom",
+      "socialHandle": "@birkissa",
+      "audioUrl": "audio.mp3",
+      "subtitles": [
+        {
+          "text": "zamanın herkes için",
+          "start": 0.0,
+          "end": 1.7
+        },
+        {
+          "text": "aynı aktığınız sanıyorsunuz",
+          "start": 1.7,
+          "end": 3.84
+        },
+        {
+          "text": "yanılıyorsunuz. Albert Einstein",
+          "start": 3.84,
+          "end": 6.12
+        },
+        {
+          "text": "şey taynın genel",
+          "start": 6.12,
+          "end": 7.18
+        },
+        {
+          "text": "göreli kurumina göre",
+          "start": 7.18,
+          "end": 8.62
+        },
+        {
+          "text": "kötüle çekimi artık",
+          "start": 8.62,
+          "end": 9.98
+        },
+        {
+          "text": "çazaman yavaşlar. Yani",
+          "start": 9.98,
+          "end": 12.32
+        },
+        {
+          "text": "dünyanın merkezine daha",
+          "start": 12.32,
+          "end": 14.06
+        },
+        {
+          "text": "yakın olan deniz",
+          "start": 14.06,
+          "end": 15.18
+        },
+        {
+          "text": "seviyesinde zaman daha",
+          "start": 15.18,
+          "end": 16.68
+        },
+        {
+          "text": "yavaş akarken. Evir",
+          "start": 16.68,
+          "end": 18.94
+        },
+        {
+          "text": "istli bir yüksek",
+          "start": 18.94,
+          "end": 19.96
+        },
+        {
+          "text": "dağların zirvesinde kötüle",
+          "start": 19.96,
+          "end": 21.94
+        },
+        {
+          "text": "çekimi azı aldığı",
+          "start": 21.94,
+          "end": 22.86
+        },
+        {
+          "text": "için zaman daha",
+          "start": 22.86,
+          "end": 24.08
+        },
+        {
+          "text": "hızlı akar. Atomik",
+          "start": 24.08,
+          "end": 26.24
+        },
+        {
+          "text": "saatlerle doğrulanan bu",
+          "start": 26.24,
+          "end": 27.96
+        },
+        {
+          "text": "sıra göre yüksek",
+          "start": 27.96,
+          "end": 29.1
+        },
+        {
+          "text": "dağlar da yaşayanlar",
+          "start": 29.1,
+          "end": 30.6
+        },
+        {
+          "text": "deniz seviyesinde kileri",
+          "start": 30.6,
+          "end": 32.0
+        },
+        {
+          "text": "göre. Nili saniyelerce",
+          "start": 32.0,
+          "end": 34.6
+        },
+        {
+          "text": "daha hızlı yaşlanmaktadır.",
+          "start": 34.6,
+          "end": 36.54
+        }
+      ],
+      "words": [
+        {
+          "text": "zamanın",
+          "start": 0.0,
+          "end": 0.84
+        },
+        {
+          "text": "herkes",
+          "start": 0.84,
+          "end": 1.24
+        },
+        {
+          "text": "için",
+          "start": 1.24,
+          "end": 1.7
+        },
+        {
+          "text": "aynı",
+          "start": 1.7,
+          "end": 2.1
+        },
+        {
+          "text": "aktığınız",
+          "start": 2.1,
+          "end": 2.78
+        },
+        {
+          "text": "sanıyorsunuz",
+          "start": 2.78,
+          "end": 3.84
+        },
+        {
+          "text": "yanılıyorsunuz.",
+          "start": 3.84,
+          "end": 4.94
+        },
+        {
+          "text": "Albert",
+          "start": 5.28,
+          "end": 5.64
+        },
+        {
+          "text": "Einstein",
+          "start": 5.64,
+          "end": 6.12
+        },
+        {
+          "text": "şey",
+          "start": 6.12,
+          "end": 6.3
+        },
+        {
+          "text": "taynın",
+          "start": 6.3,
+          "end": 6.76
+        },
+        {
+          "text": "genel",
+          "start": 6.76,
+          "end": 7.18
+        },
+        {
+          "text": "göreli",
+          "start": 7.18,
+          "end": 7.58
+        },
+        {
+          "text": "kurumina",
+          "start": 7.58,
+          "end": 8.34
+        },
+        {
+          "text": "göre",
+          "start": 8.34,
+          "end": 8.62
+        },
+        {
+          "text": "kötüle",
+          "start": 8.62,
+          "end": 9.18
+        },
+        {
+          "text": "çekimi",
+          "start": 9.18,
+          "end": 9.54
+        },
+        {
+          "text": "artık",
+          "start": 9.54,
+          "end": 9.98
+        },
+        {
+          "text": "çazaman",
+          "start": 9.98,
+          "end": 10.68
+        },
+        {
+          "text": "yavaşlar.",
+          "start": 10.68,
+          "end": 11.68
+        },
+        {
+          "text": "Yani",
+          "start": 12.06,
+          "end": 12.32
+        },
+        {
+          "text": "dünyanın",
+          "start": 12.32,
+          "end": 13.0
+        },
+        {
+          "text": "merkezine",
+          "start": 13.0,
+          "end": 13.78
+        },
+        {
+          "text": "daha",
+          "start": 13.78,
+          "end": 14.06
+        },
+        {
+          "text": "yakın",
+          "start": 14.06,
+          "end": 14.48
+        },
+        {
+          "text": "olan",
+          "start": 14.48,
+          "end": 14.76
+        },
+        {
+          "text": "deniz",
+          "start": 14.76,
+          "end": 15.18
+        },
+        {
+          "text": "seviyesinde",
+          "start": 15.18,
+          "end": 15.94
+        },
+        {
+          "text": "zaman",
+          "start": 15.94,
+          "end": 16.38
+        },
+        {
+          "text": "daha",
+          "start": 16.38,
+          "end": 16.68
+        },
+        {
+          "text": "yavaş",
+          "start": 16.68,
+          "end": 17.08
+        },
+        {
+          "text": "akarken.",
+          "start": 17.08,
+          "end": 17.84
+        },
+        {
+          "text": "Evir",
+          "start": 18.68,
+          "end": 18.94
+        },
+        {
+          "text": "istli",
+          "start": 18.94,
+          "end": 19.34
+        },
+        {
+          "text": "bir",
+          "start": 19.34,
+          "end": 19.52
+        },
+        {
+          "text": "yüksek",
+          "start": 19.52,
+          "end": 19.96
+        },
+        {
+          "text": "dağların",
+          "start": 19.96,
+          "end": 20.5
+        },
+        {
+          "text": "zirvesinde",
+          "start": 20.5,
+          "end": 21.34
+        },
+        {
+          "text": "kötüle",
+          "start": 21.34,
+          "end": 21.94
+        },
+        {
+          "text": "çekimi",
+          "start": 21.94,
+          "end": 22.22
+        },
+        {
+          "text": "azı",
+          "start": 22.22,
+          "end": 22.52
+        },
+        {
+          "text": "aldığı",
+          "start": 22.52,
+          "end": 22.86
+        },
+        {
+          "text": "için",
+          "start": 22.86,
+          "end": 23.26
+        },
+        {
+          "text": "zaman",
+          "start": 23.26,
+          "end": 23.7
+        },
+        {
+          "text": "daha",
+          "start": 23.7,
+          "end": 24.08
+        },
+        {
+          "text": "hızlı",
+          "start": 24.08,
+          "end": 24.5
+        },
+        {
+          "text": "akar.",
+          "start": 24.5,
+          "end": 24.98
+        },
+        {
+          "text": "Atomik",
+          "start": 25.58,
+          "end": 26.24
+        },
+        {
+          "text": "saatlerle",
+          "start": 26.24,
+          "end": 27.0
+        },
+        {
+          "text": "doğrulanan",
+          "start": 27.0,
+          "end": 27.72
+        },
+        {
+          "text": "bu",
+          "start": 27.72,
+          "end": 27.96
+        },
+        {
+          "text": "sıra",
+          "start": 27.96,
+          "end": 28.3
+        },
+        {
+          "text": "göre",
+          "start": 28.3,
+          "end": 28.62
+        },
+        {
+          "text": "yüksek",
+          "start": 28.62,
+          "end": 29.1
+        },
+        {
+          "text": "dağlar",
+          "start": 29.1,
+          "end": 29.6
+        },
+        {
+          "text": "da",
+          "start": 29.6,
+          "end": 29.78
+        },
+        {
+          "text": "yaşayanlar",
+          "start": 29.78,
+          "end": 30.6
+        },
+        {
+          "text": "deniz",
+          "start": 30.6,
+          "end": 30.96
+        },
+        {
+          "text": "seviyesinde",
+          "start": 30.96,
+          "end": 31.7
+        },
+        {
+          "text": "kileri",
+          "start": 31.7,
+          "end": 32.0
+        },
+        {
+          "text": "göre.",
+          "start": 32.0,
+          "end": 33.0
+        },
+        {
+          "text": "Nili",
+          "start": 33.28,
+          "end": 33.56
+        },
+        {
+          "text": "saniyelerce",
+          "start": 33.56,
+          "end": 34.6
+        },
+        {
+          "text": "daha",
+          "start": 34.6,
+          "end": 34.92
+        },
+        {
+          "text": "hızlı",
+          "start": 34.92,
+          "end": 35.34
+        },
+        {
+          "text": "yaşlanmaktadır.",
+          "start": 35.34,
+          "end": 36.54
+        }
+      ],
+      "narration": "zamanın herkes için aynı aktığınız sanıyorsunuz yanılıyorsunuz. Albert Einstein şey taynın genel göreli kurumina göre kötüle çekimi artık çazaman yavaşlar. Yani dünyanın merkezine daha yakın olan deniz seviyesinde zaman daha yavaş akarken. Evir istli bir yüksek dağların zirvesinde kötüle çekimi azı aldığı için zaman daha hızlı akar. Atomik saatlerle doğrulanan bu sıra göre yüksek dağlar da yaşayanlar deniz seviyesinde kileri göre. Nili saniyelerce daha hızlı yaşlanmaktadır.",
+      "totalDuration": 36.77,
+      "durationMode": "custom_audio",
+      "layoutType": "quote_spotlight",
+      "headerSubtitle": "01 / GÖRELİLİK",
+      "headerLine1": "ZAMANIN AKIŞI",
+      "circledWord": "YANILGI",
+      "headerLine2": "",
+      "highlightedText": "Albert Einstein Genel Görelilik",
+      "strikeWord": "AYNI",
+      "quoteSpotlight": {
+        "author": "Albert Einstein",
+        "quote": "Zamanın herkes için aynı aktığını sanıyorsunuz, yanılıyorsunuz.",
+        "badge": "FİZİK",
+        "highlightWords": [
+          "zaman",
+          "aynı",
+          "yanılıyorsunuz"
+        ]
+      },
+      "_acquired_assets": [
+        {
+          "name": "atom",
+          "type": "watermark",
+          "path": "assets/watermarks/fingerprint.svg"
+        }
+      ]
+    }
+  },
+  {
+    "id": "270c28a0",
+    "topic": "Albert Einstein ve zamanın dağlarda neden daha hızlı aktığı sırrı",
+    "theme": "neon_cyber",
+    "layoutType": "vs_split",
+    "durationMode": "deep",
+    "created_at": "2026-10-28 00:39",
+    "headerMain": "EINSTEIN VE DAĞLARDAKI ZAMAN GÖRELİLİK SIRRI",
+    "narration": "Zamanın herkes için aynı aktığını sanıyorsanız yanılıyorsunuz. Albert Einstein'ın Genel Görelilik kuramına göre kütleçekimi arttıkça zaman yavaşlar. Yani Dünya'nın merkezine daha yakın olan deniz seviyesinde zaman daha yavaş akarken, Everest gibi yüksek dağların zirvesinde kütleçekimi azaldığı için zaman daha hızlı akar. Atomic saatlerle doğrulanan bu sırra göre yüksek dağlarda yaşayanlar deniz seviyesindekilere göre milisaniyelerce daha hızlı yaşlanmaktadır.",
+    "hookScore": 98,
+    "key_used": "asdxcxc005@gmail.com",
+    "model_used": "gemini-3.5-flash",
+    "thumbnail_url": "/out/thumbnail.png?t=1793137147",
+    "video_data": {
+      "directorDecision": {
+        "theme": "neon_cyber",
+        "layoutType": "vs_split",
+        "durationMode": "deep",
+        "particles": "stars",
+        "ambientPattern": "cosmic",
+        "doodleType": "hourglass",
+        "directorReason": "Einstein'ın genel görelilik kuramını ve zamanın yükseklerde neden daha hızlı aktığını etkileyici biçimde anlatmak için neon cyber teması, deniz seviyesi ile dağ zirvesini kıyaslayan VS şablonu ve kozmik efektler seçildi."
+      },
+      "requiredIcons": [
+        "hourglass",
+        "atom",
+        "infinity",
+        "compass"
+      ],
+      "headerSubtitle": "Zamanın Gizli Ritmi",
+      "headerLine1": "EINSTEIN VE DAĞLARDAKI",
+      "circledWord": "ZAMAN",
+      "headerLine2": "MUCİZESİ",
+      "highlightedText": "GÖRELİLİK SIRRI",
+      "strikeWord": "SABİT ZAMAN",
+      "layoutType": "vs_split",
+      "cards": [
+        {
+          "id": "1",
+          "label": "Kütleçekim Effect",
+          "value": "Zamanı Büküyor",
+          "icon": "atom",
+          "color": "#0284c7",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        {
+          "id": "2",
+          "label": "Dağ Zirvesi",
+          "value": "Daha Hızlı",
+          "icon": "hourglass",
+          "color": "#ec4899",
+          "iconAssetPath": "assets/icons/hourglass.svg"
+        },
+        {
+          "id": "3",
+          "label": "Görelilik",
+          "value": "1915 Teorisi",
+          "icon": "infinity",
+          "color": "#8b5cf6",
+          "iconAssetPath": "assets/icons/infinity.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "Deniz Seviyesi",
+        "leftSubtitle": "Güçlü Kütleçekim",
+        "leftPoints": [
+          "Dünyanın merkezine yakınlık",
+          "Yoğun kütleçekim alanı",
+          "Saatler daha YAVAŞ çalışır"
+        ],
+        "leftColor": "#3b82f6",
+        "rightTitle": "Dağ Zirvesi",
+        "rightSubtitle": "Zayıf Kütleçekim",
+        "rightPoints": [
+          "Dünya merkezinden uzaklaşma",
+          "Azalan kütleçekim baskısı",
+          "Saatler daha HIZLI çalışır"
+        ],
+        "rightColor": "#ec4899",
+        "verdict": "Einstein'ın keşfettiği gibi: Kütleçekim ne kadar güçlüyse, zaman o kadar yavaşlar!"
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Adım",
+          "title": "Kütle Dokusu",
+          "desc": "Büyük kütleler uzay-zaman dokusunu bir çarşaf gibi büker.",
+          "color": "#3b82f6"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Adım",
+          "title": "Çekim Gücü",
+          "desc": "Merkeze yakın yerlerde kütleçekim zamanı yavaşlatır.",
+          "color": "#8b5cf6"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Adım",
+          "title": "Zirvedeki Fark",
+          "desc": "Dağ zirvesinde çekim zayıfladığı için zaman daha hızlı akar.",
+          "color": "#ec4899"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Albert Einstein",
+        "title": "Genel Görelilik (1915)",
+        "quoteText": "Yerçekimi sadece cisimleri çekmez; zamanın bizzat kendisini de yavaşlatır.",
+        "sourceRef": "Annalen der Physik"
+      },
+      "metricImpact": {
+        "bigNumber": "0.00000009",
+        "bigLabel": "SANİYE FARK",
+        "subheading": "Everest Zirvesinde Yaşlanan Biri",
+        "keyTakeaway": "Ömrü boyunca yüksekte yaşayan biri, deniz seviyesindekine göre milisaniyelerce daha hızlı yaşlanır."
+      },
+      "gridExplosion": {
+        "title": "GÖRELİ ZAMAN SAATLERİ",
+        "subtitle": "Her Yükseklikte Zaman Farklı Miktarda Hızlanır",
+        "iconType": "hourglass",
+        "itemCount": 12,
+        "badgeText": "UZAY-ZAMAN BÜKÜLMESİ",
+        "iconAssetPath": "assets/icons/hourglass.svg"
+      },
+      "triConcept": {
+        "badge": "FİZİKSEL HAKİKAT",
+        "concept1": {
+          "title": "KÜTLE",
+          "subtitle": "Uzay-Zamanı Büküşü",
+          "icon": "atom",
+          "color": "#0284c7",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        "concept2": {
+          "title": "ZAMAN",
+          "subtitle": "Akan Mutlak Olmayan Boyut",
+          "icon": "hourglass",
+          "color": "#ec4899",
+          "iconAssetPath": "assets/icons/hourglass.svg"
+        },
+        "concept3": {
+          "title": "ÇEKİM",
+          "subtitle": "Zamanın Hız Ayarı",
+          "icon": "infinity",
+          "color": "#8b5cf6",
+          "iconAssetPath": "assets/icons/infinity.svg"
+        },
+        "bottomNote": "YÜKSEKLİK ARTTIKÇA ZAMANIN AKIŞ HIZI ARTIYOR"
+      },
+      "timeline": {
+        "startYear": "Deniz Seviyesi",
+        "endYear": "Dağ Zirvesi",
+        "durationLabel": "Zaman Hızlanır",
+        "title": "Kütleçekimsel Zaman Genleşmesi",
+        "ayahArabic": "",
+        "ayahTranslation": "",
+        "ayahRef": ""
+      },
+      "narration": "Zamanın herkes için aynı aktığını sanıyorsanız yanılıyorsunuz. Albert Einstein'ın Genel Görelilik kuramına göre kütleçekimi arttıkça zaman yavaşlar. Yani Dünya'nın merkezine daha yakın olan deniz seviyesinde zaman daha yavaş akarken, Everest gibi yüksek dağların zirvesinde kütleçekimi azaldığı için zaman daha hızlı akar. Atomic saatlerle doğrulanan bu sırra göre yüksek dağlarda yaşayanlar deniz seviyesindekilere göre milisaniyelerce daha hızlı yaşlanmaktadır.",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Dağlarda Zaman Neden DAHA HIZLI Akar? Einstein'ın Gizli Sırrı!",
+          "Everest'te Yaşayanlar Neden Daha Hızlı Yaşlanıyor?"
+        ],
+        "hashtags": [
+          "#einstein",
+          "#fizik",
+          "#zaman",
+          "#bilim",
+          "#görelilik",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden zaman asla...",
+        "description": "Albert Einstein'ın kütleçekimsel zaman genleşmesi ve dağlarda zamanın neden daha hızlı aktığının bilimsel açıklaması."
+      },
+      "theme": "neon_cyber",
+      "durationMode": "deep",
+      "particles": "stars",
+      "ambientPattern": "cosmic",
+      "doodleType": "hourglass",
+      "socialHandle": "@birkissa",
+      "_acquired_assets": [
+        {
+          "name": "cosmic",
+          "type": "watermark",
+          "path": "assets/watermarks/cosmic.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "grid_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "atom",
+          "type": "concept_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "concept_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "infinity",
+          "type": "concept_icon",
+          "path": "assets/icons/infinity.svg"
+        },
+        {
+          "name": "atom",
+          "type": "card_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "card_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "infinity",
+          "type": "card_icon",
+          "path": "assets/icons/infinity.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "Zamanın herkes için",
+          "start": 0.0,
+          "end": 1.68
+        },
+        {
+          "text": "aynı aktığını sanıyorsanız",
+          "start": 1.68,
+          "end": 3.78
+        },
+        {
+          "text": "yanılıyorsunuz. Albert Einstein'ın",
+          "start": 3.78,
+          "end": 6.1
+        },
+        {
+          "text": "Genel Görelilik kuramına",
+          "start": 6.28,
+          "end": 7.84
+        },
+        {
+          "text": "göre kütleçekimi arttıkça",
+          "start": 7.84,
+          "end": 9.1
+        },
+        {
+          "text": "zaman yavaşlar. Yani",
+          "start": 9.1,
+          "end": 11.74
+        },
+        {
+          "text": "Dünya'nın merkezine daha",
+          "start": 12.06,
+          "end": 13.76
+        },
+        {
+          "text": "yakın olan deniz",
+          "start": 13.76,
+          "end": 14.76
+        },
+        {
+          "text": "seviyesinde zaman daha",
+          "start": 14.76,
+          "end": 16.7
+        },
+        {
+          "text": "yavaş akarken, Everest",
+          "start": 16.7,
+          "end": 18.96
+        },
+        {
+          "text": "gibi yüksek dağların",
+          "start": 18.96,
+          "end": 19.94
+        },
+        {
+          "text": "zirvesinde kütleçekimi azaldığı",
+          "start": 20.46,
+          "end": 22.22
+        },
+        {
+          "text": "için zaman daha",
+          "start": 22.22,
+          "end": 23.72
+        },
+        {
+          "text": "hızlı akar. Atomic",
+          "start": 23.72,
+          "end": 26.26
+        },
+        {
+          "text": "saatlerle doğrulanan bu",
+          "start": 26.26,
+          "end": 28.28
+        },
+        {
+          "text": "sırra göre yüksek",
+          "start": 28.28,
+          "end": 29.6
+        },
+        {
+          "text": "dağlarda yaşayanlar deniz",
+          "start": 29.6,
+          "end": 31.72
+        },
+        {
+          "text": "seviyesindekilere göre milisaniyelerce",
+          "start": 31.72,
+          "end": 33.84
+        },
+        {
+          "text": "daha hızlı yaşlanmaktadır.",
+          "start": 33.84,
+          "end": 35.32
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "b2a51031",
+    "topic": "Albert Einstein ve zamanın dağlarda neden daha hızlı aktığı sırrı",
+    "theme": "blueprint",
+    "layoutType": "vs_split",
+    "durationMode": "deep",
+    "created_at": "2026-10-28 00:37",
+    "headerMain": "ZAMAN DAĞLARDA NE DEN DAHA HIZLI KÜTLEÇEKİMSEL ZAMAN BÜKÜLMESİ",
+    "narration": "Zamanın her yerde aynı hızda aktığını sanıyorsanız yanılıyorsunuz. Albert Einstein, kütleçekiminin uzay ve zamanı büktüğünü keşfetti. Deniz seviyesinde yerçekimi daha güçlü olduğu için zaman daha yavaş akar. Bir dağın tepesine çıktığınızda ise yerçekimi azalır ve zaman hızlanır. Evet, dağda yaşayan bir insan deniz kenarındakine göre mikrosaniyelerle daha hızlı yaşlanır. Zaman mutlak değil, bastığınız toprağın kütlesine bağlı bir ilüzyondur.",
+    "hookScore": 98,
+    "key_used": "asdxcxc005@gmail.com",
+    "model_used": "gemini-3.5-flash",
+    "thumbnail_url": "/out/thumbnail.png?t=1793137039",
+    "video_data": {
+      "directorDecision": {
+        "theme": "blueprint",
+        "layoutType": "vs_split",
+        "durationMode": "deep",
+        "particles": "stars",
+        "ambientPattern": "cosmic",
+        "doodleType": "hourglass",
+        "directorReason": "Einstein'ın görelilik teorisini ve kütleçekimsel zaman genişlemesini bilimsel bir şema estetiğiyle anlatmak için blueprint teması ve dağ-deniz karşılaştırmalı vs_split düzeni seçildi."
+      },
+      "requiredIcons": [
+        "hourglass",
+        "atom",
+        "infinity",
+        "compass"
+      ],
+      "headerSubtitle": "Einstein'ın Görelilik Sırrı",
+      "headerLine1": "ZAMAN DAĞLARDA NE DEN",
+      "circledWord": "DAHA HIZLI",
+      "headerLine2": "AKIYOR?",
+      "highlightedText": "KÜTLEÇEKİMSEL ZAMAN BÜKÜLMESİ",
+      "strikeWord": "SABİT ZAMAN",
+      "layoutType": "vs_split",
+      "cards": [
+        {
+          "id": "1",
+          "label": "Deniz Seviyesi",
+          "value": "Yüksek Yerçekimi",
+          "icon": "atom",
+          "color": "#1e3a8a",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        {
+          "id": "2",
+          "label": "Dağ Zirvesi",
+          "value": "Düşük Yerçekimi",
+          "icon": "hourglass",
+          "color": "#0284c7",
+          "iconAssetPath": "assets/icons/hourglass.svg"
+        },
+        {
+          "id": "3",
+          "label": "Görünmez Bükülme",
+          "value": "Uzay-Zaman",
+          "icon": "infinity",
+          "color": "#7c3aed",
+          "iconAssetPath": "assets/icons/infinity.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "Deniz Seviyesi",
+        "leftSubtitle": "Dünya Merkezine Yakın",
+        "leftPoints": [
+          "Daha güçlü kütleçekimi",
+          "Uzay-zaman daha çok bükülür",
+          "Saatler DAHA YAVAŞ akar"
+        ],
+        "leftColor": "#0284c7",
+        "rightTitle": "Dağ Zirvesi",
+        "rightSubtitle": "Yüksek Rakım",
+        "rightPoints": [
+          "Daha zayıf kütleçekimi",
+          "Uzay-zaman daha az bükülür",
+          "Saatler DAHA HIZLI akar"
+        ],
+        "rightColor": "#f59e0b",
+        "verdict": "Einstein haklıydı: Yerçekimi ne kadar güçlüyse, zaman o kadar yavaşlar."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. İlke",
+          "title": "Kütleçekim Kuvveti",
+          "desc": "Dünyanın kütlesi etrafındaki uzay-zaman dokusunu büker.",
+          "color": "#0284c7"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Etki",
+          "title": "Yükseklik Farkı",
+          "desc": "Dağlara çıktıkça merkeze olan mesafe artar, kütleçekimi azalır.",
+          "color": "#7c3aed"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Sonuç",
+          "title": "Zaman Genişlemesi",
+          "desc": "Zaman sabit bir nehir değildir; zirvedeki saatler daha hızlı atar.",
+          "color": "#f59e0b"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Albert Einstein",
+        "title": "Genel Görelilik Teorisi (1915)",
+        "quoteText": "Yerçekimi bir kuvvet değildir; kütlenin uzay ve zaman dokusunda yarattığı bir bükülmedir.",
+        "sourceRef": "General Theory of Relativity"
+      },
+      "metricImpact": {
+        "bigNumber": "90 NANOSANİYE",
+        "bigLabel": "ÖMÜR BOYU FARK",
+        "subheading": "Dağda Yaşayanlar Daha Hızlı Yaşlanır",
+        "keyTakeaway": "Everest'in tepesinde geçirilen bir ömürde zaman deniz seviyesine göre mikrosaniyelerce daha hızlı geçer."
+      },
+      "gridExplosion": {
+        "title": "UZAY-ZAMAN BÜKÜLMESİ",
+        "subtitle": "Evrenin Her Noktasında Zaman Farklı Hızda Akar",
+        "iconType": "hourglass",
+        "itemCount": 12,
+        "badgeText": "GÖRELİLİK GERÇEĞİ",
+        "iconAssetPath": "assets/icons/hourglass.svg"
+      },
+      "triConcept": {
+        "badge": "EINSTEIN'IN FORMÜLÜ",
+        "concept1": {
+          "title": "KÜTLE",
+          "subtitle": "Uzayı BÜKER",
+          "icon": "atom",
+          "color": "#0284c7",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        "concept2": {
+          "title": "YERÇEKİMİ",
+          "subtitle": "Zamanı YAVAŞLATIR",
+          "icon": "hourglass",
+          "color": "#7c3aed",
+          "iconAssetPath": "assets/icons/hourglass.svg"
+        },
+        "concept3": {
+          "title": "RAKIM",
+          "subtitle": "Zamanı HIZLANDIRIR",
+          "icon": "infinity",
+          "color": "#f59e0b",
+          "iconAssetPath": "assets/icons/infinity.svg"
+        },
+        "bottomNote": "ZAMAN EVRENSEL BİR SABİT DEĞİLDİR"
+      },
+      "timeline": {
+        "startYear": "1915",
+        "endYear": "Günümüz",
+        "durationLabel": "İspatlanan Gerçek",
+        "title": "Atomik Saat Deneyleri",
+        "ayahArabic": "",
+        "ayahTranslation": "Hassas atomik saatler dağın tepesine götürüldüğünde, deniz seviyesindekilere göre daha hızlı çalıştığı kanıtlandı.",
+        "ayahRef": "NIST Atomik Saat Deneyi"
+      },
+      "narration": "Zamanın her yerde aynı hızda aktığını sanıyorsanız yanılıyorsunuz. Albert Einstein, kütleçekiminin uzay ve zamanı büktüğünü keşfetti. Deniz seviyesinde yerçekimi daha güçlü olduğu için zaman daha yavaş akar. Bir dağın tepesine çıktığınızda ise yerçekimi azalır ve zaman hızlanır. Evet, dağda yaşayan bir insan deniz kenarındakine göre mikrosaniyelerle daha hızlı yaşlanır. Zaman mutlak değil, bastığınız toprağın kütlesine bağlı bir ilüzyondur.",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Dağlarda Zaman Neden Daha Hızlı Akar? Einstein'ın Gizemi!",
+          "Zaman Sabit Değil! Everest Tepesinde Neden Hızlı Yaşlanırsın?"
+        ],
+        "hashtags": [
+          "#einstein",
+          "#fizik",
+          "#zaman",
+          "#bilim",
+          "#görelilik",
+          "#shorts"
+        ],
+        "loopEnding": "İşte bu yüzden aslında evrende...",
+        "description": "Albert Einstein'ın kütleçekimsel zaman genişlemesi teorisi ve dağlarda zamanın neden daha hızlı aktığının muazzam bilimi."
+      },
+      "theme": "blueprint",
+      "durationMode": "deep",
+      "particles": "stars",
+      "ambientPattern": "cosmic",
+      "doodleType": "hourglass",
+      "socialHandle": "@birkissa",
+      "_acquired_assets": [
+        {
+          "name": "cosmic",
+          "type": "watermark",
+          "path": "assets/watermarks/cosmic.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "grid_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "atom",
+          "type": "concept_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "concept_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "infinity",
+          "type": "concept_icon",
+          "path": "assets/icons/infinity.svg"
+        },
+        {
+          "name": "atom",
+          "type": "card_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "card_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "infinity",
+          "type": "card_icon",
+          "path": "assets/icons/infinity.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "Zamanın her yerde",
+          "start": 0.0,
+          "end": 1.4
+        },
+        {
+          "text": "aynı hızda aktığını",
+          "start": 1.4,
+          "end": 2.86
+        },
+        {
+          "text": "sanıyorsanız yanılıyorsunuz. Albert",
+          "start": 2.86,
+          "end": 5.68
+        },
+        {
+          "text": "Einstein, kütleçekiminin uzay",
+          "start": 5.68,
+          "end": 8.38
+        },
+        {
+          "text": "ve zamanı büktüğünü",
+          "start": 8.68,
+          "end": 10.24
+        },
+        {
+          "text": "keşfetti. Deniz seviyesinde",
+          "start": 10.24,
+          "end": 12.78
+        },
+        {
+          "text": "yerçekimi daha güçlü",
+          "start": 12.78,
+          "end": 13.84
+        },
+        {
+          "text": "olduğu için zaman",
+          "start": 13.84,
+          "end": 15.1
+        },
+        {
+          "text": "daha yavaş akar.",
+          "start": 15.52,
+          "end": 16.92
+        },
+        {
+          "text": "Bir dağın tepesine",
+          "start": 17.28,
+          "end": 18.58
+        },
+        {
+          "text": "çıktığınızda ise yerçekimi",
+          "start": 18.58,
+          "end": 20.14
+        },
+        {
+          "text": "azalır ve zaman",
+          "start": 20.14,
+          "end": 21.78
+        },
+        {
+          "text": "hızlanır. Evet, dağda",
+          "start": 21.78,
+          "end": 24.08
+        },
+        {
+          "text": "yaşayan bir insan",
+          "start": 24.08,
+          "end": 25.04
+        },
+        {
+          "text": "deniz kenarındakine göre",
+          "start": 25.04,
+          "end": 26.68
+        },
+        {
+          "text": "mikrosaniyelerle daha hızlı",
+          "start": 26.68,
+          "end": 28.86
+        },
+        {
+          "text": "yaşlanır. Zaman mutlak",
+          "start": 28.86,
+          "end": 30.88
+        },
+        {
+          "text": "değil, bastığınız toprağın",
+          "start": 30.88,
+          "end": 33.1
+        },
+        {
+          "text": "kütlesine bağlı bir",
+          "start": 33.1,
+          "end": 34.98
+        },
+        {
+          "text": "ilüzyondur.",
+          "start": 34.98,
+          "end": 35.28
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "df01f0b1",
+    "topic": "Albert Einstein ve zamanın dağlarda neden daha hızlı aktığı sırrı",
+    "theme": "blueprint",
+    "layoutType": "vs_split",
+    "durationMode": "quick",
+    "created_at": "2026-10-28 00:36",
+    "headerMain": "DAĞLARDA ZAMAN DAHA HIZLI EINSTEIN'IN ZAMAN GİZEMİ",
+    "narration": "Albert Einstein'a göre zaman herkes için aynı akmaz! Eğer bir dağın zirvesinde yaşıyorsanız, deniz seviyesindeki insanlara göre daha hızlı yaşlanırsınız. Bunun nedeni Kütleçekimsel Zaman Genleşmesidir. Dünya'nın kütlesi uzay-zamanı büker. Merkeze ne kadar yakınsanız yerçekimi o kadar güçlüdür ve zaman o kadar yavaş akar. Dağlarda yerçekimi azaldığı için saatler daha hızlı çalışır!",
+    "hookScore": 98,
+    "key_used": "asdxcxc005@gmail.com",
+    "model_used": "gemini-3.5-flash",
+    "thumbnail_url": "/out/thumbnail.png?t=1793136962",
+    "video_data": {
+      "directorDecision": {
+        "theme": "blueprint",
+        "layoutType": "vs_split",
+        "durationMode": "quick",
+        "particles": "stars",
+        "ambientPattern": "cosmic",
+        "doodleType": "hourglass",
+        "directorReason": "Einstein'ın görelilik kuramı ve kütleçekimsel zaman genleşmesini bilimsel bir karşılaştırmayla anlatmak için teknik blueprint teması ve vs_split şablonu seçildi."
+      },
+      "requiredIcons": [
+        "hourglass",
+        "infinity",
+        "atom",
+        "compass",
+        "scale"
+      ],
+      "headerSubtitle": "Görelilik Sırrı",
+      "headerLine1": "DAĞLARDA ZAMAN",
+      "circledWord": "DAHA HIZLI",
+      "headerLine2": "AKAR!",
+      "highlightedText": "EINSTEIN'IN ZAMAN GİZEMİ",
+      "strikeWord": "SABİT ZAMAN",
+      "layoutType": "vs_split",
+      "cards": [
+        {
+          "id": "1",
+          "label": "Yerçekimi",
+          "value": "Zamanı Büker",
+          "icon": "atom",
+          "color": "#0284c7",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        {
+          "id": "2",
+          "label": "Deniz Seviyesi",
+          "value": "Daha Yavaş",
+          "icon": "hourglass",
+          "color": "#2563eb",
+          "iconAssetPath": "assets/icons/hourglass.svg"
+        },
+        {
+          "id": "3",
+          "label": "Dağ Zirvesi",
+          "value": "Daha Hızlı",
+          "icon": "compass",
+          "color": "#dc2626",
+          "iconAssetPath": "assets/icons/compass.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "Deniz Seviyesi",
+        "leftSubtitle": "Güçlü Kütleçekim",
+        "leftPoints": [
+          "Dünya merkezine yakın",
+          "Yerçekimi dokusu daha yoğun",
+          "Zaman daha YAVAŞ akar"
+        ],
+        "leftColor": "#2563eb",
+        "rightTitle": "Dağ Zirvesi",
+        "rightSubtitle": "Zayıf Kütleçekim",
+        "rightPoints": [
+          "Dünya merkezinden uzak",
+          "Uzay-zaman bükülmesi az",
+          "Zaman daha HIZLI akar"
+        ],
+        "rightColor": "#dc2626",
+        "verdict": "Einstein haklıydı: Kütleçekimi azaldıkça zamanın akış hızı artar!"
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Teori",
+          "title": "Genel Görelilik",
+          "desc": "Einstein kütlenin uzay-zamanı büktüğünü kanıtladı.",
+          "color": "#0284c7"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Etki",
+          "title": "Kütleçekim Bükülmesi",
+          "desc": "Merkeze yaklaştıkça saatlerin ritmi yavaşlar.",
+          "color": "#2563eb"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Sonuç",
+          "title": "Yükseklik Farkı",
+          "desc": "Everest zirvesinde saatler deniz seviyesine göre daha hızlı işler.",
+          "color": "#dc2626"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Albert Einstein",
+        "title": "Genel Görelilik Kuramı",
+        "quoteText": "Yerçekimi bir kuvvet değildir; kütlenin uzay-zaman geometrisinde oluşturduğu bükülmedir.",
+        "sourceRef": "1915 Görelilik Teorisi"
+      },
+      "metricImpact": {
+        "bigNumber": "0.00000009",
+        "bigLabel": "SANİYE FARK",
+        "subheading": "Dağ Zirvesinde Yaşayanların Yılda Kazandığı Ekstra Zaman",
+        "keyTakeaway": "Zaman mutlak bir sabit değil, kütleçekimine bağlı dinamik bir algıdır."
+      },
+      "gridExplosion": {
+        "title": "UZAY-ZAMAN BÜKÜLMESİ",
+        "subtitle": "Evrenin Her Noktasında Zaman Farklı Hızda Akar",
+        "iconType": "hourglass",
+        "itemCount": 12,
+        "badgeText": "KÜTLEÇEKİMSEL ZAMAN GENLEŞMESİ",
+        "iconAssetPath": "assets/icons/hourglass.svg"
+      },
+      "triConcept": {
+        "badge": "ZAMANIN 3 BOYUTU",
+        "concept1": {
+          "title": "KÜTLE",
+          "subtitle": "Uzay-Zamanı Bükendir",
+          "icon": "atom",
+          "color": "#0284c7",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        "concept2": {
+          "title": "YERÇEKİMİ",
+          "subtitle": "Zamanı Yavaşlatandır",
+          "icon": "scale",
+          "color": "#2563eb",
+          "iconAssetPath": "assets/icons/scale.svg"
+        },
+        "concept3": {
+          "title": "YÜKSEKLİK",
+          "subtitle": "Zamanı Hızlandırandır",
+          "icon": "compass",
+          "color": "#dc2626",
+          "iconAssetPath": "assets/icons/compass.svg"
+        },
+        "bottomNote": "EINSTEIN'IN DEVRİM YARATAN KEŞFİ"
+      },
+      "timeline": {
+        "startYear": "1915",
+        "endYear": "Bugün",
+        "durationLabel": "Görelilik",
+        "title": "Zamanın Bükülmesi",
+        "ayahArabic": "",
+        "ayahTranslation": "Kütle büyüdükçe zaman yavaşlar, kütleden uzaklaştıkça zaman hızlanır.",
+        "ayahRef": "Fizik Yasası"
+      },
+      "narration": "Albert Einstein'a göre zaman herkes için aynı akmaz! Eğer bir dağın zirvesinde yaşıyorsanız, deniz seviyesindeki insanlara göre daha hızlı yaşlanırsınız. Bunun nedeni Kütleçekimsel Zaman Genleşmesidir. Dünya'nın kütlesi uzay-zamanı büker. Merkeze ne kadar yakınsanız yerçekimi o kadar güçlüdür ve zaman o kadar yavaş akar. Dağlarda yerçekimi azaldığı için saatler daha hızlı çalışır!",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Dağlarda Zaman Neden DAHA HIZLI Akar? Einstein'ın Sırrı!",
+          "Deniz Seviyesinde Yaşayanlar Daha Yavaş Yaşlanıyor!"
+        ],
+        "hashtags": [
+          "#bilim",
+          "#einstein",
+          "#fizik",
+          "#zaman",
+          "#uzay",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden Everest zirvesinde saatler...",
+        "description": "Albert Einstein'ın Genel Görelilik Kuramı ve dağlarda zamanın neden daha hızlı aktığının şaşırtıcı açıklaması."
+      },
+      "theme": "blueprint",
+      "durationMode": "quick",
+      "particles": "stars",
+      "ambientPattern": "cosmic",
+      "doodleType": "hourglass",
+      "socialHandle": "@birkissa",
+      "_acquired_assets": [
+        {
+          "name": "cosmic",
+          "type": "watermark",
+          "path": "assets/watermarks/cosmic.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "grid_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "atom",
+          "type": "concept_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "scale",
+          "type": "concept_icon",
+          "path": "assets/icons/scale.svg"
+        },
+        {
+          "name": "compass",
+          "type": "concept_icon",
+          "path": "assets/icons/compass.svg"
+        },
+        {
+          "name": "atom",
+          "type": "card_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "card_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "compass",
+          "type": "card_icon",
+          "path": "assets/icons/compass.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "Albert Einstein'a göre",
+          "start": 0.0,
+          "end": 1.08
+        },
+        {
+          "text": "zaman herkes için",
+          "start": 1.08,
+          "end": 2.12
+        },
+        {
+          "text": "aynı akmaz! Eğer",
+          "start": 2.12,
+          "end": 3.44
+        },
+        {
+          "text": "bir dağın zirvesinde",
+          "start": 4.66,
+          "end": 5.7
+        },
+        {
+          "text": "yaşıyorsanız, deniz seviyesindeki",
+          "start": 5.7,
+          "end": 8.32
+        },
+        {
+          "text": "insanlara göre daha",
+          "start": 8.32,
+          "end": 10.76
+        },
+        {
+          "text": "hızlı yaşlanırsınız. Bunun",
+          "start": 10.76,
+          "end": 12.96
+        },
+        {
+          "text": "nedeni Kütleçekimsel Zaman",
+          "start": 12.96,
+          "end": 14.66
+        },
+        {
+          "text": "Genleşmesidir. Dünya'nın kütlesi",
+          "start": 14.66,
+          "end": 18.4
+        },
+        {
+          "text": "uzay-zamanı büker. Merkeze",
+          "start": 18.4,
+          "end": 19.88
+        },
+        {
+          "text": "ne kadar yakınsanız",
+          "start": 20.52,
+          "end": 21.6
+        },
+        {
+          "text": "yerçekimi o kadar",
+          "start": 21.6,
+          "end": 23.42
+        },
+        {
+          "text": "güçlüdür ve zaman",
+          "start": 23.42,
+          "end": 24.66
+        },
+        {
+          "text": "o kadar yavaş",
+          "start": 24.66,
+          "end": 25.58
+        },
+        {
+          "text": "akar. Dağlarda yerçekimi",
+          "start": 25.58,
+          "end": 28.18
+        },
+        {
+          "text": "azaldığı için saatler",
+          "start": 28.18,
+          "end": 29.68
+        },
+        {
+          "text": "daha hızlı çalışır!",
+          "start": 29.68,
+          "end": 31.22
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "ea52bbdc",
+    "topic": "ben islami bir karanlık tema kullanarak kıyamet 3-4 ayetinde geçen parmak ucundaki sırrı anlatan video yap",
+    "theme": "dark_minimalist",
+    "layoutType": "grid_explosion",
+    "durationMode": "deep",
+    "created_at": "2026-10-28 00:34",
+    "headerMain": "PARMAK UCUNDAKİ BÜYÜK MİLYARLARCA MÜHÜR",
+    "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir.",
+    "hookScore": 99,
+    "key_used": "mehmet2736005@gmail.com",
+    "model_used": "gemini-3.5-flash-lite",
+    "thumbnail_url": "/out/thumbnail.png?t=1793136865",
+    "video_data": {
+      "directorDecision": {
+        "theme": "dark_minimalist",
+        "layoutType": "grid_explosion",
+        "durationMode": "deep",
+        "particles": "dust",
+        "ambientPattern": "fingerprint",
+        "doodleType": "none",
+        "directorReason": "İslami tefekkür ve biyolojik mühür vurgusu için karanlık minimal tuval ve parmak izi odaklı grid patlaması seçildi."
+      },
+      "requiredIcons": [
+        "fingerprint",
+        "dna",
+        "scale"
+      ],
+      "headerSubtitle": "Akıl Almaz Sır",
+      "headerLine1": "PARMAK UCUNDAKİ",
+      "circledWord": "BÜYÜK",
+      "headerLine2": "SIR",
+      "highlightedText": "MİLYARLARCA MÜHÜR",
+      "strikeWord": "TESADÜF",
+      "layoutType": "grid_explosion",
+      "cards": [
+        {
+          "id": "1",
+          "label": "DNA Şifresi",
+          "value": "%100 Aynı",
+          "icon": "dna",
+          "color": "#1e3a8a",
+          "iconAssetPath": "assets/icons/dna.svg"
+        },
+        {
+          "id": "2",
+          "label": "İkizler",
+          "value": "Farklı İz",
+          "icon": "fingerprint",
+          "color": "#15803d",
+          "iconAssetPath": "assets/icons/fingerprint.svg"
+        },
+        {
+          "id": "3",
+          "label": "Tesviye",
+          "value": "1400 Yıl",
+          "icon": "scale",
+          "color": "#d97706",
+          "iconAssetPath": "assets/icons/scale.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "DNA Benzerliği",
+        "leftSubtitle": "Genler Birebir Aynı",
+        "leftPoints": [
+          "Aynı genetik kod",
+          "Aynı kan grubu",
+          "Aynı fiziksel yapı"
+        ],
+        "leftColor": "#dc2626",
+        "rightTitle": "Parmak Uçları",
+        "rightSubtitle": "Eşsiz Biyolojik Mühür",
+        "rightPoints": [
+          "Anne karnında mikro temas",
+          "Asla değişmeyen geometri",
+          "Milyarlarca insanda tek"
+        ],
+        "rightColor": "#16a34a",
+        "verdict": "İkizlerin DNA'sı bile aynıyken, parmak izi her insanı tek ve eşsiz kılar."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Aşama",
+          "title": "Büyük Soru",
+          "desc": "Çürüyüp dağılan kemikler nasıl diriltilecek?",
+          "color": "#1e3a8a"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Kırılma",
+          "title": "En İnce Detay",
+          "desc": "Kur'an genel kemiklere değil, parmak ucunun milimetrik çizgilerine işaret etti.",
+          "color": "#d97706"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Hakikat",
+          "title": "Tesviye Sırrı",
+          "desc": "19. yüzyılda keşfedilen biometrik imza asırlar önce haber verildi.",
+          "color": "#15803d"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Kıyamet Suresi",
+        "title": "4. AYET",
+        "quoteText": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
+        "sourceRef": "Kıyamet Suresi, 3-4"
+      },
+      "metricImpact": {
+        "bigNumber": "8 MİLYAR",
+        "bigLabel": "İNSAN İÇİNDE",
+        "subheading": "Hiçbirinin Parmak İzi Aynı Değil",
+        "keyTakeaway": "Çünkü her insan varoluşun altına atılmış özel bir imzadır."
+      },
+      "gridExplosion": {
+        "title": "MİLYARLARCA İNSAN",
+        "subtitle": "Hiçbirinin Parmak İzi Birbirine Benzemeyecek Şekilde Yaratıldı",
+        "iconType": "fingerprint",
+        "itemCount": 12,
+        "badgeText": "EŞSİZ BİYOLOJİK MÜHÜR",
+        "iconAssetPath": "assets/icons/fingerprint.svg"
+      },
+      "triConcept": {
+        "badge": "BEKLENEN CEVAP",
+        "concept1": {
+          "title": "BEYİN",
+          "subtitle": "En Karmaşık Hafıza",
+          "icon": "brain",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/brain.svg"
+        },
+        "concept2": {
+          "title": "KALP",
+          "subtitle": "Yaşam Merkezi",
+          "icon": "heart",
+          "color": "#ef4444",
+          "iconAssetPath": "assets/icons/heart.svg"
+        },
+        "concept3": {
+          "title": "GÖZ",
+          "subtitle": "Hassas Mercek",
+          "icon": "eye",
+          "color": "#facc15",
+          "iconAssetPath": "assets/icons/eye.svg"
+        },
+        "bottomNote": "FAKAT KUR'AN PARMAK UCUNA ODAKLANDI"
+      },
+      "timeline": {
+        "startYear": "Kıyamet",
+        "endYear": "Diriliş",
+        "durationLabel": "Tesviye",
+        "title": "Kusursuz Dizilim",
+        "ayahArabic": "",
+        "ayahTranslation": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
+        "ayahRef": "Kıyamet Suresi, 3-4"
+      },
+      "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir.",
+      "viral": {
+        "hookScore": 99,
+        "viralTitles": [
+          "Parmak Ucundaki BÜYÜK Sır! Kıyamet Suresi 3-4",
+          "İkizlerin Bile Farklı: 1400 Yıl Önceki Akıl Almaz Detay!"
+        ],
+        "hashtags": [
+          "#bilim",
+          "#kuran",
+          "#parmakizi",
+          "#mucize",
+          "#tefekkür",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden her insan aslında...",
+        "description": "Parmak uçlarındaki dermatoglif şifresi ve Kıyamet Suresi'nin mucizevi detayları."
+      },
+      "theme": "dark_minimalist",
+      "durationMode": "deep",
+      "particles": "dust",
+      "ambientPattern": "fingerprint",
+      "doodleType": "none",
+      "socialHandle": "@birkissa",
+      "_acquired_assets": [
+        {
+          "name": "fingerprint",
+          "type": "watermark",
+          "path": "assets/watermarks/fingerprint.svg"
+        },
+        {
+          "name": "fingerprint",
+          "type": "grid_icon",
+          "path": "assets/icons/fingerprint.svg"
+        },
+        {
+          "name": "brain",
+          "type": "concept_icon",
+          "path": "assets/icons/brain.svg"
+        },
+        {
+          "name": "heart",
+          "type": "concept_icon",
+          "path": "assets/icons/heart.svg"
+        },
+        {
+          "name": "eye",
+          "type": "concept_icon",
+          "path": "assets/icons/eye.svg"
+        },
+        {
+          "name": "dna",
+          "type": "card_icon",
+          "path": "assets/icons/dna.svg"
+        },
+        {
+          "name": "fingerprint",
+          "type": "card_icon",
+          "path": "assets/icons/fingerprint.svg"
+        },
+        {
+          "name": "scale",
+          "type": "card_icon",
+          "path": "assets/icons/scale.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "DNA'sı yüzde yüz",
+          "start": 0.0,
+          "end": 1.72
+        },
+        {
+          "text": "aynı olan tek",
+          "start": 1.72,
+          "end": 2.88
+        },
+        {
+          "text": "yumurta ikizlerini bile",
+          "start": 2.88,
+          "end": 4.48
+        },
+        {
+          "text": "birbirinden ayıran tek",
+          "start": 4.48,
+          "end": 6.02
+        },
+        {
+          "text": "bir sır vardır.",
+          "start": 6.02,
+          "end": 7.06
+        },
+        {
+          "text": "Çürüyüp toprak olduktan",
+          "start": 7.98,
+          "end": 9.64
+        },
+        {
+          "text": "sonra nasıl diriltileceğini",
+          "start": 9.64,
+          "end": 11.6
+        },
+        {
+          "text": "soranlara, Kur'an tam",
+          "start": 11.6,
+          "end": 13.32
+        },
+        {
+          "text": "da parmak uçlarına",
+          "start": 13.32,
+          "end": 14.16
+        },
+        {
+          "text": "işaret ederek cevap",
+          "start": 14.16,
+          "end": 15.8
+        },
+        {
+          "text": "verdi. Milyarlarca insanın",
+          "start": 15.8,
+          "end": 18.14
+        },
+        {
+          "text": "her biri, parmak",
+          "start": 18.14,
+          "end": 19.5
+        },
+        {
+          "text": "ucundaki o eşsiz",
+          "start": 19.94,
+          "end": 21.38
+        },
+        {
+          "text": "mühürle yeniden var",
+          "start": 21.38,
+          "end": 23.0
+        },
+        {
+          "text": "edilir.",
+          "start": 23.0,
+          "end": 23.3
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "af7dc3dc",
+    "topic": "Rabbimiz Kur'an'da bal arılarına hitap ederken اتَّخِذِي (edin) ve فَاسْلُكِي (gir, takip et) kelimelerini dişi kalıpta kullanır. أَنِ اتَّخِذِي مِنَ الْجِبَالِ بُيُوتًا ... Bu mucizevi ifadeler, kovanda yuva yapan ve bal üreten işçi arıların dişi olduğuna işaret eder.",
+    "theme": "dark_minimalist",
+    "layoutType": "quote_spotlight",
+    "durationMode": "deep",
+    "created_at": "2026-10-28 00:22",
+    "headerMain": "BAL ARISI DİŞİ اتَّخِذِي VE فَاسْلُكِي",
+    "narration": "Rabbimiz Kur'an'da bal arılarına hitap ederken اتَّخِذِي yani 'edin' ve فَاسْلُكِي yani 'gir, takip et' kelimelerini erkek için değil, dişi kalıpta kullanır. Nahl Suresi'ndeki bu mucizevi ifadeler, kovanda yuva yapan ve bal üreten işçi arıların tamamının dişi olduğuna işaret eder. İnsanların arıların kralı sandığı dönemde, Kur'an işçi arıların dişi olduğunu gramer inceliğiyle asırlar öncesinden haber vermiştir.",
+    "hookScore": 98,
+    "key_used": "asdxcxc005@gmail.com",
+    "thumbnail_url": "/out/thumbnail.png?t=1793136126",
+    "video_data": {
+      "directorDecision": {
+        "theme": "dark_minimalist",
+        "layoutType": "quote_spotlight",
+        "durationMode": "deep",
+        "particles": "dust",
+        "ambientPattern": "islamic_geometric",
+        "doodleType": "none",
+        "directorReason": "Kur'an'daki gramer mucizesi ve bal arısı ayetinin derin tefekkür boyutu için dark_minimalist tema ve quote_spotlight düzeni seçildi."
+      },
+      "requiredIcons": [
+        "book",
+        "shield",
+        "compass"
+      ],
+      "headerSubtitle": "Kur'an'daki Gizli Detay",
+      "headerLine1": "BAL ARISI",
+      "circledWord": "DİŞİ",
+      "headerLine2": "MUCİZESİ",
+      "highlightedText": "اتَّخِذِي VE فَاسْلُكِي",
+      "strikeWord": "TESADÜF",
+      "layoutType": "quote_spotlight",
+      "cards": [
+        {
+          "id": "1",
+          "label": "Ayet Emri",
+          "labelEn": "Command",
+          "value": "اتَّخِذِي",
+          "icon": "book",
+          "color": "#d97706",
+          "iconAssetPath": "assets/icons/book.svg"
+        },
+        {
+          "id": "2",
+          "label": "Takip Et",
+          "labelEn": "Follow",
+          "value": "فَاسْلُكِي",
+          "icon": "compass",
+          "color": "#15803d",
+          "iconAssetPath": "assets/icons/compass.svg"
+        },
+        {
+          "id": "3",
+          "label": "Bilimsel Gerçek",
+          "labelEn": "Science",
+          "value": "İşçi Arılar Dişi",
+          "icon": "shield",
+          "color": "#1e3a8a",
+          "iconAssetPath": "assets/icons/shield.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "Eski Arapça Grameri",
+        "leftSubtitle": "Genel Hitap Sanılan",
+        "leftPoints": [
+          "Arapçada erkelik-dişilik ayrımı",
+          "Genel çoğul formları",
+          "Yüzeysel okumalar"
+        ],
+        "leftColor": "#dc2626",
+        "rightTitle": "Kur'an'ın Kelime Seçimi",
+        "rightSubtitle": "Dişi Kalıpta Emir (اتَّخِذِي)",
+        "rightPoints": [
+          "Sadece dişilere söylenen fiil ekleri",
+          "Kovandaki üreticilere nokta atışı hitap",
+          "Modern entomolojinin doğruladığı hakikat"
+        ],
+        "rightColor": "#16a34a",
+        "verdict": "1400 yıl önce arı kovanındaki işçilerin dişi olduğunu bilen bir hitap tarzı."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Aşama",
+          "title": "İlahi Hitap",
+          "desc": "Nahl Suresi'nde arılara verilen emirler dişi kalıpta (اتَّخِذِي) geldi.",
+          "color": "#1e3a8a"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Kırılma",
+          "title": "Biyolojik Gerçek",
+          "desc": "Asırlar boyunca insanlar arıların kralı olduğunu sandı, arıların dişi olduğunu çok geç öğrendi.",
+          "color": "#d97706"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Hakikat",
+          "title": "Kusursuz İlim",
+          "desc": "Balı üreten ve yuva yapan işçi arıların tamamının dişi olduğu bilimsel olarak kanıtlandı.",
+          "color": "#15803d"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Nahl Suresi",
+        "title": "68-69. AYET",
+        "quoteText": "Rabbin bal arısına vahyetti: 'Dağlardan, ağaçlardan ve insanların kurdukları çardaklardan kendine evler edin (اتَّخِذِي). Sonra meyvelerin hepsinden ye, ardından Rabbinin sana kolaylaştırdığı yollara boyun eğerek gir (فَاسْلُكِي).'",
+        "sourceRef": "Nahl Suresi, 68-69"
+      },
+      "metricImpact": {
+        "bigNumber": "%100",
+        "bigLabel": "İŞÇİ ARI DİŞİDİR",
+        "subheading": "1400 Yıl Önce Kur'an'da Bildirildi",
+        "keyTakeaway": "Kelime eklerindeki bu muazzam detay, Kur'an'ın ilahi kelam olduğunun apaçık delilidir."
+      },
+      "gridExplosion": {
+        "title": "KOVANDAKİ MİMAR",
+        "subtitle": "Petekleri Ören ve Balı Üretenler",
+        "iconType": "shield",
+        "itemCount": 6,
+        "badgeText": "DİŞİ İŞÇİ ARILAR",
+        "iconAssetPath": "assets/icons/shield.svg"
+      },
+      "triConcept": {
+        "badge": "NAHL SURESİ MUCİZESİ",
+        "concept1": {
+          "title": "YUVA",
+          "subtitle": "اتَّخِذِي (Edin)",
+          "icon": "book",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/book.svg"
+        },
+        "concept2": {
+          "title": "YOL",
+          "subtitle": "فَاسْلُكِي (Gir/Takip Et)",
+          "icon": "compass",
+          "color": "#facc15",
+          "iconAssetPath": "assets/icons/compass.svg"
+        },
+        "concept3": {
+          "title": "HAKİKAT",
+          "subtitle": "Dişi Kalıp Hitap",
+          "icon": "shield",
+          "color": "#ef4444",
+          "iconAssetPath": "assets/icons/shield.svg"
+        },
+        "bottomNote": "BİLİMİN YÜZYILLAR SONRA KEŞFETTİĞİ GERÇEK"
+      },
+      "timeline": {
+        "startYear": "1400 Yıl Önce",
+        "endYear": "Modern Bilim",
+        "durationLabel": "Keşif",
+        "title": "Kur'an'ın Dil Mucizesi",
+        "ayahArabic": "أَنِ اتَّخِذِي مِنَ الْجِبَالِ بُيُوتًا وَمِنَ الشَّجَرِ وَمِمَّا يَعْرِشُونَ",
+        "ayahTranslation": "Dağlardan, ağaçlardan ve insanların kurdukları çardaklardan kendine evler edin.",
+        "ayahRef": "Nahl Suresi, 68"
+      },
+      "narration": "Rabbimiz Kur'an'da bal arılarına hitap ederken اتَّخِذِي yani 'edin' ve فَاسْلُكِي yani 'gir, takip et' kelimelerini erkek için değil, dişi kalıpta kullanır. Nahl Suresi'ndeki bu mucizevi ifadeler, kovanda yuva yapan ve bal üreten işçi arıların tamamının dişi olduğuna işaret eder. İnsanların arıların kralı sandığı dönemde, Kur'an işçi arıların dişi olduğunu gramer inceliğiyle asırlar öncesinden haber vermiştir.",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Kur'an'daki Arı Mucizesi! Tek Kelime Her Şeyi Değiştirdi",
+          "Bal Arıları Hakkında 1400 Yıllık Sır: Bilim Bunu Yeni Keşfetti"
+        ],
+        "hashtags": [
+          "#kuran",
+          "#mucize",
+          "#balarısı",
+          "#nahl_suresi",
+          "#islamibilgi",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden kelimeler...",
+        "description": "Nahl Suresi'nde bal arılarına yapılan dişi hitabın (اتَّخِذِي) modern bilimle muazzam uyumu."
+      },
+      "theme": "dark_minimalist",
+      "durationMode": "deep",
+      "particles": "dust",
+      "ambientPattern": "islamic_geometric",
+      "doodleType": "none",
+      "socialHandle": "@birkissa",
+      "_acquired_assets": [
+        {
+          "name": "islamic_geometric",
+          "type": "watermark",
+          "path": "assets/watermarks/islamic_geometric.svg"
+        },
+        {
+          "name": "shield",
+          "type": "grid_icon",
+          "path": "assets/icons/shield.svg"
+        },
+        {
+          "name": "book",
+          "type": "concept_icon",
+          "path": "assets/icons/book.svg"
+        },
+        {
+          "name": "compass",
+          "type": "concept_icon",
+          "path": "assets/icons/compass.svg"
+        },
+        {
+          "name": "shield",
+          "type": "concept_icon",
+          "path": "assets/icons/shield.svg"
+        },
+        {
+          "name": "book",
+          "type": "card_icon",
+          "path": "assets/icons/book.svg"
+        },
+        {
+          "name": "compass",
+          "type": "card_icon",
+          "path": "assets/icons/compass.svg"
+        },
+        {
+          "name": "shield",
+          "type": "card_icon",
+          "path": "assets/icons/shield.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "Rabbimiz Kur'an'da bal",
+          "start": 0.0,
+          "end": 1.72
+        },
+        {
+          "text": "arılarına hitap ederken",
+          "start": 1.72,
+          "end": 3.16
+        },
+        {
+          "text": "اتَّخِذِي yani 'edin'",
+          "start": 3.16,
+          "end": 5.06
+        },
+        {
+          "text": "ve فَاسْلُكِي yani",
+          "start": 5.06,
+          "end": 6.3
+        },
+        {
+          "text": "'gir, takip et'",
+          "start": 7.14,
+          "end": 8.98
+        },
+        {
+          "text": "kelimelerini erkek için",
+          "start": 8.98,
+          "end": 10.24
+        },
+        {
+          "text": "değil, dişi kalıpta",
+          "start": 10.78,
+          "end": 12.36
+        },
+        {
+          "text": "kullanır. Nahl Suresi'ndeki",
+          "start": 12.66,
+          "end": 14.2
+        },
+        {
+          "text": "bu mucizevi ifadeler,",
+          "start": 14.2,
+          "end": 16.98
+        },
+        {
+          "text": "kovanda yuva yapan",
+          "start": 16.98,
+          "end": 18.06
+        },
+        {
+          "text": "ve bal üreten",
+          "start": 18.06,
+          "end": 19.38
+        },
+        {
+          "text": "işçi arıların tamamının",
+          "start": 19.38,
+          "end": 21.12
+        },
+        {
+          "text": "dişi olduğuna işaret",
+          "start": 21.12,
+          "end": 22.48
+        },
+        {
+          "text": "eder. İnsanların arıların",
+          "start": 23.28,
+          "end": 25.34
+        },
+        {
+          "text": "kralı sandığı dönemde,",
+          "start": 25.34,
+          "end": 27.26
+        },
+        {
+          "text": "Kur'an işçi arıların",
+          "start": 27.26,
+          "end": 28.62
+        },
+        {
+          "text": "dişi olduğunu gramer",
+          "start": 28.62,
+          "end": 29.98
+        },
+        {
+          "text": "inceliğiyle asırlar öncesinden",
+          "start": 29.98,
+          "end": 32.26
+        },
+        {
+          "text": "haber vermiştir.",
+          "start": 32.26,
+          "end": 33.4
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "666b025f",
+    "topic": "ben islami bir karanlık tema kullanarak kıyamet 3-4 ayetinde geçen parmak ucundaki sırrı anlatan video yap",
+    "theme": "dark_minimalist",
+    "layoutType": "grid_explosion",
+    "durationMode": "deep",
+    "created_at": "2026-10-28 00:19",
+    "headerMain": "PARMAK UCUNDAKİ BÜYÜK MİLYARLARCA MÜHÜR",
+    "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir.",
+    "hookScore": 99,
+    "key_used": "asdxcxc009@gmail.com",
+    "thumbnail_url": "/out/thumbnail.png?t=1793135969",
+    "video_data": {
+      "directorDecision": {
+        "theme": "dark_minimalist",
+        "layoutType": "grid_explosion",
+        "durationMode": "deep",
+        "particles": "dust",
+        "ambientPattern": "fingerprint",
+        "doodleType": "none",
+        "directorReason": "İslami tefekkür ve biyolojik mühür vurgusu için karanlık minimal tuval ve parmak izi odaklı grid patlaması seçildi."
+      },
+      "requiredIcons": [
+        "fingerprint",
+        "dna",
+        "scale"
+      ],
+      "headerSubtitle": "Akıl Almaz Sır",
+      "headerLine1": "PARMAK UCUNDAKİ",
+      "circledWord": "BÜYÜK",
+      "headerLine2": "SIR",
+      "highlightedText": "MİLYARLARCA MÜHÜR",
+      "strikeWord": "TESADÜF",
+      "layoutType": "grid_explosion",
+      "cards": [
+        {
+          "id": "1",
+          "label": "DNA Şifresi",
+          "value": "%100 Aynı",
+          "icon": "dna",
+          "color": "#1e3a8a",
+          "iconAssetPath": "assets/icons/dna.svg"
+        },
+        {
+          "id": "2",
+          "label": "İkizler",
+          "value": "Farklı İz",
+          "icon": "fingerprint",
+          "color": "#15803d",
+          "iconAssetPath": "assets/icons/fingerprint.svg"
+        },
+        {
+          "id": "3",
+          "label": "Tesviye",
+          "value": "1400 Yıl",
+          "icon": "scale",
+          "color": "#d97706",
+          "iconAssetPath": "assets/icons/scale.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "DNA Benzerliği",
+        "leftSubtitle": "Genler Birebir Aynı",
+        "leftPoints": [
+          "Aynı genetik kod",
+          "Aynı kan grubu",
+          "Aynı fiziksel yapı"
+        ],
+        "leftColor": "#dc2626",
+        "rightTitle": "Parmak Uçları",
+        "rightSubtitle": "Eşsiz Biyolojik Mühür",
+        "rightPoints": [
+          "Anne karnında mikro temas",
+          "Asla değişmeyen geometri",
+          "Milyarlarca insanda tek"
+        ],
+        "rightColor": "#16a34a",
+        "verdict": "İkizlerin DNA'sı bile aynıyken, parmak izi her insanı tek ve eşsiz kılar."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Aşama",
+          "title": "Büyük Soru",
+          "desc": "Çürüyüp dağılan kemikler nasıl diriltilecek?",
+          "color": "#1e3a8a"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Kırılma",
+          "title": "En İnce Detay",
+          "desc": "Kur'an beyne değil, parmak ucunun milimetrik çizgilerine işaret etti.",
+          "color": "#d97706"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Hakikat",
+          "title": "Tesviye Sırrı",
+          "desc": "19. yüzyılda keşfedilen biometrik imza asırlar önce haber verildi.",
+          "color": "#15803d"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Kıyamet Suresi",
+        "title": "4. AYET",
+        "quoteText": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
+        "sourceRef": "Kıyamet Suresi, 3-4"
+      },
+      "metricImpact": {
+        "bigNumber": "8 MİLYAR",
+        "bigLabel": "İNSAN İÇİNDE",
+        "subheading": "Hiçbirinin Parmak İzi Aynı Değil",
+        "keyTakeaway": "Çünkü her insan varoluşun altına atılmış özel bir imzadır."
+      },
+      "gridExplosion": {
+        "title": "MİLYARLARCA İNSAN",
+        "subtitle": "Hiçbirinin Parmak İzi Birbirine Benzemeğecek Şekilde Yaratıldı",
+        "iconType": "fingerprint",
+        "itemCount": 12,
+        "badgeText": "EŞSİZ BİYOLOJİK MÜHÜR",
+        "iconAssetPath": "assets/icons/fingerprint.svg"
+      },
+      "triConcept": {
+        "badge": "BEKLENEN CEVAP",
+        "concept1": {
+          "title": "BEYİN",
+          "subtitle": "En Karmaşık Hafıza",
+          "icon": "brain",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/brain.svg"
+        },
+        "concept2": {
+          "title": "KALP",
+          "subtitle": "Yaşam Merkezi",
+          "icon": "heart",
+          "color": "#ef4444",
+          "iconAssetPath": "assets/icons/heart.svg"
+        },
+        "concept3": {
+          "title": "GÖZ",
+          "subtitle": "Hassas Mercek",
+          "icon": "eye",
+          "color": "#facc15",
+          "iconAssetPath": "assets/icons/eye.svg"
+        },
+        "bottomNote": "FAKAT KUR'AN PARMAK UCUNA ODAKLANDI"
+      },
+      "timeline": {
+        "startYear": "Kıyamet",
+        "endYear": "Diriliş",
+        "durationLabel": "Tesviye",
+        "title": "Kusursuz Dizilim",
+        "ayahArabic": "",
+        "ayahTranslation": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
+        "ayahRef": "Kıyamet Suresi, 3-4"
+      },
+      "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir.",
+      "viral": {
+        "hookScore": 99,
+        "viralTitles": [
+          "Parmak Ucundaki BÜYÜK Sır! Kıyamet Suresi 3-4",
+          "İkizlerin Bile Farklı: 1400 Yıl Önceki Akıl Almaz Detay!"
+        ],
+        "hashtags": [
+          "#bilim",
+          "#kuran",
+          "#parmakizi",
+          "#mucize",
+          "#tefekkür",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden her insan aslında...",
+        "description": "Parmak uçlarındaki dermatoglif şifresi ve Kıyamet Suresi'nin mucizevi detayları."
+      },
+      "theme": "dark_minimalist",
+      "durationMode": "deep",
+      "particles": "dust",
+      "ambientPattern": "fingerprint",
+      "doodleType": "none",
+      "socialHandle": "@birkissa",
+      "_acquired_assets": [
+        {
+          "name": "fingerprint",
+          "type": "watermark",
+          "path": "assets/watermarks/fingerprint.svg"
+        },
+        {
+          "name": "fingerprint",
+          "type": "grid_icon",
+          "path": "assets/icons/fingerprint.svg"
+        },
+        {
+          "name": "brain",
+          "type": "concept_icon",
+          "path": "assets/icons/brain.svg"
+        },
+        {
+          "name": "heart",
+          "type": "concept_icon",
+          "path": "assets/icons/heart.svg"
+        },
+        {
+          "name": "eye",
+          "type": "concept_icon",
+          "path": "assets/icons/eye.svg"
+        },
+        {
+          "name": "dna",
+          "type": "card_icon",
+          "path": "assets/icons/dna.svg"
+        },
+        {
+          "name": "fingerprint",
+          "type": "card_icon",
+          "path": "assets/icons/fingerprint.svg"
+        },
+        {
+          "name": "scale",
+          "type": "card_icon",
+          "path": "assets/icons/scale.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "DNA'sı yüzde yüz",
+          "start": 0.0,
+          "end": 1.72
+        },
+        {
+          "text": "aynı olan tek",
+          "start": 1.72,
+          "end": 2.88
+        },
+        {
+          "text": "yumurta ikizlerini bile",
+          "start": 2.88,
+          "end": 4.48
+        },
+        {
+          "text": "birbirinden ayıran tek",
+          "start": 4.48,
+          "end": 6.02
+        },
+        {
+          "text": "bir sır vardır.",
+          "start": 6.02,
+          "end": 7.06
+        },
+        {
+          "text": "Çürüyüp toprak olduktan",
+          "start": 7.98,
+          "end": 9.62
+        },
+        {
+          "text": "sonra nasıl diriltileceğini",
+          "start": 9.62,
+          "end": 11.6
+        },
+        {
+          "text": "soranlara, Kur'an tam",
+          "start": 11.6,
+          "end": 13.32
+        },
+        {
+          "text": "da parmak uçlarına",
+          "start": 13.32,
+          "end": 14.18
+        },
+        {
+          "text": "işaret ederek cevap",
+          "start": 14.18,
+          "end": 15.82
+        },
+        {
+          "text": "verdi. Milyarlarca insanın",
+          "start": 15.82,
+          "end": 18.14
+        },
+        {
+          "text": "her biri, parmak",
+          "start": 18.14,
+          "end": 19.5
+        },
+        {
+          "text": "ucundaki o eşsiz",
+          "start": 19.94,
+          "end": 21.38
+        },
+        {
+          "text": "mühürle yeniden var",
+          "start": 21.38,
+          "end": 23.02
+        },
+        {
+          "text": "edilir.",
+          "start": 23.02,
+          "end": 23.3
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "7280fae7",
+    "topic": "Albert Einstein ve zamanın dağlarda neden daha hızlı aktığı sırrı",
+    "theme": "blueprint",
+    "layoutType": "tri_concept",
+    "durationMode": "deep",
+    "created_at": "2026-10-27 23:51",
+    "headerMain": "DAĞLARDA ZAMAN NEDEN EINSTEIN'IN BÜYÜK SIRRI",
+    "narration": "Zamanın her yerde aynı aktığını mı sanıyorsunuz? Yanılıyorsunuz. Albert Einstein'ın devrim niteliğindeki teorisine göre, kütleçekim uzay-zaman dokusunu büker. Deniz seviyesinden yüksekklere, dağların zirvesine çıktıkça Dünya'nın kütleçekimi zayıflar. Çekimin zayıfladığı yerde zaman, ovadakilere göre daha hızlı akar. Everest'in tepesindekiler, deniz kenarındakilere kıyasla gelecekte yaşarlar.",
+    "hookScore": 98,
+    "key_used": "mehmetortabakan@gmail.com",
+    "thumbnail_url": "/out/thumbnail.png?t=1793134293",
+    "video_data": {
+      "directorDecision": {
+        "theme": "blueprint",
+        "layoutType": "tri_concept",
+        "durationMode": "deep",
+        "particles": "stars",
+        "ambientPattern": "cosmic",
+        "doodleType": "galaxy",
+        "directorReason": "Albert Einstein, görelilik ve zamanın akış hızı (kütleçekimsel zaman genişlemesi) evrensel bir bilim konusu olduğu için 'blueprint' teması ve kozmik atmosfer seçilmiştir."
+      },
+      "requiredIcons": [
+        "atom",
+        "hourglass",
+        "infinity",
+        "compass"
+      ],
+      "headerSubtitle": "Zamanın Gizli Yasası",
+      "headerLine1": "DAĞLARDA ZAMAN",
+      "circledWord": "NEDEN",
+      "headerLine2": "HIZLI AKAR?",
+      "highlightedText": "EINSTEIN'IN BÜYÜK SIRRI",
+      "strikeWord": "SABİT",
+      "layoutType": "tri_concept",
+      "cards": [
+        {
+          "id": "1",
+          "label": "Deniz Seviyesi",
+          "value": "Ağır Kütle",
+          "icon": "hourglass",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/hourglass.svg"
+        },
+        {
+          "id": "2",
+          "label": "Zirve Noktası",
+          "value": "Zayıf Çekim",
+          "icon": "atom",
+          "color": "#facc15",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        {
+          "id": "3",
+          "label": "Sonuç",
+          "value": "Hızlı Zaman",
+          "icon": "infinity",
+          "color": "#ef4444",
+          "iconAssetPath": "assets/icons/infinity.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "Dünya'nın Merkezi",
+        "leftSubtitle": "Yoğun Kütleçekim",
+        "leftPoints": [
+          "Kütle zamanı büker",
+          "Saatler daha yavaş ticks",
+          "Yer çekimi maksimum"
+        ],
+        "leftColor": "#3b82f6",
+        "rightTitle": "Dağların Zirvesi",
+        "rightSubtitle": "Zayıf Kütleçekim",
+        "rightPoints": [
+          "Merkezden uzakta",
+          "Zaman daha hızlı akar",
+          "Fizik kuralları değişir"
+        ],
+        "rightColor": "#eab308",
+        "verdict": "Yüksekte yaşayanlar, deniz seviyesindekilere göre çok az da olsa gelecekte yaşarlar."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Aşama",
+          "title": "Bükülen Uzay-Zaman",
+          "desc": "Einstein, kütlenin uzay-zaman dokusunu esnettiğini kanıtladı.",
+          "color": "#3b82f6"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Kırılma",
+          "title": "Çekim Azaldıkça",
+          "desc": "Yeryüzünden uzaklaştıkça kütleçekim zayıflar ve zaman hız kazanır.",
+          "color": "#eab308"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Hakikat",
+          "title": "Zirve Sırrı",
+          "desc": "Everest'in tepesinde saatler, okyanus kıyısına göre daha hızlı ilerler.",
+          "color": "#ef4444"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Albert Einstein",
+        "title": "GÖRELİLİK TEORİSİ",
+        "quoteText": "Zaman mutlak değildir; gözlemcinin konumuna ve kütleçekim alanına göre değişir.",
+        "sourceRef": "Genel Görelilik, 1915"
+      },
+      "metricImpact": {
+        "bigNumber": "NANosaniye",
+        "bigLabel": "FARK",
+        "subheading": "Dağda ve OVADA Zamanın Akış Hızı",
+        "keyTakeaway": "Zaman evrenin her yerinde aynı akmaz; kütleçekim zamanın efendisidir."
+      },
+      "gridExplosion": {
+        "title": "UZAY-ZAMAN DOKUSU",
+        "subtitle": "Kütleçekimin Etkilediği Katmanlar",
+        "iconType": "atom",
+        "itemCount": 9,
+        "badgeText": "GÖRELİLİK KANUNU",
+        "iconAssetPath": "assets/icons/atom.svg"
+      },
+      "triConcept": {
+        "badge": "EINSTEIN'IN ÜÇLÜSÜ",
+        "concept1": {
+          "title": "KÜTLE",
+          "subtitle": "Uzayı Büker",
+          "icon": "atom",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/atom.svg"
+        },
+        "concept2": {
+          "title": "YÜKSEKLİK",
+          "subtitle": "Çekimi Azaltır",
+          "icon": "compass",
+          "color": "#facc15",
+          "iconAssetPath": "assets/icons/compass.svg"
+        },
+        "concept3": {
+          "title": "ZAMAN",
+          "subtitle": "Hız Kazanır",
+          "icon": "infinity",
+          "color": "#ef4444",
+          "iconAssetPath": "assets/icons/infinity.svg"
+        },
+        "bottomNote": "DAĞLARDA YAŞAM KONTROLÜ"
+      },
+      "timeline": {
+        "startYear": "1905",
+        "endYear": "1915",
+        "durationLabel": "10 Yıl",
+        "title": "Evrenin Yeniden Yazılışı",
+        "ayahArabic": "",
+        "ayahTranslation": "Zaman, kütlenin ellerinde şekillenen esnek bir kumaştır.",
+        "ayahRef": "Modern Fizik"
+      },
+      "narration": "Zamanın her yerde aynı aktığını mı sanıyorsunuz? Yanılıyorsunuz. Albert Einstein'ın devrim niteliğindeki teorisine göre, kütleçekim uzay-zaman dokusunu büker. Deniz seviyesinden yüksekklere, dağların zirvesine çıktıkça Dünya'nın kütleçekimi zayıflar. Çekimin zayıfladığı yerde zaman, ovadakilere göre daha hızlı akar. Everest'in tepesindekiler, deniz kenarındakilere kıyasla gelecekte yaşarlar.",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Dağlarda Zaman Neden Daha Hızlı Akar? Einstein'ın Çılgın Sırrı!",
+          "Yüksekte Yaşayanlar Gelecekte mi Yaşıyor? Zamanın Şoke Eden Gerçeği!"
+        ],
+        "hashtags": [
+          "#einstein",
+          "#fizik",
+          "#zaman",
+          "#bilim",
+          "#uzay",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden aslında...",
+        "description": "Kütleçekimsel zaman genişlemesi ve dağlarda zamanın neden hızlı aktığının bilimsel açıklaması."
+      },
+      "theme": "blueprint",
+      "durationMode": "deep",
+      "particles": "stars",
+      "ambientPattern": "cosmic",
+      "doodleType": "galaxy",
+      "socialHandle": "@bilimkosesi",
+      "_acquired_assets": [
+        {
+          "name": "cosmic",
+          "type": "watermark",
+          "path": "assets/watermarks/cosmic.svg"
+        },
+        {
+          "name": "atom",
+          "type": "grid_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "atom",
+          "type": "concept_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "compass",
+          "type": "concept_icon",
+          "path": "assets/icons/compass.svg"
+        },
+        {
+          "name": "infinity",
+          "type": "concept_icon",
+          "path": "assets/icons/infinity.svg"
+        },
+        {
+          "name": "hourglass",
+          "type": "card_icon",
+          "path": "assets/icons/hourglass.svg"
+        },
+        {
+          "name": "atom",
+          "type": "card_icon",
+          "path": "assets/icons/atom.svg"
+        },
+        {
+          "name": "infinity",
+          "type": "card_icon",
+          "path": "assets/icons/infinity.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "Zamanın her yerde",
+          "start": 0.0,
+          "end": 1.42
+        },
+        {
+          "text": "aynı aktığını mı",
+          "start": 1.42,
+          "end": 2.64
+        },
+        {
+          "text": "sanıyorsunuz? Yanılıyorsunuz. Albert",
+          "start": 2.64,
+          "end": 6.5
+        },
+        {
+          "text": "Einstein'ın devrim niteliğindeki",
+          "start": 6.5,
+          "end": 8.48
+        },
+        {
+          "text": "teorisine göre, kütleçekim",
+          "start": 8.48,
+          "end": 10.42
+        },
+        {
+          "text": "uzay-zaman dokusunu büker.",
+          "start": 10.92,
+          "end": 12.44
+        },
+        {
+          "text": "Deniz seviyesinden yüksekklere,",
+          "start": 12.44,
+          "end": 14.82
+        },
+        {
+          "text": "dağların zirvesine çıktıkça",
+          "start": 14.82,
+          "end": 18.32
+        },
+        {
+          "text": "Dünya'nın kütleçekimi zayıflar.",
+          "start": 18.32,
+          "end": 20.0
+        },
+        {
+          "text": "Çekimin zayıfladığı yerde",
+          "start": 20.0,
+          "end": 23.0
+        },
+        {
+          "text": "zaman, ovadakilere göre",
+          "start": 23.0,
+          "end": 24.88
+        },
+        {
+          "text": "daha hızlı akar.",
+          "start": 24.88,
+          "end": 26.02
+        },
+        {
+          "text": "Everest'in tepesindekiler, deniz",
+          "start": 26.44,
+          "end": 28.92
+        },
+        {
+          "text": "kenarındakilere kıyasla gelecekte",
+          "start": 29.34,
+          "end": 31.5
+        },
+        {
+          "text": "yaşarlar.",
+          "start": 31.5,
+          "end": 32.22
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "11d0f7eb",
+    "topic": "ben islami bir karanlık tema kullanarak kıyamet 3-4 ayetinde geçen parmak ucundaki sırrı anlatan video yap",
+    "theme": "dark_minimalist",
+    "layoutType": "grid_explosion",
+    "durationMode": "deep",
+    "created_at": "2026-10-27 23:49",
+    "headerMain": "PARMAK UCUNDAKİ BÜYÜK MİLYARLARCA MÜHÜR",
+    "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra insan nasıl diriltilecek diye soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilecek.",
+    "hookScore": 99,
+    "key_used": "mehmetortabakan@gmail.com",
+    "thumbnail_url": "/out/thumbnail.png?t=1793134179",
+    "video_data": {
+      "directorDecision": {
+        "theme": "dark_minimalist",
+        "layoutType": "grid_explosion",
+        "durationMode": "deep",
+        "particles": "dust",
+        "ambientPattern": "fingerprint",
+        "doodleType": "none",
+        "directorReason": "İslami tefekkür ve biyolojik mühür vurgusu için karanlık minimal tuval ve parmak izi odaklı grid yapısı seçildi."
+      },
+      "requiredIcons": [
+        "fingerprint",
+        "dna",
+        "scale",
+        "eye"
+      ],
+      "headerSubtitle": "Kur'an'ın Mucizevi İşareti",
+      "headerLine1": "PARMAK UCUNDAKİ",
+      "circledWord": "BÜYÜK",
+      "headerLine2": "SIR",
+      "highlightedText": "MİLYARLARCA MÜHÜR",
+      "strikeWord": "TESADÜF",
+      "layoutType": "grid_explosion",
+      "cards": [
+        {
+          "id": "1",
+          "label": "DNA Şifresi",
+          "value": "%100 Aynı",
+          "icon": "dna",
+          "color": "#1e3a8a",
+          "iconAssetPath": "assets/icons/dna.svg"
+        },
+        {
+          "id": "2",
+          "label": "İkizler",
+          "value": "Farklı İz",
+          "icon": "fingerprint",
+          "color": "#15803d",
+          "iconAssetPath": "assets/icons/fingerprint.svg"
+        },
+        {
+          "id": "3",
+          "label": "Tesviye",
+          "value": "1400 Yıl",
+          "icon": "scale",
+          "color": "#d97706",
+          "iconAssetPath": "assets/icons/scale.svg"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "DNA Benzerliği",
+        "leftSubtitle": "Genler Birebir Aynı",
+        "leftPoints": [
+          "Aynı genetik kod",
+          "Aynı kan grubu",
+          "Aynı fiziksel yapı"
+        ],
+        "leftColor": "#dc2626",
+        "rightTitle": "Parmak Uçları",
+        "rightSubtitle": "Eşsiz Biyolojik Mühür",
+        "rightPoints": [
+          "Anne karnında mikro temas",
+          "Asla değişmeyen geometri",
+          "Milyarlarca insanda tek"
+        ],
+        "rightColor": "#16a34a",
+        "verdict": "İkizlerin DNA'sı bile aynıyken, parmak izi her insanı tek ve eşsiz kılar."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Aşama",
+          "title": "Büyük İtiraz",
+          "desc": "Çürüyüp dağılan kemikler nasıl diriltilecek?",
+          "color": "#1e3a8a"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Kırılma",
+          "title": "En İnce Detay",
+          "desc": "Kur'an genel kemiklere değil, parmak ucuna dikkat çekti.",
+          "color": "#d97706"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Hakikat",
+          "title": "Tesviye Sırrı",
+          "desc": "Biyolojik imzanın eşsizliği asırlar önce haber verildi.",
+          "color": "#15803d"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Kıyamet Suresi",
+        "title": "4. AYET",
+        "quoteText": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
+        "sourceRef": "Kıyamet Suresi, 3-4"
+      },
+      "metricImpact": {
+        "bigNumber": "8 MİLYAR",
+        "bigLabel": "İNSAN İÇİNDE",
+        "subheading": "Hiçbirinin Parmak İzi Aynı Değil",
+        "keyTakeaway": "Çünkü her insan varoluşun altına atılmış özel bir imzadır."
+      },
+      "gridExplosion": {
+        "title": "MİLYARLARCA İNSAN",
+        "subtitle": "Hiçbirinin Parmak İzi Birbirine Benzemeğecek Şekilde Yaratıldı",
+        "iconType": "fingerprint",
+        "itemCount": 12,
+        "badgeText": "EŞSİZ BİYOLOJİK MÜHÜR",
+        "iconAssetPath": "assets/icons/fingerprint.svg"
+      },
+      "triConcept": {
+        "badge": "BEKLENEN CEVAP",
+        "concept1": {
+          "title": "BEYİN",
+          "subtitle": "En Karmaşık Hafıza",
+          "icon": "brain",
+          "color": "#38bdf8",
+          "iconAssetPath": "assets/icons/brain.svg"
+        },
+        "concept2": {
+          "title": "KALP",
+          "subtitle": "Yaşam Merkezi",
+          "icon": "heart",
+          "color": "#ef4444",
+          "iconAssetPath": "assets/icons/heart.svg"
+        },
+        "concept3": {
+          "title": "GÖZ",
+          "subtitle": "Hassas Mercek",
+          "icon": "eye",
+          "color": "#facc15",
+          "iconAssetPath": "assets/icons/eye.svg"
+        },
+        "bottomNote": "FAKAT KUR'AN PARMAK UCUNA ODAKLANDI"
+      },
+      "timeline": {
+        "startYear": "Kıyamet",
+        "endYear": "Diriliş",
+        "durationLabel": "Tesviye",
+        "title": "Kusursuz Dizilim",
+        "ayahArabic": "",
+        "ayahTranslation": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
+        "ayahRef": "Kıyamet Suresi, 3-4"
+      },
+      "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra insan nasıl diriltilecek diye soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilecek.",
+      "viral": {
+        "hookScore": 99,
+        "viralTitles": [
+          "Parmak Ucundaki BÜYÜK Sır! Kıyamet Suresi 3-4",
+          "İkizlerin Bile Farklı: 1400 Yıl Önceki Akıl Almaz Detay!"
+        ],
+        "hashtags": [
+          "#bilim",
+          "#kuran",
+          "#parmakizi",
+          "#mucize",
+          "#tefekkür",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden her insan aslında...",
+        "description": "Parmak uçlarındaki dermatoglif şifresi ve Kıyamet Suresi'nin mucizevi detayları."
+      },
+      "theme": "dark_minimalist",
+      "durationMode": "deep",
+      "particles": "dust",
+      "ambientPattern": "fingerprint",
+      "doodleType": "none",
+      "socialHandle": "@birkissa",
+      "_acquired_assets": [
+        {
+          "name": "fingerprint",
+          "type": "watermark",
+          "path": "assets/watermarks/fingerprint.svg"
+        },
+        {
+          "name": "fingerprint",
+          "type": "grid_icon",
+          "path": "assets/icons/fingerprint.svg"
+        },
+        {
+          "name": "brain",
+          "type": "concept_icon",
+          "path": "assets/icons/brain.svg"
+        },
+        {
+          "name": "heart",
+          "type": "concept_icon",
+          "path": "assets/icons/heart.svg"
+        },
+        {
+          "name": "eye",
+          "type": "concept_icon",
+          "path": "assets/icons/eye.svg"
+        },
+        {
+          "name": "dna",
+          "type": "card_icon",
+          "path": "assets/icons/dna.svg"
+        },
+        {
+          "name": "fingerprint",
+          "type": "card_icon",
+          "path": "assets/icons/fingerprint.svg"
+        },
+        {
+          "name": "scale",
+          "type": "card_icon",
+          "path": "assets/icons/scale.svg"
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "DNA'sı yüzde yüz",
+          "start": 0.0,
+          "end": 1.72
+        },
+        {
+          "text": "aynı olan tek",
+          "start": 1.72,
+          "end": 2.88
+        },
+        {
+          "text": "yumurta ikizlerini bile",
+          "start": 2.88,
+          "end": 4.5
+        },
+        {
+          "text": "birbirinden ayıran tek",
+          "start": 4.5,
+          "end": 6.02
+        },
+        {
+          "text": "bir sır vardır.",
+          "start": 6.02,
+          "end": 7.06
+        },
+        {
+          "text": "Çürüyüp toprak olduktan",
+          "start": 7.94,
+          "end": 9.6
+        },
+        {
+          "text": "sonra insan nasıl",
+          "start": 9.6,
+          "end": 11.06
+        },
+        {
+          "text": "diriltilecek diye soranlara,",
+          "start": 11.06,
+          "end": 12.96
+        },
+        {
+          "text": "Kur'an tam da",
+          "start": 13.46,
+          "end": 14.08
+        },
+        {
+          "text": "parmak uçlarına işaret",
+          "start": 14.08,
+          "end": 15.38
+        },
+        {
+          "text": "ederek cevap verdi.",
+          "start": 15.38,
+          "end": 16.84
+        },
+        {
+          "text": "Milyarlarca insanın her",
+          "start": 16.84,
+          "end": 19.5
+        },
+        {
+          "text": "biri, parmak ucundaki",
+          "start": 19.5,
+          "end": 20.94
+        },
+        {
+          "text": "o eşsiz mühürle",
+          "start": 20.94,
+          "end": 22.48
+        },
+        {
+          "text": "yeniden var edilecek.",
+          "start": 22.48,
+          "end": 23.9
+        }
+      ],
+      "audioUrl": "audio.mp3"
+    }
+  },
+  {
+    "id": "4c366570",
+    "topic": "Parmak ucundaki BÜYÜK sır! Kıyamet Suresi 3-4",
+    "theme": "dark_minimalist",
+    "layoutType": "grid_explosion",
+    "created_at": "2026-10-27 21:51",
+    "headerMain": "PARMAK UCUNDAKİ BÜYÜK MİLYARLARCA MÜHÜR",
+    "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir. Bilimin henüz yeni keşfettiği bu biometrik imza, asırlar önce bu mucizevi ayetle ilan edilmişti.",
+    "hookScore": 99,
+    "key_used": "mehmet2736005@gmail.com",
+    "thumbnail_url": "/out/thumbnail.png?t=1793127098",
+    "video_data": {
+      "headerSubtitle": "Akıl Almaz Sır",
+      "headerLine1": "PARMAK UCUNDAKİ",
+      "circledWord": "BÜYÜK",
+      "headerLine2": "SIR",
+      "highlightedText": "MİLYARLARCA MÜHÜR",
+      "strikeWord": "TESADÜF",
+      "layoutType": "grid_explosion",
+      "cards": [
+        {
+          "id": "1",
+          "label": "DNA Şifresi",
+          "value": "%100 Aynı",
+          "icon": "dna",
+          "color": "#1e3a8a"
+        },
+        {
+          "id": "2",
+          "label": "İkizler",
+          "value": "Farklı İz",
+          "icon": "fingerprint",
+          "color": "#15803d"
+        },
+        {
+          "id": "3",
+          "label": "Tesviye",
+          "value": "1400 Yıl",
+          "icon": "scale",
+          "color": "#d97706"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "DNA Benzerliği",
+        "leftSubtitle": "Genler Birebir Aynı",
+        "leftPoints": [
+          "Aynı genetik kod",
+          "Aynı kan grubu",
+          "Aynı fiziksel yapı"
+        ],
+        "leftColor": "#dc2626",
+        "rightTitle": "Parmak Uçları",
+        "rightSubtitle": "Eşsiz Biyolojik Mühür",
+        "rightPoints": [
+          "Anne karnında mikro temas",
+          "Asla değişmeyen geometri",
+          "Milyarlarca insanda tek"
+        ],
+        "rightColor": "#16a34a",
+        "verdict": "İkizlerin DNA'sı bile aynıyken, parmak izi her insanı tek ve eşsiz kılar."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Aşama",
+          "title": "Büyük Soru",
+          "desc": "Çürüyüp dağılan kemikler nasıl diriltilecek?",
+          "color": "#1e3a8a"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Kırılma",
+          "title": "En İnce Detay",
+          "desc": "Kur'an beyne değil, parmak ucunun milimetrik çizgilerine işaret etti.",
+          "color": "#d97706"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Hakikat",
+          "title": "Tesviye Sırrı",
+          "desc": "19. yüzyılda keşfedilen biometrik imza asırlar önce haber verildi.",
+          "color": "#15803d"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Kıyamet Suresi",
+        "title": "4. AYET",
+        "quoteText": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
+        "sourceRef": "Kıyamet Suresi, 3-4"
+      },
+      "metricImpact": {
+        "bigNumber": "8 MİLYAR",
+        "bigLabel": "İNSAN İÇİNDE",
+        "subheading": "Hiçbirinin Parmak İzi Aynı Değil",
+        "keyTakeaway": "Çünkü her insan varoluşun altına atılmış özel bir imzadır."
+      },
+      "gridExplosion": {
+        "title": "MİLYARLARCA İNSAN",
+        "subtitle": "Hiçbirinin Parmak İzi Birbirine Benzemeğecek Şekilde Yaratıldı",
+        "iconType": "fingerprint",
+        "itemCount": 12,
+        "badgeText": "EŞSİZ BİYOLOJİK MÜHÜR"
+      },
+      "triConcept": {
+        "badge": "BEKLENEN CEVAP",
+        "concept1": {
+          "title": "BEYİN",
+          "subtitle": "En Karmaşık Hafıza",
+          "icon": "brain",
+          "color": "#38bdf8"
+        },
+        "concept2": {
+          "title": "KALP",
+          "subtitle": "Yaşam Merkezi",
+          "icon": "heart",
+          "color": "#ef4444"
+        },
+        "concept3": {
+          "title": "GÖZ",
+          "subtitle": "Hassas Mercek",
+          "icon": "eye",
+          "color": "#facc15"
+        },
+        "bottomNote": "FAKAT KUR'AN PARMAK UCUNA ODAKLANDI"
+      },
+      "timeline": {
+        "startYear": "Kıyamet",
+        "endYear": "Diriliş",
+        "durationLabel": "Tesviye",
+        "title": "Kusursuz Dizilim",
+        "ayahArabic": "",
+        "ayahTranslation": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
+        "ayahRef": "Kıyamet Suresi, 3-4"
+      },
+      "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir. Bilimin henüz yeni keşfettiği bu biometrik imza, asırlar önce bu mucizevi ayetle ilan edilmişti.",
+      "viral": {
+        "hookScore": 99,
+        "viralTitles": [
+          "Parmak Ucundaki BÜYÜK Sır! Kıyamet Suresi 3-4",
+          "İkizlerin Bile Farklı: 1400 Yıl Önceki Akıl Almaz Detay!",
+          "Neden Beyin Değil de Parmak Ucu?"
+        ],
+        "hashtags": [
+          "#bilim",
+          "#kuran",
+          "#parmakizi",
+          "#mucize",
+          "#tefekkür",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden her insan aslında...",
+        "description": "Parmak uçlarındaki dermatoglif şifresi ve Kıyamet Suresi'nin mucizevi detayları."
+      },
+      "subtitles": [
+        {
+          "text": "DNA'sı yüzde yüz",
+          "start": 0.0,
+          "end": 1.74
+        },
+        {
+          "text": "aynı olan tek",
+          "start": 1.74,
+          "end": 2.88
+        },
+        {
+          "text": "yumurta ikizlerini bile",
+          "start": 2.88,
+          "end": 4.48
+        },
+        {
+          "text": "birbirinden ayıran tek",
+          "start": 4.48,
+          "end": 6.02
+        },
+        {
+          "text": "bir sır vardır.",
+          "start": 6.02,
+          "end": 7.06
+        },
+        {
+          "text": "Çürüyüp toprak olduktan",
+          "start": 7.94,
+          "end": 9.64
+        },
+        {
+          "text": "sonra nasıl diriltileceğini",
+          "start": 9.64,
+          "end": 11.6
+        },
+        {
+          "text": "soranlara, Kur'an tam",
+          "start": 11.6,
+          "end": 13.32
+        },
+        {
+          "text": "da parmak uçlarına",
+          "start": 13.32,
+          "end": 14.18
+        },
+        {
+          "text": "işaret ederek cevap",
+          "start": 14.18,
+          "end": 15.82
+        },
+        {
+          "text": "verdi. Milyarlarca insanın",
+          "start": 15.82,
+          "end": 18.14
+        },
+        {
+          "text": "her biri, parmak",
+          "start": 18.14,
+          "end": 19.48
+        },
+        {
+          "text": "ucundaki o eşsiz",
+          "start": 19.94,
+          "end": 21.38
+        },
+        {
+          "text": "mühürle yeniden var",
+          "start": 21.38,
+          "end": 23.0
+        },
+        {
+          "text": "edilir. Bilimin henüz",
+          "start": 23.0,
+          "end": 24.84
+        },
+        {
+          "text": "yeni keşfettiği bu",
+          "start": 24.84,
+          "end": 26.52
+        },
+        {
+          "text": "biometrik imza, asırlar",
+          "start": 26.52,
+          "end": 27.94
+        },
+        {
+          "text": "önce bu mucizevi",
+          "start": 28.48,
+          "end": 29.62
+        },
+        {
+          "text": "ayetle ilan edilmişti.",
+          "start": 29.62,
+          "end": 31.72
+        }
+      ],
+      "audioUrl": "audio.mp3",
+      "socialHandle": "@birkissa",
+      "theme": "dark_minimalist",
+      "particles": "dust",
+      "ambientPattern": "fingerprint"
+    }
+  },
+  {
+    "id": "33b12391",
+    "topic": "Allah mutlak adilse neden insanlara hemen cezasını vermiyor?",
+    "theme": "notebook",
+    "layoutType": "cards",
+    "created_at": "2026-10-27 20:52",
+    "headerMain": "NEDEN HEMEN VERİLMİYOR?",
+    "narration": "Allah mutlak adilse, neden zalimlerin cezasını hemen vermiyor? Çünkü dünya ceza yeri değil, imtihan meydanıdır. Eğer her suç anında cezalandırılsaydı, ne tevbe kapısı açık kalırdı ne de iradenin bir anlamı olurdu. O, erteler ama asla ihmal etmez.",
+    "hookScore": 98,
+    "key_used": "asdxcxc006@gmail.com",
+    "thumbnail_url": "/out/thumbnail.png?t=1793123538",
+    "video_data": {
+      "headerSubtitle": "İlahi Adalet Sırrı",
+      "headerLine1": "NEDEN",
+      "circledWord": "HEMEN",
+      "headerLine2": "CEZA",
+      "highlightedText": "VERİLMİYOR?",
+      "layoutType": "cards",
+      "cards": [
+        {
+          "id": "1",
+          "label": "mühlet",
+          "value": "İmtihan",
+          "icon": "clock",
+          "color": "#1e3a8a"
+        },
+        {
+          "id": "2",
+          "label": "tövbe",
+          "value": "Fırsat",
+          "icon": "heart",
+          "color": "#15803d"
+        },
+        {
+          "id": "3",
+          "label": "adalet",
+          "value": "Mahşer",
+          "icon": "scale",
+          "color": "#854d0e"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "İnsan Beklentisi",
+        "leftSubtitle": "Anında Karşılık",
+        "leftPoints": [
+          "Hemen cezalandırılsın",
+          "Gözümüzle görelim",
+          "Sabrımız tükeniyor"
+        ],
+        "leftColor": "#dc2626",
+        "rightTitle": "İlahi Hikmet",
+        "rightSubtitle": "Kusursuz Mühlet",
+        "rightPoints": [
+          "Tövbe kapısı açık",
+          "Herkesin vakti var",
+          "Mutlak adalet tecelli eder"
+        ],
+        "rightColor": "#16a34a",
+        "verdict": "Allah adalette acele etmez, çünkü mühlet verir, ihmal etmez."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Aşama",
+          "title": "İmtihan Sahnesi",
+          "desc": "Dünya ceza yeri değil, niyetlerin ve amellerin sergilendiği yerdir.",
+          "color": "#1e3a8a"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Aşama",
+          "title": "Mühlet Sırrı",
+          "desc": "Zalimlere fırsat verilir ki ya dönsünler ya da cezaları katlansın.",
+          "color": "#d97706"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Aşama",
+          "title": "Mutlak Adalet",
+          "desc": "Hiçbir hak kimsede kalmaz; hesap günü kesindir.",
+          "color": "#15803d"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "İmam Gazali",
+        "title": "İHYA",
+        "quoteText": "Acele eden, vaktinden önce zayi olur. İlahi adalet saat gibi şaşmaz.",
+        "sourceRef": "Hikmet Pınarları"
+      },
+      "metricImpact": {
+        "bigNumber": "MÜHLET",
+        "bigLabel": "VERİLİYOR",
+        "subheading": "Neden Kötüler Hemen Kahrolmuyor?",
+        "keyTakeaway": "Dünya ceza yurdu değil, imtihan meydanıdır."
+      },
+      "timeline": {
+        "startYear": "Dünya",
+        "endYear": "Ahiret",
+        "durationLabel": "Vade",
+        "title": "Adaletin Tezahür Vakti",
+        "ayahArabic": "",
+        "ayahTranslation": "Şüphesiz Rabbin, gözetlemededir.",
+        "ayahRef": "Fecr Suresi, 14"
+      },
+      "narration": "Allah mutlak adilse, neden zalimlerin cezasını hemen vermiyor? Çünkü dünya ceza yeri değil, imtihan meydanıdır. Eğer her suç anında cezalandırılsaydı, ne tevbe kapısı açık kalırdı ne de iradenin bir anlamı olurdu. O, erteler ama asla ihmal etmez.",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Allah Adilse Neden Hemen Cezasız Kalmıyorlar?",
+          "Zalimler Neden Hemen Kahrolmuyor? (Şoke Eden Gerçek)",
+          "Her Suçun Cezası Neden Erteleniyor?"
+        ],
+        "hashtags": [
+          "#allah",
+          "#adalet",
+          "#islam",
+          "#kelam",
+          "#felsefe",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden...",
+        "description": "Allah'ın insanlara hemen ceza vermemesinin ardındaki derin ilahi hikmet."
+      },
+      "subtitles": [
+        {
+          "text": "Allah mutlak adilse,",
+          "start": 0.0,
+          "end": 0.98
+        },
+        {
+          "text": "neden zalimlerin cezasını",
+          "start": 0.98,
+          "end": 3.4
+        },
+        {
+          "text": "hemen vermiyor? Çünkü",
+          "start": 3.4,
+          "end": 5.24
+        },
+        {
+          "text": "dünya ceza yeri",
+          "start": 5.82,
+          "end": 7.74
+        },
+        {
+          "text": "değil, imtihan meydanıdır.",
+          "start": 7.74,
+          "end": 10.26
+        },
+        {
+          "text": "Eğer her suç",
+          "start": 10.58,
+          "end": 11.64
+        },
+        {
+          "text": "anında cezalandırılsaydı, ne",
+          "start": 11.64,
+          "end": 14.42
+        },
+        {
+          "text": "tevbe kapısı açık",
+          "start": 14.42,
+          "end": 15.62
+        },
+        {
+          "text": "kalırdı ne de",
+          "start": 15.62,
+          "end": 16.74
+        },
+        {
+          "text": "iradenin bir anlamı",
+          "start": 16.74,
+          "end": 18.16
+        },
+        {
+          "text": "olurdu. O, erteler",
+          "start": 18.16,
+          "end": 20.2
+        },
+        {
+          "text": "ama asla ihmal",
+          "start": 20.2,
+          "end": 21.54
+        },
+        {
+          "text": "etmez.",
+          "start": 21.54,
+          "end": 22.1
+        }
+      ],
+      "audioUrl": "audio.mp3",
+      "socialHandle": "@birkissa",
+      "theme": "notebook"
+    }
+  },
+  {
+    "id": "7e77c272",
+    "topic": "Zaman dağlarda neden daha hızlı akar? Einstein sırrı",
+    "theme": "blueprint",
+    "layoutType": "metric_impact",
+    "created_at": "2026-10-27 20:26",
+    "headerMain": "ZAMAN DAĞLARDA DAHA HIZLI AKAR?",
+    "narration": "Zaman her yerde aynı akmaz! Einstein'ın izafiyet teorisine göre dağların tepesinde yerçekimi daha zayıftır. Kütle çekimi azaldıkça uzay-zaman dokusu rahatlar ve zirvelerde zaman deniz seviyesine göre daha hızlı akar. Bir dağa çıktığınızda aslında geleceğe biraz daha hızlı gidersiniz.",
+    "hookScore": 98,
+    "key_used": "asdxcxc001@gmail.com",
+    "thumbnail_url": "/out/thumbnail.png?t=1793121994",
+    "video_data": {
+      "headerSubtitle": "Einstein'ın Sırrı",
+      "headerLine1": "ZAMAN",
+      "circledWord": "DAĞLARDA",
+      "headerLine2": "NEDEN",
+      "highlightedText": "DAHA HIZLI AKAR?",
+      "layoutType": "metric_impact",
+      "cards": [
+        {
+          "id": "1",
+          "label": "Yerçekimi",
+          "value": "Zayıf",
+          "icon": "scale",
+          "color": "#1e3a8a"
+        },
+        {
+          "id": "2",
+          "label": "Einstein",
+          "value": "İzafet",
+          "icon": "lightbulb",
+          "color": "#d97706"
+        },
+        {
+          "id": "3",
+          "label": "Kozmos",
+          "value": "Akış",
+          "icon": "galaxy",
+          "color": "#15803d"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "Deniz Seviyesi",
+        "leftSubtitle": "Yoğun Yerçekimi",
+        "leftPoints": [
+          "Kütle çekimi çok güçlüdür",
+          "Zaman bükülür ve yavaşlar",
+          "Atomlar daha ağır salınır"
+        ],
+        "leftColor": "#2563eb",
+        "rightTitle": "Zirveler",
+        "rightSubtitle": "Zayıf Yerçekimi",
+        "rightPoints": [
+          "Kütle merkezi uzaktadır",
+          "Zaman daha hızlı akar",
+          "Saniyeler bile farklıdır"
+        ],
+        "rightColor": "#e11d48",
+        "verdict": "Zaman mutlak değil, yerçekimine göre değişen esnek bir boyuttur."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Kütle",
+          "title": "Ağırlık",
+          "desc": "Gezegenlerin kütlesi uzay-zaman dokusunu büker.",
+          "color": "#1e3a8a"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Çekim",
+          "title": "Mesafe",
+          "desc": "Merkezden uzaklaştıkça yerçekimi etkisi azalır.",
+          "color": "#d97706"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Sonuç",
+          "title": "Hızlanma",
+          "desc": "Dağ tepelerinde saatler deniz seviyesine göre ileridedir.",
+          "color": "#15803d"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Albert Einstein",
+        "title": "İzafiyet Teorisi",
+        "quoteText": "Zaman, uzaydan ayrı düşünülemez; kütlenin olduğu yerde zaman yavaşlar.",
+        "sourceRef": "Genel Görelilik"
+      },
+      "metricImpact": {
+        "bigNumber": "%0.000",
+        "bigLabel": "DAHA HIZLI",
+        "subheading": "Everest'in Tepesinde Zaman Farkı",
+        "keyTakeaway": "Yükseklerde yerçekimi azaldığı için zaman kural tanımaz ve daha hızlı akar."
+      },
+      "timeline": {
+        "startYear": "1905",
+        "endYear": "1915",
+        "durationLabel": "Teori",
+        "title": "Zamanın Bükülmesi",
+        "ayahArabic": "",
+        "ayahTranslation": "Şüphesiz Rabbin katında bir gün, sizin sayacaklarınızdan bin yıl gibidir.",
+        "ayahRef": "Hac Suresi, 47"
+      },
+      "narration": "Zaman her yerde aynı akmaz! Einstein'ın izafiyet teorisine göre dağların tepesinde yerçekimi daha zayıftır. Kütle çekimi azaldıkça uzay-zaman dokusu rahatlar ve zirvelerde zaman deniz seviyesine göre daha hızlı akar. Bir dağa çıktığınızda aslında geleceğe biraz daha hızlı gidersiniz.",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Dağlarda Zaman Neden Daha Hızlı Akar? Einstein'ın Çılgın Sırrı!",
+          "Zaman Sabit Değil: Yükseklerde Ne Oluyor?",
+          "Dağa Çıktığınızda Yaşlandığınızı Biliyor musunuz?"
+        ],
+        "hashtags": [
+          "#einstein",
+          "#fizik",
+          "#zaman",
+          "#bilim",
+          "#uzay",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte bu yüzden zaman aslında...",
+        "description": "Einstein'ın görelilik teorisi ile dağlarda zamanın neden daha hızlı aktığının şaşırtıcı açıklaması."
+      },
+      "subtitles": [
+        {
+          "text": "Zaman her yerde",
+          "start": 0.0,
+          "end": 1.28
+        },
+        {
+          "text": "aynı akmaz. Aynı",
+          "start": 1.28,
+          "end": 3.2
+        },
+        {
+          "text": "şu taynin izafiyet",
+          "start": 3.2,
+          "end": 4.56
+        },
+        {
+          "text": "teorisine göre daların",
+          "start": 4.56,
+          "end": 6.32
+        },
+        {
+          "text": "tepesinde yer çekimi",
+          "start": 6.32,
+          "end": 7.82
+        },
+        {
+          "text": "daha zayıftır. Kötüle",
+          "start": 7.82,
+          "end": 9.74
+        },
+        {
+          "text": "çekimi azaldıkça uzay",
+          "start": 9.74,
+          "end": 11.42
+        },
+        {
+          "text": "zaman dokusur rahatlar",
+          "start": 11.42,
+          "end": 13.06
+        },
+        {
+          "text": "ve zirvelerde zaman",
+          "start": 13.06,
+          "end": 14.5
+        },
+        {
+          "text": "deniz seviyesine göre",
+          "start": 14.5,
+          "end": 15.94
+        },
+        {
+          "text": "daha. Hızlı akar,",
+          "start": 15.94,
+          "end": 18.24
+        },
+        {
+          "text": "bir daha çıktığınızda",
+          "start": 18.58,
+          "end": 20.04
+        },
+        {
+          "text": "aslında geleceği biraz",
+          "start": 20.04,
+          "end": 21.7
+        },
+        {
+          "text": "daha hızlı gidersiniz.",
+          "start": 21.7,
+          "end": 23.34
+        }
+      ],
+      "audioUrl": "audio.mp3",
+      "socialHandle": "@birkissa",
+      "theme": "blueprint"
+    }
+  },
+  {
+    "id": "21b86939",
+    "topic": "Karadeliklerin olay ufkunu gecersek ne olur?",
+    "theme": "blueprint",
+    "layoutType": "flowchart",
+    "created_at": "2026-10-27 18:42",
+    "headerMain": "OLAY UFKUNU NE OLUR?",
+    "narration": "Karadeliklerin olay ufkunu geçersek ne olur? Dışarıdaki bir gözlemci için zamanın durursun, ama senin için işler çok farklı başlar. Devasa kütle çekimi seni adeta bir noodle gibi uzatır. Bilinen tüm fizik kuralları yıkılır ve geri dönüşü olmayan o karanlık merkeze doğru çekilirsin.",
+    "hookScore": 98,
+    "key_used": "asdxcxc005@gmail.com",
+    "thumbnail_url": "/out/thumbnail.png?t=1793115733",
+    "video_data": {
+      "headerSubtitle": "Kozmik Sır",
+      "headerLine1": "OLAY",
+      "circledWord": "UFKUNU",
+      "headerLine2": "GEÇERSEN",
+      "highlightedText": "NE OLUR?",
+      "layoutType": "flowchart",
+      "cards": [
+        {
+          "id": "1",
+          "label": "Çekim Gücü",
+          "value": "Sonsuz",
+          "icon": "galaxy",
+          "color": "#1e3a8a"
+        },
+        {
+          "id": "2",
+          "label": "Zaman",
+          "value": "Bükülür",
+          "icon": "clock",
+          "color": "#854d0e"
+        },
+        {
+          "id": "3",
+          "label": "Tekillik",
+          "value": "Merkez",
+          "icon": "lightbulb",
+          "color": "#15803d"
+        }
+      ],
+      "vsData": {
+        "leftTitle": "Dışarıdaki Gözlemci",
+        "leftSubtitle": "Zamanın Yavaşlaması",
+        "leftPoints": [
+          "Senin donup kaldığını görür",
+          "Işığın sana yetişemez",
+          "Asla düştüğüne şahit olamaz"
+        ],
+        "leftColor": "#dc2626",
+        "rightTitle": "Senin Deneyimin",
+        "rightSubtitle": "Fark Edilemeyen Sınır",
+        "rightPoints": [
+          "Ufku geçtiğini hissetmezsin bile",
+          "Fizik kuralları aniden değişir",
+          "Merkeze doğru kaçınılmaz düşüş"
+        ],
+        "rightColor": "#16a34a",
+        "verdict": "Olay ufkunu geçmek, geri dönüşü olmayan kozmik bir boyuta adım atmaktır."
+      },
+      "flowchartSteps": [
+        {
+          "stepNumber": 1,
+          "badge": "1. Aşama",
+          "title": "Gelgit Kuvvetleri",
+          "desc": "Ayaklarına etki eden yerçekimi başucundakinden milyon kat fazla olur.",
+          "color": "#1e3a8a"
+        },
+        {
+          "stepNumber": 2,
+          "badge": "2. Aşama",
+          "title": "Spagettifikasyon",
+          "desc": "Vücudun esneyerek ince bir tel gibi uzamaya ve parçalanmaya başlar.",
+          "color": "#d97706"
+        },
+        {
+          "stepNumber": 3,
+          "badge": "3. Aşama",
+          "title": "Tekillik",
+          "desc": "Tüm bilinen fizik kuralları yok olur ve zaman sonsuzluğa karışır.",
+          "color": "#15803d"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Albert Einstein",
+        "title": "GENEL GÖRELİLİK",
+        "quoteText": "Zaman ve uzay, kütlenin etrafında bükülen esnek bir kumaştır.",
+        "sourceRef": "Kozmik Sırlar"
+      },
+      "metricImpact": {
+        "bigNumber": "SONSUZ",
+        "bigLabel": "ÇEKİM GÜCÜ",
+        "subheading": "Işığın Bile Kaçamadığı Nokta",
+        "keyTakeaway": "Olay ufkunu geçtiğin an, evrenin geri kalanıyla tüm bağın kopar."
+      },
+      "timeline": {
+        "startYear": "Ufuk",
+        "endYear": "Merkez",
+        "durationLabel": "Süreç",
+        "title": "Karadeliğin Derinlikleri",
+        "ayahArabic": "",
+        "ayahTranslation": "Göklerin ve yerin sırlarındaki muazzam nizam.",
+        "ayahRef": "Kosmik Denge"
+      },
+      "narration": "Karadeliklerin olay ufkunu geçersek ne olur? Dışarıdaki bir gözlemci için zamanın durursun, ama senin için işler çok farklı başlar. Devasa kütle çekimi seni adeta bir noodle gibi uzatır. Bilinen tüm fizik kuralları yıkılır ve geri dönüşü olmayan o karanlık merkeze doğru çekilirsin.",
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Karadeliğin İçine Girerseniz Vücudunuza Ne Olur?",
+          "Olay Ufkunu Geçtiğiniz Anda Zaman Neden Durur?",
+          "Asla Geri Dönemeyeceğiniz O Korkunç Nokta!"
+        ],
+        "hashtags": [
+          "#karadelik",
+          "#uzay",
+          "#fizik",
+          "#einstein",
+          "#bilim",
+          "#shorts"
+        ],
+        "loopEnding": "ve o an içeriye giren kişi aslında...",
+        "description": "Karadeliklerin olay ufkunu geçmenin fiziksel ve akıl almaz sonuçları."
+      },
+      "subtitles": [
+        {
+          "text": "Karadeliklerin olay ufkunu geçersek",
+          "start": 0.0,
+          "end": 1.82
+        },
+        {
+          "text": "ne olur? Dışarıdaki bir",
+          "start": 1.82,
+          "end": 3.64
+        },
+        {
+          "text": "gözlemci için zamanın durursun,",
+          "start": 3.64,
+          "end": 5.45
+        },
+        {
+          "text": "ama senin için işler",
+          "start": 5.45,
+          "end": 7.27
+        },
+        {
+          "text": "çok farklı başlar. Devasa",
+          "start": 7.27,
+          "end": 9.09
+        },
+        {
+          "text": "kütle çekimi seni adeta",
+          "start": 9.09,
+          "end": 10.91
+        },
+        {
+          "text": "bir noodle gibi uzatır.",
+          "start": 10.91,
+          "end": 12.73
+        },
+        {
+          "text": "Bilinen tüm fizik kuralları",
+          "start": 12.73,
+          "end": 14.55
+        },
+        {
+          "text": "yıkılır ve geri dönüşü",
+          "start": 14.55,
+          "end": 16.36
+        },
+        {
+          "text": "olmayan o karanlık merkeze",
+          "start": 16.36,
+          "end": 18.18
+        },
+        {
+          "text": "doğru çekilirsin.",
+          "start": 18.18,
+          "end": 19.09
+        }
+      ],
+      "audioUrl": "audio.mp3",
+      "socialHandle": "@birkissa",
+      "theme": "blueprint"
+    }
+  },
+  {
+    "id": "c592fe1d",
+    "topic": "İbn-i Sina bir kitabı neden 40 kez okudu ve yine anlamadı?",
+    "theme": "parchment",
+    "layoutType": "metric_impact",
+    "created_at": "2026-10-26 00:49",
+    "headerMain": "İBN-İ SİNA 40 KEZ HALDE ANLAMADI?",
+    "narration": "Tarihin en büyük dâhilerinden İbn-i Sina, Aristo’nun Metafizik kitabını tam kırk kez okudu. Ezberlemişti ama yine de anlamıyordu. Ne zaman ki pazarda üç dirheme Farabi’nin şerhini buldu, işte o zaman taşlar yerine oturdu.",
+    "hookScore": 98,
+    "key_used": "asdxcxc001@gmail.com"
+  }
+]

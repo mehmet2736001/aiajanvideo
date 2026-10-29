@@ -1,0 +1,24 @@
+{
+  "name": "notebook-video-ai",
+  "version": "1.0.0",
+  "description": "AI-Powered Notebook Explainer Shorts Video Generator",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "remotion preview src/index.ts",
+    "build": "remotion render src/index.ts NotebookVideo out/video.mp4",
+    "generate": "node scripts/generate.js"
+  },
+  "dependencies": {
+    "@remotion/google-fonts": "^4.0.538",
+    "@remotion/player": "4.0.538",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.538"
+  },
+  "devDependencies": {
+    "@remotion/cli": "4.0.538",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.4"
+  }
+}

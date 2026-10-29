@@ -1,0 +1,55 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build and Render Outputs (Videos & Bundles)
+out/
+dist/
+build/
+.remotion/
+*.mp4
+*.webm
+*.zip
+
+# Sensitive API Keys & Credentials (CRITICAL)
+data/api_keys.json
+data/api_keys.csv
+data/keys.json
+data/*secret*.json
+data/token.json
+data/analyzed_audio.mp3
+data/analyzed_video.webm
+data/upload_raw_*
+data/frames/
+*.env
+*.env.*
+*.pem
+*.key
+
+# Temporary media & test recordings
+public/audio.mp3
+public/audio_raw.mp3
+public/audio_studio.mp3
+public/test_*.mp3
+public/temp_*
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+env/
+venv/
+ENV/
+
+# System and IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

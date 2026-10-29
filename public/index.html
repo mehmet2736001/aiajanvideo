@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notebook Video AI · Pro Video Editor 🎬</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@600;800&family=Caveat:wght@700&family=Kalam:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+            hand: ['"Kalam"', '"Caveat"', 'cursive'],
+            arabic: ['"Amiri"', '"Cairo"', 'serif']
+          },
+          colors: {
+            editor: {
+              bg: '#080c14',
+              surface: '#0d1322',
+              panel: '#101828',
+              border: '#1e293b',
+              accent: '#38bdf8',
+              gold: '#eab308',
+              red: '#ef4444'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #080c14; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+    /* Pure Minimal Notebook Themes */
+    .theme-notebook {
+      background-color: #fbf8f2 !important;
+      background-image: 
+        linear-gradient(to right, rgba(203, 213, 225, 0.45) 1.5px, transparent 1.5px),
+        linear-gradient(to bottom, rgba(203, 213, 225, 0.45) 1.5px, transparent 1.5px) !important;
+      background-size: 24px 24px !important;
+      color: #0f172a !important;
+    }
+    .theme-kraft {
+      background-color: #e2cfb0 !important;
+      background-image: 
+        linear-gradient(to right, rgba(120, 53, 15, 0.25) 1.5px, transparent 1.5px),
+        linear-gradient(to bottom, rgba(120, 53, 15, 0.25) 1.5px, transparent 1.5px) !important;
+      background-size: 24px 24px !important;
+      color: #292524 !important;
+    }
+    .theme-chalkboard {
+      background-color: #1b2d24 !important;
+      background-image: 
+        radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 60%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.07) 1px, transparent 1px) !important;
+      background-size: 100% 100%, 32px 32px, 32px 32px !important;
+      color: #f8fafc !important;
+      border: 6px solid #5c3a21 !important;
+    }
+    .theme-blueprint {
+      background-color: #0c243c !important;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.12) 1.5px, transparent 1.5px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 1.5px, transparent 1.5px),
+        linear-gradient(to right, rgba(56, 189, 248, 0.25) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.25) 1px, transparent 1px) !important;
+      background-size: 96px 96px, 96px 96px, 16px 16px, 16px 16px !important;
+      color: #ffffff !important;
+      border: 5px solid #08192b !important;
+    }
+    .theme-parchment {
+      background-color: #f3e6cd !important;
+      background-image: 
+        radial-gradient(ellipse at center, rgba(255, 255, 255, 0.4) 0%, rgba(180, 130, 80, 0.3) 100%),
+        linear-gradient(to right, rgba(146, 64, 14, 0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(146, 64, 14, 0.15) 1px, transparent 1px) !important;
+      background-size: 100% 100%, 28px 28px, 28px 28px !important;
+      color: #451a03 !important;
+      box-shadow: inset 0 0 50px rgba(90, 40, 10, 0.3) !important;
+    }
+    .theme-dark_minimalist {
+      background: radial-gradient(circle at 50% 20%, #111a28 0%, #06090e 80%, #020305 100%) !important;
+      color: #f8fafc !important;
+      border: 1px solid rgba(250, 204, 21, 0.25) !important;
+    }
+    .theme-neon_cyber {
+      background-color: #030712 !important;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.12) 1px, transparent 1px) !important;
+      background-size: 24px 24px !important;
+      color: #38bdf8 !important;
+      border: 1px solid rgba(56, 189, 248, 0.4) !important;
+    }
+    .theme-gold_luxury {
+      background: radial-gradient(circle at 50% 25%, #181206 0%, #080502 80%, #030201 100%) !important;
+      color: #fef08a !important;
+      border: 1px solid rgba(234, 179, 8, 0.35) !important;
+    }
+
+    /* Timeline Drag Scrub & Selection Styles */
+    .timeline-ruler-tick {
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+      height: 8px;
+    }
+    .timeline-ruler-tick.major {
+      height: 14px;
+      border-left-color: rgba(255, 255, 255, 0.4);
+    }
+    .playhead-needle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: #ef4444;
+      z-index: 40;
+      pointer-events: none;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+      transition: left 0.04s linear;
+    }
+    .playhead-handle {
+      position: absolute;
+      top: 0;
+      left: -7px;
+      width: 16px;
+      height: 18px;
+      background: #ef4444;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 65%, 50% 100%, 0% 65%);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      cursor: ew-resize;
+      pointer-events: auto;
+    }
+    .scene-block {
+      transition: all 0.15s ease-out;
+      user-select: none;
+    }
+    .scene-block.active {
+      box-shadow: 0 0 0 2px #eab308, 0 4px 14px rgba(234, 179, 8, 0.35);
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="bg-[#080c14] text-slate-200 min-h-screen font-sans flex flex-col antialiased selection:bg-amber-500 selection:text-black overflow-x-hidden">
+
+  <!-- ================= TOP HEADER (MATCHING SCREENSHOT) ================= -->
+  <header class="h-14 border-b border-slate-800/80 bg-[#0d1322] px-4 flex items-center justify-between shrink-0 z-50 sticky top-0">
+    
+    <!-- LEFT: Back Arrow, Title "Editor — S1 [Konu]", Format Dropdown & Saved Indicator -->
+    <div class="flex items-center gap-3">
+      <button onclick="location.reload()" title="Ana Ekrana Dön" class="w-8 h-8 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center text-xs transition">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+
+      <div class="flex items-center gap-2">
+        <span class="font-extrabold text-sm text-white tracking-tight flex items-center gap-1.5 font-mono">
+          <i class="fa-solid fa-film text-amber-400"></i>
+          <span id="header-editor-title">Editor — S1 Kısa Kıssa</span>
+        </span>
+        <span class="text-slate-600">|</span>
+        <!-- Format Selector -->
+        <div class="relative">
+          <select id="video-aspect-ratio" class="bg-[#070a12] border border-slate-800 hover:border-slate-700 text-slate-200 text-xs rounded-xl px-2.5 py-1 appearance-none pr-6 cursor-pointer font-semibold focus:outline-none">
+            <option value="9:16" selected>9:16 Dikey (Shorts / Reels)</option>
+            <option value="16:9">16:9 Yatay (YouTube)</option>
+            <option value="1:1">1:1 Kare (Instagram)</option>
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-2 top-2.5 text-[9px] text-slate-400 pointer-events-none"></i>
+        </div>
+        <!-- Saved badge -->
+        <span class="hidden sm:flex items-center gap-1 text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-medium">
+          <i class="fa-solid fa-check text-[10px]"></i> Kaydedildi
+        </span>
+      </div>
+    </div>
+
+    <!-- CENTER TOOLS: Media, Multilingual (Faz 9), Autopilot & Key Pool -->
+    <div class="hidden md:flex items-center gap-1.5 bg-[#070a12] p-1 rounded-2xl border border-slate-800/80 text-xs font-semibold">
+      <button onclick="toggleMediaDrawer()" class="px-3 py-1.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-solid fa-folder-open text-cyan-400"></i> Medya Aktar
+      </button>
+      <button onclick="openMultilingualModal()" class="px-3 py-1.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-solid fa-earth-americas text-emerald-400"></i> Çok Dilli (Faz 9)
+      </button>
+      <button onclick="openAutopilotModal()" class="px-3 py-1.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-solid fa-robot text-purple-400"></i> Video Dağıt (Otopilot)
+      </button>
+      <button onclick="openKeyPoolModal()" class="px-3 py-1.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-solid fa-key text-amber-400"></i> Key Havuzu (<span id="top-key-count">136</span>)
+      </button>
+    </div>
+
+    <!-- RIGHT: Green Fast Render & Prominent Gold Export Button (Matching Screenshot) -->
+    <div class="flex items-center gap-2.5">
+      <button onclick="renderVideo()" id="btn-quick-render" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 shadow-md shadow-emerald-900/30">
+        <i class="fa-solid fa-bolt text-amber-300"></i>
+        <span class="hidden sm:inline">Hızlı Render</span>
+      </button>
+
+      <!-- PROMINENT GOLD EXPORT BUTTON -->
+      <button onclick="openExportModal()" id="btn-top-export" class="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold text-xs px-4 py-1.5 rounded-xl transition flex items-center gap-1.5 shadow-lg shadow-amber-500/20 active:scale-95">
+        <i class="fa-solid fa-arrow-up-from-bracket text-slate-950"></i>
+        <span>Export</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= MAIN WORKSPACE (3-COLUMN LAYOUT) ================= -->
+  <div class="flex-1 flex overflow-hidden">
+    
+    <!-- LEFT PANEL: MEDIA LIBRARY & AI PROMPT DRAWER (320px) -->
+    <aside id="left-media-drawer" class="w-80 border-r border-slate-800/80 bg-[#0d1322] flex flex-col shrink-0 overflow-y-auto">
+      
+      <!-- Drawer Tabs -->
+      <div class="flex border-b border-slate-800 text-xs font-semibold p-2 gap-1 bg-[#090d16]">
+        <button onclick="switchLeftTab('media')" id="ltab-media-btn" class="flex-1 py-1.5 rounded-xl bg-slate-800 text-white font-bold transition flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-folder"></i> Medya & Katman
+        </button>
+        <button onclick="switchLeftTab('prompt')" id="ltab-prompt-btn" class="flex-1 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> AI İstemi
+        </button>
+        <button onclick="switchLeftTab('theme')" id="ltab-theme-btn" class="flex-1 py-1.5 rounded-xl text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-palette text-cyan-400"></i> Tema
+        </button>
+      </div>
+
+      <!-- TAB 1: MEDIA & TIMELINE ASSETS -->
+      <div id="ltab-content-media" class="p-4 space-y-4 text-xs">
+        
+        <!-- Ses Katmanı (Timeline Audio Upload Box) -->
+        <div class="p-3 bg-[#070a12] border border-slate-800 rounded-2xl space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div class="font-bold text-white flex items-center gap-1.5">
+              <i class="fa-solid fa-microphone-lines text-amber-400"></i>
+              <span>Zaman Tüneli Ses Kaydı</span>
+            </div>
+            <span id="audio-duration-badge" class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">00:15.0</span>
+          </div>
+
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Kendi sesinizi (MP3/WAV) doğrudan zaman tüneline aktarın. Whisper yapay zekâsı otomatik heceler & sahneleri hizalar.
+          </p>
+
+          <!-- Audio Upload Input -->
+          <label class="w-full flex items-center justify-center gap-2 p-3 bg-slate-800/60 hover:bg-slate-800 border border-dashed border-slate-700 hover:border-amber-400 text-slate-200 rounded-xl cursor-pointer transition font-bold text-xs">
+            <i class="fa-solid fa-cloud-arrow-up text-amber-400"></i>
+            <span id="audio-upload-text">Ses Dosyası Seç / Yükle</span>
+            <input type="file" id="timeline-audio-input" accept="audio/*" class="hidden" onchange="uploadTimelineAudioFile(this.files[0])">
+          </label>
+
+          <!-- Mini Waveform Preview -->
+          <div id="mini-waveform-box" class="h-6 w-full bg-[#0b101c] rounded-lg overflow-hidden flex items-center gap-[2px] px-1">
+            <!-- Peaks injected via JS -->
+          </div>
+        </div>
+
+        <!-- AI Video Sahneleri Listesi (Quick Jump & Add) -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+              <i class="fa-solid fa-clapperboard text-cyan-400"></i> Video Sahneleri (<span id="media-scene-count">1</span>)
+            </span>
+            <button onclick="addNewSceneToTimeline()" class="text-[11px] text-emerald-400 hover:text-emerald-300 font-bold transition flex items-center gap-1">
+              <i class="fa-solid fa-plus"></i> Sahne Ekle
+            </button>
+          </div>
+          <div id="media-scenes-list" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+            <!-- Scene mini cards populated by JS -->
+          </div>
+        </div>
+
+        <!-- Visual FX & B-Roll Assets -->
+        <div class="p-3 bg-[#070a12] border border-slate-800 rounded-2xl space-y-2">
+          <div class="font-bold text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-film text-indigo-400"></i>
+            <span>B-Roll Arka Plan Videoları</span>
+          </div>
+          <select id="media-broll-selector" onchange="changeActiveSceneBroll(this.value)" class="w-full bg-[#0c1220] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs">
+            <option value="none">Kapalı (Sadece Defter)</option>
+            <option value="night_sky">🌌 Gece Gökyüzü & Samanyolu (Time-lapse)</option>
+            <option value="macro_dust">✨ Sinematik Toz & Işık Hüzmeleri</option>
+            <option value="ink_water">🖋️ Mürekkep Yayılması & Duman</option>
+            <option value="nature_clouds">☁️ Bulut Geçişleri (Minimal)</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- TAB 2: AI PROMPT & DIRECTOR -->
+      <div id="ltab-content-prompt" class="hidden p-4 space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-white mb-1">Video Konusu veya Soru</label>
+          <textarea id="input-topic" rows="4" placeholder="Örn: İbn-i Sina bir kitabı 40 kez okuduğu halde neden anlamadı?..." class="w-full bg-[#070a12] border border-slate-800 rounded-2xl p-3 text-slate-100 text-xs focus:border-amber-500 focus:outline-none resize-none leading-relaxed">İbn-i Sina bir kitabı 40 kez okuduğu halde neden anlamadı?</textarea>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">Gemini AI Modeli</label>
+          <select id="select-gemini-model" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
+            <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite (Varsayılan)</option>
+            <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash (Dengeli)</option>
+            <option value="gemini-3-flash-preview">🔮 Gemini 3 Flash Preview</option>
+            <option value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">Seslendirme Dili & Anlatıcı</label>
+          <select id="tts-voice" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs">
+            <option value="en-US-AndrewMultilingualNeural" selected>🎙️ Andrew (Tok Belgesel & Anlatıcı)</option>
+            <option value="tr-TR-EmelNeural">🎙️ Emel (Doğal Türkçe Kadın)</option>
+            <option value="en-US-BrianMultilingualNeural">🎙️ Brian (Dinamik & Samimi)</option>
+          </select>
+        </div>
+
+        <button onclick="generateContent()" id="btn-generate" class="w-full bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-white font-extrabold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-bolt text-amber-300"></i>
+          <span>Yapay Zekâ ile Üret</span>
+        </button>
+      </div>
+
+      <!-- TAB 3: THEME PICKER -->
+      <div id="ltab-content-theme" class="hidden p-4 space-y-3 text-xs">
+        <label class="block font-bold text-white mb-1">Defter Estetiği & Kağıt Teması</label>
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="selectTheme('notebook')" class="p-2.5 rounded-xl border border-slate-700 bg-[#fbf8f2] text-slate-900 font-bold text-left hover:scale-[1.02] transition">
+            📓 Modern Defter
+          </button>
+          <button onclick="selectTheme('blueprint')" class="p-2.5 rounded-xl border border-cyan-800 bg-[#0c243c] text-cyan-300 font-bold text-left hover:scale-[1.02] transition">
+            📐 Blueprint
+          </button>
+          <button onclick="selectTheme('chalkboard')" class="p-2.5 rounded-xl border border-emerald-900 bg-[#1b2d24] text-emerald-300 font-bold text-left hover:scale-[1.02] transition">
+            🟢 Karatahta
+          </button>
+          <button onclick="selectTheme('kraft')" class="p-2.5 rounded-xl border border-amber-900 bg-[#e2cfb0] text-amber-950 font-bold text-left hover:scale-[1.02] transition">
+            📜 Saman Kraft
+          </button>
+          <button onclick="selectTheme('parchment')" class="p-2.5 rounded-xl border border-amber-800 bg-[#f3e6cd] text-amber-900 font-bold text-left hover:scale-[1.02] transition">
+            📑 Parşömen
+          </button>
+          <button onclick="selectTheme('dark_minimalist')" class="p-2.5 rounded-xl border border-slate-700 bg-[#090d16] text-slate-200 font-bold text-left hover:scale-[1.02] transition">
+            🖤 Karanlık Minimal
+          </button>
+          <button onclick="selectTheme('neon_cyber')" class="p-2.5 rounded-xl border border-sky-500/40 bg-[#030712] text-sky-400 font-bold text-left hover:scale-[1.02] transition">
+            ⚡ Neon Siber
+          </button>
+          <button onclick="selectTheme('gold_luxury')" class="p-2.5 rounded-xl border border-amber-500/40 bg-[#181206] text-amber-300 font-bold text-left hover:scale-[1.02] transition">
+            👑 Altın Lüks
+          </button>
+        </div>
+        <input type="hidden" id="selected-theme-val" value="notebook">
+      </div>
+
+    </aside>
+
+    <!-- CENTER PREVIEW MONITOR & TRANSPORT CONTROLS (FLEX-1) -->
+    <main class="flex-1 flex flex-col bg-[#080c14] overflow-hidden items-center justify-between p-4 relative">
+      
+      <!-- Top Monitor Status Bar -->
+      <div class="w-full max-w-[340px] flex items-center justify-between text-xs px-2 py-1 mb-2 bg-[#0d1322] border border-slate-800 rounded-xl">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-bold text-slate-200">9:16 Önizleme</span>
+          <span id="preview-mode-tag" class="text-[9px] bg-slate-800 text-cyan-300 border border-slate-700 px-1.5 py-0.2 rounded font-mono">📝 Canlı Taslak</span>
+        </div>
+        <button onclick="togglePreviewDisplayMode()" id="btn-toggle-display-mode" class="text-[11px] text-amber-300 hover:text-white transition flex items-center gap-1 font-semibold">
+          <i class="fa-solid fa-film"></i> <span id="text-toggle-display">MP4 Video</span>
+        </button>
+      </div>
+
+      <!-- 9:16 PHONE MOCKUP PREVIEW MONITOR -->
+      <div class="relative w-[320px] h-[520px] bg-[#0c111d] rounded-[38px] p-2.5 border-4 border-slate-800 shadow-2xl flex flex-col overflow-hidden">
+        
+        <!-- Notch -->
+        <div class="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-3 bg-slate-800/90 rounded-full z-40 flex items-center justify-center">
+          <div class="w-1.5 h-1.5 rounded-full bg-black/60"></div>
+        </div>
+
+        <!-- Screen Container -->
+        <div class="relative w-full h-full rounded-[28px] overflow-hidden bg-slate-950 flex flex-col">
+          
+          <!-- MP4 Video Player (hidden when in live canvas mode) -->
+          <video id="final-video" controls class="w-full h-full object-cover hidden z-30" src="/out/video.mp4" playsinline preload="auto"></video>
+
+          <!-- Live Canvas Mockup -->
+          <div id="notebook-preview" class="w-full h-full theme-notebook text-slate-900 flex flex-col p-4 relative font-hand overflow-hidden select-none transition-all duration-300">
+            
+            <!-- Red Margin Line -->
+            <div id="pv-margin" class="absolute left-6 top-0 bottom-0 w-[1.5px] bg-red-400 opacity-60"></div>
+
+            <!-- Spiral Holes -->
+            <div id="pv-holes" class="w-full flex justify-around mb-2 pt-2 pl-4">
+              <div class="w-2 h-2 rounded-full bg-slate-900"></div>
+              <div class="w-2 h-2 rounded-full bg-slate-900"></div>
+              <div class="w-2 h-2 rounded-full bg-slate-900"></div>
+              <div class="w-2 h-2 rounded-full bg-slate-900"></div>
+              <div class="w-2 h-2 rounded-full bg-slate-900"></div>
+              <div class="w-2 h-2 rounded-full bg-slate-900"></div>
+            </div>
+
+            <!-- Active Scene Chapter Pill -->
+            <div id="preview-scene-pill" class="mx-auto mb-1 px-2.5 py-0.5 bg-black/60 backdrop-blur-md rounded-full text-[9px] text-amber-300 font-mono font-bold border border-white/10 z-10">
+              Sahne 1 / 1 (0:00 - 0:15)
+            </div>
+
+            <!-- Header Titles -->
+            <div class="text-center pt-1">
+              <div id="pv-sub" class="text-xs font-bold text-emerald-700">Kısa Kıssa</div>
+              <div id="pv-line1" class="text-lg font-extrabold text-blue-900 leading-tight">İBN-İ SİNA</div>
+              <div class="text-sm font-extrabold text-blue-900 flex items-center justify-center gap-1.5 my-0.5">
+                <span id="pv-circle" class="border-2 border-red-600 rounded-full px-2 py-0.5 text-blue-950 -rotate-2">40 KEZ</span>
+                <span id="pv-line2">OKUDUĞU HALDE</span>
+              </div>
+              <div class="mt-0.5">
+                <span id="pv-high" class="bg-yellow-200 text-red-700 font-extrabold px-2 py-0.5 rounded text-base -rotate-1 inline-block">NEDEN ANLAMADI?</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Middle Area (PiP Polaroid / Torn Paper / Cards / Quote) -->
+            <div id="pv-middle-area" class="mt-2 flex-1 flex flex-col justify-center px-1">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Bottom Subtitles & Social Handle -->
+            <div class="mt-auto mb-1 flex flex-col items-center">
+              <div id="pv-bottom-sub" class="bg-white border-2 border-blue-900 rounded-xl px-3 py-1 text-xs font-extrabold text-blue-900 shadow">
+                ilim doğru anahtarla açılır
+              </div>
+              <div id="pv-handle" class="text-[9px] text-slate-500 italic mt-0.5 font-mono">
+                Instagram: @birkissa
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- TRANSPORT CONTROL BAR (MATCHING SCREENSHOT) -->
+      <div class="w-full max-w-[560px] bg-[#0d1322] border border-slate-800 rounded-2xl p-2.5 flex items-center justify-between mt-3 text-xs shadow-xl">
+        
+        <!-- Left: Timecode -->
+        <div class="font-mono text-amber-300 font-bold px-2 flex items-center gap-1">
+          <span id="transport-current-time">00:00.0</span>
+          <span class="text-slate-600">/</span>
+          <span id="transport-total-time" class="text-slate-400">00:15.0</span>
+        </div>
+
+        <!-- Center: Playback Transport Buttons -->
+        <div class="flex items-center gap-2">
+          <button onclick="seekTimeline(0)" title="Başa Dön" class="w-7 h-7 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+            <i class="fa-solid fa-backward-step text-xs"></i>
+          </button>
+          <button onclick="jumpToPrevScene()" title="Önceki Sahne" class="w-7 h-7 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+            <i class="fa-solid fa-chevron-left text-xs"></i>
+          </button>
+          
+          <!-- BIG PLAY/PAUSE -->
+          <button onclick="toggleTimelinePlayback()" id="btn-transport-play" title="Oynat / Durdur" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-bold flex items-center justify-center transition shadow-md shadow-amber-500/20 active:scale-95">
+            <i class="fa-solid fa-play text-sm ml-0.5" id="icon-transport-play"></i>
+          </button>
+
+          <button onclick="jumpToNextScene()" title="Sonraki Sahne" class="w-7 h-7 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+            <i class="fa-solid fa-chevron-right text-xs"></i>
+          </button>
+          <button onclick="seekTimeline(timelineDuration)" title="Sona Git" class="w-7 h-7 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+            <i class="fa-solid fa-forward-step text-xs"></i>
+          </button>
+        </div>
+
+        <!-- Right: Speed & Fullscreen -->
+        <div class="flex items-center gap-2">
+          <button onclick="cyclePlaybackSpeed()" id="btn-playback-speed" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg font-mono font-bold text-[11px] transition">
+            1.0x
+          </button>
+          <button onclick="forceRefreshPreview(true)" title="Önbelleği Temizle" class="w-7 h-7 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+            <i class="fa-solid fa-arrows-rotate text-xs"></i>
+          </button>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- RIGHT PANEL: SCENE INSPECTOR & AI REGENERATOR (320px) -->
+    <aside id="right-inspector" class="w-80 border-l border-slate-800/80 bg-[#0d1322] flex flex-col shrink-0 overflow-y-auto p-4 space-y-4 text-xs">
+      
+      <!-- Inspector Header -->
+      <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+        <div class="font-bold text-white flex items-center gap-1.5">
+          <i class="fa-solid fa-sliders text-amber-400"></i>
+          <span id="inspector-scene-title">Sahne 1 Denetçisi</span>
+        </div>
+        <span id="inspector-scene-bounds" class="font-mono text-[10px] text-cyan-400 bg-cyan-950/40 border border-cyan-800 px-2 py-0.5 rounded-full">00:00 - 00:15</span>
+      </div>
+
+      <!-- Quick Action Buttons for Active Scene -->
+      <div class="grid grid-cols-2 gap-2">
+        <button onclick="regenerateActiveScene()" id="btn-scene-regen" class="p-2.5 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 hover:from-amber-500/30 hover:to-yellow-500/30 text-amber-300 border border-amber-500/40 rounded-xl font-bold flex items-center justify-center gap-1.5 transition">
+          <i class="fa-solid fa-arrows-rotate"></i> <span>Yeniden Üret</span>
+        </button>
+        <button onclick="deleteActiveScene()" id="btn-scene-delete" class="p-2.5 bg-red-950/20 hover:bg-red-900/30 text-red-400 border border-red-500/30 rounded-xl font-bold flex items-center justify-center gap-1.5 transition">
+          <i class="fa-solid fa-trash-can"></i> <span>Sahneyi Sil</span>
+        </button>
+      </div>
+
+      <!-- Layout Selector for Scene -->
+      <div class="space-y-1.5">
+        <label class="block font-bold text-slate-300">Şablon Düzeni (Layout)</label>
+        <select id="inspect-layout-type" onchange="updateActiveSceneField('layoutType', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
+          <option value="pip_split">🖼️ PiP Split (Polaroid / Yırtık Kağıt)</option>
+          <option value="cards">🃏 Kartlar & Liste</option>
+          <option value="vs_split">⚔️ VS Karşılaştırma</option>
+          <option value="flowchart">🗺️ Akış Şeması</option>
+          <option value="quote_spotlight">💬 Alıntı & Söz</option>
+          <option value="metricImpact">📊 Büyük Metrik / Rakam</option>
+        </select>
+      </div>
+
+      <!-- Text Inputs for Scene -->
+      <div class="space-y-2.5">
+        <div>
+          <label class="block text-slate-400 mb-1">Alt Başlık (headerSubtitle)</label>
+          <input type="text" id="inspect-header-sub" oninput="updateActiveSceneField('headerSubtitle', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs">
+        </div>
+        <div>
+          <label class="block text-slate-400 mb-1">Büyük Başlık (headerLine1)</label>
+          <input type="text" id="inspect-header-line1" oninput="updateActiveSceneField('headerLine1', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs font-bold">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-400 mb-1">Çemberli Kelime</label>
+            <input type="text" id="inspect-circled-word" oninput="updateActiveSceneField('circledWord', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">İkinci Satır</label>
+            <input type="text" id="inspect-header-line2" oninput="updateActiveSceneField('headerLine2', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs">
+          </div>
+        </div>
+        <div>
+          <label class="block text-slate-400 mb-1">Fosforlu Vurgu (highlightedText)</label>
+          <input type="text" id="inspect-highlight-text" oninput="updateActiveSceneField('highlightedText', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs text-amber-300">
+        </div>
+      </div>
+
+      <!-- Illustration / Polaroid Settings -->
+      <div class="p-3 bg-[#070a12] border border-slate-800 rounded-2xl space-y-2">
+        <label class="block font-bold text-slate-300">İllüstrasyon / Görsel Kart</label>
+        <div class="grid grid-cols-2 gap-2">
+          <select id="inspect-ill-style" onchange="updateActiveSceneField('illustrationStyle', this.value)" class="bg-[#0c1220] border border-slate-800 rounded-xl px-2 py-1.5 text-slate-200 text-xs">
+            <option value="polaroid">📸 Polaroid</option>
+            <option value="torn_paper">📄 Yırtık Kağıt</option>
+          </select>
+          <select id="inspect-doodle" onchange="updateActiveSceneField('doodleType', this.value)" class="bg-[#0c1220] border border-slate-800 rounded-xl px-2 py-1.5 text-slate-200 text-xs">
+            <option value="galaxy">🌌 Galaksi</option>
+            <option value="hourglass">⏳ Kum Saati</option>
+            <option value="book">📖 Kitap</option>
+            <option value="lightbulb">💡 Ampul</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] text-slate-400 mb-1">Görsel Açıklaması (Caption)</label>
+          <input type="text" id="inspect-ill-caption" oninput="updateActiveSceneField('illustrationCaption', this.value)" class="w-full bg-[#0c1220] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs">
+        </div>
+      </div>
+
+      <!-- Split Scene Tool -->
+      <div class="p-3 bg-[#070a12] border border-slate-800 rounded-2xl flex items-center justify-between">
+        <div>
+          <div class="font-bold text-white">İğne Noktasından Böl</div>
+          <div class="text-[10px] text-slate-400">Geçerli zaman damgasından 2 sahneye böler.</div>
+        </div>
+        <button onclick="splitSceneAtPlayhead()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-xl font-bold transition flex items-center gap-1">
+          <i class="fa-solid fa-scissors"></i> Böl
+        </button>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- ================= BOTTOM MULTI-TRACK TIMELINE (ZAMAN TÜNELİ) ================= -->
+  <footer class="h-64 border-t border-slate-800/80 bg-[#0b101c] flex flex-col shrink-0 z-40 select-none">
+    
+    <!-- TIMELINE TOOLBAR -->
+    <div class="h-10 border-b border-slate-800 px-4 flex items-center justify-between bg-[#080c14] text-xs">
+      
+      <!-- Left Tools: Split, Delete, Regen, Add Scene, Add Audio -->
+      <div class="flex items-center gap-2">
+        <button onclick="splitSceneAtPlayhead()" title="Sahneyi İğneden Böl" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-semibold transition flex items-center gap-1">
+          <i class="fa-solid fa-scissors text-cyan-400"></i> <span>Böl</span>
+        </button>
+        <button onclick="deleteActiveScene()" title="Seçili Sahneyi Sil" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-semibold transition flex items-center gap-1">
+          <i class="fa-solid fa-trash-can text-red-400"></i> <span>Sil</span>
+        </button>
+        <button onclick="regenerateActiveScene()" title="Yapay Zekâ ile Yeniden Üret" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-semibold transition flex items-center gap-1">
+          <i class="fa-solid fa-arrows-rotate text-amber-400"></i> <span>Yeniden Üret</span>
+        </button>
+        <div class="h-4 w-[1px] bg-slate-800 mx-1"></div>
+        <button onclick="addNewSceneToTimeline()" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-emerald-400 font-semibold transition flex items-center gap-1">
+          <i class="fa-solid fa-plus"></i> <span>Sahne Ekle</span>
+        </button>
+        <label class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-cyan-400 font-semibold transition flex items-center gap-1 cursor-pointer">
+          <i class="fa-solid fa-microphone"></i> <span>+ Ses Ekle</span>
+          <input type="file" accept="audio/*" class="hidden" onchange="uploadTimelineAudioFile(this.files[0])">
+        </label>
+      </div>
+
+      <!-- Center: Playhead Indicator -->
+      <div class="font-mono text-xs text-amber-300 font-extrabold flex items-center gap-2">
+        <i class="fa-solid fa-clock text-amber-400"></i>
+        <span id="timeline-indicator-time">00:00.0</span>
+      </div>
+
+      <!-- Right: Timeline Zoom & Track View Mode -->
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1 text-slate-400">
+          <i class="fa-solid fa-magnifying-glass-minus text-[11px]"></i>
+          <input type="range" id="timeline-zoom-slider" min="0.5" max="2.0" step="0.1" value="1.0" oninput="changeTimelineZoom(this.value)" class="w-20 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-400">
+          <i class="fa-solid fa-magnifying-glass-plus text-[11px]"></i>
+        </div>
+        <span class="text-[11px] text-slate-500 font-mono">100% Zoom</span>
+      </div>
+
+    </div>
+
+    <!-- TRACKS & RULER SCROLL CONTAINER -->
+    <div class="flex-1 flex overflow-hidden">
+      
+      <!-- TRACK HEADERS (Left Labels) -->
+      <div class="w-36 border-r border-slate-800/80 bg-[#080c14] flex flex-col shrink-0 text-[11px] font-semibold text-slate-400 select-none">
+        <div class="h-6 border-b border-slate-800/60 px-3 flex items-center text-slate-500 font-mono text-[10px]">
+          TRACKS
+        </div>
+        <div class="h-14 border-b border-slate-800/60 px-3 flex items-center justify-between">
+          <span class="flex items-center gap-1.5 text-slate-200">
+            <i class="fa-solid fa-film text-indigo-400"></i> Video
+          </span>
+          <span class="text-[9px] bg-indigo-500/10 text-indigo-300 px-1 rounded font-mono">AI S1</span>
+        </div>
+        <div class="h-12 border-b border-slate-800/60 px-3 flex items-center justify-between">
+          <span class="flex items-center gap-1.5 text-slate-200">
+            <i class="fa-solid fa-volume-high text-emerald-400"></i> Ses
+          </span>
+          <span class="text-[9px] bg-emerald-500/10 text-emerald-300 px-1 rounded font-mono">WAV</span>
+        </div>
+        <div class="h-9 border-b border-slate-800/60 px-3 flex items-center justify-between">
+          <span class="flex items-center gap-1.5 text-slate-300">
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> FX & Foto
+          </span>
+        </div>
+        <div class="h-9 px-3 flex items-center justify-between">
+          <span class="flex items-center gap-1.5 text-slate-300">
+            <i class="fa-solid fa-closed-captioning text-cyan-400"></i> Altyazı
+          </span>
+        </div>
+      </div>
+
+      <!-- TIMELINE CANVAS TRACKS & PLAYHEAD NEEDLE -->
+      <div id="timeline-scroll-container" class="flex-1 overflow-x-auto overflow-y-hidden relative bg-[#090d16]" onmousedown="handleTimelineScrubStart(event)">
+        
+        <!-- RED PLAYHEAD NEEDLE (Draggable cursor) -->
+        <div id="playhead-needle" class="playhead-needle" style="left: 0px;">
+          <div class="playhead-handle" id="playhead-handle"></div>
+        </div>
+
+        <!-- INNER TRACKS WRAPPER (Dynamic width based on zoom & duration) -->
+        <div id="timeline-inner-wrapper" class="relative min-w-full h-full flex flex-col" style="width: 1200px;">
+          
+          <!-- RULER (Zaman Cetveli) -->
+          <div id="timeline-ruler" class="h-6 border-b border-slate-800/80 bg-[#06090e] relative text-[10px] font-mono text-slate-400">
+            <!-- Ruler ticks & timestamps rendered via JS -->
+          </div>
+
+          <!-- TRACK 1: VIDEO & AI SAHNELERİ (H: 56px) -->
+          <div id="track-video" class="h-14 border-b border-slate-800/60 relative p-1 flex items-center bg-[#070b14]/50">
+            <!-- Scene clips rendered via JS -->
+          </div>
+
+          <!-- TRACK 2: SES & DALGA FORMU (H: 48px) -->
+          <div id="track-audio" class="h-12 border-b border-slate-800/60 relative p-1 flex items-center bg-[#050810]/50">
+            <!-- Audio waveform track rendered via JS -->
+          </div>
+
+          <!-- TRACK 3: FX & ANİMASYON KATMANI (H: 36px) -->
+          <div id="track-fx" class="h-9 border-b border-slate-800/60 relative p-1 flex items-center bg-[#070b14]/50">
+            <!-- FX blocks rendered via JS -->
+          </div>
+
+          <!-- TRACK 4: ALTYAZI KATMANI (H: 36px) -->
+          <div id="track-subtitles" class="h-9 relative p-1 flex items-center bg-[#050810]/50">
+            <!-- Word chips rendered via JS -->
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- ================= EXPORT MODAL (TOP RIGHT "📤 EXPORT" BUTTON CLICK) ================= -->
+  <div id="modal-export" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0d1322] border border-slate-800 rounded-3xl max-w-xl w-full p-6 space-y-5 shadow-2xl">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-500 text-slate-950 flex items-center justify-center font-bold text-sm shadow">
+            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-extrabold text-white">Video Dışa Aktar (Export Studio)</h3>
+            <p class="text-[11px] text-slate-400">1080x1920 MP4 Video, Sosyal Medya Paketi veya YouTube Dağıtımı</p>
+          </div>
+        </div>
+        <button onclick="closeExportModal()" class="text-slate-500 hover:text-white transition"><i class="fa-solid fa-xmark text-base"></i></button>
+      </div>
+
+      <!-- Options Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+        
+        <!-- Option 1: 1080x1920 MP4 Video Render -->
+        <div class="p-4 bg-[#070a12] border border-slate-800 hover:border-amber-400/50 rounded-2xl flex flex-col justify-between space-y-3 transition">
+          <div>
+            <div class="font-extrabold text-white flex items-center gap-1.5 mb-1">
+              <i class="fa-solid fa-film text-emerald-400"></i>
+              <span>1080x1920 MP4 Video</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Remotion motoruyla 60 FPS Full HD dikey formatta derler. TikTok, Shorts ve Reels için mükemmel.
+            </p>
+          </div>
+          <button onclick="triggerExportRender()" id="btn-modal-render" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 shadow">
+            <i class="fa-solid fa-play"></i> <span>MP4 Render Başlat</span>
+          </button>
+        </div>
+
+        <!-- Option 2: All-in-One .ZIP Social Bundle -->
+        <div class="p-4 bg-[#070a12] border border-slate-800 hover:border-amber-400/50 rounded-2xl flex flex-col justify-between space-y-3 transition">
+          <div>
+            <div class="font-extrabold text-white flex items-center gap-1.5 mb-1">
+              <i class="fa-solid fa-box-archive text-amber-400"></i>
+              <span>Tüm Paket (.ZIP İndir)</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Full HD Video + Kapak Resmi PNG + Hazır Viral Başlıklar & Hashtagler tek arşivde iner.
+            </p>
+          </div>
+          <a href="/api/export/bundle" download class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 shadow text-center">
+            <i class="fa-solid fa-download"></i> <span>.ZIP Paketi İndir</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- YouTube Direct Dispatch Row -->
+      <div class="p-4 bg-[#070a12] border border-slate-800 rounded-2xl flex items-center justify-between text-xs">
+        <div class="flex items-center gap-3">
+          <i class="fa-brands fa-youtube text-red-500 text-2xl"></i>
+          <div>
+            <div class="font-bold text-white">YouTube Shorts Doğrudan Yükle</div>
+            <div class="text-[11px] text-slate-400">Kanalınıza tek tıkla başlık ve etiketlerle yükleyin.</div>
+          </div>
+        </div>
+        <button onclick="closeExportModal(); openAutopilotModal();" class="px-3.5 py-1.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> YouTube Yükleyici
+        </button>
+      </div>
+
+      <!-- Quick Viral Titles Copy Box -->
+      <div class="p-3 bg-[#070a12] border border-slate-800 rounded-2xl space-y-1.5 text-xs">
+        <div class="flex items-center justify-between text-[11px] text-slate-400">
+          <span class="font-bold">Önerilen Viral Başlık:</span>
+          <button onclick="copyToClipboard(document.getElementById('modal-viral-title').innerText)" class="text-amber-300 hover:text-white flex items-center gap-1">
+            <i class="fa-regular fa-copy"></i> Kopyala
+          </button>
+        </div>
+        <div id="modal-viral-title" class="text-slate-200 font-semibold bg-[#0c1220] p-2 rounded-xl border border-slate-800">
+          İbn-i Sina Bile 40 Kez Okudu: Akıl Almaz Sır! #Shorts
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-1">
+        <button onclick="closeExportModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold text-xs">Kapat</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= MULTILINGUAL GLOBAL MODAL (FAZ 9) ================= -->
+  <div id="modal-multilingual" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0d1322] border border-slate-800 rounded-3xl max-w-xl w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-earth-americas text-emerald-400 text-lg"></i>
+          <h3 class="text-sm font-bold text-white">Çok Dilli Küresel Dağıtım & RTL Kurgusu (Faz 9)</h3>
+        </div>
+        <button onclick="closeMultilingualModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <p class="text-xs text-slate-400 leading-relaxed">
+        Bu videoyu tek tıkla 3 küresel dile çevirin. Arapça seçildiğinde defter çizgileri ve başlıklar <b>RTL (Sağdan Sola)</b> ve hat sanatına dönüşür.
+      </p>
+
+      <div class="grid grid-cols-2 gap-3 text-xs">
+        <div class="p-3 bg-[#070a12] border border-slate-800 rounded-xl space-y-2">
+          <div class="font-bold text-white flex items-center gap-1.5">
+            <span>🇺🇸</span> <span>İngilizce (EN)</span>
+          </div>
+          <div class="text-[10px] text-slate-400">Edge-TTS: Andrew Neural</div>
+          <button onclick="cloneAndSwitchLanguage('en')" class="w-full bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold py-1.5 rounded-lg transition">İngilizceye Dönüştür</button>
+        </div>
+
+        <div class="p-3 bg-[#070a12] border border-slate-800 rounded-xl space-y-2">
+          <div class="font-bold text-white flex items-center gap-1.5">
+            <span>🇸🇦</span> <span>العربية (AR RTL)</span>
+          </div>
+          <div class="text-[10px] text-slate-400">Edge-TTS: Hamed Neural · Hat: Amiri</div>
+          <button onclick="cloneAndSwitchLanguage('ar')" class="w-full bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold py-1.5 rounded-lg transition">Arapça (RTL) Dönüştür</button>
+        </div>
+
+        <div class="p-3 bg-[#070a12] border border-slate-800 rounded-xl space-y-2">
+          <div class="font-bold text-white flex items-center gap-1.5">
+            <span>🇪🇸</span> <span>İspanyolca (ES)</span>
+          </div>
+          <div class="text-[10px] text-slate-400">Edge-TTS: Alvaro Neural</div>
+          <button onclick="cloneAndSwitchLanguage('es')" class="w-full bg-slate-800 hover:bg-slate-700 text-purple-300 font-bold py-1.5 rounded-lg transition">İspanyolcaya Dönüştür</button>
+        </div>
+
+        <div class="p-3 bg-[#070a12] border border-slate-800 rounded-xl space-y-2">
+          <div class="font-bold text-white flex items-center gap-1.5">
+            <span>🇹🇷</span> <span>Orijinal Türkçe (TR)</span>
+          </div>
+          <div class="text-[10px] text-slate-400">Edge-TTS: Andrew / Emel Neural</div>
+          <button onclick="cloneAndSwitchLanguage('tr')" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-bold py-1.5 rounded-lg transition">Türkçe Orijinal</button>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-slate-800">
+        <button onclick="closeMultilingualModal()" class="px-4 py-1.5 bg-slate-800 text-slate-300 rounded-xl font-bold text-xs">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= AUTOPILOT / YOUTUBE MODAL ================= -->
+  <div id="modal-autopilot" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0d1322] border border-slate-800 rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl text-xs">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-robot text-purple-400 text-lg"></i>
+          <h3 class="text-sm font-bold text-white">Otopilot Fabrikası & YouTube Entegrasyonu</h3>
+        </div>
+        <button onclick="closeAutopilotModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="p-3.5 bg-[#070a12] border border-slate-800 rounded-2xl space-y-2">
+        <div class="font-bold text-white flex items-center gap-1.5">
+          <i class="fa-brands fa-youtube text-red-500 text-base"></i>
+          <span>YouTube Shorts Kanal Durumu</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Google OAuth 2.0 Web Client ile yetkilendirme devrededir.</p>
+        <button onclick="window.location.href='/api/youtube/login'" class="bg-red-600 hover:bg-red-500 text-white font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1">
+          <i class="fa-solid fa-link"></i> Kanalı Yetkilendir
+        </button>
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-slate-800">
+        <button onclick="closeAutopilotModal()" class="px-4 py-1.5 bg-slate-800 text-slate-300 rounded-xl font-bold">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= KEY POOL MODAL ================= -->
+  <div id="modal-keypool" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0d1322] border border-slate-800 rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl text-xs">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-amber-400 text-base"></i>
+          <h3 class="text-sm font-bold text-white">136 API Key Havuzu & Rotasyon</h3>
+        </div>
+        <button onclick="closeKeyPoolModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <p class="text-slate-300 leading-relaxed">
+        Google Gemini 3 ve Gemini 3.5 modelleri havuzdaki 136 aktif anahtar üzerinden döner. Kota aşımı durumunda otomatik sonraki anahtara geçer.
+      </p>
+      <div class="flex justify-end pt-2 border-t border-slate-800">
+        <button onclick="closeKeyPoolModal()" class="px-4 py-1.5 bg-slate-800 text-slate-300 rounded-xl font-bold">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIO ELEMENT FOR TIMELINE PLAYBACK -->
+  <audio id="timeline-audio" src="/public/audio.mp3" preload="auto"></audio>
+
+  <!-- ================= CLIENT JAVASCRIPT ================= -->
+  <script>
+    // GLOBAL STATE
+    let videoData = null;
+    let scenes = [];
+    let waveformPeaks = [];
+    let timelineDuration = 15.0;
+    let activeSceneId = 'scene_1';
+    let isPlaying = false;
+    let playheadTime = 0.0;
+    let timelineZoom = 1.0;
+    let animationFrameId = null;
+    let previewMode = 'canvas'; // 'canvas' or 'mp4'
+
+    const audioEl = document.getElementById('timeline-audio');
+
+    // INITIALIZATION ON LOAD
+    window.addEventListener('DOMContentLoaded', async () => {
+      await loadTimelineData();
+      setupAudioListeners();
+      setupScrubListeners();
+    });
+
+    // 1. FETCH TIMELINE DATA FROM SERVER
+    async function loadTimelineData() {
+      try {
+        const res = await fetch('/api/timeline/data');
+        if (!res.ok) throw new Error('Timeline verisi alınamadı.');
+        const data = await res.json();
+        
+        videoData = data.video_data || {};
+        scenes = data.scenes || [];
+        waveformPeaks = data.waveform || [];
+        timelineDuration = data.duration || 15.0;
+
+        // Sync title
+        const title = videoData.topic || videoData.headerLine1 || 'Kısa Kıssa';
+        document.getElementById('header-editor-title').innerText = `Editor — S1 ${title}`;
+
+        // Ensure activeSceneId is valid
+        if (!scenes.find(s => s.id === activeSceneId) && scenes.length > 0) {
+          activeSceneId = scenes[0].id;
+        }
+
+        renderTimeline();
+        renderSceneInspector();
+        renderLeftScenesList();
+        renderLivePreviewCanvas();
+        updateTimeDisplays();
+      } catch (e) {
+        console.error('Timeline init error:', e);
+      }
+    }
+
+    // 2. RENDER TIMELINE COMPONENTS
+    function renderTimeline() {
+      const container = document.getElementById('timeline-inner-wrapper');
+      const pxPerSec = 40 * timelineZoom;
+      const totalWidth = Math.max(900, Math.round(timelineDuration * pxPerSec));
+      container.style.width = `${totalWidth}px`;
+
+      renderRuler(totalWidth, pxPerSec);
+      renderVideoTrack(pxPerSec);
+      renderAudioTrack(totalWidth);
+      renderFxTrack(pxPerSec);
+      renderSubtitlesTrack(pxPerSec);
+      updatePlayheadPosition();
+    }
+
+    // RULER
+    function renderRuler(totalWidth, pxPerSec) {
+      const ruler = document.getElementById('timeline-ruler');
+      ruler.innerHTML = '';
+      const step = 5; // Every 5 seconds
+      for (let sec = 0; sec <= Math.ceil(timelineDuration); sec += step) {
+        const left = sec * pxPerSec;
+        const tick = document.createElement('div');
+        tick.className = 'absolute top-0 bottom-0 flex flex-col justify-between';
+        tick.style.left = `${left}px`;
+        
+        const m = Math.floor(sec / 60);
+        const s = sec % 60;
+        const timeStr = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        
+        tick.innerHTML = `
+          <div class="h-2 w-[1px] bg-slate-700"></div>
+          <span class="pl-1 text-[9px] text-slate-500 font-mono select-none">${timeStr}</span>
+        `;
+        ruler.appendChild(tick);
+      }
+    }
+
+    // TRACK 1: VIDEO (AI SCENES)
+    function renderVideoTrack(pxPerSec) {
+      const track = document.getElementById('track-video');
+      track.innerHTML = '';
+
+      scenes.forEach((s, idx) => {
+        const start = s.startTime || 0;
+        const end = s.endTime || 12;
+        const dur = Math.max(1, end - start);
+        const left = start * pxPerSec;
+        const width = dur * pxPerSec;
+        const isActive = s.id === activeSceneId;
+
+        const block = document.createElement('div');
+        block.className = `scene-block absolute top-1 bottom-1 rounded-xl border flex items-center justify-between px-2.5 cursor-pointer shadow-md ${
+          isActive 
+            ? 'bg-gradient-to-r from-amber-950/70 via-slate-900 to-indigo-950/70 border-amber-400 active' 
+            : 'bg-slate-900/90 border-slate-700/80 hover:border-slate-500'
+        }`;
+        block.style.left = `${left}px`;
+        block.style.width = `${Math.max(60, width - 4)}px`;
+
+        const sceneNum = idx + 1;
+        const title = s.headerLine1 || s.headerSubtitle || `Sahne ${sceneNum}`;
+
+        block.innerHTML = `
+          <div class="flex items-center gap-2 overflow-hidden">
+            <span class="w-5 h-5 rounded-md ${isActive ? 'bg-amber-400 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'} flex items-center justify-center text-[10px] shrink-0 font-mono">
+              ${sceneNum}
+            </span>
+            <div class="overflow-hidden">
+              <div class="font-bold text-white text-[11px] truncate">${title}</div>
+              <div class="text-[9px] text-slate-400 font-mono truncate">${dur.toFixed(1)}s · ${s.layoutType || 'pip_split'}</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button onclick="event.stopPropagation(); quickRegenScene('${s.id}')" title="Yeniden Üret" class="w-5 h-5 rounded hover:bg-slate-700 text-slate-400 hover:text-amber-300 flex items-center justify-center text-[10px] transition">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+            <button onclick="event.stopPropagation(); deleteSceneById('${s.id}')" title="Sahneyi Sil" class="w-5 h-5 rounded hover:bg-red-900/50 text-slate-400 hover:text-red-400 flex items-center justify-center text-[10px] transition">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        `;
+
+        block.onclick = () => selectScene(s.id);
+        track.appendChild(block);
+      });
+    }
+
+    // TRACK 2: AUDIO WAVEFORM
+    function renderAudioTrack(totalWidth) {
+      const track = document.getElementById('track-audio');
+      track.innerHTML = '';
+
+      const audioBlock = document.createElement('div');
+      audioBlock.className = 'absolute top-1 bottom-1 left-1 right-1 rounded-xl bg-gradient-to-r from-emerald-950/40 via-teal-950/30 to-emerald-950/40 border border-emerald-500/30 flex items-center px-3 overflow-hidden shadow-inner';
+      audioBlock.style.width = `${totalWidth - 8}px`;
+
+      // SVG Waveform Bars
+      let svgBars = '';
+      if (waveformPeaks && waveformPeaks.length > 0) {
+        const barWidth = 3;
+        const gap = 2;
+        const totalBars = waveformPeaks.length;
+        const svgW = totalBars * (barWidth + gap);
+        
+        svgBars = waveformPeaks.map((p, i) => {
+          const h = Math.max(3, Math.round(p * 26));
+          const y = Math.round((32 - h) / 2);
+          const x = i * (barWidth + gap);
+          return `<rect x="${x}" y="${y}" width="${barWidth}" height="${h}" rx="1.5" fill="#10b981" opacity="0.85"/>`;
+        }).join('');
+      }
+
+      audioBlock.innerHTML = `
+        <div class="flex items-center gap-2 shrink-0 z-10 mr-3">
+          <i class="fa-solid fa-volume-high text-emerald-400 text-xs"></i>
+          <span class="text-[11px] font-bold text-emerald-300 font-mono">audio.mp3</span>
+        </div>
+        <div class="flex-1 h-8 overflow-hidden flex items-center">
+          <svg class="h-8 w-full" preserveAspectRatio="none" viewBox="0 0 ${Math.max(400, waveformPeaks.length * 5)} 32">
+            ${svgBars}
+          </svg>
+        </div>
+      `;
+
+      track.appendChild(audioBlock);
+    }
+
+    // TRACK 3: FX & PHOTO TIMINGS
+    function renderFxTrack(pxPerSec) {
+      const track = document.getElementById('track-fx');
+      track.innerHTML = '';
+
+      scenes.forEach((s) => {
+        const start = s.startTime || 0;
+        const end = s.endTime || 12;
+        const dur = Math.max(1, end - start);
+        const left = start * pxPerSec;
+        const width = dur * pxPerSec;
+
+        const fxBlock = document.createElement('div');
+        fxBlock.className = 'absolute top-1 bottom-1 rounded-lg bg-amber-500/10 border border-amber-500/25 flex items-center px-2 text-[10px] font-mono text-amber-300 truncate';
+        fxBlock.style.left = `${left}px`;
+        fxBlock.style.width = `${Math.max(40, width - 4)}px`;
+        fxBlock.innerHTML = `<i class="fa-solid fa-image text-amber-400 mr-1"></i> ${s.illustrationStyle || 'polaroid'}`;
+        track.appendChild(fxBlock);
+      });
+    }
+
+    // TRACK 4: SUBTITLES & WORDS
+    function renderSubtitlesTrack(pxPerSec) {
+      const track = document.getElementById('track-subtitles');
+      track.innerHTML = '';
+
+      const subs = videoData.subtitles || [];
+      subs.forEach((sub) => {
+        const start = sub.start || 0;
+        const end = sub.end || (start + 1.5);
+        const dur = Math.max(0.5, end - start);
+        const left = start * pxPerSec;
+        const width = dur * pxPerSec;
+
+        const chip = document.createElement('div');
+        chip.className = 'absolute top-1 bottom-1 rounded-md bg-blue-950/40 border border-blue-500/20 px-1.5 flex items-center text-[9px] font-medium text-blue-200 truncate select-none';
+        chip.style.left = `${left}px`;
+        chip.style.width = `${Math.max(30, width - 2)}px`;
+        chip.innerText = sub.text || '';
+        track.appendChild(chip);
+      });
+    }
+
+    // 3. PLAYHEAD & SEEKING
+    function updatePlayheadPosition() {
+      const pxPerSec = 40 * timelineZoom;
+      const left = playheadTime * pxPerSec;
+      const needle = document.getElementById('playhead-needle');
+      if (needle) {
+        needle.style.left = `${left}px`;
+      }
+    }
+
+    function seekTimeline(timeInSec) {
+      playheadTime = Math.max(0, Math.min(timelineDuration, timeInSec));
+      audioEl.currentTime = playheadTime;
+      updatePlayheadPosition();
+      updateTimeDisplays();
+
+      // Automatically sync active scene based on playhead time
+      const curScene = scenes.find(s => playheadTime >= s.startTime && playheadTime <= s.endTime);
+      if (curScene && curScene.id !== activeSceneId) {
+        activeSceneId = curScene.id;
+        renderTimeline();
+        renderSceneInspector();
+      }
+
+      renderLivePreviewCanvas();
+    }
+
+    function toggleTimelinePlayback() {
+      if (isPlaying) {
+        pausePlayback();
+      } else {
+        startPlayback();
+      }
+    }
+
+    function startPlayback() {
+      isPlaying = true;
+      audioEl.play().catch(e => console.log('Audio autoplay error:', e));
+      const btn = document.getElementById('btn-transport-play');
+      const icon = document.getElementById('icon-transport-play');
+      if (icon) icon.className = 'fa-solid fa-pause text-sm';
+      runPlaybackLoop();
+    }
+
+    function pausePlayback() {
+      isPlaying = false;
+      audioEl.pause();
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      const icon = document.getElementById('icon-transport-play');
+      if (icon) icon.className = 'fa-solid fa-play text-sm ml-0.5';
+    }
+
+    function runPlaybackLoop() {
+      if (!isPlaying) return;
+      playheadTime = audioEl.currentTime;
+
+      if (playheadTime >= timelineDuration) {
+        pausePlayback();
+        seekTimeline(0);
+        return;
+      }
+
+      updatePlayheadPosition();
+      updateTimeDisplays();
+
+      // Sync active scene
+      const curScene = scenes.find(s => playheadTime >= s.startTime && playheadTime <= s.endTime);
+      if (curScene && curScene.id !== activeSceneId) {
+        activeSceneId = curScene.id;
+        renderTimeline();
+        renderSceneInspector();
+      }
+
+      renderLivePreviewCanvas();
+      animationFrameId = requestAnimationFrame(runPlaybackLoop);
+    }
+
+    function setupAudioListeners() {
+      audioEl.addEventListener('ended', () => {
+        pausePlayback();
+        seekTimeline(0);
+      });
+    }
+
+    function setupScrubListeners() {
+      const container = document.getElementById('timeline-scroll-container');
+      let isDragging = false;
+
+      container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        scrubAtEvent(e);
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (isDragging) scrubAtEvent(e);
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+    }
+
+    function scrubAtEvent(e) {
+      const container = document.getElementById('timeline-scroll-container');
+      const rect = container.getBoundingClientRect();
+      const clickX = e.clientX - rect.left + container.scrollLeft;
+      const pxPerSec = 40 * timelineZoom;
+      const targetTime = clickX / pxPerSec;
+      seekTimeline(targetTime);
+    }
+
+    function changeTimelineZoom(val) {
+      timelineZoom = parseFloat(val);
+      renderTimeline();
+    }
+
+    function updateTimeDisplays() {
+      const fmt = (t) => {
+        const m = Math.floor(t / 60);
+        const s = Math.floor(t % 60);
+        const ms = Math.floor((t % 1) * 10);
+        return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.${ms}`;
+      };
+
+      document.getElementById('transport-current-time').innerText = fmt(playheadTime);
+      document.getElementById('transport-total-time').innerText = fmt(timelineDuration);
+      document.getElementById('timeline-indicator-time').innerText = fmt(playheadTime);
+      document.getElementById('audio-duration-badge').innerText = fmt(timelineDuration);
+    }
+
+    // 4. SCENE SELECTION & INSPECTOR
+    function selectScene(sceneId) {
+      activeSceneId = sceneId;
+      const target = scenes.find(s => s.id === sceneId);
+      if (target) {
+        seekTimeline(target.startTime || 0);
+      }
+      renderTimeline();
+      renderSceneInspector();
+      renderLeftScenesList();
+      renderLivePreviewCanvas();
+    }
+
+    function renderSceneInspector() {
+      const s = scenes.find(sc => sc.id === activeSceneId) || scenes[0];
+      if (!s) return;
+
+      const idx = scenes.indexOf(s) + 1;
+      document.getElementById('inspector-scene-title').innerText = `Sahne ${idx} Denetçisi`;
+      document.getElementById('inspector-scene-bounds').innerText = `${s.startTime?.toFixed(1)}s - ${s.endTime?.toFixed(1)}s`;
+
+      document.getElementById('inspect-layout-type').value = s.layoutType || 'pip_split';
+      document.getElementById('inspect-header-sub').value = s.headerSubtitle || '';
+      document.getElementById('inspect-header-line1').value = s.headerLine1 || '';
+      document.getElementById('inspect-circled-word').value = s.circledWord || '';
+      document.getElementById('inspect-header-line2').value = s.headerLine2 || '';
+      document.getElementById('inspect-highlight-text').value = s.highlightedText || '';
+      document.getElementById('inspect-ill-style').value = s.illustrationStyle || 'polaroid';
+      document.getElementById('inspect-doodle').value = s.doodleType || 'galaxy';
+      document.getElementById('inspect-ill-caption').value = s.illustrationCaption || '';
+    }
+
+    async function updateActiveSceneField(field, value) {
+      const s = scenes.find(sc => sc.id === activeSceneId);
+      if (!s) return;
+      s[field] = value;
+      renderLivePreviewCanvas();
+
+      // Debounced PUT to server
+      try {
+        await fetch(`/api/timeline/scenes/${activeSceneId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ [field]: value })
+        });
+      } catch (e) {
+        console.error('Update scene field error:', e);
+      }
+    }
+
+    // 5. SCENE ACTIONS (REGENERATE & DELETE & SPLIT)
+    async function regenerateActiveScene() {
+      const s = scenes.find(sc => sc.id === activeSceneId);
+      if (!s) return;
+
+      const btn = document.getElementById('btn-scene-regen');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Üretiliyor...</span>';
+
+      try {
+        const res = await fetch(`/api/timeline/scenes/${activeSceneId}/regenerate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt_override: s.headerLine1 || s.headerSubtitle,
+            layout_override: s.layoutType,
+            illustration_style_override: s.illustrationStyle,
+            model: document.getElementById('select-gemini-model').value
+          })
+        });
+
+        if (!res.ok) throw new Error('Sahne yeniden üretilemedi.');
+        const data = await res.json();
+        
+        // Update local scene
+        Object.assign(s, data.updated_scene);
+        renderTimeline();
+        renderSceneInspector();
+        renderLivePreviewCanvas();
+        alert('✨ Sahne başarıyla yenilendi!');
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> <span>Yeniden Üret</span>';
+      }
+    }
+
+    async function quickRegenScene(sceneId) {
+      selectScene(sceneId);
+      await regenerateActiveScene();
+    }
+
+    async function deleteActiveScene() {
+      if (scenes.length <= 1) {
+        return alert('En az 1 sahne bulunmalıdır. Sahneyi silmek yerine içeriğini düzenleyebilirsiniz.');
+      }
+      if (!confirm('Bu sahneyi zaman tünelinden silmek istediğinize emin misiniz?')) return;
+      await deleteSceneById(activeSceneId);
+    }
+
+    async function deleteSceneById(sceneId) {
+      try {
+        const res = await fetch(`/api/timeline/scenes/${sceneId}`, { method: 'DELETE' });
+        if (!res.ok) throw new Error('Sahne silinemedi.');
+        const data = await res.json();
+        
+        scenes = data.scenes || [];
+        timelineDuration = data.duration || 15.0;
+        activeSceneId = scenes[0]?.id || 'scene_1';
+
+        renderTimeline();
+        renderSceneInspector();
+        renderLeftScenesList();
+        renderLivePreviewCanvas();
+        updateTimeDisplays();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    async function splitSceneAtPlayhead() {
+      const s = scenes.find(sc => sc.id === activeSceneId);
+      if (!s) return;
+
+      if (playheadTime <= s.startTime + 1.5 || playheadTime >= s.endTime - 1.5) {
+        return alert(`Bölme işlemi için oynatma iğnesini sahne başlangıcı (${s.startTime}s) ile bitişi (${s.endTime}s) arasına getiriniz.`);
+      }
+
+      try {
+        const res = await fetch('/api/timeline/scenes/split', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ scene_id: s.id, split_time: playheadTime })
+        });
+        if (!res.ok) throw new Error('Sahne bölünemedi.');
+        const data = await res.json();
+        
+        scenes = data.scenes || [];
+        timelineDuration = data.duration || 15.0;
+
+        renderTimeline();
+        renderSceneInspector();
+        renderLeftScenesList();
+        renderLivePreviewCanvas();
+      } catch (e) {
+        alert('Bölme hatası: ' + e.message);
+      }
+    }
+
+    async function addNewSceneToTimeline() {
+      try {
+        const res = await fetch('/api/timeline/scenes/add', { method: 'POST' });
+        if (!res.ok) throw new Error('Yeni sahne eklenemedi.');
+        const data = await res.json();
+        
+        scenes = data.scenes || [];
+        timelineDuration = data.duration || 15.0;
+        activeSceneId = scenes[scenes.length - 1]?.id || 'scene_1';
+
+        renderTimeline();
+        renderSceneInspector();
+        renderLeftScenesList();
+        renderLivePreviewCanvas();
+        updateTimeDisplays();
+      } catch (e) {
+        alert('Sahne ekleme hatası: ' + e.message);
+      }
+    }
+
+    // 6. AUDIO UPLOAD & WAVEFORM ENGINE
+    async function uploadTimelineAudioFile(file) {
+      if (!file) return;
+      const uploadText = document.getElementById('audio-upload-text');
+      uploadText.innerText = 'Yükleniyor & Whisper Hizalanıyor...';
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const res = await fetch('/api/timeline/audio', {
+          method: 'POST',
+          body: formData
+        });
+        if (!res.ok) throw new Error('Ses yüklenemedi.');
+        const data = await res.json();
+
+        waveformPeaks = data.waveform || [];
+        timelineDuration = data.duration || 15.0;
+        scenes = data.scenes || [];
+        videoData.subtitles = data.subtitles || [];
+        videoData.words = data.words || [];
+
+        // Reload audio element
+        audioEl.src = `/public/audio.mp3?t=${Date.now()}`;
+        audioEl.load();
+
+        renderTimeline();
+        renderSceneInspector();
+        renderLeftScenesList();
+        renderLivePreviewCanvas();
+        updateTimeDisplays();
+        uploadText.innerText = 'Ses Başarıyla Eklendi ✓';
+        setTimeout(() => uploadText.innerText = 'Ses Dosyası Seç / Yükle', 3000);
+      } catch (e) {
+        alert('Ses yükleme hatası: ' + e.message);
+        uploadText.innerText = 'Ses Dosyası Seç / Yükle';
+      }
+    }
+
+    // 7. PREVIEW DISPLAY (CANVAS VS VIDEO)
+    function togglePreviewDisplayMode() {
+      const vid = document.getElementById('final-video');
+      const canvas = document.getElementById('notebook-preview');
+      const textTag = document.getElementById('text-toggle-display');
+      const modeTag = document.getElementById('preview-mode-tag');
+
+      if (previewMode === 'canvas') {
+        previewMode = 'mp4';
+        vid.classList.remove('hidden');
+        canvas.classList.add('hidden');
+        textTag.innerText = 'Canlı Taslak';
+        modeTag.innerText = '🎬 MP4 Video';
+        vid.src = `/out/video.mp4?t=${Date.now()}`;
+        vid.play().catch(e => console.log(e));
+      } else {
+        previewMode = 'canvas';
+        vid.pause();
+        vid.classList.add('hidden');
+        canvas.classList.remove('hidden');
+        textTag.innerText = 'MP4 Video';
+        modeTag.innerText = '📝 Canlı Taslak';
+      }
+    }
+
+    function renderLivePreviewCanvas() {
+      const s = scenes.find(sc => sc.id === activeSceneId) || scenes[0];
+      if (!s) return;
+
+      // Header Texts
+      document.getElementById('pv-sub').innerText = s.headerSubtitle || 'Kısa Kıssa';
+      document.getElementById('pv-line1').innerText = s.headerLine1 || 'BAŞLIK';
+      document.getElementById('pv-circle').innerText = s.circledWord || 'VURGU';
+      document.getElementById('pv-line2').innerText = s.headerLine2 || '';
+      document.getElementById('pv-high').innerText = s.highlightedText || 'ÖNEMLİ KAVRAM';
+
+      // Middle Dynamic Content based on layout
+      const mid = document.getElementById('pv-middle-area');
+      const layout = s.layoutType || 'pip_split';
+
+      if (layout === 'pip_split' || s.illustrationUrl) {
+        const illUrl = s.illustrationUrl || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80';
+        const isPolaroid = s.illustrationStyle !== 'torn_paper';
+        
+        mid.innerHTML = `
+          <div class="relative mx-auto my-auto flex flex-col items-center">
+            <div class="${isPolaroid ? 'bg-white p-2.5 pb-5 rounded shadow-xl border border-slate-300' : 'bg-white p-2 rounded-lg shadow-xl border-dashed border-2 border-slate-400'} -rotate-1 max-w-[220px]">
+              <img src="${illUrl}" class="w-full h-32 object-cover rounded" alt="Polaroid">
+              <div class="text-[10px] font-hand text-slate-800 text-center mt-2 font-bold">${s.illustrationCaption || 'Hakikat ve Bilgelik'}</div>
+            </div>
+          </div>
+        `;
+      } else if (layout === 'quote_spotlight') {
+        const q = s.quoteSpotlight || { speaker: 'İbn-i Sina', title: 'Hekimlerin Sultanı', quoteText: 'Hakikat sabır ile anlaşılır.' };
+        mid.innerHTML = `
+          <div class="p-3 bg-white/80 rounded-2xl border-2 border-blue-900 shadow-md text-center space-y-1 my-auto">
+            <div class="text-base font-extrabold text-blue-950">“${q.quoteText}”</div>
+            <div class="text-[11px] font-bold text-red-600">— ${q.speaker} (${q.title})</div>
+          </div>
+        `;
+      } else if (layout === 'metricImpact') {
+        const m = s.metricImpact || { bigNumber: '40x', bigLabel: 'KEZ OKUNDU', subheading: 'Anlaşılamayan Hakikat' };
+        mid.innerHTML = `
+          <div class="text-center my-auto">
+            <div class="text-4xl font-extrabold text-red-600 font-mono">${m.bigNumber}</div>
+            <div class="text-xs font-extrabold text-blue-900 tracking-wider">${m.bigLabel}</div>
+            <div class="text-[10px] font-bold text-slate-600 mt-1">${m.subheading || ''}</div>
+          </div>
+        `;
+      } else {
+        // Default Cards
+        const cards = s.cards || [
+          { label: 'Sır', value: 'Rehber olmadan ilim açılmaz', color: '#1e3a8a' },
+          { label: 'Çözüm', value: 'Fârâbî’nin eserini okuyunca anladı', color: '#15803d' }
+        ];
+        mid.innerHTML = `
+          <div class="space-y-2 my-auto">
+            ${cards.map(c => `
+              <div class="p-2 bg-white/90 border border-slate-300 rounded-xl shadow-sm text-center">
+                <div class="text-[10px] font-bold text-blue-900">${c.label}</div>
+                <div class="text-xs font-extrabold text-slate-900">${c.value}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      // Bottom synchronized subtitle
+      const curSub = (videoData.subtitles || []).find(sb => playheadTime >= sb.start && playheadTime <= sb.end);
+      if (curSub) {
+        document.getElementById('pv-bottom-sub').innerText = curSub.text;
+      }
+
+      // Chapter badge
+      const curIdx = scenes.indexOf(s) + 1;
+      document.getElementById('preview-scene-pill').innerText = `Sahne ${curIdx} / ${scenes.length} (${s.startTime?.toFixed(0)}s - ${s.endTime?.toFixed(0)}s)`;
+    }
+
+    function renderLeftScenesList() {
+      const list = document.getElementById('media-scenes-list');
+      if (!list) return;
+      list.innerHTML = '';
+      document.getElementById('media-scene-count').innerText = scenes.length;
+
+      scenes.forEach((s, i) => {
+        const item = document.createElement('div');
+        const isActive = s.id === activeSceneId;
+        item.className = `p-2.5 rounded-xl border flex items-center justify-between cursor-pointer transition ${
+          isActive ? 'bg-amber-500/10 border-amber-500/40 text-white' : 'bg-[#070a12] border-slate-800 text-slate-300 hover:border-slate-700'
+        }`;
+        item.innerHTML = `
+          <div class="flex items-center gap-2 overflow-hidden">
+            <span class="w-5 h-5 rounded ${isActive ? 'bg-amber-400 text-slate-950 font-bold' : 'bg-slate-800 text-slate-400'} flex items-center justify-center text-[10px] font-mono">
+              ${i + 1}
+            </span>
+            <div class="truncate">
+              <div class="font-bold text-xs truncate">${s.headerLine1 || `Sahne ${i + 1}`}</div>
+              <div class="text-[10px] text-slate-500 font-mono">${s.startTime?.toFixed(1)}s - ${s.endTime?.toFixed(1)}s</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-[10px] text-slate-600"></i>
+        `;
+        item.onclick = () => selectScene(s.id);
+        list.appendChild(item);
+      });
+    }
+
+    // 8. SPEED & NAVIGATION
+    function jumpToPrevScene() {
+      const idx = scenes.findIndex(s => s.id === activeSceneId);
+      if (idx > 0) selectScene(scenes[idx - 1].id);
+    }
+
+    function jumpToNextScene() {
+      const idx = scenes.findIndex(s => s.id === activeSceneId);
+      if (idx < scenes.length - 1) selectScene(scenes[idx + 1].id);
+    }
+
+    function cyclePlaybackSpeed() {
+      const speeds = [0.5, 1.0, 1.5, 2.0];
+      const cur = audioEl.playbackRate || 1.0;
+      let next = speeds[(speeds.indexOf(cur) + 1) % speeds.length];
+      audioEl.playbackRate = next;
+      document.getElementById('btn-playback-speed').innerText = `${next.toFixed(1)}x`;
+    }
+
+    // 9. THEME & DRAWER CONTROLS
+    function switchLeftTab(tab) {
+      ['media', 'prompt', 'theme'].forEach(t => {
+        document.getElementById(`ltab-content-${t}`).classList.add('hidden');
+        document.getElementById(`ltab-${t}-btn`).classList.remove('bg-slate-800', 'text-white', 'font-bold');
+        document.getElementById(`ltab-${t}-btn`).classList.add('text-slate-400');
+      });
+      document.getElementById(`ltab-content-${tab}`).classList.remove('hidden');
+      const b = document.getElementById(`ltab-${tab}-btn`);
+      b.classList.add('bg-slate-800', 'text-white', 'font-bold');
+      b.classList.remove('text-slate-400');
+    }
+
+    function toggleMediaDrawer() {
+      const dr = document.getElementById('left-media-drawer');
+      dr.classList.toggle('hidden');
+    }
+
+    function selectTheme(themeName) {
+      document.getElementById('selected-theme-val').value = themeName;
+      const preview = document.getElementById('notebook-preview');
+      preview.className = `w-full h-full theme-${themeName} flex flex-col p-4 relative font-hand overflow-hidden select-none transition-all duration-300`;
+    }
+
+    // 10. GENERATE NEW CONTENT WITH AI
+    async function generateContent() {
+      const topic = document.getElementById('input-topic').value.trim();
+      if (!topic) return alert('Lütfen bir konu yazın.');
+
+      const btn = document.getElementById('btn-generate');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AI Senaryo & Sahne Üretiyor...</span>';
+
+      try {
+        const res = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            topic: topic,
+            model: document.getElementById('select-gemini-model').value,
+            voice_id: document.getElementById('tts-voice').value,
+            theme: document.getElementById('selected-theme-val').value,
+            duration_mode: 'deep'
+          })
+        });
+
+        if (!res.ok) throw new Error('Üretim başarısız.');
+        await loadTimelineData();
+        alert('🎉 Yapay zekâ yeni senaryoyu ve sahneleri başarıyla oluşturdu!');
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-bolt text-amber-300"></i> <span>Yapay Zekâ ile Üret</span>';
+      }
+    }
+
+    // 11. RENDER & EXPORT MODALS
+    function openExportModal() {
+      document.getElementById('modal-export').classList.remove('hidden');
+    }
+    function closeExportModal() {
+      document.getElementById('modal-export').classList.add('hidden');
+    }
+
+    async function triggerExportRender() {
+      const btn = document.getElementById('btn-modal-render');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Renderlanıyor (60 FPS)...</span>';
+
+      try {
+        const res = await fetch('/api/render', { method: 'POST' });
+        if (!res.ok) throw new Error('Render başlatılamadı.');
+        alert('🎬 1080x1920 MP4 Video render işlemi arka planda başlatıldı! Tamamlandığında bildirim alacaksınız.');
+        closeExportModal();
+      } catch (e) {
+        alert('Render hatası: ' + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-play"></i> <span>MP4 Render Başlat</span>';
+      }
+    }
+
+    function renderVideo() {
+      openExportModal();
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+      alert('Kopyalandı: ' + text);
+    }
+
+    // 12. MULTILINGUAL & AUTOPILOT MODALS
+    function openMultilingualModal() {
+      document.getElementById('modal-multilingual').classList.remove('hidden');
+    }
+    function closeMultilingualModal() {
+      document.getElementById('modal-multilingual').classList.add('hidden');
+    }
+
+    async function cloneAndSwitchLanguage(lang) {
+      closeMultilingualModal();
+      alert(`🌍 Proje '${lang.toUpperCase()}' diline çevriliyor ve ses master'ı yapılıyor...`);
+      try {
+        const res = await fetch('/api/multilingual/clone-all', { method: 'POST' });
+        if (res.ok) {
+          await loadTimelineData();
+          alert(`✓ '${lang.toUpperCase()}' dili hazırlandı ve yüklendi!`);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function openAutopilotModal() {
+      document.getElementById('modal-autopilot').classList.remove('hidden');
+    }
+    function closeAutopilotModal() {
+      document.getElementById('modal-autopilot').classList.add('hidden');
+    }
+
+    function openKeyPoolModal() {
+      document.getElementById('modal-keypool').classList.remove('hidden');
+    }
+    function closeKeyPoolModal() {
+      document.getElementById('modal-keypool').classList.add('hidden');
+    }
+
+    function forceRefreshPreview() {
+      const v = document.getElementById('final-video');
+      v.src = `/out/video.mp4?t=${Date.now()}`;
+      audioEl.src = `/public/audio.mp3?t=${Date.now()}`;
+      audioEl.load();
+      loadTimelineData();
+    }
+  </script>
+</body>
+</html>
