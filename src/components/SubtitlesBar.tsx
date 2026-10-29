@@ -122,8 +122,17 @@ export const SubtitlesBar: React.FC<SubtitlesBarProps> = ({
     ? '"Montserrat", "Inter", -apple-system, sans-serif'
     : '"Caveat", "Kalam", cursive, sans-serif';
 
-  // Words list for word-by-word karaoke progression
-  const words = activeWord ? activeWord.text.trim().split(/\s+/) : [];
+  // Words list for word-by-word karaoke progression with apostrophe stitching
+  const cleanActiveText = activeWord
+    ? activeWord.text
+        .replace(/([A-Za-zÇĞİÖŞÜçğıöşü]+)\s*['’‘ʼ`´]\s*([A-Za-zÇĞİÖŞÜçğıöşü]+)/g, "$1'$2")
+        .replace(/\bKur\s+an\b/gi, "Kur'an")
+        .replace(/\bKur\s+an'([a-zçğıöşü]+)\b/gi, "Kur'an'$1")
+        .replace(/Kur'an[\s\-]+ı\s+Kerim/gi, "Kur'an-ı Kerim")
+        .replace(/\s+/g, ' ')
+        .trim()
+    : '';
+  const words = cleanActiveText ? cleanActiveText.split(/\s+/) : [];
   const wordsCount = Math.max(1, words.length);
   const activeWordIndex = Math.min(
     wordsCount - 1,

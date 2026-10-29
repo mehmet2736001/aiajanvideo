@@ -1,39 +1,3668 @@
 {
-  "topic": "Geçici Test Projesi 2",
+  "topic": "dsgege",
   "theme": "notebook",
-  "format": "16:9",
-  "headerSubtitle": "BÃ¶lÃ¼m 1",
-  "headerLine1": "GEÇICI TEST PROJESI 2",
-  "circledWord": "Ä°LK",
+  "format": "9:16",
+  "headerSubtitle": "Bölüm 1",
+  "headerLine1": "DSGEGE",
+  "circledWord": "İLK",
   "headerLine2": "Fikrini Buraya Yaz",
-  "highlightedText": "Ã–nemli Nokta",
+  "highlightedText": "Önemli Nokta",
   "layoutType": "pip_split",
   "scenes": [
     {
       "id": "scene_1",
-      "headerSubtitle": "BÃ¶lÃ¼m 1",
-      "headerLine1": "GEÇICI TEST PROJESI 2",
-      "circledWord": "Ä°LK",
+      "headerSubtitle": "Bölüm 1",
+      "headerLine1": "DSGEGE",
+      "circledWord": "İLK",
       "headerLine2": "Fikrini Buraya Yaz",
-      "highlightedText": "Ã–nemli Nokta",
+      "highlightedText": "Önemli Nokta",
       "layoutType": "pip_split",
       "startTime": 0.0,
-      "endTime": 10.0,
+      "endTime": 353.84,
       "duration": 10.0
     }
   ],
   "subtitles": [
     {
-      "text": "Geçici Test Projesi 2",
+      "text": "okunan Kur'an ayetleri",
       "start": 0.0,
-      "end": 2.5
+      "end": 2.0
     },
     {
-      "text": "kurgulamaya hemen baÅŸla",
-      "start": 2.5,
-      "end": 5.0
+      "text": "ve Allah'ın kelamı",
+      "start": 2.0,
+      "end": 4.0
+    },
+    {
+      "text": "Kur'an-ı Kerim rehberimizdir",
+      "start": 4.0,
+      "end": 6.0
     }
   ],
-  "totalDuration": 10.0,
-  "created_at": "2026-10-29 21:46:10"
+  "totalDuration": 353.84,
+  "created_at": "2026-10-29 22:24:34",
+  "audioUrl": "/public/audio.mp3",
+  "words": [
+    {
+      "word": "Sana",
+      "start": 0.0,
+      "end": 0.66
+    },
+    {
+      "word": "mı",
+      "start": 0.66,
+      "end": 0.84
+    },
+    {
+      "word": "kaldı",
+      "start": 0.84,
+      "end": 1.28
+    },
+    {
+      "word": "İslam",
+      "start": 1.28,
+      "end": 1.68
+    },
+    {
+      "word": "fıkında",
+      "start": 1.68,
+      "end": 2.14
+    },
+    {
+      "word": "fethvalar",
+      "start": 2.14,
+      "end": 2.78
+    },
+    {
+      "word": "vermek",
+      "start": 2.78,
+      "end": 3.24
+    },
+    {
+      "word": "hüküm",
+      "start": 3.24,
+      "end": 3.64
+    },
+    {
+      "word": "kesmek?",
+      "start": 3.64,
+      "end": 4.2
+    },
+    {
+      "word": "Şimdi",
+      "start": 4.66,
+      "end": 4.88
+    },
+    {
+      "word": "biz",
+      "start": 4.88,
+      "end": 5.32
+    },
+    {
+      "word": "Kur",
+      "start": 5.32,
+      "end": 5.6
+    },
+    {
+      "word": "'anı",
+      "start": 5.6,
+      "end": 5.8
+    },
+    {
+      "word": "Peygamber",
+      "start": 5.8,
+      "end": 6.78
+    },
+    {
+      "word": "Sünnet",
+      "start": 6.78,
+      "end": 7.1
+    },
+    {
+      "word": "'ini",
+      "start": 7.1,
+      "end": 7.64
+    },
+    {
+      "word": "sahabe",
+      "start": 7.64,
+      "end": 8.08
+    },
+    {
+      "word": "hayatını",
+      "start": 8.08,
+      "end": 8.92
+    },
+    {
+      "word": "ve",
+      "start": 8.92,
+      "end": 9.22
+    },
+    {
+      "word": "ısırlık",
+      "start": 9.22,
+      "end": 9.58
+    },
+    {
+      "word": "İslam",
+      "start": 9.58,
+      "end": 9.94
+    },
+    {
+      "word": "alimlerini",
+      "start": 9.94,
+      "end": 10.48
+    },
+    {
+      "word": "bir",
+      "start": 10.48,
+      "end": 10.72
+    },
+    {
+      "word": "kenara",
+      "start": 10.72,
+      "end": 10.92
+    },
+    {
+      "word": "bırakıp",
+      "start": 10.92,
+      "end": 11.4
+    },
+    {
+      "word": "da",
+      "start": 11.4,
+      "end": 11.78
+    },
+    {
+      "word": "bu",
+      "start": 11.78,
+      "end": 11.92
+    },
+    {
+      "word": "dinisenden",
+      "start": 11.92,
+      "end": 12.58
+    },
+    {
+      "word": "müörenceğiz.",
+      "start": 12.58,
+      "end": 13.3
+    },
+    {
+      "word": "Kur",
+      "start": 13.94,
+      "end": 14.1
+    },
+    {
+      "word": "'an'dan",
+      "start": 14.1,
+      "end": 14.42
+    },
+    {
+      "word": "tek",
+      "start": 14.42,
+      "end": 14.64
+    },
+    {
+      "word": "bir",
+      "start": 14.64,
+      "end": 14.84
+    },
+    {
+      "word": "ayet",
+      "start": 14.84,
+      "end": 15.08
+    },
+    {
+      "word": "okudesen",
+      "start": 15.08,
+      "end": 15.8
+    },
+    {
+      "word": "Sünnet'den",
+      "start": 15.8,
+      "end": 16.74
+    },
+    {
+      "word": "sahik",
+      "start": 16.74,
+      "end": 17.1
+    },
+    {
+      "word": "bir",
+      "start": 17.1,
+      "end": 17.26
+    },
+    {
+      "word": "delil",
+      "start": 17.26,
+      "end": 17.52
+    },
+    {
+      "word": "getirdesen,",
+      "start": 17.52,
+      "end": 18.3
+    },
+    {
+      "word": "dili",
+      "start": 18.42,
+      "end": 18.86
+    },
+    {
+      "word": "boğazına",
+      "start": 18.86,
+      "end": 19.28
+    },
+    {
+      "word": "düğümlenecek",
+      "start": 19.28,
+      "end": 19.84
+    },
+    {
+      "word": "insanlardan",
+      "start": 19.84,
+      "end": 20.5
+    },
+    {
+      "word": "müörenceğiz",
+      "start": 20.5,
+      "end": 21.08
+    },
+    {
+      "word": "bu",
+      "start": 21.08,
+      "end": 21.34
+    },
+    {
+      "word": "güzeli",
+      "start": 21.34,
+      "end": 21.66
+    },
+    {
+      "word": "mislamı.",
+      "start": 21.66,
+      "end": 22.08
+    },
+    {
+      "word": "Bütün",
+      "start": 23.1,
+      "end": 23.34
+    },
+    {
+      "word": "derdiniz",
+      "start": 23.34,
+      "end": 23.8
+    },
+    {
+      "word": "bitti",
+      "start": 23.8,
+      "end": 24.12
+    },
+    {
+      "word": "de",
+      "start": 24.12,
+      "end": 24.54
+    },
+    {
+      "word": "şimdi",
+      "start": 24.54,
+      "end": 24.88
+    },
+    {
+      "word": "Müslümanların",
+      "start": 24.88,
+      "end": 25.6
+    },
+    {
+      "word": "aile",
+      "start": 25.6,
+      "end": 26.02
+    },
+    {
+      "word": "yuvasını",
+      "start": 26.02,
+      "end": 26.46
+    },
+    {
+      "word": "mühe",
+      "start": 26.46,
+      "end": 26.68
+    },
+    {
+      "word": "defa",
+      "start": 26.68,
+      "end": 26.9
+    },
+    {
+      "word": "koymaya",
+      "start": 26.9,
+      "end": 27.2
+    },
+    {
+      "word": "başladınız.",
+      "start": 27.2,
+      "end": 27.8
+    },
+    {
+      "word": "Arkadaşlar",
+      "start": 27.8,
+      "end": 28.98
+    },
+    {
+      "word": "kusura",
+      "start": 28.98,
+      "end": 29.26
+    },
+    {
+      "word": "bakmayın",
+      "start": 29.26,
+      "end": 29.76
+    },
+    {
+      "word": "şu",
+      "start": 29.76,
+      "end": 30.06
+    },
+    {
+      "word": "an",
+      "start": 30.06,
+      "end": 30.26
+    },
+    {
+      "word": "aşırı",
+      "start": 30.26,
+      "end": 30.7
+    },
+    {
+      "word": "derecede",
+      "start": 30.7,
+      "end": 31.04
+    },
+    {
+      "word": "gerginim.",
+      "start": 31.04,
+      "end": 31.74
+    },
+    {
+      "word": "Çünkü",
+      "start": 32.08,
+      "end": 32.08
+    },
+    {
+      "word": "ilmi",
+      "start": 32.08,
+      "end": 32.72
+    },
+    {
+      "word": "olmayan",
+      "start": 32.72,
+      "end": 33.14
+    },
+    {
+      "word": "insanların",
+      "start": 33.14,
+      "end": 33.7
+    },
+    {
+      "word": "çıkıp",
+      "start": 33.7,
+      "end": 34.06
+    },
+    {
+      "word": "da",
+      "start": 34.06,
+      "end": 34.52
+    },
+    {
+      "word": "İslam",
+      "start": 34.52,
+      "end": 34.88
+    },
+    {
+      "word": "adına",
+      "start": 34.88,
+      "end": 35.2
+    },
+    {
+      "word": "fethvalar",
+      "start": 35.2,
+      "end": 35.8
+    },
+    {
+      "word": "mesine,",
+      "start": 35.8,
+      "end": 36.2
+    },
+    {
+      "word": "diğini",
+      "start": 36.68,
+      "end": 36.92
+    },
+    {
+      "word": "kendin",
+      "start": 36.92,
+      "end": 37.32
+    },
+    {
+      "word": "nefislerine",
+      "start": 37.32,
+      "end": 37.84
+    },
+    {
+      "word": "göre",
+      "start": 37.84,
+      "end": 38.12
+    },
+    {
+      "word": "iyi",
+      "start": 38.12,
+      "end": 38.34
+    },
+    {
+      "word": "bükmesini",
+      "start": 38.34,
+      "end": 38.74
+    },
+    {
+      "word": "artık",
+      "start": 38.74,
+      "end": 39.14
+    },
+    {
+      "word": "zere",
+      "start": 39.14,
+      "end": 39.48
+    },
+    {
+      "word": "kadar",
+      "start": 39.48,
+      "end": 39.82
+    },
+    {
+      "word": "tahammülüm",
+      "start": 39.82,
+      "end": 40.36
+    },
+    {
+      "word": "yok.",
+      "start": 40.36,
+      "end": 40.7
+    },
+    {
+      "word": "Neden",
+      "start": 41.04,
+      "end": 41.24
+    },
+    {
+      "word": "mi?",
+      "start": 41.24,
+      "end": 41.8
+    },
+    {
+      "word": "Buyurun",
+      "start": 41.98,
+      "end": 42.2
+    },
+    {
+      "word": "konuşalım.",
+      "start": 42.2,
+      "end": 42.74
+    },
+    {
+      "word": "Son",
+      "start": 43.78,
+      "end": 43.98
+    },
+    {
+      "word": "dönemde",
+      "start": 43.98,
+      "end": 44.74
+    },
+    {
+      "word": "İslam'da",
+      "start": 44.74,
+      "end": 45.34
+    },
+    {
+      "word": "kadının",
+      "start": 45.34,
+      "end": 45.74
+    },
+    {
+      "word": "yemek",
+      "start": 45.74,
+      "end": 46.06
+    },
+    {
+      "word": "yapma,",
+      "start": 46.06,
+      "end": 46.7
+    },
+    {
+      "word": "ev",
+      "start": 46.92,
+      "end": 46.98
+    },
+    {
+      "word": "sürpürme,",
+      "start": 46.98,
+      "end": 47.5
+    },
+    {
+      "word": "ütü",
+      "start": 47.82,
+      "end": 47.98
+    },
+    {
+      "word": "ve",
+      "start": 47.98,
+      "end": 48.16
+    },
+    {
+      "word": "çamaşır",
+      "start": 48.16,
+      "end": 48.54
+    },
+    {
+      "word": "yıkama",
+      "start": 48.54,
+      "end": 48.9
+    },
+    {
+      "word": "zorunduğunu",
+      "start": 48.9,
+      "end": 49.32
+    },
+    {
+      "word": "yoktur.",
+      "start": 49.32,
+      "end": 50.04
+    },
+    {
+      "word": "Yapma",
+      "start": 50.32,
+      "end": 50.64
+    },
+    {
+      "word": "sakinaha",
+      "start": 50.64,
+      "end": 51.12
+    },
+    {
+      "word": "girmez",
+      "start": 51.12,
+      "end": 51.56
+    },
+    {
+      "word": "söyleme,",
+      "start": 51.56,
+      "end": 52.22
+    },
+    {
+      "word": "cehaletin",
+      "start": 52.22,
+      "end": 53.2
+    },
+    {
+      "word": "ve",
+      "start": 53.2,
+      "end": 53.78
+    },
+    {
+      "word": "fuki",
+      "start": 53.78,
+      "end": 54.08
+    },
+    {
+      "word": "kavramları",
+      "start": 54.08,
+      "end": 54.78
+    },
+    {
+      "word": "cimbızlayarak,",
+      "start": 54.78,
+      "end": 55.58
+    },
+    {
+      "word": "diğini",
+      "start": 55.96,
+      "end": 56.12
+    },
+    {
+      "word": "tahri",
+      "start": 56.12,
+      "end": 56.44
+    },
+    {
+      "word": "fethmenin",
+      "start": 56.44,
+      "end": 57.04
+    },
+    {
+      "word": "en",
+      "start": 57.04,
+      "end": 57.36
+    },
+    {
+      "word": "bağri",
+      "start": 57.36,
+      "end": 57.64
+    },
+    {
+      "word": "zöğüneydir.",
+      "start": 57.64,
+      "end": 58.24
+    },
+    {
+      "word": "Evliliği",
+      "start": 58.8,
+      "end": 59.68
+    },
+    {
+      "word": "aynı",
+      "start": 59.68,
+      "end": 59.92
+    },
+    {
+      "word": "evi",
+      "start": 59.92,
+      "end": 60.2
+    },
+    {
+      "word": "paylaşan",
+      "start": 60.2,
+      "end": 60.7
+    },
+    {
+      "word": "iki",
+      "start": 60.7,
+      "end": 60.98
+    },
+    {
+      "word": "yurt",
+      "start": 60.98,
+      "end": 61.24
+    },
+    {
+      "word": "arkadaşının",
+      "start": 61.24,
+      "end": 61.86
+    },
+    {
+      "word": "ortaklığına",
+      "start": 61.86,
+      "end": 62.52
+    },
+    {
+      "word": "benzetice",
+      "start": 62.52,
+      "end": 63.1
+    },
+    {
+      "word": "kadar",
+      "start": 63.1,
+      "end": 63.66
+    },
+    {
+      "word": "İslam",
+      "start": 63.66,
+      "end": 64.12
+    },
+    {
+      "word": "'ın",
+      "start": 64.12,
+      "end": 64.26
+    },
+    {
+      "word": "ruhundan",
+      "start": 64.26,
+      "end": 64.74
+    },
+    {
+      "word": "kopan",
+      "start": 64.74,
+      "end": 65.1
+    },
+    {
+      "word": "bu",
+      "start": 65.1,
+      "end": 65.26
+    },
+    {
+      "word": "ziyneyet,",
+      "start": 65.26,
+      "end": 65.96
+    },
+    {
+      "word": "iş",
+      "start": 66.28,
+      "end": 66.4
+    },
+    {
+      "word": "erkeğin",
+      "start": 66.4,
+      "end": 67.16
+    },
+    {
+      "word": "ödiceği",
+      "start": 67.16,
+      "end": 67.68
+    },
+    {
+      "word": "mehire,",
+      "start": 67.68,
+      "end": 68.14
+    },
+    {
+      "word": "tek",
+      "start": 68.44,
+      "end": 68.56
+    },
+    {
+      "word": "başına",
+      "start": 68.56,
+      "end": 68.92
+    },
+    {
+      "word": "sırtlanacağı",
+      "start": 68.92,
+      "end": 69.66
+    },
+    {
+      "word": "ev",
+      "start": 69.66,
+      "end": 69.88
+    },
+    {
+      "word": "kirasına,",
+      "start": 69.88,
+      "end": 70.58
+    },
+    {
+      "word": "faturalara,",
+      "start": 70.92,
+      "end": 71.5
+    },
+    {
+      "word": "mutfak",
+      "start": 71.8,
+      "end": 72.14
+    },
+    {
+      "word": "masrafına",
+      "start": 72.14,
+      "end": 72.76
+    },
+    {
+      "word": "ve",
+      "start": 72.76,
+      "end": 72.98
+    },
+    {
+      "word": "nefaka",
+      "start": 72.98,
+      "end": 73.36
+    },
+    {
+      "word": "yutuyumlüğüne",
+      "start": 73.36,
+      "end": 74.04
+    },
+    {
+      "word": "gelince",
+      "start": 74.04,
+      "end": 74.72
+    },
+    {
+      "word": "İslam",
+      "start": 74.72,
+      "end": 75.16
+    },
+    {
+      "word": "oku",
+      "start": 75.16,
+      "end": 75.42
+    },
+    {
+      "word": "kunu",
+      "start": 75.42,
+      "end": 75.56
+    },
+    {
+      "word": "hatırlamakladır.",
+      "start": 75.56,
+      "end": 76.34
+    },
+    {
+      "word": "Fakat",
+      "start": 76.8,
+      "end": 77.06
+    },
+    {
+      "word": "iş",
+      "start": 77.06,
+      "end": 77.58
+    },
+    {
+      "word": "kendi",
+      "start": 77.58,
+      "end": 77.9
+    },
+    {
+      "word": "sorumluluğuna",
+      "start": 77.9,
+      "end": 78.54
+    },
+    {
+      "word": "gelince,",
+      "start": 78.54,
+      "end": 79.2
+    },
+    {
+      "word": "yurt",
+      "start": 79.2,
+      "end": 79.62
+    },
+    {
+      "word": "arkadaşı",
+      "start": 79.62,
+      "end": 80.24
+    },
+    {
+      "word": "yapmaksorunda",
+      "start": 80.24,
+      "end": 81.18
+    },
+    {
+      "word": "değilim,",
+      "start": 81.18,
+      "end": 81.84
+    },
+    {
+      "word": "pişkinliğine",
+      "start": 82.08,
+      "end": 82.46
+    },
+    {
+      "word": "sıvın",
+      "start": 82.46,
+      "end": 82.72
+    },
+    {
+      "word": "maktadır.",
+      "start": 82.72,
+      "end": 83.26
+    },
+    {
+      "word": "Hangi",
+      "start": 83.86,
+      "end": 84.08
+    },
+    {
+      "word": "yurt",
+      "start": 84.08,
+      "end": 84.26
+    },
+    {
+      "word": "arkadaşlı",
+      "start": 84.26,
+      "end": 84.88
+    },
+    {
+      "word": "sisteminde,",
+      "start": 84.88,
+      "end": 85.26
+    },
+    {
+      "word": "bir",
+      "start": 85.98,
+      "end": 86.04
+    },
+    {
+      "word": "taraf",
+      "start": 86.04,
+      "end": 86.42
+    },
+    {
+      "word": "diğerinin",
+      "start": 86.42,
+      "end": 87.06
+    },
+    {
+      "word": "tüm",
+      "start": 87.06,
+      "end": 87.38
+    },
+    {
+      "word": "barınma,",
+      "start": 87.38,
+      "end": 88.1
+    },
+    {
+      "word": "giyinme",
+      "start": 88.3,
+      "end": 88.8
+    },
+    {
+      "word": "ve",
+      "start": 88.8,
+      "end": 89.1
+    },
+    {
+      "word": "beslenme",
+      "start": 89.1,
+      "end": 89.5
+    },
+    {
+      "word": "masrafını",
+      "start": 89.5,
+      "end": 90.0
+    },
+    {
+      "word": "tek",
+      "start": 90.0,
+      "end": 90.26
+    },
+    {
+      "word": "başına",
+      "start": 90.26,
+      "end": 90.58
+    },
+    {
+      "word": "üstlenmek",
+      "start": 90.58,
+      "end": 91.1
+    },
+    {
+      "word": "zorundadır.",
+      "start": 91.1,
+      "end": 91.48
+    },
+    {
+      "word": "İslam",
+      "start": 92.26,
+      "end": 92.56
+    },
+    {
+      "word": "'ın",
+      "start": 92.56,
+      "end": 92.74
+    },
+    {
+      "word": "erkeği",
+      "start": 92.74,
+      "end": 93.18
+    },
+    {
+      "word": "yüklidi",
+      "start": 93.18,
+      "end": 93.66
+    },
+    {
+      "word": "ağır",
+      "start": 93.66,
+      "end": 94.26
+    },
+    {
+      "word": "maddiğim",
+      "start": 94.26,
+      "end": 94.8
+    },
+    {
+      "word": "ülkellefiyetleri",
+      "start": 94.8,
+      "end": 95.56
+    },
+    {
+      "word": "cepte",
+      "start": 95.56,
+      "end": 95.96
+    },
+    {
+      "word": "görüp,",
+      "start": 95.96,
+      "end": 96.4
+    },
+    {
+      "word": "kadının",
+      "start": 96.72,
+      "end": 97.1
+    },
+    {
+      "word": "eviçi",
+      "start": 97.1,
+      "end": 97.44
+    },
+    {
+      "word": "sorumluluğduklarını",
+      "start": 97.44,
+      "end": 98.1
+    },
+    {
+      "word": "inkar",
+      "start": 98.1,
+      "end": 98.46
+    },
+    {
+      "word": "etmek",
+      "start": 98.46,
+      "end": 98.78
+    },
+    {
+      "word": "adalet",
+      "start": 98.78,
+      "end": 99.34
+    },
+    {
+      "word": "değil,",
+      "start": 99.34,
+      "end": 99.8
+    },
+    {
+      "word": "diğini",
+      "start": 100.08,
+      "end": 100.34
+    },
+    {
+      "word": "kendi",
+      "start": 100.34,
+      "end": 100.64
+    },
+    {
+      "word": "konflunu",
+      "start": 100.64,
+      "end": 101.16
+    },
+    {
+      "word": "alet",
+      "start": 101.16,
+      "end": 101.5
+    },
+    {
+      "word": "eden",
+      "start": 101.5,
+      "end": 101.76
+    },
+    {
+      "word": "açık",
+      "start": 101.76,
+      "end": 102.12
+    },
+    {
+      "word": "bir",
+      "start": 102.12,
+      "end": 102.32
+    },
+    {
+      "word": "çiftestlandardır.",
+      "start": 102.32,
+      "end": 103.24
+    },
+    {
+      "word": "Kuranı",
+      "start": 103.82,
+      "end": 104.28
+    },
+    {
+      "word": "ki,",
+      "start": 104.28,
+      "end": 104.34
+    },
+    {
+      "word": "bakara",
+      "start": 104.34,
+      "end": 105.18
+    },
+    {
+      "word": "suurası",
+      "start": 105.18,
+      "end": 105.7
+    },
+    {
+      "word": "iki",
+      "start": 105.7,
+      "end": 106.06
+    },
+    {
+      "word": "yüz",
+      "start": 106.06,
+      "end": 106.26
+    },
+    {
+      "word": "yirmi",
+      "start": 106.26,
+      "end": 106.46
+    },
+    {
+      "word": "sekizince",
+      "start": 106.46,
+      "end": 107.02
+    },
+    {
+      "word": "ayette",
+      "start": 107.02,
+      "end": 107.52
+    },
+    {
+      "word": "aileği",
+      "start": 107.52,
+      "end": 108.3
+    },
+    {
+      "word": "için",
+      "start": 108.3,
+      "end": 108.46
+    },
+    {
+      "word": "hak",
+      "start": 108.46,
+      "end": 108.68
+    },
+    {
+      "word": "ve",
+      "start": 108.68,
+      "end": 108.8
+    },
+    {
+      "word": "vazifeleri",
+      "start": 108.8,
+      "end": 109.44
+    },
+    {
+      "word": "mağruf",
+      "start": 109.44,
+      "end": 110.32
+    },
+    {
+      "word": "ilkesine",
+      "start": 110.32,
+      "end": 110.76
+    },
+    {
+      "word": "bağlamıştır.",
+      "start": 110.76,
+      "end": 111.4
+    },
+    {
+      "word": "İslam",
+      "start": 111.94,
+      "end": 112.34
+    },
+    {
+      "word": "'a",
+      "start": 112.34,
+      "end": 112.52
+    },
+    {
+      "word": "elimlerinin",
+      "start": 112.52,
+      "end": 113.22
+    },
+    {
+      "word": "ittifakla",
+      "start": 113.22,
+      "end": 113.92
+    },
+    {
+      "word": "belirttiği",
+      "start": 113.92,
+      "end": 114.52
+    },
+    {
+      "word": "yüzlere,",
+      "start": 114.52,
+      "end": 115.08
+    },
+    {
+      "word": "mağruf",
+      "start": 115.44,
+      "end": 116.02
+    },
+    {
+      "word": "erkeğin",
+      "start": 116.02,
+      "end": 116.68
+    },
+    {
+      "word": "dışarıda",
+      "start": 116.68,
+      "end": 117.2
+    },
+    {
+      "word": "çalışıp,",
+      "start": 117.2,
+      "end": 117.8
+    },
+    {
+      "word": "aileinin",
+      "start": 118.06,
+      "end": 118.4
+    },
+    {
+      "word": "rızkını",
+      "start": 118.4,
+      "end": 118.84
+    },
+    {
+      "word": "temin",
+      "start": 118.84,
+      "end": 119.16
+    },
+    {
+      "word": "etmesi,",
+      "start": 119.16,
+      "end": 119.66
+    },
+    {
+      "word": "kadının",
+      "start": 120.36,
+      "end": 120.6
+    },
+    {
+      "word": "ise",
+      "start": 120.6,
+      "end": 121.08
+    },
+    {
+      "word": "evin",
+      "start": 121.08,
+      "end": 121.66
+    },
+    {
+      "word": "iç",
+      "start": 121.66,
+      "end": 121.9
+    },
+    {
+      "word": "düzenini,",
+      "start": 121.9,
+      "end": 122.56
+    },
+    {
+      "word": "yemeğini",
+      "start": 122.82,
+      "end": 123.24
+    },
+    {
+      "word": "ve",
+      "start": 123.24,
+      "end": 123.62
+    },
+    {
+      "word": "temizliğini",
+      "start": 123.62,
+      "end": 124.18
+    },
+    {
+      "word": "üstlenmesidir.",
+      "start": 124.18,
+      "end": 125.0
+    },
+    {
+      "word": "Yine",
+      "start": 125.82,
+      "end": 126.06
+    },
+    {
+      "word": "nisa",
+      "start": 126.06,
+      "end": 126.42
+    },
+    {
+      "word": "suurası",
+      "start": 126.42,
+      "end": 126.92
+    },
+    {
+      "word": "34.",
+      "start": 126.92,
+      "end": 127.4
+    },
+    {
+      "word": "ayette,",
+      "start": 127.76,
+      "end": 128.26
+    },
+    {
+      "word": "herkeklerin",
+      "start": 128.76,
+      "end": 129.3
+    },
+    {
+      "word": "nafakayı",
+      "start": 129.3,
+      "end": 129.9
+    },
+    {
+      "word": "sağlamaları",
+      "start": 129.9,
+      "end": 130.56
+    },
+    {
+      "word": "sebebiyle,",
+      "start": 130.56,
+      "end": 131.36
+    },
+    {
+      "word": "aile",
+      "start": 131.36,
+      "end": 131.9
+    },
+    {
+      "word": "de",
+      "start": 131.9,
+      "end": 132.22
+    },
+    {
+      "word": "kavvam,",
+      "start": 132.22,
+      "end": 132.96
+    },
+    {
+      "word": "yani",
+      "start": 133.14,
+      "end": 133.4
+    },
+    {
+      "word": "koruyup",
+      "start": 133.4,
+      "end": 133.92
+    },
+    {
+      "word": "gözetici",
+      "start": 133.92,
+      "end": 134.54
+    },
+    {
+      "word": "ve",
+      "start": 134.54,
+      "end": 134.74
+    },
+    {
+      "word": "yönetici",
+      "start": 134.74,
+      "end": 135.22
+    },
+    {
+      "word": "olduğu",
+      "start": 135.22,
+      "end": 135.86
+    },
+    {
+      "word": "saali",
+      "start": 135.86,
+      "end": 136.52
+    },
+    {
+      "word": "hak",
+      "start": 136.52,
+      "end": 136.72
+    },
+    {
+      "word": "adınların",
+      "start": 136.72,
+      "end": 137.22
+    },
+    {
+      "word": "ise",
+      "start": 137.22,
+      "end": 137.56
+    },
+    {
+      "word": "bu",
+      "start": 137.56,
+      "end": 137.74
+    },
+    {
+      "word": "düzene",
+      "start": 137.74,
+      "end": 138.28
+    },
+    {
+      "word": "uyumlu",
+      "start": 138.28,
+      "end": 138.68
+    },
+    {
+      "word": "olduğu",
+      "start": 138.68,
+      "end": 139.04
+    },
+    {
+      "word": "açıkça",
+      "start": 139.04,
+      "end": 139.52
+    },
+    {
+      "word": "beğen",
+      "start": 139.52,
+      "end": 139.8
+    },
+    {
+      "word": "edilmiştir.",
+      "start": 139.8,
+      "end": 140.6
+    },
+    {
+      "word": "Kuranı",
+      "start": 141.28,
+      "end": 141.72
+    },
+    {
+      "word": "kurduğu",
+      "start": 141.72,
+      "end": 142.16
+    },
+    {
+      "word": "bu",
+      "start": 142.16,
+      "end": 142.52
+    },
+    {
+      "word": "ilahi",
+      "start": 142.52,
+      "end": 142.92
+    },
+    {
+      "word": "iş",
+      "start": 142.92,
+      "end": 143.24
+    },
+    {
+      "word": "bölümünü",
+      "start": 143.24,
+      "end": 143.62
+    },
+    {
+      "word": "yoksa",
+      "start": 143.62,
+      "end": 144.0
+    },
+    {
+      "word": "yip,",
+      "start": 144.0,
+      "end": 144.38
+    },
+    {
+      "word": "kadını",
+      "start": 144.72,
+      "end": 144.94
+    },
+    {
+      "word": "ev",
+      "start": 144.94,
+      "end": 145.2
+    },
+    {
+      "word": "içinde",
+      "start": 145.2,
+      "end": 145.54
+    },
+    {
+      "word": "hiçbir",
+      "start": 145.54,
+      "end": 145.92
+    },
+    {
+      "word": "sorumluğu",
+      "start": 145.92,
+      "end": 146.66
+    },
+    {
+      "word": "olmayan",
+      "start": 146.66,
+      "end": 147.04
+    },
+    {
+      "word": "bir",
+      "start": 147.04,
+      "end": 147.28
+    },
+    {
+      "word": "misafir",
+      "start": 147.28,
+      "end": 147.82
+    },
+    {
+      "word": "konumuna",
+      "start": 147.82,
+      "end": 148.2
+    },
+    {
+      "word": "indir",
+      "start": 148.2,
+      "end": 148.48
+    },
+    {
+      "word": "yemek,",
+      "start": 148.48,
+      "end": 148.82
+    },
+    {
+      "word": "doğrudan",
+      "start": 149.28,
+      "end": 149.72
+    },
+    {
+      "word": "kuranın",
+      "start": 149.72,
+      "end": 150.26
+    },
+    {
+      "word": "mağruf",
+      "start": 150.26,
+      "end": 150.8
+    },
+    {
+      "word": "emrini",
+      "start": 150.8,
+      "end": 151.16
+    },
+    {
+      "word": "çiğnemektir.",
+      "start": 151.16,
+      "end": 151.54
+    },
+    {
+      "word": "Bu",
+      "start": 152.5,
+      "end": 152.64
+    },
+    {
+      "word": "temelsiz",
+      "start": 152.64,
+      "end": 153.16
+    },
+    {
+      "word": "iddia",
+      "start": 153.16,
+      "end": 153.5
+    },
+    {
+      "word": "'ya",
+      "start": 153.5,
+      "end": 153.68
+    },
+    {
+      "word": "yerle",
+      "start": 153.68,
+      "end": 154.06
+    },
+    {
+      "word": "bir",
+      "start": 154.06,
+      "end": 154.2
+    },
+    {
+      "word": "eden",
+      "start": 154.2,
+      "end": 154.5
+    },
+    {
+      "word": "en",
+      "start": 154.5,
+      "end": 154.88
+    },
+    {
+      "word": "büyük",
+      "start": 154.88,
+      "end": 155.08
+    },
+    {
+      "word": "delilirse",
+      "start": 155.08,
+      "end": 155.46
+    },
+    {
+      "word": "bizzat",
+      "start": 155.94,
+      "end": 156.6
+    },
+    {
+      "word": "Peygamber",
+      "start": 156.6,
+      "end": 157.06
+    },
+    {
+      "word": "Efendimiz",
+      "start": 157.06,
+      "end": 157.44
+    },
+    {
+      "word": "'in",
+      "start": 157.44,
+      "end": 157.84
+    },
+    {
+      "word": "öz",
+      "start": 157.84,
+      "end": 158.08
+    },
+    {
+      "word": "kızı",
+      "start": 158.08,
+      "end": 158.46
+    },
+    {
+      "word": "hazıreti",
+      "start": 158.46,
+      "end": 158.98
+    },
+    {
+      "word": "Fatima",
+      "start": 158.98,
+      "end": 159.42
+    },
+    {
+      "word": "hakkında",
+      "start": 159.42,
+      "end": 159.9
+    },
+    {
+      "word": "verdiği",
+      "start": 159.9,
+      "end": 160.34
+    },
+    {
+      "word": "hükümdür.",
+      "start": 160.34,
+      "end": 160.92
+    },
+    {
+      "word": "Bu",
+      "start": 161.62,
+      "end": 161.74
+    },
+    {
+      "word": "hariyi",
+      "start": 161.74,
+      "end": 162.02
+    },
+    {
+      "word": "ve",
+      "start": 162.02,
+      "end": 162.22
+    },
+    {
+      "word": "müslüm",
+      "start": 162.22,
+      "end": 162.46
+    },
+    {
+      "word": "gibi",
+      "start": 162.46,
+      "end": 162.76
+    },
+    {
+      "word": "en",
+      "start": 162.76,
+      "end": 163.06
+    },
+    {
+      "word": "sai",
+      "start": 163.06,
+      "end": 163.3
+    },
+    {
+      "word": "kaynaklarda",
+      "start": 163.3,
+      "end": 163.96
+    },
+    {
+      "word": "geçtiği",
+      "start": 163.96,
+      "end": 164.44
+    },
+    {
+      "word": "yüzere,",
+      "start": 164.44,
+      "end": 164.92
+    },
+    {
+      "word": "hazıreti",
+      "start": 165.26,
+      "end": 165.58
+    },
+    {
+      "word": "Fatima",
+      "start": 165.58,
+      "end": 166.06
+    },
+    {
+      "word": "elde",
+      "start": 166.06,
+      "end": 166.64
+    },
+    {
+      "word": "-iirmeni",
+      "start": 166.64,
+      "end": 166.98
+    },
+    {
+      "word": "ile",
+      "start": 166.98,
+      "end": 167.3
+    },
+    {
+      "word": "onu",
+      "start": 167.3,
+      "end": 167.52
+    },
+    {
+      "word": "ütmekten",
+      "start": 167.52,
+      "end": 168.14
+    },
+    {
+      "word": "ellerinin",
+      "start": 168.14,
+      "end": 168.72
+    },
+    {
+      "word": "nasıır",
+      "start": 168.72,
+      "end": 169.1
+    },
+    {
+      "word": "tuttuğu,",
+      "start": 169.1,
+      "end": 169.9
+    },
+    {
+      "word": "su",
+      "start": 170.02,
+      "end": 170.06
+    },
+    {
+      "word": "taşımaktan",
+      "start": 170.06,
+      "end": 170.74
+    },
+    {
+      "word": "omuzlarının",
+      "start": 170.74,
+      "end": 171.54
+    },
+    {
+      "word": "incindiği,",
+      "start": 171.54,
+      "end": 172.44
+    },
+    {
+      "word": "yemek",
+      "start": 172.64,
+      "end": 172.72
+    },
+    {
+      "word": "pişirmekten",
+      "start": 172.72,
+      "end": 173.42
+    },
+    {
+      "word": "ve",
+      "start": 173.42,
+      "end": 173.68
+    },
+    {
+      "word": "evi",
+      "start": 173.68,
+      "end": 173.86
+    },
+    {
+      "word": "sürpürmekten",
+      "start": 173.86,
+      "end": 174.52
+    },
+    {
+      "word": "kıyafetlerinın",
+      "start": 174.52,
+      "end": 175.44
+    },
+    {
+      "word": "tozlandığı",
+      "start": 175.44,
+      "end": 176.04
+    },
+    {
+      "word": "gerekçesiyle",
+      "start": 176.04,
+      "end": 176.92
+    },
+    {
+      "word": "Resolu",
+      "start": 176.92,
+      "end": 177.46
+    },
+    {
+      "word": "'la",
+      "start": 177.46,
+      "end": 177.7
+    },
+    {
+      "word": "hak",
+      "start": 177.7,
+      "end": 177.92
+    },
+    {
+      "word": "gerek,",
+      "start": 177.92,
+      "end": 178.22
+    },
+    {
+      "word": "bir",
+      "start": 178.48,
+      "end": 178.7
+    },
+    {
+      "word": "hizmetçi",
+      "start": 178.7,
+      "end": 179.16
+    },
+    {
+      "word": "talebetmiştir.",
+      "start": 179.16,
+      "end": 179.94
+    },
+    {
+      "word": "Eğer",
+      "start": 180.62,
+      "end": 180.8
+    },
+    {
+      "word": "İslam'da",
+      "start": 180.8,
+      "end": 181.34
+    },
+    {
+      "word": "kadının",
+      "start": 181.34,
+      "end": 181.8
+    },
+    {
+      "word": "yemek",
+      "start": 181.8,
+      "end": 182.06
+    },
+    {
+      "word": "yapma",
+      "start": 182.06,
+      "end": 182.48
+    },
+    {
+      "word": "ve",
+      "start": 182.48,
+      "end": 182.7
+    },
+    {
+      "word": "ev",
+      "start": 182.7,
+      "end": 182.94
+    },
+    {
+      "word": "sürpürme",
+      "start": 182.94,
+      "end": 183.34
+    },
+    {
+      "word": "vazifesi",
+      "start": 183.34,
+      "end": 183.84
+    },
+    {
+      "word": "olmasaydı,",
+      "start": 183.84,
+      "end": 184.74
+    },
+    {
+      "word": "Peygamber",
+      "start": 185.02,
+      "end": 185.3
+    },
+    {
+      "word": "Efendimiz",
+      "start": 185.3,
+      "end": 185.72
+    },
+    {
+      "word": "'in",
+      "start": 185.72,
+      "end": 186.22
+    },
+    {
+      "word": "nasıır",
+      "start": 186.22,
+      "end": 186.76
+    },
+    {
+      "word": "tutmuş",
+      "start": 186.76,
+      "end": 187.1
+    },
+    {
+      "word": "yer",
+      "start": 187.1,
+      "end": 187.38
+    },
+    {
+      "word": "parisine",
+      "start": 187.38,
+      "end": 187.9
+    },
+    {
+      "word": "kızım",
+      "start": 187.9,
+      "end": 188.54
+    },
+    {
+      "word": "senin",
+      "start": 188.54,
+      "end": 189.08
+    },
+    {
+      "word": "yemek",
+      "start": 189.08,
+      "end": 189.44
+    },
+    {
+      "word": "yapma",
+      "start": 189.44,
+      "end": 189.92
+    },
+    {
+      "word": "hamuru",
+      "start": 189.92,
+      "end": 190.3
+    },
+    {
+      "word": "yorma",
+      "start": 190.3,
+      "end": 190.82
+    },
+    {
+      "word": "ve",
+      "start": 190.82,
+      "end": 191.02
+    },
+    {
+      "word": "ev",
+      "start": 191.02,
+      "end": 191.2
+    },
+    {
+      "word": "sürpürme",
+      "start": 191.2,
+      "end": 191.58
+    },
+    {
+      "word": "zorunduğun",
+      "start": 191.58,
+      "end": 192.0
+    },
+    {
+      "word": "yok,",
+      "start": 192.0,
+      "end": 192.52
+    },
+    {
+      "word": "alibunları",
+      "start": 192.84,
+      "end": 193.32
+    },
+    {
+      "word": "senden",
+      "start": 193.32,
+      "end": 193.66
+    },
+    {
+      "word": "bekleyemez,",
+      "start": 193.66,
+      "end": 194.07
+    },
+    {
+      "word": "demez",
+      "start": 194.56,
+      "end": 194.84
+    },
+    {
+      "word": "miydim?",
+      "start": 194.84,
+      "end": 195.25
+    },
+    {
+      "word": "Aksine,",
+      "start": 195.74,
+      "end": 196.14
+    },
+    {
+      "word": "Resolu",
+      "start": 196.6,
+      "end": 196.86
+    },
+    {
+      "word": "'la",
+      "start": 196.86,
+      "end": 197.08
+    },
+    {
+      "word": "kızına",
+      "start": 197.08,
+      "end": 197.54
+    },
+    {
+      "word": "savrı",
+      "start": 197.54,
+      "end": 198.14
+    },
+    {
+      "word": "ve",
+      "start": 198.14,
+      "end": 198.36
+    },
+    {
+      "word": "tesbi",
+      "start": 198.36,
+      "end": 198.62
+    },
+    {
+      "word": "hatı",
+      "start": 198.62,
+      "end": 198.9
+    },
+    {
+      "word": "tavsiye",
+      "start": 198.9,
+      "end": 199.34
+    },
+    {
+      "word": "etmiş,",
+      "start": 199.34,
+      "end": 199.88
+    },
+    {
+      "word": "hamuru",
+      "start": 200.16,
+      "end": 200.38
+    },
+    {
+      "word": "yorma",
+      "start": 200.38,
+      "end": 200.98
+    },
+    {
+      "word": "ekmek",
+      "start": 200.98,
+      "end": 201.38
+    },
+    {
+      "word": "pişirmeye",
+      "start": 201.38,
+      "end": 201.84
+    },
+    {
+      "word": "ve",
+      "start": 201.84,
+      "end": 202.1
+    },
+    {
+      "word": "temizlik",
+      "start": 202.1,
+      "end": 202.56
+    },
+    {
+      "word": "gibi",
+      "start": 202.56,
+      "end": 202.92
+    },
+    {
+      "word": "evin",
+      "start": 202.92,
+      "end": 203.48
+    },
+    {
+      "word": "içişlerini",
+      "start": 203.48,
+      "end": 204.1
+    },
+    {
+      "word": "hazreti",
+      "start": 204.1,
+      "end": 204.66
+    },
+    {
+      "word": "Fatima",
+      "start": 204.66,
+      "end": 205.04
+    },
+    {
+      "word": "'ya",
+      "start": 205.04,
+      "end": 205.46
+    },
+    {
+      "word": "evin",
+      "start": 205.46,
+      "end": 205.96
+    },
+    {
+      "word": "dış",
+      "start": 205.96,
+      "end": 206.18
+    },
+    {
+      "word": "işlerini",
+      "start": 206.18,
+      "end": 206.54
+    },
+    {
+      "word": "ise",
+      "start": 206.54,
+      "end": 207.06
+    },
+    {
+      "word": "hazreti",
+      "start": 207.06,
+      "end": 207.56
+    },
+    {
+      "word": "Aliye",
+      "start": 207.56,
+      "end": 207.86
+    },
+    {
+      "word": "taksiybetmiştir.",
+      "start": 207.86,
+      "end": 208.82
+    },
+    {
+      "word": "Şimdi",
+      "start": 209.42,
+      "end": 209.64
+    },
+    {
+      "word": "sormak",
+      "start": 209.64,
+      "end": 210.1
+    },
+    {
+      "word": "gerekir.",
+      "start": 210.1,
+      "end": 210.56
+    },
+    {
+      "word": "Yemek",
+      "start": 210.92,
+      "end": 211.22
+    },
+    {
+      "word": "yapmak",
+      "start": 211.22,
+      "end": 211.6
+    },
+    {
+      "word": "zorunda",
+      "start": 211.6,
+      "end": 212.0
+    },
+    {
+      "word": "değilim",
+      "start": 212.0,
+      "end": 212.5
+    },
+    {
+      "word": "diyenler",
+      "start": 212.5,
+      "end": 213.18
+    },
+    {
+      "word": "İslam",
+      "start": 213.18,
+      "end": 213.72
+    },
+    {
+      "word": "'ı",
+      "start": 213.72,
+      "end": 213.98
+    },
+    {
+      "word": "bizzat",
+      "start": 213.98,
+      "end": 214.38
+    },
+    {
+      "word": "Peygamberimizden",
+      "start": 214.38,
+      "end": 215.28
+    },
+    {
+      "word": "daha",
+      "start": 215.28,
+      "end": 215.5
+    },
+    {
+      "word": "mı",
+      "start": 215.5,
+      "end": 215.68
+    },
+    {
+      "word": "iyi",
+      "start": 215.68,
+      "end": 215.78
+    },
+    {
+      "word": "bilmek",
+      "start": 215.78,
+      "end": 216.06
+    },
+    {
+      "word": "tedir?",
+      "start": 216.06,
+      "end": 216.36
+    },
+    {
+      "word": "Üstelik",
+      "start": 217.04,
+      "end": 217.44
+    },
+    {
+      "word": "Resolu",
+      "start": 217.44,
+      "end": 217.8
+    },
+    {
+      "word": "'la",
+      "start": 217.8,
+      "end": 218.12
+    },
+    {
+      "word": "bir",
+      "start": 218.12,
+      "end": 218.38
+    },
+    {
+      "word": "başka",
+      "start": 218.38,
+      "end": 218.66
+    },
+    {
+      "word": "sahi",
+      "start": 218.66,
+      "end": 218.98
+    },
+    {
+      "word": "hadisinde",
+      "start": 218.98,
+      "end": 219.74
+    },
+    {
+      "word": "kadın",
+      "start": 219.74,
+      "end": 220.26
+    },
+    {
+      "word": "koca",
+      "start": 220.26,
+      "end": 220.8
+    },
+    {
+      "word": "sının",
+      "start": 220.8,
+      "end": 221.18
+    },
+    {
+      "word": "evinin",
+      "start": 221.18,
+      "end": 221.72
+    },
+    {
+      "word": "ve",
+      "start": 221.72,
+      "end": 221.98
+    },
+    {
+      "word": "çocuklarının",
+      "start": 221.98,
+      "end": 222.58
+    },
+    {
+      "word": "çobanadır",
+      "start": 222.58,
+      "end": 223.16
+    },
+    {
+      "word": "ve",
+      "start": 223.16,
+      "end": 223.72
+    },
+    {
+      "word": "elinin",
+      "start": 223.72,
+      "end": 224.12
+    },
+    {
+      "word": "altındakilardan",
+      "start": 224.12,
+      "end": 225.04
+    },
+    {
+      "word": "sorumludur.",
+      "start": 225.04,
+      "end": 225.48
+    },
+    {
+      "word": "Buyurarak",
+      "start": 226.08,
+      "end": 226.56
+    },
+    {
+      "word": "evin",
+      "start": 226.56,
+      "end": 227.24
+    },
+    {
+      "word": "içi",
+      "start": 227.24,
+      "end": 227.62
+    },
+    {
+      "word": "daaretsinin",
+      "start": 227.62,
+      "end": 228.2
+    },
+    {
+      "word": "doğrudan",
+      "start": 228.2,
+      "end": 228.78
+    },
+    {
+      "word": "kadının",
+      "start": 228.78,
+      "end": 229.28
+    },
+    {
+      "word": "boyuna",
+      "start": 229.28,
+      "end": 229.52
+    },
+    {
+      "word": "bir",
+      "start": 229.52,
+      "end": 229.8
+    },
+    {
+      "word": "mesuliyet",
+      "start": 229.8,
+      "end": 230.24
+    },
+    {
+      "word": "olarak",
+      "start": 230.24,
+      "end": 230.58
+    },
+    {
+      "word": "kıymıştır.",
+      "start": 230.58,
+      "end": 231.22
+    },
+    {
+      "word": "Kadın",
+      "start": 231.86,
+      "end": 232.18
+    },
+    {
+      "word": "eviş",
+      "start": 232.18,
+      "end": 232.54
+    },
+    {
+      "word": "yapmazsa",
+      "start": 232.54,
+      "end": 233.22
+    },
+    {
+      "word": "günaha",
+      "start": 233.22,
+      "end": 233.66
+    },
+    {
+      "word": "girmez",
+      "start": 233.66,
+      "end": 234.0
+    },
+    {
+      "word": "yalanının",
+      "start": 234.0,
+      "end": 234.64
+    },
+    {
+      "word": "arkasına",
+      "start": 234.64,
+      "end": 235.1
+    },
+    {
+      "word": "sığınanların",
+      "start": 235.1,
+      "end": 235.54
+    },
+    {
+      "word": "yaptığı",
+      "start": 235.82,
+      "end": 236.44
+    },
+    {
+      "word": "en",
+      "start": 236.44,
+      "end": 236.72
+    },
+    {
+      "word": "büyük",
+      "start": 236.72,
+      "end": 236.94
+    },
+    {
+      "word": "çarpıtma",
+      "start": 236.94,
+      "end": 237.46
+    },
+    {
+      "word": "ise",
+      "start": 237.46,
+      "end": 238.02
+    },
+    {
+      "word": "fakırtaki",
+      "start": 238.02,
+      "end": 238.84
+    },
+    {
+      "word": "mahkeme",
+      "start": 238.84,
+      "end": 239.32
+    },
+    {
+      "word": "ve",
+      "start": 239.32,
+      "end": 239.58
+    },
+    {
+      "word": "polis",
+      "start": 239.58,
+      "end": 239.84
+    },
+    {
+      "word": "soru",
+      "start": 239.84,
+      "end": 240.06
+    },
+    {
+      "word": "ile",
+      "start": 240.06,
+      "end": 240.22
+    },
+    {
+      "word": "yaptırılan",
+      "start": 240.22,
+      "end": 240.66
+    },
+    {
+      "word": "kazayı",
+      "start": 240.86,
+      "end": 241.42
+    },
+    {
+      "word": "hütümleriyle",
+      "start": 241.42,
+      "end": 242.28
+    },
+    {
+      "word": "Allah",
+      "start": 242.28,
+      "end": 242.92
+    },
+    {
+      "word": "katında",
+      "start": 242.92,
+      "end": 243.48
+    },
+    {
+      "word": "kulum",
+      "start": 243.48,
+      "end": 244.0
+    },
+    {
+      "word": "diyenin",
+      "start": 244.0,
+      "end": 244.6
+    },
+    {
+      "word": "sorumlu",
+      "start": 244.6,
+      "end": 244.88
+    },
+    {
+      "word": "olduğu",
+      "start": 244.88,
+      "end": 245.38
+    },
+    {
+      "word": "diyeni",
+      "start": 245.38,
+      "end": 245.92
+    },
+    {
+      "word": "hütümleri",
+      "start": 245.92,
+      "end": 246.36
+    },
+    {
+      "word": "arasında",
+      "start": 246.36,
+      "end": 246.68
+    },
+    {
+      "word": "ki",
+      "start": 246.68,
+      "end": 246.94
+    },
+    {
+      "word": "farkı",
+      "start": 246.94,
+      "end": 247.68
+    },
+    {
+      "word": "haltan",
+      "start": 247.68,
+      "end": 248.06
+    },
+    {
+      "word": "gizlemeleridir.",
+      "start": 248.06,
+      "end": 249.16
+    },
+    {
+      "word": "Evet,",
+      "start": 249.66,
+      "end": 250.06
+    },
+    {
+      "word": "hanefi",
+      "start": 250.28,
+      "end": 250.6
+    },
+    {
+      "word": "fıkında",
+      "start": 250.6,
+      "end": 251.16
+    },
+    {
+      "word": "bir",
+      "start": 251.16,
+      "end": 251.4
+    },
+    {
+      "word": "kadın",
+      "start": 251.4,
+      "end": 251.66
+    },
+    {
+      "word": "yemek",
+      "start": 251.66,
+      "end": 251.98
+    },
+    {
+      "word": "yapmadığında",
+      "start": 251.98,
+      "end": 252.78
+    },
+    {
+      "word": "koca",
+      "start": 252.78,
+      "end": 253.36
+    },
+    {
+      "word": "sının",
+      "start": 253.36,
+      "end": 253.66
+    },
+    {
+      "word": "mahkemeye",
+      "start": 253.66,
+      "end": 254.16
+    },
+    {
+      "word": "verip",
+      "start": 254.16,
+      "end": 254.48
+    },
+    {
+      "word": "kolluk",
+      "start": 254.48,
+      "end": 254.88
+    },
+    {
+      "word": "kuvveti",
+      "start": 254.88,
+      "end": 255.28
+    },
+    {
+      "word": "zoruyla",
+      "start": 255.28,
+      "end": 255.6
+    },
+    {
+      "word": "mutfa",
+      "start": 255.6,
+      "end": 255.9
+    },
+    {
+      "word": "sokamaz.",
+      "start": 255.9,
+      "end": 256.7
+    },
+    {
+      "word": "Ancak",
+      "start": 257.0,
+      "end": 257.3
+    },
+    {
+      "word": "hanefi",
+      "start": 257.3,
+      "end": 257.8
+    },
+    {
+      "word": "mesemin",
+      "start": 257.8,
+      "end": 258.2
+    },
+    {
+      "word": "en",
+      "start": 258.2,
+      "end": 258.7
+    },
+    {
+      "word": "temel",
+      "start": 258.7,
+      "end": 259.12
+    },
+    {
+      "word": "kaynakları",
+      "start": 259.12,
+      "end": 259.64
+    },
+    {
+      "word": "olan",
+      "start": 259.64,
+      "end": 260.12
+    },
+    {
+      "word": "imam",
+      "start": 260.12,
+      "end": 260.56
+    },
+    {
+      "word": "serasinin",
+      "start": 260.56,
+      "end": 261.24
+    },
+    {
+      "word": "el",
+      "start": 261.24,
+      "end": 261.66
+    },
+    {
+      "word": "mepsut",
+      "start": 261.66,
+      "end": 262.08
+    },
+    {
+      "word": "ve",
+      "start": 262.08,
+      "end": 262.58
+    },
+    {
+      "word": "imne",
+      "start": 262.58,
+      "end": 262.94
+    },
+    {
+      "word": "abidinin",
+      "start": 262.94,
+      "end": 263.5
+    },
+    {
+      "word": "reddür",
+      "start": 263.5,
+      "end": 264.02
+    },
+    {
+      "word": "muhtar",
+      "start": 264.02,
+      "end": 264.36
+    },
+    {
+      "word": "adlı",
+      "start": 264.36,
+      "end": 264.64
+    },
+    {
+      "word": "eserlerin",
+      "start": 264.64,
+      "end": 265.12
+    },
+    {
+      "word": "de",
+      "start": 265.12,
+      "end": 265.62
+    },
+    {
+      "word": "kadının",
+      "start": 265.62,
+      "end": 266.22
+    },
+    {
+      "word": "yemek",
+      "start": 266.22,
+      "end": 266.44
+    },
+    {
+      "word": "ve",
+      "start": 266.44,
+      "end": 266.72
+    },
+    {
+      "word": "evişlerini",
+      "start": 266.72,
+      "end": 267.18
+    },
+    {
+      "word": "yapmasının",
+      "start": 267.18,
+      "end": 267.84
+    },
+    {
+      "word": "diyeneten.",
+      "start": 267.84,
+      "end": 268.56
+    },
+    {
+      "word": "Yani",
+      "start": 269.12,
+      "end": 269.16
+    },
+    {
+      "word": "Allah",
+      "start": 269.16,
+      "end": 269.64
+    },
+    {
+      "word": "katında",
+      "start": 269.64,
+      "end": 270.04
+    },
+    {
+      "word": "vajı",
+      "start": 270.04,
+      "end": 270.48
+    },
+    {
+      "word": "buldu",
+      "start": 270.48,
+      "end": 271.02
+    },
+    {
+      "word": "mazeretsiz",
+      "start": 271.02,
+      "end": 271.9
+    },
+    {
+      "word": "terk",
+      "start": 271.9,
+      "end": 272.14
+    },
+    {
+      "word": "etme",
+      "start": 272.14,
+      "end": 272.34
+    },
+    {
+      "word": "sağlında",
+      "start": 272.34,
+      "end": 272.8
+    },
+    {
+      "word": "Allah",
+      "start": 272.8,
+      "end": 273.14
+    },
+    {
+      "word": "katında",
+      "start": 273.14,
+      "end": 273.5
+    },
+    {
+      "word": "günahker",
+      "start": 273.5,
+      "end": 273.94
+    },
+    {
+      "word": "olacak.",
+      "start": 273.94,
+      "end": 274.3
+    },
+    {
+      "word": "Açıkca",
+      "start": 274.72,
+      "end": 274.96
+    },
+    {
+      "word": "yazıldır.",
+      "start": 274.96,
+      "end": 275.36
+    },
+    {
+      "word": "Eğer",
+      "start": 276.36,
+      "end": 276.58
+    },
+    {
+      "word": "evliliği",
+      "start": 276.58,
+      "end": 277.2
+    },
+    {
+      "word": "sadece",
+      "start": 277.2,
+      "end": 277.56
+    },
+    {
+      "word": "mahkeme",
+      "start": 277.56,
+      "end": 278.18
+    },
+    {
+      "word": "zoruyla",
+      "start": 278.18,
+      "end": 278.54
+    },
+    {
+      "word": "yaptırla",
+      "start": 278.54,
+      "end": 278.98
+    },
+    {
+      "word": "bilen",
+      "start": 278.98,
+      "end": 279.28
+    },
+    {
+      "word": "kurallara",
+      "start": 279.28,
+      "end": 279.76
+    },
+    {
+      "word": "indirgilecek",
+      "start": 279.76,
+      "end": 280.44
+    },
+    {
+      "word": "şufu",
+      "start": 280.9,
+      "end": 281.32
+    },
+    {
+      "word": "ki",
+      "start": 281.32,
+      "end": 281.54
+    },
+    {
+      "word": "gerçiyide",
+      "start": 281.54,
+      "end": 282.1
+    },
+    {
+      "word": "yüzlerine",
+      "start": 282.1,
+      "end": 282.5
+    },
+    {
+      "word": "vurmak",
+      "start": 282.5,
+      "end": 282.82
+    },
+    {
+      "word": "gerekir.",
+      "start": 282.82,
+      "end": 283.28
+    },
+    {
+      "word": "Klasik",
+      "start": 283.98,
+      "end": 284.36
+    },
+    {
+      "word": "fıkıta",
+      "start": 284.36,
+      "end": 284.88
+    },
+    {
+      "word": "erkiğin",
+      "start": 284.88,
+      "end": 285.56
+    },
+    {
+      "word": "mahkeme",
+      "start": 285.56,
+      "end": 285.96
+    },
+    {
+      "word": "kararıyla",
+      "start": 285.96,
+      "end": 286.4
+    },
+    {
+      "word": "ödemek",
+      "start": 286.4,
+      "end": 286.76
+    },
+    {
+      "word": "zorunda",
+      "start": 286.76,
+      "end": 287.06
+    },
+    {
+      "word": "olduğunla",
+      "start": 287.06,
+      "end": 287.52
+    },
+    {
+      "word": "fakah",
+      "start": 287.52,
+      "end": 288.24
+    },
+    {
+      "word": "sadece",
+      "start": 288.24,
+      "end": 288.56
+    },
+    {
+      "word": "kadının",
+      "start": 288.56,
+      "end": 289.16
+    },
+    {
+      "word": "ölmemesini",
+      "start": 289.16,
+      "end": 289.66
+    },
+    {
+      "word": "sağlayacak",
+      "start": 289.66,
+      "end": 290.24
+    },
+    {
+      "word": "kuray",
+      "start": 290.24,
+      "end": 290.52
+    },
+    {
+      "word": "ekmek",
+      "start": 290.52,
+      "end": 291.1
+    },
+    {
+      "word": "senede",
+      "start": 291.1,
+      "end": 291.6
+    },
+    {
+      "word": "iki",
+      "start": 291.6,
+      "end": 291.84
+    },
+    {
+      "word": "kat",
+      "start": 291.84,
+      "end": 292.08
+    },
+    {
+      "word": "basit",
+      "start": 292.08,
+      "end": 292.4
+    },
+    {
+      "word": "hervise",
+      "start": 292.4,
+      "end": 292.94
+    },
+    {
+      "word": "ve",
+      "start": 292.94,
+      "end": 293.34
+    },
+    {
+      "word": "tek",
+      "start": 293.34,
+      "end": 293.54
+    },
+    {
+      "word": "göz",
+      "start": 293.54,
+      "end": 293.76
+    },
+    {
+      "word": "odadan",
+      "start": 293.76,
+      "end": 294.1
+    },
+    {
+      "word": "ibaretdir.",
+      "start": 294.1,
+      "end": 294.84
+    },
+    {
+      "word": "Hatta",
+      "start": 295.1,
+      "end": 295.36
+    },
+    {
+      "word": "klasik",
+      "start": 295.36,
+      "end": 295.78
+    },
+    {
+      "word": "fıkı",
+      "start": 295.78,
+      "end": 296.06
+    },
+    {
+      "word": "metinderne",
+      "start": 296.06,
+      "end": 296.5
+    },
+    {
+      "word": "göre",
+      "start": 296.5,
+      "end": 297.06
+    },
+    {
+      "word": "koca",
+      "start": 297.06,
+      "end": 297.56
+    },
+    {
+      "word": "kırısının",
+      "start": 297.56,
+      "end": 298.22
+    },
+    {
+      "word": "doktor",
+      "start": 298.22,
+      "end": 298.74
+    },
+    {
+      "word": "ilerç",
+      "start": 298.74,
+      "end": 299.22
+    },
+    {
+      "word": "ve",
+      "start": 299.22,
+      "end": 299.32
+    },
+    {
+      "word": "hastane",
+      "start": 299.32,
+      "end": 299.74
+    },
+    {
+      "word": "masraflarını",
+      "start": 299.74,
+      "end": 300.36
+    },
+    {
+      "word": "bile",
+      "start": 300.36,
+      "end": 300.68
+    },
+    {
+      "word": "mahkeme",
+      "start": 300.68,
+      "end": 301.3
+    },
+    {
+      "word": "zoruyla",
+      "start": 301.3,
+      "end": 301.62
+    },
+    {
+      "word": "ödemek",
+      "start": 301.62,
+      "end": 301.88
+    },
+    {
+      "word": "zorunda",
+      "start": 301.88,
+      "end": 302.22
+    },
+    {
+      "word": "değildir.",
+      "start": 302.22,
+      "end": 302.76
+    },
+    {
+      "word": "Şimdi",
+      "start": 303.38,
+      "end": 303.48
+    },
+    {
+      "word": "bir",
+      "start": 303.48,
+      "end": 303.66
+    },
+    {
+      "word": "erkek",
+      "start": 303.66,
+      "end": 303.92
+    },
+    {
+      "word": "çıkıp",
+      "start": 303.92,
+      "end": 304.48
+    },
+    {
+      "word": "aynı",
+      "start": 304.48,
+      "end": 304.8
+    },
+    {
+      "word": "çarpık",
+      "start": 304.8,
+      "end": 305.28
+    },
+    {
+      "word": "mantıkla",
+      "start": 305.28,
+      "end": 305.88
+    },
+    {
+      "word": "İslam'da",
+      "start": 305.88,
+      "end": 306.62
+    },
+    {
+      "word": "karımın",
+      "start": 306.62,
+      "end": 306.98
+    },
+    {
+      "word": "hastane",
+      "start": 306.98,
+      "end": 307.42
+    },
+    {
+      "word": "ve",
+      "start": 307.42,
+      "end": 307.62
+    },
+    {
+      "word": "ilerç",
+      "start": 307.62,
+      "end": 307.96
+    },
+    {
+      "word": "masrafını",
+      "start": 307.96,
+      "end": 308.4
+    },
+    {
+      "word": "ödemek.",
+      "start": 308.4,
+      "end": 308.94
+    },
+    {
+      "word": "Ona",
+      "start": 309.12,
+      "end": 309.36
+    },
+    {
+      "word": "çeşit",
+      "start": 309.36,
+      "end": 309.76
+    },
+    {
+      "word": "çeşit",
+      "start": 309.76,
+      "end": 310.08
+    },
+    {
+      "word": "yemekler",
+      "start": 310.08,
+      "end": 310.54
+    },
+    {
+      "word": "almak",
+      "start": 310.54,
+      "end": 310.82
+    },
+    {
+      "word": "zorunda",
+      "start": 310.82,
+      "end": 311.22
+    },
+    {
+      "word": "değilim.",
+      "start": 311.22,
+      "end": 311.82
+    },
+    {
+      "word": "Yapmasın",
+      "start": 311.94,
+      "end": 312.34
+    },
+    {
+      "word": "günaha",
+      "start": 312.34,
+      "end": 312.7
+    },
+    {
+      "word": "girmem",
+      "start": 312.7,
+      "end": 313.0
+    },
+    {
+      "word": "dese",
+      "start": 313.0,
+      "end": 313.48
+    },
+    {
+      "word": "buna",
+      "start": 313.48,
+      "end": 313.98
+    },
+    {
+      "word": "hangi",
+      "start": 313.98,
+      "end": 314.32
+    },
+    {
+      "word": "vicdan",
+      "start": 314.32,
+      "end": 314.76
+    },
+    {
+      "word": "hangi",
+      "start": 314.76,
+      "end": 315.28
+    },
+    {
+      "word": "ahlak",
+      "start": 315.28,
+      "end": 315.6
+    },
+    {
+      "word": "razı",
+      "start": 315.6,
+      "end": 315.92
+    },
+    {
+      "word": "olur.",
+      "start": 315.92,
+      "end": 316.18
+    },
+    {
+      "word": "Erkiğin",
+      "start": 316.84,
+      "end": 317.4
+    },
+    {
+      "word": "fıkıta",
+      "start": 317.4,
+      "end": 317.8
+    },
+    {
+      "word": "ki",
+      "start": 317.8,
+      "end": 317.96
+    },
+    {
+      "word": "mahkeme",
+      "start": 317.96,
+      "end": 318.42
+    },
+    {
+      "word": "sınırılı",
+      "start": 318.42,
+      "end": 318.84
+    },
+    {
+      "word": "bahaneye",
+      "start": 318.84,
+      "end": 319.28
+    },
+    {
+      "word": "gerek",
+      "start": 319.28,
+      "end": 319.58
+    },
+    {
+      "word": "eşini",
+      "start": 319.58,
+      "end": 320.12
+    },
+    {
+      "word": "kuray",
+      "start": 320.12,
+      "end": 320.4
+    },
+    {
+      "word": "ekmeğe",
+      "start": 320.4,
+      "end": 320.7
+    },
+    {
+      "word": "mahkiü",
+      "start": 320.7,
+      "end": 321.02
+    },
+    {
+      "word": "metmesin",
+      "start": 321.02,
+      "end": 321.5
+    },
+    {
+      "word": "nasıl",
+      "start": 321.5,
+      "end": 321.82
+    },
+    {
+      "word": "büyük",
+      "start": 321.82,
+      "end": 322.04
+    },
+    {
+      "word": "bir",
+      "start": 322.04,
+      "end": 322.2
+    },
+    {
+      "word": "zulümse",
+      "start": 322.2,
+      "end": 323.0
+    },
+    {
+      "word": "kadınında",
+      "start": 323.0,
+      "end": 323.72
+    },
+    {
+      "word": "aynı",
+      "start": 323.72,
+      "end": 324.06
+    },
+    {
+      "word": "sınırı",
+      "start": 324.06,
+      "end": 324.44
+    },
+    {
+      "word": "çarpı",
+      "start": 324.44,
+      "end": 324.76
+    },
+    {
+      "word": "tarak",
+      "start": 324.76,
+      "end": 325.14
+    },
+    {
+      "word": "gömleyini",
+      "start": 325.14,
+      "end": 325.74
+    },
+    {
+      "word": "ütülemem",
+      "start": 325.74,
+      "end": 326.5
+    },
+    {
+      "word": "yemeğini",
+      "start": 326.5,
+      "end": 327.0
+    },
+    {
+      "word": "yapmam",
+      "start": 327.0,
+      "end": 327.58
+    },
+    {
+      "word": "evi",
+      "start": 327.58,
+      "end": 328.02
+    },
+    {
+      "word": "sürpürmem",
+      "start": 328.02,
+      "end": 328.7
+    },
+    {
+      "word": "dinen",
+      "start": 328.7,
+      "end": 329.06
+    },
+    {
+      "word": "zorunduluğum",
+      "start": 329.06,
+      "end": 329.6
+    },
+    {
+      "word": "yok",
+      "start": 329.6,
+      "end": 329.78
+    },
+    {
+      "word": "demesi",
+      "start": 329.78,
+      "end": 330.5
+    },
+    {
+      "word": "aynı",
+      "start": 330.5,
+      "end": 330.84
+    },
+    {
+      "word": "derecede",
+      "start": 330.84,
+      "end": 331.34
+    },
+    {
+      "word": "İslam",
+      "start": 331.34,
+      "end": 331.7
+    },
+    {
+      "word": "ahlakına",
+      "start": 331.7,
+      "end": 332.52
+    },
+    {
+      "word": "kuranın",
+      "start": 332.52,
+      "end": 333.06
+    },
+    {
+      "word": "emrettiği",
+      "start": 333.06,
+      "end": 333.84
+    },
+    {
+      "word": "mağruf",
+      "start": 333.84,
+      "end": 334.2
+    },
+    {
+      "word": "ilkesine",
+      "start": 334.2,
+      "end": 334.68
+    },
+    {
+      "word": "ve",
+      "start": 334.68,
+      "end": 335.08
+    },
+    {
+      "word": "peygamber",
+      "start": 335.08,
+      "end": 335.58
+    },
+    {
+      "word": "sünnetini",
+      "start": 335.58,
+      "end": 336.02
+    },
+    {
+      "word": "ihanettir.",
+      "start": 336.02,
+      "end": 337.0
+    },
+    {
+      "word": "İslam'da",
+      "start": 337.34,
+      "end": 337.86
+    },
+    {
+      "word": "aile",
+      "start": 337.86,
+      "end": 338.46
+    },
+    {
+      "word": "tarafların",
+      "start": 338.46,
+      "end": 339.46
+    },
+    {
+      "word": "birbirine",
+      "start": 339.46,
+      "end": 340.26
+    },
+    {
+      "word": "sana",
+      "start": 340.26,
+      "end": 340.82
+    },
+    {
+      "word": "bunu",
+      "start": 340.82,
+      "end": 341.1
+    },
+    {
+      "word": "yapmak",
+      "start": 341.1,
+      "end": 341.58
+    },
+    {
+      "word": "zorunda",
+      "start": 341.58,
+      "end": 342.02
+    },
+    {
+      "word": "değilim",
+      "start": 342.02,
+      "end": 342.64
+    },
+    {
+      "word": "diyerek",
+      "start": 342.64,
+      "end": 343.16
+    },
+    {
+      "word": "nefsini",
+      "start": 343.24,
+      "end": 343.96
+    },
+    {
+      "word": "dayattığı",
+      "start": 343.96,
+      "end": 344.84
+    },
+    {
+      "word": "bencil",
+      "start": 344.84,
+      "end": 345.32
+    },
+    {
+      "word": "bir",
+      "start": 345.32,
+      "end": 345.6
+    },
+    {
+      "word": "melfat",
+      "start": 345.6,
+      "end": 346.12
+    },
+    {
+      "word": "şebekez",
+      "start": 346.12,
+      "end": 346.68
+    },
+    {
+      "word": "değil.",
+      "start": 346.68,
+      "end": 347.1
+    },
+    {
+      "word": "Herkesin",
+      "start": 347.82,
+      "end": 348.48
+    },
+    {
+      "word": "kendi",
+      "start": 348.48,
+      "end": 348.76
+    },
+    {
+      "word": "vazifesini",
+      "start": 348.76,
+      "end": 349.74
+    },
+    {
+      "word": "Allah",
+      "start": 349.74,
+      "end": 350.26
+    },
+    {
+      "word": "rızası",
+      "start": 350.26,
+      "end": 350.8
+    },
+    {
+      "word": "için",
+      "start": 350.8,
+      "end": 351.1
+    },
+    {
+      "word": "yerine",
+      "start": 351.1,
+      "end": 351.46
+    },
+    {
+      "word": "getirdiği",
+      "start": 351.46,
+      "end": 351.98
+    },
+    {
+      "word": "mukaddes",
+      "start": 352.3,
+      "end": 352.98
+    },
+    {
+      "word": "bir",
+      "start": 352.98,
+      "end": 353.18
+    },
+    {
+      "word": "yuvadır.",
+      "start": 353.18,
+      "end": 353.62
+    }
+  ],
+  "narration": "Sana mı kaldı İslam fıkında fethvalar vermek hüküm kesmek? Şimdi biz Kur'anı Peygamber Sünnet'ini sahabe hayatını ve ısırlık İslam alimlerini bir kenara bırakıp da bu dinisenden müörenceğiz. Kur'an'dan tek bir ayet okudesen Sünnet'den sahik bir delil getirdesen, dili boğazına düğümlenecek insanlardan müörenceğiz bu güzeli mislamı. Bütün derdiniz bitti de şimdi Müslümanların aile yuvasını mühe defa koymaya başladınız. Arkadaşlar kusura bakmayın şu an aşırı derecede gerginim. Çünkü ilmi olmayan insanların çıkıp da İslam adına fethvalar mesine, diğini kendin nefislerine göre iyi bükmesini artık zere kadar tahammülüm yok. Neden mi? Buyurun konuşalım. Son dönemde İslam'da kadının yemek yapma, ev sürpürme, ütü ve çamaşır yıkama zorunduğunu yoktur. Yapma sakinaha girmez söyleme, cehaletin ve fuki kavramları cimbızlayarak, diğini tahri fethmenin en bağri zöğüneydir. Evliliği aynı evi paylaşan iki yurt arkadaşının ortaklığına benzetice kadar İslam'ın ruhundan kopan bu ziyneyet, iş erkeğin ödiceği mehire, tek başına sırtlanacağı ev kirasına, faturalara, mutfak masrafına ve nefaka yutuyumlüğüne gelince İslam oku kunu hatırlamakladır. Fakat iş kendi sorumluluğuna gelince, yurt arkadaşı yapmaksorunda değilim, pişkinliğine sıvın maktadır. Hangi yurt arkadaşlı sisteminde, bir taraf diğerinin tüm barınma, giyinme ve beslenme masrafını tek başına üstlenmek zorundadır. İslam'ın erkeği yüklidi ağır maddiğim ülkellefiyetleri cepte görüp, kadının eviçi sorumluluğduklarını inkar etmek adalet değil, diğini kendi konflunu alet eden açık bir çiftestlandardır. Kuranı ki, bakara suurası iki yüz yirmi sekizince ayette aileği için hak ve vazifeleri mağruf ilkesine bağlamıştır. İslam'a elimlerinin ittifakla belirttiği yüzlere, mağruf erkeğin dışarıda çalışıp, aileinin rızkını temin etmesi, kadının ise evin iç düzenini, yemeğini ve temizliğini üstlenmesidir. Yine nisa suurası 34. ayette, herkeklerin nafakayı sağlamaları sebebiyle, aile de kavvam, yani koruyup gözetici ve yönetici olduğu saali hak adınların ise bu düzene uyumlu olduğu açıkça beğen edilmiştir. Kuranı kurduğu bu ilahi iş bölümünü yoksa yip, kadını ev içinde hiçbir sorumluğu olmayan bir misafir konumuna indir yemek, doğrudan kuranın mağruf emrini çiğnemektir. Bu temelsiz iddia'ya yerle bir eden en büyük delilirse bizzat Peygamber Efendimiz'in öz kızı hazıreti Fatima hakkında verdiği hükümdür. Bu hariyi ve müslüm gibi en sai kaynaklarda geçtiği yüzere, hazıreti Fatima elde-iirmeni ile onu ütmekten ellerinin nasıır tuttuğu, su taşımaktan omuzlarının incindiği, yemek pişirmekten ve evi sürpürmekten kıyafetlerinın tozlandığı gerekçesiyle Resolu'la hak gerek, bir hizmetçi talebetmiştir. Eğer İslam'da kadının yemek yapma ve ev sürpürme vazifesi olmasaydı, Peygamber Efendimiz'in nasıır tutmuş yer parisine kızım senin yemek yapma hamuru yorma ve ev sürpürme zorunduğun yok, alibunları senden bekleyemez, demez miydim? Aksine, Resolu'la kızına savrı ve tesbi hatı tavsiye etmiş, hamuru yorma ekmek pişirmeye ve temizlik gibi evin içişlerini hazreti Fatima'ya evin dış işlerini ise hazreti Aliye taksiybetmiştir. Şimdi sormak gerekir. Yemek yapmak zorunda değilim diyenler İslam'ı bizzat Peygamberimizden daha mı iyi bilmek tedir? Üstelik Resolu'la bir başka sahi hadisinde kadın koca sının evinin ve çocuklarının çobanadır ve elinin altındakilardan sorumludur. Buyurarak evin içi daaretsinin doğrudan kadının boyuna bir mesuliyet olarak kıymıştır. Kadın eviş yapmazsa günaha girmez yalanının arkasına sığınanların yaptığı en büyük çarpıtma ise fakırtaki mahkeme ve polis soru ile yaptırılan kazayı hütümleriyle Allah katında kulum diyenin sorumlu olduğu diyeni hütümleri arasında ki farkı haltan gizlemeleridir. Evet, hanefi fıkında bir kadın yemek yapmadığında koca sının mahkemeye verip kolluk kuvveti zoruyla mutfa sokamaz. Ancak hanefi mesemin en temel kaynakları olan imam serasinin el mepsut ve imne abidinin reddür muhtar adlı eserlerin de kadının yemek ve evişlerini yapmasının diyeneten. Yani Allah katında vajı buldu mazeretsiz terk etme sağlında Allah katında günahker olacak. Açıkca yazıldır. Eğer evliliği sadece mahkeme zoruyla yaptırla bilen kurallara indirgilecek şufu ki gerçiyide yüzlerine vurmak gerekir. Klasik fıkıta erkiğin mahkeme kararıyla ödemek zorunda olduğunla fakah sadece kadının ölmemesini sağlayacak kuray ekmek senede iki kat basit hervise ve tek göz odadan ibaretdir. Hatta klasik fıkı metinderne göre koca kırısının doktor ilerç ve hastane masraflarını bile mahkeme zoruyla ödemek zorunda değildir. Şimdi bir erkek çıkıp aynı çarpık mantıkla İslam'da karımın hastane ve ilerç masrafını ödemek. Ona çeşit çeşit yemekler almak zorunda değilim. Yapmasın günaha girmem dese buna hangi vicdan hangi ahlak razı olur. Erkiğin fıkıta ki mahkeme sınırılı bahaneye gerek eşini kuray ekmeğe mahkiü metmesin nasıl büyük bir zulümse kadınında aynı sınırı çarpı tarak gömleyini ütülemem yemeğini yapmam evi sürpürmem dinen zorunduluğum yok demesi aynı derecede İslam ahlakına kuranın emrettiği mağruf ilkesine ve peygamber sünnetini ihanettir. İslam'da aile tarafların birbirine sana bunu yapmak zorunda değilim diyerek nefsini dayattığı bencil bir melfat şebekez değil. Herkesin kendi vazifesini Allah rızası için yerine getirdiği mukaddes bir yuvadır."
 }

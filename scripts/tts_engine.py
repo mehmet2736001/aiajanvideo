@@ -22,6 +22,12 @@ try:
 except ImportError:
     whisper = None
 
+from scripts.subtitle_cleaner import (
+    clean_text_apostrophes,
+    stitch_whisper_word_tokens,
+    build_subtitle_chunks
+)
+
 # Base directories
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 PUBLIC_DIR = os.path.join(BASE_DIR, "public")
@@ -370,32 +376,23 @@ def align_subtitles_whisper(audio_path: str, lang: str = "tr") -> Tuple[List[Dic
             fp16=False
         )
 
-        all_words = []
+        raw_words = []
         for segment in result.get("segments", []):
             for w in segment.get("words", []):
-                cleaned_word = w["word"].strip()
+                cleaned_word = w.get("word", "").strip()
                 if cleaned_word:
-                    word_obj = {
+                    raw_words.append({
                         "word": cleaned_word,
-                        "start": round(w["start"], 2),
-                        "end": round(w["end"], 2)
-                    }
-                    all_words.append(word_obj)
-                    words_list.append(word_obj)
+                        "text": cleaned_word,
+                        "start": round(w.get("start", 0.0), 2),
+                        "end": round(w.get("end", 0.0), 2)
+                    })
 
-        # Group words into 3-word punchy subtitle chunks
-        chunk_size = 3
-        for i in range(0, len(all_words), chunk_size):
-            chunk = all_words[i:i + chunk_size]
-            sub_text = " ".join(item["word"] for item in chunk)
-            sub_start = chunk[0]["start"]
-            sub_end = chunk[-1]["end"]
-            subtitles.append({
-                "text": sub_text,
-                "start": sub_start,
-                "end": sub_end,
-                "words": chunk
-            })
+        # Intelligent stitching for words like Kur'an, Allah'ın etc.
+        words_list = stitch_whisper_word_tokens(raw_words)
+
+        # Build chunks with stitched words
+        subtitles = build_subtitle_chunks(words_list, chunk_size=3)
 
     except Exception as e:
         print(f"[TTS Engine] Whisper alignment error: {e}")

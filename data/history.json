@@ -1,5 +1,54 @@
 [
   {
+    "id": "7c036202",
+    "topic": "dsgege",
+    "theme": "notebook",
+    "layoutType": "pip_split",
+    "durationMode": "10s",
+    "created_at": "2026-10-29 22:24:34",
+    "headerMain": "DSGEGE",
+    "thumbnail_url": "/out/thumbnail.png",
+    "video_data": {
+      "topic": "dsgege",
+      "theme": "notebook",
+      "format": "9:16",
+      "headerSubtitle": "Bölüm 1",
+      "headerLine1": "DSGEGE",
+      "circledWord": "İLK",
+      "headerLine2": "Fikrini Buraya Yaz",
+      "highlightedText": "Önemli Nokta",
+      "layoutType": "pip_split",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "headerSubtitle": "Bölüm 1",
+          "headerLine1": "DSGEGE",
+          "circledWord": "İLK",
+          "headerLine2": "Fikrini Buraya Yaz",
+          "highlightedText": "Önemli Nokta",
+          "layoutType": "pip_split",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "duration": 10.0
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "dsgege",
+          "start": 0.0,
+          "end": 2.5
+        },
+        {
+          "text": "kurgulamaya hemen başla",
+          "start": 2.5,
+          "end": 5.0
+        }
+      ],
+      "totalDuration": 10.0,
+      "created_at": "2026-10-29 22:24:34"
+    }
+  },
+  {
     "id": "56a779b4",
     "topic": "Mimar Sinan'ın Kandil ve Devekuşu Sırrı",
     "theme": "blueprint",

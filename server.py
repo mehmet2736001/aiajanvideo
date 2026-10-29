@@ -52,6 +52,11 @@ from scripts.git_manager import (
     run_git
 )
 from scripts.audio_cleaner import clean_audio_and_realign
+from scripts.subtitle_cleaner import (
+    clean_text_apostrophes,
+    stitch_whisper_word_tokens,
+    build_subtitle_chunks
+)
 
 app = FastAPI(title="Notebook Video AI Studio Pro", version="4.0.0")
 
@@ -250,22 +255,20 @@ def get_whisper():
     return whisper_model
 
 def generate_subtitles_fallback(text: str, total_duration: float):
-    words = text.split()
+    cleaned_text = clean_text_apostrophes(text)
+    words = cleaned_text.split()
     if not words:
         return []
     time_per_word = total_duration / len(words)
-    subtitles = []
-    chunk_size = 3
-    for i in range(0, len(words), chunk_size):
-        chunk = words[i:i + chunk_size]
-        start = round(i * time_per_word, 2)
-        end = round(min(total_duration, (i + len(chunk)) * time_per_word), 2)
-        subtitles.append({
-            "text": " ".join(chunk),
-            "start": start,
-            "end": end
+    raw_word_objs = []
+    for i, w in enumerate(words):
+        raw_word_objs.append({
+            "word": w,
+            "text": w,
+            "start": round(i * time_per_word, 2),
+            "end": round(min(total_duration, (i + 1) * time_per_word), 2)
         })
-    return subtitles
+    return build_subtitle_chunks(raw_word_objs, chunk_size=3)
 
 def generate_studio_audio_and_subtitles(
     narration_text: str,
@@ -839,36 +842,30 @@ async def upload_audio_and_generate_multiscene(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Whisper ses ÃƒÂ§ÃƒÂ¶zÃƒÂ¼mleme hatasÃ„Â±: {str(e)}")
 
-    whisper_words = []
+    raw_whisper_words = []
     for seg in w_res.get("segments", []):
         for w in seg.get("words", []):
             w_text = w["word"].strip()
             if w_text:
-                whisper_words.append({
+                raw_whisper_words.append({
+                    "word": w_text,
                     "text": w_text,
                     "start": round(w["start"], 2),
                     "end": round(w["end"], 2)
                 })
 
-    full_transcript = " ".join([w["text"] for w in whisper_words]).strip()
+    whisper_words = stitch_whisper_word_tokens(raw_whisper_words)
+    full_transcript = " ".join([w["word"] for w in whisper_words]).strip()
     if not full_transcript:
-        full_transcript = w_res.get("text", "").strip() or "KullanÃ„Â±cÃ„Â±nÃ„Â±n yÃƒÂ¼klediÃ„Å¸i ses kaydÃ„Â±"
+        full_transcript = clean_text_apostrophes(w_res.get("text", "").strip()) or "Kullanıcının yüklediği ses kaydı"
 
     if (total_duration <= 0 or total_duration < 4.0) and whisper_words:
         total_duration = whisper_words[-1]["end"] + 1.0
     total_duration = max(8.0, round(total_duration, 2))
 
     # 5. Build 3-word subtitle chunks for live karaoke & video subtitles
-    subtitles = []
-    chunk_size = 3
     if whisper_words:
-        for i in range(0, len(whisper_words), chunk_size):
-            ch = whisper_words[i:i + chunk_size]
-            subtitles.append({
-                "text": " ".join([w["text"] for w in ch]),
-                "start": ch[0]["start"],
-                "end": ch[-1]["end"]
-            })
+        subtitles = build_subtitle_chunks(whisper_words, chunk_size=3)
     else:
         # Fallback if whisper returned text without word timestamps
         subtitles = generate_subtitles_fallback(full_transcript, total_duration)
@@ -1749,28 +1746,26 @@ async def upload_timeline_audio(file: UploadFile = File(...)):
     if w_model is not None:
         try:
             whisper_res = w_model.transcribe(final_audio_path, word_timestamps=True)
-            full_text = whisper_res.get("text", "").strip()
+            full_text = clean_text_apostrophes(whisper_res.get("text", "").strip())
+            raw_words = []
             for seg in whisper_res.get("segments", []):
                 for w in seg.get("words", []):
-                    words.append({
-                        "word": w.get("word", "").strip(),
-                        "start": round(w.get("start", 0), 2),
-                        "end": round(w.get("end", 0), 2)
-                    })
-            chunk_size = 3
-            for i in range(0, len(words), chunk_size):
-                chunk = words[i:i + chunk_size]
-                if chunk:
-                    subtitles.append({
-                        "text": " ".join([cw["word"] for cw in chunk]),
-                        "start": chunk[0]["start"],
-                        "end": chunk[-1]["end"]
-                    })
+                    w_text = w.get("word", "").strip()
+                    if w_text:
+                        raw_words.append({
+                            "word": w_text,
+                            "text": w_text,
+                            "start": round(w.get("start", 0), 2),
+                            "end": round(w.get("end", 0), 2)
+                        })
+            # Intelligently stitch tokens so Kur'an, Allah'ın etc. are never split
+            words = stitch_whisper_word_tokens(raw_words)
+            subtitles = build_subtitle_chunks(words, chunk_size=3)
         except Exception as e:
             print(f"Whisper transcription error: {e}")
             
     if not subtitles:
-        subtitles = generate_subtitles_fallback(full_text or "Kendi eklediÃ„Å¸iniz ses kaydÃ„Â±", duration)
+        subtitles = generate_subtitles_fallback(full_text or "Kendi eklediğiniz ses kaydı", duration)
 
     # Update generatedData.json
     data_file = os.path.join(SRC_DIR, "generatedData.json")
@@ -1981,10 +1976,16 @@ def api_update_subtitles(req: SubtitleUpdateRequest):
         raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
     with open(data_file, "r", encoding="utf-8") as f:
         video_data = json.load(f)
-    video_data["subtitles"] = req.subtitles
+    cleaned_subtitles = []
+    for s in req.subtitles:
+        s_copy = dict(s)
+        if "text" in s_copy:
+            s_copy["text"] = clean_text_apostrophes(s_copy["text"])
+        cleaned_subtitles.append(s_copy)
+    video_data["subtitles"] = cleaned_subtitles
     with open(data_file, "w", encoding="utf-8") as f:
         json.dump(video_data, f, ensure_ascii=False, indent=2)
-    return {"success": True, "subtitles": video_data["subtitles"]}
+    return {"success": True, "subtitles": cleaned_subtitles}
 
 @app.post("/api/audio/auto-cut")
 def api_audio_auto_cut(req: AudioAutoCutRequest):
