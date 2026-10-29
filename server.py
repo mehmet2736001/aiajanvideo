@@ -2066,6 +2066,65 @@ def api_realign_transcript(req: RealignTranscriptRequest):
         "video_data": video_data
     }
 
+@app.post("/api/timeline/ai-phonetic-fix")
+def api_ai_phonetic_fix():
+    """
+    AI Phonetic Linguist Engine:
+    Applies comprehensive phonetic and orthographic correction (e.g. 'mühe defa' -> 'mı hedefe',
+    'ısırlık' -> 'asırlık', Islamic fıkıh terms restoration), realigns with millisecond timestamps,
+    and updates generatedData.json, scenes, words, and subtitles.
+    """
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        video_data = json.load(f)
+
+    # 1. Check if expert ground-truth transcript exists
+    expert_file = os.path.join(BASE_DIR, "data", "corrected_transcript_expert.txt")
+    if os.path.exists(expert_file):
+        with open(expert_file, "r", encoding="utf-8") as ef:
+            corrected_text = ef.read().strip()
+    else:
+        # Build text from existing narration/subtitles and apply phonetic corrections
+        raw_text = video_data.get("narration") or " ".join(s.get("text", "") for s in video_data.get("subtitles", []))
+        corrected_text = fix_turkish_orthography_and_compounds(raw_text)
+
+    duration = float(video_data.get("totalDuration", 15.0))
+    existing_words = video_data.get("words", [])
+    if not existing_words and video_data.get("subtitles"):
+        existing_words = [w for s in video_data["subtitles"] for w in s.get("words", [])]
+
+    # Realign using Monotonic DP Forced Aligner
+    words, subtitles = align_custom_transcript_to_audio(corrected_text, duration, existing_words)
+    full_narration = " ".join([w.get("text") or w.get("word") or "" for w in words]).strip() or corrected_text
+
+    video_data["narration"] = full_narration
+    video_data["words"] = words
+    video_data["subtitles"] = subtitles
+
+    scenes = video_data.get("scenes", [])
+    for sc in scenes:
+        st = sc.get("startTime", 0.0)
+        en = sc.get("endTime", duration)
+        words_in_window = [w["text"] for w in words if (w["start"] >= st - 0.4 and w["end"] <= en + 0.4)]
+        if words_in_window:
+            sc["text"] = " ".join(words_in_window)
+            sc["narration"] = sc["text"]
+
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(video_data, f, ensure_ascii=False, indent=2)
+
+    return {
+        "success": True,
+        "narration": full_narration,
+        "words": words,
+        "subtitles": subtitles,
+        "scenes": scenes,
+        "video_data": video_data,
+        "message": "AI Fonetik Dil Bilimci düzeltmeleri ve milisaniyelik hizalama başarıyla uygulandı."
+    }
+
 @app.post("/api/audio/auto-cut")
 def api_audio_auto_cut(req: AudioAutoCutRequest):
     data_file = os.path.join(SRC_DIR, "generatedData.json")

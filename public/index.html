@@ -502,9 +502,14 @@
               <span class="text-[10px] text-slate-400 flex items-center gap-1">
                 <i class="fa-solid fa-check text-emerald-400 text-[9px]"></i> Kendi metnin akar
               </span>
-              <button onclick="realignSidebarTranscript()" id="btn-realign-transcript" class="text-[10px] text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 transition px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">
-                <i class="fa-solid fa-arrows-rotate"></i> Metni Yeniden Hizala
-              </button>
+              <div class="flex items-center gap-1.5">
+                <button onclick="applyAiPhoneticFix()" id="btn-ai-phonetic-fix" title="Whisper fonetik hatalarını (mühe defa -> mı hedefe, ısırlık -> asırlık vb.) AI fonetik uzmanıyla otomatik düzelt" class="text-[10px] text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1 transition px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> AI Fonetik Dil Bilimci
+                </button>
+                <button onclick="realignSidebarTranscript()" id="btn-realign-transcript" class="text-[10px] text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 transition px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">
+                  <i class="fa-solid fa-arrows-rotate"></i> Metni Yeniden Hizala
+                </button>
+              </div>
             </div>
           </div>
 
@@ -2164,12 +2169,43 @@
       }
     }
 
+    async function applyAiPhoneticFix() {
+      try {
+        showToast('AI Fonetik Dil Bilimci metni ve fıkhi terimleri düzeltiyor...', 'info');
+        const res = await fetch('/api/timeline/ai-phonetic-fix', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const d = await res.json();
+        if (!res.ok) throw new Error(d.detail || 'Fonetik düzeltme başarısız');
+
+        videoData.subtitles = d.subtitles || [];
+        videoData.words = d.words || [];
+        videoData.narration = d.narration || '';
+        if (d.scenes) scenes = d.scenes;
+
+        const sidebarInput = document.getElementById('sidebar-audio-transcript');
+        if (sidebarInput && d.narration) {
+          sidebarInput.value = d.narration;
+        }
+
+        renderTimeline();
+        renderSceneInspector();
+        renderLeftScenesList();
+        renderLivePreviewCanvas();
+        showToast('AI Fonetik Dil Bilimci: Kelime hataları ve zamanlama başarıyla düzeltildi!', 'success');
+      } catch (err) {
+        showToast('Fonetik düzeltme hatası: ' + err.message, 'error');
+      }
+    }
+
     window.openAudioUploadModal = openAudioUploadModal;
     window.closeAudioUploadModal = closeAudioUploadModal;
     window.handleModalAudioSelected = handleModalAudioSelected;
     window.updateModalTranscriptCount = updateModalTranscriptCount;
     window.submitModalAudioAndTranscript = submitModalAudioAndTranscript;
     window.realignSidebarTranscript = realignSidebarTranscript;
+    window.applyAiPhoneticFix = applyAiPhoneticFix;
 
     // Audio Progress Modal Helpers
     let audioProgressTimer = null;

@@ -24,6 +24,7 @@ Solves:
 import difflib
 import re
 from typing import List, Dict, Any, Tuple, Optional
+from scripts.phonetic_rules import apply_phonetic_corrections
 
 # All possible apostrophe / glottal stop characters
 APOSTROPHES = ("'", "’", "‘", "ʼ", "`", "´")
@@ -115,6 +116,9 @@ def fix_turkish_orthography_and_compounds(text: str) -> str:
     """
     if not text:
         return ""
+
+    # 0. Apply AI Phonetic Linguistic Normalization (e.g. 'mühe defa' -> 'mı hedefe', 'ısırlık' -> 'asırlık')
+    text = apply_phonetic_corrections(text)
 
     # First clean apostrophes
     text = clean_text_apostrophes(text)
@@ -383,14 +387,39 @@ def build_subtitle_chunks(
                 end_idx -= 1
 
         chunk = stitched_words[i:end_idx]
-        chunk_text = " ".join(fix_turkish_orthography_and_compounds(w.get("word") or w.get("text") or "") for w in chunk)
+        chunk_text = " ".join(w.get("word") or w.get("text") or "" for w in chunk)
         chunk_text = fix_turkish_orthography_and_compounds(chunk_text)
+
+        # Synchronize words in chunk with phonetic corrections and clitic cohesion
+        chunk_words = chunk_text.split()
+        if len(chunk_words) == len(chunk):
+            final_chunk = []
+            for cw, orig_w in zip(chunk_words, chunk):
+                w_copy = dict(orig_w)
+                w_copy["word"] = cw
+                w_copy["text"] = cw
+                final_chunk.append(w_copy)
+        elif chunk_words:
+            t_start = chunk[0]["start"]
+            t_end = chunk[-1]["end"]
+            dur = max(0.2, t_end - t_start)
+            step = dur / len(chunk_words)
+            final_chunk = []
+            for w_i, cw in enumerate(chunk_words):
+                final_chunk.append({
+                    "word": cw,
+                    "text": cw,
+                    "start": round(t_start + w_i * step, 2),
+                    "end": round(t_start + (w_i + 1) * step, 2)
+                })
+        else:
+            final_chunk = chunk
 
         sub_obj = {
             "text": chunk_text,
             "start": chunk[0]["start"],
             "end": chunk[-1]["end"],
-            "words": chunk
+            "words": final_chunk
         }
         subtitles.append(sub_obj)
         i = end_idx
