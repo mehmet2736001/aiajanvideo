@@ -312,6 +312,12 @@
           <div id="mini-waveform-box" class="h-6 w-full bg-[#0b101c] rounded-lg overflow-hidden flex items-center gap-[2px] px-1">
             <!-- Peaks injected via JS -->
           </div>
+
+          <!-- CapCut Style Auto-Cut Silence Button -->
+          <button onclick="autoCutAudioSilence()" id="btn-auto-cut-silence" class="w-full py-2 bg-gradient-to-r from-emerald-600/30 via-teal-600/20 to-emerald-600/30 hover:from-emerald-600/40 hover:to-teal-600/30 text-emerald-300 border border-emerald-500/40 rounded-xl transition font-bold flex items-center justify-center gap-2 shadow-sm text-xs">
+            <i class="fa-solid fa-scissors text-amber-400"></i>
+            <span>🪄 Sessizlikleri Temizle (&gt;0.35s)</span>
+          </button>
         </div>
 
         <!-- AI Video Sahneleri Listesi (Quick Jump & Add) -->
@@ -2085,6 +2091,40 @@
       }
       if (tab === 'subs') {
         renderSubtitlesDrawerList();
+      }
+    }
+
+    // SPRINT 3: CAPCUT STYLE AUTO-CUT SILENCE & AUDIO ENHANCER
+    async function autoCutAudioSilence() {
+      const btn = document.getElementById('btn-auto-cut-silence');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-amber-400"></i> <span>Sessizlikler Taranıyor...</span>';
+      }
+      try {
+        showToast('Seste 0.35s üzeri duraklamalar taranıyor ve kesiliyor...', 'info');
+        const res = await fetch('/api/audio/auto-cut', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ min_duration: 0.35, keep_margin: 0.08 })
+        });
+        const d = await res.json();
+        if (!res.ok) throw new Error(d.detail || 'Sessizlik temizleme hatası');
+
+        if (d.modified) {
+          showToast(`✅ ${d.message}`, 'success');
+          audioEl.src = `/public/audio.mp3?t=${Date.now()}`;
+          await loadVideoData();
+        } else {
+          showToast(`ℹ️ ${d.message}`, 'info');
+        }
+      } catch (err) {
+        showToast(`Hata: ${err.message}`, 'error');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-scissors text-amber-400"></i> <span>🪄 Sessizlikleri Temizle (&gt;0.35s)</span>';
+        }
       }
     }
 

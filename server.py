@@ -51,6 +51,7 @@ from scripts.git_manager import (
     rollback_to_commit,
     run_git
 )
+from scripts.audio_cleaner import clean_audio_and_realign
 
 app = FastAPI(title="Notebook Video AI Studio Pro", version="4.0.0")
 
@@ -181,6 +182,11 @@ class TimelineUpdateScenesRequest(BaseModel):
 
 class SubtitleUpdateRequest(BaseModel):
     subtitles: List[Dict[str, Any]]
+
+class AudioAutoCutRequest(BaseModel):
+    min_duration: Optional[float] = 0.35
+    keep_margin: Optional[float] = 0.08
+    noise_threshold: Optional[str] = "-30dB" 
 
 class GitBackupRequest(BaseModel):
     message: Optional[str] = None
@@ -1836,6 +1842,28 @@ def api_update_subtitles(req: SubtitleUpdateRequest):
     with open(data_file, "w", encoding="utf-8") as f:
         json.dump(video_data, f, ensure_ascii=False, indent=2)
     return {"success": True, "subtitles": video_data["subtitles"]}
+
+@app.post("/api/audio/auto-cut")
+def api_audio_auto_cut(req: AudioAutoCutRequest):
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        video_data = json.load(f)
+    audio_path = os.path.join(PUBLIC_DIR, "audio.mp3")
+    if not os.path.exists(audio_path):
+        raise HTTPException(status_code=404, detail="audio.mp3 bulunamadı.")
+    try:
+        res = clean_audio_and_realign(
+            audio_path=audio_path,
+            video_data=video_data,
+            min_duration=req.min_duration or 0.35,
+            noise_threshold=req.noise_threshold or "-30dB",
+            keep_margin=req.keep_margin or 0.08
+        )
+        return res
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 

@@ -29,11 +29,10 @@ data/frames/
 *.key
 
 # Temporary media & test recordings
-public/audio.mp3
-public/audio_raw.mp3
-public/audio_studio.mp3
+public/audio*.mp3
 public/test_*.mp3
 public/temp_*
+
 
 # Python cache & virtual environments
 __pycache__/
