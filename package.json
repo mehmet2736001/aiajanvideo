@@ -6,6 +6,9 @@
   "scripts": {
     "start": "remotion preview src/index.ts",
     "build": "remotion render src/index.ts NotebookVideo out/video.mp4",
+    "build:horizontal": "remotion render src/index.ts NotebookVideo-Horizontal out/video_horizontal.mp4",
+    "build:square": "remotion render src/index.ts NotebookVideo-Square out/video_square.mp4",
+    "build:all": "npm run build && npm run build:horizontal && npm run build:square",
     "generate": "node scripts/generate.js"
   },
   "dependencies": {

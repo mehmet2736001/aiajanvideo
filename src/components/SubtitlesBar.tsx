@@ -16,7 +16,9 @@ export const SubtitlesBar: React.FC<SubtitlesBarProps> = ({
   isRTL = false,
 }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, width, height } = useVideoConfig();
+  const isHorizontal = width > height;
+
 
   const currentTime = frame / fps;
 
@@ -132,7 +134,7 @@ export const SubtitlesBar: React.FC<SubtitlesBarProps> = ({
     <div
       style={{
         position: 'absolute',
-        bottom: 110,
+        bottom: isHorizontal ? 35 : 110,
         left: 0,
         right: 0,
         display: 'flex',

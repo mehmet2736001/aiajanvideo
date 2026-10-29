@@ -29,6 +29,7 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
+      {/* 1. 9:16 Vertical (TikTok, Instagram Reels, YouTube Shorts) */}
       <Composition
         id="NotebookVideo"
         component={NotebookVideo}
@@ -36,6 +37,28 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1080}
         height={1920}
+        defaultProps={activeProps}
+      />
+
+      {/* 2. 16:9 Landscape (YouTube Long-form, Desktop, TV) */}
+      <Composition
+        id="NotebookVideo-Horizontal"
+        component={NotebookVideo}
+        durationInFrames={dynamicDuration}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={activeProps}
+      />
+
+      {/* 3. 1:1 Square (Instagram Feed, LinkedIn, Twitter/X) */}
+      <Composition
+        id="NotebookVideo-Square"
+        component={NotebookVideo}
+        durationInFrames={dynamicDuration}
+        fps={30}
+        width={1080}
+        height={1080}
         defaultProps={activeProps}
       />
     </>

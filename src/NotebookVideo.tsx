@@ -30,9 +30,13 @@ import { VideoData } from './types';
 
 export const NotebookVideo: React.FC<VideoData> = (props) => {
   const frame = useCurrentFrame();
-  const { durationInFrames, fps } = useVideoConfig();
+  const { durationInFrames, fps, width, height } = useVideoConfig();
+
+  const isHorizontal = width > height;
+  const isSquare = width === height;
 
   const isRTL = props.isRTL || props.direction === 'rtl' || props.language === 'ar';
+
 
   // Load fonts
   const { fontFamily } = loadFont();
@@ -84,15 +88,15 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
     (props.narration || '')
   ).toLowerCase();
 
-  if (textCorpus.includes('zaman') || textCorpus.includes('saat') || textCorpus.includes('yıl') || textCorpus.includes('gün')) {
+  if (textCorpus.includes('zaman') || textCorpus.includes('saat') || textCorpus.includes('yÄ±l') || textCorpus.includes('gÃ¼n')) {
     doodleType = 'hourglass';
   } else if (textCorpus.includes('kitap') || textCorpus.includes('aristo') || textCorpus.includes('farabi') || textCorpus.includes('alim') || textCorpus.includes('oku') || textCorpus.includes('sina')) {
     doodleType = 'book';
-  } else if (textCorpus.includes('fikir') || textCorpus.includes('akıl') || textCorpus.includes('beyin') || textCorpus.includes('düşün') || textCorpus.includes('ışık')) {
+  } else if (textCorpus.includes('fikir') || textCorpus.includes('akÄ±l') || textCorpus.includes('beyin') || textCorpus.includes('dÃ¼ÅŸÃ¼n') || textCorpus.includes('Ä±ÅŸÄ±k')) {
     doodleType = 'lightbulb';
-  } else if (textCorpus.includes('kainat') || textCorpus.includes('galaksi') || textCorpus.includes('evren') || textCorpus.includes('kara') || textCorpus.includes('yıldız') || textCorpus.includes('delik')) {
+  } else if (textCorpus.includes('kainat') || textCorpus.includes('galaksi') || textCorpus.includes('evren') || textCorpus.includes('kara') || textCorpus.includes('yÄ±ldÄ±z') || textCorpus.includes('delik')) {
     doodleType = 'galaxy';
-  } else if (textCorpus.includes('yön') || textCorpus.includes('pusula') || textCorpus.includes('yol') || textCorpus.includes('hedef')) {
+  } else if (textCorpus.includes('yÃ¶n') || textCorpus.includes('pusula') || textCorpus.includes('yol') || textCorpus.includes('hedef')) {
     doodleType = 'compass';
   }
 
@@ -114,10 +118,11 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
   return (
     <div
       style={{
-        width: 1080,
-        height: 1920,
+        width,
+        height,
         position: 'relative',
         overflow: 'hidden',
+
         fontFamily: effectiveFont,
         direction: isRTL ? 'rtl' : 'ltr',
         transform: `scale(${cameraZoom})`,
@@ -141,7 +146,7 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
         color={activeTheme === 'gold_luxury' ? '#facc15' : activeTheme === 'neon_cyber' ? '#38bdf8' : '#fef08a'}
       />
 
-      {/* 3.5 Sinematik B-Roll Stok Medya Katmanı (Faz 8) */}
+      {/* 3.5 Sinematik B-Roll Stok Medya KatmanÄ± (Faz 8) */}
       <BRollOverlay
         type={props.brollType || 'none'}
         brollUrl={props.brollUrl}
@@ -189,7 +194,7 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
 
             {/* 2. Top Handdrawn Header with Pen & Marker Cursor Animation */}
             <HanddrawnHeader
-              subtitle={props.headerSubtitle || 'Kısa Kıssa'}
+              subtitle={props.headerSubtitle || 'KÄ±sa KÄ±ssa'}
               title1={title1}
               title2={title2}
               circledWord={props.circledWord || ''}
@@ -235,11 +240,11 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
                 <Sequence from={0} durationInFrames={props.timeline ? 180 : durationInFrames}>
                   <IconGridExplosion
                     title={props.gridExplosion?.title || (title1 + ' ' + (props.circledWord || '') + ' ' + (props.highlightedText || ''))}
-                    subtitle={props.gridExplosion?.subtitle || (props.metricImpact?.subheading || 'Milyarlarca İnsan, Benzersiz Mühür')}
+                    subtitle={props.gridExplosion?.subtitle || (props.metricImpact?.subheading || 'Milyarlarca Ä°nsan, Benzersiz MÃ¼hÃ¼r')}
                     iconType={props.gridExplosion?.iconType || 'fingerprint'}
                     itemCount={props.gridExplosion?.itemCount || 12}
                     accentColor={activeTheme === 'neon_cyber' ? '#38bdf8' : '#facc15'}
-                    badgeText={props.strikeWord ? undefined : (props.gridExplosion?.badgeText || 'EŞSİZ BİYOLOJİK MÜHÜR')}
+                    badgeText={props.strikeWord ? undefined : (props.gridExplosion?.badgeText || 'EÅSÄ°Z BÄ°YOLOJÄ°K MÃœHÃœR')}
                   />
                 </Sequence>
               ) : layout === 'pip_split' ? (

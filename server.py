@@ -186,7 +186,10 @@ class SubtitleUpdateRequest(BaseModel):
 class AudioAutoCutRequest(BaseModel):
     min_duration: Optional[float] = 0.35
     keep_margin: Optional[float] = 0.08
-    noise_threshold: Optional[str] = "-30dB" 
+    noise_threshold: Optional[str] = "-30dB"
+
+class RenderMultiFormatRequest(BaseModel):
+    formats: Optional[List[str]] = ["9:16"]
 
 class GitBackupRequest(BaseModel):
     message: Optional[str] = None
@@ -1312,54 +1315,63 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
         "history_item": new_hist_item
     }
 
-def run_remotion_render():
+def run_remotion_render(formats=None):
     global render_state
+    if not formats:
+        formats = ["9:16"]
     render_state["status"] = "rendering"
-    render_state["message"] = "Remotion motoru videoyu renderlÃ„Â±yor (1080x1920)..."
+    render_state["message"] = f"Remotion motoru formatları derliyor: {', '.join(formats)}..."
+    rendered_files = []
     try:
-        result = subprocess.run(
-            ["npm.cmd", "run", "build"],
-            cwd=BASE_DIR,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            check=False
+        if "9:16" in formats:
+            render_state["message"] = "9:16 Shorts/Reels derleniyor (1080x1920)..."
+            res916 = subprocess.run(["npm.cmd", "run", "build"], cwd=BASE_DIR, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
+            if res916.returncode == 0:
+                rendered_files.append("9:16 (Dikey)")
+
+        if "16:9" in formats:
+            render_state["message"] = "16:9 YouTube Yatay derleniyor (1920x1080)..."
+            res169 = subprocess.run(["npm.cmd", "run", "build:horizontal"], cwd=BASE_DIR, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
+            if res169.returncode == 0:
+                rendered_files.append("16:9 (Yatay)")
+
+        if "1:1" in formats:
+            render_state["message"] = "1:1 Kare derleniyor (1080x1080)..."
+            res11 = subprocess.run(["npm.cmd", "run", "build:square"], cwd=BASE_DIR, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
+            if res11.returncode == 0:
+                rendered_files.append("1:1 (Kare)")
+
+        # Render thumbnail
+        subprocess.run(
+            ["npx.cmd", "remotion", "still", "src/index.ts", "NotebookVideo", "out/thumbnail.png", "--frame=45"],
+            cwd=BASE_DIR, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False
         )
-        if result.returncode == 0:
-            # Also render thumbnail automatically
-            subprocess.run(
-                ["npx.cmd", "remotion", "still", "src/index.ts", "NotebookVideo", "out/thumbnail.png", "--frame=45"],
-                cwd=BASE_DIR,
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                check=False
-            )
-            render_state["status"] = "completed"
-            render_state["message"] = "Video ve kapak gÃƒÂ¶rseli baÃ…Å¸arÃ„Â±yla oluÃ…Å¸turuldu!"
-            t_now = str(int(time.time() * 1000))
-            render_state["video_url"] = f"/out/video.mp4?t={t_now}"
-            render_state["thumbnail_url"] = f"/out/thumbnail.png?t={t_now}"
-            render_state["last_rendered_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            render_state["status"] = "error"
-            render_state["message"] = f"Render hatasÃ„Â±: {result.stderr[:200]}"
+
+        render_state["status"] = "completed"
+        t_now = str(int(time.time() * 1000))
+        render_state["message"] = f"Render tamamlandı! ({', '.join(rendered_files)})"
+        render_state["video_url"] = f"/out/video.mp4?t={t_now}"
+        if os.path.exists(os.path.join(OUT_DIR, "video_horizontal.mp4")):
+            render_state["video_horizontal_url"] = f"/out/video_horizontal.mp4?t={t_now}"
+        if os.path.exists(os.path.join(OUT_DIR, "video_square.mp4")):
+            render_state["video_square_url"] = f"/out/video_square.mp4?t={t_now}"
+        render_state["thumbnail_url"] = f"/out/thumbnail.png?t={t_now}"
+        render_state["last_rendered_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
     except Exception as e:
         render_state["status"] = "error"
-        render_state["message"] = f"Beklenmeyen hata: {str(e)}"
+        render_state["message"] = f"Render hatası: {str(e)}"
 
 @app.post("/api/render")
-def trigger_render(bg_tasks: BackgroundTasks):
+def trigger_render(bg_tasks: BackgroundTasks, req: Optional[RenderMultiFormatRequest] = None):
     global render_state
     if render_state["status"] == "rendering":
-        return {"status": "rendering", "message": "Zaten bir video renderlanÃ„Â±yor, lÃƒÂ¼tfen bekleyin."}
+        return {"status": "rendering", "message": "Zaten bir video renderlanıyor, lütfen bekleyin."}
     
-    bg_tasks.add_task(run_remotion_render)
+    formats = req.formats if req and req.formats else ["9:16"]
+    bg_tasks.add_task(run_remotion_render, formats)
     render_state["status"] = "rendering"
-    render_state["message"] = "Render iÃ…Å¸lemi baÃ…Å¸latÃ„Â±ldÃ„Â±..."
-    return {"status": "rendering", "message": "Render iÃ…Å¸lemi arka planda baÃ…Å¸latÃ„Â±ldÃ„Â±."}
+    render_state["message"] = f"Render işlemi başlatıldı ({', '.join(formats)})..."
+    return {"status": "rendering", "message": f"Render işlemi başlatıldı ({', '.join(formats)})..."}
 
 @app.get("/api/render/status")
 def get_render_status():
