@@ -824,6 +824,21 @@
 
           </div>
 
+          <!-- LIVE PREVIEW QUOTE VIDEO & DEBUNK OVERLAY (CapCut / Reaction Frame) -->
+          <div id="pv-quote-overlay" style="display: none; z-index: 28;" class="absolute inset-0 flex flex-col items-center justify-center p-3 bg-black/85 backdrop-blur-[2px] transition-all duration-200">
+            <!-- Rendered dynamically by renderQuotePreviewOverlay() -->
+          </div>
+
+          <!-- LIVE PREVIEW PIP VIDEO OVERLAY -->
+          <div id="pv-pip-overlay" style="display: none; z-index: 24;" class="absolute pointer-events-none transition-all duration-200">
+            <!-- Rendered dynamically by renderPipPreviewOverlay() -->
+          </div>
+
+          <!-- LIVE PREVIEW PNG STICKER OVERLAY -->
+          <div id="pv-png-overlay" style="display: none; z-index: 26;" class="absolute pointer-events-none transition-all duration-200">
+            <!-- Rendered dynamically by renderPngPreviewOverlay() -->
+          </div>
+
           <!-- TikTok / Shorts Safe Zone Overlay (CapCut / TikTok Standardı) -->
           <div id="safe-zone-overlay" class="hidden absolute inset-0 pointer-events-none z-30 flex flex-col justify-between p-3 select-none">
             <!-- Top Safe Area (Leave header visible) -->
@@ -3257,6 +3272,7 @@
 
         const block = document.createElement('div');
         block.className = 'absolute top-1 bottom-1 rounded-xl bg-gradient-to-r from-rose-950/90 via-slate-900 to-amber-950/80 border border-rose-500/60 flex items-center justify-between px-2 text-[10px] text-rose-200 shadow-md group cursor-pointer hover:border-rose-300 transition';
+        block.onclick = () => { seekTimeline(start); showToast(`Alıntı klip önizleniyor: ${qv.headerText}`, 'info'); };
         block.style.left = `${left}px`;
         block.style.width = `${Math.max(90, width - 4)}px`;
         block.title = `Alıntı: "${qv.headerText}" [${qv.trimStart}s - ${qv.trimEnd}s] (${qv.theme})`;
@@ -4005,6 +4021,7 @@
         quoteSelectedFile = null;
         if (fileInput) fileInput.value = '';
         await loadTimelineData();
+        seekTimeline(timelineStart);
       } catch (e) {
         showToast('Hata: ' + e.message, 'error');
         alert('Hata: ' + e.message);
@@ -4607,7 +4624,270 @@
 
       // Chapter badge
       const curIdx = scenes.indexOf(s) + 1;
-      document.getElementById('preview-scene-pill').innerText = `Sahne ${curIdx} / ${scenes.length} (${s.startTime?.toFixed(0)}s - ${s.endTime?.toFixed(0)}s)`;
+      const scenePill = document.getElementById('preview-scene-pill');
+      if (scenePill) scenePill.innerText = `Sahne ${curIdx} / ${scenes.length} (${s.startTime?.toFixed(0)}s - ${s.endTime?.toFixed(0)}s)`;
+
+      // Dynamic Live Overlays in Preview Screen
+      renderQuotePreviewOverlay();
+      renderPipPreviewOverlay();
+      renderPngPreviewOverlay();
+    }
+
+
+    // ==========================================
+    // LIVE PREVIEW OVERLAYS (QUOTE, PIP, PNG)
+    // ==========================================
+    let currentRenderedQuoteId = null;
+    let currentRenderedPipId = null;
+    let currentRenderedPngId = null;
+
+    function renderQuotePreviewOverlay() {
+      const container = document.getElementById('pv-quote-overlay');
+      if (!container) return;
+
+      const quotes = (videoData && videoData.quoteVideos) || [];
+      const activeQuote = quotes.find(qv => {
+        const start = qv.timelineStart || 0;
+        const dur = qv.duration || Math.max(1, (qv.trimEnd || 6) - (qv.trimStart || 0));
+        return playheadTime >= start && playheadTime <= (start + dur);
+      });
+
+      if (!activeQuote) {
+        if (container.style.display !== 'none') {
+          container.style.display = 'none';
+          const livePlayer = document.getElementById('pv-quote-live-player');
+          if (livePlayer) livePlayer.pause();
+          currentRenderedQuoteId = null;
+        }
+        return;
+      }
+
+      const start = activeQuote.timelineStart || 0;
+      const dur = activeQuote.duration || Math.max(1, (activeQuote.trimEnd || 6) - (activeQuote.trimStart || 0));
+      const elapsed = Math.max(0, playheadTime - start);
+      const progressPct = Math.min(100, Math.max(0, (elapsed / dur) * 100));
+
+      const isLastSeconds = elapsed >= Math.max(0.5, dur - 1.8);
+      const showStamp = activeQuote.stamp && activeQuote.stamp !== 'none' && isLastSeconds;
+
+      // Badges by theme
+      const badgeText = 
+        activeQuote.theme === 'red_alert' ? '🚨 DİKKAT: YANILTICI İÇERİK' :
+        activeQuote.theme === 'court_evidence' ? '⚖️ DELİL DOSYASI & İNCELEME' :
+        activeQuote.theme === 'news_broadcast' ? '🔴 SON DAKİKA / İDDİA' :
+        activeQuote.theme === 'social_phone' ? '📱 SOSYAL MEDYA İDDİASI' : '💬 ALINTI KESİT';
+
+      const badgeBg = 
+        activeQuote.theme === 'red_alert' ? 'bg-red-600' :
+        activeQuote.theme === 'court_evidence' ? 'bg-amber-600' :
+        activeQuote.theme === 'news_broadcast' ? 'bg-rose-600' : 'bg-indigo-600';
+
+      const frameBorder = 
+        activeQuote.theme === 'red_alert' ? 'border-2 border-red-500 shadow-[0_0_25px_rgba(239,68,68,0.8)]' :
+        activeQuote.theme === 'court_evidence' ? 'border-2 border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.6)]' :
+        activeQuote.theme === 'news_broadcast' ? 'border-2 border-rose-500 shadow-[0_0_15px_rgba(244,63,94,0.6)]' :
+        activeQuote.theme === 'social_phone' ? 'border-4 border-slate-700 rounded-3xl' :
+        'border border-white/20 rounded-xl shadow-2xl';
+
+      let resolvedVideoUrl = activeQuote.videoUrl;
+      if (resolvedVideoUrl && !resolvedVideoUrl.startsWith('http') && !resolvedVideoUrl.startsWith('/')) {
+        resolvedVideoUrl = '/' + resolvedVideoUrl;
+      }
+
+      const stampText = 
+        activeQuote.stamp === 'yalan' ? '❌ YALAN / ÇÜRÜTÜLDÜ' :
+        activeQuote.stamp === 'iddia' ? '⚠️ KANITSIZ İDDİA' :
+        activeQuote.stamp === 'carpitma' ? '🔴 ÇARPITILMIŞ İÇERİK' : '🚨 YANILTICI BİLGİ';
+      const stampColor = activeQuote.stamp === 'iddia' ? 'border-amber-400 text-amber-300' : 'border-red-500 text-red-400';
+
+      // 1. Initial build when activeQuote changes or container was hidden
+      if (currentRenderedQuoteId !== activeQuote.id || container.style.display === 'none') {
+        container.style.display = 'flex';
+        currentRenderedQuoteId = activeQuote.id;
+
+        container.innerHTML = `
+          <div class="w-full max-w-[280px] flex flex-col items-center select-none">
+            
+            <!-- Callout Badge -->
+            <div id="pv-quote-badge" class="mb-1.5 px-2.5 py-0.5 ${badgeBg} text-white font-extrabold text-[9px] uppercase tracking-wider rounded-full shadow-md flex items-center gap-1">
+              ${badgeText}
+            </div>
+
+            <!-- Header Banner Text -->
+            <div id="pv-quote-header" class="text-center font-extrabold text-white text-xs leading-snug drop-shadow-md mb-1.5 px-1 line-clamp-2">
+              ${activeQuote.headerText || 'Arkadaşlar bu videoyu iyi izleyin...'}
+            </div>
+
+            <!-- Subheader / Author -->
+            <div id="pv-quote-meta" class="text-[9px] text-slate-300 font-mono mb-1.5 flex items-center gap-1.5 ${(!activeQuote.subHeaderText && !activeQuote.authorTag) ? 'hidden' : ''}">
+              <span id="pv-quote-sub">${activeQuote.subHeaderText || ''}</span>
+              <span id="pv-quote-author" class="text-cyan-300 bg-cyan-950/80 px-1 rounded ${!activeQuote.authorTag ? 'hidden' : ''}">${activeQuote.authorTag || ''}</span>
+            </div>
+
+            <!-- Thematic Frame Container -->
+            <div class="relative w-full aspect-video bg-black rounded-xl overflow-hidden ${frameBorder}">
+              <video id="pv-quote-live-player" src="${resolvedVideoUrl}" muted playsinline class="w-full h-full object-cover"></video>
+              
+              <!-- Animated Stamp Element -->
+              <div id="pv-quote-stamp" class="${showStamp ? '' : 'hidden'} absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
+                <div class="px-3 py-1.5 border-4 ${stampColor} bg-black/95 font-black text-xs md:text-sm rounded-lg -rotate-12 uppercase tracking-widest shadow-2xl animate-bounce">
+                  ${stampText}
+                </div>
+              </div>
+              
+              <!-- Progress Bar inside frame -->
+              <div class="absolute bottom-0 left-0 right-0 h-1 bg-black/60">
+                <div id="pv-quote-progressbar" class="h-full bg-rose-500 transition-all duration-75" style="width: ${progressPct}%"></div>
+              </div>
+            </div>
+
+            <!-- Bottom Time & Control Pill -->
+            <div class="mt-2 flex items-center gap-2 px-2.5 py-0.5 bg-slate-900/90 border border-slate-700/80 rounded-full text-[9px] font-mono text-slate-300">
+              <span id="pv-quote-timer" class="text-rose-400 font-bold">⏱️ ${elapsed.toFixed(1)}s / ${dur.toFixed(1)}s</span>
+              <span>·</span>
+              <span>Kesit: ${activeQuote.trimStart}s - ${activeQuote.trimEnd}s</span>
+              <button onclick="deleteQuoteItem('${activeQuote.id}')" title="Bu Alıntıyı Sil" class="text-rose-400 hover:text-white ml-1">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+
+          </div>
+        `;
+      }
+
+      // 2. High-performance frame-by-frame updates without recreating video player
+      container.style.display = 'flex';
+      const pBar = document.getElementById('pv-quote-progressbar');
+      if (pBar) pBar.style.width = `${progressPct}%`;
+
+      const timerEl = document.getElementById('pv-quote-timer');
+      if (timerEl) timerEl.innerText = `⏱️ ${elapsed.toFixed(1)}s / ${dur.toFixed(1)}s`;
+
+      const stampEl = document.getElementById('pv-quote-stamp');
+      if (stampEl) {
+        if (showStamp) {
+          stampEl.classList.remove('hidden');
+        } else {
+          stampEl.classList.add('hidden');
+        }
+      }
+
+      // 3. Synchronize video player time and playback state
+      const livePlayer = document.getElementById('pv-quote-live-player');
+      if (livePlayer) {
+        const targetVideoTime = (activeQuote.trimStart || 0) + elapsed;
+        if (Math.abs(livePlayer.currentTime - targetVideoTime) > 0.3) {
+          livePlayer.currentTime = targetVideoTime;
+        }
+        if (isPlaying) {
+          if (livePlayer.paused) {
+            livePlayer.play().catch(() => {});
+          }
+        } else {
+          if (!livePlayer.paused) {
+            livePlayer.pause();
+          }
+        }
+      }
+    }
+
+    function renderPipPreviewOverlay() {
+      const container = document.getElementById('pv-pip-overlay');
+      if (!container) return;
+
+      const pips = (videoData && videoData.pipVideos) || [];
+      const activePip = pips.find(p => {
+        const start = p.startTime || 0;
+        const end = p.endTime || (start + 5);
+        return playheadTime >= start && playheadTime <= end;
+      });
+
+      if (!activePip) {
+        if (container.style.display !== 'none') {
+          container.style.display = 'none';
+          const vid = container.querySelector('video');
+          if (vid) vid.pause();
+          currentRenderedPipId = null;
+        }
+        return;
+      }
+
+      if (currentRenderedPipId !== activePip.id || container.style.display === 'none') {
+        container.style.display = 'block';
+        currentRenderedPipId = activePip.id;
+
+        let posClass = 'top-10 right-4';
+        if (activePip.position === 'top-left') posClass = 'top-10 left-4';
+        else if (activePip.position === 'bottom-right') posClass = 'bottom-16 right-4';
+        else if (activePip.position === 'bottom-left') posClass = 'bottom-14 left-3';
+        else if (activePip.position === 'center') posClass = 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2';
+
+        const shapeClass = activePip.shape === 'circle' ? 'rounded-full aspect-square w-20' : activePip.shape === 'phone' ? 'rounded-2xl w-24 aspect-[9/16]' : 'rounded-xl w-28 aspect-video';
+
+        let resolvedSrc = activePip.videoUrl;
+        if (resolvedSrc && !resolvedSrc.startsWith('http') && !resolvedSrc.startsWith('/')) {
+          resolvedSrc = '/' + resolvedSrc;
+        }
+
+        container.className = `absolute pointer-events-none transition-all duration-200 ${posClass}`;
+        container.innerHTML = `
+          <div class="overflow-hidden ${shapeClass} bg-black border-2 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.7)] flex items-center justify-center">
+            <video id="pv-pip-live-player" src="${resolvedSrc}" muted autoplay loop playsinline class="w-full h-full object-cover"></video>
+          </div>
+        `;
+      }
+
+      container.style.display = 'block';
+      const pipPlayer = document.getElementById('pv-pip-live-player');
+      if (pipPlayer) {
+        if (isPlaying && pipPlayer.paused) pipPlayer.play().catch(() => {});
+        else if (!isPlaying && !pipPlayer.paused) pipPlayer.pause();
+      }
+    }
+
+    function renderPngPreviewOverlay() {
+      const container = document.getElementById('pv-png-overlay');
+      if (!container) return;
+
+      const overlays = (videoData && videoData.overlayImages) || [];
+      const activeOverlay = overlays.find(o => {
+        const start = o.startTime || 0;
+        const end = o.endTime || (start + 4);
+        return playheadTime >= start && playheadTime <= end;
+      });
+
+      if (!activeOverlay) {
+        if (container.style.display !== 'none') {
+          container.style.display = 'none';
+          currentRenderedPngId = null;
+        }
+        return;
+      }
+
+      if (currentRenderedPngId !== activeOverlay.id || container.style.display === 'none') {
+        container.style.display = 'block';
+        currentRenderedPngId = activeOverlay.id;
+
+        let posClass = 'top-8 right-3';
+        if (activeOverlay.position === 'top-left') posClass = 'top-8 left-3';
+        else if (activeOverlay.position === 'bottom-right') posClass = 'bottom-14 right-3';
+        else if (activeOverlay.position === 'bottom-left') posClass = 'bottom-14 left-3';
+        else if (activeOverlay.position === 'center') posClass = 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2';
+
+        let resolvedSrc = activeOverlay.imageUrl;
+        if (resolvedSrc && !resolvedSrc.startsWith('http') && !resolvedSrc.startsWith('/')) {
+          resolvedSrc = '/' + resolvedSrc;
+        }
+
+        const animClass = activeOverlay.animation === 'bounce' ? 'animate-bounce' : activeOverlay.animation === 'spin' ? 'animate-spin' : '';
+
+        container.className = `absolute pointer-events-none transition-all duration-200 ${posClass}`;
+        container.innerHTML = `
+          <img src="${resolvedSrc}" class="w-16 h-auto drop-shadow-xl ${animClass}" alt="PNG Sticker">
+        `;
+      }
+
+      container.style.display = 'block';
     }
 
     // SPRINT 1: TIMELINE DRAG-TO-TRIM & DRAG-TO-REORDER
