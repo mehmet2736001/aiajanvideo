@@ -151,6 +151,35 @@ export interface AudioTrackItem {
   label?: string;
 }
 
+export type QuoteFrameTheme =
+  | 'red_alert'       // 🚨 Kırmızı Alarm & Yanıltıcı İçerik Uyarısı (Glow Kırmızı Çerçeve)
+  | 'social_phone'    // 📱 Sosyal Medya Telefonu (iPhone Mockup, Reels/TikTok stili)
+  | 'news_broadcast'  // 📺 Haber Kanalı / Arşiv TV Çerçevesi ("İDDİA EDİLEN BİLGİ")
+  | 'court_evidence'  // ⚖️ Hukuki / Bilimsel Delil Dosyası ("DELİL #1")
+  | 'minimal_card';   // 💬 Şık Eleştiri Kartı (Tırnak işaretli modern kart)
+
+export type QuoteStampType = 'yalan' | 'iddia' | 'carpitma' | 'dikkat' | 'none';
+
+export interface QuoteVideoItem {
+  id: string;
+  videoUrl: string;             // Orijinal video dosya yolu
+  trimStart: number;            // Kırpma başlangıç zamanı (video içindeki saniye)
+  trimEnd: number;              // Kırpma bitiş zamanı (video içindeki saniye)
+  timelineStart: number;        // Proje zaman tüneline giriş saniyesi
+  duration: number;             // Gösterim süresi (trimEnd - trimStart)
+  timelineEnd?: number;         // timelineStart + duration
+  theme: QuoteFrameTheme;       // Çerçeve teması
+  headerText: string;           // Üst afiş: "Arkadaşlar bu videoyu iyi izleyin..."
+  subHeaderText?: string;       // İkinci satır / İddia başlığı: "Sosyal medyada yayılan iddia"
+  authorTag?: string;           // Kaynak hesabı: "@orijinal_hesap"
+  stamp?: QuoteStampType;       // Damga efekti ('yalan', 'iddia', 'carpitma', 'dikkat', 'none')
+  volume?: number;              // Alıntı video ses düzeyi (0.0 - 1.0, varsayılan 1.0)
+  muted?: boolean;              // Sessize alma
+  freezeAtEnd?: boolean;        // Klip bitiminde son kareyi dondurup filtre uygula
+  width?: number;               // Özel genişlik (px)
+  height?: number;              // Özel yükseklik (px)
+}
+
 export interface VideoScene {
   id: string; // e.g. "scene_1", "scene_2"
   startTime: number; // in seconds (e.g. 0.0, 12.0)
@@ -183,6 +212,7 @@ export interface VideoScene {
   videoUrl?: string;
   pipVideos?: PipVideoItem[];
   overlayImages?: OverlayImageItem[];
+  quoteVideos?: QuoteVideoItem[];
   language?: LanguageCode;
   direction?: TextDirection;
   isRTL?: boolean;
@@ -245,6 +275,7 @@ export interface VideoData {
   audioVolume?: number;
   pipVideos?: PipVideoItem[];
   overlayImages?: OverlayImageItem[];
+  quoteVideos?: QuoteVideoItem[];
   audioTracks?: AudioTrackItem[];
   scenes?: VideoScene[];
   language?: LanguageCode;

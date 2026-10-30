@@ -2137,6 +2137,31 @@ class ExtractAudioRequest(BaseModel):
 class RemoveAudioRequest(BaseModel):
     mode: str = "mute" # "mute", "unmute" or "delete"
 
+class AddQuoteVideoRequest(BaseModel):
+    videoUrl: Optional[str] = None
+    video_url: Optional[str] = None
+    trimStart: Optional[float] = 0.0
+    trim_start: Optional[float] = None
+    trimEnd: Optional[float] = 6.0
+    trim_end: Optional[float] = None
+    timelineStart: Optional[float] = 0.0
+    timeline_start: Optional[float] = None
+    duration: Optional[float] = None
+    theme: Optional[str] = "red_alert"
+    headerText: Optional[str] = "Arkadaşlar bu videoyu iyi izleyin..."
+    header_text: Optional[str] = None
+    subHeaderText: Optional[str] = None
+    sub_header_text: Optional[str] = None
+    authorTag: Optional[str] = None
+    author_tag: Optional[str] = None
+    stamp: Optional[str] = "yalan"
+    volume: Optional[float] = 1.0
+    muted: Optional[bool] = False
+    freezeAtEnd: Optional[bool] = False
+    freeze_at_end: Optional[bool] = False
+    sceneId: Optional[str] = None
+    scene_id: Optional[str] = None
+
 class AddPipRequest(BaseModel):
     videoUrl: Optional[str] = None
     video_url: Optional[str] = None
@@ -4511,6 +4536,57 @@ def api_remove_audio(req: RemoveAudioRequest):
         "message": "Ses durumu güncellendi."
     }
 
+@app.post("/api/timeline/add-quote-video")
+def api_add_quote_video(req: AddQuoteVideoRequest):
+    """
+    Adds a trimmed Quote / Reaction / Debunking video frame to the timeline.
+    """
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        vdata = json.load(f)
+
+    video_url = req.videoUrl or req.video_url
+    if not video_url:
+        raise HTTPException(status_code=400, detail="videoUrl zorunludur.")
+
+    trim_start = float(req.trimStart if req.trimStart is not None else (req.trim_start or 0.0))
+    trim_end = float(req.trimEnd if req.trimEnd is not None else (req.trim_end or (trim_start + 6.0)))
+    if trim_end <= trim_start:
+        trim_end = trim_start + 4.0
+
+    calc_dur = round(trim_end - trim_start, 2)
+    dur = float(req.duration) if req.duration is not None else calc_dur
+    tl_start = float(req.timelineStart if req.timelineStart is not None else (req.timeline_start or 0.0))
+
+    quote_item = {
+        "id": f"quote_{uuid.uuid4().hex[:8]}",
+        "videoUrl": video_url,
+        "trimStart": round(trim_start, 2),
+        "trimEnd": round(trim_end, 2),
+        "timelineStart": round(tl_start, 2),
+        "timelineEnd": round(tl_start + dur, 2),
+        "duration": round(dur, 2),
+        "theme": req.theme or "red_alert",
+        "headerText": req.headerText or req.header_text or "Arkadaşlar bu videoyu iyi izleyin...",
+        "subHeaderText": req.subHeaderText or req.sub_header_text or "",
+        "authorTag": req.authorTag or req.author_tag or "",
+        "stamp": req.stamp or "yalan",
+        "volume": float(req.volume if req.volume is not None else 1.0),
+        "muted": bool(req.muted if req.muted is not None else False),
+        "freezeAtEnd": bool(req.freezeAtEnd or req.freeze_at_end or False)
+    }
+
+    if "quoteVideos" not in vdata or not isinstance(vdata["quoteVideos"], list):
+        vdata["quoteVideos"] = []
+    vdata["quoteVideos"].append(quote_item)
+
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(vdata, f, ensure_ascii=False, indent=2)
+
+    return {"success": True, "quoteItem": quote_item, "video_data": vdata}
+
 @app.post("/api/timeline/add-pip")
 def api_add_pip(req: AddPipRequest):
     """
@@ -4608,6 +4684,8 @@ def api_delete_media_item(req: DeleteMediaItemRequest):
         vdata["pipVideos"] = [p for p in vdata["pipVideos"] if p.get("id") != item_id]
     elif (item_type in ["overlay", "png_overlay", "png"]) and "overlayImages" in vdata:
         vdata["overlayImages"] = [o for o in vdata["overlayImages"] if o.get("id") != item_id]
+    elif (item_type in ["quote", "quote_video"]) and "quoteVideos" in vdata:
+        vdata["quoteVideos"] = [q for q in vdata["quoteVideos"] if q.get("id") != item_id]
 
     with open(data_file, "w", encoding="utf-8") as f:
         json.dump(vdata, f, ensure_ascii=False, indent=2)

@@ -1019,7 +1019,7 @@
   </div>
 
   <!-- ================= BOTTOM MULTI-TRACK TIMELINE (ZAMAN TÜNELİ) ================= -->
-  <footer class="h-80 border-t border-slate-800/80 bg-[#0b101c] flex flex-col shrink-0 z-40 select-none">
+  <footer class="h-[380px] border-t border-slate-800/80 bg-[#0b101c] flex flex-col shrink-0 z-40 select-none">
     
     <!-- TIMELINE TOOLBAR -->
     <div class="h-10 border-b border-slate-800 px-4 flex items-center justify-between bg-[#080c14] text-xs">
@@ -1040,6 +1040,9 @@
           <i class="fa-solid fa-plus"></i> <span>Sahne Ekle</span>
         </button>
         <div class="h-4 w-[1px] bg-slate-800 mx-0.5"></div>
+        <button onclick="openQuoteVideoModal()" title="Eleştiri / Yanıltıcı İçerik Alıntı Videosu Ekle" class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-rose-950 to-red-950 hover:from-rose-900 hover:to-red-900 border border-rose-500/70 text-rose-200 font-extrabold transition flex items-center gap-1.5 shadow-md shadow-rose-950/50">
+          <i class="fa-solid fa-quote-left text-rose-400"></i> <span>+ Alıntı Video</span>
+        </button>
         <button onclick="openMediaModal('video')" title="Video veya B-Roll Ekle" class="px-2.5 py-1 rounded-lg bg-indigo-950/70 hover:bg-indigo-900 border border-indigo-500/40 text-indigo-300 font-semibold transition flex items-center gap-1">
           <i class="fa-solid fa-film text-indigo-400"></i> <span>+ Video</span>
         </button>
@@ -1092,6 +1095,13 @@
             <i class="fa-solid fa-film text-indigo-400"></i> Video
           </span>
           <span class="text-[9px] bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded font-mono font-bold">ANA</span>
+        </div>
+        <!-- 1.5. Alıntı Video Katmanı -->
+        <div class="h-10 border-b border-slate-800/60 px-3 flex items-center justify-between bg-rose-950/20">
+          <span class="flex items-center gap-1.5 text-rose-300 font-medium">
+            <i class="fa-solid fa-quote-left text-rose-400"></i> Alıntı Video
+          </span>
+          <span class="text-[9px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-mono font-bold">ALINTI</span>
         </div>
         <!-- 2. PIP Video Katmanı -->
         <div class="h-10 border-b border-slate-800/60 px-3 flex items-center justify-between">
@@ -1149,6 +1159,11 @@
           <!-- TRACK 1: VIDEO & AI SAHNELERİ (H: 56px) -->
           <div id="track-video" class="h-14 border-b border-slate-800/60 relative p-1 flex items-center bg-[#070b14]/50">
             <!-- Scene clips rendered via JS -->
+          </div>
+
+          <!-- TRACK 1.5: ALINTI VIDEO & ELEŞTİRİ KATMANI (H: 40px) -->
+          <div id="track-quote" class="h-10 border-b border-slate-800/60 relative p-1 flex items-center bg-[#150a12]/40">
+            <!-- Quote Video items rendered via JS -->
           </div>
 
           <!-- TRACK 2: PIP VIDEO KATMANI (H: 40px) -->
@@ -1719,7 +1734,240 @@
   </div>
 
   <!-- ================= GLOBAL TOAST NOTIFICATION CONTAINER ================= -->
-    <!-- ================= UNIFIED MEDIA STUDIO MODAL ================= -->
+    <!-- ================= QUOTE & DEBUNK VIDEO TRIMMER MODAL ================= -->
+  <div id="modal-quote-video" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0f1422] border border-rose-500/50 rounded-3xl max-w-3xl w-full p-6 space-y-5 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-rose-600/30 to-red-600/30 text-rose-400 border border-rose-500/40 flex items-center justify-center text-lg shadow-inner">
+            <i class="fa-solid fa-quote-left"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-white text-base leading-tight flex items-center gap-2">
+              <span>Alıntı Video & Yanıltıcı İçerik Eleştirisi</span>
+              <span class="text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2 py-0.5 rounded-full font-mono uppercase">Debunk Studio</span>
+            </h3>
+            <p class="text-xs text-slate-400">Eleştirmek istediğiniz videoyu yükleyin, yalan söylenen kısmı kırpın ve uyarı çerçevesiyle zaman tüneline ekleyin.</p>
+          </div>
+        </div>
+        <button onclick="closeQuoteVideoModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="flex-1 overflow-y-auto pr-1 space-y-4 text-xs">
+        
+        <!-- SECTION 1: VIDEO SOURCE -->
+        <div class="p-3.5 bg-[#090d18] border border-slate-800 rounded-2xl space-y-3">
+          <div class="font-extrabold text-slate-200 flex items-center gap-2">
+            <i class="fa-solid fa-file-video text-rose-400"></i>
+            <span>1. Alıntı Yapılacak Video Kaynağı</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-400 font-semibold mb-1">Video Dosyası Yükle (.mp4, .webm)</label>
+              <input type="file" id="quote-input-video-file" accept="video/mp4,video/webm" onchange="handleQuoteVideoFileSelect(this.files[0])" class="w-full bg-[#050810] border border-slate-800 rounded-xl p-2 text-slate-300">
+            </div>
+            <div>
+              <label class="block text-slate-400 font-semibold mb-1">Veya Hazır Örnek Seçin</label>
+              <select id="quote-stock-select" onchange="handleQuoteStockSelect(this.value)" class="w-full bg-[#050810] border border-slate-800 rounded-xl p-2 text-slate-200">
+                <option value="">-- Dosya Yüklemesi Kullanılsın --</option>
+                <option value="broll/cosmic.mp4">🌌 Kozmik Uzay (cosmic.mp4)</option>
+                <option value="broll/clouds.mp4">☁️ Bulutlar (clouds.mp4)</option>
+                <option value="broll/ink.mp4">🖋️ Mürekkep Sanatı (ink.mp4)</option>
+                <option value="broll/waves.mp4">🌊 Okyanus Dalgaları (waves.mp4)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: INTERACTIVE VIDEO TRIMMER -->
+        <div class="p-3.5 bg-[#090d18] border border-slate-800 rounded-2xl space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="font-extrabold text-slate-200 flex items-center gap-2">
+              <i class="fa-solid fa-scissors text-rose-400"></i>
+              <span>2. Hassas Kırpıcı (İddianın Söylendiği Bölümü Seçin)</span>
+            </div>
+            <div id="quote-trim-duration-badge" class="font-mono text-amber-300 font-bold bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded text-[11px]">
+              Kırpılan Süre: 00:00.0 - 00:06.0 (6.0s)
+            </div>
+          </div>
+
+          <!-- Trimmer Video Player -->
+          <div class="relative rounded-2xl overflow-hidden bg-black flex justify-center max-h-56 border border-slate-800">
+            <video id="quote-trim-player" class="w-full max-h-56 object-contain" controls preload="metadata"></video>
+          </div>
+
+          <!-- Trimmer Range Controls -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-1">
+            <div class="bg-[#050810] p-2 rounded-xl border border-slate-800/80">
+              <label class="block text-slate-400 text-[10px] font-bold mb-1">Başlangıç (sn)</label>
+              <div class="flex items-center gap-1">
+                <input type="number" id="quote-trim-start" min="0" step="0.1" value="0.0" oninput="updateQuoteTrimTimes()" class="w-full bg-[#0a0f1d] border border-slate-800 rounded px-1.5 py-1 text-slate-200 font-mono text-xs">
+                <button type="button" onclick="setQuoteTrimInCurrent()" title="Videonun şu anki saniyesini başlangıç yap" class="px-2 py-1 bg-rose-950/80 hover:bg-rose-900 border border-rose-500/40 text-rose-300 font-bold rounded text-[10px] whitespace-nowrap">
+                  📍 Şu An
+                </button>
+              </div>
+            </div>
+
+            <div class="bg-[#050810] p-2 rounded-xl border border-slate-800/80">
+              <label class="block text-slate-400 text-[10px] font-bold mb-1">Bitiş (sn)</label>
+              <div class="flex items-center gap-1">
+                <input type="number" id="quote-trim-end" min="0.5" step="0.1" value="6.0" oninput="updateQuoteTrimTimes()" class="w-full bg-[#0a0f1d] border border-slate-800 rounded px-1.5 py-1 text-slate-200 font-mono text-xs">
+                <button type="button" onclick="setQuoteTrimOutCurrent()" title="Videonun şu anki saniyesini bitiş yap" class="px-2 py-1 bg-rose-950/80 hover:bg-rose-900 border border-rose-500/40 text-rose-300 font-bold rounded text-[10px] whitespace-nowrap">
+                  📍 Şu An
+                </button>
+              </div>
+            </div>
+
+            <div class="bg-[#050810] p-2 rounded-xl border border-slate-800/80 flex items-center justify-center">
+              <button type="button" onclick="playQuoteTrimmedRange()" class="w-full py-1.5 bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/40 text-indigo-200 font-extrabold rounded-lg transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-play text-xs text-indigo-400"></i> <span>Kesiti Oynat</span>
+              </button>
+            </div>
+
+            <div class="bg-[#050810] p-2 rounded-xl border border-slate-800/80 flex items-center justify-center">
+              <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 font-semibold select-none text-[11px]">
+                <input type="checkbox" id="quote-input-muted" class="accent-rose-500 rounded">
+                <span>Sessize Al</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: THEME & FRAME SELECTOR -->
+        <div class="p-3.5 bg-[#090d18] border border-slate-800 rounded-2xl space-y-3">
+          <div class="font-extrabold text-slate-200 flex items-center gap-2">
+            <i class="fa-solid fa-palette text-rose-400"></i>
+            <span>3. Çerçeve & Eleştiri Teması Seçimi</span>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+            <!-- Theme 1: Red Alert -->
+            <button type="button" onclick="selectQuoteTheme('red_alert')" id="quote-theme-card-red_alert" class="quote-theme-card p-2.5 rounded-xl border-2 border-rose-500 bg-rose-950/30 text-left transition space-y-1">
+              <div class="text-base text-rose-400"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              <div class="font-bold text-white text-[11px] leading-tight">Kırmızı Alarm</div>
+              <div class="text-[9px] text-slate-400">Yanıltıcı İçerik / Parlayan Kırmızı</div>
+            </button>
+
+            <!-- Theme 2: Social Phone -->
+            <button type="button" onclick="selectQuoteTheme('social_phone')" id="quote-theme-card-social_phone" class="quote-theme-card p-2.5 rounded-xl border border-slate-800 bg-[#060912] hover:border-slate-700 text-left transition space-y-1">
+              <div class="text-base text-purple-400"><i class="fa-solid fa-mobile-screen"></i></div>
+              <div class="font-bold text-white text-[11px] leading-tight">Telefon Mockup</div>
+              <div class="text-[9px] text-slate-400">TikTok / Reels Arayüzü</div>
+            </button>
+
+            <!-- Theme 3: News Broadcast -->
+            <button type="button" onclick="selectQuoteTheme('news_broadcast')" id="quote-theme-card-news_broadcast" class="quote-theme-card p-2.5 rounded-xl border border-slate-800 bg-[#060912] hover:border-slate-700 text-left transition space-y-1">
+              <div class="text-base text-red-500"><i class="fa-solid fa-bullhorn"></i></div>
+              <div class="font-bold text-white text-[11px] leading-tight">Haber / Arşiv</div>
+              <div class="text-[9px] text-slate-400">Son Dakika İddia Bandı</div>
+            </button>
+
+            <!-- Theme 4: Court Evidence -->
+            <button type="button" onclick="selectQuoteTheme('court_evidence')" id="quote-theme-card-court_evidence" class="quote-theme-card p-2.5 rounded-xl border border-slate-800 bg-[#060912] hover:border-slate-700 text-left transition space-y-1">
+              <div class="text-base text-amber-400"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div class="font-bold text-white text-[11px] leading-tight">Delil Dosyası</div>
+              <div class="text-[9px] text-slate-400">Hukuki / Delil #1 Kartı</div>
+            </button>
+
+            <!-- Theme 5: Minimal Card -->
+            <button type="button" onclick="selectQuoteTheme('minimal_card')" id="quote-theme-card-minimal_card" class="quote-theme-card p-2.5 rounded-xl border border-slate-800 bg-[#060912] hover:border-slate-700 text-left transition space-y-1">
+              <div class="text-base text-indigo-400"><i class="fa-solid fa-quote-left"></i></div>
+              <div class="font-bold text-white text-[11px] leading-tight">Alıntı Kartı</div>
+              <div class="text-[9px] text-slate-400">Şık Tırnak İşaretli Kart</div>
+            </button>
+          </div>
+          <input type="hidden" id="quote-selected-theme" value="red_alert">
+        </div>
+
+        <!-- SECTION 4: HEADER TEXT & QUICK TEMPLATES -->
+        <div class="p-3.5 bg-[#090d18] border border-slate-800 rounded-2xl space-y-3">
+          <div class="font-extrabold text-slate-200 flex items-center justify-between">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-heading text-rose-400"></i>
+              <span>4. Üst Uyarı Afişi & Hazır Şablonlar</span>
+            </span>
+            <span class="text-[10px] text-slate-400 font-normal">Tek tıkla hazır ifade seçebilirsiniz</span>
+          </div>
+
+          <!-- Quick Template Chips -->
+          <div class="flex flex-wrap gap-1.5">
+            <button type="button" onclick="setQuoteQuickTemplate('Arkadaşlar bu videoyu iyi izleyin...')" class="px-2.5 py-1 rounded-lg bg-rose-950/50 hover:bg-rose-900 border border-rose-500/30 text-rose-200 text-[11px] transition">
+              🔴 "Arkadaşlar bu videoyu iyi izleyin..."
+            </button>
+            <button type="button" onclick="setQuoteQuickTemplate('Sosyal medyada yayılan şu iddiaya bakın!')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] transition">
+              ⚠️ "Sosyal medyada yayılan şu iddiaya bakın!"
+            </button>
+            <button type="button" onclick="setQuoteQuickTemplate('Gelin bu iddiayı delilleriyle çürütelim:')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] transition">
+              🔎 "Gelin bu iddiayı delilleriyle çürütelim:"
+            </button>
+            <button type="button" onclick="setQuoteQuickTemplate('İddia edilen sözde gerçek:')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] transition">
+              ❌ "İddia edilen sözde gerçek:"
+            </button>
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-bold mb-1">Afiş Metni (Videonun üstünde büyük fontla görünür)</label>
+            <input type="text" id="quote-header-text" value="Arkadaşlar bu videoyu iyi izleyin..." class="w-full bg-[#050810] border border-slate-800 rounded-xl p-2.5 text-white font-bold text-sm">
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-400 font-semibold mb-1">İddia Başlığı / Konu (Alt Başlık)</label>
+              <input type="text" id="quote-subheader-text" placeholder="Örn: Evlilik ve nafaka hakkındaki asılsız iddia" class="w-full bg-[#050810] border border-slate-800 rounded-xl p-2 text-slate-300">
+            </div>
+            <div>
+              <label class="block text-slate-400 font-semibold mb-1">Kaynak / Konuşmacı Hesabı</label>
+              <input type="text" id="quote-author-tag" placeholder="Örn: @iddia_sahibi" class="w-full bg-[#050810] border border-slate-800 rounded-xl p-2 text-slate-300">
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 5: STAMP & TIMELINE SETTINGS -->
+        <div class="p-3.5 bg-[#090d18] border border-slate-800 rounded-2xl space-y-3">
+          <div class="font-extrabold text-slate-200 flex items-center gap-2">
+            <i class="fa-solid fa-stamp text-rose-400"></i>
+            <span>5. Damga Efekti & Zaman Tüneli Konumu</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 font-bold mb-1">Videonun Sonunda Basılacak Damga</label>
+              <select id="quote-stamp-select" class="w-full bg-[#050810] border border-slate-800 rounded-xl p-2 text-slate-200 font-bold">
+                <option value="yalan" selected>❌ YALAN / ÇÜRÜTÜLDÜ (Kırmızı Damga)</option>
+                <option value="iddia">⚠️ KANITSIZ İDDİA (Sarı Damga)</option>
+                <option value="carpitma">🔴 ÇARPITILMIŞ İÇERİK (Mor Damga)</option>
+                <option value="dikkat">🚨 YANILTICI BİLGİ (Kırmızı Alarm)</option>
+                <option value="none">Damgasız (Düz Bitiş)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1">Zaman Tüneline Giriş Zamanı (sn)</label>
+              <input type="number" id="quote-timeline-start" min="0" step="0.5" value="0.0" class="w-full bg-[#050810] border border-slate-800 rounded-xl p-2 text-slate-200 font-mono">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-3 border-t border-slate-800 flex items-center justify-between shrink-0">
+        <button onclick="closeQuoteVideoModal()" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold text-xs transition">
+          İptal
+        </button>
+        <button onclick="submitAddQuoteVideo()" id="btn-submit-quote-video" class="px-6 py-2.5 bg-gradient-to-r from-rose-600 via-red-600 to-amber-600 hover:from-rose-500 hover:to-amber-500 text-white font-extrabold rounded-xl transition flex items-center gap-2 shadow-lg shadow-rose-950/60">
+          <i class="fa-solid fa-quote-left"></i> <span>Alıntı Videoyu Zaman Tüneline Ekle</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= UNIFIED MEDIA STUDIO MODAL ================= -->
   <div id="modal-add-media" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
     <div class="bg-[#0d1322] border border-slate-700/80 rounded-3xl max-w-2xl w-full p-6 space-y-5 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
       
@@ -2873,6 +3121,7 @@
 
       renderRuler(totalWidth, pxPerSec);
       renderVideoTrack(pxPerSec);
+      renderQuoteTrack(pxPerSec);
       renderPipTrack(pxPerSec);
       renderOverlayTrack(pxPerSec);
       renderAudioTrack(totalWidth);
@@ -2982,6 +3231,54 @@
           };
           track.appendChild(transBtn);
         }
+      });
+    }
+
+    // ==========================================
+    // TRACK 1.4: QUOTE & DEBUNK VIDEO TRACK
+    // ==========================================
+    function renderQuoteTrack(pxPerSec) {
+      const track = document.getElementById('track-quote');
+      if (!track) return;
+      track.innerHTML = '';
+
+      const quotes = (videoData && videoData.quoteVideos) || [];
+      if (quotes.length === 0) {
+        track.innerHTML = '<span class="text-[10px] text-slate-500/70 italic px-3 select-none flex items-center gap-1.5"><i class="fa-solid fa-quote-left text-rose-900/60"></i> Alıntı video katmanı boş. Eleştiri klibi eklemek için "+ Alıntı Video" butonuna tıklayın.</span>';
+        return;
+      }
+
+      quotes.forEach((qv, idx) => {
+        const start = qv.timelineStart || 0;
+        const dur = qv.duration || Math.max(1, (qv.trimEnd || 6) - (qv.trimStart || 0));
+        const end = start + dur;
+        const left = start * pxPerSec;
+        const width = dur * pxPerSec;
+
+        const block = document.createElement('div');
+        block.className = 'absolute top-1 bottom-1 rounded-xl bg-gradient-to-r from-rose-950/90 via-slate-900 to-amber-950/80 border border-rose-500/60 flex items-center justify-between px-2 text-[10px] text-rose-200 shadow-md group cursor-pointer hover:border-rose-300 transition';
+        block.style.left = `${left}px`;
+        block.style.width = `${Math.max(90, width - 4)}px`;
+        block.title = `Alıntı: "${qv.headerText}" [${qv.trimStart}s - ${qv.trimEnd}s] (${qv.theme})`;
+
+        const themeIcon = qv.theme === 'red_alert' ? 'triangle-exclamation' : qv.theme === 'social_phone' ? 'mobile-screen' : qv.theme === 'news_broadcast' ? 'bullhorn' : qv.theme === 'court_evidence' ? 'scale-balanced' : 'quote-left';
+
+        block.innerHTML = `
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <i class="fa-solid fa-${themeIcon} text-rose-400 text-xs shrink-0"></i>
+            <div class="overflow-hidden">
+              <span class="font-bold text-white text-[10px] truncate block">${qv.headerText || 'Alıntı Klip'}</span>
+              <span class="text-[8px] text-rose-300 font-mono">${start.toFixed(1)}s - ${end.toFixed(1)}s (Kesit: ${qv.trimStart}s-${qv.trimEnd}s)</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 shrink-0 ml-1">
+            ${qv.stamp && qv.stamp !== 'none' ? `<span class="text-[8px] bg-red-600/80 text-white px-1 rounded uppercase font-extrabold font-mono">${qv.stamp}</span>` : ''}
+            <button onclick="event.stopPropagation(); deleteQuoteItem('${qv.id}')" title="Bu Alıntı Klibini Sil" class="w-5 h-5 rounded hover:bg-rose-900 text-slate-400 hover:text-white flex items-center justify-center text-[10px] transition">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        `;
+        track.appendChild(block);
       });
     }
 
@@ -3496,6 +3793,217 @@
     }
 
     // ==========================================
+    // ==========================================
+    // 5.4. QUOTE & DEBUNK VIDEO ACTIONS
+    // ==========================================
+    let quoteTrimObjectUrl = null;
+
+    function openQuoteVideoModal() {
+      const modal = document.getElementById('modal-quote-video');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+
+      // Set default timeline start time to current playhead
+      const tlStart = document.getElementById('quote-timeline-start');
+      if (tlStart) tlStart.value = playheadTime.toFixed(1);
+
+      // Default stock video if none loaded yet
+      const player = document.getElementById('quote-trim-player');
+      if (player && !player.src) {
+        player.src = '/public/broll/cosmic.mp4';
+      }
+      updateQuoteTrimTimes();
+    }
+
+    function closeQuoteVideoModal() {
+      const modal = document.getElementById('modal-quote-video');
+      if (modal) modal.classList.add('hidden');
+      const player = document.getElementById('quote-trim-player');
+      if (player) player.pause();
+    }
+
+    function handleQuoteVideoFileSelect(file) {
+      if (!file) return;
+      if (quoteTrimObjectUrl) URL.revokeObjectURL(quoteTrimObjectUrl);
+      quoteTrimObjectUrl = URL.createObjectURL(file);
+      const player = document.getElementById('quote-trim-player');
+      if (player) {
+        player.src = quoteTrimObjectUrl;
+        player.load();
+        player.onloadedmetadata = () => {
+          const dur = Math.min(6.0, player.duration || 6.0);
+          document.getElementById('quote-trim-start').value = '0.0';
+          document.getElementById('quote-trim-end').value = dur.toFixed(1);
+          updateQuoteTrimTimes();
+        };
+      }
+    }
+
+    function handleQuoteStockSelect(url) {
+      if (!url) return;
+      const player = document.getElementById('quote-trim-player');
+      if (player) {
+        player.src = url.startsWith('/') ? url : `/${url}`;
+        player.load();
+        player.onloadedmetadata = () => {
+          const dur = Math.min(6.0, player.duration || 6.0);
+          document.getElementById('quote-trim-start').value = '0.0';
+          document.getElementById('quote-trim-end').value = dur.toFixed(1);
+          updateQuoteTrimTimes();
+        };
+      }
+    }
+
+    function updateQuoteTrimTimes() {
+      const startIn = parseFloat(document.getElementById('quote-trim-start')?.value || 0);
+      const endIn = parseFloat(document.getElementById('quote-trim-end')?.value || 6);
+      const dur = Math.max(0.5, endIn - startIn);
+      const badge = document.getElementById('quote-trim-duration-badge');
+      if (badge) {
+        badge.innerText = `Kırpılan Süre: ${startIn.toFixed(1)}s - ${endIn.toFixed(1)}s (${dur.toFixed(1)}s)`;
+      }
+    }
+
+    function setQuoteTrimInCurrent() {
+      const player = document.getElementById('quote-trim-player');
+      if (!player) return;
+      const cur = player.currentTime || 0;
+      const startIn = document.getElementById('quote-trim-start');
+      if (startIn) startIn.value = cur.toFixed(1);
+      updateQuoteTrimTimes();
+    }
+
+    function setQuoteTrimOutCurrent() {
+      const player = document.getElementById('quote-trim-player');
+      if (!player) return;
+      const cur = player.currentTime || 0;
+      const endIn = document.getElementById('quote-trim-end');
+      if (endIn) endIn.value = cur.toFixed(1);
+      updateQuoteTrimTimes();
+    }
+
+    function playQuoteTrimmedRange() {
+      const player = document.getElementById('quote-trim-player');
+      if (!player) return;
+      const startIn = parseFloat(document.getElementById('quote-trim-start')?.value || 0);
+      const endIn = parseFloat(document.getElementById('quote-trim-end')?.value || 6);
+
+      player.currentTime = startIn;
+      player.play();
+
+      const checkTime = () => {
+        if (player.currentTime >= endIn) {
+          player.pause();
+          player.removeEventListener('timeupdate', checkTime);
+        }
+      };
+      player.addEventListener('timeupdate', checkTime);
+    }
+
+    function selectQuoteTheme(theme) {
+      document.getElementById('quote-selected-theme').value = theme;
+      const themes = ['red_alert', 'social_phone', 'news_broadcast', 'court_evidence', 'minimal_card'];
+      themes.forEach(t => {
+        const card = document.getElementById(`quote-theme-card-${t}`);
+        if (!card) return;
+        if (t === theme) {
+          card.className = 'quote-theme-card p-2.5 rounded-xl border-2 border-rose-500 bg-rose-950/30 text-left transition space-y-1 shadow-md';
+        } else {
+          card.className = 'quote-theme-card p-2.5 rounded-xl border border-slate-800 bg-[#060912] hover:border-slate-700 text-left transition space-y-1';
+        }
+      });
+    }
+
+    function setQuoteQuickTemplate(text) {
+      const inp = document.getElementById('quote-header-text');
+      if (inp) inp.value = text;
+    }
+
+    async function submitAddQuoteVideo() {
+      const fileInput = document.getElementById('quote-input-video-file');
+      const stockSel = document.getElementById('quote-stock-select')?.value;
+      const trimStart = parseFloat(document.getElementById('quote-trim-start')?.value || 0);
+      const trimEnd = parseFloat(document.getElementById('quote-trim-end')?.value || 6);
+      const timelineStart = parseFloat(document.getElementById('quote-timeline-start')?.value || 0);
+      const theme = document.getElementById('quote-selected-theme')?.value || 'red_alert';
+      const headerText = document.getElementById('quote-header-text')?.value || 'Arkadaşlar bu videoyu iyi izleyin...';
+      const subHeaderText = document.getElementById('quote-subheader-text')?.value || '';
+      const authorTag = document.getElementById('quote-author-tag')?.value || '';
+      const stamp = document.getElementById('quote-stamp-select')?.value || 'yalan';
+      const muted = document.getElementById('quote-input-muted')?.checked ?? false;
+
+      let videoUrl = '';
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('media_type', 'video');
+        showToast('Alıntı video yükleniyor...', 'info');
+        const upRes = await fetch('/api/media/upload', { method: 'POST', body: formData });
+        if (!upRes.ok) throw new Error('Video yüklenemedi');
+        const upData = await upRes.json();
+        videoUrl = upData.url;
+      } else if (stockSel) {
+        videoUrl = stockSel;
+      } else {
+        const player = document.getElementById('quote-trim-player');
+        if (player && player.src) {
+          videoUrl = player.src.replace(window.location.origin, '');
+        }
+      }
+
+      if (!videoUrl) {
+        return alert('Lütfen bir video dosyası seçin veya hazır B-Roll seçin.');
+      }
+
+      try {
+        const res = await fetch('/api/timeline/add-quote-video', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            videoUrl: videoUrl,
+            video_url: videoUrl,
+            trimStart: trimStart,
+            trim_start: trimStart,
+            trimEnd: trimEnd,
+            trim_end: trimEnd,
+            timelineStart: timelineStart,
+            timeline_start: timelineStart,
+            theme: theme,
+            headerText: headerText,
+            header_text: headerText,
+            subHeaderText: subHeaderText,
+            sub_header_text: subHeaderText,
+            authorTag: authorTag,
+            author_tag: authorTag,
+            stamp: stamp,
+            muted: muted
+          })
+        });
+        if (!res.ok) throw new Error('Alıntı video eklenemedi.');
+        showToast('Alıntı video başarıyla zaman tüneline eklendi!', 'success');
+        closeQuoteVideoModal();
+        await loadTimelineData();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    async function deleteQuoteItem(id) {
+      if (!confirm('Bu alıntı video klibini silmek istediğinize emin misiniz?')) return;
+      try {
+        const res = await fetch('/api/timeline/delete-media-item', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ item_type: 'quote', itemType: 'quote', item_id: id, itemId: id })
+        });
+        if (!res.ok) throw new Error('Alıntı klibi silinemedi');
+        showToast('Alıntı klip silindi', 'info');
+        await loadTimelineData();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
     // 5.5. UNIFIED MEDIA STUDIO ACTIONS & API INTEGRATION
     // ==========================================
     function openMediaModal(tab = 'video') {

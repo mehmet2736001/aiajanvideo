@@ -28,7 +28,8 @@ import { BRollOverlay } from './components/effects/BRollOverlay';
 import { PipSplitView } from './components/effects/PipSplitView';
 import { PipVideoOverlay } from './components/effects/PipVideoOverlay';
 import { PngOverlayLayer } from './components/effects/PngOverlayLayer';
-import { PipVideoItem, OverlayImageItem } from './types';
+import { QuoteVideoFrame } from './components/effects/QuoteVideoFrame';
+import { PipVideoItem, OverlayImageItem, QuoteVideoItem } from './types';
 import { VideoData } from './types';
 
 export const NotebookVideo: React.FC<VideoData> = (props) => {
@@ -61,6 +62,16 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
     }
     return list;
   }, [props.overlayImages, props.scenes]);
+
+  const allQuoteVideos = React.useMemo(() => {
+    const list: QuoteVideoItem[] = [...(props.quoteVideos || [])];
+    if (props.scenes) {
+      for (const sc of props.scenes) {
+        if (sc.quoteVideos) list.push(...sc.quoteVideos);
+      }
+    }
+    return list;
+  }, [props.quoteVideos, props.scenes]);
 
   // Load fonts
   const { fontFamily } = loadFont();
@@ -332,6 +343,7 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
         {/* 4.5. Floating PIP Video Katmanı & PNG Sticker / Watermark Katmanı */}
         <PipVideoOverlay pipVideos={allPipVideos} />
         <PngOverlayLayer overlayImages={allOverlayImages} />
+        <QuoteVideoFrame quoteVideos={allQuoteVideos} />
       </div>
 
       {/* 5. Cinematic Light Leaks (Faz 6) */}
