@@ -36,5 +36,23 @@
   ],
   "totalDuration": 10.0,
   "created_at": "2026-10-30 21:49:50",
-  "quoteVideos": []
+  "quoteVideos": [
+    {
+      "id": "quote_3e0487d8",
+      "videoUrl": "/public/uploads/elestiri_ornegi_3a6fdc05.mp4",
+      "trimStart": 1.0,
+      "trimEnd": 5.5,
+      "timelineStart": 2.0,
+      "timelineEnd": 6.5,
+      "duration": 4.5,
+      "theme": "red_alert",
+      "headerText": "Arkadaşlar bu videoyu iyi izleyin...",
+      "subHeaderText": "Sosyal medyada yayılan yanıltıcı iddia",
+      "authorTag": "@elestirilen_hesap",
+      "stamp": "yalan",
+      "volume": 1.0,
+      "muted": false,
+      "freezeAtEnd": false
+    }
+  ]
 }

@@ -267,6 +267,9 @@ export const QuoteVideoFrame: React.FC<QuoteVideoFrameProps> = ({ quoteVideos = 
                   endAt={trimEndFrame}
                   volume={qv.volume ?? 1.0}
                   muted={qv.muted ?? false}
+                  onError={(err) => {
+                    console.warn('Quote video playback warning:', err);
+                  }}
                   style={{
                     width: '100%',
                     height: '100%',

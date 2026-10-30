@@ -3797,6 +3797,7 @@
     // 5.4. QUOTE & DEBUNK VIDEO ACTIONS
     // ==========================================
     let quoteTrimObjectUrl = null;
+    let quoteSelectedFile = null;
 
     function openQuoteVideoModal() {
       const modal = document.getElementById('modal-quote-video');
@@ -3824,6 +3825,7 @@
 
     function handleQuoteVideoFileSelect(file) {
       if (!file) return;
+      quoteSelectedFile = file;
       if (quoteTrimObjectUrl) URL.revokeObjectURL(quoteTrimObjectUrl);
       quoteTrimObjectUrl = URL.createObjectURL(file);
       const player = document.getElementById('quote-trim-player');
@@ -3920,42 +3922,55 @@
     }
 
     async function submitAddQuoteVideo() {
-      const fileInput = document.getElementById('quote-input-video-file');
-      const stockSel = document.getElementById('quote-stock-select')?.value;
-      const trimStart = parseFloat(document.getElementById('quote-trim-start')?.value || 0);
-      const trimEnd = parseFloat(document.getElementById('quote-trim-end')?.value || 6);
-      const timelineStart = parseFloat(document.getElementById('quote-timeline-start')?.value || 0);
-      const theme = document.getElementById('quote-selected-theme')?.value || 'red_alert';
-      const headerText = document.getElementById('quote-header-text')?.value || 'Arkadaşlar bu videoyu iyi izleyin...';
-      const subHeaderText = document.getElementById('quote-subheader-text')?.value || '';
-      const authorTag = document.getElementById('quote-author-tag')?.value || '';
-      const stamp = document.getElementById('quote-stamp-select')?.value || 'yalan';
-      const muted = document.getElementById('quote-input-muted')?.checked ?? false;
-
-      let videoUrl = '';
-      if (fileInput && fileInput.files && fileInput.files[0]) {
-        const formData = new FormData();
-        formData.append('file', fileInput.files[0]);
-        formData.append('media_type', 'video');
-        showToast('Alıntı video yükleniyor...', 'info');
-        const upRes = await fetch('/api/media/upload', { method: 'POST', body: formData });
-        if (!upRes.ok) throw new Error('Video yüklenemedi');
-        const upData = await upRes.json();
-        videoUrl = upData.url;
-      } else if (stockSel) {
-        videoUrl = stockSel;
-      } else {
-        const player = document.getElementById('quote-trim-player');
-        if (player && player.src) {
-          videoUrl = player.src.replace(window.location.origin, '');
-        }
-      }
-
-      if (!videoUrl) {
-        return alert('Lütfen bir video dosyası seçin veya hazır B-Roll seçin.');
+      const btn = document.getElementById('btn-submit-quote-video');
+      const originalBtnText = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> <span>İşleniyor & Ekleniyor...</span>';
       }
 
       try {
+        const fileInput = document.getElementById('quote-input-video-file');
+        const stockSel = document.getElementById('quote-stock-select')?.value;
+        const trimStart = parseFloat(document.getElementById('quote-trim-start')?.value || 0);
+        const trimEnd = parseFloat(document.getElementById('quote-trim-end')?.value || 6);
+        const timelineStart = parseFloat(document.getElementById('quote-timeline-start')?.value || 0);
+        const theme = document.getElementById('quote-selected-theme')?.value || 'red_alert';
+        const headerText = document.getElementById('quote-header-text')?.value || 'Arkadaşlar bu videoyu iyi izleyin...';
+        const subHeaderText = document.getElementById('quote-subheader-text')?.value || '';
+        const authorTag = document.getElementById('quote-author-tag')?.value || '';
+        const stamp = document.getElementById('quote-stamp-select')?.value || 'yalan';
+        const muted = document.getElementById('quote-input-muted')?.checked ?? false;
+
+        const fileToUpload = (fileInput && fileInput.files && fileInput.files[0]) || quoteSelectedFile;
+        let videoUrl = '';
+
+        if (fileToUpload) {
+          const formData = new FormData();
+          formData.append('file', fileToUpload);
+          formData.append('media_type', 'video');
+          showToast('Alıntı video sunucuya aktarılıyor...', 'info');
+          const upRes = await fetch('/api/media/upload', { method: 'POST', body: formData });
+          if (!upRes.ok) {
+            const errData = await upRes.json().catch(() => ({}));
+            throw new Error('Video sunucuya yüklenemedi: ' + (errData.detail || upRes.statusText));
+          }
+          const upData = await upRes.json();
+          videoUrl = upData.url;
+        } else if (stockSel) {
+          videoUrl = stockSel;
+        } else {
+          const player = document.getElementById('quote-trim-player');
+          if (player && player.src && !player.src.startsWith('blob:')) {
+            videoUrl = player.src.replace(window.location.origin, '');
+          }
+        }
+
+        if (!videoUrl) {
+          if (btn) { btn.disabled = false; btn.innerHTML = originalBtnText; }
+          return alert('Lütfen bir video dosyası seçin veya hazır B-Roll seçin.');
+        }
+
         const res = await fetch('/api/timeline/add-quote-video', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -3979,12 +3994,25 @@
             muted: muted
           })
         });
-        if (!res.ok) throw new Error('Alıntı video eklenemedi.');
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error('Alıntı video eklenemedi: ' + (errData.detail || res.statusText));
+        }
+
         showToast('Alıntı video başarıyla zaman tüneline eklendi!', 'success');
         closeQuoteVideoModal();
+        quoteSelectedFile = null;
+        if (fileInput) fileInput.value = '';
         await loadTimelineData();
       } catch (e) {
+        showToast('Hata: ' + e.message, 'error');
         alert('Hata: ' + e.message);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = originalBtnText;
+        }
       }
     }
 
