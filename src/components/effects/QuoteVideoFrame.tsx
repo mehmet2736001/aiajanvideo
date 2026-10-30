@@ -93,25 +93,43 @@ export const QuoteVideoFrame: React.FC<QuoteVideoFrameProps> = ({ quoteVideos = 
         const stampScale = interpolate(stampSpring, [0, 1], [2.4, 1]);
         const stampOpacity = interpolate(stampSpring, [0, 0.4, 1], [0, 0.8, 1]);
 
-        // Frame dimensions (Default ~78% width for maximum punch & readability)
-        const containerWidth = qv.width || Math.min(width * 0.82, 880);
+        // Frame dimensions (If 9:16 vertical project, quote video is 9:16)
         const isVerticalAspect = width < height;
+        const is916 = isVerticalAspect;
+        const videoWidth = is916 ? Math.min(width * 0.74, 760) : (qv.width || Math.min(width * 0.82, 880));
+        const videoAspectRatio = is916 ? '9/16' : (qv.theme === 'social_phone' ? '9/16' : '16/9');
 
         return (
           <div
             key={qv.id || `quote_${startSec}`}
             style={{
               position: 'absolute',
-              width: containerWidth,
-              maxWidth: '92%',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
               opacity: currentOpacity,
-              transform: `scale(${currentScale})`,
+              backgroundColor: '#05070e', // 100% OPAQUE FULL SCREEN STUDIO: Hides notebook paper, theme, texts & subtitles!
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.85))',
+              justifyContent: 'center',
+              padding: is916 ? '40px 24px' : '24px 40px',
+              zIndex: 48,
             }}
           >
+            {/* Center Stage Container */}
+            <div
+              style={{
+                width: is916 ? '100%' : videoWidth,
+                maxWidth: '96%',
+                transform: `scale(${currentScale})`,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95))',
+              }}
+            >
             {/* 1. TOP CALLOUT BANNER ("Arkadaşlar bu videoyu iyi izleyin...") */}
             <div
               style={{
@@ -200,30 +218,35 @@ export const QuoteVideoFrame: React.FC<QuoteVideoFrameProps> = ({ quoteVideos = 
               )}
             </div>
 
-            {/* 2. THEMATIC FRAME CONTAINER */}
+            {/* 2. THEMATIC FRAME CONTAINER (9:16 Centered in Vertical Projects) */}
             <div
               style={{
-                width: '100%',
+                width: videoWidth,
+                aspectRatio: videoAspectRatio,
+                maxHeight: is916 ? '70vh' : '65vh',
                 position: 'relative',
-                borderRadius: qv.theme === 'social_phone' ? 44 : qv.theme === 'minimal_card' ? 24 : 20,
+                borderRadius: qv.theme === 'social_phone' ? 44 : qv.theme === 'minimal_card' ? 24 : 22,
                 overflow: 'hidden',
                 background: '#000000',
                 border:
                   qv.theme === 'red_alert'
-                    ? '4px solid #ef4444'
+                    ? '5px solid #ef4444'
                     : qv.theme === 'court_evidence'
-                    ? '4px solid #f59e0b'
+                    ? '5px solid #f59e0b'
                     : qv.theme === 'news_broadcast'
-                    ? '4px solid #f43f5e'
+                    ? '5px solid #f43f5e'
                     : qv.theme === 'social_phone'
                     ? '8px solid #1e293b'
-                    : '3px solid rgba(255, 255, 255, 0.2)',
+                    : '4px solid rgba(255, 255, 255, 0.25)',
                 boxShadow:
                   qv.theme === 'red_alert'
-                    ? '0 0 40px rgba(239, 68, 68, 0.65), inset 0 0 20px rgba(239, 68, 68, 0.25)'
+                    ? '0 0 50px rgba(239, 68, 68, 0.8), inset 0 0 25px rgba(239, 68, 68, 0.3)'
                     : qv.theme === 'court_evidence'
-                    ? '0 0 35px rgba(245, 158, 11, 0.5), inset 0 0 15px rgba(245, 158, 11, 0.2)'
-                    : '0 20px 40px rgba(0, 0, 0, 0.7)',
+                    ? '0 0 45px rgba(245, 158, 11, 0.65), inset 0 0 20px rgba(245, 158, 11, 0.25)'
+                    : '0 25px 60px rgba(0, 0, 0, 0.85)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               {/* Phone Mockup Top Speaker & Camera Notch */}
@@ -254,8 +277,7 @@ export const QuoteVideoFrame: React.FC<QuoteVideoFrameProps> = ({ quoteVideos = 
               <div
                 style={{
                   width: '100%',
-                  aspectRatio: qv.theme === 'social_phone' ? '9/16' : '16/9',
-                  maxHeight: isVerticalAspect ? '52vh' : '62vh',
+                  height: '100%',
                   background: '#05070e',
                   position: 'relative',
                   overflow: 'hidden',
@@ -404,7 +426,8 @@ export const QuoteVideoFrame: React.FC<QuoteVideoFrameProps> = ({ quoteVideos = 
               <span>🔊 {qv.muted ? 'Sessiz' : 'Orijinal Ses'}</span>
             </div>
           </div>
-        );
+        </div>
+      );
       })}
     </div>
   );

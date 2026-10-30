@@ -825,7 +825,7 @@
           </div>
 
           <!-- LIVE PREVIEW QUOTE VIDEO & DEBUNK OVERLAY (CapCut / Reaction Frame) -->
-          <div id="pv-quote-overlay" style="display: none; z-index: 28;" class="absolute inset-0 flex flex-col items-center justify-center p-3 bg-black/85 backdrop-blur-[2px] transition-all duration-200">
+          <div id="pv-quote-overlay" style="display: none; z-index: 28;" class="absolute inset-0 flex flex-col items-center justify-between p-2.5 bg-[#05070e] transition-all duration-200">
             <!-- Rendered dynamically by renderQuotePreviewOverlay() -->
           </div>
 
@@ -4643,6 +4643,7 @@
 
     function renderQuotePreviewOverlay() {
       const container = document.getElementById('pv-quote-overlay');
+      const notebookPreview = document.getElementById('notebook-preview');
       if (!container) return;
 
       const quotes = (videoData && videoData.quoteVideos) || [];
@@ -4659,7 +4660,15 @@
           if (livePlayer) livePlayer.pause();
           currentRenderedQuoteId = null;
         }
+        if (notebookPreview && notebookPreview.style.visibility === 'hidden') {
+          notebookPreview.style.visibility = 'visible';
+        }
         return;
+      }
+
+      // Hide notebook preview so that underlying theme, lines & texts are completely concealed
+      if (notebookPreview && notebookPreview.style.visibility !== 'hidden') {
+        notebookPreview.style.visibility = 'hidden';
       }
 
       const start = activeQuote.timelineStart || 0;
@@ -4705,27 +4714,35 @@
         container.style.display = 'flex';
         currentRenderedQuoteId = activeQuote.id;
 
+        const is916 = !videoData.format || videoData.format === '9:16' || videoData.format === 'portrait';
+        const frameAspectClass = is916 
+          ? 'w-[185px] h-[325px] aspect-[9/16]' 
+          : 'w-full max-w-[270px] aspect-video';
+
         container.innerHTML = `
-          <div class="w-full max-w-[280px] flex flex-col items-center select-none">
+          <div class="w-full h-full flex flex-col items-center justify-between py-1 select-none animate-fadeIn">
             
-            <!-- Callout Badge -->
-            <div id="pv-quote-badge" class="mb-1.5 px-2.5 py-0.5 ${badgeBg} text-white font-extrabold text-[9px] uppercase tracking-wider rounded-full shadow-md flex items-center gap-1">
-              ${badgeText}
+            <!-- Top Callout Area -->
+            <div class="flex flex-col items-center text-center w-full px-2">
+              <!-- Callout Badge -->
+              <div id="pv-quote-badge" class="mb-1 px-2.5 py-0.5 ${badgeBg} text-white font-extrabold text-[9px] uppercase tracking-wider rounded-full shadow-md flex items-center gap-1">
+                ${badgeText}
+              </div>
+
+              <!-- Header Banner Text -->
+              <div id="pv-quote-header" class="text-center font-extrabold text-white text-xs leading-snug drop-shadow-md px-1 line-clamp-2">
+                ${activeQuote.headerText || 'Arkadaşlar bu videoyu iyi izleyin...'}
+              </div>
+
+              <!-- Subheader / Author -->
+              <div id="pv-quote-meta" class="text-[9px] text-slate-300 font-mono mt-0.5 flex items-center gap-1.5 ${(!activeQuote.subHeaderText && !activeQuote.authorTag) ? 'hidden' : ''}">
+                <span id="pv-quote-sub">${activeQuote.subHeaderText || ''}</span>
+                <span id="pv-quote-author" class="text-cyan-300 bg-cyan-950/80 px-1 rounded ${!activeQuote.authorTag ? 'hidden' : ''}">${activeQuote.authorTag || ''}</span>
+              </div>
             </div>
 
-            <!-- Header Banner Text -->
-            <div id="pv-quote-header" class="text-center font-extrabold text-white text-xs leading-snug drop-shadow-md mb-1.5 px-1 line-clamp-2">
-              ${activeQuote.headerText || 'Arkadaşlar bu videoyu iyi izleyin...'}
-            </div>
-
-            <!-- Subheader / Author -->
-            <div id="pv-quote-meta" class="text-[9px] text-slate-300 font-mono mb-1.5 flex items-center gap-1.5 ${(!activeQuote.subHeaderText && !activeQuote.authorTag) ? 'hidden' : ''}">
-              <span id="pv-quote-sub">${activeQuote.subHeaderText || ''}</span>
-              <span id="pv-quote-author" class="text-cyan-300 bg-cyan-950/80 px-1 rounded ${!activeQuote.authorTag ? 'hidden' : ''}">${activeQuote.authorTag || ''}</span>
-            </div>
-
-            <!-- Thematic Frame Container -->
-            <div class="relative w-full aspect-video bg-black rounded-xl overflow-hidden ${frameBorder}">
+            <!-- Centered 9:16 Thematic Frame Container -->
+            <div class="relative ${frameAspectClass} bg-black rounded-2xl overflow-hidden ${frameBorder} flex items-center justify-center my-auto shadow-2xl">
               <video id="pv-quote-live-player" src="${resolvedVideoUrl}" muted playsinline class="w-full h-full object-cover"></video>
               
               <!-- Animated Stamp Element -->
@@ -4742,7 +4759,7 @@
             </div>
 
             <!-- Bottom Time & Control Pill -->
-            <div class="mt-2 flex items-center gap-2 px-2.5 py-0.5 bg-slate-900/90 border border-slate-700/80 rounded-full text-[9px] font-mono text-slate-300">
+            <div class="flex items-center gap-2 px-2.5 py-0.5 bg-slate-900/95 border border-slate-700/80 rounded-full text-[9px] font-mono text-slate-300 shrink-0">
               <span id="pv-quote-timer" class="text-rose-400 font-bold">⏱️ ${elapsed.toFixed(1)}s / ${dur.toFixed(1)}s</span>
               <span>·</span>
               <span>Kesit: ${activeQuote.trimStart}s - ${activeQuote.trimEnd}s</span>

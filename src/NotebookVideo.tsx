@@ -343,8 +343,10 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
         {/* 4.5. Floating PIP Video Katmanı & PNG Sticker / Watermark Katmanı */}
         <PipVideoOverlay pipVideos={allPipVideos} />
         <PngOverlayLayer overlayImages={allOverlayImages} />
-        <QuoteVideoFrame quoteVideos={allQuoteVideos} />
       </div>
+
+      {/* 4.8. Debunk / Reaction Quote Video Frame (Full-Screen Studio Stage Overlay) */}
+      <QuoteVideoFrame quoteVideos={allQuoteVideos} />
 
       {/* 5. Cinematic Light Leaks (Faz 6) */}
       <LightLeaksOverlay
