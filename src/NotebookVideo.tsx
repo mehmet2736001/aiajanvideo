@@ -26,6 +26,9 @@ import { LightLeaksOverlay } from './components/effects/LightLeaksOverlay';
 import { HanddrawnAccents } from './components/effects/HanddrawnAccents';
 import { BRollOverlay } from './components/effects/BRollOverlay';
 import { PipSplitView } from './components/effects/PipSplitView';
+import { PipVideoOverlay } from './components/effects/PipVideoOverlay';
+import { PngOverlayLayer } from './components/effects/PngOverlayLayer';
+import { PipVideoItem, OverlayImageItem } from './types';
 import { VideoData } from './types';
 
 export const NotebookVideo: React.FC<VideoData> = (props) => {
@@ -37,6 +40,27 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
 
   const isRTL = props.isRTL || props.direction === 'rtl' || props.language === 'ar';
 
+
+  // Collect all PIP videos & PNG overlays from props and individual scenes
+  const allPipVideos = React.useMemo(() => {
+    const list: PipVideoItem[] = [...(props.pipVideos || [])];
+    if (props.scenes) {
+      for (const sc of props.scenes) {
+        if (sc.pipVideos) list.push(...sc.pipVideos);
+      }
+    }
+    return list;
+  }, [props.pipVideos, props.scenes]);
+
+  const allOverlayImages = React.useMemo(() => {
+    const list: OverlayImageItem[] = [...(props.overlayImages || [])];
+    if (props.scenes) {
+      for (const sc of props.scenes) {
+        if (sc.overlayImages) list.push(...sc.overlayImages);
+      }
+    }
+    return list;
+  }, [props.overlayImages, props.scenes]);
 
   // Load fonts
   const { fontFamily } = loadFont();
@@ -304,6 +328,10 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
           theme={activeTheme}
           isRTL={isRTL}
         />
+
+        {/* 4.5. Floating PIP Video Katmanı & PNG Sticker / Watermark Katmanı */}
+        <PipVideoOverlay pipVideos={allPipVideos} />
+        <PngOverlayLayer overlayImages={allOverlayImages} />
       </div>
 
       {/* 5. Cinematic Light Leaks (Faz 6) */}
@@ -331,16 +359,35 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
         })}
 
       {/* 1. Primary Spoken Voiceover */}
-      {props.audioUrl && (
+      {props.audioUrl && !props.audioMuted && (
         <Audio
           src={
             props.audioUrl.startsWith('http://') || props.audioUrl.startsWith('https://')
               ? props.audioUrl
               : staticFile(props.audioUrl.replace(/^\/?(public\/)?/, ''))
           }
-          volume={1.0}
+          volume={props.audioVolume ?? 1.0}
         />
       )}
+
+      {/* 1.5 Additional Audio Tracks (Extracted / Multi-track) */}
+      {props.audioTracks && props.audioTracks.map((trk) => {
+        if (trk.muted) return null;
+        const fromFrame = Math.round((trk.startTime || 0) * fps);
+        const durFrame = Math.max(1, Math.round(((trk.endTime || (durationInFrames / fps)) - (trk.startTime || 0)) * fps));
+        return (
+          <Sequence key={trk.id} from={fromFrame} durationInFrames={durFrame}>
+            <Audio
+              src={
+                trk.audioUrl.startsWith('http://') || trk.audioUrl.startsWith('https://')
+                  ? trk.audioUrl
+                  : staticFile(trk.audioUrl.replace(/^\/?(public\/)?/, ''))
+              }
+              volume={trk.volume ?? 1.0}
+            />
+          </Sequence>
+        );
+      })}
 
       {/* 2. Background Ambient Music Bed with Smart Auto-Ducking 2.0 (Faz 7) */}
       <Audio

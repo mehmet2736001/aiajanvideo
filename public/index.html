@@ -1019,7 +1019,7 @@
   </div>
 
   <!-- ================= BOTTOM MULTI-TRACK TIMELINE (ZAMAN TÜNELİ) ================= -->
-  <footer class="h-64 border-t border-slate-800/80 bg-[#0b101c] flex flex-col shrink-0 z-40 select-none">
+  <footer class="h-80 border-t border-slate-800/80 bg-[#0b101c] flex flex-col shrink-0 z-40 select-none">
     
     <!-- TIMELINE TOOLBAR -->
     <div class="h-10 border-b border-slate-800 px-4 flex items-center justify-between bg-[#080c14] text-xs">
@@ -1039,10 +1039,25 @@
         <button onclick="addNewSceneToTimeline()" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-emerald-400 font-semibold transition flex items-center gap-1">
           <i class="fa-solid fa-plus"></i> <span>Sahne Ekle</span>
         </button>
-        <label class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-cyan-400 font-semibold transition flex items-center gap-1 cursor-pointer">
-          <i class="fa-solid fa-microphone"></i> <span>+ Ses Ekle</span>
-          <input type="file" accept="audio/*" class="hidden" onchange="uploadTimelineAudioFile(this.files[0])">
-        </label>
+        <div class="h-4 w-[1px] bg-slate-800 mx-0.5"></div>
+        <button onclick="openMediaModal('video')" title="Video veya B-Roll Ekle" class="px-2.5 py-1 rounded-lg bg-indigo-950/70 hover:bg-indigo-900 border border-indigo-500/40 text-indigo-300 font-semibold transition flex items-center gap-1">
+          <i class="fa-solid fa-film text-indigo-400"></i> <span>+ Video</span>
+        </button>
+        <button onclick="openMediaModal('image')" title="Görsel / Fotoğraf Ekle" class="px-2.5 py-1 rounded-lg bg-amber-950/70 hover:bg-amber-900 border border-amber-500/40 text-amber-300 font-semibold transition flex items-center gap-1">
+          <i class="fa-solid fa-image text-amber-400"></i> <span>+ Görsel</span>
+        </button>
+        <button onclick="openMediaModal('pip')" title="Picture-in-Picture Video Katmanı Ekle" class="px-2.5 py-1 rounded-lg bg-purple-950/80 hover:bg-purple-900 border border-purple-500/50 text-purple-300 font-semibold transition flex items-center gap-1 shadow-sm">
+          <i class="fa-solid fa-clone text-purple-400"></i> <span>+ PIP Video</span>
+        </button>
+        <button onclick="openMediaModal('png')" title="PNG Sticker, Logo veya Watermark Ekle" class="px-2.5 py-1 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/50 text-emerald-300 font-semibold transition flex items-center gap-1 shadow-sm">
+          <i class="fa-solid fa-stamp text-emerald-400"></i> <span>+ PNG</span>
+        </button>
+        <button onclick="openMediaModal('audio')" title="Ses / Vokal Parçası Ekle" class="px-2.5 py-1 rounded-lg bg-cyan-950/70 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 font-semibold transition flex items-center gap-1">
+          <i class="fa-solid fa-microphone text-cyan-400"></i> <span>+ Ses</span>
+        </button>
+        <button onclick="openMediaModal('audio-tools')" title="Videodan Sesi Çıkar / Sessize Al / Sesi Sil" class="px-2.5 py-1 rounded-lg bg-rose-950/70 hover:bg-rose-900 border border-rose-500/50 text-rose-300 font-semibold transition flex items-center gap-1 shadow-sm">
+          <i class="fa-solid fa-scissors text-rose-400"></i> <span>✂️ Ses İşlemleri</span>
+        </button>
       </div>
 
       <!-- Center: Playhead Indicator -->
@@ -1071,27 +1086,47 @@
         <div class="h-6 border-b border-slate-800/60 px-3 flex items-center text-slate-500 font-mono text-[10px]">
           TRACKS
         </div>
+        <!-- 1. Video Sahneleri -->
         <div class="h-14 border-b border-slate-800/60 px-3 flex items-center justify-between">
-          <span class="flex items-center gap-1.5 text-slate-200">
+          <span class="flex items-center gap-1.5 text-slate-200 font-medium">
             <i class="fa-solid fa-film text-indigo-400"></i> Video
           </span>
-          <span class="text-[9px] bg-indigo-500/10 text-indigo-300 px-1 rounded font-mono">AI S1</span>
+          <span class="text-[9px] bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded font-mono font-bold">ANA</span>
         </div>
-        <div class="h-12 border-b border-slate-800/60 px-3 flex items-center justify-between">
-          <span class="flex items-center gap-1.5 text-slate-200">
-            <i class="fa-solid fa-volume-high text-emerald-400"></i> Ses
+        <!-- 2. PIP Video Katmanı -->
+        <div class="h-10 border-b border-slate-800/60 px-3 flex items-center justify-between">
+          <span class="flex items-center gap-1.5 text-purple-300 font-medium">
+            <i class="fa-solid fa-clone text-purple-400"></i> PIP Video
           </span>
-          <span class="text-[9px] bg-emerald-500/10 text-emerald-300 px-1 rounded font-mono">WAV</span>
+          <span class="text-[9px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded font-mono font-bold">PIP</span>
         </div>
+        <!-- 3. PNG & Sticker Katmanı -->
         <div class="h-9 border-b border-slate-800/60 px-3 flex items-center justify-between">
-          <span class="flex items-center gap-1.5 text-slate-300">
+          <span class="flex items-center gap-1.5 text-emerald-300 font-medium">
+            <i class="fa-solid fa-stamp text-emerald-400"></i> PNG & Logo
+          </span>
+          <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-mono font-bold">PNG</span>
+        </div>
+        <!-- 4. Ses & Vokal -->
+        <div class="h-12 border-b border-slate-800/60 px-3 flex items-center justify-between">
+          <span class="flex items-center gap-1.5 text-slate-200 font-medium">
+            <i class="fa-solid fa-volume-high text-cyan-400"></i> Ses
+          </span>
+          <span class="text-[9px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded font-mono font-bold">WAV</span>
+        </div>
+        <!-- 5. FX & Foto -->
+        <div class="h-9 border-b border-slate-800/60 px-3 flex items-center justify-between">
+          <span class="flex items-center gap-1.5 text-slate-300 font-medium">
             <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> FX & Foto
           </span>
+          <span class="text-[9px] bg-amber-500/10 text-amber-300 px-1 rounded font-mono">FX</span>
         </div>
+        <!-- 6. Altyazı -->
         <div class="h-9 px-3 flex items-center justify-between">
-          <span class="flex items-center gap-1.5 text-slate-300">
+          <span class="flex items-center gap-1.5 text-slate-300 font-medium">
             <i class="fa-solid fa-closed-captioning text-cyan-400"></i> Altyazı
           </span>
+          <span class="text-[9px] bg-cyan-500/10 text-cyan-300 px-1 rounded font-mono">SUB</span>
         </div>
       </div>
 
@@ -1116,17 +1151,27 @@
             <!-- Scene clips rendered via JS -->
           </div>
 
-          <!-- TRACK 2: SES & DALGA FORMU (H: 48px) -->
+          <!-- TRACK 2: PIP VIDEO KATMANI (H: 40px) -->
+          <div id="track-pip" class="h-10 border-b border-slate-800/60 relative p-1 flex items-center bg-[#080a18]/50">
+            <!-- PIP Video items rendered via JS -->
+          </div>
+
+          <!-- TRACK 3: PNG & STICKER KATMANI (H: 36px) -->
+          <div id="track-overlay" class="h-9 border-b border-slate-800/60 relative p-1 flex items-center bg-[#061210]/40">
+            <!-- PNG Sticker items rendered via JS -->
+          </div>
+
+          <!-- TRACK 4: SES & DALGA FORMU (H: 48px) -->
           <div id="track-audio" class="h-12 border-b border-slate-800/60 relative p-1 flex items-center bg-[#050810]/50">
             <!-- Audio waveform track rendered via JS -->
           </div>
 
-          <!-- TRACK 3: FX & ANİMASYON KATMANI (H: 36px) -->
+          <!-- TRACK 5: FX & ANİMASYON KATMANI (H: 36px) -->
           <div id="track-fx" class="h-9 border-b border-slate-800/60 relative p-1 flex items-center bg-[#070b14]/50">
             <!-- FX blocks rendered via JS -->
           </div>
 
-          <!-- TRACK 4: ALTYAZI KATMANI (H: 36px) -->
+          <!-- TRACK 6: ALTYAZI KATMANI (H: 36px) -->
           <div id="track-subtitles" class="h-9 relative p-1 flex items-center bg-[#050810]/50">
             <!-- Word chips rendered via JS -->
           </div>
@@ -1674,6 +1719,347 @@
   </div>
 
   <!-- ================= GLOBAL TOAST NOTIFICATION CONTAINER ================= -->
+    <!-- ================= UNIFIED MEDIA STUDIO MODAL ================= -->
+  <div id="modal-add-media" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0d1322] border border-slate-700/80 rounded-3xl max-w-2xl w-full p-6 space-y-5 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-base">
+            <i class="fa-solid fa-photo-film"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-white text-base leading-tight">Medya & Katman Stüdyosu</h3>
+            <p class="text-xs text-slate-400">Video, Görsel, PIP, Şeffaf PNG & Ses İşlemleri</p>
+          </div>
+        </div>
+        <button onclick="closeMediaModal()" class="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="flex items-center gap-1.5 p-1 bg-[#070a12] border border-slate-800/80 rounded-2xl overflow-x-auto shrink-0 text-xs font-bold">
+        <button id="media-tab-btn-video" onclick="switchMediaTab('video')" class="px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 bg-indigo-600 text-white shadow">
+          <i class="fa-solid fa-film"></i> <span>Video Ekle</span>
+        </button>
+        <button id="media-tab-btn-image" onclick="switchMediaTab('image')" class="px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-image"></i> <span>Görsel / Foto</span>
+        </button>
+        <button id="media-tab-btn-pip" onclick="switchMediaTab('pip')" class="px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-clone"></i> <span>PIP Video</span>
+        </button>
+        <button id="media-tab-btn-png" onclick="switchMediaTab('png')" class="px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-stamp"></i> <span>PNG / Sticker</span>
+        </button>
+        <button id="media-tab-btn-audio" onclick="switchMediaTab('audio')" class="px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-scissors"></i> <span>Ses & Çıkarma</span>
+        </button>
+      </div>
+
+      <!-- Tab Panes Container -->
+      <div class="flex-1 overflow-y-auto pr-1 space-y-4 text-xs">
+
+        <!-- TAB 1: VIDEO EKLE -->
+        <div id="media-tab-pane-video" class="space-y-4">
+          <div class="p-3 bg-indigo-950/20 border border-indigo-500/30 rounded-2xl text-indigo-300">
+            <i class="fa-solid fa-info-circle mr-1"></i> Arka plan videosu (B-Roll) veya sahneye özel MP4/WebM klip ekleyin.
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-bold mb-1.5">Video Dosyası Yükle (.mp4, .webm)</label>
+            <input type="file" id="media-input-video-file" accept="video/mp4,video/webm" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-300">
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-bold mb-1.5">Veya Hazır Atmosferik B-Roll Seçin</label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 cursor-pointer hover:border-indigo-500/60 transition">
+                <input type="radio" name="stock-broll" value="broll/cosmic.mp4" class="accent-indigo-500">
+                <span>🌌 Kozmik Uzay (cosmic.mp4)</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 cursor-pointer hover:border-indigo-500/60 transition">
+                <input type="radio" name="stock-broll" value="broll/clouds.mp4" class="accent-indigo-500">
+                <span>☁️ Bulutlar (clouds.mp4)</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 cursor-pointer hover:border-indigo-500/60 transition">
+                <input type="radio" name="stock-broll" value="broll/ink.mp4" class="accent-indigo-500">
+                <span>🖋️ Mürekkep Sanatı (ink.mp4)</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 cursor-pointer hover:border-indigo-500/60 transition">
+                <input type="radio" name="stock-broll" value="broll/waves.mp4" class="accent-indigo-500">
+                <span>🌊 Okyanus Dalgaları (waves.mp4)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Uygulama Hedefi</label>
+              <select id="media-video-target" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+                <option value="scene">Yalnızca Aktif Sahneye Ata</option>
+                <option value="all">Tüm Proje Arka Plan Videosu</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Yerleşim Stili</label>
+              <select id="media-video-fit" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+                <option value="cover">Tam Ekran Kaplama (Cover)</option>
+                <option value="contain">En-Boy Oranını Koru (Contain)</option>
+              </select>
+            </div>
+          </div>
+
+          <button onclick="submitAddVideo()" id="btn-submit-add-video" class="w-full py-2.5 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-extrabold rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+            <i class="fa-solid fa-film"></i> <span>Videoyu Sahnede Kullan</span>
+          </button>
+        </div>
+
+        <!-- TAB 2: GÖRSEL / FOTOĞRAF EKLE -->
+        <div id="media-tab-pane-image" class="hidden space-y-4">
+          <div class="p-3 bg-amber-950/20 border border-amber-500/30 rounded-2xl text-amber-300">
+            <i class="fa-solid fa-info-circle mr-1"></i> Sahneye özel illüstrasyon, fotoğraf veya belge görseli ekleyin.
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-bold mb-1.5">Görsel Dosyası Yükle (.jpg, .png, .webp)</label>
+            <input type="file" id="media-input-image-file" accept="image/*" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-300">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Hedef Sahne</label>
+              <select id="media-image-scene-target" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+                <!-- Filled dynamically via JS -->
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Çerçeve & Görünüm Stili</label>
+              <select id="media-image-style" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+                <option value="polaroid">Polaroid Çerçeve (Vintage Kart)</option>
+                <option value="torn_paper">Yırtık Eski Kağıt (Antik Belge)</option>
+                <option value="clean_frame">Modern Temiz Çerçeve</option>
+                <option value="fullscreen">Tam Ekran Arka Plan</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-bold mb-1.5">Görsel Altı Başlığı (İsteğe bağlı)</label>
+            <input type="text" id="media-image-caption" placeholder="Örn: Klasik Fıkıh Eseri el-Mebsût" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+          </div>
+
+          <button onclick="submitAddIllustration()" id="btn-submit-add-image" class="w-full py-2.5 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-extrabold rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+            <i class="fa-solid fa-image"></i> <span>Görseli Sahneye Ata</span>
+          </button>
+        </div>
+
+        <!-- TAB 3: PIP (PICTURE-IN-PICTURE) VIDEO EKLE -->
+        <div id="media-tab-pane-pip" class="hidden space-y-4">
+          <div class="p-3 bg-purple-950/20 border border-purple-500/30 rounded-2xl text-purple-300">
+            <i class="fa-solid fa-clone mr-1"></i> Ana videonun üzerine yüzen konuşmacı, tepki kamerası veya detay videosu ekleyin.
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-bold mb-1.5">PIP Video Dosyası Seç (.mp4, .webm)</label>
+            <input type="file" id="media-input-pip-file" accept="video/mp4,video/webm" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-300">
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-bold mb-1.5">Veya Hazır Video Seçin</label>
+            <select id="media-pip-stock-select" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+              <option value="">-- Dosya Yüklemesi Kullanılsın --</option>
+              <option value="broll/cosmic.mp4">🌌 Kozmik Uzay (cosmic.mp4)</option>
+              <option value="broll/clouds.mp4">☁️ Bulutlar (clouds.mp4)</option>
+              <option value="broll/ink.mp4">🖋️ Mürekkep Sanatı (ink.mp4)</option>
+              <option value="broll/waves.mp4">🌊 Okyanus Dalgaları (waves.mp4)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">PIP Çerçeve Şekli</label>
+              <select id="media-pip-shape" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+                <option value="circle">Daire (Circle - Konuşmacı / Reaction Cam)</option>
+                <option value="phone">Telefon Mockup (iPhone Çerçeveli)</option>
+                <option value="rounded">Modern Yuvarlatılmış Kart</option>
+                <option value="rectangle">Düz Dikdörtgen</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Ekran Konumu</label>
+              <select id="media-pip-position" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+                <option value="top-right">Sağ Üst (Top-Right)</option>
+                <option value="top-left">Sol Üst (Top-Left)</option>
+                <option value="bottom-right">Sağ Alt (Bottom-Right)</option>
+                <option value="bottom-left">Sol Alt (Bottom-Left)</option>
+                <option value="center">Ortalanmış (Center)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Başlangıç (sn)</label>
+              <input type="number" id="media-pip-start" min="0" step="0.5" value="0.0" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200 font-mono">
+            </div>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Süre (sn)</label>
+              <input type="number" id="media-pip-dur" min="1" step="0.5" value="6.0" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200 font-mono">
+            </div>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Genişlik (%)</label>
+              <select id="media-pip-width" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+                <option value="28%">Küçük (%28)</option>
+                <option value="36%" selected>Orta (%36)</option>
+                <option value="48%">Geniş (%48)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 p-3 bg-slate-900/60 rounded-xl border border-slate-800">
+            <label class="flex items-center gap-2 cursor-pointer text-slate-300 font-semibold">
+              <input type="checkbox" id="media-pip-mute" checked class="accent-purple-500 rounded">
+              <span>PIP Videosunu Sessize Al (Ana Sesle Çakışmasın)</span>
+            </label>
+          </div>
+
+          <button onclick="submitAddPipVideo()" id="btn-submit-add-pip" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+            <i class="fa-solid fa-clone"></i> <span>PIP Videoyu Zaman Tüneline Ekle</span>
+          </button>
+        </div>
+
+        <!-- TAB 4: PNG / STICKER / LOGO OVERLAY EKLE -->
+        <div id="media-tab-pane-png" class="hidden space-y-4">
+          <div class="p-3 bg-emerald-950/20 border border-emerald-500/30 rounded-2xl text-emerald-300">
+            <i class="fa-solid fa-stamp mr-1"></i> Şeffaf PNG formatında logo, filigran, emoji veya rozet ekleyin.
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-bold mb-1.5">Şeffaf PNG Dosyası Yükle (.png)</label>
+            <input type="file" id="media-input-png-file" accept="image/png,image/webp" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-300">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Giriş Animasyonu</label>
+              <select id="media-png-anim" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+                <option value="bounce">Yaylı Zıplama (Spring Bounce)</option>
+                <option value="fade">Yumuşak Karararak Açılma (Fade)</option>
+                <option value="slide_up">Aşağıdan Yukarı Kayma (Slide Up)</option>
+                <option value="spin">Dönerek Giriş (Spin)</option>
+                <option value="none">Animasyonsuz (Sabit)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Konum</label>
+              <select id="media-png-position" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200">
+                <option value="top-right">Sağ Üst (Logo Konumu)</option>
+                <option value="top-left">Sol Üst</option>
+                <option value="bottom-right">Sağ Alt</option>
+                <option value="bottom-left">Sol Alt</option>
+                <option value="center">Tam Orta</option>
+                <option value="bottom-center">Alt Orta (Rozet / Bilgi)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Başlangıç (sn)</label>
+              <input type="number" id="media-png-start" min="0" step="0.5" value="0.0" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200 font-mono">
+            </div>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Süre (sn)</label>
+              <input type="number" id="media-png-dur" min="1" step="0.5" value="5.0" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200 font-mono">
+            </div>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1.5">Boyut (px)</label>
+              <input type="number" id="media-png-width" min="40" max="600" step="10" value="180" class="w-full bg-[#080d18] border border-slate-800 rounded-xl p-2 text-slate-200 font-mono">
+            </div>
+          </div>
+
+          <button onclick="submitAddPngOverlay()" id="btn-submit-add-png" class="w-full py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+            <i class="fa-solid fa-stamp"></i> <span>PNG Katmanını Zaman Tüneline Ekle</span>
+          </button>
+        </div>
+
+        <!-- TAB 5: SES VE VOKAL İŞLEMLERİ (EXTRACT / MUTE / DELETE) -->
+        <div id="media-tab-pane-audio" class="hidden space-y-4">
+          
+          <!-- Section A: Extract Audio from Video -->
+          <div class="p-4 bg-[#080d1a] border border-cyan-500/30 rounded-2xl space-y-3">
+            <div class="flex items-center gap-2 text-cyan-300 font-extrabold text-sm">
+              <i class="fa-solid fa-file-audio text-cyan-400"></i>
+              <span>1. Videodan Ses Çıkar (FFmpeg Audio Extraction)</span>
+            </div>
+            <p class="text-slate-400 text-xs leading-relaxed">
+              Herhangi bir MP4/WebM videonun sesini FFmpeg ile doğrudan ayıklayarak otomatik olarak projenizin ana ses parçası ve zaman tüneli dalga formu haline getirin.
+            </p>
+            <div>
+              <label class="block text-slate-300 font-bold mb-1">Video Dosyası Yükle (.mp4, .webm)</label>
+              <input type="file" id="media-input-extract-file" accept="video/mp4,video/webm" class="w-full bg-[#050810] border border-slate-800 rounded-xl p-2 text-slate-300">
+            </div>
+            <button onclick="submitExtractAudioFromVideo()" id="btn-submit-extract-audio" class="w-full py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-extrabold rounded-xl transition flex items-center justify-center gap-2 shadow">
+              <i class="fa-solid fa-scissors"></i> <span>Videodan Sesi Çıkar ve Zaman Tüneline Ata</span>
+            </button>
+          </div>
+
+          <!-- Section B: Mute / Unmute & Delete -->
+          <div class="p-4 bg-[#080d1a] border border-rose-500/30 rounded-2xl space-y-3">
+            <div class="flex items-center gap-2 text-rose-300 font-extrabold text-sm">
+              <i class="fa-solid fa-sliders text-rose-400"></i>
+              <span>2. Sesi Yönet (Sessize Al / Sesi Sil)</span>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+              <div>
+                <div class="font-bold text-white text-xs" id="media-audio-status-text">Ses Durumu: Aktif (Ses Çalıyor)</div>
+                <div class="text-[10px] text-slate-400 font-mono">Render edilen videoda sesin açık/kapalı olmasını belirler.</div>
+              </div>
+              <button onclick="toggleAudioMute()" id="btn-toggle-mute-modal" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition">
+                🔇 Sessize Al
+              </button>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-rose-950/20 rounded-xl border border-rose-900/40">
+              <div>
+                <div class="font-bold text-rose-300 text-xs">Mevcut Sesi Projeden Kaldır</div>
+                <div class="text-[10px] text-slate-400">Ses dosyasını ve zamanlanmış kelimeleri sıfırlar.</div>
+              </div>
+              <button onclick="deleteMediaAudio()" class="px-3 py-1.5 bg-rose-900/60 hover:bg-rose-800 text-rose-200 font-bold rounded-xl transition">
+                <i class="fa-solid fa-trash-can mr-1"></i> Sesi Sil
+              </button>
+            </div>
+          </div>
+
+          <!-- Section C: Upload New Voiceover Audio -->
+          <div class="p-4 bg-[#080d1a] border border-emerald-500/30 rounded-2xl space-y-3">
+            <div class="flex items-center gap-2 text-emerald-300 font-extrabold text-sm">
+              <i class="fa-solid fa-microphone text-emerald-400"></i>
+              <span>3. Yeni Ses / Dublaj Yükle</span>
+            </div>
+            <div>
+              <input type="file" id="media-input-new-audio-file" accept="audio/*" class="w-full bg-[#050810] border border-slate-800 rounded-xl p-2 text-slate-300">
+            </div>
+            <button onclick="submitUploadNewAudio()" id="btn-submit-upload-new-audio" class="w-full py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold rounded-xl transition flex items-center justify-center gap-2 shadow">
+              <i class="fa-solid fa-cloud-arrow-up"></i> <span>Yeni Sesi Yükle & Hizala</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-3 border-t border-slate-800 flex justify-end shrink-0">
+        <button onclick="closeMediaModal()" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold text-xs transition">
+          Kapat
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <div id="global-toast-container" class="fixed bottom-5 right-5 z-[9999] flex flex-col gap-2.5 pointer-events-none max-w-sm w-full px-4 sm:px-0"></div>
 
   <!-- AUDIO ELEMENT FOR TIMELINE PLAYBACK -->
@@ -2487,6 +2873,8 @@
 
       renderRuler(totalWidth, pxPerSec);
       renderVideoTrack(pxPerSec);
+      renderPipTrack(pxPerSec);
+      renderOverlayTrack(pxPerSec);
       renderAudioTrack(totalWidth);
       renderFxTrack(pxPerSec);
       renderSubtitlesTrack(pxPerSec);
@@ -2597,13 +2985,101 @@
       });
     }
 
-    // TRACK 2: AUDIO WAVEFORM
+    // TRACK 1.5: PIP VIDEO TRACK
+    function renderPipTrack(pxPerSec) {
+      const track = document.getElementById('track-pip');
+      if (!track) return;
+      track.innerHTML = '';
+
+      const pips = (videoData && videoData.pipVideos) || [];
+      if (pips.length === 0) {
+        track.innerHTML = '<span class="text-[10px] text-slate-500/70 italic px-3 select-none flex items-center gap-1.5"><i class="fa-solid fa-clone text-purple-900/60"></i> PIP video katmanı boş. Eklemek için "+ PIP Video" butonuna tıklayın.</span>';
+        return;
+      }
+
+      pips.forEach((pip, idx) => {
+        const start = pip.startTime || 0;
+        const end = pip.endTime || (start + 5);
+        const dur = Math.max(0.5, end - start);
+        const left = start * pxPerSec;
+        const width = dur * pxPerSec;
+
+        const pipBlock = document.createElement('div');
+        pipBlock.className = 'absolute top-1 bottom-1 rounded-xl bg-gradient-to-r from-purple-950/80 via-slate-900 to-indigo-950/80 border border-purple-500/50 flex items-center justify-between px-2 text-[10px] text-purple-200 shadow-md group cursor-pointer hover:border-purple-300 transition';
+        pipBlock.style.left = `${left}px`;
+        pipBlock.style.width = `${Math.max(70, width - 4)}px`;
+        pipBlock.title = `PIP #${idx+1}: ${pip.position} (${pip.shape}) [${start.toFixed(1)}s - ${end.toFixed(1)}s]`;
+
+        const shapeIcon = pip.shape === 'circle' ? 'circle-dot' : pip.shape === 'phone' ? 'mobile-screen' : 'square';
+
+        pipBlock.innerHTML = `
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <i class="fa-solid fa-${shapeIcon} text-purple-400 text-xs shrink-0"></i>
+            <div class="overflow-hidden">
+              <span class="font-bold text-white text-[10px] truncate block">PIP #${idx+1} · ${pip.shape}</span>
+              <span class="text-[8px] text-purple-300 font-mono">${start.toFixed(1)}s - ${end.toFixed(1)}s</span>
+            </div>
+          </div>
+          <button onclick="event.stopPropagation(); deletePipItem('${pip.id}')" title="Bu PIP Katmanını Sil" class="w-5 h-5 rounded hover:bg-rose-900/60 text-slate-400 hover:text-rose-300 flex items-center justify-center text-[10px] transition shrink-0 ml-1">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        `;
+        track.appendChild(pipBlock);
+      });
+    }
+
+    // TRACK 1.6: PNG & STICKER OVERLAY TRACK
+    function renderOverlayTrack(pxPerSec) {
+      const track = document.getElementById('track-overlay');
+      if (!track) return;
+      track.innerHTML = '';
+
+      const overlays = (videoData && videoData.overlayImages) || [];
+      if (overlays.length === 0) {
+        track.innerHTML = '<span class="text-[10px] text-slate-500/70 italic px-3 select-none flex items-center gap-1.5"><i class="fa-solid fa-stamp text-emerald-950/60"></i> PNG sticker & logo katmanı boş. Eklemek için "+ PNG" butonuna tıklayın.</span>';
+        return;
+      }
+
+      overlays.forEach((ov, idx) => {
+        const start = ov.startTime || 0;
+        const end = ov.endTime || (start + 4);
+        const dur = Math.max(0.5, end - start);
+        const left = start * pxPerSec;
+        const width = dur * pxPerSec;
+
+        const ovBlock = document.createElement('div');
+        ovBlock.className = 'absolute top-1 bottom-1 rounded-lg bg-emerald-950/70 border border-emerald-500/40 flex items-center justify-between px-2 text-[10px] text-emerald-200 shadow-sm group cursor-pointer hover:border-emerald-300 transition';
+        ovBlock.style.left = `${left}px`;
+        ovBlock.style.width = `${Math.max(65, width - 4)}px`;
+        ovBlock.title = `PNG: ${ov.position} (${ov.animation || 'bounce'}) [${start.toFixed(1)}s - ${end.toFixed(1)}s]`;
+
+        ovBlock.innerHTML = `
+          <div class="flex items-center gap-1.5 overflow-hidden">
+            <i class="fa-solid fa-stamp text-emerald-400 text-xs shrink-0"></i>
+            <span class="font-bold text-white text-[10px] truncate">PNG #${idx+1} · ${ov.animation || 'bounce'}</span>
+          </div>
+          <button onclick="event.stopPropagation(); deleteOverlayItem('${ov.id}')" title="Bu PNG Katmanını Sil" class="w-4 h-4 rounded hover:bg-rose-900/60 text-slate-400 hover:text-rose-300 flex items-center justify-center text-[9px] transition shrink-0 ml-1">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        `;
+        track.appendChild(ovBlock);
+      });
+    }
+
+    // TRACK 2: AUDIO WAVEFORM & SOUND CONTROLS
     function renderAudioTrack(totalWidth) {
       const track = document.getElementById('track-audio');
       track.innerHTML = '';
 
+      const isMuted = videoData && !!videoData.audioMuted;
+      const audioUrl = (videoData && videoData.audioUrl) || 'audio.mp3';
+
       const audioBlock = document.createElement('div');
-      audioBlock.className = 'absolute top-1 bottom-1 left-1 right-1 rounded-xl bg-gradient-to-r from-emerald-950/40 via-teal-950/30 to-emerald-950/40 border border-emerald-500/30 flex items-center px-3 overflow-hidden shadow-inner';
+      audioBlock.className = `absolute top-1 bottom-1 left-1 right-1 rounded-xl ${
+        isMuted 
+          ? 'bg-gradient-to-r from-rose-950/50 via-slate-900 to-rose-950/50 border border-rose-500/40' 
+          : 'bg-gradient-to-r from-emerald-950/40 via-teal-950/30 to-emerald-950/40 border border-emerald-500/30'
+      } flex items-center px-3 overflow-hidden shadow-inner`;
       audioBlock.style.width = `${totalWidth - 8}px`;
 
       // SVG Waveform Bars
@@ -2612,20 +3088,31 @@
         const barWidth = 3;
         const gap = 2;
         const totalBars = waveformPeaks.length;
-        const svgW = totalBars * (barWidth + gap);
         
         svgBars = waveformPeaks.map((p, i) => {
           const h = Math.max(3, Math.round(p * 26));
           const y = Math.round((32 - h) / 2);
           const x = i * (barWidth + gap);
-          return `<rect x="${x}" y="${y}" width="${barWidth}" height="${h}" rx="1.5" fill="#10b981" opacity="0.85"/>`;
+          const barColor = isMuted ? '#f43f5e' : '#10b981';
+          return `<rect x="${x}" y="${y}" width="${barWidth}" height="${h}" rx="1.5" fill="${barColor}" opacity="${isMuted ? '0.45' : '0.85'}"/>`;
         }).join('');
       }
 
+      const muteLabel = isMuted ? '<span class="text-[9px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-mono font-bold">🔇 SESSİZ</span>' : '';
+
       audioBlock.innerHTML = `
         <div class="flex items-center gap-2 shrink-0 z-10 mr-3">
-          <i class="fa-solid fa-volume-high text-emerald-400 text-xs"></i>
-          <span class="text-[11px] font-bold text-emerald-300 font-mono">audio.mp3</span>
+          <i class="fa-solid ${isMuted ? 'fa-volume-xmark text-rose-400' : 'fa-volume-high text-emerald-400'} text-xs"></i>
+          <span class="text-[11px] font-bold ${isMuted ? 'text-rose-300 line-through' : 'text-emerald-300'} font-mono">${audioUrl.split('/').pop() || 'audio.mp3'}</span>
+          ${muteLabel}
+          <div class="flex items-center gap-1 ml-2">
+            <button onclick="toggleAudioMute()" title="${isMuted ? 'Sesi Aç' : 'Sessize Al'}" class="px-2 py-0.5 rounded bg-slate-800/90 hover:bg-slate-700 text-[10px] text-slate-200 transition">
+              ${isMuted ? '🔊 Sesi Aç' : '🔇 Sessize Al'}
+            </button>
+            <button onclick="openMediaModal('audio-tools')" title="Videodan Sesi Çıkar / Değiştir" class="px-2 py-0.5 rounded bg-slate-800/90 hover:bg-slate-700 text-[10px] text-cyan-300 transition">
+              ✂️ Ses İşlemleri
+            </button>
+          </div>
         </div>
         <div class="flex-1 h-8 overflow-hidden flex items-center">
           <svg class="h-8 w-full" preserveAspectRatio="none" viewBox="0 0 ${Math.max(400, waveformPeaks.length * 5)} 32">
@@ -3007,6 +3494,386 @@
         alert('Sahne ekleme hatası: ' + e.message);
       }
     }
+
+    // ==========================================
+    // 5.5. UNIFIED MEDIA STUDIO ACTIONS & API INTEGRATION
+    // ==========================================
+    function openMediaModal(tab = 'video') {
+      const modal = document.getElementById('modal-add-media');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+
+      // Populate scene target dropdown for images
+      const sceneSel = document.getElementById('media-image-scene-target');
+      if (sceneSel && scenes) {
+        sceneSel.innerHTML = scenes.map((s, idx) => `
+          <option value="${s.id}" ${s.id === activeSceneId ? 'selected' : ''}>Sahne ${idx+1}: ${(s.headerLine1 || s.headerSubtitle || s.id).slice(0, 28)}</option>
+        `).join('');
+      }
+
+      // Update playhead start time default for PIP and PNG
+      const pipStart = document.getElementById('media-pip-start');
+      if (pipStart) pipStart.value = playheadTime.toFixed(1);
+      const pngStart = document.getElementById('media-png-start');
+      if (pngStart) pngStart.value = playheadTime.toFixed(1);
+
+      // Update audio status badge in modal
+      updateAudioModalStatus();
+
+      switchMediaTab(tab);
+    }
+
+    function closeMediaModal() {
+      const modal = document.getElementById('modal-add-media');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function switchMediaTab(tab) {
+      const tabs = ['video', 'image', 'pip', 'png', 'audio'];
+      const activeTab = (tab === 'audio-tools') ? 'audio' : tab;
+
+      tabs.forEach(t => {
+        const btn = document.getElementById(`media-tab-btn-${t}`);
+        const pane = document.getElementById(`media-tab-pane-${t}`);
+        if (t === activeTab) {
+          if (btn) btn.className = 'px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 bg-indigo-600 text-white shadow font-bold';
+          if (pane) pane.classList.remove('hidden');
+        } else {
+          if (btn) btn.className = 'px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200 font-bold';
+          if (pane) pane.classList.add('hidden');
+        }
+      });
+    }
+
+    function updateAudioModalStatus() {
+      const isMuted = videoData && !!videoData.audioMuted;
+      const statusText = document.getElementById('media-audio-status-text');
+      const toggleBtn = document.getElementById('btn-toggle-mute-modal');
+      if (statusText) {
+        statusText.innerText = isMuted ? 'Ses Durumu: 🔇 Sessiz (Video sessiz render edilir)' : 'Ses Durumu: 🔊 Aktif (Ses çalıyor)';
+        statusText.className = isMuted ? 'font-bold text-rose-400 text-xs' : 'font-bold text-emerald-400 text-xs';
+      }
+      if (toggleBtn) {
+        toggleBtn.innerText = isMuted ? '🔊 Sesi Aç' : '🔇 Sessize Al';
+        toggleBtn.className = isMuted ? 'px-3 py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-xl transition' : 'px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition';
+      }
+    }
+
+    // 1. Submit Add Video
+    async function submitAddVideo() {
+      const fileInput = document.getElementById('media-input-video-file');
+      const stockRadios = document.getElementsByName('stock-broll');
+      const target = document.getElementById('media-video-target')?.value || 'scene';
+      const fit = document.getElementById('media-video-fit')?.value || 'cover';
+
+      let videoUrl = '';
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('media_type', 'video');
+        showToast('Video yükleniyor...', 'info');
+        const upRes = await fetch('/api/media/upload', { method: 'POST', body: formData });
+        if (!upRes.ok) throw new Error('Video yüklenemedi');
+        const upData = await upRes.json();
+        videoUrl = upData.url;
+      } else {
+        for (const r of stockRadios) {
+          if (r.checked) {
+            videoUrl = r.value;
+            break;
+          }
+        }
+      }
+
+      if (!videoUrl) {
+        return alert('Lütfen bir video dosyası seçin veya hazır B-Roll işaretleyin.');
+      }
+
+      try {
+        const res = await fetch('/api/timeline/set-scene-media', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            scene_id: target === 'scene' ? activeSceneId : null,
+            sceneId: target === 'scene' ? activeSceneId : null,
+            video_url: videoUrl,
+            videoUrl: videoUrl,
+            fit: fit,
+            apply_to_all_scenes: target === 'all',
+            applyToAllScenes: target === 'all'
+          })
+        });
+        if (!res.ok) throw new Error('Video timeline\'a uygulanamadı.');
+        showToast('Video başarıyla sahneye atandı!', 'success');
+        closeMediaModal();
+        await loadTimelineData();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    // 2. Submit Add Illustration
+    async function submitAddIllustration() {
+      const fileInput = document.getElementById('media-input-image-file');
+      const sceneId = document.getElementById('media-image-scene-target')?.value || activeSceneId;
+      const style = document.getElementById('media-image-style')?.value || 'polaroid';
+      const caption = document.getElementById('media-image-caption')?.value || '';
+
+      if (!fileInput || !fileInput.files || !fileInput.files[0]) {
+        return alert('Lütfen bir görsel veya fotoğraf dosyası seçin.');
+      }
+
+      try {
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('media_type', 'image');
+        showToast('Görsel yükleniyor...', 'info');
+        const upRes = await fetch('/api/media/upload', { method: 'POST', body: formData });
+        if (!upRes.ok) throw new Error('Görsel yüklenemedi');
+        const upData = await upRes.json();
+
+        const res = await fetch('/api/timeline/set-scene-media', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            scene_id: sceneId,
+            sceneId: sceneId,
+            illustration_url: upData.url,
+            illustrationUrl: upData.url,
+            illustration_style: style,
+            illustrationStyle: style,
+            illustration_caption: caption,
+            illustrationCaption: caption
+          })
+        });
+        if (!res.ok) throw new Error('Görsel sahneye atanamadı.');
+        showToast('Görsel başarıyla sahneye eklendi!', 'success');
+        closeMediaModal();
+        await loadTimelineData();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    // 3. Submit Add PIP Video
+    async function submitAddPipVideo() {
+      const fileInput = document.getElementById('media-input-pip-file');
+      const stockSel = document.getElementById('media-pip-stock-select')?.value;
+      const shape = document.getElementById('media-pip-shape')?.value || 'circle';
+      const position = document.getElementById('media-pip-position')?.value || 'top-right';
+      const startTime = parseFloat(document.getElementById('media-pip-start')?.value || 0);
+      const duration = parseFloat(document.getElementById('media-pip-dur')?.value || 6);
+      const width = document.getElementById('media-pip-width')?.value || '36%';
+      const muted = document.getElementById('media-pip-mute')?.checked ?? true;
+
+      let videoUrl = '';
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('media_type', 'video');
+        showToast('PIP Video yükleniyor...', 'info');
+        const upRes = await fetch('/api/media/upload', { method: 'POST', body: formData });
+        if (!upRes.ok) throw new Error('PIP video yüklenemedi');
+        const upData = await upRes.json();
+        videoUrl = upData.url;
+      } else if (stockSel) {
+        videoUrl = stockSel;
+      }
+
+      if (!videoUrl) {
+        return alert('Lütfen bir PIP video dosyası yükleyin veya hazır videolardan birini seçin.');
+      }
+
+      try {
+        const res = await fetch('/api/timeline/add-pip', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            video_url: videoUrl,
+            videoUrl: videoUrl,
+            start_time: startTime,
+            startTime: startTime,
+            duration: duration,
+            position: position,
+            shape: shape,
+            width: width,
+            muted: muted
+          })
+        });
+        if (!res.ok) throw new Error('PIP video timeline\'a eklenemedi.');
+        showToast('PIP Video katmanı eklendi!', 'success');
+        closeMediaModal();
+        await loadTimelineData();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    // 4. Submit Add PNG Overlay
+    async function submitAddPngOverlay() {
+      const fileInput = document.getElementById('media-input-png-file');
+      const anim = document.getElementById('media-png-anim')?.value || 'bounce';
+      const position = document.getElementById('media-png-position')?.value || 'top-right';
+      const startTime = parseFloat(document.getElementById('media-png-start')?.value || 0);
+      const duration = parseFloat(document.getElementById('media-png-dur')?.value || 5);
+      const width = parseInt(document.getElementById('media-png-width')?.value || 180, 10);
+
+      if (!fileInput || !fileInput.files || !fileInput.files[0]) {
+        return alert('Lütfen şeffaf bir PNG dosyası seçin.');
+      }
+
+      try {
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('media_type', 'png');
+        showToast('PNG Sticker yükleniyor...', 'info');
+        const upRes = await fetch('/api/media/upload', { method: 'POST', body: formData });
+        if (!upRes.ok) throw new Error('PNG dosyası yüklenemedi');
+        const upData = await upRes.json();
+
+        const res = await fetch('/api/timeline/add-png-overlay', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            image_url: upData.url,
+            imageUrl: upData.url,
+            start_time: startTime,
+            startTime: startTime,
+            duration: duration,
+            position: position,
+            animation: anim,
+            width: width
+          })
+        });
+        if (!res.ok) throw new Error('PNG katmanı eklenemedi.');
+        showToast('PNG Katmanı zaman tüneline eklendi!', 'success');
+        closeMediaModal();
+        await loadTimelineData();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    // 5. Submit Extract Audio From Video
+    async function submitExtractAudioFromVideo() {
+      const fileInput = document.getElementById('media-input-extract-file');
+      if (!fileInput || !fileInput.files || !fileInput.files[0]) {
+        return alert('Lütfen sesini çıkarmak istediğiniz bir video dosyası seçin.');
+      }
+
+      try {
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('media_type', 'video');
+        showToast('Video yükleniyor ve FFmpeg ile sesi ayıklanıyor...', 'info');
+        
+        const upRes = await fetch('/api/media/upload', { method: 'POST', body: formData });
+        if (!upRes.ok) throw new Error('Video yüklenemedi');
+        const upData = await upRes.json();
+
+        const extRes = await fetch('/api/media/extract-audio', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            video_url: upData.url,
+            apply_to_timeline: true
+          })
+        });
+        if (!extRes.ok) throw new Error('Videodan ses çıkarılamadı');
+        const extData = await extRes.json();
+        
+        showToast(`Ses videodan başarıyla çıkarıldı! (${extData.duration}s)`, 'success');
+        closeMediaModal();
+        await loadTimelineData();
+      } catch (e) {
+        alert('Ses çıkarma hatası: ' + e.message);
+      }
+    }
+
+    // 6. Toggle Audio Mute / Unmute
+    async function toggleAudioMute() {
+      const currentMuted = videoData && !!videoData.audioMuted;
+      const targetMode = currentMuted ? 'unmute' : 'mute';
+
+      try {
+        const res = await fetch('/api/media/remove-audio', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mode: targetMode })
+        });
+        if (!res.ok) throw new Error('Ses durumu güncellenemedi');
+        const data = await res.json();
+        if (videoData) videoData.audioMuted = data.audioMuted;
+        showToast(data.audioMuted ? 'Ses sessize alındı (Muted)' : 'Ses tekrar açıldı (Unmuted)', 'info');
+        updateAudioModalStatus();
+        renderTimeline();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    // 7. Delete Audio from Project
+    async function deleteMediaAudio() {
+      if (!confirm('Projenin ana ses dosyasını silmek istediğinize emin misiniz?')) return;
+      try {
+        const res = await fetch('/api/media/remove-audio', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mode: 'delete' })
+        });
+        if (!res.ok) throw new Error('Ses silinemedi');
+        showToast('Ses ve altyazı zamanlamaları temizlendi.', 'info');
+        closeMediaModal();
+        await loadTimelineData();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    // 8. Delete PIP Item
+    async function deletePipItem(id) {
+      if (!confirm('Bu PIP video katmanını silmek istediğinize emin misiniz?')) return;
+      try {
+        const res = await fetch('/api/timeline/delete-media-item', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ item_type: 'pip', itemType: 'pip', item_id: id, itemId: id })
+        });
+        if (!res.ok) throw new Error('PIP silinemedi');
+        showToast('PIP katmanı silindi', 'info');
+        await loadTimelineData();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    // 9. Delete Overlay Item
+    async function deleteOverlayItem(id) {
+      if (!confirm('Bu PNG katmanını silmek istediğinize emin misiniz?')) return;
+      try {
+        const res = await fetch('/api/timeline/delete-media-item', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ item_type: 'png_overlay', itemType: 'png_overlay', item_id: id, itemId: id })
+        });
+        if (!res.ok) throw new Error('PNG katmanı silinemedi');
+        showToast('PNG katmanı silindi', 'info');
+        await loadTimelineData();
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      }
+    }
+
+    // 10. Submit Upload New Audio from Modal
+    async function submitUploadNewAudio() {
+      const fileInput = document.getElementById('media-input-new-audio-file');
+      if (!fileInput || !fileInput.files || !fileInput.files[0]) {
+        return alert('Lütfen bir ses dosyası seçin.');
+      }
+      closeMediaModal();
+      await uploadTimelineAudioFile(fileInput.files[0]);
+    }
+
 
     // 6. AUDIO UPLOAD & WAVEFORM ENGINE
     async function uploadTimelineAudioFile(file, customTranscript = null) {

@@ -101,6 +101,56 @@ export interface SubtitleWord {
   end: number;
 }
 
+export type PipPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'center';
+export type PipShape = 'circle' | 'rounded' | 'rectangle' | 'phone';
+
+export interface PipVideoItem {
+  id: string;
+  videoUrl: string;
+  startTime: number; // in seconds
+  endTime: number; // in seconds
+  position?: PipPosition;
+  shape?: PipShape;
+  width?: number; // width in px
+  height?: number; // height in px
+  x?: number;
+  y?: number;
+  volume?: number; // 0.0 to 1.0
+  muted?: boolean;
+  opacity?: number;
+  borderColor?: string;
+  borderWidth?: number;
+}
+
+export type OverlayPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'center' | 'top-banner' | 'bottom-banner';
+export type OverlayAnimation = 'fade' | 'bounce' | 'slide_up' | 'spin' | 'none';
+
+export interface OverlayImageItem {
+  id: string;
+  imageUrl: string;
+  startTime: number;
+  endTime: number;
+  position?: OverlayPosition;
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+  opacity?: number;
+  rotation?: number;
+  animation?: OverlayAnimation;
+}
+
+export interface AudioTrackItem {
+  id: string;
+  audioUrl: string;
+  startTime: number;
+  endTime: number;
+  volume: number;
+  muted: boolean;
+  type?: 'voiceover' | 'music' | 'sfx' | 'extracted';
+  label?: string;
+}
+
 export interface VideoScene {
   id: string; // e.g. "scene_1", "scene_2"
   startTime: number; // in seconds (e.g. 0.0, 12.0)
@@ -130,6 +180,9 @@ export interface VideoScene {
   brollType?: 'none' | 'cosmic' | 'ink' | 'clouds' | 'waves';
   brollOpacity?: number;
   pipData?: { title?: string; subtitle?: string; caption?: string; badge?: string };
+  videoUrl?: string;
+  pipVideos?: PipVideoItem[];
+  overlayImages?: OverlayImageItem[];
   language?: LanguageCode;
   direction?: TextDirection;
   isRTL?: boolean;
@@ -175,6 +228,8 @@ export interface VideoData {
   brollType?: 'none' | 'cosmic' | 'ink' | 'clouds' | 'waves';
   brollOpacity?: number;
   pipData?: { title?: string; subtitle?: string; caption?: string; badge?: string };
+  narration?: string;
+  words?: Array<any>;
   socialHandle: string;
   audioUrl?: string;
   subtitles?: SubtitleWord[];
@@ -185,6 +240,12 @@ export interface VideoData {
   viral?: ViralMetadata;
   durationMode?: 'quick' | 'deep' | 'custom_audio';
   totalDuration?: number;
+  videoUrl?: string;
+  audioMuted?: boolean;
+  audioVolume?: number;
+  pipVideos?: PipVideoItem[];
+  overlayImages?: OverlayImageItem[];
+  audioTracks?: AudioTrackItem[];
   scenes?: VideoScene[];
   language?: LanguageCode;
   direction?: TextDirection;
