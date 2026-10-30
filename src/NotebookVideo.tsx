@@ -372,17 +372,27 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
           );
         })}
 
-      {/* 1. Primary Spoken Voiceover */}
-      {props.audioUrl && !props.audioMuted && (
-        <Audio
-          src={
-            props.audioUrl.startsWith('http://') || props.audioUrl.startsWith('https://')
-              ? props.audioUrl
-              : staticFile(props.audioUrl.replace(/^\/?(public\/)?/, ''))
-          }
-          volume={props.audioVolume ?? 1.0}
-        />
-      )}
+      {/* 1. Primary Spoken Voiceover (With smart auto-ducking when quote video is speaking) */}
+      {props.audioUrl && !props.audioMuted && (() => {
+        const isAudibleQuoteActive = allQuoteVideos.some((qv) => {
+          if (qv.muted) return false;
+          const startSec = qv.timelineStart ?? 0;
+          const dur = qv.duration || Math.max(1, (qv.trimEnd || 6) - (qv.trimStart || 0));
+          return currentTimeSec >= startSec && currentTimeSec <= (startSec + dur);
+        });
+        const effectiveVol = isAudibleQuoteActive ? 0.0 : (props.audioVolume ?? 1.0);
+
+        return (
+          <Audio
+            src={
+              props.audioUrl.startsWith('http://') || props.audioUrl.startsWith('https://')
+                ? props.audioUrl
+                : staticFile(props.audioUrl.replace(/^\/?(public\/)?/, ''))
+            }
+            volume={effectiveVol}
+          />
+        );
+      })()}
 
       {/* 1.5 Additional Audio Tracks (Extracted / Multi-track) */}
       {props.audioTracks && props.audioTracks.map((trk) => {

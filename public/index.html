@@ -1161,23 +1161,33 @@
         </div>
       </div>
 
-      <!-- TIMELINE CANVAS TRACKS & PLAYHEAD NEEDLE -->
-      <div id="timeline-scroll-container" class="flex-1 overflow-x-auto overflow-y-hidden relative bg-[#090d16]" onmousedown="handleTimelineScrubStart(event)">
+      <!-- TIMELINE CANVAS TRACKS & FIXED CENTER PLAYHEAD WRAPPER -->
+      <div class="flex-1 relative overflow-hidden bg-[#090d16] flex flex-col">
         
-        <!-- MAGNET SNAP GUIDELINE (Golden vertical snap line) -->
-        <div id="timeline-magnet-guide" style="display: none;" class="absolute top-0 bottom-0 w-[2px] bg-amber-400 z-45 pointer-events-none shadow-[0_0_10px_#f59e0b]">
-          <div id="timeline-magnet-label" class="absolute -top-5 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 font-black text-[9px] px-1.5 py-0.5 rounded shadow whitespace-nowrap">
-            🧲 Kenetlendi
+        <!-- FIXED CENTER PLAYHEAD NEEDLE (Pervasive Center Needle - Stays strictly at 50% width!) -->
+        <div id="playhead-fixed-center" class="pointer-events-none absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
+          <!-- Top Marker (Red inverted diamond / arrow) -->
+          <div class="w-3.5 h-3.5 bg-red-500 rotate-45 shadow-[0_0_12px_#ef4444] -mt-1.5 shrink-0 rounded-xs border border-white/60"></div>
+          <!-- Vertical Needle Line -->
+          <div class="w-[2px] flex-1 bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.95)]"></div>
+          <!-- Fixed Center Timestamp Badge -->
+          <div id="playhead-center-time-tag" class="absolute top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white font-mono font-extrabold text-[8px] px-1.5 py-0.2 rounded-full shadow-lg border border-red-400 whitespace-nowrap">
+            00:00.0
           </div>
         </div>
 
-        <!-- RED PLAYHEAD NEEDLE (Draggable cursor) -->
-        <div id="playhead-needle" class="playhead-needle" style="left: 0px;">
-          <div class="playhead-handle" id="playhead-handle"></div>
-        </div>
+        <!-- SCROLL CONTAINER (Smoothly flows underneath the fixed center playhead) -->
+        <div id="timeline-scroll-container" class="w-full h-full overflow-x-auto overflow-y-hidden relative select-none" onmousedown="handleTimelineScrubStart(event)">
+          
+          <!-- MAGNET SNAP GUIDELINE (Golden vertical snap line inside tracks) -->
+          <div id="timeline-magnet-guide" style="display: none;" class="absolute top-0 bottom-0 w-[2px] bg-amber-400 z-35 pointer-events-none shadow-[0_0_10px_#f59e0b]">
+            <div id="timeline-magnet-label" class="absolute -top-5 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 font-black text-[9px] px-1.5 py-0.5 rounded shadow whitespace-nowrap">
+              🧲 Kenetlendi
+            </div>
+          </div>
 
-        <!-- INNER TRACKS WRAPPER (Dynamic width based on zoom & duration) -->
-        <div id="timeline-inner-wrapper" class="relative min-w-full h-full flex flex-col" style="width: 1200px;">
+          <!-- INNER TRACKS WRAPPER (With 50% left & right padding so 0.0s and end hit the center needle) -->
+          <div id="timeline-inner-wrapper" class="relative min-w-full h-full flex flex-col transition-all duration-75">
           
           <!-- RULER (Zaman Cetveli) -->
           <div id="timeline-ruler" class="h-6 border-b border-slate-800/80 bg-[#06090e] relative text-[10px] font-mono text-slate-400">
@@ -3143,16 +3153,21 @@
     // 2. RENDER TIMELINE COMPONENTS
     function renderTimeline() {
       const container = document.getElementById('timeline-inner-wrapper');
+      const scrollParent = document.getElementById('timeline-scroll-container');
       const pxPerSec = 40 * timelineZoom;
-      const totalWidth = Math.max(900, Math.round(timelineDuration * pxPerSec));
-      container.style.width = `${totalWidth}px`;
+      const contentWidth = Math.max(900, Math.round(timelineDuration * pxPerSec));
 
-      renderRuler(totalWidth, pxPerSec);
+      const halfWidth = scrollParent ? Math.floor(scrollParent.clientWidth / 2) : 400;
+      container.style.paddingLeft = `${halfWidth}px`;
+      container.style.paddingRight = `${halfWidth}px`;
+      container.style.width = `${contentWidth + (halfWidth * 2)}px`;
+
+      renderRuler(contentWidth, pxPerSec);
       renderVideoTrack(pxPerSec);
       renderQuoteTrack(pxPerSec);
       renderPipTrack(pxPerSec);
       renderOverlayTrack(pxPerSec);
-      renderAudioTrack(totalWidth);
+      renderAudioTrack(contentWidth);
       renderFxTrack(pxPerSec);
       renderSubtitlesTrack(pxPerSec);
       updatePlayheadPosition();
@@ -3545,12 +3560,28 @@
     }
 
     // 3. PLAYHEAD & SEEKING
+    let isProgrammaticScroll = false;
+
     function updatePlayheadPosition() {
+      const container = document.getElementById('timeline-scroll-container');
+      if (!container) return;
       const pxPerSec = 40 * timelineZoom;
-      const left = playheadTime * pxPerSec;
-      const needle = document.getElementById('playhead-needle');
-      if (needle) {
-        needle.style.left = `${left}px`;
+
+      // 1. Smoothly scroll timeline underneath the center playhead
+      const targetScroll = Math.round(playheadTime * pxPerSec);
+      if (Math.abs(container.scrollLeft - targetScroll) > 0.5) {
+        isProgrammaticScroll = true;
+        container.scrollLeft = targetScroll;
+        isProgrammaticScroll = false;
+      }
+
+      // 2. Update center time badge
+      const timeTag = document.getElementById('playhead-center-time-tag');
+      if (timeTag) {
+        const m = Math.floor(playheadTime / 60);
+        const s = Math.floor(playheadTime % 60);
+        const ms = Math.floor((playheadTime % 1) * 10);
+        timeTag.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}.${ms}`;
       }
     }
 
@@ -3644,6 +3675,7 @@
         pipPlayer.pause();
       }
 
+      if (audioEl) audioEl.volume = 1.0;
       renderLivePreviewCanvas();
     }
 
@@ -3689,28 +3721,51 @@
 
     function setupScrubListeners() {
       const container = document.getElementById('timeline-scroll-container');
+      if (!container) return;
       let isDragging = false;
+      let startClientX = 0;
+      let startTime = 0;
 
       container.addEventListener('mousedown', (e) => {
+        if (isDraggingMediaClip) return;
         isDragging = true;
+        startClientX = e.clientX;
+        startTime = playheadTime;
         scrubAtEvent(e);
       });
 
       window.addEventListener('mousemove', (e) => {
-        if (isDragging) scrubAtEvent(e);
+        if (isDragging && !isDraggingMediaClip) {
+          scrubAtEvent(e);
+        }
       });
 
       window.addEventListener('mouseup', () => {
         isDragging = false;
       });
+
+      // Mouse wheel / trackpad horizontal scrolling also smoothly scrubs underneath center needle
+      container.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey) {
+          e.preventDefault();
+          const pxPerSec = 40 * timelineZoom;
+          const delta = e.deltaX || e.deltaY;
+          const targetTime = Math.max(0, Math.min(timelineDuration, playheadTime + (delta / pxPerSec) * 0.4));
+          seekTimeline(targetTime);
+        }
+      }, { passive: false });
     }
 
     function scrubAtEvent(e) {
       const container = document.getElementById('timeline-scroll-container');
+      if (!container) return;
       const rect = container.getBoundingClientRect();
-      const clickX = e.clientX - rect.left + container.scrollLeft;
       const pxPerSec = 40 * timelineZoom;
-      const targetTime = clickX / pxPerSec;
+      const halfWidth = container.clientWidth / 2;
+
+      // Calculate clicked point relative to center playhead line
+      const clickOffsetFromCenter = (e.clientX - rect.left) - halfWidth;
+      const targetTime = Math.max(0, Math.min(timelineDuration, playheadTime + (clickOffsetFromCenter / pxPerSec)));
       seekTimeline(targetTime);
     }
 
@@ -4746,7 +4801,26 @@
     let currentRenderedPipId = null;
     let currentRenderedPngId = null;
 
-    function renderQuotePreviewOverlay() {
+    function toggleActiveQuoteAudio(quoteId) {
+      const q = (videoData && videoData.quoteVideos || []).find(x => x.id === quoteId);
+      if (!q) return;
+      q.muted = !q.muted;
+      const livePlayer = document.getElementById('pv-quote-live-player');
+      if (livePlayer) {
+        livePlayer.muted = q.muted;
+        if (!q.muted) livePlayer.volume = 1.0;
+      }
+      const icon = document.getElementById('pv-quote-audio-icon');
+      const label = document.getElementById('pv-quote-audio-label');
+      if (icon) icon.className = `fa-solid ${q.muted ? 'fa-volume-xmark text-rose-400' : 'fa-volume-high text-emerald-400'}`;
+      if (label) {
+        label.className = `${q.muted ? 'text-rose-400' : 'text-emerald-400'} font-bold`;
+        label.innerText = q.muted ? 'Sessiz' : 'Ses Açık';
+      }
+      showToast(q.muted ? 'Alıntı video sessize alındı' : 'Alıntı video sesi açıldı (Duyulabilir)', 'info');
+    }
+
+        function renderQuotePreviewOverlay() {
       const container = document.getElementById('pv-quote-overlay');
       const notebookPreview = document.getElementById('notebook-preview');
       if (!container) return;
@@ -4768,6 +4842,7 @@
         if (notebookPreview && notebookPreview.style.visibility === 'hidden') {
           notebookPreview.style.visibility = 'visible';
         }
+        if (audioEl) audioEl.volume = 1.0;
         return;
       }
 
@@ -4848,7 +4923,7 @@
 
             <!-- Centered 9:16 Thematic Frame Container -->
             <div class="relative ${frameAspectClass} bg-black rounded-2xl overflow-hidden ${frameBorder} flex items-center justify-center my-auto shadow-2xl">
-              <video id="pv-quote-live-player" src="${resolvedVideoUrl}" muted playsinline class="w-full h-full object-cover"></video>
+              <video id="pv-quote-live-player" src="${resolvedVideoUrl}" ${activeQuote.muted ? 'muted' : ''} playsinline class="w-full h-full object-cover"></video>
               
               <!-- Animated Stamp Element -->
               <div id="pv-quote-stamp" class="${showStamp ? '' : 'hidden'} absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
@@ -4863,9 +4938,14 @@
               </div>
             </div>
 
-            <!-- Bottom Time & Control Pill -->
+            <!-- Bottom Time & Control Pill (With Sound Indicator & Toggle) -->
             <div class="flex items-center gap-2 px-2.5 py-0.5 bg-slate-900/95 border border-slate-700/80 rounded-full text-[9px] font-mono text-slate-300 shrink-0">
               <span id="pv-quote-timer" class="text-rose-400 font-bold">⏱️ ${elapsed.toFixed(1)}s / ${dur.toFixed(1)}s</span>
+              <span>·</span>
+              <button onclick="toggleActiveQuoteAudio('${activeQuote.id}')" title="${activeQuote.muted ? 'Alıntı Sesini Aç' : 'Alıntı Sesini Kapat'}" class="flex items-center gap-1 hover:text-white transition">
+                <i id="pv-quote-audio-icon" class="fa-solid ${activeQuote.muted ? 'fa-volume-xmark text-rose-400' : 'fa-volume-high text-emerald-400'}"></i>
+                <span id="pv-quote-audio-label" class="${activeQuote.muted ? 'text-rose-400' : 'text-emerald-400'} font-bold">${activeQuote.muted ? 'Sessiz' : 'Ses Açık'}</span>
+              </button>
               <span>·</span>
               <span>Kesit: ${activeQuote.trimStart}s - ${activeQuote.trimEnd}s</span>
               <button onclick="deleteQuoteItem('${activeQuote.id}')" title="Bu Alıntıyı Sil" class="text-rose-400 hover:text-white ml-1">
@@ -4894,16 +4974,29 @@
         }
       }
 
-      // 3. Synchronize video player time and playback state
+      // 3. Synchronize video player time, audio volume, and playback state
       const livePlayer = document.getElementById('pv-quote-live-player');
       if (livePlayer) {
+        const isQuoteMuted = activeQuote.muted === true;
+        livePlayer.muted = isQuoteMuted;
+        livePlayer.volume = typeof activeQuote.volume === 'number' ? activeQuote.volume : 1.0;
+
+        // Smart Audio Ducking: Duck background voiceover to 0 while quote video is talking!
+        if (audioEl && isPlaying) {
+          if (!isQuoteMuted) {
+            audioEl.volume = 0.0;
+          } else {
+            audioEl.volume = 1.0;
+          }
+        }
+
         const targetVideoTime = (activeQuote.trimStart || 0) + elapsed;
         if (Math.abs(livePlayer.currentTime - targetVideoTime) > 0.3) {
           livePlayer.currentTime = targetVideoTime;
         }
         if (isPlaying) {
           if (livePlayer.paused) {
-            livePlayer.play().catch(() => {});
+            livePlayer.play().catch(err => console.log('Quote video play info:', err));
           }
         } else {
           if (!livePlayer.paused) {

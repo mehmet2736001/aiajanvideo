@@ -1,9 +1,9 @@
 {
-  "topic": "dqwdqwd",
+  "topic": "scsscs",
   "theme": "notebook",
   "format": "9:16",
   "headerSubtitle": "Bölüm 1",
-  "headerLine1": "DQWDQWD",
+  "headerLine1": "SCSSCS",
   "circledWord": "İLK",
   "headerLine2": "Fikrini Buraya Yaz",
   "highlightedText": "Önemli Nokta",
@@ -12,7 +12,7 @@
     {
       "id": "scene_1",
       "headerSubtitle": "Bölüm 1",
-      "headerLine1": "DQWDQWD",
+      "headerLine1": "SCSSCS",
       "circledWord": "İLK",
       "headerLine2": "Fikrini Buraya Yaz",
       "highlightedText": "Önemli Nokta",
@@ -20,11 +20,53 @@
       "startTime": 0.0,
       "endTime": 10.0,
       "duration": 10.0
+    },
+    {
+      "id": "scene_2",
+      "startTime": 10.0,
+      "endTime": 20.0,
+      "layoutType": "cards",
+      "headerSubtitle": "Bölüm 2",
+      "headerLine1": "YENİ",
+      "circledWord": "BAŞLIK",
+      "headerLine2": "",
+      "highlightedText": "ÖNEMLİ NOKTA",
+      "strikeWord": "",
+      "doodleType": "book",
+      "cards": [
+        {
+          "id": "1",
+          "label": "Detay 1",
+          "value": "Açıklama 1",
+          "color": "#1e3a8a"
+        },
+        {
+          "id": "2",
+          "label": "Detay 2",
+          "value": "Açıklama 2",
+          "color": "#15803d"
+        }
+      ],
+      "quoteSpotlight": {
+        "speaker": "Yazar",
+        "title": "Kaynak",
+        "quoteText": "Hakikat sabır ile anlaşılır."
+      },
+      "metricImpact": {
+        "bigNumber": "100%",
+        "bigLabel": "ÖNEMLİ",
+        "subheading": "Anahtar Fikir",
+        "keyTakeaway": "Özet"
+      },
+      "pipData": {
+        "title": "Yeni Sahne",
+        "caption": "Detay Görseli"
+      }
     }
   ],
   "subtitles": [
     {
-      "text": "dqwdqwd",
+      "text": "scsscs",
       "start": 0.0,
       "end": 2.5
     },
@@ -34,17 +76,17 @@
       "end": 5.0
     }
   ],
-  "totalDuration": 10.0,
-  "created_at": "2026-10-30 23:18:16",
+  "totalDuration": 20.0,
+  "created_at": "2026-10-31 00:48:10",
   "quoteVideos": [
     {
-      "id": "quote_0afb56cd",
-      "videoUrl": "/public/uploads/YEMEK_YAPMAK_ZORUNDA_DE__L_M__07950e95.mp4",
+      "id": "quote_66d02d6e",
+      "videoUrl": "/public/uploads/YEMEK_YAPMAK_ZORUNDA_DE__L_M__baab47bd.mp4",
       "trimStart": 1.8,
       "trimEnd": 25.6,
-      "timelineStart": 3.5,
-      "timelineEnd": 8.5,
-      "duration": 5.0,
+      "timelineStart": 0.0,
+      "timelineEnd": 23.8,
+      "duration": 23.8,
       "theme": "red_alert",
       "headerText": "Arkadaşlar bu videoyu iyi izleyin...",
       "subHeaderText": "",
@@ -54,8 +96,5 @@
       "muted": false,
       "freezeAtEnd": false
     }
-  ],
-  "audioMuted": false,
-  "audioUrl": "",
-  "words": []
+  ]
 }
