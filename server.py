@@ -2138,6 +2138,15 @@ class ExtractAudioRequest(BaseModel):
 class RemoveAudioRequest(BaseModel):
     mode: str = "mute" # "mute", "unmute" or "delete"
 
+class UpdateMediaPositionRequest(BaseModel):
+    item_type: Optional[str] = None
+    itemType: Optional[str] = None
+    item_id: Optional[str] = None
+    itemId: Optional[str] = None
+    timeline_start: Optional[float] = None
+    timelineStart: Optional[float] = None
+    duration: Optional[float] = None
+
 class AddQuoteVideoRequest(BaseModel):
     videoUrl: Optional[str] = None
     video_url: Optional[str] = None
@@ -4505,6 +4514,7 @@ def api_extract_audio(req: ExtractAudioRequest):
         "message": "Sesi videodan çıkarma işlemi başarıyla tamamlandı!"
     }
 
+@app.post("/api/timeline/remove-audio")
 @app.post("/api/media/remove-audio")
 def api_remove_audio(req: RemoveAudioRequest):
     """
@@ -4692,6 +4702,56 @@ def api_delete_media_item(req: DeleteMediaItemRequest):
         json.dump(vdata, f, ensure_ascii=False, indent=2)
 
     return {"success": True, "video_data": vdata}
+
+@app.post("/api/timeline/update-media-position")
+def api_update_media_position(req: UpdateMediaPositionRequest):
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        vdata = json.load(f)
+
+    item_type = req.item_type or req.itemType or ""
+    item_id = req.item_id or req.itemId or ""
+    raw_start = req.timeline_start if req.timeline_start is not None else req.timelineStart
+    if raw_start is None:
+        raise HTTPException(status_code=400, detail="timeline_start zorunludur.")
+    new_start = round(max(0.0, float(raw_start)), 2)
+    updated = False
+
+    if (item_type in ["quote", "quote_video", "quoteVideo"]) and "quoteVideos" in vdata:
+        for qv in vdata["quoteVideos"]:
+            if qv.get("id") == item_id:
+                dur = float(req.duration) if req.duration is not None else float(qv.get("duration", 5.0))
+                qv["timelineStart"] = new_start
+                qv["timelineEnd"] = round(new_start + dur, 2)
+                qv["duration"] = round(dur, 2)
+                updated = True
+                break
+    elif (item_type in ["pip", "pip_video", "pipVideo"]) and "pipVideos" in vdata:
+        for p in vdata["pipVideos"]:
+            if p.get("id") == item_id:
+                dur = float(req.duration) if req.duration is not None else float(p.get("endTime", 5.0) - p.get("startTime", 0.0))
+                p["startTime"] = new_start
+                p["endTime"] = round(new_start + dur, 2)
+                updated = True
+                break
+    elif (item_type in ["overlay", "png_overlay", "png", "image"]) and "overlayImages" in vdata:
+        for o in vdata["overlayImages"]:
+            if o.get("id") == item_id:
+                dur = float(req.duration) if req.duration is not None else float(o.get("endTime", 4.0) - o.get("startTime", 0.0))
+                o["startTime"] = new_start
+                o["endTime"] = round(new_start + dur, 2)
+                updated = True
+                break
+
+    if not updated:
+        raise HTTPException(status_code=404, detail="Medya öğesi bulunamadı.")
+
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(vdata, f, ensure_ascii=False, indent=2)
+
+    return {"success": True, "new_start": new_start, "video_data": vdata}
 
 @app.post("/api/timeline/set-scene-media")
 def api_set_scene_media(req: SetSceneMediaRequest):

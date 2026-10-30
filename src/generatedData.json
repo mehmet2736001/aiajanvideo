@@ -38,21 +38,24 @@
   "created_at": "2026-10-30 23:18:16",
   "quoteVideos": [
     {
-      "id": "quote_1b8c5bc9",
-      "videoUrl": "public/broll/cosmic.mp4",
-      "trimStart": 0.0,
-      "trimEnd": 4.5,
-      "timelineStart": 1.0,
-      "timelineEnd": 5.5,
-      "duration": 4.5,
+      "id": "quote_0afb56cd",
+      "videoUrl": "/public/uploads/YEMEK_YAPMAK_ZORUNDA_DE__L_M__07950e95.mp4",
+      "trimStart": 1.8,
+      "trimEnd": 25.6,
+      "timelineStart": 3.5,
+      "timelineEnd": 8.5,
+      "duration": 5.0,
       "theme": "red_alert",
       "headerText": "Arkadaşlar bu videoyu iyi izleyin...",
-      "subHeaderText": "Sosyal medyada yayılan iddia",
-      "authorTag": "@iddia_sahibi",
+      "subHeaderText": "",
+      "authorTag": "",
       "stamp": "yalan",
       "volume": 1.0,
       "muted": false,
       "freezeAtEnd": false
     }
-  ]
+  ],
+  "audioMuted": false,
+  "audioUrl": "",
+  "words": []
 }
