@@ -177,11 +177,25 @@
       cursor: grab;
       user-select: none;
       -webkit-user-select: none;
+      scroll-behavior: auto !important;
+    }
+    #timeline-ruler {
+      cursor: ew-resize !important;
+      user-select: none !important;
+      -webkit-user-select: none !important;
+    }
+    #playhead-center-diamond,
+    #playhead-center-time-tag {
+      cursor: ew-resize !important;
+      pointer-events: auto !important;
     }
     body.is-scrubbing-timeline,
     body.is-scrubbing-timeline #timeline-scroll-container,
     body.is-scrubbing-timeline #timeline-inner-wrapper,
-    body.is-scrubbing-timeline .timeline-track-lane {
+    body.is-scrubbing-timeline .timeline-track-lane,
+    body.is-space-panning,
+    body.is-space-panning #timeline-scroll-container,
+    body.is-space-panning * {
       cursor: grabbing !important;
       user-select: none !important;
       -webkit-user-select: none !important;
@@ -1373,15 +1387,15 @@
         <!-- FIXED CENTER PLAYHEAD NEEDLE (Pervasive Center Needle - Stays strictly at 50% width!) -->
         <div id="playhead-fixed-center" class="pointer-events-none absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
           <!-- Top Marker (Red inverted diamond / arrow) -->
-          <div id="playhead-center-diamond" class="w-3.5 h-3.5 bg-red-500 rotate-45 shadow-[0_0_12px_#ef4444] -mt-1.5 shrink-0 rounded-xs border border-white/60 transition-colors duration-150"></div>
+          <div id="playhead-center-diamond" class="w-3.5 h-3.5 bg-red-500 rotate-45 shadow-[0_0_12px_#ef4444] -mt-1.5 shrink-0 rounded-xs border border-white/60 transition-transform duration-100 pointer-events-auto cursor-ew-resize hover:scale-125" title="Sürükleyerek Zaman Tünelini Kaydır"></div>
           <!-- Vertical Needle Line -->
-          <div id="playhead-center-line" class="w-[2px] flex-1 bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.95)] transition-colors duration-150"></div>
+          <div id="playhead-center-line" class="w-[2px] flex-1 bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.95)] transition-colors duration-150 pointer-events-none"></div>
           <!-- Fixed Center Timestamp Badge with Frame Counter -->
-          <div id="playhead-center-time-tag" class="absolute top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white font-mono font-extrabold text-[8px] px-2 py-0.5 rounded-full shadow-lg border border-red-400 whitespace-nowrap transition-all duration-150">
+          <div id="playhead-center-time-tag" class="absolute top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white font-mono font-extrabold text-[8px] px-2 py-0.5 rounded-full shadow-lg border border-red-400 whitespace-nowrap transition-colors duration-150 pointer-events-auto cursor-ew-resize hover:bg-red-500 select-none" title="Sürükleyerek Zaman Tünelini Kaydır">
             00:00.0 · K0
           </div>
           <!-- Shift Micro-Precision Indicator (Appears when Shift is held or during micro-scrub) -->
-          <div id="playhead-shift-badge" style="display: none;" class="absolute top-11 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 font-bold text-[7px] px-2 py-0.5 rounded-full border border-amber-300 shadow-md whitespace-nowrap">
+          <div id="playhead-shift-badge" style="display: none;" class="absolute top-11 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 font-bold text-[7px] px-2 py-0.5 rounded-full border border-amber-300 shadow-md whitespace-nowrap pointer-events-none">
             ⚡ HASSAS MOD (5x)
           </div>
         </div>
@@ -1397,7 +1411,7 @@
           </div>
 
           <!-- INNER TRACKS WRAPPER (With 50% left & right padding so 0.0s and end hit the center needle) -->
-          <div id="timeline-inner-wrapper" class="relative min-w-full h-full flex flex-col transition-all duration-75">
+          <div id="timeline-inner-wrapper" class="relative min-w-full h-full flex flex-col select-none">
           
           <!-- RULER (Zaman Cetveli) -->
           <div id="timeline-ruler" class="h-6 border-b border-slate-800/80 bg-[#06090e] relative text-[10px] font-mono text-slate-400">
@@ -3623,6 +3637,7 @@
             ? 'bg-gradient-to-r from-amber-950/70 via-slate-900 to-indigo-950/70 border-amber-400 active' 
             : 'bg-slate-900/90 border-slate-700/80 hover:border-slate-500'
         }`;
+        block.setAttribute('data-scene-id', s.id);
         block.style.left = `${left}px`;
         block.style.width = `${Math.max(60, width - 4)}px`;
 
@@ -4093,11 +4108,11 @@
       updatePlayheadPosition();
       updateTimeDisplays();
 
-      // Automatically sync active scene based on playhead time
+      // Automatically sync active scene based on playhead time without DOM tearing
       const curScene = scenes.find(s => playheadTime >= s.startTime && playheadTime <= s.endTime);
       if (curScene && curScene.id !== activeSceneId) {
         activeSceneId = curScene.id;
-        renderTimeline();
+        updateActiveSceneCardHighlight(activeSceneId);
         renderSceneInspector();
       }
 
@@ -4298,17 +4313,69 @@
       }
     }
 
+    // HIGHLIGHT ACTIVE SCENE CARD VISUALLY WITHOUT DESTROYING TIMELINE DOM
+    function updateActiveSceneCardHighlight(sceneId) {
+      document.querySelectorAll('.scene-block').forEach(b => {
+        const isAct = b.getAttribute('data-scene-id') === sceneId;
+        if (isAct) {
+          b.className = 'scene-block absolute top-1 bottom-1 rounded-xl border flex items-center justify-between px-2 cursor-pointer shadow-md bg-gradient-to-r from-amber-950/70 via-slate-900 to-indigo-950/70 border-amber-400 active';
+        } else {
+          b.className = 'scene-block absolute top-1 bottom-1 rounded-xl border flex items-center justify-between px-2 cursor-pointer shadow-md bg-slate-900/90 border-slate-700/80 hover:border-slate-500';
+        }
+      });
+    }
+
+    // CAPCUT & DAVINCI PRECISION TIMELINE PAN & PHYSICAL REEL ENGINE
+    let isScrubbing = false;
+    let isSpacePanning = false;
+    let lastClientX = 0;
+    let startClientX = 0;
+    let startTime = 0;
+    let hasDragged = false;
+
     function setupScrubListeners() {
       const container = document.getElementById('timeline-scroll-container');
+      const ruler = document.getElementById('timeline-ruler');
+      const diamond = document.getElementById('playhead-center-diamond');
+      const timeTag = document.getElementById('playhead-center-time-tag');
       if (!container) return;
 
-      let isScrubbing = false;
-      let lastClientX = 0;
-      let startClientX = 0;
-      let startTime = 0;
-      let hasDragged = false;
+      // 1. Two-way native scroll synchronization (scrollbar, trackpad, touch swipe)
+      container.addEventListener('scroll', () => {
+        if (isProgrammaticScroll || isScrubbing) return;
+        const pxPerSec = 40 * timelineZoom;
+        const newTime = Math.max(0, Math.min(timelineDuration, container.scrollLeft / pxPerSec));
+        if (Math.abs(newTime - playheadTime) > 0.01) {
+          playheadTime = newTime;
+          playbackStartTime = performance.now();
+          playbackStartPlayhead = playheadTime;
 
-      // Track Shift key for dynamic micro-precision
+          if (audioEl && audioEl.src && videoData && !!videoData.audioUrl && !videoData.audioMuted) {
+            audioEl.currentTime = playheadTime;
+          }
+
+          updateTimeDisplays();
+          renderLivePreviewCanvas();
+
+          const tTag = document.getElementById('playhead-center-time-tag');
+          if (tTag) {
+            const m = Math.floor(playheadTime / 60);
+            const s = Math.floor(playheadTime % 60);
+            const ms = Math.floor((playheadTime % 1) * 10);
+            const frameNum = Math.floor(playheadTime * 30);
+            tTag.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}.${ms} · K${frameNum}`;
+          }
+
+          const curScene = scenes.find(s => playheadTime >= s.startTime && playheadTime <= s.endTime);
+          if (curScene && curScene.id !== activeSceneId) {
+            activeSceneId = curScene.id;
+            updateActiveSceneCardHighlight(activeSceneId);
+            renderSceneInspector();
+          }
+        }
+      }, { passive: true });
+
+      // 2. Track Shift & Space keys for Micro-Precision & Space-Pan
       window.addEventListener('keydown', (e) => {
         if (e.key === 'Shift') {
           isShiftKeyDown = true;
@@ -4316,6 +4383,12 @@
           if (shiftBadge) {
             shiftBadge.innerText = '⚡ HASSAS MOD (5x)';
             shiftBadge.style.display = 'block';
+          }
+        }
+        if (e.code === 'Space' && !e.target.matches('input, textarea') && !e.repeat) {
+          if (!isPlaying && !isScrubbing) {
+            isSpacePanning = true;
+            document.body.classList.add('is-space-panning');
           }
         }
       });
@@ -4326,12 +4399,22 @@
           const shiftBadge = document.getElementById('playhead-shift-badge');
           if (shiftBadge) shiftBadge.style.display = 'none';
         }
+        if (e.code === 'Space') {
+          isSpacePanning = false;
+          document.body.classList.remove('is-space-panning');
+        }
       });
 
-      container.addEventListener('mousedown', (e) => {
-        // Do not intercept if user clicked on interactive clips, trim handles, or buttons
-        if (isDraggingMediaClip) return;
-        if (e.target.closest('button') || e.target.closest('.timeline-clip-item') || e.target.closest('.trim-handle')) return;
+      // Unified Pointer/Mouse Drag Initiator
+      function startTimelineScrub(e) {
+        // If clicking on clip or button (and not Space panning), let the clip handle it
+        if (!isSpacePanning) {
+          if (isDraggingMediaClip) return;
+          if (e.target.closest('button') || e.target.closest('.timeline-clip-item') || e.target.closest('.scene-block') || e.target.closest('.trim-handle')) return;
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
 
         if (isPlaying) pausePlayback();
 
@@ -4342,8 +4425,15 @@
         startTime = playheadTime;
 
         document.body.classList.add('is-scrubbing-timeline');
-      });
+      }
 
+      // Attach startTimelineScrub to container, ruler, playhead needle diamond and badge
+      container.addEventListener('mousedown', startTimelineScrub);
+      if (ruler) ruler.addEventListener('mousedown', startTimelineScrub);
+      if (diamond) diamond.addEventListener('mousedown', startTimelineScrub);
+      if (timeTag) timeTag.addEventListener('mousedown', startTimelineScrub);
+
+      // Mousemove handler for smooth physical reel motion
       window.addEventListener('mousemove', (e) => {
         if (!isScrubbing || isDraggingMediaClip) return;
 
@@ -4359,7 +4449,7 @@
         const precisionMultiplier = (e.shiftKey || isShiftKeyDown) ? 0.2 : 1.0;
 
         // PHYSICAL REEL / CAPCUT FORMULA:
-        // Dragging mouse left (negative deltaStepX) pulls the filmstrip left, which advances time forward (+deltaTime).
+        // Dragging mouse left (negative deltaStepX) advances time forward (+deltaTime).
         // Dragging mouse right (positive deltaStepX) moves backward in time (-deltaTime).
         const deltaTime = -(deltaStepX / pxPerSec) * precisionMultiplier;
         let rawTargetTime = Math.max(0, Math.min(timelineDuration, playheadTime + deltaTime));
@@ -4382,6 +4472,7 @@
         seekTimeline(rawTargetTime);
       });
 
+      // Mouseup handler
       window.addEventListener('mouseup', (e) => {
         if (!isScrubbing) return;
         isScrubbing = false;
@@ -4399,18 +4490,24 @@
         }
       });
 
-      // Mouse wheel / trackpad horizontal scrolling also smoothly scrubs underneath center needle
+      // Mouse wheel / trackpad scrolling: Ctrl+Wheel to Zoom, Normal Wheel to Scrub
       container.addEventListener('wheel', (e) => {
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey) {
+        if (e.ctrlKey) {
           e.preventDefault();
-          if (isPlaying) pausePlayback();
-          const pxPerSec = 40 * timelineZoom;
-          const precisionMultiplier = (e.shiftKey || isShiftKeyDown) ? 0.2 : 1.0;
-          const delta = e.deltaX || e.deltaY;
-          const deltaTime = (delta / pxPerSec) * 0.3 * precisionMultiplier;
-          const targetTime = Math.max(0, Math.min(timelineDuration, playheadTime + deltaTime));
-          seekTimeline(targetTime);
+          const zoomDelta = e.deltaY < 0 ? 0.15 : -0.15;
+          timelineZoom = Math.max(0.5, Math.min(3.0, Math.round((timelineZoom + zoomDelta) * 100) / 100));
+          renderTimeline();
+          return;
         }
+
+        e.preventDefault();
+        if (isPlaying) pausePlayback();
+        const pxPerSec = 40 * timelineZoom;
+        const precisionMultiplier = (e.shiftKey || isShiftKeyDown) ? 0.2 : 1.0;
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        const deltaTime = (delta / pxPerSec) * 0.4 * precisionMultiplier;
+        const targetTime = Math.max(0, Math.min(timelineDuration, playheadTime + deltaTime));
+        seekTimeline(targetTime);
       }, { passive: false });
 
       // Setup desktop NLE keyboard shortcuts
