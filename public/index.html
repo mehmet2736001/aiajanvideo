@@ -109,6 +109,21 @@
       border: 1px solid rgba(234, 179, 8, 0.35) !important;
     }
 
+    /* Precision Timeline Drag & Pan Styles (CapCut Standard) */
+    #timeline-scroll-container {
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body.is-scrubbing-timeline,
+    body.is-scrubbing-timeline #timeline-scroll-container,
+    body.is-scrubbing-timeline #timeline-inner-wrapper,
+    body.is-scrubbing-timeline .timeline-track-lane {
+      cursor: grabbing !important;
+      user-select: none !important;
+      -webkit-user-select: none !important;
+    }
+
     /* Timeline Drag Scrub & Selection Styles */
     .timeline-ruler-tick {
       border-left: 1px solid rgba(255, 255, 255, 0.15);
@@ -891,9 +906,19 @@
             <i class="fa-solid fa-chevron-left text-xs"></i>
           </button>
           
+          <!-- 1 KARE GERİ (33.3ms) -->
+          <button onclick="stepFrame(-1)" title="1 Kare Geri (33.3ms) [Alt+Sol / ,]" class="w-7 h-7 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-amber-400 hover:text-amber-300 flex items-center justify-center transition active:scale-95 shadow-sm">
+            <i class="fa-solid fa-angles-left text-[10px]"></i>
+          </button>
+
           <!-- BIG PLAY/PAUSE -->
-          <button onclick="toggleTimelinePlayback()" id="btn-transport-play" title="Oynat / Durdur" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-bold flex items-center justify-center transition shadow-md shadow-amber-500/20 active:scale-95">
+          <button onclick="toggleTimelinePlayback()" id="btn-transport-play" title="Oynat / Durdur (Boşluk)" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-bold flex items-center justify-center transition shadow-md shadow-amber-500/20 active:scale-95">
             <i class="fa-solid fa-play text-sm ml-0.5" id="icon-transport-play"></i>
+          </button>
+
+          <!-- 1 KARE İLERİ (33.3ms) -->
+          <button onclick="stepFrame(1)" title="1 Kare İleri (33.3ms) [Alt+Sağ / .]" class="w-7 h-7 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-amber-400 hover:text-amber-300 flex items-center justify-center transition active:scale-95 shadow-sm">
+            <i class="fa-solid fa-angles-right text-[10px]"></i>
           </button>
 
           <button onclick="jumpToNextScene()" title="Sonraki Sahne" class="w-7 h-7 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
@@ -1167,17 +1192,21 @@
         <!-- FIXED CENTER PLAYHEAD NEEDLE (Pervasive Center Needle - Stays strictly at 50% width!) -->
         <div id="playhead-fixed-center" class="pointer-events-none absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
           <!-- Top Marker (Red inverted diamond / arrow) -->
-          <div class="w-3.5 h-3.5 bg-red-500 rotate-45 shadow-[0_0_12px_#ef4444] -mt-1.5 shrink-0 rounded-xs border border-white/60"></div>
+          <div id="playhead-center-diamond" class="w-3.5 h-3.5 bg-red-500 rotate-45 shadow-[0_0_12px_#ef4444] -mt-1.5 shrink-0 rounded-xs border border-white/60 transition-colors duration-150"></div>
           <!-- Vertical Needle Line -->
-          <div class="w-[2px] flex-1 bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.95)]"></div>
-          <!-- Fixed Center Timestamp Badge -->
-          <div id="playhead-center-time-tag" class="absolute top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white font-mono font-extrabold text-[8px] px-1.5 py-0.2 rounded-full shadow-lg border border-red-400 whitespace-nowrap">
-            00:00.0
+          <div id="playhead-center-line" class="w-[2px] flex-1 bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.95)] transition-colors duration-150"></div>
+          <!-- Fixed Center Timestamp Badge with Frame Counter -->
+          <div id="playhead-center-time-tag" class="absolute top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white font-mono font-extrabold text-[8px] px-2 py-0.5 rounded-full shadow-lg border border-red-400 whitespace-nowrap transition-all duration-150">
+            00:00.0 · K0
+          </div>
+          <!-- Shift Micro-Precision Indicator (Appears when Shift is held or during micro-scrub) -->
+          <div id="playhead-shift-badge" style="display: none;" class="absolute top-11 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 font-bold text-[7px] px-2 py-0.5 rounded-full border border-amber-300 shadow-md whitespace-nowrap">
+            ⚡ HASSAS MOD (5x)
           </div>
         </div>
 
         <!-- SCROLL CONTAINER (Smoothly flows underneath the fixed center playhead) -->
-        <div id="timeline-scroll-container" class="w-full h-full overflow-x-auto overflow-y-hidden relative select-none" onmousedown="handleTimelineScrubStart(event)">
+        <div id="timeline-scroll-container" class="w-full h-full overflow-x-auto overflow-y-hidden relative select-none">
           
           <!-- MAGNET SNAP GUIDELINE (Golden vertical snap line inside tracks) -->
           <div id="timeline-magnet-guide" style="display: none;" class="absolute top-0 bottom-0 w-[2px] bg-amber-400 z-35 pointer-events-none shadow-[0_0_10px_#f59e0b]">
@@ -3581,7 +3610,8 @@
         const m = Math.floor(playheadTime / 60);
         const s = Math.floor(playheadTime % 60);
         const ms = Math.floor((playheadTime % 1) * 10);
-        timeTag.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}.${ms}`;
+        const frameNum = Math.floor(playheadTime * 30);
+        timeTag.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}.${ms} · K${frameNum}`;
       }
     }
 
@@ -3719,54 +3749,279 @@
       });
     }
 
+    // ==========================================
+    // CAPCUT & DAVINCI PRECISION TIMELINE ENGINE
+    // ==========================================
+    let isShiftKeyDown = false;
+    let shiftBadgeTimeout = null;
+
+    function showShiftBadgeTemporarily(text) {
+      const badge = document.getElementById('playhead-shift-badge');
+      if (!badge) return;
+      badge.innerText = text;
+      badge.style.display = 'block';
+      clearTimeout(shiftBadgeTimeout);
+      shiftBadgeTimeout = setTimeout(() => {
+        if (!isShiftKeyDown) badge.style.display = 'none';
+      }, 1000);
+    }
+
+    // Step by exact frames (30 FPS standard: 1 frame = ~0.03333s)
+    function stepFrame(frames = 1) {
+      const fps = 30.0;
+      const frameDuration = 1.0 / fps;
+      if (isPlaying) pausePlayback();
+      const newTime = Math.max(0, Math.min(timelineDuration, playheadTime + (frames * frameDuration)));
+      seekTimeline(newTime);
+      showShiftBadgeTemporarily(`Kare ${Math.floor(newTime * fps)} (${frames > 0 ? '+1 Kare' : '-1 Kare'})`);
+    }
+
+    // Gather all magnetic snap points across scenes, quotes, PIPs and subtitles
+    function getAllMagneticSnapPoints() {
+      const points = [0, timelineDuration];
+      (scenes || []).forEach(s => {
+        if (typeof s.startTime === 'number') points.push(s.startTime);
+        if (typeof s.endTime === 'number') points.push(s.endTime);
+      });
+      ((videoData && videoData.quoteVideos) || []).forEach(qv => {
+        const start = qv.timelineStart ?? 0;
+        const dur = qv.duration || Math.max(1, (qv.trimEnd || 6) - (qv.trimStart || 0));
+        points.push(start);
+        points.push(start + dur);
+      });
+      ((videoData && videoData.pipVideos) || []).forEach(pv => {
+        const start = pv.timelineStart ?? 0;
+        const dur = pv.duration || Math.max(1, (pv.trimEnd || 5) - (pv.trimStart || 0));
+        points.push(start);
+        points.push(start + dur);
+      });
+      ((videoData && videoData.subtitles) || []).forEach(sub => {
+        if (typeof sub.start === 'number') points.push(sub.start);
+        if (typeof sub.end === 'number') points.push(sub.end);
+      });
+      return Array.from(new Set(points.filter(p => !isNaN(p) && p >= 0 && p <= timelineDuration))).sort((a, b) => a - b);
+    }
+
+    // Visual feedback when snapped to a magnet point
+    function setCenterNeedleSnapState(isSnapped, snapTime = 0) {
+      const line = document.getElementById('playhead-center-line');
+      const diamond = document.getElementById('playhead-center-diamond');
+      const timeTag = document.getElementById('playhead-center-time-tag');
+      if (isSnapped) {
+        if (line) {
+          line.classList.remove('bg-red-500');
+          line.classList.add('bg-amber-400');
+        }
+        if (diamond) {
+          diamond.classList.remove('bg-red-500');
+          diamond.classList.add('bg-amber-400');
+        }
+        if (timeTag) {
+          timeTag.classList.remove('bg-red-600', 'border-red-400');
+          timeTag.classList.add('bg-amber-500', 'text-slate-950', 'border-amber-300');
+        }
+      } else {
+        if (line) {
+          line.classList.remove('bg-amber-400');
+          line.classList.add('bg-red-500');
+        }
+        if (diamond) {
+          diamond.classList.remove('bg-amber-400');
+          diamond.classList.add('bg-red-500');
+        }
+        if (timeTag) {
+          timeTag.classList.remove('bg-amber-500', 'text-slate-950', 'border-amber-300');
+          timeTag.classList.add('bg-red-600', 'text-white', 'border-red-400');
+        }
+      }
+    }
+
     function setupScrubListeners() {
       const container = document.getElementById('timeline-scroll-container');
       if (!container) return;
-      let isDragging = false;
+
+      let isScrubbing = false;
+      let lastClientX = 0;
       let startClientX = 0;
       let startTime = 0;
+      let hasDragged = false;
 
-      container.addEventListener('mousedown', (e) => {
-        if (isDraggingMediaClip) return;
-        isDragging = true;
-        startClientX = e.clientX;
-        startTime = playheadTime;
-        scrubAtEvent(e);
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (isDragging && !isDraggingMediaClip) {
-          scrubAtEvent(e);
+      // Track Shift key for dynamic micro-precision
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Shift') {
+          isShiftKeyDown = true;
+          const shiftBadge = document.getElementById('playhead-shift-badge');
+          if (shiftBadge) {
+            shiftBadge.innerText = '⚡ HASSAS MOD (5x)';
+            shiftBadge.style.display = 'block';
+          }
         }
       });
 
-      window.addEventListener('mouseup', () => {
-        isDragging = false;
+      window.addEventListener('keyup', (e) => {
+        if (e.key === 'Shift') {
+          isShiftKeyDown = false;
+          const shiftBadge = document.getElementById('playhead-shift-badge');
+          if (shiftBadge) shiftBadge.style.display = 'none';
+        }
+      });
+
+      container.addEventListener('mousedown', (e) => {
+        // Do not intercept if user clicked on interactive clips, trim handles, or buttons
+        if (isDraggingMediaClip) return;
+        if (e.target.closest('button') || e.target.closest('.timeline-clip-item') || e.target.closest('.trim-handle')) return;
+
+        if (isPlaying) pausePlayback();
+
+        isScrubbing = true;
+        hasDragged = false;
+        startClientX = e.clientX;
+        lastClientX = e.clientX;
+        startTime = playheadTime;
+
+        document.body.classList.add('is-scrubbing-timeline');
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isScrubbing || isDraggingMediaClip) return;
+
+        const deltaTotalX = e.clientX - startClientX;
+        if (Math.abs(deltaTotalX) > 2) {
+          hasDragged = true;
+        }
+
+        const deltaStepX = e.clientX - lastClientX;
+        lastClientX = e.clientX;
+
+        const pxPerSec = 40 * timelineZoom;
+        const precisionMultiplier = (e.shiftKey || isShiftKeyDown) ? 0.2 : 1.0;
+
+        // PHYSICAL REEL / CAPCUT FORMULA:
+        // Dragging mouse left (negative deltaStepX) pulls the filmstrip left, which advances time forward (+deltaTime).
+        // Dragging mouse right (positive deltaStepX) moves backward in time (-deltaTime).
+        const deltaTime = -(deltaStepX / pxPerSec) * precisionMultiplier;
+        let rawTargetTime = Math.max(0, Math.min(timelineDuration, playheadTime + deltaTime));
+
+        // Magnetic Snap check (unless Ctrl key is held)
+        let isSnapped = false;
+        if (isMagnetEnabled && !e.ctrlKey) {
+          const snapPoints = getAllMagneticSnapPoints();
+          const snapThreshold = (8 / pxPerSec) * precisionMultiplier; // ~8 pixels tolerance
+          for (const sp of snapPoints) {
+            if (Math.abs(rawTargetTime - sp) <= snapThreshold) {
+              rawTargetTime = sp;
+              isSnapped = true;
+              break;
+            }
+          }
+        }
+
+        setCenterNeedleSnapState(isSnapped, rawTargetTime);
+        seekTimeline(rawTargetTime);
+      });
+
+      window.addEventListener('mouseup', (e) => {
+        if (!isScrubbing) return;
+        isScrubbing = false;
+        document.body.classList.remove('is-scrubbing-timeline');
+        setCenterNeedleSnapState(false);
+
+        // If user simply single-clicked without dragging, jump that clicked point to the center needle!
+        if (!hasDragged && !isDraggingMediaClip) {
+          const rect = container.getBoundingClientRect();
+          const pxPerSec = 40 * timelineZoom;
+          const halfWidth = container.clientWidth / 2;
+          const clickOffsetFromCenter = (e.clientX - rect.left) - halfWidth;
+          const targetTime = Math.max(0, Math.min(timelineDuration, startTime + (clickOffsetFromCenter / pxPerSec)));
+          seekTimeline(targetTime);
+        }
       });
 
       // Mouse wheel / trackpad horizontal scrolling also smoothly scrubs underneath center needle
       container.addEventListener('wheel', (e) => {
         if (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey) {
           e.preventDefault();
+          if (isPlaying) pausePlayback();
           const pxPerSec = 40 * timelineZoom;
+          const precisionMultiplier = (e.shiftKey || isShiftKeyDown) ? 0.2 : 1.0;
           const delta = e.deltaX || e.deltaY;
-          const targetTime = Math.max(0, Math.min(timelineDuration, playheadTime + (delta / pxPerSec) * 0.4));
+          const deltaTime = (delta / pxPerSec) * 0.3 * precisionMultiplier;
+          const targetTime = Math.max(0, Math.min(timelineDuration, playheadTime + deltaTime));
           seekTimeline(targetTime);
         }
       }, { passive: false });
+
+      // Setup desktop NLE keyboard shortcuts
+      setupGlobalKeyboardShortcuts();
     }
 
-    function scrubAtEvent(e) {
-      const container = document.getElementById('timeline-scroll-container');
-      if (!container) return;
-      const rect = container.getBoundingClientRect();
-      const pxPerSec = 40 * timelineZoom;
-      const halfWidth = container.clientWidth / 2;
+    // Global desktop NLE keyboard shortcuts for timeline scrubbing
+    function setupGlobalKeyboardShortcuts() {
+      window.addEventListener('keydown', (e) => {
+        const tag = (e.target && e.target.tagName) || '';
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target && e.target.isContentEditable)) {
+          return;
+        }
 
-      // Calculate clicked point relative to center playhead line
-      const clickOffsetFromCenter = (e.clientX - rect.left) - halfWidth;
-      const targetTime = Math.max(0, Math.min(timelineDuration, playheadTime + (clickOffsetFromCenter / pxPerSec)));
-      seekTimeline(targetTime);
+        // Space -> Toggle Play/Pause
+        if (e.code === 'Space') {
+          e.preventDefault();
+          toggleTimelinePlayback();
+          return;
+        }
+
+        // Home -> 0.0s
+        if (e.key === 'Home') {
+          e.preventDefault();
+          seekTimeline(0);
+          return;
+        }
+
+        // End -> timelineDuration
+        if (e.key === 'End') {
+          e.preventDefault();
+          seekTimeline(timelineDuration);
+          return;
+        }
+
+        // 1 Frame Step Back: Alt + Left OR ',' OR '<'
+        if ((e.altKey && e.key === 'ArrowLeft') || e.key === ',' || e.key === '<') {
+          e.preventDefault();
+          stepFrame(-1);
+          return;
+        }
+
+        // 1 Frame Step Forward: Alt + Right OR '.' OR '>'
+        if ((e.altKey && e.key === 'ArrowRight') || e.key === '.' || e.key === '>') {
+          e.preventDefault();
+          stepFrame(1);
+          return;
+        }
+
+        // 1 Second Jump: Shift + Left / Right
+        if (e.shiftKey && e.key === 'ArrowLeft') {
+          e.preventDefault();
+          seekTimeline(Math.max(0, playheadTime - 1.0));
+          return;
+        }
+        if (e.shiftKey && e.key === 'ArrowRight') {
+          e.preventDefault();
+          seekTimeline(Math.min(timelineDuration, playheadTime + 1.0));
+          return;
+        }
+
+        // Plain Left / Right Arrow -> 1 Frame Step
+        if (e.key === 'ArrowLeft' && !e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          stepFrame(-1);
+          return;
+        }
+        if (e.key === 'ArrowRight' && !e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          stepFrame(1);
+          return;
+        }
+      });
     }
 
     function changeTimelineZoom(val) {
