@@ -3582,7 +3582,7 @@
           if (!hasMovedScene) selectScene(s.id);
         };
 
-        // Enable Free Drag & Pan for Scene Block along the timeline
+        // Enable Free Drag & Pan for Scene Block along the timeline with Magnetic Snapping
         let hasMovedScene = false;
         block.addEventListener('mousedown', (e) => {
           if (e.target.closest('.trim-handle') || e.target.closest('button')) return;
@@ -3591,22 +3591,38 @@
           hasMovedScene = false;
           const startMouseX = e.clientX;
           const initialStart = s.startTime || 0;
-          const duration = Math.max(1, (s.endTime || 10) - initialStart);
+          const duration = Math.max(0.5, (s.endTime || (initialStart + 10)) - initialStart);
 
-          block.classList.add('opacity-90', 'shadow-2xl', 'ring-2', 'ring-amber-400');
+          block.classList.add('opacity-90', 'shadow-2xl', 'ring-2', 'ring-amber-400', 'z-40');
 
           function onMouseMove(moveEvt) {
             const deltaX = moveEvt.clientX - startMouseX;
-            if (Math.abs(deltaX) > 3) hasMovedScene = true;
+            if (Math.abs(deltaX) > 2) hasMovedScene = true;
             if (!hasMovedScene) return;
 
             const pxSec = 40 * timelineZoom;
             const deltaSec = deltaX / pxSec;
-            const newStart = Math.max(0, initialStart + deltaSec);
-            s.startTime = Math.round(newStart * 10) / 10;
-            s.endTime = Math.round((newStart + duration) * 10) / 10;
+            const rawStart = Math.max(0, initialStart + deltaSec);
+
+            // CapCut / DaVinci Magnetic Snapping
+            const snapRes = applyMagneticSnap(rawStart, duration, s.id, pxSec, moveEvt.ctrlKey);
+            s.startTime = snapRes.snappedStart;
+            s.endTime = Math.round((snapRes.snappedStart + duration) * 100) / 100;
 
             block.style.left = `${s.startTime * pxSec}px`;
+
+            if (snapRes.isSnapped) {
+              block.classList.add('ring-2', 'ring-amber-400', 'shadow-[0_0_20px_rgba(245,158,11,0.7)]');
+            } else {
+              block.classList.remove('shadow-[0_0_20px_rgba(245,158,11,0.7)]');
+            }
+
+            // Real-time time label update on card
+            const timeInfoEl = block.querySelector('.font-mono.truncate');
+            if (timeInfoEl) {
+              timeInfoEl.innerText = `${s.startTime.toFixed(1)}s - ${s.endTime.toFixed(1)}s (${duration.toFixed(1)}s) · ${s.layoutType || 'pip_split'}`;
+            }
+
             timelineDuration = calculateDynamicTimelineDuration(videoData, scenes);
             updatePlayheadPosition();
           }
@@ -3614,10 +3630,16 @@
           function onMouseUp() {
             window.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('mouseup', onMouseUp);
-            block.classList.remove('opacity-90', 'shadow-2xl', 'ring-2', 'ring-amber-400');
+            hideMagneticGuide();
+            block.classList.remove('opacity-90', 'shadow-2xl', 'ring-2', 'ring-amber-400', 'shadow-[0_0_20px_rgba(245,158,11,0.7)]', 'z-40');
             setTimeout(() => { isDraggingMediaClip = false; }, 50);
 
             if (hasMovedScene) {
+              // If this was the first scene, sync aiKurguStartOffset
+              if (scenes[0] && scenes[0].id === s.id) {
+                if (videoData) videoData.aiKurguStartOffset = s.startTime;
+              }
+
               fetch('/api/timeline/scenes', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -3626,8 +3648,11 @@
                 timelineDuration = calculateDynamicTimelineDuration(videoData, scenes);
                 renderTimeline();
                 renderLivePreviewCanvas();
-                showToast(`Sahne başlangıcı ${s.startTime.toFixed(1)}s olarak güncellendi`, 'info');
-              }).catch(err => console.error(err));
+                updateTimeDisplays();
+                showToast(`🧲 Sahne "${title}" konumu güncellendi: ${s.startTime.toFixed(1)}s - ${s.endTime.toFixed(1)}s`, 'success');
+              }).catch(err => {
+                console.error('Scene update error:', err);
+              });
             }
           }
 
@@ -5844,10 +5869,186 @@
     }
 
     // ==========================================
-    // ADVANCED TIMELINE MEDIA DRAGGING & MAGNET SNAPPING
+        // ==========================================
+    // UNIFIED TIMELINE MAGNETIC SNAPPING ENGINE (CapCut / Premiere Pro Standard)
     // ==========================================
     let isMagnetEnabled = true;
-    let isDraggingMediaClip = false;
+
+    function getTimelineSnapTargets(excludeId = null) {
+      const targets = [];
+
+      // 1. Playhead Needle (Oynatma Çizgisi) - Core User Request!
+      if (typeof playheadTime === 'number' && !isNaN(playheadTime)) {
+        targets.push({ time: Math.round(playheadTime * 100) / 100, label: 'Oynatma Çizgisi', type: 'playhead', priority: 10 });
+      }
+
+      // 2. Timeline Start (00:00) & Dynamic End
+      targets.push({ time: 0.0, label: '00:00 (Başlangıç)', type: 'boundary', priority: 5 });
+      if (typeof timelineDuration === 'number' && timelineDuration > 0) {
+        targets.push({ time: Math.round(timelineDuration * 100) / 100, label: 'Zaman Tüneli Bitişi', type: 'boundary', priority: 4 });
+      }
+
+      // 3. AI Sahneleri (Scenes) Start & End Boundaries
+      (scenes || []).forEach((sc, i) => {
+        if (sc.id !== excludeId) {
+          const sStart = typeof sc.startTime === 'number' ? sc.startTime : 0;
+          const sEnd = typeof sc.endTime === 'number' ? sc.endTime : (sStart + (sc.duration || 10));
+          targets.push({ time: Math.round(sStart * 100) / 100, label: `Sahne ${i + 1} Başı`, type: 'scene_start', priority: 8 });
+          targets.push({ time: Math.round(sEnd * 100) / 100, label: `Sahne ${i + 1} Sonu`, type: 'scene_end', priority: 8 });
+        }
+      });
+
+      // 4. Alıntı Videoları (Quote Videos) Start & End
+      ((videoData && videoData.quoteVideos) || []).forEach((q, i) => {
+        if (q.id !== excludeId) {
+          const qStart = q.timelineStart || 0;
+          const qDur = q.duration || Math.max(1, (q.trimEnd || 6) - (q.trimStart || 0));
+          const qEnd = qStart + qDur;
+          targets.push({ time: Math.round(qStart * 100) / 100, label: `Alıntı Başı`, type: 'quote_start', priority: 9 });
+          targets.push({ time: Math.round(qEnd * 100) / 100, label: `Alıntı Sonu`, type: 'quote_end', priority: 9 });
+        }
+      });
+
+      // 5. PIP Videoları Start & End
+      ((videoData && videoData.pipVideos) || []).forEach((p, i) => {
+        if (p.id !== excludeId) {
+          const pStart = p.startTime || 0;
+          const pDur = p.duration || Math.max(1, (p.trimEnd || 5) - (p.trimStart || 0));
+          const pEnd = pStart + pDur;
+          targets.push({ time: Math.round(pStart * 100) / 100, label: `PIP Başı`, type: 'pip_start', priority: 7 });
+          targets.push({ time: Math.round(pEnd * 100) / 100, label: `PIP Sonu`, type: 'pip_end', priority: 7 });
+        }
+      });
+
+      // 6. PNG & Sticker Katmanı Start & End
+      ((videoData && videoData.overlayImages) || []).forEach((o, i) => {
+        if (o.id !== excludeId) {
+          const oStart = o.startTime || 0;
+          const oEnd = oStart + (o.duration || 5);
+          targets.push({ time: Math.round(oStart * 100) / 100, label: `PNG Başı`, type: 'png_start', priority: 6 });
+          targets.push({ time: Math.round(oEnd * 100) / 100, label: `PNG Sonu`, type: 'png_end', priority: 6 });
+        }
+      });
+
+      // Group nearby targets (within 0.05s) into merged labels for clean display
+      const merged = [];
+      targets.sort((a, b) => a.time - b.time);
+      for (const t of targets) {
+        const last = merged[merged.length - 1];
+        if (last && Math.abs(last.time - t.time) <= 0.05) {
+          if (!last.label.includes(t.label)) {
+            last.label = `${last.label} & ${t.label}`;
+          }
+          last.priority = Math.max(last.priority, t.priority);
+        } else {
+          merged.push({ ...t });
+        }
+      }
+
+      return merged;
+    }
+
+    function applyMagneticSnap(rawStart, duration, excludeId, pxPerSec, isCtrlPressed = false) {
+      if (!isMagnetEnabled || isCtrlPressed) {
+        hideMagneticGuide();
+        return {
+          snappedStart: Math.max(0, Math.round(rawStart * 100) / 100),
+          isSnapped: false,
+          activeTarget: null
+        };
+      }
+
+      const rawEnd = rawStart + duration;
+      const targets = getTimelineSnapTargets(excludeId);
+
+      // Magnetic snap threshold: 15 pixels physically on screen (adapts dynamically with zoom)
+      const SNAP_THRESHOLD_SEC = Math.max(0.18, 15 / pxPerSec);
+
+      let bestSnap = null;
+      let minDistance = Infinity;
+
+      for (const t of targets) {
+        // 1. Check card START (left edge) snapping to target point
+        const distStart = Math.abs(rawStart - t.time);
+        if (distStart <= SNAP_THRESHOLD_SEC) {
+          const score = distStart - (t.priority * 0.005);
+          if (score < minDistance) {
+            minDistance = score;
+            bestSnap = {
+              snappedStart: t.time,
+              snapLineTime: t.time,
+              target: t,
+              edge: 'start',
+              label: `🧲 ${t.label}`
+            };
+          }
+        }
+
+        // 2. Check card END (right edge) snapping to target point
+        const distEnd = Math.abs(rawEnd - t.time);
+        if (distEnd <= SNAP_THRESHOLD_SEC) {
+          const score = distEnd - (t.priority * 0.005);
+          if (score < minDistance) {
+            minDistance = score;
+            bestSnap = {
+              snappedStart: Math.max(0, t.time - duration),
+              snapLineTime: t.time,
+              target: t,
+              edge: 'end',
+              label: `🧲 ${t.label} (Klip Bitişi)`
+            };
+          }
+        }
+      }
+
+      if (bestSnap) {
+        showMagneticGuide(bestSnap.snapLineTime, bestSnap.label, pxPerSec);
+        return {
+          snappedStart: Math.max(0, Math.round(bestSnap.snappedStart * 100) / 100),
+          isSnapped: true,
+          activeTarget: bestSnap.target,
+          snapLineTime: bestSnap.snapLineTime
+        };
+      } else {
+        hideMagneticGuide();
+        return {
+          snappedStart: Math.max(0, Math.round(rawStart * 100) / 100),
+          isSnapped: false,
+          activeTarget: null
+        };
+      }
+    }
+
+    function showMagneticGuide(snapTimeSec, labelText, pxPerSec) {
+      let guide = document.getElementById('timeline-magnet-guide');
+      let label = document.getElementById('timeline-magnet-label');
+      const innerWrapper = document.getElementById('timeline-inner-wrapper');
+      const scrollParent = document.getElementById('timeline-scroll-container');
+      if (!innerWrapper) return;
+
+      const halfWidth = scrollParent ? Math.floor(scrollParent.clientWidth / 2) : 400;
+      const targetLeft = Math.round((snapTimeSec * pxPerSec) + halfWidth);
+
+      // Ensure guide is inside timeline-inner-wrapper for full track height
+      if (guide && guide.parentElement !== innerWrapper) {
+        innerWrapper.appendChild(guide);
+      }
+
+      if (guide) {
+        guide.style.display = 'block';
+        guide.style.left = `${targetLeft}px`;
+        guide.className = 'absolute top-0 bottom-0 w-[2px] bg-amber-400 z-50 pointer-events-none shadow-[0_0_14px_#f59e0b]';
+      }
+
+      if (label) {
+        label.innerText = `${labelText} (${snapTimeSec.toFixed(1)}s)`;
+      }
+    }
+
+    function hideMagneticGuide() {
+      const guide = document.getElementById('timeline-magnet-guide');
+      if (guide) guide.style.display = 'none';
+    }
 
     function toggleTimelineMagnet() {
       isMagnetEnabled = !isMagnetEnabled;
@@ -5875,111 +6076,49 @@
 
       targetEl.classList.add('ring-2', 'ring-amber-400', 'z-40', 'opacity-90', 'shadow-2xl');
 
-      const guide = document.getElementById('timeline-magnet-guide');
-      const guideLabel = document.getElementById('timeline-magnet-label');
-
-      // 1. Collect all snap targets across timeline
-      const snapTargets = [];
-      snapTargets.push({ time: 0, label: '0:00 (Başlangıç)' });
-      snapTargets.push({ time: timelineDuration, label: 'Bitiş' });
-      snapTargets.push({ time: playheadTime, label: 'Oynatma Çizgisi' });
-
-      // Scene boundaries
-      scenes.forEach((sc, i) => {
-        snapTargets.push({ time: sc.startTime, label: `Sahne ${i+1} Başı` });
-        snapTargets.push({ time: sc.endTime, label: `Sahne ${i+1} Sonu` });
-      });
-
-      // Other Quote videos
-      (videoData.quoteVideos || []).forEach(q => {
-        if (q.id !== itemId) {
-          snapTargets.push({ time: q.timelineStart, label: 'Alıntı Başı' });
-          snapTargets.push({ time: q.timelineStart + (q.duration || 5), label: 'Alıntı Sonu' });
-        }
-      });
-
-      // Other PIP videos
-      (videoData.pipVideos || []).forEach(p => {
-        if (p.id !== itemId) {
-          snapTargets.push({ time: p.startTime, label: 'PIP Başı' });
-          snapTargets.push({ time: p.endTime, label: 'PIP Sonu' });
-        }
-      });
-
-      // Other PNG overlays
-      (videoData.overlayImages || []).forEach(o => {
-        if (o.id !== itemId) {
-          snapTargets.push({ time: o.startTime, label: 'PNG Başı' });
-          snapTargets.push({ time: o.endTime, label: 'PNG Sonu' });
-        }
-      });
-
       let currentNewStart = initialStart;
 
       function onMouseMove(ev) {
         const deltaX = ev.clientX - startMouseX;
-        if (Math.abs(deltaX) > 3) hasMoved = true;
+        if (Math.abs(deltaX) > 2) hasMoved = true;
         if (!hasMoved) return;
 
         isDraggingMediaClip = true;
         const pxPerSec = 40 * timelineZoom;
         const deltaSec = deltaX / pxPerSec;
-        const rawStart = Math.max(0, Math.min(timelineDuration - duration, initialStart + deltaSec));
+        const rawStart = Math.max(0, initialStart + deltaSec);
 
-        let finalStart = rawStart;
-        let snapped = false;
-        let activeSnap = null;
+        // Apply unified magnetic snap
+        const snapRes = applyMagneticSnap(rawStart, duration, itemId, pxPerSec, ev.ctrlKey);
+        currentNewStart = snapRes.snappedStart;
 
-        if (isMagnetEnabled) {
-          const SNAP_THRESHOLD_SEC = 16 / pxPerSec; // ~16px threshold
-
-          for (const target of snapTargets) {
-            // Snap clip start edge
-            if (Math.abs(rawStart - target.time) <= SNAP_THRESHOLD_SEC) {
-              finalStart = target.time;
-              snapped = true;
-              activeSnap = target;
-              break;
-            }
-            // Snap clip end edge
-            if (Math.abs((rawStart + duration) - target.time) <= SNAP_THRESHOLD_SEC) {
-              finalStart = Math.max(0, target.time - duration);
-              snapped = true;
-              activeSnap = { time: target.time, label: target.label + ' (Klip Bitişi)' };
-              break;
-            }
-          }
-        }
-
-        currentNewStart = Math.max(0, Math.min(timelineDuration - duration, finalStart));
-
-        // Update block left visually
         targetEl.style.left = `${currentNewStart * pxPerSec}px`;
 
-        // Update magnet visual guideline
-        if (snapped && activeSnap && guide) {
-          guide.style.display = 'block';
-          guide.style.left = `${activeSnap.time * pxPerSec}px`;
-          if (guideLabel) guideLabel.innerText = `🧲 ${activeSnap.label} (${activeSnap.time.toFixed(1)}s)`;
-        } else if (guide) {
-          guide.style.display = 'none';
+        if (snapRes.isSnapped) {
+          targetEl.classList.add('shadow-[0_0_20px_rgba(245,158,11,0.7)]');
+        } else {
+          targetEl.classList.remove('shadow-[0_0_20px_rgba(245,158,11,0.7)]');
         }
 
-        // Live Preview seek
+        // Live update time text inside the dragged clip
+        const monoTag = targetEl.querySelector('.font-mono');
+        if (monoTag) {
+          const end = currentNewStart + duration;
+          monoTag.innerText = `${currentNewStart.toFixed(1)}s - ${end.toFixed(1)}s`;
+        }
+
         seekTimeline(currentNewStart);
       }
 
       async function onMouseUp(ev) {
         window.removeEventListener('mousemove', onMouseMove);
         window.removeEventListener('mouseup', onMouseUp);
+        hideMagneticGuide();
 
-        targetEl.classList.remove('ring-2', 'ring-amber-400', 'z-40', 'opacity-90', 'shadow-2xl');
-        if (guide) guide.style.display = 'none';
-
+        targetEl.classList.remove('ring-2', 'ring-amber-400', 'z-40', 'opacity-90', 'shadow-2xl', 'shadow-[0_0_20px_rgba(245,158,11,0.7)]');
         setTimeout(() => { isDraggingMediaClip = false; }, 50);
 
         if (!hasMoved) {
-          // Just a single click: seek and preview
           seekTimeline(initialStart);
           return;
         }
@@ -6020,8 +6159,10 @@
           if (!res.ok) throw new Error('Konum kaydedilemedi');
           const data = await res.json();
           videoData = data.video_data;
+          timelineDuration = calculateDynamicTimelineDuration(videoData, scenes);
           renderTimeline();
           renderLivePreviewCanvas();
+          updateTimeDisplays();
           showToast(`🧲 Klip taşındı: ${currentNewStart.toFixed(1)}s - ${(currentNewStart + duration).toFixed(1)}s`, 'success');
         } catch (err) {
           console.error(err);
@@ -6070,14 +6211,59 @@
         tooltip.style.left = `${moveEvt.clientX + 14}px`;
         tooltip.style.top = `${moveEvt.clientY - 32}px`;
 
+        const targets = getTimelineSnapTargets(scene.id);
+        const SNAP_THRESHOLD_SEC = Math.max(0.18, 14 / pxPerSec);
+
         if (side === 'left') {
-          currentNewStart = Math.max(0, Math.min(origEnd - 1.0, origStart + deltaSec));
+          let rawStart = Math.max(0, Math.min(origEnd - 0.5, origStart + deltaSec));
+          let snapped = false;
+          let snapTarget = null;
+
+          if (isMagnetEnabled && !moveEvt.ctrlKey) {
+            for (const t of targets) {
+              if (Math.abs(rawStart - t.time) <= SNAP_THRESHOLD_SEC) {
+                rawStart = t.time;
+                snapped = true;
+                snapTarget = t;
+                break;
+              }
+            }
+          }
+
+          currentNewStart = rawStart;
+          if (snapped && snapTarget) {
+            showMagneticGuide(snapTarget.time, `🧲 ${snapTarget.label}`, pxPerSec);
+          } else {
+            hideMagneticGuide();
+          }
+
           const newW = (origEnd - currentNewStart) * pxPerSec;
           blockEl.style.left = `${currentNewStart * pxPerSec}px`;
           blockEl.style.width = `${Math.max(40, newW - 4)}px`;
           tooltip.innerText = `Başlangıç: ${currentNewStart.toFixed(2)}s | Süre: ${(origEnd - currentNewStart).toFixed(2)}s`;
         } else {
-          currentNewEnd = Math.max(origStart + 1.0, origEnd + deltaSec);
+          let rawEnd = Math.max(origStart + 0.5, origEnd + deltaSec);
+          let snapped = false;
+          let snapTarget = null;
+
+          if (isMagnetEnabled && !moveEvt.ctrlKey) {
+            for (const t of targets) {
+              if (Math.abs(rawEnd - t.time) <= SNAP_THRESHOLD_SEC) {
+                rawEnd = t.time;
+                snapped = true;
+                snapTarget = t;
+                break;
+              }
+            }
+          }
+
+          currentNewEnd = rawEnd;
+          if (snapped && snapTarget) {
+            showMagneticGuide(snapTarget.time, `🧲 ${snapTarget.label}`, pxPerSec);
+          } else {
+            hideMagneticGuide();
+          }
+
           const newW = (currentNewEnd - origStart) * pxPerSec;
           blockEl.style.width = `${Math.max(40, newW - 4)}px`;
           tooltip.innerText = `Bitiş: ${currentNewEnd.toFixed(2)}s | Süre: ${(currentNewEnd - origStart).toFixed(2)}s`;
@@ -6087,6 +6273,7 @@
       async function onMouseUp() {
         window.removeEventListener('mousemove', onMouseMove);
         window.removeEventListener('mouseup', onMouseUp);
+        hideMagneticGuide();
         tooltip.style.display = 'none';
         isTrimming = false;
 

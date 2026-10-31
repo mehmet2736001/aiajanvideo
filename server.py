@@ -1996,6 +1996,7 @@ def update_timeline_scenes(req: TimelineUpdateScenesRequest):
     video_data["scenes"] = req.scenes
     if req.scenes:
         video_data["totalDuration"] = calculate_dynamic_timeline_duration(video_data, req.scenes)
+        video_data["aiKurguStartOffset"] = float(req.scenes[0].get("startTime", 0.0) or 0.0)
         s0 = req.scenes[0]
         for key in ["headerSubtitle", "headerLine1", "circledWord", "headerLine2", "highlightedText", "strikeWord", "layoutType", "illustrationUrl", "illustrationCaption", "illustrationStyle"]:
             if key in s0:
