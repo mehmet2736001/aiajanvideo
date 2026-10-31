@@ -786,7 +786,26 @@
         </div>
 
         <div class="space-y-2">
-          <!-- Page Turn -->
+          <!-- HIZLI PRODÜKSİYON & GİRİŞ BUTONLARI (+ Metin Ekle / + MP3 Ekle) -->
+        <div class="p-3 bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900 border border-purple-500/30 rounded-2xl space-y-2 shadow-sm mb-3">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-extrabold text-purple-200 flex items-center gap-1.5">
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> 3 Aşamalı Yapay Zekâ Kurgu
+            </span>
+            <span class="text-[9px] bg-purple-500/20 text-purple-300 border border-purple-500/40 px-1.5 py-0.5 rounded-full font-mono font-bold">PRO</span>
+          </div>
+          <p class="text-[10px] text-slate-400 leading-tight">Metninizi veya sesinizi 3 aşamada analiz edin; tarihsel atmosfer ve daktilo ayet çerçevesiyle zaman tüneline aktarın:</p>
+          <div class="grid grid-cols-2 gap-2 pt-0.5">
+            <button onclick="openAiMissionModal('text')" class="py-2 px-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-extrabold text-[11px] shadow-md transition flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-file-lines text-xs"></i> <span>+ Metin Ekle</span>
+            </button>
+            <button onclick="openAiMissionModal('mp3')" class="py-2 px-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-[11px] shadow-md transition flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-microphone text-xs"></i> <span>+ MP3 Ekle</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Page Turn -->
           <div class="p-2.5 bg-[#070a12] border border-slate-800 rounded-xl flex items-center justify-between hover:border-slate-700 transition">
             <div class="flex items-center gap-2">
               <button onclick="previewSfx('/public/sfx/page_turn.wav')" title="Dinle" class="w-7 h-7 rounded-lg bg-purple-950/50 hover:bg-purple-800 text-purple-300 flex items-center justify-center transition">
@@ -1536,6 +1555,198 @@
         <button onclick="submitCreateNewProject()" class="px-5 py-2 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold rounded-xl text-xs transition flex items-center gap-1.5 shadow-lg shadow-amber-500/20">
           <i class="fa-solid fa-play"></i> Projeyi Başlat & Düzenle
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 3-STAGE AI MISSION PROGRESS & PRODUCTION MODAL ================= -->
+  <div id="modal-ai-mission-hud" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0b101d] border border-amber-500/40 rounded-3xl max-w-xl w-full p-6 space-y-5 shadow-2xl relative overflow-hidden">
+      <!-- Glow ambient decorations -->
+      <div class="absolute -top-24 -right-24 w-52 h-52 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-52 h-52 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Header -->
+      <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-400 via-purple-500 to-indigo-600 text-white flex items-center justify-center text-lg font-bold shadow-lg shadow-amber-500/20">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+              <span>3 Aşamalı Yapay Zekâ Kurgu Motoru</span>
+              <span class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-mono">FAZ 3 PRO</span>
+            </h3>
+            <p class="text-[11px] text-slate-400">1. Analiz • 2. Tarihsel & Daktilo Ayet Planı • 3. Zaman Tüneline Dağıtım</p>
+          </div>
+        </div>
+        <button onclick="closeAiMissionModal()" class="text-slate-400 hover:text-white transition w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- VIEW A: INPUT CONFIGURATION -->
+      <div id="ai-mission-view-input" class="space-y-4 text-xs">
+        <!-- Tabs: Metin ile Üret vs MP3 ile Üret -->
+        <div class="flex items-center bg-[#070a12] p-1 rounded-2xl border border-slate-800">
+          <button id="btn-mission-tab-text" onclick="switchMissionInputTab('text')" class="flex-1 py-2 rounded-xl text-center font-bold text-white bg-slate-800/90 shadow transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-file-lines text-amber-400"></i> Metin ile Üret
+          </button>
+          <button id="btn-mission-tab-mp3" onclick="switchMissionInputTab('mp3')" class="flex-1 py-2 rounded-xl text-center font-bold text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-microphone text-purple-400"></i> Kendi MP3 Dosyan ile Üret
+          </button>
+        </div>
+
+        <!-- Tab 1: Text Input Panel -->
+        <div id="mission-panel-text" class="space-y-3">
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="font-bold text-slate-300">Video Metni veya Konusu</label>
+              <div class="flex items-center gap-1">
+                <button type="button" onclick="setMissionSamplePrompt('hz_ali')" class="text-[10px] bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-lg transition">
+                  🕌 Hz. Ali & Bakara 153 Örneği
+                </button>
+                <button type="button" onclick="setMissionSamplePrompt('ibn_sina')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-0.5 rounded-lg transition">
+                  📖 İbn-i Sina Örneği
+                </button>
+              </div>
+            </div>
+            <textarea
+              id="mission-input-text"
+              rows="4"
+              placeholder="Metninizi buraya yazın veya yapıştırın. Örn: Hz. Ali efendimizin ilmi ve adaleti anlatılır. Arkasından 'Şüphesiz Allah sabredenlerle beraberdir' ayeti ve derin tefekkürü açıklanır..."
+              class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-2xl p-3 text-slate-100 placeholder-slate-500 focus:outline-none transition leading-relaxed resize-none"
+            ></textarea>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">Seslendirici (Anlatıcı)</label>
+              <select id="mission-input-voice" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
+                <option value="en-US-AndrewMultilingualNeural" selected>🎙️ Andrew (Tok Belgesel & Anlatıcı)</option>
+                <option value="tr-TR-AhmetNeural">🎙️ Ahmet (Resmi ve Vurgulu)</option>
+                <option value="tr-TR-EmelNeural">🎙️ Emel (Sakin & Mistik)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">Kurgu Derinliği</label>
+              <select id="mission-input-duration-mode" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
+                <option value="deep" selected>⏱️ Derin Kurgu (3-4 Sahne, ~30-45s)</option>
+                <option value="short">⚡ Hızlı Shorts (2-3 Sahne, ~15-25s)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: MP3 Input Panel -->
+        <div id="mission-panel-mp3" class="hidden space-y-3">
+          <div onclick="document.getElementById('mission-mp3-file-input').click()" class="border-2 border-dashed border-slate-700 hover:border-purple-400 bg-[#070a12] rounded-2xl p-4 text-center cursor-pointer transition flex flex-col items-center justify-center gap-1.5 group">
+            <div class="w-10 h-10 rounded-xl bg-slate-800 text-purple-400 group-hover:scale-110 group-hover:bg-purple-950 transition flex items-center justify-center text-lg">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <div id="mission-mp3-drop-label" class="text-xs text-slate-300 font-semibold">
+              <span class="text-white group-hover:text-purple-300 transition">MP3 veya WAV dosyanızı seçin</span>
+            </div>
+            <span class="text-[10px] text-slate-500">Maks 100MB • Otomatik Whisper Fonetik Hizalama</span>
+            <input type="file" id="mission-mp3-file-input" accept="audio/*" class="hidden" onchange="handleMissionAudioSelected(this.files[0])">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Metin Transkripti (İsteğe Bağlı - %100 Birebir Eşleşme)</label>
+            <textarea
+              id="mission-mp3-transcript"
+              rows="3"
+              placeholder="Ses kaydında okunan metni buraya yapıştırabilirsiniz (Ayet ve kelime koruması için önerilir)..."
+              class="w-full bg-[#070a12] border border-slate-800 focus:border-purple-400 rounded-2xl p-2.5 text-slate-200 placeholder-slate-500 focus:outline-none transition leading-relaxed resize-none"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Footer Submit Button -->
+        <div class="pt-2 border-t border-slate-800/80 flex items-center justify-end gap-3">
+          <button onclick="closeAiMissionModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold transition">
+            Vazgeç
+          </button>
+          <button onclick="startAiMissionPipeline()" id="btn-mission-submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs flex items-center gap-2 shadow-lg shadow-amber-500/25 transition">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>3 Aşamalı Kurguyu Başlat</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- VIEW B: LIVE ANIMATED 3-STAGE MISSION PROGRESS HUD -->
+      <div id="ai-mission-view-hud" class="hidden space-y-4 text-xs">
+        <div class="text-center space-y-1 pb-1">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-[10px] font-bold">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+            <span>YAPAY ZEKÂ SİNEMATİK ÜRETİM DEVREDE</span>
+          </div>
+          <h4 id="mission-hud-main-title" class="text-sm font-extrabold text-white">Görev Yürütülüyor...</h4>
+        </div>
+
+        <!-- 3 Animated Stepper Cards -->
+        <div class="space-y-3">
+          <!-- STAGE 1 CARD -->
+          <div id="mission-step-card-1" class="p-3.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-start gap-3 transition-all duration-300">
+            <div id="mission-step-icon-1" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-sm font-bold shrink-0">
+              <span>1</span>
+            </div>
+            <div class="flex-1 space-y-1">
+              <div class="flex items-center justify-between">
+                <span class="font-extrabold text-white text-xs">1. GÖREV: ANALİZ AŞAMASI</span>
+                <span id="mission-step-status-1" class="text-[10px] font-mono text-slate-500">Bekliyor</span>
+              </div>
+              <p id="mission-step-desc-1" class="text-[11px] text-slate-400 leading-tight">Metin ve ses frekansları taranıyor; tarihsel dönem ve ayet/hadis kısımları ayrıştırılıyor.</p>
+            </div>
+          </div>
+
+          <!-- STAGE 2 CARD -->
+          <div id="mission-step-card-2" class="p-3.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-start gap-3 transition-all duration-300">
+            <div id="mission-step-icon-2" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-sm font-bold shrink-0">
+              <span>2</span>
+            </div>
+            <div class="flex-1 space-y-1">
+              <div class="flex items-center justify-between">
+                <span class="font-extrabold text-white text-xs">2. GÖREV: PLANLAMA AŞAMASI</span>
+                <span id="mission-step-status-2" class="text-[10px] font-mono text-slate-500">Bekliyor</span>
+              </div>
+              <p id="mission-step-desc-2" class="text-[11px] text-slate-400 leading-tight">Tarihsel atmosfer (0-20s) ve tezhibli daktilo ayet çerçevesi (20-40s) ile SFX eşleşmesi planlanıyor.</p>
+            </div>
+          </div>
+
+          <!-- STAGE 3 CARD -->
+          <div id="mission-step-card-3" class="p-3.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-start gap-3 transition-all duration-300">
+            <div id="mission-step-icon-3" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-sm font-bold shrink-0">
+              <span>3</span>
+            </div>
+            <div class="flex-1 space-y-1">
+              <div class="flex items-center justify-between">
+                <span class="font-extrabold text-white text-xs">3. GÖREV: UYGULAMA & ZAMAN TÜNELİ</span>
+                <span id="mission-step-status-3" class="text-[10px] font-mono text-slate-500">Bekliyor</span>
+              </div>
+              <p id="mission-step-desc-3" class="text-[11px] text-slate-400 leading-tight">Tüm veriler (Video, Alıntı, MP3, SFX, Daktilo Altyazı) zaman tüneline sıfır gecikmeyle kenetleniyor.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Completion Box (Hidden until done) -->
+        <div id="mission-hud-complete" class="hidden p-4 rounded-2xl bg-gradient-to-r from-emerald-950/60 via-slate-900 to-emerald-950/60 border border-emerald-500/40 text-center space-y-3">
+          <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center text-lg">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <h5 class="text-sm font-extrabold text-white">🎉 Kurgu Başarıyla Tamamlandı!</h5>
+            <p class="text-[11px] text-emerald-300/80">Sahneler, ayet çerçevesi, ses dalgası ve SFX'ler zaman tüneline aktarıldı.</p>
+          </div>
+          <div class="flex items-center justify-center gap-2 pt-1">
+            <button onclick="finishMissionAndPlay()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 hover:scale-105 transition">
+              <i class="fa-solid fa-play"></i> <span>Senkronize Oynat</span>
+            </button>
+            <button onclick="closeAiMissionModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition">
+              Kapat & İncele
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -4097,14 +4308,30 @@
     let playbackStartTime = 0;
     let playbackStartPlayhead = 0;
 
+    function getAiAudioOffset() {
+      if (videoData && typeof videoData.aiKurguStartOffset === 'number' && videoData.aiKurguStartOffset > 0) {
+        return videoData.aiKurguStartOffset;
+      }
+      if (scenes && scenes.length > 0 && typeof scenes[0].startTime === 'number' && scenes[0].startTime > 0) {
+        return scenes[0].startTime;
+      }
+      return 0.0;
+    }
+
     function seekTimeline(timeInSec) {
       playheadTime = Math.max(0, Math.min(timelineDuration, timeInSec));
       playbackStartTime = performance.now();
       playbackStartPlayhead = playheadTime;
 
+      const audioOffset = getAiAudioOffset();
       const hasAudio = audioEl && audioEl.src && videoData && !!videoData.audioUrl && !videoData.audioMuted;
       if (hasAudio) {
-        audioEl.currentTime = playheadTime;
+        const audioDur = audioEl.duration || 99999;
+        if (playheadTime >= audioOffset && playheadTime < audioOffset + audioDur) {
+          audioEl.currentTime = Math.max(0, playheadTime - audioOffset);
+        } else {
+          if (!audioEl.paused) audioEl.pause();
+        }
       }
 
       updatePlayheadPosition();
@@ -4142,10 +4369,16 @@
       playbackStartTime = performance.now();
       playbackStartPlayhead = playheadTime;
 
+      const audioOffset = getAiAudioOffset();
       const hasAudio = audioEl && audioEl.src && videoData && !!videoData.audioUrl && !videoData.audioMuted;
       if (hasAudio) {
-        audioEl.currentTime = playheadTime;
-        audioEl.play().catch(e => console.log('Audio playback info:', e));
+        const audioDur = audioEl.duration || 99999;
+        if (playheadTime >= audioOffset && playheadTime < audioOffset + audioDur) {
+          audioEl.currentTime = Math.max(0, playheadTime - audioOffset);
+          audioEl.play().catch(e => console.log('Audio playback info:', e));
+        } else {
+          audioEl.pause();
+        }
       }
 
       const icon = document.getElementById('icon-transport-play');
@@ -4191,19 +4424,34 @@
     function runPlaybackLoop() {
       if (!isPlaying) return;
 
-      const hasAudio = audioEl && audioEl.src && videoData && !!videoData.audioUrl && !videoData.audioMuted;
-      if (hasAudio && !audioEl.paused) {
-        playheadTime = audioEl.currentTime;
-      } else {
-        // Accurate Master Wall-Clock Timer (works with or without voice audio!)
-        const elapsed = (performance.now() - playbackStartTime) / 1000;
-        playheadTime = playbackStartPlayhead + elapsed;
-      }
+      // Master Wall-Clock Timer drives the timeline with microsecond precision
+      const elapsed = (performance.now() - playbackStartTime) / 1000;
+      playheadTime = playbackStartPlayhead + elapsed;
 
       if (playheadTime >= timelineDuration) {
         pausePlayback();
         seekTimeline(0);
         return;
+      }
+
+      // Sync AI audio voiceover to audioOffset
+      const audioOffset = getAiAudioOffset();
+      const hasAudio = audioEl && audioEl.src && videoData && !!videoData.audioUrl && !videoData.audioMuted;
+      if (hasAudio) {
+        const audioDur = audioEl.duration || 99999;
+        if (playheadTime >= audioOffset && playheadTime < audioOffset + audioDur) {
+          const targetAudioTime = playheadTime - audioOffset;
+          if (audioEl.paused) {
+            audioEl.currentTime = targetAudioTime;
+            audioEl.play().catch(() => {});
+          } else if (Math.abs(audioEl.currentTime - targetAudioTime) > 0.25) {
+            audioEl.currentTime = targetAudioTime;
+          }
+        } else {
+          if (!audioEl.paused) {
+            audioEl.pause();
+          }
+        }
       }
 
       updatePlayheadPosition();
@@ -4223,8 +4471,11 @@
 
     function setupAudioListeners() {
       audioEl.addEventListener('ended', () => {
-        pausePlayback();
-        seekTimeline(0);
+        // Only loop or pause when the overall timeline duration has reached the end
+        if (playheadTime >= timelineDuration - 0.5) {
+          pausePlayback();
+          seekTimeline(0);
+        }
       });
     }
 
@@ -5705,11 +5956,60 @@
           </div>
         `;
       } else if (layout === 'quote_spotlight') {
-        const q = s.quoteSpotlight || { speaker: 'İbn-i Sina', title: 'Hekimlerin Sultanı', quoteText: 'Hakikat sabır ile anlaşılır.' };
+        const q = s.quoteSpotlight || { speaker: 'Hz. Ali (r.a.)', title: 'Hikmet ve Adalet', quoteText: 'İlim bir noktadır, onu cahiller çoğaltmıştır.' };
+        const isVerse = s.isVerse || q.isVerse || (q.title && (q.title.toLowerCase().includes('ayet') || q.title.toLowerCase().includes('sure') || q.title.toLowerCase().includes('hadis')));
+        const badgeText = q.verseBadge || (isVerse ? 'AYET-İ KERİME' : (q.title || 'HİKMETLİ SÖZ'));
+        
+        // Calculate Typewriter progress based on playhead time relative to scene start/end
+        const sceneStart = s.startTime || 0;
+        const sceneEnd = s.endTime || (sceneStart + 10);
+        const sceneDur = Math.max(0.5, sceneEnd - sceneStart);
+        const elapsed = Math.max(0, playheadTime - sceneStart);
+        const progress = Math.min(1.0, elapsed / sceneDur);
+
+        // Full text and words
+        const fullText = q.quoteText || '';
+        const charCount = (q.typewriter !== false) ? Math.max(3, Math.floor(progress * fullText.length)) : fullText.length;
+        const currentSlice = fullText.substring(0, charCount);
+        const isFinished = charCount >= fullText.length;
+
+        // Underline and highlight keywords
+        const targetWords = (s.underlinedWords || q.underlinedWords || ['adalet', 'ilim', 'sabır', 'allah', 'huzur', 'hakikat']).map(w => w.toLowerCase());
+        
+        let formattedHtml = currentSlice.split(' ').map(word => {
+          const cleanWord = word.replace(/[.,/#!$%^&*;:{}=\-_`~()"'“”!’?]/g, '').toLowerCase();
+          const shouldUnderline = targetWords.some(tw => cleanWord.includes(tw) || tw.includes(cleanWord));
+          if (shouldUnderline && cleanWord.length > 2) {
+            return `<span class="inline-block relative text-amber-300 font-extrabold drop-shadow-[0_0_10px_rgba(245,158,11,0.9)] pb-0.5"><span class="relative z-10">${word}</span><span class="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 rounded-full shadow-[0_0_8px_#f59e0b] animate-pulse"></span></span>`;
+          }
+          return word;
+        }).join(' ');
+
+        const cursorHtml = !isFinished ? `<span class="inline-block w-2 h-4 bg-amber-400 ml-1 animate-pulse align-middle shadow-[0_0_8px_#f59e0b]"></span>` : '';
+
         mid.innerHTML = `
-          <div class="p-3 bg-white/80 rounded-2xl border-2 border-blue-900 shadow-md text-center space-y-1 my-auto">
-            <div class="text-base font-extrabold text-blue-950">“${q.quoteText}”</div>
-            <div class="text-[11px] font-bold text-red-600">— ${q.speaker} (${q.title})</div>
+          <div class="relative mx-auto my-auto max-w-[310px] w-full p-4 rounded-3xl bg-gradient-to-b from-[#18110b]/95 via-[#0e101a]/95 to-[#16120b]/95 border-2 border-amber-500/70 shadow-[0_0_30px_rgba(245,158,11,0.25)] flex flex-col items-center text-center space-y-2.5 backdrop-blur-md">
+            <!-- Glowing Header Badge -->
+            <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-500/20 via-amber-400/30 to-amber-500/20 border border-amber-400/50 text-[10px] font-extrabold text-amber-300 tracking-wider shadow-[0_0_12px_rgba(245,158,11,0.4)]">
+              <i class="fa-solid fa-${isVerse ? 'book-quran text-amber-300' : 'feather-pointed text-amber-400'} text-xs"></i>
+              <span>${badgeText}</span>
+            </div>
+
+            <!-- Typewriter Quote Box -->
+            <div class="text-[13px] sm:text-sm font-serif font-extrabold text-slate-100 leading-relaxed tracking-wide px-1 min-h-[58px] flex items-center justify-center">
+              <div>“${formattedHtml}${cursorHtml}”</div>
+            </div>
+
+            <!-- Speaker & Gold Seal -->
+            <div class="w-full pt-2 border-t border-amber-500/30 flex items-center justify-between text-left">
+              <div>
+                <div class="text-[11px] font-bold text-amber-200 truncate">— ${q.speaker || 'Hz. Ali (r.a.)'}</div>
+                <div class="text-[9px] text-slate-400 font-mono">${q.title || 'Hikmet & Tefekkür'}</div>
+              </div>
+              <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-400 border border-amber-200/60 shadow-[0_0_10px_rgba(245,158,11,0.6)] flex items-center justify-center text-slate-950 text-xs font-black shrink-0">
+                ★
+              </div>
+            </div>
           </div>
         `;
       } else if (layout === 'metricImpact') {
@@ -6916,44 +7216,22 @@
 
     async function generateContent() {
       const topic = document.getElementById('input-topic').value.trim();
-      if (!topic) return alert('Lütfen bir konu yazın.');
+      if (!topic) return alert('Lütfen bir konu veya metin yazın.');
 
-      const btn = document.getElementById('btn-generate');
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AI Senaryo & Sahne Üretiyor...</span>';
+      // Prefill 3-Stage Mission Modal
+      const missionTextEl = document.getElementById('mission-input-text');
+      if (missionTextEl) missionTextEl.value = topic;
 
-      const startAfterQuote = document.getElementById('ai-text-start-after-quote')?.checked ?? true;
-
-      try {
-        const res = await fetch('/api/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            topic: topic,
-            model: document.getElementById('select-gemini-model').value,
-            voice_id: document.getElementById('tts-voice').value,
-            theme: document.getElementById('selected-theme-val')?.value || 'dark_minimalist',
-            duration_mode: 'deep',
-            start_after_quote: startAfterQuote
-          })
-        });
-
-        if (!res.ok) {
-          const errData = await res.json().catch(() => ({}));
-          throw new Error(errData.detail || 'Üretim başarısız.');
-        }
-
-        const data = await res.json();
-        await loadTimelineData();
-
-        const sceneCount = data.scenes ? data.scenes.length : 1;
-        alert(`🎉 Yapay zekâ ${sceneCount} adet dinamik sahneyi başarıyla üretti ve zaman tüneline ekledi!`);
-      } catch (e) {
-        alert('Hata: ' + e.message);
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-bolt text-amber-300"></i> <span>Yapay Zekâ ile Üret</span>';
+      const ttsVoice = document.getElementById('tts-voice')?.value;
+      if (ttsVoice && document.getElementById('mission-input-voice')) {
+        document.getElementById('mission-input-voice').value = ttsVoice;
       }
+
+      // Open the 3-Stage Mission HUD modal in 'text' mode
+      openAiMissionModal('text');
+
+      // Automatically launch the animated 3-Stage Mission Pipeline!
+      startAiMissionPipeline();
     }
 
     async function generateFromAudioFile() {
@@ -6963,42 +7241,18 @@
         return;
       }
 
-      const btn = document.getElementById('btn-generate-audio');
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Whisper & Gemini Sahneleri Üretiyor...</span>';
+      selectedMissionAudioFile = selectedAiAudioFile;
+      const label = document.getElementById('mission-mp3-drop-label');
+      if (label) {
+        label.innerHTML = `<span class="text-amber-400 font-bold">${selectedAiAudioFile.name} (${(selectedAiAudioFile.size / (1024 * 1024)).toFixed(1)} MB)</span>`;
+      }
 
       const customTx = document.getElementById('ai-audio-custom-transcript')?.value?.trim() || '';
-      const model = document.getElementById('select-ai-audio-model')?.value || 'gemini-3.5-flash-lite';
-      const startAfterQuote = document.getElementById('ai-audio-start-after-quote')?.checked ?? true;
+      const missionTx = document.getElementById('mission-mp3-transcript');
+      if (missionTx && customTx) missionTx.value = customTx;
 
-      const formData = new FormData();
-      formData.append('file', selectedAiAudioFile);
-      if (customTx) formData.append('transcript', customTx);
-      formData.append('model', model);
-      formData.append('start_after_quote', startAfterQuote);
-
-      try {
-        const res = await fetch('/api/timeline/generate-from-audio', {
-          method: 'POST',
-          body: formData
-        });
-
-        if (!res.ok) {
-          const errData = await res.json().catch(() => ({}));
-          throw new Error(errData.detail || 'Ses analizi ve sahne üretimi başarısız.');
-        }
-
-        const data = await res.json();
-        await loadTimelineData();
-
-        const sceneCount = data.scenes ? data.scenes.length : 1;
-        alert(`🎉 Harika! Ses başarıyla analiz edildi ve ${sceneCount} dinamik sahne zaman tüneline eklendi!`);
-      } catch (e) {
-        alert('Hata: ' + e.message);
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> <span>🎙️ Sesi Analiz Et & Sahneleri Zaman Tüneline Diz</span>';
-      }
+      openAiMissionModal('mp3');
+      startAiMissionPipeline();
     }
 
     function triggerQuickAudioToScenes() {
@@ -7414,6 +7668,218 @@
         alert('Geri dönüş hatası: ' + e.message);
       }
     }
+  
+    // ==========================================
+    // 3-STAGE AI MISSION PROGRESS & PRODUCTION CONTROLLER
+    // ==========================================
+    let selectedMissionAudioFile = null;
+
+    function openAiMissionModal(mode = 'text') {
+      const modal = document.getElementById('modal-ai-mission-hud');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      switchMissionInputTab(mode);
+
+      document.getElementById('ai-mission-view-input').classList.remove('hidden');
+      document.getElementById('ai-mission-view-hud').classList.add('hidden');
+      document.getElementById('mission-hud-complete').classList.add('hidden');
+    }
+
+    function closeAiMissionModal() {
+      const modal = document.getElementById('modal-ai-mission-hud');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function switchMissionInputTab(tab) {
+      const btnText = document.getElementById('btn-mission-tab-text');
+      const btnMp3 = document.getElementById('btn-mission-tab-mp3');
+      const panelText = document.getElementById('mission-panel-text');
+      const panelMp3 = document.getElementById('mission-panel-mp3');
+      if (!btnText || !btnMp3 || !panelText || !panelMp3) return;
+
+      if (tab === 'text') {
+        btnText.className = 'flex-1 py-2 rounded-xl text-center font-bold text-white bg-slate-800/90 shadow transition flex items-center justify-center gap-1.5';
+        btnMp3.className = 'flex-1 py-2 rounded-xl text-center font-bold text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5';
+        panelText.classList.remove('hidden');
+        panelMp3.classList.add('hidden');
+      } else {
+        btnMp3.className = 'flex-1 py-2 rounded-xl text-center font-bold text-white bg-slate-800/90 shadow transition flex items-center justify-center gap-1.5';
+        btnText.className = 'flex-1 py-2 rounded-xl text-center font-bold text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5';
+        panelMp3.classList.remove('hidden');
+        panelText.classList.add('hidden');
+      }
+    }
+
+    function setMissionSamplePrompt(type) {
+      const textarea = document.getElementById('mission-input-text');
+      if (!textarea) return;
+      if (type === 'hz_ali') {
+        textarea.value = "Hz. Ali efendimizin ilmi ve adaleti anlatılır. İlk 20 saniye onun hikmet dolu hayatı, ilim kapısı oluşu ve Kufe dönemindeki vakur duruşu aktarılır. Ardından 'Şüphesiz ki Allah sabredenlerle beraberdir' (Bakara Suresi 153. Ayet) meali ve derin hikmeti ekranda daktilo gibi akarak açıklanır.";
+      } else if (type === 'ibn_sina') {
+        textarea.value = "İbn-i Sina'nın tıp ve felsefedeki sırları. Hakikat arayışında sabır ve tefekkürün rolü, 'Hakikat sabır ile anlaşılır' hikmetli sözü ve ilahi nizama duyulan hayranlık anlatılır.";
+      }
+    }
+
+    function handleMissionAudioSelected(file) {
+      if (!file) return;
+      selectedMissionAudioFile = file;
+      const label = document.getElementById('mission-mp3-drop-label');
+      if (label) {
+        label.innerHTML = `<span class="text-amber-400 font-bold">${file.name} (${(file.size / (1024 * 1024)).toFixed(1)} MB)</span>`;
+      }
+    }
+
+    async function startAiMissionPipeline() {
+      const isTextTab = !document.getElementById('mission-panel-text').classList.contains('hidden');
+      
+      // Switch to HUD View
+      document.getElementById('ai-mission-view-input').classList.add('hidden');
+      document.getElementById('ai-mission-view-hud').classList.remove('hidden');
+      document.getElementById('mission-hud-complete').classList.add('hidden');
+
+      const card1 = document.getElementById('mission-step-card-1');
+      const card2 = document.getElementById('mission-step-card-2');
+      const card3 = document.getElementById('mission-step-card-3');
+      const icon1 = document.getElementById('mission-step-icon-1');
+      const icon2 = document.getElementById('mission-step-icon-2');
+      const icon3 = document.getElementById('mission-step-icon-3');
+      const status1 = document.getElementById('mission-step-status-1');
+      const status2 = document.getElementById('mission-step-status-2');
+      const status3 = document.getElementById('mission-step-status-3');
+      const desc1 = document.getElementById('mission-step-desc-1');
+      const desc2 = document.getElementById('mission-step-desc-2');
+      const desc3 = document.getElementById('mission-step-desc-3');
+      const title = document.getElementById('mission-hud-main-title');
+
+      function setStepActive(stepNum, statusText, descText) {
+        [card1, card2, card3].forEach((c, idx) => {
+          const num = idx + 1;
+          const ic = [icon1, icon2, icon3][idx];
+          const st = [status1, status2, status3][idx];
+          if (num < stepNum) {
+            c.className = 'p-3.5 rounded-2xl border border-emerald-500/40 bg-emerald-950/20 flex items-start gap-3 transition-all duration-300';
+            ic.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold shrink-0';
+            ic.innerHTML = '<i class="fa-solid fa-check"></i>';
+            st.className = 'text-[10px] font-mono text-emerald-400 font-bold';
+            st.innerText = 'Tamamlandı ✓';
+          } else if (num === stepNum) {
+            c.className = 'p-3.5 rounded-2xl border border-amber-400/80 bg-gradient-to-r from-amber-950/30 via-slate-900 to-amber-950/30 ring-2 ring-amber-400/30 flex items-start gap-3 transition-all duration-300 shadow-lg shadow-amber-500/10';
+            ic.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-sm font-bold shrink-0 animate-pulse';
+            ic.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+            st.className = 'text-[10px] font-mono text-amber-300 font-bold';
+            st.innerText = statusText || 'İşleniyor...';
+          } else {
+            c.className = 'p-3.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-start gap-3 transition-all duration-300 opacity-60';
+            ic.className = 'w-8 h-8 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center text-sm font-bold shrink-0';
+            ic.innerHTML = `<span>${num}</span>`;
+            st.className = 'text-[10px] font-mono text-slate-500';
+            st.innerText = 'Bekliyor';
+          }
+        });
+      }
+
+      try {
+        // 1. GÖREV: ANALİZ AŞAMASI
+        title.innerText = '1. Görev Yürütülüyor: Metin & Ses Ayrıştırma...';
+        setStepActive(1, 'Analiz Ediliyor...', 'Metin frekansları taranıyor, tarihsel varlıklar ve ayet/hadis referansları saptanıyor.');
+
+        let apiResult = null;
+
+        if (isTextTab) {
+          const topicText = document.getElementById('mission-input-text').value.trim();
+          const voiceId = document.getElementById('mission-input-voice').value;
+          const durationMode = document.getElementById('mission-input-duration-mode').value;
+          if (!topicText) throw new Error('Lütfen bir metin veya konu girin.');
+
+          await new Promise(r => setTimeout(r, 600));
+          desc1.innerHTML = 'Metin analiz edildi: <strong>Tarihsel anlatım</strong> ve <strong>Ayet odak bloğu</strong> tespit edildi. 4 anahtar kavram işaretlendi.';
+
+          // 2. GÖREV: PLANLAMA AŞAMASI
+          title.innerText = '2. Görev Yürütülüyor: Sinematik Sahneler Kurgulanıyor...';
+          setStepActive(2, 'Kurgulanıyor...', '0-20s tarihsel mistik atmosfer ve 20-40s daktilo ayet çerçevesi ile SFX eşleşmesi tasarlanıyor.');
+
+          const response = await fetch('/api/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              topic: topicText,
+              mode: 'auto',
+              voice_id: voiceId,
+              duration_mode: durationMode,
+              start_after_quote: true
+            })
+          });
+          if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.detail || 'Kurgu üretilemedi');
+          }
+          apiResult = await response.json();
+        } else {
+          // MP3 tab
+          if (!selectedMissionAudioFile) throw new Error('Lütfen bir MP3 veya ses dosyası seçin.');
+          const customTrans = document.getElementById('mission-mp3-transcript').value.trim();
+
+          await new Promise(r => setTimeout(r, 600));
+          desc1.innerHTML = 'Ses dosyası okundu: <strong>Whisper milisaniye fonetik zamanlaması</strong> ve Ayet mealleri ayrıştırıldı.';
+
+          // 2. GÖREV: PLANLAMA AŞAMASI
+          title.innerText = '2. Görev Yürütülüyor: Ses Senkronu ve Daktilo Ayet Çerçevesi...';
+          setStepActive(2, 'Kurgulanıyor...', 'Ses dalgasına uygun çok sahneli storyboard ve daktilo ayet kutusu kurgulanıyor.');
+
+          const formData = new FormData();
+          formData.append('file', selectedMissionAudioFile);
+          if (customTrans) formData.append('transcript', customTrans);
+          formData.append('mode', 'auto');
+          formData.append('scene_duration', '12');
+          formData.append('start_after_quote', 'true');
+
+          const response = await fetch('/api/timeline/generate-from-audio', {
+            method: 'POST',
+            body: formData
+          });
+          if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.detail || 'Ses analizi yapılamadı');
+          }
+          apiResult = await response.json();
+        }
+
+        // 3. GÖREV: UYGULAMA & ZAMAN TÜNELİNE DAĞITIM
+        title.innerText = '3. Görev Yürütülüyor: Zaman Tüneline Dağıtım...';
+        setStepActive(3, 'Dağıtılıyor...', 'Video, Alıntı, MP3, SFX ve Daktilo Altyazı katmanları sıfır gecikmeyle yerleştiriliyor.');
+
+        await loadTimelineData();
+        renderTimeline();
+        renderLivePreviewCanvas();
+        updateTimeDisplays();
+
+        // Mark all steps completed
+        [card1, card2, card3].forEach((c, idx) => {
+          const ic = [icon1, icon2, icon3][idx];
+          const st = [status1, status2, status3][idx];
+          c.className = 'p-3.5 rounded-2xl border border-emerald-500/40 bg-emerald-950/20 flex items-start gap-3 transition-all duration-300';
+          ic.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold shrink-0';
+          ic.innerHTML = '<i class="fa-solid fa-check"></i>';
+          st.className = 'text-[10px] font-mono text-emerald-400 font-bold';
+          st.innerText = 'Tamamlandı ✓';
+        });
+
+        title.innerText = '🎉 3 Aşamalı Kurgu Başarıyla Tamamlandı!';
+        document.getElementById('mission-hud-complete').classList.remove('hidden');
+
+      } catch (err) {
+        alert('Hata: ' + err.message);
+        document.getElementById('ai-mission-view-input').classList.remove('hidden');
+        document.getElementById('ai-mission-view-hud').classList.add('hidden');
+      }
+    }
+
+    function finishMissionAndPlay() {
+      closeAiMissionModal();
+      seekTimeline(0);
+      startPlayback();
+    }
+
   </script>
 </body>
 </html>

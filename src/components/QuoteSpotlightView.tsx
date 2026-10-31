@@ -54,6 +54,48 @@ export const QuoteSpotlightView: React.FC<QuoteSpotlightViewProps> = ({
   const textPrimary = isChalkboard || isBlueprint ? '#ffffff' : '#0f172a';
   const textMuted = isChalkboard ? '#cbd5e1' : isBlueprint ? '#93c5fd' : '#475569';
 
+  const isVerse = (quoteSpotlight as any).isVerse || (quoteSpotlight.title && (quoteSpotlight.title.toLowerCase().includes('ayet') || quoteSpotlight.title.toLowerCase().includes('sure') || quoteSpotlight.title.toLowerCase().includes('hadis')));
+  const badgeText = (quoteSpotlight as any).verseBadge || (isVerse ? 'AYET-İ KERİME' : (quoteSpotlight.title || 'HİKMETLİ SÖZ'));
+  const rawText = quoteSpotlight.quoteText || (quoteSpotlight as any).quote || (quoteSpotlight as any).text || '';
+
+  // Typewriter calculation
+  const elapsedFrames = Math.max(0, frame - (startFrame + 12));
+  const charsToShow = Math.min(rawText.length, Math.floor(elapsedFrames * 1.6));
+  const currentText = rawText.slice(0, charsToShow);
+  const isFinished = charsToShow >= rawText.length;
+
+  const targetWords = (((quoteSpotlight as any).underlinedWords) || ['adalet', 'ilim', 'sabır', 'allah', 'huzur', 'hakikat']).map((w: string) => w.toLowerCase());
+
+  const words = currentText.split(' ');
+  const renderedWords = words.map((w: string, idx: number) => {
+    const clean = w.replace(/[.,/#!$%^&*;:{}=\-_`~()"“”!?’]/g, '').toLowerCase();
+    const shouldUnderline = targetWords.some((tw: string) => clean.includes(tw) || tw.includes(clean));
+    if (shouldUnderline && clean.length > 2) {
+      return (
+        <span
+          key={idx}
+          style={{
+            display: 'inline-block',
+            position: 'relative',
+            color: '#d97706',
+            fontWeight: 900,
+            borderBottom: '4px solid #f59e0b',
+            paddingBottom: 2,
+            marginRight: 8,
+            textShadow: '0 0 12px rgba(245, 158, 11, 0.5)',
+          }}
+        >
+          {w}
+        </span>
+      );
+    }
+    return (
+      <span key={idx} style={{ marginRight: 8 }}>
+        {w}
+      </span>
+    );
+  });
+
   return (
     <div
       style={{
@@ -113,33 +155,52 @@ export const QuoteSpotlightView: React.FC<QuoteSpotlightViewProps> = ({
           “
         </div>
 
-        {/* Subtitle / Category */}
+        {/* Subtitle / Category / Verse Badge */}
         <div
           style={{
-            fontSize: 24,
-            fontWeight: 800,
-            color: borderColor,
-            letterSpacing: 2,
+            fontSize: isVerse ? 28 : 24,
+            fontWeight: 900,
+            color: isVerse ? '#d97706' : borderColor,
+            letterSpacing: 3,
             textTransform: 'uppercase',
             marginBottom: 14,
+            padding: isVerse ? '4px 20px' : '0',
+            borderRadius: 20,
+            backgroundColor: isVerse ? 'rgba(217, 119, 6, 0.12)' : 'transparent',
+            border: isVerse ? '2px solid rgba(217, 119, 6, 0.4)' : 'none',
           }}
         >
-          {quoteSpotlight.title || (quoteSpotlight as any).badge || 'HİKMETLİ SÖZ'}
+          {badgeText}
         </div>
 
-        {/* The Giant Quote Text */}
+        {/* The Giant Quote Text with Typewriter & Gold Underline */}
         <div
           style={{
             fontSize: 38,
             fontWeight: 900,
             color: textPrimary,
-            lineHeight: 1.35,
+            lineHeight: 1.4,
             padding: '0 20px',
             marginBottom: 26,
             fontStyle: 'italic',
+            minHeight: 110,
           }}
         >
-          "{quoteSpotlight.quoteText || (quoteSpotlight as any).quote || (quoteSpotlight as any).text || ''}"
+          “{renderedWords}
+          {!isFinished && (
+            <span
+              style={{
+                display: 'inline-block',
+                width: 12,
+                height: 34,
+                backgroundColor: '#f59e0b',
+                marginLeft: 6,
+                verticalAlign: 'middle',
+                opacity: (frame % 20 < 10) ? 1 : 0.2,
+                boxShadow: '0 0 10px #f59e0b',
+              }}
+            />
+          )}”
         </div>
 
         {/* Speaker & Source */}

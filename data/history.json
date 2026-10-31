@@ -1,5 +1,2345 @@
 [
   {
+    "id": "64d513c4",
+    "topic": "tarafların birbirine \"sana bunu yapmak zorunda değilim\" diyerek nefsini dayattığı bencil bir menfaat şebekesi değil... herkesin kendi vazifesini, Allah rızası için yerine getirdiği mukaddes bir yuvadır!",
+    "theme": "dark_minimalist",
+    "layoutType": "quote_spotlight",
+    "durationMode": "3 Sahne (64s)",
+    "created_at": "2026-11-01 02:15",
+    "headerMain": "MUKADDES YUVA BENCİL MENFAAT DEĞİL",
+    "narration": "Bugün maalesef evlilikler, tarafların birbirine 'sana bunu yapmak zorunda değilim' diyerek nefislerini dayattığı soğuk bir menfaat şebekesine dönüştürülmek isteniyor. Oysa İslam nazarında aile; hakların yarıştırıldığı bir pazar değil, herkesin kendi vazifesini, yalnızca Allah rızası için yerine getirdiği mukaddes bir sığınaktır, emniyet yuvasıdır. Unutmayın ki huzur, ben bencilce hak aradığımda değil, vazifemi eksiksiz ifa ettiğimde başlar.",
+    "hookScore": 98,
+    "key_used": "asdxcxc005@gmail.com",
+    "model_used": "gemini-3.5-flash-lite",
+    "thumbnail_url": "/out/thumbnail.png?t=1793488503",
+    "video_data": {
+      "directorDecision": {
+        "theme": "dark_minimalist",
+        "particles": "dust",
+        "ambientPattern": "fingerprint",
+        "doodleType": "none",
+        "directorReason": "Evliliğin hakikatini modern bencil yaklaşımlardan ayıran felsefi ve manevi derinlik, koyu minimal bir tema ile en etkileyici şekilde vurgulanmıştır."
+      },
+      "requiredIcons": [
+        "scale",
+        "shield",
+        "heart",
+        "book"
+      ],
+      "theme": "dark_minimalist",
+      "narration": "Bugün maalesef evlilikler, tarafların birbirine 'sana bunu yapmak zorunda değilim' diyerek nefislerini dayattığı soğuk bir menfaat şebekesine dönüştürülmek isteniyor. Oysa İslam nazarında aile; hakların yarıştırıldığı bir pazar değil, herkesin kendi vazifesini, yalnızca Allah rızası için yerine getirdiği mukaddes bir sığınaktır, emniyet yuvasıdır. Unutmayın ki huzur, ben bencilce hak aradığımda değil, vazifemi eksiksiz ifa ettiğimde başlar.",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "layoutType": "quote_spotlight",
+          "headerSubtitle": "Ahlaki Hakikat",
+          "headerLine1": "MUKADDES",
+          "circledWord": "YUVA",
+          "headerLine2": "",
+          "highlightedText": "BENCİL MENFAAT DEĞİL",
+          "strikeWord": "ZORUNDA DEĞİLİM",
+          "quoteSpotlight": {
+            "speaker": "Hikmetli Bakış",
+            "title": "AİLE ANLAYIŞI",
+            "quoteText": "Evlilik hak alma savaşı değil, vazife bilinciyle inşa edilen mukaddes bir yuvadır."
+          },
+          "startTime": 23.8,
+          "endTime": 37.03
+        },
+        {
+          "id": "scene_2",
+          "layoutType": "vs_split",
+          "headerSubtitle": "Paradigma Çatışması",
+          "headerLine1": "NEFSİN",
+          "circledWord": "DAYATMASI",
+          "headerLine2": "VS İLAHİ RIZA",
+          "highlightedText": "MENFAAT ŞEBEKESİ",
+          "strikeWord": "BENCİLLİK",
+          "vsData": {
+            "leftTitle": "Menfaat Şebekesi",
+            "leftSubtitle": "Nefsin Dayatması",
+            "leftPoints": [
+              "Sürekli hak iddiası",
+              "Zorunda değilim bencilliği",
+              "Soğuk hesaplaşmalar"
+            ],
+            "rightTitle": "Mukaddes Yuva",
+            "rightSubtitle": "Allah Rızası",
+            "rightPoints": [
+              "Vazife şuuru ve ihsan",
+              "Fedakarlık ve vefa",
+              "Manevi huzur ve bereket"
+            ],
+            "verdict": "Hak arayışıyla tükenen evlilikler değil, vazife bilinciyle yaşayan mukaddes yuvalar kazanır."
+          },
+          "startTime": 37.03,
+          "endTime": 50.27
+        },
+        {
+          "id": "scene_3",
+          "layoutType": "cards",
+          "headerSubtitle": "Huzurun Reçetesi",
+          "headerLine1": "HUZURUN",
+          "circledWord": "TEMELİ",
+          "headerLine2": "",
+          "highlightedText": "ALLAH RIZASI",
+          "strikeWord": "",
+          "cards": [
+            {
+              "id": "1",
+              "label": "İlahi Denge",
+              "value": "Adalet ve Merhamet",
+              "icon": "scale",
+              "color": "#1e3a8a"
+            },
+            {
+              "id": "2",
+              "label": "Emniyet",
+              "value": "Mukaddes Sığınak",
+              "icon": "shield",
+              "color": "#d97706"
+            },
+            {
+              "id": "3",
+              "label": "Maneviyat",
+              "value": "Karşılıklı İhsan",
+              "icon": "heart",
+              "color": "#15803d"
+            }
+          ],
+          "startTime": 50.27,
+          "endTime": 63.5
+        }
+      ],
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Evlilik Menfaat Şebekesi Değildir!",
+          "Sana Bunu Yapmak Zorunda Değilim Demekle Ne Kaybediyoruz?"
+        ],
+        "hashtags": [
+          "#aile",
+          "#evlilik",
+          "#huzur",
+          "#tefekkür",
+          "#shorts",
+          "#allahrizasi"
+        ],
+        "loopEnding": "ve işte gerçek huzur buradadır.",
+        "description": "Evlilik kurumunun bencil menfaatlerden arındırılarak mukaddes bir yuva olarak yeniden düşünülmesi üzerine derinlemesine bir analiz."
+      },
+      "durationMode": "deep",
+      "particles": "dust",
+      "ambientPattern": "fingerprint",
+      "doodleType": "none",
+      "filmGrain": "subtle",
+      "lightLeaks": "auto",
+      "cameraMotion": "handheld",
+      "accentType": "none",
+      "socialHandle": "@birkissa",
+      "musicTrack": "ambient_music.wav",
+      "ttsProvider": "edge_tts",
+      "voiceId": "en-US-AndrewMultilingualNeural",
+      "emotionTone": "documentary",
+      "brollType": "none",
+      "brollOpacity": 0.18,
+      "_acquired_assets": [
+        {
+          "name": "fingerprint",
+          "type": "watermark",
+          "path": "assets/watermarks/fingerprint.svg"
+        }
+      ],
+      "aiKurguStartOffset": 23.8,
+      "subtitles": [
+        {
+          "text": "Bugün maile sev",
+          "start": 23.8,
+          "end": 25.1,
+          "words": [
+            {
+              "word": "Bugün",
+              "text": "Bugün",
+              "start": 0.0,
+              "end": 0.4
+            },
+            {
+              "word": "maile",
+              "text": "maile",
+              "start": 0.4,
+              "end": 0.94
+            },
+            {
+              "word": "sev",
+              "text": "sev",
+              "start": 0.94,
+              "end": 1.3
+            }
+          ]
+        },
+        {
+          "text": "evlilikler, tarafların birbirine",
+          "start": 25.1,
+          "end": 27.98,
+          "words": [
+            {
+              "word": "evlilikler,",
+              "text": "evlilikler,",
+              "start": 1.3,
+              "end": 2.38
+            },
+            {
+              "word": "tarafların",
+              "text": "tarafların",
+              "start": 2.74,
+              "end": 3.42
+            },
+            {
+              "word": "birbirine",
+              "text": "birbirine",
+              "start": 3.42,
+              "end": 4.18
+            }
+          ]
+        },
+        {
+          "text": "sana bunu yapmak",
+          "start": 27.98,
+          "end": 29.22,
+          "words": [
+            {
+              "word": "sana",
+              "text": "sana",
+              "start": 4.18,
+              "end": 4.64
+            },
+            {
+              "word": "bunu",
+              "text": "bunu",
+              "start": 4.64,
+              "end": 4.94
+            },
+            {
+              "word": "yapmak",
+              "text": "yapmak",
+              "start": 4.94,
+              "end": 5.42
+            }
+          ]
+        },
+        {
+          "text": "zorunda değilim, diyerek",
+          "start": 29.22,
+          "end": 31.06,
+          "words": [
+            {
+              "word": "zorunda",
+              "text": "zorunda",
+              "start": 5.42,
+              "end": 5.94
+            },
+            {
+              "word": "değilim,",
+              "text": "değilim,",
+              "start": 5.94,
+              "end": 6.56
+            },
+            {
+              "word": "diyerek",
+              "text": "diyerek",
+              "start": 6.84,
+              "end": 7.26
+            }
+          ]
+        },
+        {
+          "text": "nefislerini dayattığı soğuk",
+          "start": 31.06,
+          "end": 33.22,
+          "words": [
+            {
+              "word": "nefislerini",
+              "text": "nefislerini",
+              "start": 7.26,
+              "end": 8.18
+            },
+            {
+              "word": "dayattığı",
+              "text": "dayattığı",
+              "start": 8.18,
+              "end": 8.92
+            },
+            {
+              "word": "soğuk",
+              "text": "soğuk",
+              "start": 8.92,
+              "end": 9.42
+            }
+          ]
+        },
+        {
+          "text": "bir. Menfaat şebekesine",
+          "start": 33.22,
+          "end": 35.84,
+          "words": [
+            {
+              "word": "bir.",
+              "text": "bir.",
+              "start": 9.42,
+              "end": 9.6
+            },
+            {
+              "word": "Menfaat",
+              "text": "Menfaat",
+              "start": 10.46,
+              "end": 11.2
+            },
+            {
+              "word": "şebekesine",
+              "text": "şebekesine",
+              "start": 11.2,
+              "end": 12.04
+            }
+          ]
+        },
+        {
+          "text": "dönüştürülmek isteniyor. Oysa",
+          "start": 35.84,
+          "end": 38.52,
+          "words": [
+            {
+              "word": "dönüştürülmek",
+              "text": "dönüştürülmek",
+              "start": 12.04,
+              "end": 12.96
+            },
+            {
+              "word": "isteniyor.",
+              "text": "isteniyor.",
+              "start": 12.96,
+              "end": 13.76
+            },
+            {
+              "word": "Oysa",
+              "text": "Oysa",
+              "start": 14.24,
+              "end": 14.72
+            }
+          ]
+        },
+        {
+          "text": "İslam nazarında aile,",
+          "start": 38.52,
+          "end": 40.36,
+          "words": [
+            {
+              "word": "İslam",
+              "text": "İslam",
+              "start": 14.72,
+              "end": 15.28
+            },
+            {
+              "word": "nazarında",
+              "text": "nazarında",
+              "start": 15.28,
+              "end": 16.02
+            },
+            {
+              "word": "aile,",
+              "text": "aile,",
+              "start": 16.02,
+              "end": 16.56
+            }
+          ]
+        },
+        {
+          "text": "hakların yarıştırıldığı bir",
+          "start": 40.82,
+          "end": 42.64,
+          "words": [
+            {
+              "word": "hakların",
+              "text": "hakların",
+              "start": 17.02,
+              "end": 17.64
+            },
+            {
+              "word": "yarıştırıldığı",
+              "text": "yarıştırıldığı",
+              "start": 17.64,
+              "end": 18.54
+            },
+            {
+              "word": "bir",
+              "text": "bir",
+              "start": 18.54,
+              "end": 18.84
+            }
+          ]
+        },
+        {
+          "text": "pazar değil. Herkesin",
+          "start": 42.64,
+          "end": 44.84,
+          "words": [
+            {
+              "word": "pazar",
+              "text": "pazar",
+              "start": 18.84,
+              "end": 19.36
+            },
+            {
+              "word": "değil.",
+              "text": "değil.",
+              "start": 19.36,
+              "end": 19.74
+            },
+            {
+              "word": "Herkesin",
+              "text": "Herkesin",
+              "start": 20.3,
+              "end": 21.04
+            }
+          ]
+        },
+        {
+          "text": "kendi vazifesini, yalnızca",
+          "start": 44.84,
+          "end": 47.38,
+          "words": [
+            {
+              "word": "kendi",
+              "text": "kendi",
+              "start": 21.04,
+              "end": 21.44
+            },
+            {
+              "word": "vazifesini,",
+              "text": "vazifesini,",
+              "start": 21.44,
+              "end": 22.5
+            },
+            {
+              "word": "yalnızca",
+              "text": "yalnızca",
+              "start": 22.86,
+              "end": 23.58
+            }
+          ]
+        },
+        {
+          "text": "Allah rızası için",
+          "start": 47.38,
+          "end": 48.86,
+          "words": [
+            {
+              "word": "Allah",
+              "text": "Allah",
+              "start": 23.58,
+              "end": 23.94
+            },
+            {
+              "word": "rızası",
+              "text": "rızası",
+              "start": 23.94,
+              "end": 24.62
+            },
+            {
+              "word": "için",
+              "text": "için",
+              "start": 24.62,
+              "end": 25.06
+            }
+          ]
+        },
+        {
+          "text": "yerine getirdiği mukaddes",
+          "start": 48.86,
+          "end": 50.68,
+          "words": [
+            {
+              "word": "yerine",
+              "text": "yerine",
+              "start": 25.06,
+              "end": 25.54
+            },
+            {
+              "word": "getirdiği",
+              "text": "getirdiği",
+              "start": 25.54,
+              "end": 26.2
+            },
+            {
+              "word": "mukaddes",
+              "text": "mukaddes",
+              "start": 26.2,
+              "end": 26.88
+            }
+          ]
+        },
+        {
+          "text": "bir sığınaktır. Emniyet",
+          "start": 50.68,
+          "end": 53.1,
+          "words": [
+            {
+              "word": "bir",
+              "text": "bir",
+              "start": 26.88,
+              "end": 27.2
+            },
+            {
+              "word": "sığınaktır.",
+              "text": "sığınaktır.",
+              "start": 27.2,
+              "end": 28.26
+            },
+            {
+              "word": "Emniyet",
+              "text": "Emniyet",
+              "start": 28.26,
+              "end": 29.3
+            }
+          ]
+        },
+        {
+          "text": "yuvasıdır, unutmayın ki",
+          "start": 53.1,
+          "end": 55.28,
+          "words": [
+            {
+              "word": "yuvasıdır,",
+              "text": "yuvasıdır,",
+              "start": 29.3,
+              "end": 30.2
+            },
+            {
+              "word": "unutmayın",
+              "text": "unutmayın",
+              "start": 30.54,
+              "end": 31.14
+            },
+            {
+              "word": "ki",
+              "text": "ki",
+              "start": 31.14,
+              "end": 31.48
+            }
+          ]
+        },
+        {
+          "text": "huzur, ben bence",
+          "start": 55.28,
+          "end": 57.06,
+          "words": [
+            {
+              "word": "huzur,",
+              "text": "huzur,",
+              "start": 31.48,
+              "end": 31.92
+            },
+            {
+              "word": "ben",
+              "text": "ben",
+              "start": 32.5,
+              "end": 32.78
+            },
+            {
+              "word": "bence",
+              "text": "bence",
+              "start": 32.78,
+              "end": 33.26
+            }
+          ]
+        },
+        {
+          "text": "haklı aradımda değil.",
+          "start": 57.06,
+          "end": 58.76,
+          "words": [
+            {
+              "word": "haklı",
+              "text": "haklı",
+              "start": 33.26,
+              "end": 33.92
+            },
+            {
+              "word": "aradımda",
+              "text": "aradımda",
+              "start": 33.92,
+              "end": 34.56
+            },
+            {
+              "word": "değil.",
+              "text": "değil.",
+              "start": 34.56,
+              "end": 34.96
+            }
+          ]
+        },
+        {
+          "text": "Vazifemi eksiksiz ifa",
+          "start": 58.76,
+          "end": 61.34,
+          "words": [
+            {
+              "word": "Vazifemi",
+              "text": "Vazifemi",
+              "start": 34.96,
+              "end": 36.26
+            },
+            {
+              "word": "eksiksiz",
+              "text": "eksiksiz",
+              "start": 36.26,
+              "end": 37.12
+            },
+            {
+              "word": "ifa",
+              "text": "ifa",
+              "start": 37.12,
+              "end": 37.54
+            }
+          ]
+        },
+        {
+          "text": "ettiğimde başlar.",
+          "start": 61.34,
+          "end": 62.7,
+          "words": [
+            {
+              "word": "ettiğimde",
+              "text": "ettiğimde",
+              "start": 37.54,
+              "end": 38.24
+            },
+            {
+              "word": "başlar.",
+              "text": "başlar.",
+              "start": 38.24,
+              "end": 38.9
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "word": "Bugün",
+          "text": "Bugün",
+          "start": 23.8,
+          "end": 24.2
+        },
+        {
+          "word": "maile",
+          "text": "maile",
+          "start": 24.2,
+          "end": 24.74
+        },
+        {
+          "word": "sev",
+          "text": "sev",
+          "start": 24.74,
+          "end": 25.1
+        },
+        {
+          "word": "evlilikler,",
+          "text": "evlilikler,",
+          "start": 25.1,
+          "end": 26.18
+        },
+        {
+          "word": "tarafların",
+          "text": "tarafların",
+          "start": 26.54,
+          "end": 27.22
+        },
+        {
+          "word": "birbirine",
+          "text": "birbirine",
+          "start": 27.22,
+          "end": 27.98
+        },
+        {
+          "word": "sana",
+          "text": "sana",
+          "start": 27.98,
+          "end": 28.44
+        },
+        {
+          "word": "bunu",
+          "text": "bunu",
+          "start": 28.44,
+          "end": 28.74
+        },
+        {
+          "word": "yapmak",
+          "text": "yapmak",
+          "start": 28.74,
+          "end": 29.22
+        },
+        {
+          "word": "zorunda",
+          "text": "zorunda",
+          "start": 29.22,
+          "end": 29.74
+        },
+        {
+          "word": "değilim,",
+          "text": "değilim,",
+          "start": 29.74,
+          "end": 30.36
+        },
+        {
+          "word": "diyerek",
+          "text": "diyerek",
+          "start": 30.64,
+          "end": 31.06
+        },
+        {
+          "word": "nefislerini",
+          "text": "nefislerini",
+          "start": 31.06,
+          "end": 31.98
+        },
+        {
+          "word": "dayattığı",
+          "text": "dayattığı",
+          "start": 31.98,
+          "end": 32.72
+        },
+        {
+          "word": "soğuk",
+          "text": "soğuk",
+          "start": 32.72,
+          "end": 33.22
+        },
+        {
+          "word": "bir.",
+          "text": "bir.",
+          "start": 33.22,
+          "end": 33.4
+        },
+        {
+          "word": "Menfaat",
+          "text": "Menfaat",
+          "start": 34.26,
+          "end": 35.0
+        },
+        {
+          "word": "şebekesine",
+          "text": "şebekesine",
+          "start": 35.0,
+          "end": 35.84
+        },
+        {
+          "word": "dönüştürülmek",
+          "text": "dönüştürülmek",
+          "start": 35.84,
+          "end": 36.76
+        },
+        {
+          "word": "isteniyor.",
+          "text": "isteniyor.",
+          "start": 36.76,
+          "end": 37.56
+        },
+        {
+          "word": "Oysa",
+          "text": "Oysa",
+          "start": 38.04,
+          "end": 38.52
+        },
+        {
+          "word": "İslam",
+          "text": "İslam",
+          "start": 38.52,
+          "end": 39.08
+        },
+        {
+          "word": "nazarında",
+          "text": "nazarında",
+          "start": 39.08,
+          "end": 39.82
+        },
+        {
+          "word": "aile,",
+          "text": "aile,",
+          "start": 39.82,
+          "end": 40.36
+        },
+        {
+          "word": "hakların",
+          "text": "hakların",
+          "start": 40.82,
+          "end": 41.44
+        },
+        {
+          "word": "yarıştırıldığı",
+          "text": "yarıştırıldığı",
+          "start": 41.44,
+          "end": 42.34
+        },
+        {
+          "word": "bir",
+          "text": "bir",
+          "start": 42.34,
+          "end": 42.64
+        },
+        {
+          "word": "pazar",
+          "text": "pazar",
+          "start": 42.64,
+          "end": 43.16
+        },
+        {
+          "word": "değil.",
+          "text": "değil.",
+          "start": 43.16,
+          "end": 43.54
+        },
+        {
+          "word": "Herkesin",
+          "text": "Herkesin",
+          "start": 44.1,
+          "end": 44.84
+        },
+        {
+          "word": "kendi",
+          "text": "kendi",
+          "start": 44.84,
+          "end": 45.24
+        },
+        {
+          "word": "vazifesini,",
+          "text": "vazifesini,",
+          "start": 45.24,
+          "end": 46.3
+        },
+        {
+          "word": "yalnızca",
+          "text": "yalnızca",
+          "start": 46.66,
+          "end": 47.38
+        },
+        {
+          "word": "Allah",
+          "text": "Allah",
+          "start": 47.38,
+          "end": 47.74
+        },
+        {
+          "word": "rızası",
+          "text": "rızası",
+          "start": 47.74,
+          "end": 48.42
+        },
+        {
+          "word": "için",
+          "text": "için",
+          "start": 48.42,
+          "end": 48.86
+        },
+        {
+          "word": "yerine",
+          "text": "yerine",
+          "start": 48.86,
+          "end": 49.34
+        },
+        {
+          "word": "getirdiği",
+          "text": "getirdiği",
+          "start": 49.34,
+          "end": 50.0
+        },
+        {
+          "word": "mukaddes",
+          "text": "mukaddes",
+          "start": 50.0,
+          "end": 50.68
+        },
+        {
+          "word": "bir",
+          "text": "bir",
+          "start": 50.68,
+          "end": 51.0
+        },
+        {
+          "word": "sığınaktır.",
+          "text": "sığınaktır.",
+          "start": 51.0,
+          "end": 52.06
+        },
+        {
+          "word": "Emniyet",
+          "text": "Emniyet",
+          "start": 52.06,
+          "end": 53.1
+        },
+        {
+          "word": "yuvasıdır,",
+          "text": "yuvasıdır,",
+          "start": 53.1,
+          "end": 54.0
+        },
+        {
+          "word": "unutmayın",
+          "text": "unutmayın",
+          "start": 54.34,
+          "end": 54.94
+        },
+        {
+          "word": "ki",
+          "text": "ki",
+          "start": 54.94,
+          "end": 55.28
+        },
+        {
+          "word": "huzur,",
+          "text": "huzur,",
+          "start": 55.28,
+          "end": 55.72
+        },
+        {
+          "word": "ben",
+          "text": "ben",
+          "start": 56.3,
+          "end": 56.58
+        },
+        {
+          "word": "bence",
+          "text": "bence",
+          "start": 56.58,
+          "end": 57.06
+        },
+        {
+          "word": "haklı",
+          "text": "haklı",
+          "start": 57.06,
+          "end": 57.72
+        },
+        {
+          "word": "aradımda",
+          "text": "aradımda",
+          "start": 57.72,
+          "end": 58.36
+        },
+        {
+          "word": "değil.",
+          "text": "değil.",
+          "start": 58.36,
+          "end": 58.76
+        },
+        {
+          "word": "Vazifemi",
+          "text": "Vazifemi",
+          "start": 58.76,
+          "end": 60.06
+        },
+        {
+          "word": "eksiksiz",
+          "text": "eksiksiz",
+          "start": 60.06,
+          "end": 60.92
+        },
+        {
+          "word": "ifa",
+          "text": "ifa",
+          "start": 60.92,
+          "end": 61.34
+        },
+        {
+          "word": "ettiğimde",
+          "text": "ettiğimde",
+          "start": 61.34,
+          "end": 62.04
+        },
+        {
+          "word": "başlar.",
+          "text": "başlar.",
+          "start": 62.04,
+          "end": 62.7
+        }
+      ],
+      "audioUrl": "/public/audio.mp3",
+      "headerSubtitle": "Ahlaki Hakikat",
+      "headerLine1": "MUKADDES",
+      "circledWord": "YUVA",
+      "highlightedText": "BENCİL MENFAAT DEĞİL",
+      "strikeWord": "ZORUNDA DEĞİLİM",
+      "layoutType": "quote_spotlight",
+      "quoteSpotlight": {
+        "speaker": "Hikmetli Bakış",
+        "title": "AİLE ANLAYIŞI",
+        "quoteText": "Evlilik hak alma savaşı değil, vazife bilinciyle inşa edilen mukaddes bir yuvadır."
+      },
+      "quoteVideos": [
+        {
+          "id": "quote_e727f371",
+          "videoUrl": "/public/uploads/YEMEK_YAPMAK_ZORUNDA_DE__L_M__98cf3ee2.mp4",
+          "trimStart": 1.8,
+          "trimEnd": 25.6,
+          "timelineStart": 0.0,
+          "timelineEnd": 23.8,
+          "duration": 23.8,
+          "theme": "red_alert",
+          "headerText": "Arkadaşlar bu videoyu iyi izleyin...",
+          "subHeaderText": "",
+          "authorTag": "",
+          "stamp": "yalan",
+          "volume": 1.0,
+          "muted": false,
+          "freezeAtEnd": false
+        }
+      ],
+      "totalDuration": 63.5
+    }
+  },
+  {
+    "id": "c9a46056",
+    "topic": "Ekranların karşısına geçip; \"Kadın yemek yapmak zorunda değil, evi süpürmek, gömleğinizi ütülemek, çamaşırınızı yıkamak zorunda değil; bunları yapmadığında günah olmuyor\" diyen sesler, yuvalarımızı nereye sürüklüyor?...\n\nSor kendine... Yarım söylenen bir doğru, bazen en büyük yanılgıdan daha tehlikeli değil midir?... Aynı yastığa baş koyan karı ile kocayı, birbirinin yüküne omuz veren iki yol arkadaşı değil de, birbirine hesap soran iki rakip gibi kodlayan bu modern fısıltı, evlerimizde huzur bırakır mı?...\n\nGel, bu nefis okşayan sloganları bırakalım ve bin dört yüz yıl öncesine, Medine’ye gidelim...\n\nKarşımızda âlemlerin efendisi Hz. Muhammed Mustafa’nın (s.a.v.) ciğerparesi, cennet kadınlarının hanımefendisi Hz. Fâtıma validemiz duruyor... Eğer ev işi yapmamak bir üstünlük olsaydı, buna en layık olan kişi Peygamber kızı Fâtıma olmaz mıydı?... Ama onun mübarek elleri el değirmeniyle un öğütmekten nasır bağlamış, su taşımaktan omuzları iz olmuş, ocağın altını yakıp evi süpürmekten elbiseleri toz ve is içinde kalmıştı... Yorgunluktan takati kesilip babasından bir hizmetçi istediğinde, Resûlullah (s.a.v.) ona; \"Kızım Fâtıma! Senin yemek yapma, ev süpürme zorunluluğun yok, Ali’nin çamaşırlarını yıkamazsan günah olmaz\" mı dedi?...\n\nHayır!... Vallahi böyle demedi!... Aksine, ona yatmadan önce otuz üçer defa Sübhânallah, Elhamdülillah ve otuz dört defa Allâhü Ekber demeyi öğretti... Ve kıyamete kadar bütün ümmete ölçü olacak o nebevî iş bölümünü yaptı: Evin iç işlerini, hamur yoğurup ekmek yapmayı ve temizliği Hz. Fâtıma’ya; evin dış işlerini ve rızık teminini ise Hz. Ali’ye vazife olarak verdi!...\n\nPeki bugün \"Kadının iş yapma zorunluluğu yok\" diyenler hangi gerçeği gizliyor?...\n\n**Hanefî mezhebimizin** fıkıh kitaplarında hükümler ikiye ayrılır: **Kazâen**, yani mahkeme zoruyla yaptırılanlar; ve **Diyâneten**, yani kul ile Allah arasındaki dinî sorumluluklar... Evet, bir kadın \"Ben yemek yapmıyorum\" derse, koca ona mahkeme veya polis zoruyla iş yaptıramaz... Ancak Hanefî fıkhına göre, sağlığı yerinde olan bir kadının evinin iç işlerini yapması, yemeğini pişirip evini temizlemesi **diyâneten**, yani dinen ve Allah katında onun vazifesidir, boynunun borcudur!... Mazeretsiz yere \"Zorunda değilim\" diyerek yuvasını yüzüstü bırakması, Allah katında vebaldir!...\n\nBak, Efendimiz (s.a.v.) sahih hadis-i şerifinde bu vazifeyi nasıl mühürlüyor:\n\n*\"Ve'l-mer'etü râiyetün fî beyti zevcihâ ve mes'ûletün an raiyyetihâ...\"*\n\n**\"Kadın, kocasının evinin çobanıdır (yöneticisidir, koruyucusudur) ve elinin altındakilerden sorumludur!\"**\n\nElbette İslam, erkeğe de \"Eşin senin kölendir\" demez!... Kendi söküğünü diken, ev işlerinde ailesinin hizmetinde bulunan Peygamberimiz (s.a.v.); **\"Sizin en hayırlınız, ailesine karşı en hayırlı olanınızdır\"** buyurarak erkeğe de eşinin yükünü paylaşmayı ve merhameti emreder...\n\nÇünkü Âlemlerin Rabbi, Rûm Suresi 21. ayette yuvanın kanununu şöyle koymuştur:\n\n*\"Ve min âyâtihî en halaka leküm min enfüsiküm ezvâcen li teskünû ileyhâ ve ceale beyneküm meveddeten ve rahmeh...\"*\n\n**\"Kendileriyle huzur bulasınız diye sizin için kendi türünüzden eşler yaratması ve aranızda bir sevgi ve merhamet var etmesi O'nun ayetlerindendir...\"**\n\nŞimdi düşün... Evden bu merhamet çekilip alınsa; kadın \"Ben senin yemeğini yapmak, gömleğini ütülemek zorunda değilim\" dese... Erkek de çıkıp aynı kuru mahkeme diliyle; \"Öyleyse ben de sana karın doyuracak kuru ekmek ve yılda iki kat sade kıyafet dışında hiçbir şey almak zorunda değilim, hatta hastalandığında ilaç ve hastane masrafını bile ödemek zorunda değilim\" dese... Söyle, o ev yuva mı olur, yoksa iki yabancının birbirine fatura kestiği soğuk bir ticarethane mi?...\n\nVakit varken uyan kardeşim... Yuvalar \"Zorunda değilim\" kibriyle değil, fedakârlıkla ayakta kalır... Kalpleri birbirine ısındıran **El-Vedûd**, şefkatin kaynağı **Er-Rahîm** ve yuvada yapılan en küçük hizmeti bile kat kat ecirle mükâfatlandıran **Eş-Şekûr** olan Allah’a sığınalım... Evimizde pişirdiğimiz bir tas çorbanın, döktüğümüz her alın terinin Allah katında ibadet olduğunu unutmayalım ve kalbimizi Furkân Suresi 74. ayetteki o muazzam duayla mühürleyelim:\n\n*\"Rabbenâ heb lenâ min ezvâcinâ ve zürriyyâtinâ kurrate a'yünin vec'alnâ li'l-müttekîne imâmâ...\"*\n\n**\"Ey Rabbimiz! Bize eşlerimizden ve nesillerimizden göz aydınlığı olacak salih kimseler ihsan eyle ve bizi takva sahiplerine önder kıl... Âmîn...\"**",
+    "theme": "gold_luxury",
+    "layoutType": "quote_spotlight",
+    "durationMode": "4 Sahne (75s)",
+    "created_at": "2026-11-01 01:26",
+    "headerMain": "YARIM DOĞRU SOĞUK TİCARETHANE",
+    "narration": "'Kadın yemek yapmak zorunda değil' diyen modern fısıltılar, yuvalarımızı nereye sürüklüyor? Aile, birbirine fatura kestiği soğuk bir ticarethane midir? Oysa Medine'ye gittiğimizde Peygamber kızı Hz. Fâtıma’nın un öğütmekten nasır tutmuş ellerini görürüz. Efendimiz (s.a.v.) ev işlerini kızına, dış işleri Hz. Ali’ye emanet etmiştir. Hanefî fıkhına göre; mahkeme zoruyla olmasa da, kadının evine hizmet etmesi diyâneten, yani Allah katında boynunun borcudur. Yuvalar bencil sloganlarla değil; sevgi, fedakârlık ve nebevî ölçüyle huzur bulur.",
+    "hookScore": 98,
+    "key_used": "mehmetortabakan@gmail.com",
+    "model_used": "gemini-3.5-flash",
+    "thumbnail_url": "/out/thumbnail.png?t=1793485570",
+    "video_data": {
+      "directorDecision": {
+        "theme": "gold_luxury",
+        "particles": "dust",
+        "ambientPattern": "fingerprint",
+        "doodleType": "none",
+        "directorReason": "İslami ve fıkhi tefekkürün derinliğini yansıtmak amacıyla altın tonlarında lüks minimalizm ve karşılaştırmalı sahne kurgusu tercih edilmiştir."
+      },
+      "requiredIcons": [
+        "book",
+        "shield",
+        "heart",
+        "scale"
+      ],
+      "theme": "gold_luxury",
+      "narration": "'Kadın yemek yapmak zorunda değil' diyen modern fısıltılar, yuvalarımızı nereye sürüklüyor? Aile, birbirine fatura kestiği soğuk bir ticarethane midir? Oysa Medine'ye gittiğimizde Peygamber kızı Hz. Fâtıma’nın un öğütmekten nasır tutmuş ellerini görürüz. Efendimiz (s.a.v.) ev işlerini kızına, dış işleri Hz. Ali’ye emanet etmiştir. Hanefî fıkhına göre; mahkeme zoruyla olmasa da, kadının evine hizmet etmesi diyâneten, yani Allah katında boynunun borcudur. Yuvalar bencil sloganlarla değil; sevgi, fedakârlık ve nebevî ölçüyle huzur bulur.",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "layoutType": "quote_spotlight",
+          "headerSubtitle": "Modern Çıkmaz",
+          "headerLine1": "YARIM",
+          "circledWord": "DOĞRU",
+          "headerLine2": "BÜYÜK YANILGI",
+          "highlightedText": "SOĞUK TİCARETHANE",
+          "strikeWord": "ZORUNDA DEĞİLİM",
+          "quoteSpotlight": {
+            "speaker": "Hadis-i Şerif",
+            "title": "NEBEVİ ÖLÇÜ",
+            "quoteText": "Kadın, kocasının evinin koruyucusudur ve elinin altındakilerden sorumludur."
+          },
+          "startTime": 23.8,
+          "endTime": 36.67
+        },
+        {
+          "id": "scene_2",
+          "layoutType": "vs_split",
+          "headerSubtitle": "Fıkhi Hakikat",
+          "headerLine1": "KAZÂEN MEVZUAT",
+          "circledWord": "DİYÂNETEN",
+          "headerLine2": "MUKADDES VAZİFE",
+          "highlightedText": "ALLAH KATINDA BORÇ",
+          "strikeWord": "BENCİLLİK",
+          "vsData": {
+            "leftTitle": "Kazâen (Mahkeme)",
+            "leftSubtitle": "Hukuki Yaptırım",
+            "leftPoints": [
+              "Polis/Mahkeme zoru yok",
+              "Kuru ve soğuk hukuk dili",
+              "Bencil hak çatışması"
+            ],
+            "rightTitle": "Diyâneten (Dinî)",
+            "rightSubtitle": "Allah Katında Sorumluluk",
+            "rightPoints": [
+              "Evin iç işlerini yürütmek",
+              "Hz. Fâtıma'nın sünneti",
+              "Ahiret mesuliyeti ve ecir"
+            ],
+            "verdict": "Yuva, mahkeme diliyle değil; diyâneten vefa ve fedakârlıkla ayakta kalır."
+          },
+          "startTime": 36.67,
+          "endTime": 49.54
+        },
+        {
+          "id": "scene_3",
+          "layoutType": "cards",
+          "headerSubtitle": "Huzur Sütunları",
+          "headerLine1": "SAADETİN",
+          "circledWord": "TEMELİ",
+          "headerLine2": "NEBEVİ İŞ BÖLÜMÜ",
+          "highlightedText": "SEVGİ VE MERHAMET",
+          "strikeWord": "",
+          "cards": [
+            {
+              "id": "1",
+              "label": "Hz. Fâtıma Sünneti",
+              "value": "Ev İçi Hizmet",
+              "icon": "book",
+              "color": "#d97706"
+            },
+            {
+              "id": "2",
+              "label": "Hz. Ali Vazifesi",
+              "value": "Dış İşler & Rızık",
+              "icon": "shield",
+              "color": "#1e3a8a"
+            },
+            {
+              "id": "3",
+              "label": "Rûm Suresi 21",
+              "value": "Meveddet & Rahmet",
+              "icon": "heart",
+              "color": "#15803d"
+            }
+          ],
+          "startTime": 49.54,
+          "endTime": 62.41
+        },
+        {
+          "id": "scene_4",
+          "layoutType": "metric_impact",
+          "headerSubtitle": "İlahi Kanun",
+          "headerLine1": "BİN DÖRT YÜZ",
+          "circledWord": "YILLIK",
+          "headerLine2": "DEĞİŞMEZ ÖLÇÜ",
+          "highlightedText": "İBADET SAYILAN ALIN TERİ",
+          "strikeWord": "",
+          "metricImpact": {
+            "value": "1400",
+            "label": "YILLIK SÜNNET MODELİ",
+            "subtext": "Evimizde pişirdiğimiz bir tas çorba, Allah katında bir ibadettir."
+          },
+          "startTime": 62.41,
+          "endTime": 75.28
+        }
+      ],
+      "viral": {
+        "hookScore": 98,
+        "viralTitles": [
+          "Kadın Yemek Yapmak Zorunda Değil mi?",
+          "Hz. Fâtıma'nın Elleri Neden Nasır Bağladı?",
+          "Kazâen ve Diyâneten: Yuvanızı Yıkan Slogan!"
+        ],
+        "hashtags": [
+          "#evlilik",
+          "#aile",
+          "#dinidersleri",
+          "#hzfatima",
+          "#huzur"
+        ],
+        "loopEnding": "ve işte gerçek huzur bu nebevî ölçüdedir.",
+        "description": "Kadının evindeki sorumlulukları, Hanefî fıkhındaki Kazâen ve Diyâneten farkı ve Hz. Fâtıma'nın nebevî örneği üzerine derin tefekkür."
+      },
+      "durationMode": "deep",
+      "particles": "dust",
+      "ambientPattern": "fingerprint",
+      "doodleType": "none",
+      "filmGrain": "subtle",
+      "lightLeaks": "auto",
+      "cameraMotion": "handheld",
+      "accentType": "none",
+      "socialHandle": "@birkissa",
+      "musicTrack": "ambient_music.wav",
+      "ttsProvider": "edge_tts",
+      "voiceId": "en-US-AndrewMultilingualNeural",
+      "emotionTone": "documentary",
+      "brollType": "none",
+      "brollOpacity": 0.18,
+      "_acquired_assets": [
+        {
+          "name": "fingerprint",
+          "type": "watermark",
+          "path": "assets/watermarks/fingerprint.svg"
+        }
+      ],
+      "aiKurguStartOffset": 23.8,
+      "subtitles": [
+        {
+          "text": "Kadın yemek yapmak",
+          "start": 23.8,
+          "end": 25.08,
+          "words": [
+            {
+              "word": "Kadın",
+              "text": "Kadın",
+              "start": 0.0,
+              "end": 0.46
+            },
+            {
+              "word": "yemek",
+              "text": "yemek",
+              "start": 0.46,
+              "end": 0.7
+            },
+            {
+              "word": "yapmak",
+              "text": "yapmak",
+              "start": 0.7,
+              "end": 1.28
+            }
+          ]
+        },
+        {
+          "text": "zorunda değil, diyen",
+          "start": 25.08,
+          "end": 26.64,
+          "words": [
+            {
+              "word": "zorunda",
+              "text": "zorunda",
+              "start": 1.28,
+              "end": 1.82
+            },
+            {
+              "word": "değil,",
+              "text": "değil,",
+              "start": 1.82,
+              "end": 2.24
+            },
+            {
+              "word": "diyen",
+              "text": "diyen",
+              "start": 2.56,
+              "end": 2.84
+            }
+          ]
+        },
+        {
+          "text": "modern fısıldılar. Yuvalarımızı",
+          "start": 26.64,
+          "end": 29.54,
+          "words": [
+            {
+              "word": "modern",
+              "text": "modern",
+              "start": 2.84,
+              "end": 3.26
+            },
+            {
+              "word": "fısıldılar.",
+              "text": "fısıldılar.",
+              "start": 3.26,
+              "end": 4.44
+            },
+            {
+              "word": "Yuvalarımızı",
+              "text": "Yuvalarımızı",
+              "start": 4.84,
+              "end": 5.74
+            }
+          ]
+        },
+        {
+          "text": "nereye sürükliyor?",
+          "start": 29.54,
+          "end": 30.72,
+          "words": [
+            {
+              "word": "nereye",
+              "text": "nereye",
+              "start": 5.74,
+              "end": 6.16
+            },
+            {
+              "word": "sürükliyor?",
+              "text": "sürükliyor?",
+              "start": 6.16,
+              "end": 6.92
+            }
+          ]
+        },
+        {
+          "text": "A ile birbirine",
+          "start": 31.36,
+          "end": 32.88,
+          "words": [
+            {
+              "word": "A",
+              "text": "A",
+              "start": 7.56,
+              "end": 7.72
+            },
+            {
+              "word": "ile",
+              "text": "ile",
+              "start": 7.72,
+              "end": 8.02
+            },
+            {
+              "word": "birbirine",
+              "text": "birbirine",
+              "start": 8.02,
+              "end": 9.08
+            }
+          ]
+        },
+        {
+          "text": "fatura kestiği soğuk",
+          "start": 32.88,
+          "end": 34.46,
+          "words": [
+            {
+              "word": "fatura",
+              "text": "fatura",
+              "start": 9.08,
+              "end": 9.54
+            },
+            {
+              "word": "kestiği",
+              "text": "kestiği",
+              "start": 9.54,
+              "end": 10.34
+            },
+            {
+              "word": "soğuk",
+              "text": "soğuk",
+              "start": 10.34,
+              "end": 10.66
+            }
+          ]
+        },
+        {
+          "text": "bir ticaret hanemidir.",
+          "start": 34.46,
+          "end": 36.02,
+          "words": [
+            {
+              "word": "bir",
+              "text": "bir",
+              "start": 10.66,
+              "end": 10.82
+            },
+            {
+              "word": "ticaret",
+              "text": "ticaret",
+              "start": 10.82,
+              "end": 11.4
+            },
+            {
+              "word": "hanemidir.",
+              "text": "hanemidir.",
+              "start": 11.4,
+              "end": 12.22
+            }
+          ]
+        },
+        {
+          "text": "Oysa medyineye gittiğimizde",
+          "start": 36.66,
+          "end": 38.82,
+          "words": [
+            {
+              "word": "Oysa",
+              "text": "Oysa",
+              "start": 12.86,
+              "end": 13.34
+            },
+            {
+              "word": "medyineye",
+              "text": "medyineye",
+              "start": 13.34,
+              "end": 14.1
+            },
+            {
+              "word": "gittiğimizde",
+              "text": "gittiğimizde",
+              "start": 14.1,
+              "end": 15.02
+            }
+          ]
+        },
+        {
+          "text": "Peygamber kızı heize.",
+          "start": 38.82,
+          "end": 40.56,
+          "words": [
+            {
+              "word": "Peygamber",
+              "text": "Peygamber",
+              "start": 15.02,
+              "end": 15.8
+            },
+            {
+              "word": "kızı",
+              "text": "kızı",
+              "start": 15.8,
+              "end": 16.32
+            },
+            {
+              "word": "heize.",
+              "text": "heize.",
+              "start": 16.32,
+              "end": 16.76
+            }
+          ]
+        },
+        {
+          "text": "Fatimanın'un ütmekten nasıl",
+          "start": 41.3,
+          "end": 43.46,
+          "words": [
+            {
+              "word": "Fatimanın'un",
+              "text": "Fatimanın'un",
+              "start": 17.5,
+              "end": 18.44
+            },
+            {
+              "word": "ütmekten",
+              "text": "ütmekten",
+              "start": 18.44,
+              "end": 19.28
+            },
+            {
+              "word": "nasıl",
+              "text": "nasıl",
+              "start": 19.28,
+              "end": 19.66
+            }
+          ]
+        },
+        {
+          "text": "tutmuş ellerini görürüz.",
+          "start": 43.46,
+          "end": 45.36,
+          "words": [
+            {
+              "word": "tutmuş",
+              "text": "tutmuş",
+              "start": 19.66,
+              "end": 20.28
+            },
+            {
+              "word": "ellerini",
+              "text": "ellerini",
+              "start": 20.28,
+              "end": 20.94
+            },
+            {
+              "word": "görürüz.",
+              "text": "görürüz.",
+              "start": 20.94,
+              "end": 21.56
+            }
+          ]
+        },
+        {
+          "text": "Efendimiz, C-A-V",
+          "start": 45.76,
+          "end": 48.42,
+          "words": [
+            {
+              "word": "Efendimiz,",
+              "text": "Efendimiz,",
+              "start": 21.96,
+              "end": 22.5
+            },
+            {
+              "word": "C-A-V",
+              "text": "C-A-V",
+              "start": 23.36,
+              "end": 24.62
+            }
+          ]
+        },
+        {
+          "text": "Ev işlerini kızına,",
+          "start": 48.69,
+          "end": 50.58,
+          "words": [
+            {
+              "word": "Ev",
+              "text": "Ev",
+              "start": 24.89,
+              "end": 25.42
+            },
+            {
+              "word": "işlerini",
+              "text": "işlerini",
+              "start": 25.42,
+              "end": 26.12
+            },
+            {
+              "word": "kızına,",
+              "text": "kızına,",
+              "start": 26.12,
+              "end": 26.78
+            }
+          ]
+        },
+        {
+          "text": "dış işleri heize,",
+          "start": 51.0,
+          "end": 52.66,
+          "words": [
+            {
+              "word": "dış",
+              "text": "dış",
+              "start": 27.2,
+              "end": 27.34
+            },
+            {
+              "word": "işleri",
+              "text": "işleri",
+              "start": 27.34,
+              "end": 28.18
+            },
+            {
+              "word": "heize,",
+              "text": "heize,",
+              "start": 28.18,
+              "end": 28.86
+            }
+          ]
+        },
+        {
+          "text": "aliye emanet etmiştir.",
+          "start": 53.22,
+          "end": 55.04,
+          "words": [
+            {
+              "word": "aliye",
+              "text": "aliye",
+              "start": 29.42,
+              "end": 29.78
+            },
+            {
+              "word": "emanet",
+              "text": "emanet",
+              "start": 29.78,
+              "end": 30.5
+            },
+            {
+              "word": "etmiştir.",
+              "text": "etmiştir.",
+              "start": 30.5,
+              "end": 31.24
+            }
+          ]
+        },
+        {
+          "text": "Hanephi fıkına göre,",
+          "start": 55.52,
+          "end": 57.1,
+          "words": [
+            {
+              "word": "Hanephi",
+              "text": "Hanephi",
+              "start": 31.72,
+              "end": 32.3
+            },
+            {
+              "word": "fıkına",
+              "text": "fıkına",
+              "start": 32.3,
+              "end": 32.96
+            },
+            {
+              "word": "göre,",
+              "text": "göre,",
+              "start": 32.96,
+              "end": 33.3
+            }
+          ]
+        },
+        {
+          "text": "mahkeme zoruyla olmasa da,",
+          "start": 57.56,
+          "end": 59.62,
+          "words": [
+            {
+              "word": "mahkeme",
+              "text": "mahkeme",
+              "start": 33.76,
+              "end": 34.24
+            },
+            {
+              "word": "zoruyla",
+              "text": "zoruyla",
+              "start": 34.24,
+              "end": 34.94
+            },
+            {
+              "word": "olmasa",
+              "text": "olmasa",
+              "start": 34.94,
+              "end": 35.64
+            },
+            {
+              "word": "da,",
+              "text": "da,",
+              "start": 35.64,
+              "end": 35.82
+            }
+          ]
+        },
+        {
+          "text": "kadının evine hizmet",
+          "start": 60.0,
+          "end": 61.38,
+          "words": [
+            {
+              "word": "kadının",
+              "text": "kadının",
+              "start": 36.2,
+              "end": 36.66
+            },
+            {
+              "word": "evine",
+              "text": "evine",
+              "start": 36.66,
+              "end": 37.18
+            },
+            {
+              "word": "hizmet",
+              "text": "hizmet",
+              "start": 37.18,
+              "end": 37.58
+            }
+          ]
+        },
+        {
+          "text": "etmesi diyaneten. Yani",
+          "start": 61.38,
+          "end": 63.64,
+          "words": [
+            {
+              "word": "etmesi",
+              "text": "etmesi",
+              "start": 37.58,
+              "end": 38.26
+            },
+            {
+              "word": "diyaneten.",
+              "text": "diyaneten.",
+              "start": 38.26,
+              "end": 39.1
+            },
+            {
+              "word": "Yani",
+              "text": "Yani",
+              "start": 39.62,
+              "end": 39.84
+            }
+          ]
+        },
+        {
+          "text": "Allah katında boynunun",
+          "start": 63.64,
+          "end": 65.58,
+          "words": [
+            {
+              "word": "Allah",
+              "text": "Allah",
+              "start": 39.84,
+              "end": 40.44
+            },
+            {
+              "word": "katında",
+              "text": "katında",
+              "start": 40.44,
+              "end": 41.18
+            },
+            {
+              "word": "boynunun",
+              "text": "boynunun",
+              "start": 41.18,
+              "end": 41.78
+            }
+          ]
+        },
+        {
+          "text": "borcudur. Yuvalar bence",
+          "start": 65.58,
+          "end": 68.06,
+          "words": [
+            {
+              "word": "borcudur.",
+              "text": "borcudur.",
+              "start": 41.78,
+              "end": 42.76
+            },
+            {
+              "word": "Yuvalar",
+              "text": "Yuvalar",
+              "start": 43.22,
+              "end": 43.7
+            },
+            {
+              "word": "bence",
+              "text": "bence",
+              "start": 43.7,
+              "end": 44.26
+            }
+          ]
+        },
+        {
+          "text": "silogenlarla değil, sevgi,",
+          "start": 68.06,
+          "end": 70.56,
+          "words": [
+            {
+              "word": "silogenlarla",
+              "text": "silogenlarla",
+              "start": 44.26,
+              "end": 45.4
+            },
+            {
+              "word": "değil,",
+              "text": "değil,",
+              "start": 45.4,
+              "end": 45.74
+            },
+            {
+              "word": "sevgi,",
+              "text": "sevgi,",
+              "start": 46.12,
+              "end": 46.76
+            }
+          ]
+        },
+        {
+          "text": "fedakarlık ve ne",
+          "start": 71.02,
+          "end": 72.44,
+          "words": [
+            {
+              "word": "fedakarlık",
+              "text": "fedakarlık",
+              "start": 47.22,
+              "end": 48.18
+            },
+            {
+              "word": "ve",
+              "text": "ve",
+              "start": 48.18,
+              "end": 48.4
+            },
+            {
+              "word": "ne",
+              "text": "ne",
+              "start": 48.4,
+              "end": 48.64
+            }
+          ]
+        },
+        {
+          "text": "bebi ölçüyle huzur",
+          "start": 72.44,
+          "end": 73.94,
+          "words": [
+            {
+              "word": "bebi",
+              "text": "bebi",
+              "start": 48.64,
+              "end": 48.96
+            },
+            {
+              "word": "ölçüyle",
+              "text": "ölçüyle",
+              "start": 48.96,
+              "end": 49.74
+            },
+            {
+              "word": "huzur",
+              "text": "huzur",
+              "start": 49.74,
+              "end": 50.14
+            }
+          ]
+        },
+        {
+          "text": "bulur.",
+          "start": 73.94,
+          "end": 74.48,
+          "words": [
+            {
+              "word": "bulur.",
+              "text": "bulur.",
+              "start": 50.14,
+              "end": 50.68
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "word": "Kadın",
+          "text": "Kadın",
+          "start": 23.8,
+          "end": 24.26
+        },
+        {
+          "word": "yemek",
+          "text": "yemek",
+          "start": 24.26,
+          "end": 24.5
+        },
+        {
+          "word": "yapmak",
+          "text": "yapmak",
+          "start": 24.5,
+          "end": 25.08
+        },
+        {
+          "word": "zorunda",
+          "text": "zorunda",
+          "start": 25.08,
+          "end": 25.62
+        },
+        {
+          "word": "değil,",
+          "text": "değil,",
+          "start": 25.62,
+          "end": 26.04
+        },
+        {
+          "word": "diyen",
+          "text": "diyen",
+          "start": 26.36,
+          "end": 26.64
+        },
+        {
+          "word": "modern",
+          "text": "modern",
+          "start": 26.64,
+          "end": 27.06
+        },
+        {
+          "word": "fısıldılar.",
+          "text": "fısıldılar.",
+          "start": 27.06,
+          "end": 28.24
+        },
+        {
+          "word": "Yuvalarımızı",
+          "text": "Yuvalarımızı",
+          "start": 28.64,
+          "end": 29.54
+        },
+        {
+          "word": "nereye",
+          "text": "nereye",
+          "start": 29.54,
+          "end": 29.96
+        },
+        {
+          "word": "sürükliyor?",
+          "text": "sürükliyor?",
+          "start": 29.96,
+          "end": 30.72
+        },
+        {
+          "word": "A",
+          "text": "A",
+          "start": 31.36,
+          "end": 31.52
+        },
+        {
+          "word": "ile",
+          "text": "ile",
+          "start": 31.52,
+          "end": 31.82
+        },
+        {
+          "word": "birbirine",
+          "text": "birbirine",
+          "start": 31.82,
+          "end": 32.88
+        },
+        {
+          "word": "fatura",
+          "text": "fatura",
+          "start": 32.88,
+          "end": 33.34
+        },
+        {
+          "word": "kestiği",
+          "text": "kestiği",
+          "start": 33.34,
+          "end": 34.14
+        },
+        {
+          "word": "soğuk",
+          "text": "soğuk",
+          "start": 34.14,
+          "end": 34.46
+        },
+        {
+          "word": "bir",
+          "text": "bir",
+          "start": 34.46,
+          "end": 34.62
+        },
+        {
+          "word": "ticaret",
+          "text": "ticaret",
+          "start": 34.62,
+          "end": 35.2
+        },
+        {
+          "word": "hanemidir.",
+          "text": "hanemidir.",
+          "start": 35.2,
+          "end": 36.02
+        },
+        {
+          "word": "Oysa",
+          "text": "Oysa",
+          "start": 36.66,
+          "end": 37.14
+        },
+        {
+          "word": "medyineye",
+          "text": "medyineye",
+          "start": 37.14,
+          "end": 37.9
+        },
+        {
+          "word": "gittiğimizde",
+          "text": "gittiğimizde",
+          "start": 37.9,
+          "end": 38.82
+        },
+        {
+          "word": "Peygamber",
+          "text": "Peygamber",
+          "start": 38.82,
+          "end": 39.6
+        },
+        {
+          "word": "kızı",
+          "text": "kızı",
+          "start": 39.6,
+          "end": 40.12
+        },
+        {
+          "word": "heize.",
+          "text": "heize.",
+          "start": 40.12,
+          "end": 40.56
+        },
+        {
+          "word": "Fatimanın'un",
+          "text": "Fatimanın'un",
+          "start": 41.3,
+          "end": 42.24
+        },
+        {
+          "word": "ütmekten",
+          "text": "ütmekten",
+          "start": 42.24,
+          "end": 43.08
+        },
+        {
+          "word": "nasıl",
+          "text": "nasıl",
+          "start": 43.08,
+          "end": 43.46
+        },
+        {
+          "word": "tutmuş",
+          "text": "tutmuş",
+          "start": 43.46,
+          "end": 44.08
+        },
+        {
+          "word": "ellerini",
+          "text": "ellerini",
+          "start": 44.08,
+          "end": 44.74
+        },
+        {
+          "word": "görürüz.",
+          "text": "görürüz.",
+          "start": 44.74,
+          "end": 45.36
+        },
+        {
+          "word": "Efendimiz,",
+          "text": "Efendimiz,",
+          "start": 45.76,
+          "end": 46.3
+        },
+        {
+          "word": "C-A-V",
+          "text": "C-A-V",
+          "start": 47.16,
+          "end": 48.42
+        },
+        {
+          "word": "Ev",
+          "text": "Ev",
+          "start": 48.69,
+          "end": 49.22
+        },
+        {
+          "word": "işlerini",
+          "text": "işlerini",
+          "start": 49.22,
+          "end": 49.92
+        },
+        {
+          "word": "kızına,",
+          "text": "kızına,",
+          "start": 49.92,
+          "end": 50.58
+        },
+        {
+          "word": "dış",
+          "text": "dış",
+          "start": 51.0,
+          "end": 51.14
+        },
+        {
+          "word": "işleri",
+          "text": "işleri",
+          "start": 51.14,
+          "end": 51.98
+        },
+        {
+          "word": "heize,",
+          "text": "heize,",
+          "start": 51.98,
+          "end": 52.66
+        },
+        {
+          "word": "aliye",
+          "text": "aliye",
+          "start": 53.22,
+          "end": 53.58
+        },
+        {
+          "word": "emanet",
+          "text": "emanet",
+          "start": 53.58,
+          "end": 54.3
+        },
+        {
+          "word": "etmiştir.",
+          "text": "etmiştir.",
+          "start": 54.3,
+          "end": 55.04
+        },
+        {
+          "word": "Hanephi",
+          "text": "Hanephi",
+          "start": 55.52,
+          "end": 56.1
+        },
+        {
+          "word": "fıkına",
+          "text": "fıkına",
+          "start": 56.1,
+          "end": 56.76
+        },
+        {
+          "word": "göre,",
+          "text": "göre,",
+          "start": 56.76,
+          "end": 57.1
+        },
+        {
+          "word": "mahkeme",
+          "text": "mahkeme",
+          "start": 57.56,
+          "end": 58.04
+        },
+        {
+          "word": "zoruyla",
+          "text": "zoruyla",
+          "start": 58.04,
+          "end": 58.74
+        },
+        {
+          "word": "olmasa",
+          "text": "olmasa",
+          "start": 58.74,
+          "end": 59.44
+        },
+        {
+          "word": "da,",
+          "text": "da,",
+          "start": 59.44,
+          "end": 59.62
+        },
+        {
+          "word": "kadının",
+          "text": "kadının",
+          "start": 60.0,
+          "end": 60.46
+        },
+        {
+          "word": "evine",
+          "text": "evine",
+          "start": 60.46,
+          "end": 60.98
+        },
+        {
+          "word": "hizmet",
+          "text": "hizmet",
+          "start": 60.98,
+          "end": 61.38
+        },
+        {
+          "word": "etmesi",
+          "text": "etmesi",
+          "start": 61.38,
+          "end": 62.06
+        },
+        {
+          "word": "diyaneten.",
+          "text": "diyaneten.",
+          "start": 62.06,
+          "end": 62.9
+        },
+        {
+          "word": "Yani",
+          "text": "Yani",
+          "start": 63.42,
+          "end": 63.64
+        },
+        {
+          "word": "Allah",
+          "text": "Allah",
+          "start": 63.64,
+          "end": 64.24
+        },
+        {
+          "word": "katında",
+          "text": "katında",
+          "start": 64.24,
+          "end": 64.98
+        },
+        {
+          "word": "boynunun",
+          "text": "boynunun",
+          "start": 64.98,
+          "end": 65.58
+        },
+        {
+          "word": "borcudur.",
+          "text": "borcudur.",
+          "start": 65.58,
+          "end": 66.56
+        },
+        {
+          "word": "Yuvalar",
+          "text": "Yuvalar",
+          "start": 67.02,
+          "end": 67.5
+        },
+        {
+          "word": "bence",
+          "text": "bence",
+          "start": 67.5,
+          "end": 68.06
+        },
+        {
+          "word": "silogenlarla",
+          "text": "silogenlarla",
+          "start": 68.06,
+          "end": 69.2
+        },
+        {
+          "word": "değil,",
+          "text": "değil,",
+          "start": 69.2,
+          "end": 69.54
+        },
+        {
+          "word": "sevgi,",
+          "text": "sevgi,",
+          "start": 69.92,
+          "end": 70.56
+        },
+        {
+          "word": "fedakarlık",
+          "text": "fedakarlık",
+          "start": 71.02,
+          "end": 71.98
+        },
+        {
+          "word": "ve",
+          "text": "ve",
+          "start": 71.98,
+          "end": 72.2
+        },
+        {
+          "word": "ne",
+          "text": "ne",
+          "start": 72.2,
+          "end": 72.44
+        },
+        {
+          "word": "bebi",
+          "text": "bebi",
+          "start": 72.44,
+          "end": 72.76
+        },
+        {
+          "word": "ölçüyle",
+          "text": "ölçüyle",
+          "start": 72.76,
+          "end": 73.54
+        },
+        {
+          "word": "huzur",
+          "text": "huzur",
+          "start": 73.54,
+          "end": 73.94
+        },
+        {
+          "word": "bulur.",
+          "text": "bulur.",
+          "start": 73.94,
+          "end": 74.48
+        }
+      ],
+      "audioUrl": "/public/audio.mp3",
+      "headerSubtitle": "Modern Çıkmaz",
+      "headerLine1": "YARIM",
+      "circledWord": "DOĞRU",
+      "headerLine2": "BÜYÜK YANILGI",
+      "highlightedText": "SOĞUK TİCARETHANE",
+      "strikeWord": "ZORUNDA DEĞİLİM",
+      "layoutType": "quote_spotlight",
+      "quoteSpotlight": {
+        "speaker": "Hadis-i Şerif",
+        "title": "NEBEVİ ÖLÇÜ",
+        "quoteText": "Kadın, kocasının evinin koruyucusudur ve elinin altındakilerden sorumludur."
+      },
+      "quoteVideos": [
+        {
+          "id": "quote_e727f371",
+          "videoUrl": "/public/uploads/YEMEK_YAPMAK_ZORUNDA_DE__L_M__98cf3ee2.mp4",
+          "trimStart": 1.8,
+          "trimEnd": 25.6,
+          "timelineStart": 0.0,
+          "timelineEnd": 23.8,
+          "duration": 23.8,
+          "theme": "red_alert",
+          "headerText": "Arkadaşlar bu videoyu iyi izleyin...",
+          "subHeaderText": "",
+          "authorTag": "",
+          "stamp": "yalan",
+          "volume": 1.0,
+          "muted": false,
+          "freezeAtEnd": false
+        }
+      ],
+      "totalDuration": 75.28
+    }
+  },
+  {
+    "id": "fce85d9d",
+    "topic": "fwewfewf",
+    "theme": "notebook",
+    "layoutType": "pip_split",
+    "durationMode": "10s",
+    "created_at": "2026-11-01 00:57:50",
+    "headerMain": "FWEWFEWF",
+    "thumbnail_url": "/out/thumbnail.png",
+    "video_data": {
+      "topic": "fwewfewf",
+      "theme": "notebook",
+      "format": "9:16",
+      "headerSubtitle": "Bölüm 1",
+      "headerLine1": "FWEWFEWF",
+      "circledWord": "İLK",
+      "headerLine2": "Fikrini Buraya Yaz",
+      "highlightedText": "Önemli Nokta",
+      "layoutType": "pip_split",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "headerSubtitle": "Bölüm 1",
+          "headerLine1": "FWEWFEWF",
+          "circledWord": "İLK",
+          "headerLine2": "Fikrini Buraya Yaz",
+          "highlightedText": "Önemli Nokta",
+          "layoutType": "pip_split",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "duration": 10.0
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "fwewfewf",
+          "start": 0.0,
+          "end": 2.5
+        },
+        {
+          "text": "kurgulamaya hemen başla",
+          "start": 2.5,
+          "end": 5.0
+        }
+      ],
+      "totalDuration": 10.0,
+      "created_at": "2026-11-01 00:57:50"
+    }
+  },
+  {
+    "id": "4eed0846",
+    "topic": "cevap1",
+    "theme": "notebook",
+    "layoutType": "pip_split",
+    "durationMode": "10s",
+    "created_at": "2026-11-01 00:45:55",
+    "headerMain": "CEVAP1",
+    "thumbnail_url": "/out/thumbnail.png",
+    "video_data": {
+      "topic": "cevap1",
+      "theme": "notebook",
+      "format": "9:16",
+      "headerSubtitle": "Bölüm 1",
+      "headerLine1": "CEVAP1",
+      "circledWord": "İLK",
+      "headerLine2": "Fikrini Buraya Yaz",
+      "highlightedText": "Önemli Nokta",
+      "layoutType": "pip_split",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "headerSubtitle": "Bölüm 1",
+          "headerLine1": "CEVAP1",
+          "circledWord": "İLK",
+          "headerLine2": "Fikrini Buraya Yaz",
+          "highlightedText": "Önemli Nokta",
+          "layoutType": "pip_split",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "duration": 10.0
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "cevap1",
+          "start": 0.0,
+          "end": 2.5
+        },
+        {
+          "text": "kurgulamaya hemen başla",
+          "start": 2.5,
+          "end": 5.0
+        }
+      ],
+      "totalDuration": 10.0,
+      "created_at": "2026-11-01 00:45:55"
+    }
+  },
+  {
     "id": "90939c5d",
     "topic": "🎙️ Ses Yükleme: Bugün aile kurumunu saran en büyük tehlike tarafların sürekl...",
     "theme": "dark_minimalist",
@@ -9292,761 +11632,6 @@
         }
       ],
       "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "11d0f7eb",
-    "topic": "ben islami bir karanlık tema kullanarak kıyamet 3-4 ayetinde geçen parmak ucundaki sırrı anlatan video yap",
-    "theme": "dark_minimalist",
-    "layoutType": "grid_explosion",
-    "durationMode": "deep",
-    "created_at": "2026-10-27 23:49",
-    "headerMain": "PARMAK UCUNDAKİ BÜYÜK MİLYARLARCA MÜHÜR",
-    "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra insan nasıl diriltilecek diye soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilecek.",
-    "hookScore": 99,
-    "key_used": "mehmetortabakan@gmail.com",
-    "thumbnail_url": "/out/thumbnail.png?t=1793134179",
-    "video_data": {
-      "directorDecision": {
-        "theme": "dark_minimalist",
-        "layoutType": "grid_explosion",
-        "durationMode": "deep",
-        "particles": "dust",
-        "ambientPattern": "fingerprint",
-        "doodleType": "none",
-        "directorReason": "İslami tefekkür ve biyolojik mühür vurgusu için karanlık minimal tuval ve parmak izi odaklı grid yapısı seçildi."
-      },
-      "requiredIcons": [
-        "fingerprint",
-        "dna",
-        "scale",
-        "eye"
-      ],
-      "headerSubtitle": "Kur'an'ın Mucizevi İşareti",
-      "headerLine1": "PARMAK UCUNDAKİ",
-      "circledWord": "BÜYÜK",
-      "headerLine2": "SIR",
-      "highlightedText": "MİLYARLARCA MÜHÜR",
-      "strikeWord": "TESADÜF",
-      "layoutType": "grid_explosion",
-      "cards": [
-        {
-          "id": "1",
-          "label": "DNA Şifresi",
-          "value": "%100 Aynı",
-          "icon": "dna",
-          "color": "#1e3a8a",
-          "iconAssetPath": "assets/icons/dna.svg"
-        },
-        {
-          "id": "2",
-          "label": "İkizler",
-          "value": "Farklı İz",
-          "icon": "fingerprint",
-          "color": "#15803d",
-          "iconAssetPath": "assets/icons/fingerprint.svg"
-        },
-        {
-          "id": "3",
-          "label": "Tesviye",
-          "value": "1400 Yıl",
-          "icon": "scale",
-          "color": "#d97706",
-          "iconAssetPath": "assets/icons/scale.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "DNA Benzerliği",
-        "leftSubtitle": "Genler Birebir Aynı",
-        "leftPoints": [
-          "Aynı genetik kod",
-          "Aynı kan grubu",
-          "Aynı fiziksel yapı"
-        ],
-        "leftColor": "#dc2626",
-        "rightTitle": "Parmak Uçları",
-        "rightSubtitle": "Eşsiz Biyolojik Mühür",
-        "rightPoints": [
-          "Anne karnında mikro temas",
-          "Asla değişmeyen geometri",
-          "Milyarlarca insanda tek"
-        ],
-        "rightColor": "#16a34a",
-        "verdict": "İkizlerin DNA'sı bile aynıyken, parmak izi her insanı tek ve eşsiz kılar."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Aşama",
-          "title": "Büyük İtiraz",
-          "desc": "Çürüyüp dağılan kemikler nasıl diriltilecek?",
-          "color": "#1e3a8a"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Kırılma",
-          "title": "En İnce Detay",
-          "desc": "Kur'an genel kemiklere değil, parmak ucuna dikkat çekti.",
-          "color": "#d97706"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Hakikat",
-          "title": "Tesviye Sırrı",
-          "desc": "Biyolojik imzanın eşsizliği asırlar önce haber verildi.",
-          "color": "#15803d"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Kıyamet Suresi",
-        "title": "4. AYET",
-        "quoteText": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
-        "sourceRef": "Kıyamet Suresi, 3-4"
-      },
-      "metricImpact": {
-        "bigNumber": "8 MİLYAR",
-        "bigLabel": "İNSAN İÇİNDE",
-        "subheading": "Hiçbirinin Parmak İzi Aynı Değil",
-        "keyTakeaway": "Çünkü her insan varoluşun altına atılmış özel bir imzadır."
-      },
-      "gridExplosion": {
-        "title": "MİLYARLARCA İNSAN",
-        "subtitle": "Hiçbirinin Parmak İzi Birbirine Benzemeğecek Şekilde Yaratıldı",
-        "iconType": "fingerprint",
-        "itemCount": 12,
-        "badgeText": "EŞSİZ BİYOLOJİK MÜHÜR",
-        "iconAssetPath": "assets/icons/fingerprint.svg"
-      },
-      "triConcept": {
-        "badge": "BEKLENEN CEVAP",
-        "concept1": {
-          "title": "BEYİN",
-          "subtitle": "En Karmaşık Hafıza",
-          "icon": "brain",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/brain.svg"
-        },
-        "concept2": {
-          "title": "KALP",
-          "subtitle": "Yaşam Merkezi",
-          "icon": "heart",
-          "color": "#ef4444",
-          "iconAssetPath": "assets/icons/heart.svg"
-        },
-        "concept3": {
-          "title": "GÖZ",
-          "subtitle": "Hassas Mercek",
-          "icon": "eye",
-          "color": "#facc15",
-          "iconAssetPath": "assets/icons/eye.svg"
-        },
-        "bottomNote": "FAKAT KUR'AN PARMAK UCUNA ODAKLANDI"
-      },
-      "timeline": {
-        "startYear": "Kıyamet",
-        "endYear": "Diriliş",
-        "durationLabel": "Tesviye",
-        "title": "Kusursuz Dizilim",
-        "ayahArabic": "",
-        "ayahTranslation": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
-        "ayahRef": "Kıyamet Suresi, 3-4"
-      },
-      "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra insan nasıl diriltilecek diye soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilecek.",
-      "viral": {
-        "hookScore": 99,
-        "viralTitles": [
-          "Parmak Ucundaki BÜYÜK Sır! Kıyamet Suresi 3-4",
-          "İkizlerin Bile Farklı: 1400 Yıl Önceki Akıl Almaz Detay!"
-        ],
-        "hashtags": [
-          "#bilim",
-          "#kuran",
-          "#parmakizi",
-          "#mucize",
-          "#tefekkür",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden her insan aslında...",
-        "description": "Parmak uçlarındaki dermatoglif şifresi ve Kıyamet Suresi'nin mucizevi detayları."
-      },
-      "theme": "dark_minimalist",
-      "durationMode": "deep",
-      "particles": "dust",
-      "ambientPattern": "fingerprint",
-      "doodleType": "none",
-      "socialHandle": "@birkissa",
-      "_acquired_assets": [
-        {
-          "name": "fingerprint",
-          "type": "watermark",
-          "path": "assets/watermarks/fingerprint.svg"
-        },
-        {
-          "name": "fingerprint",
-          "type": "grid_icon",
-          "path": "assets/icons/fingerprint.svg"
-        },
-        {
-          "name": "brain",
-          "type": "concept_icon",
-          "path": "assets/icons/brain.svg"
-        },
-        {
-          "name": "heart",
-          "type": "concept_icon",
-          "path": "assets/icons/heart.svg"
-        },
-        {
-          "name": "eye",
-          "type": "concept_icon",
-          "path": "assets/icons/eye.svg"
-        },
-        {
-          "name": "dna",
-          "type": "card_icon",
-          "path": "assets/icons/dna.svg"
-        },
-        {
-          "name": "fingerprint",
-          "type": "card_icon",
-          "path": "assets/icons/fingerprint.svg"
-        },
-        {
-          "name": "scale",
-          "type": "card_icon",
-          "path": "assets/icons/scale.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "DNA'sı yüzde yüz",
-          "start": 0.0,
-          "end": 1.72
-        },
-        {
-          "text": "aynı olan tek",
-          "start": 1.72,
-          "end": 2.88
-        },
-        {
-          "text": "yumurta ikizlerini bile",
-          "start": 2.88,
-          "end": 4.5
-        },
-        {
-          "text": "birbirinden ayıran tek",
-          "start": 4.5,
-          "end": 6.02
-        },
-        {
-          "text": "bir sır vardır.",
-          "start": 6.02,
-          "end": 7.06
-        },
-        {
-          "text": "Çürüyüp toprak olduktan",
-          "start": 7.94,
-          "end": 9.6
-        },
-        {
-          "text": "sonra insan nasıl",
-          "start": 9.6,
-          "end": 11.06
-        },
-        {
-          "text": "diriltilecek diye soranlara,",
-          "start": 11.06,
-          "end": 12.96
-        },
-        {
-          "text": "Kur'an tam da",
-          "start": 13.46,
-          "end": 14.08
-        },
-        {
-          "text": "parmak uçlarına işaret",
-          "start": 14.08,
-          "end": 15.38
-        },
-        {
-          "text": "ederek cevap verdi.",
-          "start": 15.38,
-          "end": 16.84
-        },
-        {
-          "text": "Milyarlarca insanın her",
-          "start": 16.84,
-          "end": 19.5
-        },
-        {
-          "text": "biri, parmak ucundaki",
-          "start": 19.5,
-          "end": 20.94
-        },
-        {
-          "text": "o eşsiz mühürle",
-          "start": 20.94,
-          "end": 22.48
-        },
-        {
-          "text": "yeniden var edilecek.",
-          "start": 22.48,
-          "end": 23.9
-        }
-      ],
-      "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "4c366570",
-    "topic": "Parmak ucundaki BÜYÜK sır! Kıyamet Suresi 3-4",
-    "theme": "dark_minimalist",
-    "layoutType": "grid_explosion",
-    "created_at": "2026-10-27 21:51",
-    "headerMain": "PARMAK UCUNDAKİ BÜYÜK MİLYARLARCA MÜHÜR",
-    "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir. Bilimin henüz yeni keşfettiği bu biometrik imza, asırlar önce bu mucizevi ayetle ilan edilmişti.",
-    "hookScore": 99,
-    "key_used": "mehmet2736005@gmail.com",
-    "thumbnail_url": "/out/thumbnail.png?t=1793127098",
-    "video_data": {
-      "headerSubtitle": "Akıl Almaz Sır",
-      "headerLine1": "PARMAK UCUNDAKİ",
-      "circledWord": "BÜYÜK",
-      "headerLine2": "SIR",
-      "highlightedText": "MİLYARLARCA MÜHÜR",
-      "strikeWord": "TESADÜF",
-      "layoutType": "grid_explosion",
-      "cards": [
-        {
-          "id": "1",
-          "label": "DNA Şifresi",
-          "value": "%100 Aynı",
-          "icon": "dna",
-          "color": "#1e3a8a"
-        },
-        {
-          "id": "2",
-          "label": "İkizler",
-          "value": "Farklı İz",
-          "icon": "fingerprint",
-          "color": "#15803d"
-        },
-        {
-          "id": "3",
-          "label": "Tesviye",
-          "value": "1400 Yıl",
-          "icon": "scale",
-          "color": "#d97706"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "DNA Benzerliği",
-        "leftSubtitle": "Genler Birebir Aynı",
-        "leftPoints": [
-          "Aynı genetik kod",
-          "Aynı kan grubu",
-          "Aynı fiziksel yapı"
-        ],
-        "leftColor": "#dc2626",
-        "rightTitle": "Parmak Uçları",
-        "rightSubtitle": "Eşsiz Biyolojik Mühür",
-        "rightPoints": [
-          "Anne karnında mikro temas",
-          "Asla değişmeyen geometri",
-          "Milyarlarca insanda tek"
-        ],
-        "rightColor": "#16a34a",
-        "verdict": "İkizlerin DNA'sı bile aynıyken, parmak izi her insanı tek ve eşsiz kılar."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Aşama",
-          "title": "Büyük Soru",
-          "desc": "Çürüyüp dağılan kemikler nasıl diriltilecek?",
-          "color": "#1e3a8a"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Kırılma",
-          "title": "En İnce Detay",
-          "desc": "Kur'an beyne değil, parmak ucunun milimetrik çizgilerine işaret etti.",
-          "color": "#d97706"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Hakikat",
-          "title": "Tesviye Sırrı",
-          "desc": "19. yüzyılda keşfedilen biometrik imza asırlar önce haber verildi.",
-          "color": "#15803d"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Kıyamet Suresi",
-        "title": "4. AYET",
-        "quoteText": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
-        "sourceRef": "Kıyamet Suresi, 3-4"
-      },
-      "metricImpact": {
-        "bigNumber": "8 MİLYAR",
-        "bigLabel": "İNSAN İÇİNDE",
-        "subheading": "Hiçbirinin Parmak İzi Aynı Değil",
-        "keyTakeaway": "Çünkü her insan varoluşun altına atılmış özel bir imzadır."
-      },
-      "gridExplosion": {
-        "title": "MİLYARLARCA İNSAN",
-        "subtitle": "Hiçbirinin Parmak İzi Birbirine Benzemeğecek Şekilde Yaratıldı",
-        "iconType": "fingerprint",
-        "itemCount": 12,
-        "badgeText": "EŞSİZ BİYOLOJİK MÜHÜR"
-      },
-      "triConcept": {
-        "badge": "BEKLENEN CEVAP",
-        "concept1": {
-          "title": "BEYİN",
-          "subtitle": "En Karmaşık Hafıza",
-          "icon": "brain",
-          "color": "#38bdf8"
-        },
-        "concept2": {
-          "title": "KALP",
-          "subtitle": "Yaşam Merkezi",
-          "icon": "heart",
-          "color": "#ef4444"
-        },
-        "concept3": {
-          "title": "GÖZ",
-          "subtitle": "Hassas Mercek",
-          "icon": "eye",
-          "color": "#facc15"
-        },
-        "bottomNote": "FAKAT KUR'AN PARMAK UCUNA ODAKLANDI"
-      },
-      "timeline": {
-        "startYear": "Kıyamet",
-        "endYear": "Diriliş",
-        "durationLabel": "Tesviye",
-        "title": "Kusursuz Dizilim",
-        "ayahArabic": "",
-        "ayahTranslation": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
-        "ayahRef": "Kıyamet Suresi, 3-4"
-      },
-      "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir. Bilimin henüz yeni keşfettiği bu biometrik imza, asırlar önce bu mucizevi ayetle ilan edilmişti.",
-      "viral": {
-        "hookScore": 99,
-        "viralTitles": [
-          "Parmak Ucundaki BÜYÜK Sır! Kıyamet Suresi 3-4",
-          "İkizlerin Bile Farklı: 1400 Yıl Önceki Akıl Almaz Detay!",
-          "Neden Beyin Değil de Parmak Ucu?"
-        ],
-        "hashtags": [
-          "#bilim",
-          "#kuran",
-          "#parmakizi",
-          "#mucize",
-          "#tefekkür",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden her insan aslında...",
-        "description": "Parmak uçlarındaki dermatoglif şifresi ve Kıyamet Suresi'nin mucizevi detayları."
-      },
-      "subtitles": [
-        {
-          "text": "DNA'sı yüzde yüz",
-          "start": 0.0,
-          "end": 1.74
-        },
-        {
-          "text": "aynı olan tek",
-          "start": 1.74,
-          "end": 2.88
-        },
-        {
-          "text": "yumurta ikizlerini bile",
-          "start": 2.88,
-          "end": 4.48
-        },
-        {
-          "text": "birbirinden ayıran tek",
-          "start": 4.48,
-          "end": 6.02
-        },
-        {
-          "text": "bir sır vardır.",
-          "start": 6.02,
-          "end": 7.06
-        },
-        {
-          "text": "Çürüyüp toprak olduktan",
-          "start": 7.94,
-          "end": 9.64
-        },
-        {
-          "text": "sonra nasıl diriltileceğini",
-          "start": 9.64,
-          "end": 11.6
-        },
-        {
-          "text": "soranlara, Kur'an tam",
-          "start": 11.6,
-          "end": 13.32
-        },
-        {
-          "text": "da parmak uçlarına",
-          "start": 13.32,
-          "end": 14.18
-        },
-        {
-          "text": "işaret ederek cevap",
-          "start": 14.18,
-          "end": 15.82
-        },
-        {
-          "text": "verdi. Milyarlarca insanın",
-          "start": 15.82,
-          "end": 18.14
-        },
-        {
-          "text": "her biri, parmak",
-          "start": 18.14,
-          "end": 19.48
-        },
-        {
-          "text": "ucundaki o eşsiz",
-          "start": 19.94,
-          "end": 21.38
-        },
-        {
-          "text": "mühürle yeniden var",
-          "start": 21.38,
-          "end": 23.0
-        },
-        {
-          "text": "edilir. Bilimin henüz",
-          "start": 23.0,
-          "end": 24.84
-        },
-        {
-          "text": "yeni keşfettiği bu",
-          "start": 24.84,
-          "end": 26.52
-        },
-        {
-          "text": "biometrik imza, asırlar",
-          "start": 26.52,
-          "end": 27.94
-        },
-        {
-          "text": "önce bu mucizevi",
-          "start": 28.48,
-          "end": 29.62
-        },
-        {
-          "text": "ayetle ilan edilmişti.",
-          "start": 29.62,
-          "end": 31.72
-        }
-      ],
-      "audioUrl": "audio.mp3",
-      "socialHandle": "@birkissa",
-      "theme": "dark_minimalist",
-      "particles": "dust",
-      "ambientPattern": "fingerprint"
-    }
-  },
-  {
-    "id": "33b12391",
-    "topic": "Allah mutlak adilse neden insanlara hemen cezasını vermiyor?",
-    "theme": "notebook",
-    "layoutType": "cards",
-    "created_at": "2026-10-27 20:52",
-    "headerMain": "NEDEN HEMEN VERİLMİYOR?",
-    "narration": "Allah mutlak adilse, neden zalimlerin cezasını hemen vermiyor? Çünkü dünya ceza yeri değil, imtihan meydanıdır. Eğer her suç anında cezalandırılsaydı, ne tevbe kapısı açık kalırdı ne de iradenin bir anlamı olurdu. O, erteler ama asla ihmal etmez.",
-    "hookScore": 98,
-    "key_used": "asdxcxc006@gmail.com",
-    "thumbnail_url": "/out/thumbnail.png?t=1793123538",
-    "video_data": {
-      "headerSubtitle": "İlahi Adalet Sırrı",
-      "headerLine1": "NEDEN",
-      "circledWord": "HEMEN",
-      "headerLine2": "CEZA",
-      "highlightedText": "VERİLMİYOR?",
-      "layoutType": "cards",
-      "cards": [
-        {
-          "id": "1",
-          "label": "mühlet",
-          "value": "İmtihan",
-          "icon": "clock",
-          "color": "#1e3a8a"
-        },
-        {
-          "id": "2",
-          "label": "tövbe",
-          "value": "Fırsat",
-          "icon": "heart",
-          "color": "#15803d"
-        },
-        {
-          "id": "3",
-          "label": "adalet",
-          "value": "Mahşer",
-          "icon": "scale",
-          "color": "#854d0e"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "İnsan Beklentisi",
-        "leftSubtitle": "Anında Karşılık",
-        "leftPoints": [
-          "Hemen cezalandırılsın",
-          "Gözümüzle görelim",
-          "Sabrımız tükeniyor"
-        ],
-        "leftColor": "#dc2626",
-        "rightTitle": "İlahi Hikmet",
-        "rightSubtitle": "Kusursuz Mühlet",
-        "rightPoints": [
-          "Tövbe kapısı açık",
-          "Herkesin vakti var",
-          "Mutlak adalet tecelli eder"
-        ],
-        "rightColor": "#16a34a",
-        "verdict": "Allah adalette acele etmez, çünkü mühlet verir, ihmal etmez."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Aşama",
-          "title": "İmtihan Sahnesi",
-          "desc": "Dünya ceza yeri değil, niyetlerin ve amellerin sergilendiği yerdir.",
-          "color": "#1e3a8a"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Aşama",
-          "title": "Mühlet Sırrı",
-          "desc": "Zalimlere fırsat verilir ki ya dönsünler ya da cezaları katlansın.",
-          "color": "#d97706"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Aşama",
-          "title": "Mutlak Adalet",
-          "desc": "Hiçbir hak kimsede kalmaz; hesap günü kesindir.",
-          "color": "#15803d"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "İmam Gazali",
-        "title": "İHYA",
-        "quoteText": "Acele eden, vaktinden önce zayi olur. İlahi adalet saat gibi şaşmaz.",
-        "sourceRef": "Hikmet Pınarları"
-      },
-      "metricImpact": {
-        "bigNumber": "MÜHLET",
-        "bigLabel": "VERİLİYOR",
-        "subheading": "Neden Kötüler Hemen Kahrolmuyor?",
-        "keyTakeaway": "Dünya ceza yurdu değil, imtihan meydanıdır."
-      },
-      "timeline": {
-        "startYear": "Dünya",
-        "endYear": "Ahiret",
-        "durationLabel": "Vade",
-        "title": "Adaletin Tezahür Vakti",
-        "ayahArabic": "",
-        "ayahTranslation": "Şüphesiz Rabbin, gözetlemededir.",
-        "ayahRef": "Fecr Suresi, 14"
-      },
-      "narration": "Allah mutlak adilse, neden zalimlerin cezasını hemen vermiyor? Çünkü dünya ceza yeri değil, imtihan meydanıdır. Eğer her suç anında cezalandırılsaydı, ne tevbe kapısı açık kalırdı ne de iradenin bir anlamı olurdu. O, erteler ama asla ihmal etmez.",
-      "viral": {
-        "hookScore": 98,
-        "viralTitles": [
-          "Allah Adilse Neden Hemen Cezasız Kalmıyorlar?",
-          "Zalimler Neden Hemen Kahrolmuyor? (Şoke Eden Gerçek)",
-          "Her Suçun Cezası Neden Erteleniyor?"
-        ],
-        "hashtags": [
-          "#allah",
-          "#adalet",
-          "#islam",
-          "#kelam",
-          "#felsefe",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden...",
-        "description": "Allah'ın insanlara hemen ceza vermemesinin ardındaki derin ilahi hikmet."
-      },
-      "subtitles": [
-        {
-          "text": "Allah mutlak adilse,",
-          "start": 0.0,
-          "end": 0.98
-        },
-        {
-          "text": "neden zalimlerin cezasını",
-          "start": 0.98,
-          "end": 3.4
-        },
-        {
-          "text": "hemen vermiyor? Çünkü",
-          "start": 3.4,
-          "end": 5.24
-        },
-        {
-          "text": "dünya ceza yeri",
-          "start": 5.82,
-          "end": 7.74
-        },
-        {
-          "text": "değil, imtihan meydanıdır.",
-          "start": 7.74,
-          "end": 10.26
-        },
-        {
-          "text": "Eğer her suç",
-          "start": 10.58,
-          "end": 11.64
-        },
-        {
-          "text": "anında cezalandırılsaydı, ne",
-          "start": 11.64,
-          "end": 14.42
-        },
-        {
-          "text": "tevbe kapısı açık",
-          "start": 14.42,
-          "end": 15.62
-        },
-        {
-          "text": "kalırdı ne de",
-          "start": 15.62,
-          "end": 16.74
-        },
-        {
-          "text": "iradenin bir anlamı",
-          "start": 16.74,
-          "end": 18.16
-        },
-        {
-          "text": "olurdu. O, erteler",
-          "start": 18.16,
-          "end": 20.2
-        },
-        {
-          "text": "ama asla ihmal",
-          "start": 20.2,
-          "end": 21.54
-        },
-        {
-          "text": "etmez.",
-          "start": 21.54,
-          "end": 22.1
-        }
-      ],
-      "audioUrl": "audio.mp3",
-      "socialHandle": "@birkissa",
-      "theme": "notebook"
     }
   }
 ]
