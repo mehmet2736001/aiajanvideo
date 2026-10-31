@@ -1387,7 +1387,7 @@
         <!-- FIXED CENTER PLAYHEAD NEEDLE (Pervasive Center Needle - Stays strictly at 50% width!) -->
         <div id="playhead-fixed-center" class="pointer-events-none absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
           <!-- Top Marker (Red inverted diamond / arrow) -->
-          <div id="playhead-center-diamond" class="w-3.5 h-3.5 bg-red-500 rotate-45 shadow-[0_0_12px_#ef4444] -mt-1.5 shrink-0 rounded-xs border border-white/60 transition-transform duration-100 pointer-events-auto cursor-ew-resize hover:scale-125" title="Sürükleyerek Zaman Tünelini Kaydır"></div>
+          <div id="playhead-center-diamond" class="w-4 h-4 bg-red-500 rotate-45 shadow-[0_0_12px_#ef4444] mt-0.5 shrink-0 rounded-xs border border-white/60 transition-transform duration-100 pointer-events-auto cursor-ew-resize hover:scale-125" title="Sürükleyerek Zaman Tünelini Kaydır"></div>
           <!-- Vertical Needle Line -->
           <div id="playhead-center-line" class="w-[2px] flex-1 bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.95)] transition-colors duration-150 pointer-events-none"></div>
           <!-- Fixed Center Timestamp Badge with Frame Counter -->
@@ -4078,7 +4078,9 @@
       if (Math.abs(container.scrollLeft - targetScroll) > 0.5) {
         isProgrammaticScroll = true;
         container.scrollLeft = targetScroll;
-        isProgrammaticScroll = false;
+        requestAnimationFrame(() => {
+          isProgrammaticScroll = false;
+        });
       }
 
       // 2. Update center time badge
@@ -4326,12 +4328,13 @@
     }
 
     // CAPCUT & DAVINCI PRECISION TIMELINE PAN & PHYSICAL REEL ENGINE
+    let isDraggingMediaClip = false;
     let isScrubbing = false;
     let isSpacePanning = false;
-    let lastClientX = 0;
     let startClientX = 0;
     let startTime = 0;
     let hasDragged = false;
+    let dragSource = 'track'; // 'ruler' | 'track' | 'needle'
 
     function setupScrubListeners() {
       const container = document.getElementById('timeline-scroll-container');
@@ -4406,11 +4409,11 @@
       });
 
       // Unified Pointer/Mouse Drag Initiator
-      function startTimelineScrub(e) {
+      function startTimelineScrub(e, source = 'track') {
         // If clicking on clip or button (and not Space panning), let the clip handle it
         if (!isSpacePanning) {
           if (isDraggingMediaClip) return;
-          if (e.target.closest('button') || e.target.closest('.timeline-clip-item') || e.target.closest('.scene-block') || e.target.closest('.trim-handle')) return;
+          if (e.target.closest('button') || e.target.closest('.timeline-clip-item') || e.target.closest('.scene-block') || e.target.closest('.trim-handle') || e.target.closest('.transition-badge')) return;
         }
 
         e.preventDefault();
@@ -4418,41 +4421,62 @@
 
         if (isPlaying) pausePlayback();
 
+        const rect = container.getBoundingClientRect();
+        const pxPerSec = 40 * timelineZoom;
+        const halfWidth = container.clientWidth / 2;
+
         isScrubbing = true;
         hasDragged = false;
+        dragSource = source;
         startClientX = e.clientX;
-        lastClientX = e.clientX;
-        startTime = playheadTime;
+
+        if (source === 'ruler') {
+          // Instant Jump on Click: Move timeline so clicked timestamp aligns with center needle
+          const clickOffset = (e.clientX - rect.left) - halfWidth;
+          const clickedTime = Math.max(0, Math.min(timelineDuration, playheadTime + (clickOffset / pxPerSec)));
+          seekTimeline(clickedTime);
+          startTime = clickedTime;
+        } else {
+          startTime = playheadTime;
+        }
 
         document.body.classList.add('is-scrubbing-timeline');
+
+        // Pointer Capture to guarantee unbreakable dragging across window/boundaries
+        if (e.target && e.target.setPointerCapture && e.pointerId !== undefined) {
+          try { e.target.setPointerCapture(e.pointerId); } catch (_) {}
+        }
       }
 
       // Attach startTimelineScrub to container, ruler, playhead needle diamond and badge
-      container.addEventListener('mousedown', startTimelineScrub);
-      if (ruler) ruler.addEventListener('mousedown', startTimelineScrub);
-      if (diamond) diamond.addEventListener('mousedown', startTimelineScrub);
-      if (timeTag) timeTag.addEventListener('mousedown', startTimelineScrub);
+      if (ruler) ruler.addEventListener('pointerdown', (e) => startTimelineScrub(e, 'ruler'));
+      container.addEventListener('pointerdown', (e) => startTimelineScrub(e, 'track'));
+      if (diamond) diamond.addEventListener('pointerdown', (e) => startTimelineScrub(e, 'needle'));
+      if (timeTag) timeTag.addEventListener('pointerdown', (e) => startTimelineScrub(e, 'needle'));
 
-      // Mousemove handler for smooth physical reel motion
-      window.addEventListener('mousemove', (e) => {
+      // Fallback mousedown if pointerdown was not triggered
+      if (ruler) ruler.addEventListener('mousedown', (e) => { if (!isScrubbing) startTimelineScrub(e, 'ruler'); });
+      container.addEventListener('mousedown', (e) => { if (!isScrubbing) startTimelineScrub(e, 'track'); });
+      if (diamond) diamond.addEventListener('mousedown', (e) => { if (!isScrubbing) startTimelineScrub(e, 'needle'); });
+      if (timeTag) timeTag.addEventListener('mousedown', (e) => { if (!isScrubbing) startTimelineScrub(e, 'needle'); });
+
+      // Mousemove / Pointermove handler for 0ms latency physical reel motion
+      function handleScrubMove(e) {
         if (!isScrubbing || isDraggingMediaClip) return;
 
-        const deltaTotalX = e.clientX - startClientX;
-        if (Math.abs(deltaTotalX) > 2) {
+        const totalDeltaX = e.clientX - startClientX;
+        if (Math.abs(totalDeltaX) > 2) {
           hasDragged = true;
         }
-
-        const deltaStepX = e.clientX - lastClientX;
-        lastClientX = e.clientX;
 
         const pxPerSec = 40 * timelineZoom;
         const precisionMultiplier = (e.shiftKey || isShiftKeyDown) ? 0.2 : 1.0;
 
         // PHYSICAL REEL / CAPCUT FORMULA:
-        // Dragging mouse left (negative deltaStepX) advances time forward (+deltaTime).
-        // Dragging mouse right (positive deltaStepX) moves backward in time (-deltaTime).
-        const deltaTime = -(deltaStepX / pxPerSec) * precisionMultiplier;
-        let rawTargetTime = Math.max(0, Math.min(timelineDuration, playheadTime + deltaTime));
+        // Dragging mouse left (negative totalDeltaX) advances time forward (+deltaTime).
+        // Dragging mouse right (positive totalDeltaX) moves backward in time (-deltaTime).
+        const deltaTime = -(totalDeltaX / pxPerSec) * precisionMultiplier;
+        let rawTargetTime = Math.max(0, Math.min(timelineDuration, startTime + deltaTime));
 
         // Magnetic Snap check (unless Ctrl key is held)
         let isSnapped = false;
@@ -4470,17 +4494,20 @@
 
         setCenterNeedleSnapState(isSnapped, rawTargetTime);
         seekTimeline(rawTargetTime);
-      });
+      }
 
-      // Mouseup handler
-      window.addEventListener('mouseup', (e) => {
+      window.addEventListener('pointermove', handleScrubMove);
+      window.addEventListener('mousemove', handleScrubMove);
+
+      // Mouseup / Pointerup handler
+      function handleScrubEnd(e) {
         if (!isScrubbing) return;
         isScrubbing = false;
         document.body.classList.remove('is-scrubbing-timeline');
         setCenterNeedleSnapState(false);
 
-        // If user simply single-clicked without dragging, jump that clicked point to the center needle!
-        if (!hasDragged && !isDraggingMediaClip) {
+        // If user simply single-clicked on empty track area without dragging, jump that clicked point to the center needle!
+        if (!hasDragged && dragSource === 'track' && !isDraggingMediaClip) {
           const rect = container.getBoundingClientRect();
           const pxPerSec = 40 * timelineZoom;
           const halfWidth = container.clientWidth / 2;
@@ -4488,7 +4515,11 @@
           const targetTime = Math.max(0, Math.min(timelineDuration, startTime + (clickOffsetFromCenter / pxPerSec)));
           seekTimeline(targetTime);
         }
-      });
+      }
+
+      window.addEventListener('pointerup', handleScrubEnd);
+      window.addEventListener('pointercancel', handleScrubEnd);
+      window.addEventListener('mouseup', handleScrubEnd);
 
       // Mouse wheel / trackpad scrolling: Ctrl+Wheel to Zoom, Normal Wheel to Scrub
       container.addEventListener('wheel', (e) => {
