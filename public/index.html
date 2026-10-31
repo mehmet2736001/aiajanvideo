@@ -851,7 +851,7 @@
         </button>
 
         <!-- 9:16 PHONE MOCKUP PREVIEW MONITOR (Full Phone Device Bezel, Notch & Screen) -->
-        <div id="preview-phone-mockup" ondblclick="togglePreviewFullscreen(event)" title="Tam Ekran İçin Çift Tıklayın" class="relative w-[320px] h-[520px] bg-[#0c111d] rounded-[38px] p-2.5 border-4 border-slate-800 shadow-2xl flex flex-col overflow-hidden cursor-pointer transition-all duration-300">
+        <div id="preview-phone-mockup" onclick="handlePreviewScreenClick(event)" title="Oynat/Durdur için tek tıkla · Tam ekran için çift tıkla" class="relative w-[320px] h-[520px] bg-[#0c111d] rounded-[38px] p-2.5 border-4 border-slate-800 shadow-2xl flex flex-col overflow-hidden cursor-pointer transition-all duration-300">
           
           <!-- Notch -->
           <div id="preview-phone-notch" class="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-3 bg-slate-800/90 rounded-full z-40 flex items-center justify-center pointer-events-none transition-all duration-300">
@@ -860,6 +860,13 @@
 
           <!-- Screen Container -->
           <div id="preview-screen-container" class="relative w-full h-full rounded-[28px] overflow-hidden bg-slate-950 flex flex-col transition-all duration-300">
+          
+          <!-- Transient Play/Pause Center Pop Indicator (YouTube/Instagram Reel style) -->
+          <div id="preview-center-pop-icon" class="pointer-events-none absolute inset-0 z-45 flex items-center justify-center opacity-0 transition-opacity duration-200">
+            <div id="preview-pop-icon-box" class="w-14 h-14 rounded-full bg-black/70 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-2xl scale-75 transition-transform duration-200">
+              <i id="preview-pop-icon-i" class="fa-solid fa-play text-xl ml-0.5 text-amber-400"></i>
+            </div>
+          </div>
           
           <!-- MP4 Video Player (hidden when in live canvas mode) -->
           <video id="final-video" controls class="w-full h-full object-cover hidden z-30" src="/out/video.mp4" playsinline preload="auto"></video>
@@ -5142,6 +5149,56 @@
         if (uploadText) uploadText.innerText = 'Ses Dosyası Seç';
         return false;
       }
+    }
+
+    // 7.0. PREVIEW SCREEN SINGLE CLICK (PLAY/PAUSE) & DOUBLE CLICK (FULLSCREEN)
+    let previewClickTimer = null;
+    let popIconTimeout = null;
+
+    function handlePreviewScreenClick(e) {
+      if (e) {
+        const target = e.target;
+        // Do not intercept if user clicked on interactive action buttons or inputs inside the preview
+        if (target && (target.closest('button') || target.closest('input') || target.closest('select') || target.closest('textarea'))) {
+          return;
+        }
+      }
+
+      if (previewClickTimer) {
+        // Double-click detected within 220ms! Cancel single click and trigger fullscreen
+        clearTimeout(previewClickTimer);
+        previewClickTimer = null;
+        togglePreviewFullscreen(e);
+      } else {
+        // Wait 220ms to distinguish from double-click
+        previewClickTimer = setTimeout(() => {
+          previewClickTimer = null;
+          toggleTimelinePlayback();
+          showPlayPauseCenterIndicator();
+        }, 220);
+      }
+    }
+
+    function showPlayPauseCenterIndicator() {
+      const popEl = document.getElementById('preview-center-pop-icon');
+      const boxEl = document.getElementById('preview-pop-icon-box');
+      const iconI = document.getElementById('preview-pop-icon-i');
+      if (!popEl || !boxEl || !iconI) return;
+
+      if (isPlaying) {
+        iconI.className = 'fa-solid fa-play text-xl ml-0.5 text-amber-400';
+      } else {
+        iconI.className = 'fa-solid fa-pause text-xl text-amber-400';
+      }
+
+      popEl.style.opacity = '1';
+      boxEl.style.transform = 'scale(1.15)';
+
+      clearTimeout(popIconTimeout);
+      popIconTimeout = setTimeout(() => {
+        popEl.style.opacity = '0';
+        boxEl.style.transform = 'scale(0.8)';
+      }, 350);
     }
 
     // 7.1. FULLSCREEN PHONE FRAME PREVIEW CONTROLS (DEVICE BEZEL + NOTCH + SCREEN)
