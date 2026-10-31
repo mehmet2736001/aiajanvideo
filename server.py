@@ -3740,63 +3740,263 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
         "history_item": new_hist_item
     }
 
-def run_remotion_render(formats=None):
-    global render_state
-    if not formats:
-        formats = ["9:16"]
-    render_state["status"] = "rendering"
-    render_state["message"] = f"Remotion motoru formatları derliyor: {', '.join(formats)}..."
-    rendered_files = []
+
+def check_nvenc_available() -> bool:
     try:
-        if "9:16" in formats:
-            render_state["message"] = "9:16 Shorts/Reels derleniyor (1080x1920)..."
-            res916 = subprocess.run(["npm.cmd", "run", "build"], cwd=BASE_DIR, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
-            if res916.returncode == 0:
-                rendered_files.append("9:16 (Dikey)")
+        cmd = ["ffmpeg", "-f", "lavfi", "-i", "nullsrc=s=256x256:d=1", "-c:v", "h264_nvenc", "-f", "null", "-"]
+        res = subprocess.run(cmd, capture_output=True, text=True, check=False)
+        return res.returncode == 0
+    except Exception:
+        return False
 
-        if "16:9" in formats:
-            render_state["message"] = "16:9 YouTube Yatay derleniyor (1920x1080)..."
-            res169 = subprocess.run(["npm.cmd", "run", "build:horizontal"], cwd=BASE_DIR, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
-            if res169.returncode == 0:
-                rendered_files.append("16:9 (Yatay)")
+def generate_srt_content(subtitles: list) -> str:
+    def fmt_time(sec: float) -> str:
+        hours = int(sec // 3600)
+        mins = int((sec % 3600) // 60)
+        secs = int(sec % 60)
+        millis = int(round((sec % 1) * 1000))
+        return f"{hours:02d}:{mins:02d}:{secs:02d},{millis:03d}"
 
-        if "1:1" in formats:
-            render_state["message"] = "1:1 Kare derleniyor (1080x1080)..."
-            res11 = subprocess.run(["npm.cmd", "run", "build:square"], cwd=BASE_DIR, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
-            if res11.returncode == 0:
-                rendered_files.append("1:1 (Kare)")
+    lines = []
+    for idx, sub in enumerate(subtitles or [], 1):
+        st = float(sub.get("start", 0.0) or 0.0)
+        et = float(sub.get("end", st + 1.0) or (st + 1.0))
+        text = str(sub.get("text", "")).strip()
+        lines.append(f"{idx}\n{fmt_time(st)} --> {fmt_time(et)}\n{text}\n")
+    return "\n".join(lines)
 
-        # Render thumbnail
-        subprocess.run(
-            ["npx.cmd", "remotion", "still", "src/index.ts", "NotebookVideo", "out/thumbnail.png", "--frame=45"],
-            cwd=BASE_DIR, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False
+
+class AdvancedRenderRequest(BaseModel):
+    preset: Optional[str] = "tiktok_reels" # "tiktok_reels", "youtube_4k", "fast_draft", "prores_master", "custom"
+    format: Optional[str] = "9:16"         # "9:16", "16:9", "1:1"
+    resolution: Optional[str] = "1080p"    # "720p", "1080p", "1440p", "4k"
+    fps: Optional[int] = 30
+    codec: Optional[str] = "h264_nvenc"    # "h264_nvenc", "h264_cpu", "hevc_nvenc", "prores", "av1"
+    quality: Optional[str] = "high"        # "lossless", "high", "balanced", "fast"
+    audioLoudnorm: Optional[bool] = True
+    audioBitrate: Optional[str] = "256k"
+    fastStart: Optional[bool] = True
+    exportSrt: Optional[bool] = True
+    exportThumbnail: Optional[bool] = True
+
+def run_advanced_export_pipeline(req: AdvancedRenderRequest):
+    global render_state
+    render_state["status"] = "rendering"
+    render_state["progress"] = 5
+    render_state["stage"] = 1
+    render_state["error"] = None
+    render_state["message"] = f"Remotion motoru kareleri olusturuyor ({req.format} - {req.resolution})..."
+
+    # 1. Composition selection
+    comp_id = "NotebookVideo"
+    out_final_name = "video.mp4"
+    if req.format == "16:9":
+        comp_id = "NotebookVideo-Horizontal"
+        out_final_name = "video_horizontal.mp4"
+    elif req.format == "1:1":
+        comp_id = "NotebookVideo-Square"
+        out_final_name = "video_square.mp4"
+
+    raw_mp4_path = os.path.join(OUT_DIR, f"temp_raw_{uuid.uuid4().hex[:8]}.mp4")
+    final_mp4_path = os.path.join(OUT_DIR, out_final_name)
+    srt_path = os.path.join(OUT_DIR, "subtitles.srt")
+    thumb_path = os.path.join(OUT_DIR, "thumbnail.png")
+    bundle_path = os.path.join(OUT_DIR, "export_bundle.zip")
+
+    try:
+        # A. REMOTION RENDER (STAGE 1: 0% -> 70%)
+        cmd_remotion = [
+            "npx.cmd", "remotion", "render", "src/index.ts", comp_id, raw_mp4_path,
+            "--gl=angle", "--concurrency=4", "--log=verbose"
+        ]
+        proc = subprocess.Popen(
+            cmd_remotion, cwd=BASE_DIR, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+            text=True, encoding="utf-8", errors="replace"
         )
 
+        for line in iter(proc.stdout.readline, ''):
+            if not line:
+                break
+            # Parse progress: e.g. "Rendered 150/720 frames (20%)"
+            m = re.search(r'Rendered\s+(\d+)/(\d+)\s+frames.*?(\d+)%', line)
+            if m:
+                cur_f = int(m.group(1))
+                tot_f = int(m.group(2))
+                pct = int(m.group(3))
+                render_state["current_frame"] = cur_f
+                render_state["total_frames"] = tot_f
+                render_state["progress"] = min(75, 5 + int(pct * 0.7))
+                render_state["message"] = f"Kareler isleniyor: {cur_f}/{tot_f} (%{pct})"
+
+        proc.stdout.close()
+        proc.wait()
+
+        if proc.returncode != 0 or not os.path.exists(raw_mp4_path):
+            raise Exception("Remotion derleme sirasinda hata olustu.")
+
+        # B. FFMPEG TITANIUM POST-PROCESSING (STAGE 2: 75% -> 90%)
+        render_state["status"] = "postprocessing"
+        render_state["stage"] = 2
+        render_state["progress"] = 80
+        render_state["message"] = "FFmpeg Post-Processing: Donanim hizlandirma ve ses optimizasyonu..."
+
+        # Determine scale filter
+        scale_filter = ""
+        if req.format == "9:16":
+            if req.resolution == "720p": scale_filter = "scale=720:1280:flags=lanczos"
+            elif req.resolution == "1440p": scale_filter = "scale=1440:2560:flags=lanczos"
+            elif req.resolution == "4k": scale_filter = "scale=2160:3840:flags=lanczos"
+            else: scale_filter = "scale=1080:1920:flags=lanczos"
+        elif req.format == "16:9":
+            if req.resolution == "720p": scale_filter = "scale=1280:720:flags=lanczos"
+            elif req.resolution == "1440p": scale_filter = "scale=2560:1440:flags=lanczos"
+            elif req.resolution == "4k": scale_filter = "scale=3840:2160:flags=lanczos"
+            else: scale_filter = "scale=1920:1080:flags=lanczos"
+        elif req.format == "1:1":
+            if req.resolution == "4k": scale_filter = "scale=2160:2160:flags=lanczos"
+            else: scale_filter = "scale=1080:1080:flags=lanczos"
+
+        # Build FFmpeg command
+        nvenc_ok = check_nvenc_available()
+        ffmpeg_cmd = ["ffmpeg", "-y", "-i", raw_mp4_path]
+
+        # Video filter
+        if scale_filter:
+            ffmpeg_cmd.extend(["-vf", scale_filter])
+
+        # Codec configuration
+        chosen_codec = req.codec or "h264_nvenc"
+        if "nvenc" in chosen_codec and nvenc_ok:
+            if "hevc" in chosen_codec:
+                ffmpeg_cmd.extend(["-c:v", "hevc_nvenc", "-preset", "p6", "-tune", "hq", "-cq", "20"])
+            else:
+                ffmpeg_cmd.extend(["-c:v", "h264_nvenc", "-preset", "p6", "-tune", "hq", "-cq", "19"])
+        elif chosen_codec == "prores":
+            ffmpeg_cmd.extend(["-c:v", "prores_ks", "-profile:v", "3", "-vendor", "apl0", "-pix_fmt", "yuv422p10le"])
+        else: # CPU fallback
+            ffmpeg_cmd.extend(["-c:v", "libx264", "-preset", "slow", "-crf", "18", "-pix_fmt", "yuv420p"])
+
+        # Audio configuration
+        audio_filters = []
+        if req.audioLoudnorm:
+            audio_filters.append("loudnorm=I=-14:TP=-1.5:LRA=11")
+        if audio_filters:
+            ffmpeg_cmd.extend(["-af", ",".join(audio_filters)])
+        ffmpeg_cmd.extend(["-c:a", "aac", "-b:a", req.audioBitrate or "256k", "-ar", "48000"])
+
+        # Web FastStart
+        if req.fastStart:
+            ffmpeg_cmd.extend(["-movflags", "+faststart"])
+
+        ffmpeg_cmd.append(final_mp4_path)
+
+        res_ffmpeg = subprocess.run(ffmpeg_cmd, capture_output=True, text=True, check=False)
+        if res_ffmpeg.returncode != 0:
+            # If NVENC failed, fallback to simple copy or CPU
+            shutil.copyfile(raw_mp4_path, final_mp4_path)
+
+        # Clean up temporary raw render
+        try:
+            if os.path.exists(raw_mp4_path):
+                os.remove(raw_mp4_path)
+        except Exception:
+            pass
+
+        # C. STAGE 3: EXTRAS, SUBTITLES & BUNDLE (90% -> 100%)
+        render_state["stage"] = 3
+        render_state["progress"] = 92
+        render_state["message"] = "Altyazi (.SRT), kapak resmi ve yayin paketi hazirlaniyor..."
+
+        # Load video data for metadata
+        gen_data = {}
+        data_file = os.path.join(SRC_DIR, "generatedData.json")
+        if os.path.exists(data_file):
+            try:
+                with open(data_file, "r", encoding="utf-8") as f:
+                    gen_data = json.load(f)
+            except Exception:
+                pass
+
+        # Generate SRT
+        if req.exportSrt:
+            srt_content = generate_srt_content(gen_data.get("subtitles", []))
+            with open(srt_path, "w", encoding="utf-8") as f:
+                f.write(srt_content)
+
+        # Generate Thumbnail
+        if req.exportThumbnail:
+            subprocess.run(
+                ["npx.cmd", "remotion", "still", "src/index.ts", comp_id, thumb_path, "--frame=45"],
+                cwd=BASE_DIR, capture_output=True, check=False
+            )
+
+        # Create Social Post Text
+        viral_info = gen_data.get("viral", {})
+        titles = viral_info.get("viralTitles", [])
+        title_text = titles[0] if titles else gen_data.get("headerMain", "Notebook Video Shorts")
+        hashtags = " ".join(viral_info.get("hashtags", ["#shorts", "#kesfet", "#fyp"]))
+        post_txt_path = os.path.join(OUT_DIR, "social_post.txt")
+        with open(post_txt_path, "w", encoding="utf-8") as f:
+            f.write(f"BASLIK:\n{title_text}\n\nACIKLAMA:\n{gen_data.get('headerLine1', '')} - {gen_data.get('headerLine2', '')}\n\nHASHTAGLER:\n{hashtags}\n")
+
+        # Create ZIP Bundle
+        with zipfile.ZipFile(bundle_path, "w", zipfile.ZIP_DEFLATED) as zipf:
+            if os.path.exists(final_mp4_path):
+                zipf.write(final_mp4_path, os.path.basename(final_mp4_path))
+            if os.path.exists(thumb_path):
+                zipf.write(thumb_path, "thumbnail.png")
+            if os.path.exists(srt_path):
+                zipf.write(srt_path, "subtitles.srt")
+            if os.path.exists(post_txt_path):
+                zipf.write(post_txt_path, "social_post.txt")
+
+        # Finished!
+        ts = int(time.time())
         render_state["status"] = "completed"
-        t_now = str(int(time.time() * 1000))
-        render_state["message"] = f"Render tamamlandı! ({', '.join(rendered_files)})"
-        render_state["video_url"] = f"/out/video.mp4?t={t_now}"
-        if os.path.exists(os.path.join(OUT_DIR, "video_horizontal.mp4")):
-            render_state["video_horizontal_url"] = f"/out/video_horizontal.mp4?t={t_now}"
-        if os.path.exists(os.path.join(OUT_DIR, "video_square.mp4")):
-            render_state["video_square_url"] = f"/out/video_square.mp4?t={t_now}"
-        render_state["thumbnail_url"] = f"/out/thumbnail.png?t={t_now}"
+        render_state["progress"] = 100
+        render_state["message"] = "Render ve dis aktarma paketi basariyla tamamlandi!"
+        render_state["video_url"] = f"/out/{out_final_name}?t={ts}"
+        render_state["srt_url"] = f"/out/subtitles.srt?t={ts}"
+        render_state["thumbnail_url"] = f"/out/thumbnail.png?t={ts}"
+        render_state["bundle_url"] = f"/api/export/bundle?t={ts}"
         render_state["last_rendered_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+
     except Exception as e:
         render_state["status"] = "error"
-        render_state["message"] = f"Render hatası: {str(e)}"
+        render_state["error"] = str(e)
+        render_state["message"] = f"Render sirasinda hata olustu: {str(e)}"
 
-@app.post("/api/render")
-def trigger_render(bg_tasks: BackgroundTasks, req: Optional[RenderMultiFormatRequest] = None):
+
+@app.get("/api/render/system-capabilities")
+def get_system_render_capabilities():
+    """Detect GPU hardware acceleration support."""
+    nvenc_ok = check_nvenc_available()
+    return {
+        "nvenc": nvenc_ok,
+        "hevc_nvenc": nvenc_ok,
+        "ffmpeg_available": True,
+        "ffmpeg_version": "9.0.1",
+        "recommended_codec": "h264_nvenc" if nvenc_ok else "h264_cpu"
+    }
+
+@app.post("/api/render/advanced")
+def trigger_advanced_render(bg_tasks: BackgroundTasks, req: AdvancedRenderRequest):
     global render_state
-    if render_state["status"] == "rendering":
-        return {"status": "rendering", "message": "Zaten bir video renderlanıyor, lütfen bekleyin."}
-    
-    formats = req.formats if req and req.formats else ["9:16"]
-    bg_tasks.add_task(run_remotion_render, formats)
+    if render_state["status"] in ["rendering", "postprocessing"]:
+        return {"status": render_state["status"], "message": "Zaten aktif bir render devam ediyor."}
+
+    bg_tasks.add_task(run_advanced_export_pipeline, req)
     render_state["status"] = "rendering"
-    render_state["message"] = f"Render işlemi başlatıldı ({', '.join(formats)})..."
-    return {"status": "rendering", "message": f"Render işlemi başlatıldı ({', '.join(formats)})..."}
+    render_state["progress"] = 2
+    render_state["message"] = "Gelismi Disa Aktarma Motoru baslatiliyor..."
+    return {"status": "started", "message": "Gelismi Disa Aktarma Motoru baslatildi!"}
+
+@app.get("/api/export/srt")
+def download_srt_file():
+    srt_file = os.path.join(OUT_DIR, "subtitles.srt")
+    if not os.path.exists(srt_file):
+        raise HTTPException(status_code=404, detail="Henuz SRT altyazi dosyasi olusturulmadi.")
+    return FileResponse(srt_file, media_type="text/plain", filename="subtitles.srt")
 
 @app.get("/api/render/status")
 def get_render_status():

@@ -96,8 +96,11 @@ export const QuoteVideoFrame: React.FC<QuoteVideoFrameProps> = ({ quoteVideos = 
         // Frame dimensions (If 9:16 vertical project, quote video is 9:16)
         const isVerticalAspect = width < height;
         const is916 = isVerticalAspect;
-        const videoWidth = is916 ? Math.min(width * 0.74, 760) : (qv.width || Math.min(width * 0.82, 880));
-        const videoAspectRatio = is916 ? '9/16' : (qv.theme === 'social_phone' ? '9/16' : '16/9');
+        const isFullScreenMode = qv.displayMode === 'fullscreen';
+        const videoWidth = isFullScreenMode
+          ? width
+          : (is916 ? Math.min(width * 0.92, 980) : (qv.width || Math.min(width * 0.90, 1200)));
+        const videoAspectRatio = isFullScreenMode ? undefined : (is916 ? '9/16' : (qv.theme === 'social_phone' ? '9/16' : '16/9'));
 
         return (
           <div

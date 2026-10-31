@@ -1167,6 +1167,9 @@
         <button onclick="openQuoteVideoModal()" title="Eleştiri / Yanıltıcı İçerik Alıntı Videosu Ekle" class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-rose-950 to-red-950 hover:from-rose-900 hover:to-red-900 border border-rose-500/70 text-rose-200 font-extrabold transition flex items-center gap-1.5 shadow-md shadow-rose-950/50">
           <i class="fa-solid fa-quote-left text-rose-400"></i> <span>+ Alıntı Video</span>
         </button>
+        <button onclick="shiftAiScenesAfterQuote()" title="Tüm Yapay Zekâ Kurgusunu (Sahneler, Ses, Altyazılar) Alıntı Videosunun Bittiği Saniyeye Otomatik Bağlar" class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-amber-950 to-indigo-950 hover:from-amber-900 hover:to-indigo-900 border border-amber-500/60 text-amber-200 font-extrabold transition flex items-center gap-1.5 shadow-md shadow-amber-950/40">
+          <i class="fa-solid fa-magnet text-amber-400"></i> <span>🧲 Kurguyu Alıntıdan Başlat</span>
+        </button>
         <button onclick="openMediaModal('video')" title="Video veya B-Roll Ekle" class="px-2.5 py-1 rounded-lg bg-indigo-950/70 hover:bg-indigo-900 border border-indigo-500/40 text-indigo-300 font-semibold transition flex items-center gap-1">
           <i class="fa-solid fa-film text-indigo-400"></i> <span>+ Video</span>
         </button>
@@ -1215,23 +1218,39 @@
     <div class="flex-1 flex overflow-hidden">
       
       <!-- TRACK HEADERS (Left Labels) -->
-      <div class="w-36 border-r border-slate-800/80 bg-[#080c14] flex flex-col shrink-0 text-[11px] font-semibold text-slate-400 select-none">
-        <div class="h-6 border-b border-slate-800/60 px-3 flex items-center text-slate-500 font-mono text-[10px]">
-          TRACKS
+      <div class="w-44 border-r border-slate-800/80 bg-[#080c14] flex flex-col shrink-0 text-[11px] font-semibold text-slate-400 select-none">
+        <div class="h-6 border-b border-slate-800/60 px-3 flex items-center justify-between text-slate-500 font-mono text-[10px]">
+          <span>TRACKS</span>
+          <span class="text-[9px] text-amber-400 font-bold">SERBEST KURGU</span>
         </div>
-        <!-- 1. Video Sahneleri -->
-        <div class="h-14 border-b border-slate-800/60 px-3 flex items-center justify-between">
-          <span class="flex items-center gap-1.5 text-slate-200 font-medium">
-            <i class="fa-solid fa-film text-indigo-400"></i> Video
-          </span>
-          <span class="text-[9px] bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded font-mono font-bold">ANA</span>
+        <!-- 1. AI Video Kurgusu -->
+        <div class="h-14 border-b border-slate-800/60 px-2.5 flex flex-col justify-center bg-indigo-950/25">
+          <div class="flex items-center justify-between">
+            <span class="flex items-center gap-1.5 text-amber-300 font-bold text-[10px] truncate" title="Yapay Zekâ Sahne & Defter Kurgusu">
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> AI Kurgu
+            </span>
+            <span id="badge-ai-kurgu-offset" title="Kurgunun Başlama Zamanı" class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-1.5 py-0.2 rounded font-mono font-bold">0.0s</span>
+          </div>
+          <div class="flex items-center gap-1 mt-1">
+            <button onclick="shiftAiScenesAfterQuote()" title="Kurguyu Alıntı Bitişine Mıknatısla Kaydır" class="flex-1 py-0.5 px-1 rounded bg-amber-500/20 hover:bg-amber-500/40 border border-amber-400/50 text-[9px] text-amber-200 font-extrabold flex items-center justify-center gap-1 transition shadow-sm">
+              <i class="fa-solid fa-magnet text-amber-400 text-[8px]"></i> <span>Alıntı Sonrası</span>
+            </button>
+            <button onclick="resetAiScenesToStart()" title="00:00 Noktasına Geri Al" class="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-[9px] transition">
+              <i class="fa-solid fa-backward-step"></i>
+            </button>
+          </div>
         </div>
         <!-- 1.5. Alıntı Video Katmanı -->
-        <div class="h-10 border-b border-slate-800/60 px-3 flex items-center justify-between bg-rose-950/20">
-          <span class="flex items-center gap-1.5 text-rose-300 font-medium">
+        <div class="h-10 border-b border-slate-800/60 px-2.5 flex items-center justify-between bg-rose-950/20">
+          <span class="flex items-center gap-1.5 text-rose-300 font-medium text-[10px]">
             <i class="fa-solid fa-quote-left text-rose-400"></i> Alıntı Video
           </span>
-          <span class="text-[9px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-mono font-bold">ALINTI</span>
+          <div class="flex items-center gap-1">
+            <button onclick="openQuoteVideoModal()" title="Alıntı Ayarları" class="text-[9px] text-rose-300 hover:text-white px-1 py-0.5 rounded bg-rose-900/40 hover:bg-rose-800/60 transition">
+              <i class="fa-solid fa-gear"></i>
+            </button>
+            <span class="text-[8px] bg-rose-500/20 text-rose-300 px-1 py-0.2 rounded font-mono font-bold">ALINTI</span>
+          </div>
         </div>
         <!-- 2. PIP Video Katmanı -->
         <div class="h-10 border-b border-slate-800/60 px-3 flex items-center justify-between">
@@ -1588,127 +1607,246 @@
   </div>
 
   <!-- ================= EXPORT MODAL (TOP RIGHT "📤 EXPORT" BUTTON CLICK) ================= -->
-  <div id="modal-export" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-[#0d1322] border border-slate-800 rounded-3xl max-w-xl w-full p-6 space-y-5 shadow-2xl">
-      
+  <div id="modal-export" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#0b101d] border border-slate-700/80 rounded-3xl max-w-2xl w-full p-6 space-y-4 shadow-2xl overflow-hidden max-h-[92vh] flex flex-col animate-fadeIn">
+
       <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-500 text-slate-950 flex items-center justify-center font-bold text-sm shadow">
-            <i class="fa-solid fa-arrow-up-from-bracket"></i>
-          </div>
-          <div>
-            <h3 class="text-sm font-extrabold text-white">Video Dışa Aktar (Export Studio)</h3>
-            <p class="text-[11px] text-slate-400">1080x1920 MP4 Video, Sosyal Medya Paketi veya YouTube Dağıtımı</p>
-          </div>
-        </div>
-        <button onclick="closeExportModal()" class="text-slate-500 hover:text-white transition"><i class="fa-solid fa-xmark text-base"></i></button>
-      </div>
-
-      <!-- Options Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
-        
-        <!-- Option 1: Multi-Format Remotion Studio (9:16 + 16:9 + 1:1) -->
-        <div class="p-4 bg-[#070a12] border border-slate-800 hover:border-amber-400/50 rounded-2xl flex flex-col justify-between space-y-3 transition">
-          <div>
-            <div class="font-extrabold text-white flex items-center justify-between mb-1.5">
-              <span class="flex items-center gap-1.5 text-amber-300">
-                <i class="fa-solid fa-layer-group"></i>
-                <span>Çoklu Format Render</span>
-              </span>
-              <span class="text-[9px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-full font-mono">1-Tıkla 3 Boyut</span>
-            </div>
-            <p class="text-[11px] text-slate-400 leading-relaxed mb-3">
-              Yapay zeka defter kurgusunu tek seferde tüm sosyal medya boyutlarına uyarlar.
-            </p>
-
-            <!-- Format Checkboxes -->
-            <div class="space-y-2 bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
-              <label class="flex items-center justify-between cursor-pointer text-slate-200 hover:text-white">
-                <div class="flex items-center gap-2">
-                  <input type="checkbox" id="fmt-chk-916" checked class="rounded border-slate-700 text-amber-500 focus:ring-0">
-                  <span class="font-bold">9:16 Dikey Shorts / Reels</span>
-                </div>
-                <span class="text-[10px] text-slate-500 font-mono">1080x1920</span>
-              </label>
-
-              <label class="flex items-center justify-between cursor-pointer text-slate-200 hover:text-white">
-                <div class="flex items-center gap-2">
-                  <input type="checkbox" id="fmt-chk-169" checked class="rounded border-slate-700 text-amber-500 focus:ring-0">
-                  <span class="font-bold">16:9 Yatay YouTube</span>
-                </div>
-                <span class="text-[10px] text-slate-500 font-mono">1920x1080</span>
-              </label>
-
-              <label class="flex items-center justify-between cursor-pointer text-slate-200 hover:text-white">
-                <div class="flex items-center gap-2">
-                  <input type="checkbox" id="fmt-chk-11" checked class="rounded border-slate-700 text-amber-500 focus:ring-0">
-                  <span class="font-bold">1:1 Kare Instagram / X</span>
-                </div>
-                <span class="text-[10px] text-slate-500 font-mono">1080x1080</span>
-              </label>
-            </div>
-          </div>
-
-          <button onclick="triggerExportRender()" id="btn-modal-render" class="w-full bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30">
-            <i class="fa-solid fa-bolt text-amber-300"></i>
-            <span>Seçili Formatları Renderla</span>
-          </button>
-        </div>
-
-        <!-- Option 2: All-in-One .ZIP Social Bundle -->
-        <div class="p-4 bg-[#070a12] border border-slate-800 hover:border-amber-400/50 rounded-2xl flex flex-col justify-between space-y-3 transition">
-          <div>
-            <div class="font-extrabold text-white flex items-center gap-1.5 mb-1">
-              <i class="fa-solid fa-box-archive text-amber-400"></i>
-              <span>Tüm Paket (.ZIP İndir)</span>
-            </div>
-            <p class="text-[11px] text-slate-400 leading-relaxed">
-              Full HD Video + Kapak Resmi PNG + Hazır Viral Başlıklar & Hashtagler tek arşivde iner.
-            </p>
-          </div>
-          <a href="/api/export/bundle" download class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 shadow text-center">
-            <i class="fa-solid fa-download"></i> <span>.ZIP Paketi İndir</span>
-          </a>
-        </div>
-
-      </div>
-
-      <!-- YouTube Direct Dispatch Row -->
-      <div class="p-4 bg-[#070a12] border border-slate-800 rounded-2xl flex items-center justify-between text-xs">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 shrink-0">
         <div class="flex items-center gap-3">
-          <i class="fa-brands fa-youtube text-red-500 text-2xl"></i>
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-amber-600 text-slate-950 flex items-center justify-center font-black text-lg shadow-lg shadow-amber-500/20">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
           <div>
-            <div class="font-bold text-white">YouTube Shorts Doğrudan Yükle</div>
-            <div class="text-[11px] text-slate-400">Kanalınıza tek tıkla başlık ve etiketlerle yükleyin.</div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-base font-extrabold text-white">Titanium Export Studio Pro</h3>
+              <span id="export-gpu-badge" class="text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full font-mono font-bold flex items-center gap-1">
+                <i class="fa-solid fa-microchip text-emerald-400"></i> NVIDIA NVENC GPU Aktif
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400">FFmpeg 9.0 Donanım Hızlandırmalı Render & Sosyal Medya Dağıtım Motoru</p>
           </div>
         </div>
-        <button onclick="closeExportModal(); openAutopilotModal();" class="px-3.5 py-1.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition flex items-center gap-1.5">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> YouTube Yükleyici
+        <button onclick="closeExportModal()" class="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <!-- Quick Viral Titles Copy Box -->
-      <div class="p-3 bg-[#070a12] border border-slate-800 rounded-2xl space-y-1.5 text-xs">
-        <div class="flex items-center justify-between text-[11px] text-slate-400">
-          <span class="font-bold">Önerilen Viral Başlık:</span>
-          <button onclick="copyToClipboard(document.getElementById('modal-viral-title').innerText)" class="text-amber-300 hover:text-white flex items-center gap-1">
-            <i class="fa-regular fa-copy"></i> Kopyala
-          </button>
+      <!-- Main Modal Body (Scrollable) -->
+      <div id="export-config-panel" class="space-y-4 overflow-y-auto pr-1 flex-1 text-xs">
+
+        <!-- 4 Quick Presets -->
+        <div>
+          <label class="block text-slate-300 font-extrabold mb-2 flex items-center gap-1.5 text-xs">
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> Hızlı Çıktı Önayarları (Tek Tıkla Optimize)
+          </label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            
+            <!-- Preset 1: TikTok & Reels Viral -->
+            <div id="preset-card-tiktok" onclick="selectExportPreset('tiktok')" class="p-3 rounded-2xl bg-gradient-to-b from-rose-950/40 to-slate-900 border-2 border-rose-500/80 cursor-pointer hover:border-rose-400 transition shadow-lg relative group">
+              <div class="text-[9px] bg-rose-500 text-white font-extrabold px-1.5 py-0.2 rounded-full absolute -top-2 right-2 uppercase tracking-wider">Viral</div>
+              <div class="font-bold text-white text-[11px] flex items-center gap-1 mb-1">
+                <i class="fa-brands fa-tiktok text-rose-400"></i> TikTok & Reels
+              </div>
+              <div class="text-[10px] text-slate-300 font-mono">1080p · 60fps NVENC</div>
+              <div class="text-[9px] text-emerald-400 mt-1 font-semibold">-14 LUFS Ses Standardı</div>
+            </div>
+
+            <!-- Preset 2: YouTube 4K Ultra HD -->
+            <div id="preset-card-youtube4k" onclick="selectExportPreset('youtube4k')" class="p-3 rounded-2xl bg-slate-900/80 border border-slate-700/80 cursor-pointer hover:border-amber-400 transition relative group">
+              <div class="font-bold text-white text-[11px] flex items-center gap-1 mb-1">
+                <i class="fa-brands fa-youtube text-red-500"></i> YouTube 4K
+              </div>
+              <div class="text-[10px] text-slate-300 font-mono">2160x3840 Ultra HD</div>
+              <div class="text-[9px] text-amber-300 mt-1 font-semibold">Maksimum Netlik</div>
+            </div>
+
+            <!-- Preset 3: Fast Draft (Hızlı Taslak) -->
+            <div id="preset-card-draft" onclick="selectExportPreset('draft')" class="p-3 rounded-2xl bg-slate-900/80 border border-slate-700/80 cursor-pointer hover:border-indigo-400 transition relative group">
+              <div class="font-bold text-white text-[11px] flex items-center gap-1 mb-1">
+                <i class="fa-solid fa-gauge-high text-cyan-400"></i> Hızlı Taslak
+              </div>
+              <div class="text-[10px] text-slate-300 font-mono">720p · 30fps Ultra Hız</div>
+              <div class="text-[9px] text-cyan-300 mt-1 font-semibold">Anında Önizleme</div>
+            </div>
+
+            <!-- Preset 4: Master ProRes -->
+            <div id="preset-card-master" onclick="selectExportPreset('master')" class="p-3 rounded-2xl bg-slate-900/80 border border-slate-700/80 cursor-pointer hover:border-purple-400 transition relative group">
+              <div class="font-bold text-white text-[11px] flex items-center gap-1 mb-1">
+                <i class="fa-solid fa-film text-purple-400"></i> ProRes Master
+              </div>
+              <div class="text-[10px] text-slate-300 font-mono">10-Bit Kayıpsız Arşiv</div>
+              <div class="text-[9px] text-purple-300 mt-1 font-semibold">Stüdyo Kalitesi</div>
+            </div>
+
+          </div>
         </div>
-        <div id="modal-viral-title" class="text-slate-200 font-semibold bg-[#0c1220] p-2 rounded-xl border border-slate-800">
-          İbn-i Sina Bile 40 Kez Okudu: Akıl Almaz Sır! #Shorts
+
+        <!-- Advanced Render Settings -->
+        <div class="p-4 bg-[#070b14] border border-slate-800 rounded-2xl space-y-3">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-200">
+            <span class="flex items-center gap-1.5 text-amber-400">
+              <i class="fa-solid fa-sliders"></i> Gelişmiş Kodlayıcı Parametreleri
+            </span>
+            <span class="text-[10px] text-slate-400 font-mono">Lanczos Rescaling + NVENC SDK</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <!-- Resolution -->
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Çözünürlük</label>
+              <select id="export-opt-resolution" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-[11px] text-white font-mono focus:border-amber-400 focus:outline-none">
+                <option value="1080p" selected>1080p Full HD (1080x1920)</option>
+                <option value="4k">4K Ultra HD (2160x3840)</option>
+                <option value="1440p">2K QHD (1440x2560)</option>
+                <option value="720p">720p HD (720x1280)</option>
+              </select>
+            </div>
+
+            <!-- Codec -->
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Video Kodlayıcı (Codec)</label>
+              <select id="export-opt-codec" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-[11px] text-white font-mono focus:border-amber-400 focus:outline-none">
+                <option value="h264_nvenc" selected>H.264 (NVIDIA NVENC GPU ⚡)</option>
+                <option value="hevc_nvenc">HEVC/H.265 (NVIDIA GPU 🚀)</option>
+                <option value="libx264">H.264 (CPU Yazılımsal)</option>
+                <option value="prores">Apple ProRes 422 HQ</option>
+              </select>
+            </div>
+
+            <!-- FPS -->
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Kare Hızı (FPS)</label>
+              <select id="export-opt-fps" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-[11px] text-white font-mono focus:border-amber-400 focus:outline-none">
+                <option value="60">60 FPS (Akıcı Hareket)</option>
+                <option value="30" selected>30 FPS (Standart)</option>
+              </select>
+            </div>
+
+            <!-- Kalite Profili -->
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 mb-1">Kalite Seviyesi</label>
+              <select id="export-opt-quality" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-1.5 text-[11px] text-white font-mono focus:border-amber-400 focus:outline-none">
+                <option value="ultra" selected>Ultra (CRF 17 / Yüksek Bitrate)</option>
+                <option value="high">Yüksek (CRF 21 / Dengeli)</option>
+                <option value="draft">Taslak (Hızlı İşleme)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Feature Checkboxes -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 border-t border-slate-800/80">
+            
+            <label class="flex items-center gap-2 cursor-pointer bg-slate-900/50 p-2 rounded-xl border border-slate-800 hover:border-slate-700">
+              <input type="checkbox" id="export-opt-loudnorm" checked class="rounded border-slate-700 text-amber-500 focus:ring-0">
+              <div>
+                <div class="font-bold text-slate-200 text-[10px]">EBU R128 Ses Standardı</div>
+                <div class="text-[9px] text-emerald-400 font-mono">-14 LUFS Yayın Seviyesi</div>
+              </div>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer bg-slate-900/50 p-2 rounded-xl border border-slate-800 hover:border-slate-700">
+              <input type="checkbox" id="export-opt-faststart" checked class="rounded border-slate-700 text-amber-500 focus:ring-0">
+              <div>
+                <div class="font-bold text-slate-200 text-[10px]">Web FastStart (+faststart)</div>
+                <div class="text-[9px] text-cyan-400 font-mono">Anında Takılmasız Akış</div>
+              </div>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer bg-slate-900/50 p-2 rounded-xl border border-slate-800 hover:border-slate-700">
+              <input type="checkbox" id="export-opt-srt" checked class="rounded border-slate-700 text-amber-500 focus:ring-0">
+              <div>
+                <div class="font-bold text-slate-200 text-[10px]">Altyazı (.SRT) Dosyası</div>
+                <div class="text-[9px] text-amber-300 font-mono">Ayrı Altyazı Dışa Aktarımı</div>
+              </div>
+            </label>
+
+          </div>
         </div>
+
+        <!-- Render Trigger Button -->
+        <button id="btn-start-advanced-export" onclick="triggerAdvancedExport()" class="w-full bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 hover:from-emerald-500 hover:to-teal-400 text-white font-black py-3 px-4 rounded-2xl transition flex items-center justify-center gap-2 shadow-xl shadow-emerald-950/60 text-sm">
+          <i class="fa-solid fa-bolt text-yellow-300 text-base"></i>
+          <span>GPU Hızlandırmalı Render Başlat (Full HD MP4)</span>
+        </button>
+
       </div>
 
-      <div class="flex justify-end pt-1">
-        <button onclick="closeExportModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold text-xs">Kapat</button>
+      <!-- Live Render Progress & Status Screen (Hidden until triggered) -->
+      <div id="export-progress-panel" class="hidden space-y-4 py-4 px-2 text-center animate-fadeIn">
+        
+        <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 text-slate-950 flex items-center justify-center text-2xl shadow-xl shadow-amber-500/30 animate-pulse">
+          <i class="fa-solid fa-film"></i>
+        </div>
+
+        <div>
+          <h4 id="export-live-status-title" class="text-sm font-extrabold text-white">Yapay Zekâ Videosu Render Ediliyor...</h4>
+          <p id="export-live-status-desc" class="text-xs text-slate-400 mt-0.5 font-mono">Remotion kareleri oluşturuluyor...</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="space-y-1.5 max-w-lg mx-auto">
+          <div class="flex items-center justify-between text-[11px] font-mono">
+            <span id="export-live-stage-badge" class="text-amber-400 font-bold">Aşama: Remotion Rendering</span>
+            <span id="export-live-pct" class="text-white font-extrabold text-xs">0%</span>
+          </div>
+          <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden border border-slate-800 p-0.5 shadow-inner">
+            <div id="export-live-bar" class="h-full bg-gradient-to-r from-amber-500 via-yellow-400 to-emerald-400 rounded-full transition-all duration-300 w-2 shadow-[0_0_12px_rgba(234,179,8,0.8)]"></div>
+          </div>
+          <div class="flex items-center justify-between text-[10px] text-slate-500 font-mono pt-1">
+            <span id="export-live-frame-info">Frame: 0 / 1026</span>
+            <span id="export-live-speed-badge">Hız: 0.0x</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Export Complete Success Screen (Hidden until finished) -->
+      <div id="export-complete-panel" class="hidden space-y-4 py-3 animate-fadeIn">
+        <div class="p-4 bg-emerald-950/30 border border-emerald-500/50 rounded-2xl flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center text-lg font-black shrink-0 shadow-lg shadow-emerald-500/30">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <div>
+            <div class="font-extrabold text-white text-sm">Render Başarıyla Tamamlandı!</div>
+            <div id="export-complete-summary" class="text-[11px] text-emerald-300 font-mono">1080x1920 MP4 · NVIDIA NVENC · EBU R128 Standardı Hazır</div>
+          </div>
+        </div>
+
+        <!-- Download Action Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          
+          <a id="btn-dl-final-mp4" href="/out/video.mp4" download="aivideo_render.mp4" class="p-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold rounded-xl transition flex flex-col items-center justify-center gap-1 shadow-md text-center">
+            <i class="fa-solid fa-download text-base"></i>
+            <span class="text-xs">MP4 Videoyu İndir</span>
+            <span class="text-[9px] text-emerald-200 font-mono">1080p Full HD</span>
+          </a>
+
+          <a href="/api/export/bundle" download="sosyal_medya_paketi.zip" class="p-3 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-extrabold rounded-xl transition flex flex-col items-center justify-center gap-1 shadow-md text-center">
+            <i class="fa-solid fa-box-archive text-base"></i>
+            <span class="text-xs">Tüm Paket (.ZIP)</span>
+            <span class="text-[9px] text-amber-950 font-mono">Video + Kapak + SRT</span>
+          </a>
+
+          <a href="/api/export/srt" download="subtitles.srt" class="p-3 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-cyan-300 font-extrabold rounded-xl transition flex flex-col items-center justify-center gap-1 shadow text-center">
+            <i class="fa-solid fa-closed-captioning text-base text-cyan-400"></i>
+            <span class="text-xs">Altyazı (.SRT) İndir</span>
+            <span class="text-[9px] text-slate-400 font-mono">Zaman Kodlu Metin</span>
+          </a>
+
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <button onclick="resetExportModalView()" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl text-xs transition">
+            <i class="fa-solid fa-sliders mr-1"></i> Yeni Render Ayarları
+          </button>
+          <button onclick="closeExportModal()" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition">
+            Kapat
+          </button>
+        </div>
       </div>
 
     </div>
-  </div>
-
-  <!-- ================= MULTILINGUAL GLOBAL MODAL (FAZ 9) ================= -->
+  </div><!-- ================= MULTILINGUAL GLOBAL MODAL (FAZ 9) ================= -->
   <div id="modal-multilingual" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
     <div class="bg-[#0d1322] border border-slate-800 rounded-3xl max-w-xl w-full p-6 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -3352,6 +3490,17 @@
       renderFxTrack(pxPerSec);
       renderSubtitlesTrack(pxPerSec);
       updatePlayheadPosition();
+
+      const offsetBadge = document.getElementById('badge-ai-kurgu-offset');
+      if (offsetBadge && scenes && scenes.length > 0) {
+        const firstStart = scenes[0].startTime || 0;
+        offsetBadge.innerText = `${firstStart.toFixed(1)}s`;
+        if (firstStart > 0) {
+          offsetBadge.className = 'text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-1.5 py-0.2 rounded font-mono font-bold';
+        } else {
+          offsetBadge.className = 'text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-1.5 py-0.2 rounded font-mono font-bold';
+        }
+      }
     }
 
     // RULER
@@ -3412,7 +3561,7 @@
             </span>
             <div class="overflow-hidden">
               <div class="font-bold text-white text-[11px] truncate">${title}</div>
-              <div class="text-[9px] text-slate-400 font-mono truncate">${dur.toFixed(1)}s · ${s.layoutType || 'pip_split'}</div>
+              <div class="text-[9px] text-slate-400 font-mono truncate">${start.toFixed(1)}s - ${end.toFixed(1)}s (${dur.toFixed(1)}s) · ${s.layoutType || 'pip_split'}</div>
             </div>
           </div>
 
@@ -3552,6 +3701,9 @@
             </div>
           </div>
           <div class="flex items-center gap-1 shrink-0 ml-1">
+            <button onclick="event.stopPropagation(); shiftAiScenesAfterQuote()" title="Yapay zekâ kurgusunu bu alıntının bittiği noktaya (${end.toFixed(1)}s) bağla" class="px-1.5 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/40 border border-amber-400/40 text-[8px] text-amber-200 font-bold transition flex items-center gap-1">
+              <i class="fa-solid fa-magnet text-amber-300"></i> Kurguyu Bağla
+            </button>
             ${qv.stamp && qv.stamp !== 'none' ? `<span class="text-[8px] bg-red-600/80 text-white px-1 rounded uppercase font-extrabold font-mono">${qv.stamp}</span>` : ''}
             <button onclick="event.stopPropagation(); deleteQuoteItem('${qv.id}')" title="Bu Alıntı Klibini Sil" class="w-5 h-5 rounded hover:bg-rose-900 text-slate-400 hover:text-white flex items-center justify-center text-[10px] transition">
               <i class="fa-solid fa-trash-can"></i>
@@ -5475,9 +5627,10 @@
         currentRenderedQuoteId = activeQuote.id;
 
         const is916 = !videoData.format || videoData.format === '9:16' || videoData.format === 'portrait';
-        const frameAspectClass = is916 
-          ? 'w-[62%] aspect-[9/16] max-h-[66%]' 
-          : 'w-[90%] aspect-video max-h-[60%]';
+        const isFullScreenMode = activeQuote.displayMode === 'fullscreen';
+        const frameAspectClass = isFullScreenMode
+          ? 'w-full h-full rounded-2xl overflow-hidden'
+          : (is916 ? 'w-[94%] aspect-[9/16] max-h-[82%]' : 'w-[96%] aspect-video max-h-[72%]');
 
         container.innerHTML = `
           <div class="w-full h-full flex flex-col items-center justify-between py-1 select-none animate-fadeIn">
@@ -5519,7 +5672,7 @@
             </div>
 
             <!-- Bottom Time & Control Pill (With Sound Indicator & Toggle) -->
-            <div class="flex items-center gap-2 px-2.5 py-0.5 bg-slate-900/95 border border-slate-700/80 rounded-full text-[9px] font-mono text-slate-300 shrink-0">
+            <div class="flex items-center gap-2 px-3 py-1 bg-slate-900/95 border border-slate-700/80 rounded-full text-[9px] font-mono text-slate-300 shrink-0 shadow-lg">
               <span id="pv-quote-timer" class="text-rose-400 font-bold">⏱️ ${elapsed.toFixed(1)}s / ${dur.toFixed(1)}s</span>
               <span>·</span>
               <button onclick="toggleActiveQuoteAudio('${activeQuote.id}')" title="${activeQuote.muted ? 'Alıntı Sesini Aç' : 'Alıntı Sesini Kapat'}" class="flex items-center gap-1 hover:text-white transition">
@@ -5528,7 +5681,12 @@
               </button>
               <span>·</span>
               <span>Kesit: ${activeQuote.trimStart}s - ${activeQuote.trimEnd}s</span>
-              <button onclick="deleteQuoteItem('${activeQuote.id}')" title="Bu Alıntıyı Sil" class="text-rose-400 hover:text-white ml-1">
+              <span>·</span>
+              <button onclick="toggleActiveQuoteDisplayMode('${activeQuote.id}')" title="Tam Ekran ve Çerçeveli Mod Arasında Geçiş Yap" class="hover:text-amber-300 transition text-[9px] text-cyan-300 flex items-center gap-1 font-sans">
+                <i class="fa-solid fa-${isFullScreenMode ? 'compress' : 'expand'}"></i>
+                <span>${isFullScreenMode ? 'Kutu' : 'Tam Ekran'}</span>
+              </button>
+              <button onclick="deleteQuoteItem('${activeQuote.id}')" title="Bu Alıntıyı Sil" class="text-rose-400 hover:text-white ml-0.5">
                 <i class="fa-solid fa-trash-can"></i>
               </button>
             </div>
@@ -6349,43 +6507,234 @@
     }
 
     // 11. RENDER & EXPORT MODALS
+        // ==========================================
+    // TITANIUM EXPORT STUDIO PRO (FFmpeg NVENC 9.0)
+    // ==========================================
+    let activeExportPreset = 'tiktok';
+    let exportPollTimer = null;
+
     function openExportModal() {
-      document.getElementById('modal-export').classList.remove('hidden');
+      const modal = document.getElementById('modal-export');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      resetExportModalView();
+      checkSystemGpuCapabilities();
     }
+
     function closeExportModal() {
-      document.getElementById('modal-export').classList.add('hidden');
+      const modal = document.getElementById('modal-export');
+      if (modal) modal.classList.add('hidden');
+      if (exportPollTimer) {
+        clearInterval(exportPollTimer);
+        exportPollTimer = null;
+      }
     }
 
-    async function triggerExportRender() {
-      const btn = document.getElementById('btn-modal-render');
-      const formats = [];
-      if (document.getElementById('fmt-chk-916')?.checked) formats.push('9:16');
-      if (document.getElementById('fmt-chk-169')?.checked) formats.push('16:9');
-      if (document.getElementById('fmt-chk-11')?.checked) formats.push('1:1');
+    function resetExportModalView() {
+      document.getElementById('export-config-panel')?.classList.remove('hidden');
+      document.getElementById('export-progress-panel')?.classList.add('hidden');
+      document.getElementById('export-complete-panel')?.classList.add('hidden');
+      const btn = document.getElementById('btn-start-advanced-export');
+      if (btn) btn.disabled = false;
+    }
 
-      if (formats.length === 0) {
-        return alert('Lütfen en az bir format seçin!');
+    async function checkSystemGpuCapabilities() {
+      try {
+        const res = await fetch('/api/render/system-capabilities');
+        if (!res.ok) return;
+        const cap = await res.json();
+        const badge = document.getElementById('export-gpu-badge');
+        const codecSel = document.getElementById('export-opt-codec');
+        if (cap.nvenc) {
+          if (badge) {
+            badge.innerHTML = '<i class="fa-solid fa-microchip text-emerald-400"></i> NVIDIA NVENC GPU Aktif';
+            badge.className = 'text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full font-mono font-bold flex items-center gap-1';
+          }
+          if (codecSel) codecSel.value = 'h264_nvenc';
+        } else {
+          if (badge) {
+            badge.innerHTML = '<i class="fa-solid fa-cpu text-amber-400"></i> CPU Kodlayıcı (libx264)';
+            badge.className = 'text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-mono font-bold flex items-center gap-1';
+          }
+          if (codecSel) codecSel.value = 'libx264';
+        }
+      } catch (e) {
+        console.warn('Capabilities check failed:', e);
       }
+    }
 
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-amber-300"></i> <span>Render Başlatılıyor (${formats.join(', ')})...</span>`;
+    function selectExportPreset(presetKey) {
+      activeExportPreset = presetKey;
+      const cards = ['tiktok', 'youtube4k', 'draft', 'master'];
+      cards.forEach(k => {
+        const el = document.getElementById(`preset-card-${k}`);
+        if (!el) return;
+        if (k === presetKey) {
+          el.className = 'p-3 rounded-2xl bg-gradient-to-b from-rose-950/40 to-slate-900 border-2 border-rose-500/80 cursor-pointer shadow-lg relative group scale-[1.02] transition';
+        } else {
+          el.className = 'p-3 rounded-2xl bg-slate-900/80 border border-slate-700/80 cursor-pointer hover:border-slate-500 transition relative group';
+        }
+      });
+
+      const resSel = document.getElementById('export-opt-resolution');
+      const fpsSel = document.getElementById('export-opt-fps');
+      const qSel = document.getElementById('export-opt-quality');
+      const codecSel = document.getElementById('export-opt-codec');
+
+      if (presetKey === 'tiktok') {
+        if (resSel) resSel.value = '1080p';
+        if (fpsSel) fpsSel.value = '60';
+        if (qSel) qSel.value = 'ultra';
+        if (codecSel) codecSel.value = 'h264_nvenc';
+      } else if (presetKey === 'youtube4k') {
+        if (resSel) resSel.value = '4k';
+        if (fpsSel) fpsSel.value = '60';
+        if (qSel) qSel.value = 'ultra';
+        if (codecSel) codecSel.value = 'h264_nvenc';
+      } else if (presetKey === 'draft') {
+        if (resSel) resSel.value = '720p';
+        if (fpsSel) fpsSel.value = '30';
+        if (qSel) qSel.value = 'draft';
+        if (codecSel) codecSel.value = 'h264_nvenc';
+      } else if (presetKey === 'master') {
+        if (resSel) resSel.value = '1080p';
+        if (fpsSel) fpsSel.value = '60';
+        if (qSel) qSel.value = 'ultra';
+        if (codecSel) codecSel.value = 'prores';
+      }
+    }
+
+    async function triggerAdvancedExport() {
+      const btn = document.getElementById('btn-start-advanced-export');
+      if (btn) btn.disabled = true;
+
+      const payload = {
+        preset: activeExportPreset,
+        format: videoData?.format || '9:16',
+        resolution: document.getElementById('export-opt-resolution')?.value || '1080p',
+        fps: parseInt(document.getElementById('export-opt-fps')?.value || '30', 10),
+        codec: document.getElementById('export-opt-codec')?.value || 'h264_nvenc',
+        quality: document.getElementById('export-opt-quality')?.value || 'ultra',
+        audioLoudnorm: document.getElementById('export-opt-loudnorm')?.checked ?? true,
+        fastStart: document.getElementById('export-opt-faststart')?.checked ?? true,
+        exportSrt: document.getElementById('export-opt-srt')?.checked ?? true,
+        exportThumbnail: true
+      };
 
       try {
-        const res = await fetch('/api/render', {
+        const res = await fetch('/api/render/advanced', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ formats: formats })
+          body: JSON.stringify(payload)
         });
-        const d = await res.json();
-        if (!res.ok) throw new Error(d.message || 'Render başlatılamadı.');
-        alert(`🎬 ${d.message} Tamamlandığında bildirim alacaksınız.`);
-        closeExportModal();
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || data.message || 'Render başlatılamadı.');
+
+        // Switch to progress screen
+        document.getElementById('export-config-panel')?.classList.add('hidden');
+        document.getElementById('export-progress-panel')?.classList.remove('hidden');
+        document.getElementById('export-complete-panel')?.classList.add('hidden');
+
+        startExportProgressPolling();
       } catch (e) {
-        alert('Render hatası: ' + e.message);
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-bolt text-amber-300"></i> <span>Seçili Formatları Renderla</span>';
+        showToast('Export Hatası: ' + e.message, 'error');
+        if (btn) btn.disabled = false;
       }
+    }
+
+    function startExportProgressPolling() {
+      if (exportPollTimer) clearInterval(exportPollTimer);
+      exportPollTimer = setInterval(async () => {
+        try {
+          const res = await fetch('/api/render/status');
+          if (!res.ok) return;
+          const status = await res.json();
+
+          const pct = Math.min(100, Math.max(0, status.progress || 0));
+          const bar = document.getElementById('export-live-bar');
+          const pctText = document.getElementById('export-live-pct');
+          const stageBadge = document.getElementById('export-live-stage-badge');
+          const frameInfo = document.getElementById('export-live-frame-info');
+          const speedBadge = document.getElementById('export-live-speed-badge');
+          const statusDesc = document.getElementById('export-live-status-desc');
+
+          if (bar) bar.style.width = `${pct}%`;
+          if (pctText) pctText.innerText = `${Math.round(pct)}%`;
+          if (statusDesc) statusDesc.innerText = status.message || 'İşleniyor...';
+
+          if (status.status === 'rendering') {
+            if (stageBadge) stageBadge.innerText = 'Aşama: Remotion Frame Rendering';
+          } else if (status.status === 'postprocessing') {
+            if (stageBadge) stageBadge.innerText = 'Aşama: FFmpeg GPU NVENC & -14 LUFS';
+          }
+
+          if (status.current_frame && status.total_frames) {
+            if (frameInfo) frameInfo.innerText = `Frame: ${status.current_frame} / ${status.total_frames}`;
+          }
+          if (status.speed) {
+            if (speedBadge) speedBadge.innerText = `Hız: ${status.speed}`;
+          }
+
+          if (status.status === 'completed' || pct >= 100) {
+            clearInterval(exportPollTimer);
+            exportPollTimer = null;
+            document.getElementById('export-progress-panel')?.classList.add('hidden');
+            document.getElementById('export-complete-panel')?.classList.remove('hidden');
+            showToast('🎉 Video render başarıyla tamamlandı!', 'success');
+          } else if (status.status === 'failed') {
+            clearInterval(exportPollTimer);
+            exportPollTimer = null;
+            document.getElementById('export-progress-panel')?.classList.add('hidden');
+            document.getElementById('export-config-panel')?.classList.remove('hidden');
+            showToast('Render Başarısız: ' + (status.error || 'Bilinmeyen hata'), 'error');
+            const btn = document.getElementById('btn-start-advanced-export');
+            if (btn) btn.disabled = false;
+          }
+        } catch (e) {
+          console.warn('Poll status error:', e);
+        }
+      }, 750);
+    }
+
+    async function resetAiScenesToStart() {
+      try {
+        const res = await fetch('/api/timeline/shift-scenes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ targetStart: 0.0 })
+        });
+        const data = await res.json();
+        if (data.success) {
+          scenes = data.scenes;
+          timelineDuration = data.totalDuration;
+          if (videoData) {
+            videoData.scenes = scenes;
+            videoData.totalDuration = data.totalDuration;
+            videoData.aiKurguStartOffset = 0.0;
+          }
+          renderTimeline();
+          renderLivePreviewCanvas();
+          updateTimeDisplays();
+          showToast('🎬 Yapay zekâ kurgusu 00:00 başlangıç noktasına hizalandı.', 'info');
+        }
+      } catch (e) {
+        showToast('Hata: ' + e.message, 'error');
+      }
+    }
+
+    function toggleActiveQuoteDisplayMode(quoteId) {
+      const quotes = (videoData && videoData.quoteVideos) || [];
+      const q = quotes.find(item => item.id === quoteId);
+      if (!q) return;
+      q.displayMode = q.displayMode === 'fullscreen' ? 'card' : 'fullscreen';
+      currentRenderedQuoteId = null; // force re-render
+      renderQuotePreviewOverlay();
+      showToast(q.displayMode === 'fullscreen' ? '📱 Alıntı Videosu: Tam Ekran Moduna Alındı' : '🔲 Alıntı Videosu: Vurgulu Kutu Moduna Alındı', 'info');
+      fetch('/api/timeline/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(q)
+      }).catch(() => {});
     }
 
     function renderVideo() {
