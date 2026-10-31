@@ -35,6 +35,7 @@ import { VideoData } from './types';
 export const NotebookVideo: React.FC<VideoData> = (props) => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps, width, height } = useVideoConfig();
+  const currentTimeSec = frame / fps;
 
   const isHorizontal = width > height;
   const isSquare = width === height;

@@ -617,6 +617,12 @@
             <i class="fa-solid fa-scissors text-amber-400"></i>
             <span>🪄 Sessizlikleri Temizle (&gt;0.35s)</span>
           </button>
+
+          <!-- One-click AI Audio-to-Scenes Generator -->
+          <button onclick="triggerQuickAudioToScenes()" id="btn-quick-audio-to-scenes" class="w-full py-2 bg-gradient-to-r from-amber-600/25 via-orange-600/20 to-amber-600/25 hover:from-amber-600/35 hover:to-orange-600/30 text-amber-300 border border-amber-500/40 rounded-xl transition font-bold flex items-center justify-center gap-2 shadow-sm text-xs">
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+            <span>🎙️ Sesten AI Sahneleri Üret (Otomatik Kurgu)</span>
+          </button>
         </div>
 
         <!-- AI Video Sahneleri Listesi (Quick Jump & Add) -->
@@ -651,36 +657,108 @@
 
       </div>
 
-      <!-- TAB 2: AI PROMPT & DIRECTOR -->
-      <div id="ltab-content-prompt" class="hidden p-4 space-y-4 text-xs">
-        <div>
-          <label class="block font-bold text-white mb-1">Video Konusu veya Soru</label>
-          <textarea id="input-topic" rows="4" placeholder="Örn: İbn-i Sina bir kitabı 40 kez okuduğu halde neden anlamadı?..." class="w-full bg-[#070a12] border border-slate-800 rounded-2xl p-3 text-slate-100 text-xs focus:border-amber-500 focus:outline-none resize-none leading-relaxed">İbn-i Sina bir kitabı 40 kez okuduğu halde neden anlamadı?</textarea>
+      <!-- TAB 2: AI PROMPT & DIRECTOR (DUAL ENGINE: METİN VEYA SES İLE ÜRET) -->
+      <div id="ltab-content-prompt" class="hidden p-4 space-y-3.5 text-xs">
+        
+        <!-- Mode Switcher: Metin vs Ses Dosyası -->
+        <div class="flex p-1 bg-[#070a12] border border-slate-800 rounded-xl gap-1">
+          <button id="ai-mode-text-btn" onclick="switchAiGenMode('text')" class="flex-1 py-1.5 rounded-lg bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-bold transition flex items-center justify-center gap-1.5 text-[11px]">
+            <i class="fa-solid fa-pen-nib"></i>
+            <span>Metin ile Üret</span>
+          </button>
+          <button id="ai-mode-audio-btn" onclick="switchAiGenMode('audio')" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white font-bold transition flex items-center justify-center gap-1.5 text-[11px]">
+            <i class="fa-solid fa-microphone-lines text-amber-400"></i>
+            <span>🎙️ Ses ile Üret</span>
+          </button>
         </div>
 
-        <div>
-          <label class="block font-bold text-slate-300 mb-1">Gemini AI Modeli</label>
-          <select id="select-gemini-model" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
-            <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite (Varsayılan)</option>
-            <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash (Dengeli)</option>
-            <option value="gemini-3-flash-preview">🔮 Gemini 3 Flash Preview</option>
-            <option value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview</option>
-          </select>
+        <!-- PANEL 1: METİN İLE ÜRET -->
+        <div id="ai-gen-text-panel" class="space-y-3.5">
+          <div>
+            <label class="block font-bold text-white mb-1">Video Konusu veya Soru</label>
+            <textarea id="input-topic" rows="4" placeholder="Örn: İbn-i Sina bir kitabı 40 kez okuduğu halde neden anlamadı?..." class="w-full bg-[#070a12] border border-slate-800 rounded-2xl p-3 text-slate-100 text-xs focus:border-amber-500 focus:outline-none resize-none leading-relaxed">tarafların birbirine 'sana bunu yapmak zorunda değilim' diyerek nefsini dayattığı bencil bir menfaat şebekesi değil... herkesin kendi vazifesini, Allah rızası için yerine getirdiği mukaddes bir yuvadır!</textarea>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Gemini AI Modeli</label>
+            <select id="select-gemini-model" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
+              <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite (Varsayılan)</option>
+              <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash (Dengeli)</option>
+              <option value="gemini-3-flash-preview">🔮 Gemini 3 Flash Preview</option>
+              <option value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Seslendirme Dili & Anlatıcı</label>
+            <select id="tts-voice" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs">
+              <option value="en-US-AndrewMultilingualNeural" selected>🎙️ Andrew (Tok Belgesel & Anlatıcı)</option>
+              <option value="tr-TR-EmelNeural">🎙️ Emel (Doğal Türkçe Kadın)</option>
+              <option value="en-US-BrianMultilingualNeural">🎙️ Brian (Dinamik & Samimi)</option>
+            </select>
+          </div>
+
+          <!-- Alıntı Videosu Otomatik Manyetik Başlangıç Ayarı -->
+          <label class="flex items-center gap-2 p-2.5 rounded-xl bg-[#070a12] border border-slate-800 text-[11px] cursor-pointer hover:border-slate-700 transition">
+            <input type="checkbox" id="ai-text-start-after-quote" checked class="w-4 h-4 rounded accent-emerald-500 cursor-pointer">
+            <div class="flex-1 flex items-center justify-between">
+              <span class="text-slate-300 font-medium">🧲 Alıntı videosundan sonra başlat</span>
+              <span id="ai-text-quote-offset-badge" class="font-mono text-emerald-400 font-bold text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">23.8s</span>
+            </div>
+          </label>
+
+          <button onclick="generateContent()" id="btn-generate" class="w-full bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-white font-extrabold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-bolt text-amber-300"></i>
+            <span>Yapay Zekâ ile Üret</span>
+          </button>
         </div>
 
-        <div>
-          <label class="block font-bold text-slate-300 mb-1">Seslendirme Dili & Anlatıcı</label>
-          <select id="tts-voice" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs">
-            <option value="en-US-AndrewMultilingualNeural" selected>🎙️ Andrew (Tok Belgesel & Anlatıcı)</option>
-            <option value="tr-TR-EmelNeural">🎙️ Emel (Doğal Türkçe Kadın)</option>
-            <option value="en-US-BrianMultilingualNeural">🎙️ Brian (Dinamik & Samimi)</option>
-          </select>
+        <!-- PANEL 2: SES İLE SAHNE ÜRET (AUDIO-TO-SCENES PIPELINE) -->
+        <div id="ai-gen-audio-panel" class="hidden space-y-3.5">
+          <!-- Audio Dropzone -->
+          <div class="p-4 bg-[#070a12] border-2 border-dashed border-slate-700 hover:border-amber-400 rounded-2xl text-center cursor-pointer transition relative group" onclick="document.getElementById('ai-audio-file-input').click()">
+            <input type="file" id="ai-audio-file-input" accept="audio/*" class="hidden" onchange="handleAiAudioFileSelect(this.files[0])">
+            <div class="w-11 h-11 mx-auto rounded-full bg-amber-500/10 text-amber-400 flex items-center justify-center mb-2 group-hover:scale-110 transition">
+              <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
+            </div>
+            <div id="ai-audio-filename-display" class="font-bold text-white text-xs mb-1">Ses Dosyası Seç veya Sürükle</div>
+            <div id="ai-audio-filesize-display" class="text-[10px] text-slate-400">MP3, WAV, M4A (Whisper AI ile çözülür)</div>
+          </div>
+
+          <!-- Transcript Input (Optional) -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="font-bold text-slate-300 text-[11px]">Ses Metni (Opsiyonel)</label>
+              <span class="text-[9px] text-emerald-400">Boşsa Whisper çözer</span>
+            </div>
+            <textarea id="ai-audio-custom-transcript" rows="3" placeholder="Seslendirilen metni biliyorsanız buraya yapıştırabilirsiniz (Whisper kelime hatalarını sıfırlar)..." class="w-full bg-[#070a12] border border-slate-800 rounded-xl p-2.5 text-slate-200 text-xs focus:border-amber-500 focus:outline-none resize-none leading-relaxed"></textarea>
+          </div>
+
+          <!-- Gemini Model -->
+          <div>
+            <label class="block font-bold text-slate-300 mb-1 text-[11px]">Gemini Kurgu Modeli</label>
+            <select id="select-ai-audio-model" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
+              <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite (Önerilen & Hızlı)</option>
+              <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash (Dengeli)</option>
+              <option value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview</option>
+            </select>
+          </div>
+
+          <!-- Offset Checkbox -->
+          <label class="flex items-center gap-2 p-2.5 rounded-xl bg-[#070a12] border border-slate-800 text-[11px] cursor-pointer hover:border-slate-700 transition">
+            <input type="checkbox" id="ai-audio-start-after-quote" checked class="w-4 h-4 rounded accent-emerald-500 cursor-pointer">
+            <div class="flex-1 flex items-center justify-between">
+              <span class="text-slate-300 font-medium">🧲 Alıntı videosundan sonra başlat</span>
+              <span id="ai-audio-quote-offset-badge" class="font-mono text-emerald-400 font-bold text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">23.8s</span>
+            </div>
+          </label>
+
+          <button onclick="generateFromAudioFile()" id="btn-generate-audio" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-extrabold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-wand-magic-sparkles text-slate-950"></i>
+            <span>🎙️ Sesi Analiz Et & Sahneleri Zaman Tüneline Diz</span>
+          </button>
         </div>
 
-        <button onclick="generateContent()" id="btn-generate" class="w-full bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-white font-extrabold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
-          <i class="fa-solid fa-bolt text-amber-300"></i>
-          <span>Yapay Zekâ ile Üret</span>
-        </button>
       </div>
 
       <!-- TAB 3: ASMR & SFX DRAWER (CAPCUT / VN STİLİ) -->
@@ -6660,7 +6738,54 @@
       preview.className = `w-full h-full theme-${themeName} flex flex-col p-4 relative font-hand overflow-hidden select-none transition-all duration-300`;
     }
 
-    // 10. GENERATE NEW CONTENT WITH AI
+    // 10. GENERATE NEW CONTENT WITH AI (TEXT TO MULTI-SCENE STORYBOARD)
+    let selectedAiAudioFile = null;
+
+    function switchAiGenMode(mode) {
+      const textPanel = document.getElementById('ai-gen-text-panel');
+      const audioPanel = document.getElementById('ai-gen-audio-panel');
+      const textBtn = document.getElementById('ai-mode-text-btn');
+      const audioBtn = document.getElementById('ai-mode-audio-btn');
+
+      if (mode === 'audio') {
+        if (textPanel) textPanel.classList.add('hidden');
+        if (audioPanel) audioPanel.classList.remove('hidden');
+        if (audioBtn) audioBtn.className = 'flex-1 py-1.5 rounded-lg bg-amber-600/30 text-amber-300 border border-amber-500/40 font-bold transition flex items-center justify-center gap-1.5 text-[11px]';
+        if (textBtn) textBtn.className = 'flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white font-bold transition flex items-center justify-center gap-1.5 text-[11px]';
+      } else {
+        if (audioPanel) audioPanel.classList.add('hidden');
+        if (textPanel) textPanel.classList.remove('hidden');
+        if (textBtn) textBtn.className = 'flex-1 py-1.5 rounded-lg bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-bold transition flex items-center justify-center gap-1.5 text-[11px]';
+        if (audioBtn) audioBtn.className = 'flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white font-bold transition flex items-center justify-center gap-1.5 text-[11px]';
+      }
+      updateAiQuoteOffsetBadges();
+    }
+
+    function handleAiAudioFileSelect(file) {
+      if (!file) return;
+      selectedAiAudioFile = file;
+      const nameEl = document.getElementById('ai-audio-filename-display');
+      const sizeEl = document.getElementById('ai-audio-filesize-display');
+      if (nameEl) nameEl.innerText = file.name;
+      if (sizeEl) sizeEl.innerText = `${(file.size / (1024 * 1024)).toFixed(2)} MB • Hazır ✓`;
+    }
+
+    function updateAiQuoteOffsetBadges() {
+      let quoteEnd = 0.0;
+      if (videoData && videoData.quoteVideos) {
+        videoData.quoteVideos.forEach(q => {
+          const st = q.timelineStart || 0;
+          const dur = q.duration || Math.max(1, (q.trimEnd || 6) - (q.trimStart || 0));
+          quoteEnd = Math.max(quoteEnd, st + dur);
+        });
+      }
+      const b1 = document.getElementById('ai-text-quote-offset-badge');
+      const b2 = document.getElementById('ai-audio-quote-offset-badge');
+      const txt = quoteEnd > 0 ? `${quoteEnd.toFixed(1)}s` : '0.0s (Yok)';
+      if (b1) b1.innerText = txt;
+      if (b2) b2.innerText = txt;
+    }
+
     async function generateContent() {
       const topic = document.getElementById('input-topic').value.trim();
       if (!topic) return alert('Lütfen bir konu yazın.');
@@ -6668,6 +6793,8 @@
       const btn = document.getElementById('btn-generate');
       btn.disabled = true;
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>AI Senaryo & Sahne Üretiyor...</span>';
+
+      const startAfterQuote = document.getElementById('ai-text-start-after-quote')?.checked ?? true;
 
       try {
         const res = await fetch('/api/generate', {
@@ -6677,20 +6804,78 @@
             topic: topic,
             model: document.getElementById('select-gemini-model').value,
             voice_id: document.getElementById('tts-voice').value,
-            theme: document.getElementById('selected-theme-val').value,
-            duration_mode: 'deep'
+            theme: document.getElementById('selected-theme-val')?.value || 'dark_minimalist',
+            duration_mode: 'deep',
+            start_after_quote: startAfterQuote
           })
         });
 
-        if (!res.ok) throw new Error('Üretim başarısız.');
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.detail || 'Üretim başarısız.');
+        }
+
+        const data = await res.json();
         await loadTimelineData();
-        alert('🎉 Yapay zekâ yeni senaryoyu ve sahneleri başarıyla oluşturdu!');
+
+        const sceneCount = data.scenes ? data.scenes.length : 1;
+        alert(`🎉 Yapay zekâ ${sceneCount} adet dinamik sahneyi başarıyla üretti ve zaman tüneline ekledi!`);
       } catch (e) {
         alert('Hata: ' + e.message);
       } finally {
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-bolt text-amber-300"></i> <span>Yapay Zekâ ile Üret</span>';
       }
+    }
+
+    async function generateFromAudioFile() {
+      if (!selectedAiAudioFile) {
+        alert('Lütfen önce bir ses dosyası (MP3, WAV, M4A) seçin.');
+        document.getElementById('ai-audio-file-input')?.click();
+        return;
+      }
+
+      const btn = document.getElementById('btn-generate-audio');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Whisper & Gemini Sahneleri Üretiyor...</span>';
+
+      const customTx = document.getElementById('ai-audio-custom-transcript')?.value?.trim() || '';
+      const model = document.getElementById('select-ai-audio-model')?.value || 'gemini-3.5-flash-lite';
+      const startAfterQuote = document.getElementById('ai-audio-start-after-quote')?.checked ?? true;
+
+      const formData = new FormData();
+      formData.append('file', selectedAiAudioFile);
+      if (customTx) formData.append('transcript', customTx);
+      formData.append('model', model);
+      formData.append('start_after_quote', startAfterQuote);
+
+      try {
+        const res = await fetch('/api/timeline/generate-from-audio', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.detail || 'Ses analizi ve sahne üretimi başarısız.');
+        }
+
+        const data = await res.json();
+        await loadTimelineData();
+
+        const sceneCount = data.scenes ? data.scenes.length : 1;
+        alert(`🎉 Harika! Ses başarıyla analiz edildi ve ${sceneCount} dinamik sahne zaman tüneline eklendi!`);
+      } catch (e) {
+        alert('Hata: ' + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> <span>🎙️ Sesi Analiz Et & Sahneleri Zaman Tüneline Diz</span>';
+      }
+    }
+
+    function triggerQuickAudioToScenes() {
+      switchLeftTab('prompt');
+      switchAiGenMode('audio');
     }
 
     // 11. RENDER & EXPORT MODALS

@@ -1,59 +1,1014 @@
 {
-  "topic": "wedwefewf",
-  "theme": "notebook",
-  "format": "9:16",
-  "headerSubtitle": "Bölüm 1",
-  "headerLine1": "WEDWEFEWF",
-  "circledWord": "İLK",
-  "headerLine2": "Fikrini Buraya Yaz",
-  "highlightedText": "Önemli Nokta",
-  "layoutType": "pip_split",
+  "directorDecision": {
+    "theme": "dark_minimalist",
+    "particles": "dust",
+    "ambientPattern": "fingerprint",
+    "directorReason": "İslami ve derin tefekkür temalı ses kaydı için karanlık, minimalist ve odak artırıcı sinematik dark_minimalist tema seçildi."
+  },
+  "requiredIcons": [
+    "shield",
+    "heart",
+    "scale",
+    "book",
+    "infinity"
+  ],
   "scenes": [
     {
       "id": "scene_1",
-      "headerSubtitle": "Bölüm 1",
-      "headerLine1": "WEDWEFEWF",
-      "circledWord": "İLK",
-      "headerLine2": "Fikrini Buraya Yaz",
-      "highlightedText": "Önemli Nokta",
-      "layoutType": "pip_split",
-      "startTime": 12.9,
-      "endTime": 22.8,
-      "duration": 10
-    }
-  ],
-  "subtitles": [
-    {
-      "text": "wedwefewf",
-      "start": 23.8,
-      "end": 26.3
+      "startTime": 23.8,
+      "endTime": 34.37,
+      "layoutType": "quote_spotlight",
+      "headerSubtitle": "AİLE KURUMU",
+      "headerLine1": "EN BÜYÜK",
+      "circledWord": "TEHLİKE",
+      "headerLine2": "BUGÜN",
+      "highlightedText": "sana bunu yapmak zorunda değilim",
+      "strikeWord": "ZORUNLULUK",
+      "cards": null,
+      "vsData": null,
+      "flowchartSteps": null,
+      "quoteSpotlight": {
+        "speaker": "Analiz",
+        "quoteText": "Bugün aile kurumunu saran en büyük tehlike tarafların sürekli, sana bunu yapmak zorunda değilim diyerek nefislerini dayatmasıdır."
+      },
+      "metricImpact": null,
+      "gridExplosion": null,
+      "triConcept": null,
+      "timeline": null
     },
     {
-      "text": "kurgulamaya hemen başla",
-      "start": 26.3,
-      "end": 28.8
+      "id": "scene_2",
+      "startTime": 34.37,
+      "endTime": 44.93,
+      "layoutType": "vs_split",
+      "headerSubtitle": "İLİŞKİ DİNAMİĞİ",
+      "headerLine1": "HESAPLAŞMA",
+      "circledWord": "DEĞİL",
+      "headerLine2": "HELALLEŞME",
+      "highlightedText": "helalleşmelerin adresidir",
+      "strikeWord": "HESAP",
+      "cards": null,
+      "vsData": {
+        "leftTitle": "HESAPLAŞMA",
+        "leftPoints": [
+          "Menfaat çatışması",
+          "Sürekli hak arayışı",
+          "Menzil sığlığı"
+        ],
+        "rightTitle": "HELALLEŞME",
+        "rightPoints": [
+          "Gönül rızası",
+          "Fedakarlık",
+          "Huzur iklimi"
+        ]
+      },
+      "flowchartSteps": null,
+      "quoteSpotlight": null,
+      "metricImpact": null,
+      "gridExplosion": null,
+      "triConcept": null,
+      "timeline": null
+    },
+    {
+      "id": "scene_3",
+      "startTime": 44.93,
+      "endTime": 55.5,
+      "layoutType": "metric_impact",
+      "headerSubtitle": "HAKİKİ HUZUR",
+      "headerLine1": "VAZİFE",
+      "circledWord": "AŞK",
+      "headerLine2": "İFA",
+      "highlightedText": "vazifelerin aşkla ifa edildiği yer",
+      "strikeWord": "BEKLENTİ",
+      "cards": null,
+      "vsData": null,
+      "flowchartSteps": null,
+      "quoteSpotlight": null,
+      "metricImpact": {
+        "number": "%100",
+        "label": "Rıza-i Bari İçin İhlas",
+        "subText": "Hakid diyilen yerde değil, vazifelerin aşkla ifa edildiği yerde başlar."
+      },
+      "gridExplosion": null,
+      "triConcept": null,
+      "timeline": null
     }
   ],
-  "totalDuration": 22.8,
-  "created_at": "2026-10-31 12:36:18",
+  "viral": {
+    "hookScore": 96,
+    "viralTitles": [
+      "Aile Kurumunu Saran Gizli Tehlike!",
+      "Mutluluğun Gerçek Adresi: Hesaplaşma Değil Helalleşme"
+    ],
+    "hashtags": [
+      "#aile",
+      "#huzur",
+      "#tefekkür",
+      "#shorts",
+      "#ilahipaylaşımlar",
+      "#maneviyat"
+    ],
+    "loopEnding": "ve vazifelerin aşkla ifa edildiği yerde başlar.",
+    "description": "Aile kurumundaki modern çıkmazları ve helalleşme kültürünün önemini ele alan derin tefekkür yüklü video."
+  },
+  "theme": "dark_minimalist",
+  "particles": "dust",
+  "ambientPattern": "fingerprint",
+  "socialHandle": "@birkissa",
+  "audioUrl": "/public/audio.mp3",
+  "filmGrain": "subtle",
+  "lightLeaks": "auto",
+  "cameraMotion": "handheld",
+  "accentType": "none",
+  "musicTrack": "ambient_music.wav",
+  "brollType": "none",
+  "aiKurguStartOffset": 23.8,
+  "subtitles": [
+    {
+      "text": "Bugün aile kurumunu",
+      "start": 23.8,
+      "end": 25.3,
+      "words": [
+        {
+          "word": "Bugün",
+          "text": "Bugün",
+          "start": 0.0,
+          "end": 0.5
+        },
+        {
+          "word": "aile",
+          "text": "aile",
+          "start": 0.5,
+          "end": 0.94
+        },
+        {
+          "word": "kurumunu",
+          "text": "kurumunu",
+          "start": 0.94,
+          "end": 1.5
+        }
+      ]
+    },
+    {
+      "text": "saran en büyük",
+      "start": 25.3,
+      "end": 26.18,
+      "words": [
+        {
+          "word": "saran",
+          "text": "saran",
+          "start": 1.5,
+          "end": 1.86
+        },
+        {
+          "word": "en",
+          "text": "en",
+          "start": 1.86,
+          "end": 2.14
+        },
+        {
+          "word": "büyük",
+          "text": "büyük",
+          "start": 2.14,
+          "end": 2.38
+        }
+      ]
+    },
+    {
+      "text": "tehlike tarafların sürekli,",
+      "start": 26.18,
+      "end": 28.38,
+      "words": [
+        {
+          "word": "tehlike",
+          "text": "tehlike",
+          "start": 2.38,
+          "end": 2.94
+        },
+        {
+          "word": "tarafların",
+          "text": "tarafların",
+          "start": 2.94,
+          "end": 3.82
+        },
+        {
+          "word": "sürekli,",
+          "text": "sürekli,",
+          "start": 3.82,
+          "end": 4.58
+        }
+      ]
+    },
+    {
+      "text": "sana bunu yapmak",
+      "start": 28.6,
+      "end": 29.5,
+      "words": [
+        {
+          "word": "sana",
+          "text": "sana",
+          "start": 4.8,
+          "end": 5.06
+        },
+        {
+          "word": "bunu",
+          "text": "bunu",
+          "start": 5.06,
+          "end": 5.3
+        },
+        {
+          "word": "yapmak",
+          "text": "yapmak",
+          "start": 5.3,
+          "end": 5.7
+        }
+      ]
+    },
+    {
+      "text": "zorunda değilim diyerek",
+      "start": 29.5,
+      "end": 31.04,
+      "words": [
+        {
+          "word": "zorunda",
+          "text": "zorunda",
+          "start": 5.7,
+          "end": 6.34
+        },
+        {
+          "word": "değilim",
+          "text": "değilim",
+          "start": 6.34,
+          "end": 6.78
+        },
+        {
+          "word": "diyerek",
+          "text": "diyerek",
+          "start": 6.78,
+          "end": 7.24
+        }
+      ]
+    },
+    {
+      "text": "nefislerini dayaktır soğup",
+      "start": 31.04,
+      "end": 32.7,
+      "words": [
+        {
+          "word": "nefislerini",
+          "text": "nefislerini",
+          "start": 7.24,
+          "end": 7.88
+        },
+        {
+          "word": "dayaktır",
+          "text": "dayaktır",
+          "start": 7.88,
+          "end": 8.54
+        },
+        {
+          "word": "soğup",
+          "text": "soğup",
+          "start": 8.54,
+          "end": 8.9
+        }
+      ]
+    },
+    {
+      "text": "bir meynfağa çebekesine",
+      "start": 32.7,
+      "end": 34.04,
+      "words": [
+        {
+          "word": "bir",
+          "text": "bir",
+          "start": 8.9,
+          "end": 9.16
+        },
+        {
+          "word": "meynfağa",
+          "text": "meynfağa",
+          "start": 9.16,
+          "end": 9.7
+        },
+        {
+          "word": "çebekesine",
+          "text": "çebekesine",
+          "start": 9.7,
+          "end": 10.24
+        }
+      ]
+    },
+    {
+      "text": "dönüşmesidir. Oysa yua",
+      "start": 34.04,
+      "end": 36.04,
+      "words": [
+        {
+          "word": "dönüşmesidir.",
+          "text": "dönüşmesidir.",
+          "start": 10.24,
+          "end": 11.18
+        },
+        {
+          "word": "Oysa",
+          "text": "Oysa",
+          "start": 11.48,
+          "end": 11.82
+        },
+        {
+          "word": "yua",
+          "text": "yua",
+          "start": 11.82,
+          "end": 12.24
+        }
+      ]
+    },
+    {
+      "text": "hesaplaşmaların değil, helalleşmelerine",
+      "start": 36.04,
+      "end": 38.86,
+      "words": [
+        {
+          "word": "hesaplaşmaların",
+          "text": "hesaplaşmaların",
+          "start": 12.24,
+          "end": 13.46
+        },
+        {
+          "word": "değil,",
+          "text": "değil,",
+          "start": 13.46,
+          "end": 13.92
+        },
+        {
+          "word": "helalleşmelerine",
+          "text": "helalleşmelerine",
+          "start": 14.18,
+          "end": 15.06
+        }
+      ]
+    },
+    {
+      "text": "adresidir. Herkesin kendi",
+      "start": 38.86,
+      "end": 40.78,
+      "words": [
+        {
+          "word": "adresidir.",
+          "text": "adresidir.",
+          "start": 15.06,
+          "end": 15.88
+        },
+        {
+          "word": "Herkesin",
+          "text": "Herkesin",
+          "start": 16.2,
+          "end": 16.72
+        },
+        {
+          "word": "kendi",
+          "text": "kendi",
+          "start": 16.72,
+          "end": 16.98
+        }
+      ]
+    },
+    {
+      "text": "vazifesini, en ufak",
+      "start": 40.78,
+      "end": 42.48,
+      "words": [
+        {
+          "word": "vazifesini,",
+          "text": "vazifesini,",
+          "start": 16.98,
+          "end": 17.86
+        },
+        {
+          "word": "en",
+          "text": "en",
+          "start": 18.26,
+          "end": 18.36
+        },
+        {
+          "word": "ufak",
+          "text": "ufak",
+          "start": 18.36,
+          "end": 18.68
+        }
+      ]
+    },
+    {
+      "text": "bir karşılık beklemeden",
+      "start": 42.48,
+      "end": 43.96,
+      "words": [
+        {
+          "word": "bir",
+          "text": "bir",
+          "start": 18.68,
+          "end": 18.9
+        },
+        {
+          "word": "karşılık",
+          "text": "karşılık",
+          "start": 18.9,
+          "end": 19.38
+        },
+        {
+          "word": "beklemeden",
+          "text": "beklemeden",
+          "start": 19.38,
+          "end": 20.16
+        }
+      ]
+    },
+    {
+      "text": "yalnızca Allah rızası",
+      "start": 43.96,
+      "end": 45.76,
+      "words": [
+        {
+          "word": "yalnızca",
+          "text": "yalnızca",
+          "start": 20.16,
+          "end": 21.1
+        },
+        {
+          "word": "Allah",
+          "text": "Allah",
+          "start": 21.1,
+          "end": 21.44
+        },
+        {
+          "word": "rızası",
+          "text": "rızası",
+          "start": 21.44,
+          "end": 21.96
+        }
+      ]
+    },
+    {
+      "text": "için yerine getirdiğin",
+      "start": 45.76,
+      "end": 47.0,
+      "words": [
+        {
+          "word": "için",
+          "text": "için",
+          "start": 21.96,
+          "end": 22.32
+        },
+        {
+          "word": "yerine",
+          "text": "yerine",
+          "start": 22.32,
+          "end": 22.66
+        },
+        {
+          "word": "getirdiğin",
+          "text": "getirdiğin",
+          "start": 22.66,
+          "end": 23.2
+        }
+      ]
+    },
+    {
+      "text": "mukaad desbilsirin aktır.",
+      "start": 47.0,
+      "end": 48.7,
+      "words": [
+        {
+          "word": "mukaad",
+          "text": "mukaad",
+          "start": 23.2,
+          "end": 23.8
+        },
+        {
+          "word": "desbilsirin",
+          "text": "desbilsirin",
+          "start": 23.8,
+          "end": 24.42
+        },
+        {
+          "word": "aktır.",
+          "text": "aktır.",
+          "start": 24.42,
+          "end": 24.9
+        }
+      ]
+    },
+    {
+      "text": "Unutmayın ki huzur,",
+      "start": 48.7,
+      "end": 50.3,
+      "words": [
+        {
+          "word": "Unutmayın",
+          "text": "Unutmayın",
+          "start": 24.9,
+          "end": 25.72
+        },
+        {
+          "word": "ki",
+          "text": "ki",
+          "start": 25.72,
+          "end": 25.94
+        },
+        {
+          "word": "huzur,",
+          "text": "huzur,",
+          "start": 25.94,
+          "end": 26.5
+        }
+      ]
+    },
+    {
+      "text": "hakid DIY dilen",
+      "start": 50.48,
+      "end": 51.46,
+      "words": [
+        {
+          "word": "hakid",
+          "text": "hakid",
+          "start": 26.68,
+          "end": 27.02
+        },
+        {
+          "word": "DIY",
+          "text": "DIY",
+          "start": 27.02,
+          "end": 27.3
+        },
+        {
+          "word": "dilen",
+          "text": "dilen",
+          "start": 27.3,
+          "end": 27.66
+        }
+      ]
+    },
+    {
+      "text": "yerde değil, vazifelerin",
+      "start": 51.46,
+      "end": 53.22,
+      "words": [
+        {
+          "word": "yerde",
+          "text": "yerde",
+          "start": 27.66,
+          "end": 27.98
+        },
+        {
+          "word": "değil,",
+          "text": "değil,",
+          "start": 27.98,
+          "end": 28.4
+        },
+        {
+          "word": "vazifelerin",
+          "text": "vazifelerin",
+          "start": 28.68,
+          "end": 29.42
+        }
+      ]
+    },
+    {
+      "text": "aşkla ifa edildiği",
+      "start": 53.22,
+      "end": 54.4,
+      "words": [
+        {
+          "word": "aşkla",
+          "text": "aşkla",
+          "start": 29.42,
+          "end": 29.84
+        },
+        {
+          "word": "ifa",
+          "text": "ifa",
+          "start": 29.84,
+          "end": 30.2
+        },
+        {
+          "word": "edildiği",
+          "text": "edildiği",
+          "start": 30.2,
+          "end": 30.6
+        }
+      ]
+    },
+    {
+      "text": "yerde başlaf.",
+      "start": 54.4,
+      "end": 55.18,
+      "words": [
+        {
+          "word": "yerde",
+          "text": "yerde",
+          "start": 30.6,
+          "end": 30.88
+        },
+        {
+          "word": "başlaf.",
+          "text": "başlaf.",
+          "start": 30.88,
+          "end": 31.38
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "word": "Bugün",
+      "text": "Bugün",
+      "start": 23.8,
+      "end": 24.3
+    },
+    {
+      "word": "aile",
+      "text": "aile",
+      "start": 24.3,
+      "end": 24.74
+    },
+    {
+      "word": "kurumunu",
+      "text": "kurumunu",
+      "start": 24.74,
+      "end": 25.3
+    },
+    {
+      "word": "saran",
+      "text": "saran",
+      "start": 25.3,
+      "end": 25.66
+    },
+    {
+      "word": "en",
+      "text": "en",
+      "start": 25.66,
+      "end": 25.94
+    },
+    {
+      "word": "büyük",
+      "text": "büyük",
+      "start": 25.94,
+      "end": 26.18
+    },
+    {
+      "word": "tehlike",
+      "text": "tehlike",
+      "start": 26.18,
+      "end": 26.74
+    },
+    {
+      "word": "tarafların",
+      "text": "tarafların",
+      "start": 26.74,
+      "end": 27.62
+    },
+    {
+      "word": "sürekli,",
+      "text": "sürekli,",
+      "start": 27.62,
+      "end": 28.38
+    },
+    {
+      "word": "sana",
+      "text": "sana",
+      "start": 28.6,
+      "end": 28.86
+    },
+    {
+      "word": "bunu",
+      "text": "bunu",
+      "start": 28.86,
+      "end": 29.1
+    },
+    {
+      "word": "yapmak",
+      "text": "yapmak",
+      "start": 29.1,
+      "end": 29.5
+    },
+    {
+      "word": "zorunda",
+      "text": "zorunda",
+      "start": 29.5,
+      "end": 30.14
+    },
+    {
+      "word": "değilim",
+      "text": "değilim",
+      "start": 30.14,
+      "end": 30.58
+    },
+    {
+      "word": "diyerek",
+      "text": "diyerek",
+      "start": 30.58,
+      "end": 31.04
+    },
+    {
+      "word": "nefislerini",
+      "text": "nefislerini",
+      "start": 31.04,
+      "end": 31.68
+    },
+    {
+      "word": "dayaktır",
+      "text": "dayaktır",
+      "start": 31.68,
+      "end": 32.34
+    },
+    {
+      "word": "soğup",
+      "text": "soğup",
+      "start": 32.34,
+      "end": 32.7
+    },
+    {
+      "word": "bir",
+      "text": "bir",
+      "start": 32.7,
+      "end": 32.96
+    },
+    {
+      "word": "meynfağa",
+      "text": "meynfağa",
+      "start": 32.96,
+      "end": 33.5
+    },
+    {
+      "word": "çebekesine",
+      "text": "çebekesine",
+      "start": 33.5,
+      "end": 34.04
+    },
+    {
+      "word": "dönüşmesidir.",
+      "text": "dönüşmesidir.",
+      "start": 34.04,
+      "end": 34.98
+    },
+    {
+      "word": "Oysa",
+      "text": "Oysa",
+      "start": 35.28,
+      "end": 35.62
+    },
+    {
+      "word": "yua",
+      "text": "yua",
+      "start": 35.62,
+      "end": 36.04
+    },
+    {
+      "word": "hesaplaşmaların",
+      "text": "hesaplaşmaların",
+      "start": 36.04,
+      "end": 37.26
+    },
+    {
+      "word": "değil,",
+      "text": "değil,",
+      "start": 37.26,
+      "end": 37.72
+    },
+    {
+      "word": "helalleşmelerine",
+      "text": "helalleşmelerine",
+      "start": 37.98,
+      "end": 38.86
+    },
+    {
+      "word": "adresidir.",
+      "text": "adresidir.",
+      "start": 38.86,
+      "end": 39.68
+    },
+    {
+      "word": "Herkesin",
+      "text": "Herkesin",
+      "start": 40.0,
+      "end": 40.52
+    },
+    {
+      "word": "kendi",
+      "text": "kendi",
+      "start": 40.52,
+      "end": 40.78
+    },
+    {
+      "word": "vazifesini,",
+      "text": "vazifesini,",
+      "start": 40.78,
+      "end": 41.66
+    },
+    {
+      "word": "en",
+      "text": "en",
+      "start": 42.06,
+      "end": 42.16
+    },
+    {
+      "word": "ufak",
+      "text": "ufak",
+      "start": 42.16,
+      "end": 42.48
+    },
+    {
+      "word": "bir",
+      "text": "bir",
+      "start": 42.48,
+      "end": 42.7
+    },
+    {
+      "word": "karşılık",
+      "text": "karşılık",
+      "start": 42.7,
+      "end": 43.18
+    },
+    {
+      "word": "beklemeden",
+      "text": "beklemeden",
+      "start": 43.18,
+      "end": 43.96
+    },
+    {
+      "word": "yalnızca",
+      "text": "yalnızca",
+      "start": 43.96,
+      "end": 44.9
+    },
+    {
+      "word": "Allah",
+      "text": "Allah",
+      "start": 44.9,
+      "end": 45.24
+    },
+    {
+      "word": "rızası",
+      "text": "rızası",
+      "start": 45.24,
+      "end": 45.76
+    },
+    {
+      "word": "için",
+      "text": "için",
+      "start": 45.76,
+      "end": 46.12
+    },
+    {
+      "word": "yerine",
+      "text": "yerine",
+      "start": 46.12,
+      "end": 46.46
+    },
+    {
+      "word": "getirdiğin",
+      "text": "getirdiğin",
+      "start": 46.46,
+      "end": 47.0
+    },
+    {
+      "word": "mukaad",
+      "text": "mukaad",
+      "start": 47.0,
+      "end": 47.6
+    },
+    {
+      "word": "desbilsirin",
+      "text": "desbilsirin",
+      "start": 47.6,
+      "end": 48.22
+    },
+    {
+      "word": "aktır.",
+      "text": "aktır.",
+      "start": 48.22,
+      "end": 48.7
+    },
+    {
+      "word": "Unutmayın",
+      "text": "Unutmayın",
+      "start": 48.7,
+      "end": 49.52
+    },
+    {
+      "word": "ki",
+      "text": "ki",
+      "start": 49.52,
+      "end": 49.74
+    },
+    {
+      "word": "huzur,",
+      "text": "huzur,",
+      "start": 49.74,
+      "end": 50.3
+    },
+    {
+      "word": "hakid",
+      "text": "hakid",
+      "start": 50.48,
+      "end": 50.82
+    },
+    {
+      "word": "DIY",
+      "text": "DIY",
+      "start": 50.82,
+      "end": 51.1
+    },
+    {
+      "word": "dilen",
+      "text": "dilen",
+      "start": 51.1,
+      "end": 51.46
+    },
+    {
+      "word": "yerde",
+      "text": "yerde",
+      "start": 51.46,
+      "end": 51.78
+    },
+    {
+      "word": "değil,",
+      "text": "değil,",
+      "start": 51.78,
+      "end": 52.2
+    },
+    {
+      "word": "vazifelerin",
+      "text": "vazifelerin",
+      "start": 52.48,
+      "end": 53.22
+    },
+    {
+      "word": "aşkla",
+      "text": "aşkla",
+      "start": 53.22,
+      "end": 53.64
+    },
+    {
+      "word": "ifa",
+      "text": "ifa",
+      "start": 53.64,
+      "end": 54.0
+    },
+    {
+      "word": "edildiği",
+      "text": "edildiği",
+      "start": 54.0,
+      "end": 54.4
+    },
+    {
+      "word": "yerde",
+      "text": "yerde",
+      "start": 54.4,
+      "end": 54.68
+    },
+    {
+      "word": "başlaf.",
+      "text": "başlaf.",
+      "start": 54.68,
+      "end": 55.18
+    }
+  ],
+  "narration": "Bugün aile kurumunu saran en büyük tehlike tarafların sürekli, sana bunu yapmak zorunda değilim diyerek nefislerini dayaktır soğup bir meynfağa çebekesine dönüşmesidir. Oysa yua hesaplaşmaların değil, helalleşmelerine adresidir. Herkesin kendi vazifesini, en ufak bir karşılık beklemeden yalnızca Allah rızası için yerine getirdiğin mukaad desbilsirin aktır. Unutmayın ki huzur, hakid DIY dilen yerde değil, vazifelerin aşkla ifa edildiği yerde başlaf.",
+  "durationMode": "custom_audio",
+  "layoutType": "quote_spotlight",
+  "headerSubtitle": "AİLE KURUMU",
+  "headerLine1": "EN BÜYÜK",
+  "circledWord": "TEHLİKE",
+  "headerLine2": "BUGÜN",
+  "highlightedText": "sana bunu yapmak zorunda değilim",
+  "strikeWord": "ZORUNLULUK",
+  "quoteSpotlight": {
+    "speaker": "Analiz",
+    "quoteText": "Bugün aile kurumunu saran en büyük tehlike tarafların sürekli, sana bunu yapmak zorunda değilim diyerek nefislerini dayatmasıdır."
+  },
+  "_acquired_assets": [
+    {
+      "name": "fingerprint",
+      "type": "watermark",
+      "path": "assets/watermarks/fingerprint.svg"
+    }
+  ],
   "quoteVideos": [
     {
-      "id": "quote_5bdc8340",
-      "videoUrl": "/public/uploads/YEMEK_YAPMAK_ZORUNDA_DE__L_M__e4047d25.mp4",
+      "id": "quote_1",
+      "url": "/public/uploads/YEMEK_YAPMAK_ZORUNDA_DE__L_M__9eae0184.mp4",
+      "title": "Arkadaşlar bu videoyu iyi izleyin...",
+      "timelineStart": 0.0,
+      "duration": 23.8,
       "trimStart": 1.8,
       "trimEnd": 25.6,
-      "timelineStart": 0.0,
-      "timelineEnd": 23.8,
-      "duration": 23.8,
-      "theme": "red_alert",
-      "headerText": "Arkadaşlar bu videoyu iyi izleyin...",
-      "subHeaderText": "",
-      "authorTag": "",
-      "stamp": "yalan",
-      "volume": 1.0,
+      "stampText": "YALAN",
+      "stampStyle": "red",
       "muted": false,
-      "freezeAtEnd": false
+      "displayMode": "stage_box"
     }
   ],
-  "aiKurguStartOffset": 23.8
+  "totalDuration": 55.5
 }

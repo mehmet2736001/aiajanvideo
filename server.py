@@ -140,6 +140,8 @@ class GenerateRequest(BaseModel):
     illustration_style: Optional[str] = "polaroid" # polaroid, torn_paper, clean_frame
     broll_type: Optional[str] = "none" # none, cosmic, clouds, waves, ink
     broll_opacity: Optional[float] = 0.18
+    start_offset: Optional[float] = None
+    start_after_quote: Optional[bool] = True
 
 class OptimizeRequest(BaseModel):
     topic: str
@@ -2428,6 +2430,8 @@ class GenerateRequest(BaseModel):
     illustration_style: Optional[str] = "polaroid" # polaroid, torn_paper, clean_frame
     broll_type: Optional[str] = "none" # none, cosmic, clouds, waves, ink
     broll_opacity: Optional[float] = 0.18
+    start_offset: Optional[float] = None
+    start_after_quote: Optional[bool] = True
 
 class OptimizeRequest(BaseModel):
     topic: str
@@ -3070,9 +3074,10 @@ def probe_audio_duration(file_path: str) -> float:
         return 0.0
 
 # =========================================================================
-# LIVE AUDIO UPLOAD & MULTI-SCENE CHAINED NARRATIVE ENGINE
+# LIVE AUDIO UPLOAD & MULTI-SCENE CHAINED NARRATIVE ENGINE (PRO TITANIUM)
 # =========================================================================
 @app.post("/api/audio/upload")
+@app.post("/api/timeline/generate-from-audio")
 async def upload_audio_and_generate_multiscene(
     file: UploadFile = File(...),
     transcript: Optional[str] = Form(None),
@@ -3080,6 +3085,8 @@ async def upload_audio_and_generate_multiscene(
     theme: Optional[str] = Form(None),
     mode: Optional[str] = Form("auto"),
     scene_duration: Optional[int] = Form(12),
+    start_offset: Optional[float] = Form(None),
+    start_after_quote: Optional[bool] = Form(True),
     social_handle: Optional[str] = Form("@birkissa"),
     film_grain: Optional[str] = Form("subtle"),
     light_leaks: Optional[str] = Form("auto"),
@@ -3090,12 +3097,12 @@ async def upload_audio_and_generate_multiscene(
     enable_illustration: Optional[bool] = Form(False)
 ):
     if not file:
-        raise HTTPException(status_code=400, detail="LÃƒÂ¼tfen bir ses dosyasÃ„Â± seÃƒÂ§in.")
+        raise HTTPException(status_code=400, detail="Lütfen bir ses dosyası seçin.")
 
     ext = os.path.splitext(file.filename)[1].lower() if file.filename else ".mp3"
     allowed_exts = [".mp3", ".wav", ".m4a", ".ogg", ".aac", ".flac", ".wma", ".webm"]
     if ext not in allowed_exts:
-        raise HTTPException(status_code=400, detail=f"Desteklenmeyen ses formatÃ„Â± ({ext}). MP3, WAV veya M4A yÃƒÂ¼kleyin.")
+        raise HTTPException(status_code=400, detail=f"Desteklenmeyen ses formatı ({ext}). MP3, WAV veya M4A yükleyin.")
 
     # 1. Save uploaded file to temp path
     upload_raw_path = os.path.join(DATA_DIR, f"upload_raw_{uuid.uuid4().hex[:8]}{ext}")
@@ -3103,7 +3110,7 @@ async def upload_audio_and_generate_multiscene(
         with open(upload_raw_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Ses dosyasÃ„Â± kaydedilemedi: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Ses dosyası kaydedilemedi: {str(e)}")
 
     target_audio_path = os.path.join(PUBLIC_DIR, "audio.mp3")
 
@@ -3132,7 +3139,7 @@ async def upload_audio_and_generate_multiscene(
         whisper_m = get_whisper()
         w_res = whisper_m.transcribe(target_audio_path, word_timestamps=True, language="tr", fp16=False)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Whisper ses ÃƒÂ§ÃƒÂ¶zÃƒÂ¼mleme hatasÃ„Â±: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Whisper ses çözümleme hatası: {str(e)}")
 
     raw_whisper_words = []
     for seg in w_res.get("segments", []):
@@ -3165,10 +3172,33 @@ async def upload_audio_and_generate_multiscene(
         if whisper_words:
             subtitles = build_subtitle_chunks(whisper_words, chunk_size=3)
         else:
-            # Fallback if whisper returned text without word timestamps
             subtitles = generate_subtitles_fallback(full_transcript, total_duration)
 
-    # 6. Segment into 10-14 second sequential scenes
+    # 6. Read existing project to preserve Quote Videos and PIP layers
+    out_json = os.path.join(SRC_DIR, "generatedData.json")
+    existing_data = {}
+    if os.path.exists(out_json):
+        try:
+            with open(out_json, "r", encoding="utf-8") as ef:
+                existing_data = json.load(ef)
+        except Exception:
+            pass
+
+    # Calculate offset if quote video exists
+    quote_offset = 0.0
+    for q in (existing_data.get("quoteVideos", []) or []):
+        q_st = float(q.get("timelineStart", 0.0) or 0.0)
+        q_dur = float(q.get("duration", 0.0) or max(1.0, float(q.get("trimEnd", 6.0) or 6.0) - float(q.get("trimStart", 0.0) or 0.0)))
+        quote_offset = max(quote_offset, q_st + q_dur)
+
+    if start_offset is not None:
+        effective_offset = float(start_offset)
+    elif start_after_quote and quote_offset > 0:
+        effective_offset = round(quote_offset, 2)
+    else:
+        effective_offset = 0.0
+
+    # 7. Segment into 9-14 second sequential scenes
     sec_per_scene = max(8.0, min(16.0, float(scene_duration or 12)))
     num_scenes = max(1, math.ceil(total_duration / sec_per_scene))
     if num_scenes == 1 and total_duration > 18.0:
@@ -3186,80 +3216,74 @@ async def upload_audio_and_generate_multiscene(
             "scene_index": i + 1,
             "start_time": st,
             "end_time": en,
-            "text_spoken": slice_text or f"{i+1}. BÃƒÂ¶lÃƒÂ¼m KonuÃ…Å¸masÃ„Â±"
+            "text_spoken": slice_text or f"{i+1}. Bölüm Konuşması"
         })
 
-    # 7. Gemini 3 Director Prompt for Multi-Scene Storyboard
+    # 8. Gemini 3 Director Prompt for Multi-Scene Storyboard
     effective_model = model or DEFAULT_MODEL
-    prompt = f"""Sen viral YouTube Shorts, TikTok ve Mini-Belgesel prodÃƒÂ¼ksiyonlarÃ„Â±nÃ„Â±n BAÃ…Â YAPAY ZEKÃƒâ€š YÃƒâ€“NETMENÃ„Â° ve senaristisin.
-KullanÃ„Â±cÃ„Â± kendi ses kaydÃ„Â±nÃ„Â± yÃƒÂ¼kledi!
-Toplam Ses SÃƒÂ¼resi: {total_duration:.1f} saniye.
-Tam Ses DÃƒÂ¶kÃƒÂ¼mÃƒÂ¼: '{full_transcript}'
+    prompt = f"""Sen viral YouTube Shorts, TikTok ve Mini-Belgesel prodüksiyonlarının BAŞ YAPAY ZEKA YÖNETMENİ ve senaristisin.
+Kullanıcı kendi ses kaydını yükledi!
+Toplam Ses Süresi: {total_duration:.1f} saniye.
+Tam Ses Dökümü: '{full_transcript}'
 
-Bu ses {num_scenes} ardÃ„Â±Ã…Å¸Ã„Â±k bÃƒÂ¶lÃƒÂ¼me/sahneye ayrÃ„Â±ldÃ„Â±. Her sahne yaklaÃ…Å¸Ã„Â±k {total_duration / num_scenes:.1f} saniye sÃƒÂ¼rmektedir:
+Bu ses {num_scenes} ardışık bölüme/sahneye ayrıldı. Her sahne yaklaşık {total_duration / num_scenes:.1f} saniye sürmektedir:
 {json.dumps(scene_slices, ensure_ascii=False, indent=2)}
 
-GÃƒâ€“REVÃ„Â°N:
-1. TemayÃ„Â± belirle: 'dark_minimalist' | 'gold_luxury' | 'neon_cyber' | 'parchment' | 'notebook' | 'kraft' | 'chalkboard' | 'blueprint'
-   (KURAL: Ã„Â°slami / derin tefekkÃƒÂ¼r dendiÃ„Å¸inde KESÃ„Â°NLÃ„Â°KLE 'dark_minimalist' veya 'gold_luxury'; Bilim / teknoloji / evren iÃƒÂ§in 'neon_cyber' veya 'blueprint'; Tarih / felsefe iÃƒÂ§in 'parchment' veya 'kraft')
-2. HER BÃ„Â°R BÃƒâ€“LÃƒÅ“M (SCENE) Ã„Â°Ãƒâ€¡Ã„Â°N:
-   - Ãƒâ€“nceki sahnenin bittiÃ„Å¸i yerden devam edecek Ã…Å¸ekilde ve gÃƒÂ¶rsel monotonluÃ„Å¸u kÃ„Â±rmak iÃƒÂ§in FARKLI bir Ã…Å¸ablon (layoutType) seÃƒÂ§:
-     'cards' | 'vs_split' | 'flowchart' | 'quote_spotlight' | 'metric_impact' | 'grid_explosion' | 'tri_concept'
-   - Sahneye ÃƒÂ¶zel 'headerSubtitle', 'headerLine1', 'circledWord', 'headerLine2', 'highlightedText', 'strikeWord' oluÃ…Å¸tur.
-   - SeÃƒÂ§tiÃ„Å¸in layoutType'a uygun zengin iÃƒÂ§erik verisini (cards, vsData, flowchartSteps, quoteSpotlight, metricImpact, gridExplosion, triConcept) ÃƒÂ¼ret.
-3. 'requiredIcons': Senaryolarda geÃƒÂ§en tÃƒÂ¼m ikon isimleri (ÃƒÂ¶rn: ['fingerprint', 'dna', 'atom', 'brain', 'heart', 'eye', 'scale', 'hourglass', 'book', 'lightbulb', 'compass', 'shield', 'infinity']).
+GÖREVİN:
+1. Temayı belirle: 'dark_minimalist' | 'gold_luxury' | 'neon_cyber' | 'parchment' | 'notebook' | 'kraft' | 'chalkboard' | 'blueprint'
+   (KURAL: İslami / derin tefekkür dendiğinde KESİNLİKLE 'dark_minimalist' veya 'gold_luxury'; Bilim / teknoloji / evren için 'neon_cyber' veya 'blueprint'; Tarih / felsefe için 'parchment' veya 'kraft')
+2. HER BİR BÖLÜM (SCENE) İÇİN ({num_scenes} adet):
+   - Önceki sahnenin bittiği yerden devam edecek şekilde ve görsel monotonluğu kırmak için FARKLI bir şablon (layoutType) seç:
+     'quote_spotlight' | 'vs_split' | 'cards' | 'metric_impact' | 'grid_explosion' | 'tri_concept' | 'pip_split'
+   - Sahneye özel 'headerSubtitle', 'headerLine1', 'circledWord', 'headerLine2', 'highlightedText', 'strikeWord' oluştur.
+   - Seçtiğin layoutType'a uygun zengin içerik verisini (cards, vsData, flowchartSteps, quoteSpotlight, metricImpact, gridExplosion, triConcept) üret.
+3. 'requiredIcons': Senaryolarda geçen tüm ikon isimleri (örn: ['fingerprint', 'dna', 'atom', 'brain', 'heart', 'eye', 'scale', 'hourglass', 'book', 'lightbulb', 'compass', 'shield', 'infinity']).
 
-SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
+SADECE SAF GEÇERLİ JSON DÖNDÜR:
 {{
   "directorDecision": {{
     "theme": "{theme if theme else 'dark_minimalist'}",
     "particles": "dust",
     "ambientPattern": "fingerprint",
-    "directorReason": "KullanÃ„Â±cÃ„Â±nÃ„Â±n yÃƒÂ¼klediÃ„Å¸i sese uygun olarak dinamik ÃƒÂ§ok sahneli kurgu hazÃ„Â±rlandÃ„Â±."
+    "directorReason": "Kullanıcının yüklediği sese uygun olarak dinamik çok sahneli kurgu hazırlandı."
   }},
   "requiredIcons": ["fingerprint", "dna", "brain", "scale"],
   "scenes": [
     {{
       "id": "scene_1",
-      "startTime": 0.0,
-      "endTime": {scene_slices[0]['end_time']},
-      "layoutType": "grid_explosion",
-      "headerSubtitle": "1. BÃƒÂ¶lÃƒÂ¼m",
-      "headerLine1": "Ã„Â°LK SIR",
-      "circledWord": "BAÃ…ÂLANGIÃƒâ€¡",
+      "layoutType": "quote_spotlight",
+      "headerSubtitle": "1. Bölüm",
+      "headerLine1": "İLK SIR",
+      "circledWord": "BAŞLANGIÇ",
       "headerLine2": "",
       "highlightedText": "CANLI SES VURGUSU",
-      "strikeWord": "TESADÃƒÅ“F",
-      "gridExplosion": {{
-        "title": "EÃ…ÂSÃ„Â°Z Ã„Â°Ã…ÂARET",
-        "subtitle": "Kelimelerin ArdÃ„Â±ndaki Derin Anlam",
-        "iconType": "fingerprint",
-        "itemCount": 12,
-        "badgeText": "BÃ„Â°RÃ„Â°NCÃ„Â° AÃ…ÂAMA"
+      "strikeWord": "TESADÜF",
+      "quoteSpotlight": {{
+        "speaker": "Ses Kaydı",
+        "quoteText": "{full_transcript[:90]}"
       }}
     }}
   ],
   "viral": {{
     "hookScore": 98,
-    "viralTitles": ["Kendi Sesinden Shorts BaÃ…Å¸lÃ„Â±Ã„Å¸Ã„Â± 1", "BaÃ…Å¸lÃ„Â±k 2"],
+    "viralTitles": ["Kendi Sesinden Shorts Başlığı 1", "Başlık 2"],
     "hashtags": ["#shorts", "#viral", "#seslikurgu"],
-    "loopEnding": "ve iÃ…Å¸te bu yÃƒÂ¼zden...",
-    "description": "KullanÃ„Â±cÃ„Â± ses kaydÃ„Â±yla ÃƒÂ¼retilen profesyonel video."
+    "loopEnding": "ve işte bu yüzden...",
+    "description": "Kullanıcı ses kaydıyla üretilen profesyonel video."
   }}
 }}
 """
     res, key_name = pool.query_with_rotation(prompt, "You are a specialized JSON video schema generator. Output ONLY raw JSON.", model=effective_model)
     if not res:
-        raise HTTPException(status_code=500, detail=f"LLM modelinden ({effective_model}) yanÃ„Â±t alÃ„Â±namadÃ„Â±.")
+        raise HTTPException(status_code=500, detail=f"LLM modelinden ({effective_model}) yanıt alınamadı.")
 
-    import re
     cleaned = re.sub(r"```json\s*", "", res)
     cleaned = re.sub(r"```\s*", "", cleaned).strip()
 
     try:
         video_data = json.loads(cleaned)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"LLM JSON ÃƒÂ§Ã„Â±ktÃ„Â±sÃ„Â± ayrÃ„Â±Ã…Å¸tÃ„Â±rÃ„Â±lamadÃ„Â±: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"LLM JSON çıktısı ayrıştırılamadı: {str(e)}")
 
     director_dec = video_data.get("directorDecision", {})
     selected_theme = theme or director_dec.get("theme") or "dark_minimalist"
@@ -3272,7 +3296,7 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
     video_data["particles"] = particles
     video_data["ambientPattern"] = ambient_pattern
     video_data["socialHandle"] = social_handle or "@birkissa"
-    video_data["audioUrl"] = "audio.mp3"
+    video_data["audioUrl"] = "/public/audio.mp3"
     video_data["filmGrain"] = film_grain or "subtle"
     video_data["lightLeaks"] = light_leaks or "auto"
     video_data["cameraMotion"] = camera_motion or "handheld"
@@ -3281,92 +3305,71 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
     video_data["brollType"] = broll_type or "none"
     if enable_illustration:
         try:
-            ill_res = generate_ai_illustration(full_transcript[:80], style="polaroid", caption="KayÃ„Â±ttan Sahne")
+            ill_res = generate_ai_illustration(full_transcript[:80], style="polaroid", caption="Kayıttan Sahne")
             video_data["illustrationUrl"] = ill_res["illustrationUrl"]
             video_data["illustrationCaption"] = ill_res["caption"]
         except Exception as e:
             print(f"Audio upload illustration error: {e}")
 
-    video_data["subtitles"] = subtitles
-    video_data["words"] = whisper_words
-    video_data["narration"] = full_transcript
-    video_data["totalDuration"] = total_duration
-    video_data["durationMode"] = "custom_audio"
-
-    # Validate and sync scenes array
+    # Validate and sync scenes array with start offset
     parsed_scenes = video_data.get("scenes", [])
     synced_scenes = []
 
-    available_layouts = ['pip_split', 'cards', 'vs_split', 'flowchart', 'quote_spotlight', 'metric_impact', 'grid_explosion', 'tri_concept']
+    available_layouts = ['quote_spotlight', 'vs_split', 'cards', 'metric_impact', 'grid_explosion', 'tri_concept', 'pip_split', 'flowchart']
 
     for i, sl in enumerate(scene_slices):
         sc = parsed_scenes[i] if i < len(parsed_scenes) else {}
         sc_id = f"scene_{i + 1}"
         sc_layout = sc.get("layoutType") or available_layouts[i % len(available_layouts)]
-        
-        # Ensure fallback data if LLM omitted specific layout
+
         if sc_layout == "cards" and not sc.get("cards"):
             sc["cards"] = [
-                {"id": "1", "label": "1. Anahtar", "value": "AÃƒÂ§Ã„Â±klama", "icon": "brain", "color": "#1e3a8a"},
-                {"id": "2", "label": "2. Anahtar", "value": "GeliÃ…Å¸me", "icon": "scale", "color": "#15803d"},
-                {"id": "3", "label": "3. Anahtar", "value": "SonuÃƒÂ§", "icon": "lightbulb", "color": "#d97706"}
+                {"id": "1", "label": "1. Anahtar", "value": "Açıklama", "icon": "brain", "color": "#1e3a8a"},
+                {"id": "2", "label": "2. Anahtar", "value": "Gelişme", "icon": "scale", "color": "#15803d"},
+                {"id": "3", "label": "3. Anahtar", "value": "Sonuç", "icon": "lightbulb", "color": "#d97706"}
             ]
         elif sc_layout == "vs_split" and not sc.get("vsData"):
             sc["vsData"] = {
-                "leftTitle": "Zan / YanÃ„Â±lgÃ„Â±",
-                "leftSubtitle": "GÃƒÂ¶rÃƒÂ¼nen",
-                "leftPoints": ["YÃƒÂ¼zeysel algÃ„Â±"],
+                "leftTitle": "Zan / Yanılgı",
+                "leftSubtitle": "Görünen",
+                "leftPoints": ["Yüzeysel algı", "Nefsin dayatması"],
                 "rightTitle": "Hakikat",
-                "rightSubtitle": "GerÃƒÂ§ek Olan",
-                "rightPoints": ["Derin anlam"],
-                "verdict": "Hakikat daima ayrÃ„Â±ntÃ„Â±larda gizlidir."
+                "rightSubtitle": "Gerçek Olan",
+                "rightPoints": ["Derin anlam", "Allah rızası"],
+                "verdict": "Hakikat daima ayrıntılarda ve ilahi rızada gizlidir."
             }
-        elif sc_layout == "flowchart" and not sc.get("flowchartSteps"):
-            sc["flowchartSteps"] = [
-                {"stepNumber": 1, "badge": "GiriÃ…Å¸", "title": "BÃƒÂ¼yÃƒÂ¼k Soru"},
-                {"stepNumber": 2, "badge": "GeliÃ…Å¸me", "title": "DÃƒÂ¶nÃƒÂ¼m NoktasÃ„Â±"},
-                {"stepNumber": 3, "badge": "SonuÃƒÂ§", "title": "Ãƒâ€¡Ã„Â±karÃ„Â±m"}
-            ]
-        elif sc_layout == "tri_concept" and not sc.get("triConcept"):
-            sc["triConcept"] = {
-                "badge": f"{i+1}. BÃƒâ€“LÃƒÅ“M",
-                "concept1": {"title": "BEYÃ„Â°N", "icon": "brain"},
-                "concept2": {"title": "KALP", "icon": "heart"},
-                "concept3": {"title": "GÃƒâ€“Z", "icon": "eye"},
-                "bottomNote": "Her parÃƒÂ§a tek bir ahengin ifadesidir."
+        elif sc_layout == "quote_spotlight" and not sc.get("quoteSpotlight"):
+            sc["quoteSpotlight"] = {
+                "speaker": "Ses Kaydı",
+                "quoteText": sl["text_spoken"][:90] or full_transcript[:90]
             }
         elif sc_layout == "metric_impact" and not sc.get("metricImpact"):
             sc["metricImpact"] = {
                 "bigNumber": "%100",
-                "bigLabel": "DOÃ„ÂRULUK",
-                "subheading": "EÃ…Å¸siz Ã„Â°fade",
-                "keyTakeaway": "SÃƒÂ¶zler doÃ„Å¸ru anahtarla aÃƒÂ§Ã„Â±lÃ„Â±r."
-            }
-        elif sc_layout == "quote_spotlight" and not sc.get("quoteSpotlight"):
-            sc["quoteSpotlight"] = {
-                "speaker": "Ses KaydÃ„Â±",
-                "quoteText": sl["text_spoken"][:90] or full_transcript[:90]
+                "bigLabel": "HAKİKAT",
+                "subheading": "Sözlerin Gücü",
+                "keyTakeaway": "Sözler doğru anahtarla hakikati açar."
             }
         elif sc_layout == "grid_explosion" and not sc.get("gridExplosion"):
             sc["gridExplosion"] = {
-                "title": "MÃ„Â°LYARLARCA MÃƒÅ“HÃƒÅ“R",
-                "subtitle": "Benzersiz AnlatÃ„Â±m",
+                "title": "MİLYARLARCA MÜHÜR",
+                "subtitle": "Benzersiz Anlatım",
                 "iconType": "fingerprint",
                 "itemCount": 12,
-                "badgeText": "HAKÃ„Â°KAT"
+                "badgeText": "HAKİKAT"
             }
 
         synced_scene = {
             "id": sc_id,
-            "startTime": sl["start_time"],
-            "endTime": sl["end_time"],
+            "startTime": round(effective_offset + sl["start_time"], 2),
+            "endTime": round(effective_offset + sl["end_time"], 2),
             "layoutType": sc_layout,
-            "headerSubtitle": sc.get("headerSubtitle") or f"{i+1}. BÃƒÂ¶lÃƒÂ¼m ({sl['start_time']}s - {sl['end_time']}s)",
-            "headerLine1": sc.get("headerLine1") or (full_transcript.split()[0].upper() if full_transcript.split() else "DÃ„Â°KKAT"),
-            "circledWord": sc.get("circledWord") or (full_transcript.split()[1].upper() if len(full_transcript.split()) > 1 else "BÃƒÅ“YÃƒÅ“K"),
+            "headerSubtitle": sc.get("headerSubtitle") or f"{i+1}. Bölüm",
+            "headerLine1": sc.get("headerLine1") or (full_transcript.split()[0].upper() if full_transcript.split() else "DİKKAT"),
+            "circledWord": sc.get("circledWord") or (full_transcript.split()[1].upper() if len(full_transcript.split()) > 1 else "HAKİKAT"),
             "headerLine2": sc.get("headerLine2") or "",
             "highlightedText": sc.get("highlightedText") or (full_transcript.split()[2].upper() if len(full_transcript.split()) > 2 else "SIR"),
-            "strikeWord": sc.get("strikeWord"),
+            "strikeWord": sc.get("strikeWord", ""),
             "cards": sc.get("cards"),
             "vsData": sc.get("vsData"),
             "flowchartSteps": sc.get("flowchartSteps"),
@@ -3378,9 +3381,23 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
         }
         synced_scenes.append(synced_scene)
 
-    video_data["scenes"] = synced_scenes
+    # Offset subtitles and words
+    if effective_offset > 0:
+        for sub in subtitles:
+            sub["start"] = round(sub["start"] + effective_offset, 2)
+            sub["end"] = round(sub["end"] + effective_offset, 2)
+        for w in whisper_words:
+            w["start"] = round(w["start"] + effective_offset, 2)
+            w["end"] = round(w["end"] + effective_offset, 2)
 
-    # Copy first scene properties to root for 100% backward compatibility
+    video_data["scenes"] = synced_scenes
+    video_data["aiKurguStartOffset"] = effective_offset
+    video_data["subtitles"] = subtitles
+    video_data["words"] = whisper_words
+    video_data["narration"] = full_transcript
+    video_data["durationMode"] = "custom_audio"
+
+    # Copy first scene properties to root for backward compatibility
     if synced_scenes:
         first = synced_scenes[0]
         video_data["layoutType"] = first["layoutType"]
@@ -3389,7 +3406,7 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
         video_data["circledWord"] = first["circledWord"]
         video_data["headerLine2"] = first["headerLine2"]
         video_data["highlightedText"] = first["highlightedText"]
-        video_data["strikeWord"] = first.get("strikeWord")
+        video_data["strikeWord"] = first.get("strikeWord", "")
         for k in ["cards", "vsData", "flowchartSteps", "quoteSpotlight", "metricImpact", "gridExplosion", "triConcept"]:
             if first.get(k):
                 video_data[k] = first[k]
@@ -3398,8 +3415,14 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
     video_data = process_video_assets(video_data, pool=pool)
     acquired_assets = video_data.get("_acquired_assets", [])
 
+    # PRESERVE Quote Videos, PIP Videos, Overlay Images, Audio Tracks
+    for k in ["quoteVideos", "pipVideos", "overlayImages", "audioTracks"]:
+        if k in existing_data and existing_data[k]:
+            video_data[k] = existing_data[k]
+
+    video_data["totalDuration"] = calculate_dynamic_timeline_duration(video_data, synced_scenes)
+
     # Save to generatedData.json
-    out_json = os.path.join(SRC_DIR, "generatedData.json")
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(video_data, f, ensure_ascii=False, indent=2)
 
@@ -3408,10 +3431,10 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
     hist_id = str(uuid.uuid4())[:8]
     new_hist_item = {
         "id": hist_id,
-        "topic": f"ÄŸÅ¸Ââ„¢Ã¯Â¸Â Ses YÃƒÂ¼kleme: {full_transcript[:60]}...",
+        "topic": f"🎙️ Ses Yükleme: {full_transcript[:60]}...",
         "theme": selected_theme,
         "layoutType": video_data.get("layoutType", "cards"),
-        "durationMode": f"{len(synced_scenes)} Sahne ({total_duration:.0f}s)",
+        "durationMode": f"{len(synced_scenes)} Sahne ({video_data['totalDuration']:.0f}s)",
         "created_at": time.strftime("%Y-%m-%d %H:%M"),
         "headerMain": video_data.get("headerLine1", "") + " " + video_data.get("circledWord", "") + " " + video_data.get("highlightedText", ""),
         "narration": full_transcript,
@@ -3429,139 +3452,154 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
         "success": True,
         "key_used": key_name,
         "model_used": effective_model,
-        "total_duration": total_duration,
+        "total_duration": video_data["totalDuration"],
+        "totalDuration": video_data["totalDuration"],
         "num_scenes": len(synced_scenes),
         "scenes": synced_scenes,
         "subtitles": subtitles,
         "words": whisper_words,
+        "waveform": extract_audio_waveform(target_audio_path),
         "video_data": video_data,
+        "aiKurguStartOffset": effective_offset,
         "audio_url": f"/public/audio.mp3?t={t_now}",
         "history_item": new_hist_item,
-        "director_reason": director_dec.get("directorReason") or f"YÃƒÂ¼klenen {total_duration:.1f} saniyelik ses kaydÃ„Â± iÃƒÂ§in {len(synced_scenes)} bÃƒÂ¶lÃƒÂ¼mlÃƒÂ¼ dinamik video kurgulandÃ„Â±."
+        "director_reason": director_dec.get("directorReason") or f"Yüklenen {total_duration:.1f} saniyelik ses kaydı için {len(synced_scenes)} bölümlü dinamik video kurgulandı."
     }
 
+
+# =========================================================================
+# AI VIDEO SCRIPT & MULTI-SCENE TIMELINE GENERATOR (Faz 8 PRO TITANIUM)
+# =========================================================================
 @app.post("/api/generate")
 def generate_video_content(req: GenerateRequest):
     topic = req.topic.strip()
     if not topic:
-        raise HTTPException(status_code=400, detail="Konu boÃ…Å¸ olamaz")
+        raise HTTPException(status_code=400, detail="Konu boş olamaz")
 
     is_auto = (req.mode == "auto" or not req.mode)
 
-    # In manual mode, word requirement depends on explicit duration_mode
-    word_req = "90-130 kelimelik derin, belgesel kurgulu, tefekkÃƒÂ¼r ve merak uyandÃ„Â±ran" if req.duration_mode == "deep" else "35-50 kelimelik akÃ„Â±cÃ„Â±, merak uyandÃ„Â±ran"
+    # 1. Read existing project to preserve Quote Videos and PIP layers
+    out_json = os.path.join(SRC_DIR, "generatedData.json")
+    existing_data = {}
+    if os.path.exists(out_json):
+        try:
+            with open(out_json, "r", encoding="utf-8") as ef:
+                existing_data = json.load(ef)
+        except Exception:
+            pass
 
-    prompt = f"""Sen viral YouTube Shorts, TikTok ve Mini-Belgesel prodÃƒÂ¼ksiyonlarÃ„Â±nÃ„Â±n BAÃ…Â YAPAY ZEKÃƒâ€š YÃƒâ€“NETMENÃ„Â° ve senaristisin.
-KullanÃ„Â±cÃ„Â± Talebi / Girdisi: '{topic}'
-Ãƒâ€¡alÃ„Â±Ã…Å¸ma Modu: {'ÄŸÅ¸Â¤â€“ AI YÃƒâ€“NETMEN MODU (TÃƒÂ¼m kararlarÃ„Â± sen ver)' if is_auto else f'ÄŸÅ¸â€ºÂ Ã¯Â¸Â MANUEL KULLANICI MODU (SeÃƒÂ§ilen: Tema: {req.theme}, Ã…Âablon: {req.layout_type}, SÃƒÂ¼re: {req.duration_mode})'}
+    # Calculate offset if quote video exists
+    quote_offset = 0.0
+    for q in (existing_data.get("quoteVideos", []) or []):
+        q_st = float(q.get("timelineStart", 0.0) or 0.0)
+        q_dur = float(q.get("duration", 0.0) or max(1.0, float(q.get("trimEnd", 6.0) or 6.0) - float(q.get("trimStart", 0.0) or 0.0)))
+        quote_offset = max(quote_offset, q_st + q_dur)
 
-GÃƒâ€“REV 1: YÃƒâ€“NETMEN KARARI (DIRECTOR DECISION)
-KullanÃ„Â±cÃ„Â±nÃ„Â±n yazdÃ„Â±Ã„Å¸Ã„Â± metni derinlemesine analiz et. EÃ„Å¸er kullanÃ„Â±cÃ„Â± ÃƒÂ¶rtÃƒÂ¼k veya aÃƒÂ§Ã„Â±k bir tema (ÃƒÂ¶rn: 'islami', 'karanlÃ„Â±k tema', 'felsefe', 'karatahta', 'belgesel', 'hÃ„Â±zlÃ„Â±') belirttiyse veya sadece yalÃ„Â±n bir konu verdiyse, EN UYGUN ve en viral parametreleri seÃƒÂ§:
+    if req.start_offset is not None:
+        effective_offset = float(req.start_offset)
+    elif getattr(req, "start_after_quote", True) and quote_offset > 0:
+        effective_offset = round(quote_offset, 2)
+    else:
+        effective_offset = 0.0
+
+    word_req = "80-120 kelimelik derin, belgesel kurgulu, tefekkür ve merak uyandıran" if req.duration_mode == "deep" else "35-55 kelimelik akıcı, merak uyandıran"
+
+    prompt = f"""Sen viral YouTube Shorts, TikTok ve Mini-Belgesel prodüksiyonlarının BAŞ YAPAY ZEKA YÖNETMENİ ve senaristisin.
+Kullanıcı Talebi / Girdisi: '{topic}'
+Çalışma Modu: {'🤖 AI YÖNETMEN MODU (Tüm kararları sen ver)' if is_auto else f'🛠️ MANUEL KULLANICI MODU (Seçilen: Tema: {req.theme}, Şablon: {req.layout_type}, Süre: {req.duration_mode})'}
+
+GÖREV 1: YÖNETMEN KARARI (DIRECTOR DECISION)
+Kullanıcının yazdığı metni derinlemesine analiz et. Konuya EN UYGUN ve en viral parametreleri seç:
 - 'theme': 'dark_minimalist' | 'gold_luxury' | 'neon_cyber' | 'parchment' | 'notebook' | 'kraft' | 'chalkboard' | 'blueprint'
-  (KURAL: 'islami' ve 'karanlÃ„Â±k' veya 'derin tefekkÃƒÂ¼r' dendiÃ„Å¸inde KESÃ„Â°NLÃ„Â°KLE 'dark_minimalist' veya 'gold_luxury' seÃƒÂ§; 'felsefe/tarih' iÃƒÂ§in 'parchment' veya 'kraft'; 'bilim/evren' iÃƒÂ§in 'blueprint' veya 'neon_cyber')
-- 'layoutType': 'pip_split' | 'grid_explosion' | 'tri_concept' | 'vs_split' | 'flowchart' | 'quote_spotlight' | 'metric_impact' | 'cards'
-  (KURAL: 'gÃƒÂ¶rsel / fotoÃ„Å¸raf / polaroid / kurgu / sinematik' veya portre odaklÃ„Â± anlatÃ„Â±mlarda 'pip_split' seÃƒÂ§; 'parmak izi / milyarlarca insan / mÃƒÂ¼hÃƒÂ¼r' iÃƒÂ§in 'grid_explosion'; 3 kavram karÃ…Å¸Ã„Â±laÃ…Å¸tÃ„Â±rmasÃ„Â±nda 'tri_concept'; ayet/vecize iÃƒÂ§in 'quote_spotlight'; karÃ…Å¸Ã„Â±laÃ…Å¸tÃ„Â±rma ise 'vs_split')
-- 'illustrationPrompt': Konuya uygun Ã„Â°ngilizce sanatsal AI gÃƒÂ¶rsel ÃƒÂ¼retim promptu (Ãƒâ€“rn: 'vintage oil painting of Galileo looking through telescope at starry night, dramatic lighting, 8k')
-- 'illustrationCaption': GÃƒÂ¶rselin altÃ„Â±na el yazÃ„Â±sÃ„Â±yla yazÃ„Â±lacak kÃ„Â±sa TÃƒÂ¼rkÃƒÂ§e baÃ…Å¸lÃ„Â±k (Ãƒâ€“rn: 'GÃƒÂ¶kyÃƒÂ¼zÃƒÂ¼nÃƒÂ¼n SÃ„Â±rrÃ„Â±')
-- 'brollType': 'none' | 'cosmic' | 'clouds' | 'waves' | 'ink'
-- 'durationMode': 'deep' (60-90s, derin anlatÃ„Â±m) veya 'quick' (35s, hÃ„Â±zlÃ„Â± shorts)
-- 'particles': 'dust' (altÃ„Â±n tozu) | 'embers' (kÃ„Â±vÃ„Â±lcÃ„Â±m) | 'fog' | 'stars' | 'none'
-- 'ambientPattern': 'fingerprint' | 'islamic_geometric' | 'dna' | 'cosmic' | 'none'
-- 'doodleType': 'compass' | 'galaxy' | 'hourglass' | 'book' | 'lightbulb' | 'none'
-- 'directorReason': Neden bu tema, Ã…Å¸ablon ve gÃƒÂ¶rsel atmosferin seÃƒÂ§ildiÃ„Å¸inin 1 cÃƒÂ¼mlelik profesyonel TÃƒÂ¼rkÃƒÂ§e aÃƒÂ§Ã„Â±klamasÃ„Â±.
+  (KURAL: 'islami', 'karanlık' veya 'derin tefekkür' dendiğinde KESİNLİKLE 'dark_minimalist' veya 'gold_luxury' seç; 'felsefe/tarih' için 'parchment' veya 'kraft'; 'bilim/evren' için 'blueprint' veya 'neon_cyber')
+- 'directorReason': Neden bu tema ve sahnelerin seçildiğinin 1 cümlelik profesyonel Türkçe açıklaması.
 
-GÃƒâ€“REV 2: GEREKLÃ„Â° ASSET VE Ã„Â°KON LÃ„Â°STESÃ„Â°
-- 'requiredIcons': ['crescent', 'kaaba', 'fingerprint', 'dna', 'atom', 'brain', 'heart', 'eye', 'scale', 'hourglass', 'book', 'lightbulb', 'compass', 'shield', 'infinity'] arasÃ„Â±ndan veya yeni gereken ikon adlarÃ„Â±.
+GÖREV 2: {word_req} PROFESYONEL TÜRKÇE SESLENDİRME METNİ ('narration') YAZ.
 
-GÃƒâ€“REV 3: SENARYO VE VÃ„Â°RAL Ã…ÂEMA
-- 'strikeWord': ÃƒÅ“zeri kÃ„Â±rmÃ„Â±zÃ„Â± ÃƒÂ§izgiyle ÃƒÂ§izilecek ÃƒÂ§ÃƒÂ¼rÃƒÂ¼tÃƒÂ¼len kelime/iddia (Ãƒâ€“rn: 'TESADÃƒÅ“F' veya 'YARATMAK' veya '')
-- 'narration': Profesyonel, etkileyici TÃƒÂ¼rkÃƒÂ§e seslendirme metni.
+GÖREV 3: BU SENARYOYU 3 İLA 4 ARDIŞIK DİNAMİK BÖLÜME/SAHNEYE ('scenes') AYIR:
+Görsel monotonluğu kırmak için ardışık sahnelerde MUTLAKA FARKLI bir şablon ('layoutType') seç:
+'quote_spotlight' | 'vs_split' | 'cards' | 'metric_impact' | 'grid_explosion' | 'tri_concept' | 'pip_split'
+Her sahne için:
+- 'headerSubtitle': Kısa merak uyandırıcı alt başlık
+- 'headerLine1': Büyük 1. satır başlığı
+- 'circledWord': Vurgulu el çizimi çember içine alınacak kelime
+- 'headerLine2': İkinci satır veya tamamlama
+- 'highlightedText': Fosforlu kalemle çizilecek çarpıcı kelime/ifade
+- 'strikeWord': Üzeri kırmızıyla çizilecek çürütülen kelime (varsa)
+- İlgili şablon verisini (quoteSpotlight, vsData, cards, metricImpact, gridExplosion, triConcept) eksiksiz doldur.
 
-SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
+SADECE SAF GEÇERLİ JSON DÖNDÜR:
 {{
   "directorDecision": {{
     "theme": "{req.theme if not is_auto else 'dark_minimalist'}",
-    "layoutType": "{req.layout_type if not is_auto else 'grid_explosion'}",
-    "durationMode": "{req.duration_mode if not is_auto else 'deep'}",
     "particles": "dust",
     "ambientPattern": "fingerprint",
     "doodleType": "none",
-    "directorReason": "Ã„Â°slami tefekkÃƒÂ¼r ve biyolojik mÃƒÂ¼hÃƒÂ¼r vurgusu iÃƒÂ§in karanlÃ„Â±k minimal tuval ve 12'li parmak izi Ã„Â±zgarasÃ„Â± seÃƒÂ§ildi."
+    "directorReason": "Konunun ciddiyeti ve ilahi vazife bilinci için karanlık minimal tuval ve karşılaştırmalı sahne yapısı seçildi."
   }},
-  "requiredIcons": ["fingerprint", "dna", "scale"],
-  "headerSubtitle": "AkÃ„Â±l Almaz SÃ„Â±r",
-  "headerLine1": "PARMAK UCUNDAKÃ„Â°",
-  "circledWord": "BÃƒÅ“YÃƒÅ“K",
-  "headerLine2": "SIR",
-  "highlightedText": "MÃ„Â°LYARLARCA MÃƒÅ“HÃƒÅ“R",
-  "strikeWord": "TESADÃƒÅ“F",
-  "layoutType": "{req.layout_type if not is_auto else 'grid_explosion'}",
-  "cards": [
-    {{"id": "1", "label": "DNA Ã…Âifresi", "value": "%100 AynÃ„Â±", "icon": "dna", "color": "#1e3a8a"}},
-    {{"id": "2", "label": "Ã„Â°kizler", "value": "FarklÃ„Â± Ã„Â°z", "icon": "fingerprint", "color": "#15803d"}},
-    {{"id": "3", "label": "Tesviye", "value": "1400 YÃ„Â±l", "icon": "scale", "color": "#d97706"}}
+  "requiredIcons": ["scale", "shield", "heart", "book"],
+  "theme": "{req.theme if not is_auto else 'dark_minimalist'}",
+  "narration": "Profesyonel, akıcı ve etkileyici Türkçe seslendirme metni...",
+  "scenes": [
+    {{
+      "id": "scene_1",
+      "layoutType": "quote_spotlight",
+      "headerSubtitle": "İlmi Hakikat",
+      "headerLine1": "MUKADDES",
+      "circledWord": "YUVA",
+      "headerLine2": "",
+      "highlightedText": "BENCİL MENFAAT DEĞİL",
+      "strikeWord": "ZORUNDA DEĞİLİM",
+      "quoteSpotlight": {{
+        "speaker": "Fıkhi İlke",
+        "title": "AİLE HUKUKU",
+        "quoteText": "Kadınların erkekler üzerinde hakları olduğu gibi vazifeleri de vardır."
+      }}
+    }},
+    {{
+      "id": "scene_2",
+      "layoutType": "vs_split",
+      "headerSubtitle": "Kavram Analizi",
+      "headerLine1": "NEFSİN",
+      "circledWord": "DAYATMASI",
+      "headerLine2": "TEHLİKESİ",
+      "highlightedText": "MENFAAT ŞEBEKESİ",
+      "strikeWord": "BENCİLLİK",
+      "vsData": {{
+        "leftTitle": "Bencil Menfaat",
+        "leftSubtitle": "Nefsin Dayatması",
+        "leftPoints": ["Zorunda değilim tavrı", "Sürekli hak yarışı", "Huzursuzluk ve kopuş"],
+        "rightTitle": "Mukaddes Yuva",
+        "rightSubtitle": "Allah Rızası",
+        "rightPoints": ["Karşılıklı ihsan ve vefa", "İlahi vazife şuuru", "Huzur ve bereket"],
+        "verdict": "Aile hak iddia etme şebekesi değil, karşılıklı vazifelerin yerine getirildiği mukaddes bir yuvadır."
+      }}
+    }},
+    {{
+      "id": "scene_3",
+      "layoutType": "cards",
+      "headerSubtitle": "Huzurun Sırrı",
+      "headerLine1": "HUZURUN",
+      "circledWord": "TEMELİ",
+      "headerLine2": "",
+      "highlightedText": "ALLAH RIZASI",
+      "strikeWord": "",
+      "cards": [
+        {{"id": "1", "label": "Maruf İlkesi", "value": "İlahi Denge", "icon": "scale", "color": "#1e3a8a"}},
+        {{"id": "2", "label": "Sünnet Modeli", "value": "Hz. Fatıma Örneği", "icon": "shield", "color": "#d97706"}},
+        {{"id": "3", "label": "Manevi Bereket", "value": "Karşılıklı İhsan", "icon": "heart", "color": "#15803d"}}
+      ]
+    }}
   ],
-  "vsData": {{
-    "leftTitle": "DNA BenzerliÃ„Å¸i",
-    "leftSubtitle": "Genler Birebir AynÃ„Â±",
-    "leftPoints": ["AynÃ„Â± genetik kod", "AynÃ„Â± kan grubu", "AynÃ„Â± fiziksel yapÃ„Â±"],
-    "leftColor": "#dc2626",
-    "rightTitle": "Parmak UÃƒÂ§larÃ„Â±",
-    "rightSubtitle": "EÃ…Å¸siz Biyolojik MÃƒÂ¼hÃƒÂ¼r",
-    "rightPoints": ["Anne karnÃ„Â±nda mikro temas", "Asla deÃ„Å¸iÃ…Å¸meyen geometri", "Milyarlarca insanda tek"],
-    "rightColor": "#16a34a",
-    "verdict": "Ã„Â°kizlerin DNA'sÃ„Â± bile aynÃ„Â±yken, parmak izi her insanÃ„Â± tek ve eÃ…Å¸siz kÃ„Â±lar."
-  }},
-  "flowchartSteps": [
-    {{"stepNumber": 1, "badge": "1. AÃ…Å¸ama", "title": "BÃƒÂ¼yÃƒÂ¼k Soru", "desc": "Ãƒâ€¡ÃƒÂ¼rÃƒÂ¼yÃƒÂ¼p daÃ„Å¸Ã„Â±lan kemikler nasÃ„Â±l diriltilecek?", "color": "#1e3a8a"}},
-    {{"stepNumber": 2, "badge": "2. KÃ„Â±rÃ„Â±lma", "title": "En Ã„Â°nce Detay", "desc": "Kur'an beyne deÃ„Å¸il, parmak ucunun milimetrik ÃƒÂ§izgilerine iÃ…Å¸aret etti.", "color": "#d97706"}},
-    {{"stepNumber": 3, "badge": "3. Hakikat", "title": "Tesviye SÃ„Â±rrÃ„Â±", "desc": "19. yÃƒÂ¼zyÃ„Â±lda keÃ…Å¸fedilen biometrik imza asÃ„Â±rlar ÃƒÂ¶nce haber verildi.", "color": "#15803d"}}
-  ],
-  "quoteSpotlight": {{
-    "speaker": "KÃ„Â±yamet Suresi",
-    "title": "4. AYET",
-    "quoteText": "Evet, bizim onun parmak uÃƒÂ§larÃ„Â±nÃ„Â± bile derleyip yeniden dÃƒÂ¼zene koymaya gÃƒÂ¼cÃƒÂ¼mÃƒÂ¼z yeter.",
-    "sourceRef": "KÃ„Â±yamet Suresi, 3-4"
-  }},
-  "metricImpact": {{
-    "bigNumber": "8 MÃ„Â°LYAR",
-    "bigLabel": "Ã„Â°NSAN Ã„Â°Ãƒâ€¡Ã„Â°NDE",
-    "subheading": "HiÃƒÂ§birinin Parmak Ã„Â°zi AynÃ„Â± DeÃ„Å¸il",
-    "keyTakeaway": "Ãƒâ€¡ÃƒÂ¼nkÃƒÂ¼ her insan varoluÃ…Å¸un altÃ„Â±na atÃ„Â±lmÃ„Â±Ã…Å¸ ÃƒÂ¶zel bir imzadÃ„Â±r."
-  }},
-  "gridExplosion": {{
-    "title": "MÃ„Â°LYARLARCA Ã„Â°NSAN",
-    "subtitle": "HiÃƒÂ§birinin Parmak Ã„Â°zi Birbirine BenzemeÃ„Å¸ecek Ã…Âekilde YaratÃ„Â±ldÃ„Â±",
-    "iconType": "fingerprint",
-    "itemCount": 12,
-    "badgeText": "EÃ…ÂSÃ„Â°Z BÃ„Â°YOLOJÃ„Â°K MÃƒÅ“HÃƒÅ“R"
-  }},
-  "triConcept": {{
-    "badge": "BEKLENEN CEVAP",
-    "concept1": {{"title": "BEYÃ„Â°N", "subtitle": "En KarmaÃ…Å¸Ã„Â±k HafÃ„Â±za", "icon": "brain", "color": "#38bdf8"}},
-    "concept2": {{"title": "KALP", "subtitle": "YaÃ…Å¸am Merkezi", "icon": "heart", "color": "#ef4444"}},
-    "concept3": {{"title": "GÃƒâ€“Z", "subtitle": "Hassas Mercek", "icon": "eye", "color": "#facc15"}},
-    "bottomNote": "FAKAT KUR'AN PARMAK UCUNA ODAKLANDI"
-  }},
-  "timeline": {{
-    "startYear": "KÃ„Â±yamet",
-    "endYear": "DiriliÃ…Å¸",
-    "durationLabel": "Tesviye",
-    "title": "Kusursuz Dizilim",
-    "ayahArabic": "",
-    "ayahTranslation": "Evet, bizim onun parmak uÃƒÂ§larÃ„Â±nÃ„Â± bile derleyip yeniden dÃƒÂ¼zene koymaya gÃƒÂ¼cÃƒÂ¼mÃƒÂ¼z yeter.",
-    "ayahRef": "KÃ„Â±yamet Suresi, 3-4"
-  }},
-  "narration": "DNA'sÃ„Â± yÃƒÂ¼zde yÃƒÂ¼z aynÃ„Â± olan tek yumurta ikizlerini bile birbirinden ayÃ„Â±ran tek bir sÃ„Â±r vardÃ„Â±r. Ãƒâ€¡ÃƒÂ¼rÃƒÂ¼yÃƒÂ¼p toprak olduktan sonra nasÃ„Â±l diriltileceÃ„Å¸ini soranlara, Kur'an tam da parmak uÃƒÂ§larÃ„Â±na iÃ…Å¸aret ederek cevap verdi. Milyarlarca insanÃ„Â±n her biri, parmak ucundaki o eÃ…Å¸siz mÃƒÂ¼hÃƒÂ¼rle yeniden var edilir.",
   "viral": {{
     "hookScore": 99,
     "viralTitles": [
-      "Parmak Ucundaki BÃƒÅ“YÃƒÅ“K SÃ„Â±r! KÃ„Â±yamet Suresi 3-4",
-      "Ã„Â°kizlerin Bile FarklÃ„Â±: 1400 YÃ„Â±l Ãƒâ€“nceki AkÃ„Â±l Almaz Detay!"
+      "Aile Bencil Menfaat Şebekesi Değildir!",
+      "Nefsin Dayatması mı, Allah Rızası mı?"
     ],
-    "hashtags": ["#bilim", "#kuran", "#parmakizi", "#mucize", "#tefekkÃƒÂ¼r", "#shorts"],
-    "loopEnding": "ve iÃ…Å¸te bu yÃƒÂ¼zden her insan aslÃ„Â±nda...",
-    "description": "Parmak uÃƒÂ§larÃ„Â±ndaki dermatoglif Ã…Å¸ifresi ve KÃ„Â±yamet Suresi'nin mucizevi detaylarÃ„Â±."
+    "hashtags": ["#aile", "#evlilik", "#huzur", "#tefekkür", "#shorts"],
+    "loopEnding": "ve işte gerçek huzur buradadır.",
+    "description": "Evlilik ve aile hukuku üzerine ilmi ve felsefi hakikatler."
   }}
 }}
 """
@@ -3569,58 +3607,35 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
     effective_model = req.model or DEFAULT_MODEL
     res, key_name = pool.query_with_rotation(prompt, "You are a specialized JSON video schema generator. Output ONLY raw JSON.", model=effective_model)
     if not res:
-        raise HTTPException(status_code=500, detail=f"Key havuzundaki tÃƒÂ¼m anahtarlar denendi ({effective_model}) ancak yanÃ„Â±t alÃ„Â±namadÃ„Â±.")
+        raise HTTPException(status_code=500, detail=f"Key havuzundaki tüm anahtarlar denendi ({effective_model}) ancak yanıt alınamadı.")
 
-    import re
     cleaned = re.sub(r"```json\s*", "", res)
     cleaned = re.sub(r"```\s*", "", cleaned).strip()
 
     try:
         video_data = json.loads(cleaned)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"LLM JSON ÃƒÂ§Ã„Â±ktÃ„Â±sÃ„Â± ayrÃ„Â±Ã…Å¸tÃ„Â±rÃ„Â±lamadÃ„Â±: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"LLM JSON çıktısı ayrıştırılamadı: {str(e)}")
 
-    # 1. AI Director vs Manual Decisions Sync
     director_dec = video_data.get("directorDecision", {})
     topic_lower = topic.lower()
 
     if is_auto:
-        # AI Director selects
-        theme = director_dec.get("theme")
-        if not theme:
-            if "karanlÃ„Â±k" in topic_lower or "dark" in topic_lower or "islam" in topic_lower:
-                theme = "dark_minimalist"
-            elif "felsefe" in topic_lower or "tarih" in topic_lower:
-                theme = "parchment"
-            else:
-                theme = req.theme or "notebook"
-
-        layout_type = director_dec.get("layoutType")
-        if not layout_type:
-            if any(w in topic_lower for w in ["parmak", "milyar", "mÃƒÂ¼hÃƒÂ¼r"]):
-                layout_type = "grid_explosion"
-            elif any(w in topic_lower for w in ["beyin", "kalp", "gÃƒÂ¶z", "ÃƒÂ¼ÃƒÂ§", "3"]):
-                layout_type = "tri_concept"
-            else:
-                layout_type = req.layout_type or "cards"
-
-        duration_mode = director_dec.get("durationMode") or req.duration_mode or "quick"
+        theme = director_dec.get("theme") or ("dark_minimalist" if "islam" in topic_lower or "derin" in topic_lower else (req.theme or "notebook"))
+        duration_mode = director_dec.get("durationMode") or req.duration_mode or "deep"
         is_dark = (theme in ["dark_minimalist", "neon_cyber", "gold_luxury"])
         particles = director_dec.get("particles") or ("dust" if is_dark else "none")
-        ambient_pattern = director_dec.get("ambientPattern") or ("fingerprint" if "parmak" in topic_lower else ("islamic_geometric" if "islam" in topic_lower else ("dna" if "dna" in topic_lower else "none")))
+        ambient_pattern = director_dec.get("ambientPattern") or ("fingerprint" if is_dark else "none")
         doodle_type = director_dec.get("doodleType") or ("none" if is_dark else "auto")
     else:
-        # Manual Mode respects user
         theme = req.theme or "notebook"
-        layout_type = req.layout_type or "cards"
-        duration_mode = req.duration_mode or "quick"
+        duration_mode = req.duration_mode or "deep"
         is_dark = (theme in ["dark_minimalist", "neon_cyber", "gold_luxury"])
         particles = req.particles if (req.particles and req.particles != "default") else ("dust" if is_dark else "none")
         ambient_pattern = req.ambient_pattern if (req.ambient_pattern and req.ambient_pattern != "default") else ("fingerprint" if is_dark else "none")
         doodle_type = req.doodle_type if (req.doodle_type and req.doodle_type != "auto") else "auto"
 
     video_data["theme"] = theme
-    video_data["layoutType"] = layout_type
     video_data["durationMode"] = duration_mode
     video_data["particles"] = particles
     video_data["ambientPattern"] = ambient_pattern
@@ -3629,45 +3644,18 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
     video_data["lightLeaks"] = req.light_leaks or "auto"
     video_data["cameraMotion"] = req.camera_motion or "handheld"
     video_data["accentType"] = req.accent_type or "none"
-    video_data["socialHandle"] = req.social_handle
+    video_data["socialHandle"] = req.social_handle or "@birkissa"
     video_data["musicTrack"] = req.music_track or "ambient_music.wav"
     video_data["ttsProvider"] = req.tts_provider or "edge_tts"
     video_data["voiceId"] = req.voice_id or "en-US-AndrewMultilingualNeural"
     video_data["emotionTone"] = req.emotion_tone or "documentary"
-
-    # Faz 8: AI Illustration & B-Roll Resolution
-    should_gen_image = req.enable_illustration or (is_auto and (layout_type == "pip_split" or any(w in topic_lower for w in ["resim", "gÃƒÂ¶rsel", "fotoÃ„Å¸raf", "tablo", "portre"])))
-    if should_gen_image:
-        ill_prompt = req.illustration_prompt or director_dec.get("illustrationPrompt") or f"vintage oil sketch of {topic}, dramatic lighting, masterwork, 8k"
-        ill_caption = req.illustration_caption or director_dec.get("illustrationCaption") or topic[:35]
-        ill_style = req.illustration_style or "polaroid"
-        try:
-            ill_res = generate_ai_illustration(prompt=ill_prompt, style=ill_style, caption=ill_caption)
-            video_data["illustrationUrl"] = ill_res["illustrationUrl"]
-            video_data["illustrationCaption"] = ill_res["caption"]
-            video_data["illustrationStyle"] = ill_style
-        except Exception as e:
-            print(f"[Server] Illustration generation error: {e}")
-
-    # B-Roll Selection
-    broll_choice = req.broll_type if (req.broll_type and req.broll_type != "none") else director_dec.get("brollType", "none")
-    if is_auto and broll_choice == "none":
-        if any(w in topic_lower for w in ["evren", "yÃ„Â±ldÃ„Â±z", "zaman", "uzay"]) or theme == "neon_cyber":
-            broll_choice = "cosmic"
-        elif any(w in topic_lower for w in ["deniz", "su", "okyanus"]):
-            broll_choice = "waves"
-        elif any(w in topic_lower for w in ["tefekkÃƒÂ¼r", "felsefe", "derin"]) or theme == "dark_minimalist":
-            broll_choice = "ink"
-        elif any(w in topic_lower for w in ["gÃƒÂ¶kyÃƒÂ¼zÃƒÂ¼", "hava", "bulut"]):
-            broll_choice = "clouds"
-
-    video_data["brollType"] = broll_choice
+    video_data["brollType"] = req.broll_type if (req.broll_type and req.broll_type != "none") else "none"
     video_data["brollOpacity"] = req.broll_opacity or 0.18
 
-    # 2. AdÃ„Â±m 2: Asset Manager & Ingestor Pipeline (VarlÃ„Â±k TaramasÃ„Â± & Otomatik Ã„Â°ndirme)
+    # Ingest required icons
     video_data = process_video_assets(video_data, pool=pool)
 
-    # 3. AdÃ„Â±m 3: Studio TTS Audio & Whisper-aligned Subtitles (Faz 7 Multi-TTS)
+    # 2. Studio TTS Audio & Whisper-aligned Subtitles
     narration_text = video_data.get("narration", "")
     audio_name, subtitles, words_list = generate_studio_audio_and_subtitles(
         narration_text=narration_text,
@@ -3677,12 +3665,112 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
         emotion_tone=req.emotion_tone or "documentary",
         elevenlabs_api_key=req.elevenlabs_api_key
     )
+
+    if words_list:
+        total_audio_duration = round(words_list[-1]["end"] + 0.8, 2)
+    elif subtitles:
+        total_audio_duration = round(subtitles[-1]["end"] + 0.8, 2)
+    else:
+        total_audio_duration = 20.0
+
+    # 3. Synchronize Multi-Scene Storyboard across audio duration with start offset
+    parsed_scenes = video_data.get("scenes", [])
+    if not parsed_scenes or len(parsed_scenes) == 0:
+        parsed_scenes = [
+            {
+                "id": "scene_1",
+                "layoutType": "quote_spotlight",
+                "headerSubtitle": "İlmi Hakikat",
+                "headerLine1": "MUKADDES",
+                "circledWord": "YUVA",
+                "headerLine2": "",
+                "highlightedText": "BENCİL MENFAAT DEĞİL",
+                "strikeWord": "ZORUNDA DEĞİLİM",
+                "quoteSpotlight": {
+                    "speaker": "Fıkhi İlke",
+                    "quoteText": narration_text[:90] if narration_text else "Aile mukaddes bir yuvadır."
+                }
+            },
+            {
+                "id": "scene_2",
+                "layoutType": "vs_split",
+                "headerSubtitle": "Kavram Karşılaştırması",
+                "headerLine1": "NEFSİN",
+                "circledWord": "DAYATMASI",
+                "headerLine2": "",
+                "highlightedText": "MENFAAT ŞEBEKESİ",
+                "strikeWord": "BENCİLLİK",
+                "vsData": {
+                    "leftTitle": "Bencil Menfaat",
+                    "leftSubtitle": "Nefsin Dayatması",
+                    "leftPoints": ["Zorunda değilim tavrı", "Sürekli hak yarışı", "Kopuş"],
+                    "rightTitle": "Mukaddes Yuva",
+                    "rightSubtitle": "Allah Rızası",
+                    "rightPoints": ["Karşılıklı vefa", "İlahi vazife", "Huzur"],
+                    "verdict": "Aile hak yarışı değil, karşılıklı ihsandır."
+                }
+            },
+            {
+                "id": "scene_3",
+                "layoutType": "cards",
+                "headerSubtitle": "Huzurun Sırrı",
+                "headerLine1": "HUZURUN",
+                "circledWord": "TEMELİ",
+                "headerLine2": "",
+                "highlightedText": "ALLAH RIZASI",
+                "strikeWord": "",
+                "cards": [
+                    {"id": "1", "label": "Maruf İlkesi", "value": "İlahi Denge", "icon": "scale", "color": "#1e3a8a"},
+                    {"id": "2", "label": "Sünnet Modeli", "value": "Hz. Fatıma Örneği", "icon": "shield", "color": "#d97706"},
+                    {"id": "3", "label": "Manevi Bereket", "value": "Karşılıklı İhsan", "icon": "heart", "color": "#15803d"}
+                ]
+            }
+        ]
+
+    num_scenes = len(parsed_scenes)
+    slice_dur = total_audio_duration / num_scenes
+    synced_scenes = []
+
+    for i, sc in enumerate(parsed_scenes):
+        st = round(effective_offset + (i * slice_dur), 2)
+        en = round(effective_offset + ((i + 1) * slice_dur if i < num_scenes - 1 else total_audio_duration), 2)
+        sc["id"] = f"scene_{i + 1}"
+        sc["startTime"] = st
+        sc["endTime"] = en
+        if "layoutType" not in sc:
+            sc["layoutType"] = "cards"
+        synced_scenes.append(sc)
+
+    # Offset subtitles and words
+    if effective_offset > 0:
+        for sub in subtitles:
+            sub["start"] = round(sub["start"] + effective_offset, 2)
+            sub["end"] = round(sub["end"] + effective_offset, 2)
+        for w in words_list:
+            w["start"] = round(w["start"] + effective_offset, 2)
+            w["end"] = round(w["end"] + effective_offset, 2)
+
+    video_data["scenes"] = synced_scenes
+    video_data["aiKurguStartOffset"] = effective_offset
     video_data["subtitles"] = subtitles
     video_data["words"] = words_list
-    video_data["audioUrl"] = audio_name
+    video_data["audioUrl"] = "/public/audio.mp3"
+
+    # Copy first scene properties to root for 100% backward compatibility
+    if synced_scenes:
+        first = synced_scenes[0]
+        for k in ["headerSubtitle", "headerLine1", "circledWord", "headerLine2", "highlightedText", "strikeWord", "layoutType", "cards", "quoteSpotlight", "vsData", "metricImpact", "gridExplosion", "triConcept"]:
+            if k in first and first[k]:
+                video_data[k] = first[k]
+
+    # PRESERVE Quote Videos, PIP Videos, Overlay Images, Audio Tracks
+    for k in ["quoteVideos", "pipVideos", "overlayImages", "audioTracks"]:
+        if k in existing_data and existing_data[k]:
+            video_data[k] = existing_data[k]
+
+    video_data["totalDuration"] = calculate_dynamic_timeline_duration(video_data, synced_scenes)
 
     # Save to generatedData.json for Remotion
-    out_json = os.path.join(SRC_DIR, "generatedData.json")
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(video_data, f, ensure_ascii=False, indent=2)
 
@@ -3692,8 +3780,8 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
         "id": str(uuid.uuid4())[:8],
         "topic": topic,
         "theme": theme,
-        "layoutType": layout_type,
-        "durationMode": duration_mode,
+        "layoutType": video_data.get("layoutType", "cards"),
+        "durationMode": f"{len(synced_scenes)} Sahne ({video_data['totalDuration']:.0f}s)",
         "created_at": time.strftime("%Y-%m-%d %H:%M"),
         "headerMain": video_data.get("headerLine1", "") + " " + video_data.get("circledWord", "") + " " + video_data.get("highlightedText", topic),
         "narration": narration_text,
@@ -3706,19 +3794,25 @@ SADECE SAF GEÃƒâ€¡ERLÃ„Â° JSON DÃƒâ€“NDÃƒÅ“R:
     history.insert(0, new_hist_item)
     save_history(history[:30])
 
-    # Final response with director feedback & asset log
-    director_reason = director_dec.get("directorReason") or f"{'Yapay ZekÃƒÂ¢ YÃƒÂ¶netmeni' if is_auto else 'KullanÃ„Â±cÃ„Â±'} konuya uygun olarak {theme} temasÃ„Â±nÃ„Â± ve {layout_type} sahne yapÃ„Â±sÃ„Â±nÃ„Â± seÃƒÂ§ti."
+    director_reason = director_dec.get("directorReason") or f"Konuya uygun olarak {theme} teması ve {len(synced_scenes)} bölümlü dinamik defter kurgusu oluşturuldu."
     acquired_assets = video_data.get("_acquired_assets", [])
 
     return {
         "success": True,
         "key_used": key_name,
         "model_used": effective_model,
+        "scenes": synced_scenes,
+        "totalDuration": video_data["totalDuration"],
+        "total_duration": video_data["totalDuration"],
+        "num_scenes": len(synced_scenes),
+        "aiKurguStartOffset": effective_offset,
+        "subtitles": subtitles,
+        "words": words_list,
         "video_data": video_data,
         "director_decisions": {
             "mode": "auto" if is_auto else "manual",
             "theme": theme,
-            "layout_type": layout_type,
+            "layout_type": video_data.get("layoutType", "cards"),
             "duration_mode": duration_mode,
             "particles": particles,
             "ambient_pattern": ambient_pattern,

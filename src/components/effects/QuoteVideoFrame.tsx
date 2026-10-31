@@ -66,7 +66,8 @@ export const QuoteVideoFrame: React.FC<QuoteVideoFrameProps> = ({ quoteVideos = 
         const trimEndFrame = Math.round(trimEndSec * fps);
 
         // Resolve video source URL
-        let resolvedSrc = qv.videoUrl;
+        let resolvedSrc = qv.videoUrl || (qv as any).url || '';
+        if (!resolvedSrc) return null;
         if (
           !resolvedSrc.startsWith('http://') &&
           !resolvedSrc.startsWith('https://') &&
