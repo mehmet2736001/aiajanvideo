@@ -109,13 +109,13 @@
       border: 1px solid rgba(234, 179, 8, 0.35) !important;
     }
 
-    /* FULLSCREEN CINEMA PREVIEW STYLES */
-    #preview-screen-container {
+    /* FULLSCREEN PHONE DEVICE CINEMA PREVIEW STYLES */
+    #preview-phone-mockup {
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    #preview-screen-container.in-fullscreen,
-    #preview-screen-container:fullscreen,
-    #preview-screen-container:-webkit-full-screen {
+    #preview-phone-fullscreen-wrapper:fullscreen,
+    #preview-phone-fullscreen-wrapper:-webkit-full-screen,
+    #preview-phone-fullscreen-wrapper.in-fullscreen {
       position: fixed !important;
       inset: 0 !important;
       top: 0 !important;
@@ -128,41 +128,47 @@
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      border-radius: 0 !important;
-      border: none !important;
       padding: 1.5rem !important;
       margin: 0 !important;
       z-index: 999999 !important;
     }
 
-    #preview-screen-container.in-fullscreen #notebook-preview,
-    #preview-screen-container:fullscreen #notebook-preview,
-    #preview-screen-container:-webkit-full-screen #notebook-preview {
+    #preview-phone-fullscreen-wrapper:fullscreen #preview-phone-mockup,
+    #preview-phone-fullscreen-wrapper:-webkit-full-screen #preview-phone-mockup,
+    #preview-phone-fullscreen-wrapper.in-fullscreen #preview-phone-mockup {
       height: 94vh !important;
+      max-height: 94vh !important;
       width: auto !important;
-      aspect-ratio: 9 / 16 !important;
-      max-width: 94vw !important;
-      border-radius: 28px !important;
-      box-shadow: 0 0 70px rgba(0, 0, 0, 0.95), 0 0 30px rgba(245, 158, 11, 0.15) !important;
+      aspect-ratio: 320 / 520 !important;
+      max-width: 90vw !important;
+      border-radius: 48px !important;
+      border-width: 7px !important;
+      border-color: #334155 !important;
+      padding: 14px !important;
+      background-color: #0c111d !important;
+      box-shadow: 0 0 90px rgba(0, 0, 0, 0.98), 0 0 40px rgba(245, 158, 11, 0.25) !important;
       margin: auto !important;
     }
 
-    #preview-screen-container.in-fullscreen #final-video,
-    #preview-screen-container:fullscreen #final-video,
-    #preview-screen-container:-webkit-full-screen #final-video {
-      height: 94vh !important;
-      width: auto !important;
-      aspect-ratio: 9 / 16 !important;
-      max-width: 94vw !important;
-      object-fit: contain !important;
-      border-radius: 24px !important;
-      box-shadow: 0 0 70px rgba(0, 0, 0, 0.95) !important;
-      margin: auto !important;
+    #preview-phone-fullscreen-wrapper:fullscreen #preview-phone-notch,
+    #preview-phone-fullscreen-wrapper:-webkit-full-screen #preview-phone-notch,
+    #preview-phone-fullscreen-wrapper.in-fullscreen #preview-phone-notch {
+      width: 130px !important;
+      height: 18px !important;
+      top: 18px !important;
     }
 
-    #preview-screen-container.in-fullscreen #btn-exit-fullscreen,
-    #preview-screen-container:fullscreen #btn-exit-fullscreen,
-    #preview-screen-container:-webkit-full-screen #btn-exit-fullscreen {
+    #preview-phone-fullscreen-wrapper:fullscreen #preview-screen-container,
+    #preview-phone-fullscreen-wrapper:-webkit-full-screen #preview-screen-container,
+    #preview-phone-fullscreen-wrapper.in-fullscreen #preview-screen-container {
+      border-radius: 36px !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    #preview-phone-fullscreen-wrapper:fullscreen #btn-exit-fullscreen,
+    #preview-phone-fullscreen-wrapper:-webkit-full-screen #btn-exit-fullscreen,
+    #preview-phone-fullscreen-wrapper.in-fullscreen #btn-exit-fullscreen {
       display: inline-flex !important;
     }
 
@@ -836,21 +842,24 @@
         </div>
       </div>
 
-      <!-- 9:16 PHONE MOCKUP PREVIEW MONITOR -->
-      <div class="relative w-[320px] h-[520px] bg-[#0c111d] rounded-[38px] p-2.5 border-4 border-slate-800 shadow-2xl flex flex-col overflow-hidden">
+      <!-- PREVIEW PHONE FULLSCREEN WRAPPER (Scales entire device with bezel & notch) -->
+      <div id="preview-phone-fullscreen-wrapper" class="relative flex items-center justify-center my-auto transition-all duration-300">
         
-        <!-- Notch -->
-        <div class="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-3 bg-slate-800/90 rounded-full z-40 flex items-center justify-center">
-          <div class="w-1.5 h-1.5 rounded-full bg-black/60"></div>
-        </div>
+        <!-- Floating Exit Fullscreen Button (Visible in Fullscreen) -->
+        <button id="btn-exit-fullscreen" onclick="togglePreviewFullscreen(event)" title="Tam Ekrandan Çık (ESC veya Çift Tıkla)" class="hidden fixed top-5 right-6 z-50 bg-slate-900/95 hover:bg-slate-800 text-amber-400 hover:text-white px-3.5 py-1.5 rounded-full border border-slate-700 shadow-2xl backdrop-blur-md text-xs font-semibold items-center gap-1.5 transition active:scale-95">
+          <i class="fa-solid fa-compress"></i> <span>Tam Ekrandan Çık</span>
+        </button>
 
-        <!-- Screen Container (Double Click to toggle Fullscreen) -->
-        <div id="preview-screen-container" ondblclick="togglePreviewFullscreen(event)" title="Tam Ekran Yapmak İçin Çift Tıklayın" class="relative w-full h-full rounded-[28px] overflow-hidden bg-slate-950 flex flex-col cursor-pointer transition-all duration-200">
+        <!-- 9:16 PHONE MOCKUP PREVIEW MONITOR (Full Phone Device Bezel, Notch & Screen) -->
+        <div id="preview-phone-mockup" ondblclick="togglePreviewFullscreen(event)" title="Tam Ekran İçin Çift Tıklayın" class="relative w-[320px] h-[520px] bg-[#0c111d] rounded-[38px] p-2.5 border-4 border-slate-800 shadow-2xl flex flex-col overflow-hidden cursor-pointer transition-all duration-300">
           
-          <!-- Floating Exit Fullscreen Button (Visible in Fullscreen) -->
-          <button id="btn-exit-fullscreen" onclick="togglePreviewFullscreen(event)" title="Tam Ekrandan Çık (ESC veya Çift Tıkla)" class="hidden fixed top-5 right-6 z-50 bg-slate-900/95 hover:bg-slate-800 text-amber-400 hover:text-white px-3.5 py-1.5 rounded-full border border-slate-700 shadow-2xl backdrop-blur-md text-xs font-semibold items-center gap-1.5 transition active:scale-95">
-            <i class="fa-solid fa-compress"></i> <span>Tam Ekrandan Çık</span>
-          </button>
+          <!-- Notch -->
+          <div id="preview-phone-notch" class="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-3 bg-slate-800/90 rounded-full z-40 flex items-center justify-center pointer-events-none transition-all duration-300">
+            <div class="w-1.5 h-1.5 rounded-full bg-black/60"></div>
+          </div>
+
+          <!-- Screen Container -->
+          <div id="preview-screen-container" class="relative w-full h-full rounded-[28px] overflow-hidden bg-slate-950 flex flex-col transition-all duration-300">
           
           <!-- MP4 Video Player (hidden when in live canvas mode) -->
           <video id="final-video" controls class="w-full h-full object-cover hidden z-30" src="/out/video.mp4" playsinline preload="auto"></video>
@@ -952,6 +961,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
 
       <!-- TRANSPORT CONTROL BAR (MATCHING SCREENSHOT) -->
@@ -5011,11 +5021,12 @@
       }
     }
 
-    // 7.1. FULLSCREEN PREVIEW CONTROLS (DOUBLE CLICK SUPPORT)
+    // 7.1. FULLSCREEN PHONE FRAME PREVIEW CONTROLS (DEVICE BEZEL + NOTCH + SCREEN)
     function togglePreviewFullscreen(e) {
       if (e) {
         const target = e.target;
-        if (target && (target.closest('button') && target.closest('button').id !== 'btn-exit-fullscreen' && target.closest('button').title?.indexOf('Tam Ekran') === -1)) {
+        // Do not toggle if double-clicking specific action buttons inside the phone (like mute or delete)
+        if (target && target.closest('button') && target.closest('button').id !== 'btn-exit-fullscreen' && target.closest('button').title?.indexOf('Tam Ekran') === -1) {
           return;
         }
         if (target && (target.closest('input') || target.closest('select') || target.closest('textarea'))) {
@@ -5023,21 +5034,21 @@
         }
       }
 
-      const container = document.getElementById('preview-screen-container');
-      if (!container) return;
+      const wrapper = document.getElementById('preview-phone-fullscreen-wrapper') || document.getElementById('preview-phone-mockup');
+      if (!wrapper) return;
 
-      const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || container.classList.contains('in-fullscreen'));
+      const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || wrapper.classList.contains('in-fullscreen'));
 
       if (!isFs) {
-        if (container.requestFullscreen) {
-          container.requestFullscreen().catch(err => {
-            console.warn('requestFullscreen fallback:', err);
-            setPreviewFullscreenState(true);
+        if (wrapper.requestFullscreen) {
+          wrapper.requestFullscreen().catch(err => {
+            console.warn('requestFullscreen fallback to cinema mode:', err);
+            setPhoneFullscreenState(true);
           });
-        } else if (container.webkitRequestFullscreen) {
-          container.webkitRequestFullscreen();
+        } else if (wrapper.webkitRequestFullscreen) {
+          wrapper.webkitRequestFullscreen();
         } else {
-          setPreviewFullscreenState(true);
+          setPhoneFullscreenState(true);
         }
       } else {
         if (document.fullscreenElement || document.webkitFullscreenElement) {
@@ -5047,23 +5058,23 @@
             document.webkitExitFullscreen();
           }
         }
-        setPreviewFullscreenState(false);
+        setPhoneFullscreenState(false);
       }
     }
 
-    function setPreviewFullscreenState(active) {
-      const container = document.getElementById('preview-screen-container');
+    function setPhoneFullscreenState(active) {
+      const wrapper = document.getElementById('preview-phone-fullscreen-wrapper');
       const icon = document.getElementById('icon-preview-fullscreen');
       const exitBtn = document.getElementById('btn-exit-fullscreen');
-      if (!container) return;
+      if (!wrapper) return;
 
       if (active) {
-        container.classList.add('in-fullscreen');
+        wrapper.classList.add('in-fullscreen');
         if (icon) icon.className = 'fa-solid fa-compress text-[10px] text-amber-400';
         if (exitBtn) exitBtn.style.display = 'inline-flex';
-        showToast('📺 Tam ekran modundasınız (Çıkmak için tekrar çift tıklayın veya ESC)', 'info');
+        showToast('📺 Cihaz çerçeveli tam ekran moduna geçildi (Çıkmak için tekrar çift tıklayın veya ESC)', 'info');
       } else {
-        container.classList.remove('in-fullscreen');
+        wrapper.classList.remove('in-fullscreen');
         if (icon) icon.className = 'fa-solid fa-expand text-[10px]';
         if (exitBtn) exitBtn.style.display = 'none';
       }
@@ -5071,11 +5082,11 @@
 
     document.addEventListener('fullscreenchange', () => {
       const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
-      setPreviewFullscreenState(isFs);
+      setPhoneFullscreenState(isFs);
     });
     document.addEventListener('webkitfullscreenchange', () => {
       const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
-      setPreviewFullscreenState(isFs);
+      setPhoneFullscreenState(isFs);
     });
 
     // 7. PREVIEW DISPLAY (CANVAS VS VIDEO)
@@ -5285,8 +5296,8 @@
 
         const is916 = !videoData.format || videoData.format === '9:16' || videoData.format === 'portrait';
         const frameAspectClass = is916 
-          ? 'w-[185px] h-[325px] aspect-[9/16]' 
-          : 'w-full max-w-[270px] aspect-video';
+          ? 'w-[62%] aspect-[9/16] max-h-[66%]' 
+          : 'w-[90%] aspect-video max-h-[60%]';
 
         container.innerHTML = `
           <div class="w-full h-full flex flex-col items-center justify-between py-1 select-none animate-fadeIn">
