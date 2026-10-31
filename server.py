@@ -1690,6 +1690,24 @@ def download_export_bundle():
 # ==========================================
 # PRO VIDEO EDITOR & TIMELINE API ENDPOINTS
 # ==========================================
+def calculate_dynamic_timeline_duration(video_data: dict, scenes: list) -> float:
+    ends = [5.0]
+    for s in (scenes or []):
+        ends.append(float(s.get("endTime", 0.0) or 0.0))
+    for q in (video_data.get("quoteVideos", []) or []):
+        start = float(q.get("timelineStart", 0.0) or 0.0)
+        dur = float(q.get("duration", 0.0) or max(1.0, float(q.get("trimEnd", 6.0) or 6.0) - float(q.get("trimStart", 0.0) or 0.0)))
+        ends.append(start + dur)
+    for p in (video_data.get("pipVideos", []) or []):
+        start = float(p.get("timelineStart", 0.0) or 0.0)
+        dur = float(p.get("duration", 0.0) or max(1.0, float(p.get("trimEnd", 5.0) or 5.0) - float(p.get("trimStart", 0.0) or 0.0)))
+        ends.append(start + dur)
+    for sub in (video_data.get("subtitles", []) or []):
+        ends.append(float(sub.get("end", 0.0) or 0.0))
+    if "totalDuration" in video_data and isinstance(video_data["totalDuration"], (int, float)):
+        ends.append(float(video_data["totalDuration"]))
+    return round(max(ends), 2)
+
 @app.get("/api/timeline/data")
 def get_timeline_data():
     data_file = os.path.join(SRC_DIR, "generatedData.json")
@@ -1702,12 +1720,13 @@ def get_timeline_data():
     audio_path = os.path.join(PUBLIC_DIR, "audio.mp3")
     waveform = extract_audio_waveform(audio_path, num_peaks=120)
     
+    total_dur = calculate_dynamic_timeline_duration(video_data, scenes)
     return {
         "success": True,
         "video_data": video_data,
         "scenes": scenes,
         "waveform": waveform,
-        "duration": video_data.get("totalDuration", 15.0),
+        "duration": total_dur,
         "subtitles": video_data.get("subtitles", []),
         "words": video_data.get("words", [])
     }
@@ -1920,6 +1939,52 @@ def add_scene(duration: float = 10.0):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+class ShiftScenesRequest(BaseModel):
+    targetStart: float
+
+@app.post("/api/timeline/shift-scenes")
+def shift_scenes_offset(req: ShiftScenesRequest):
+    """Shift all AI notebook scenes so that the first scene starts at targetStart (e.g. after quote video)."""
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        video_data = json.load(f)
+
+    scenes = video_data.get("scenes", [])
+    if not scenes:
+        raise HTTPException(status_code=400, detail="Sahneler listesi boş.")
+
+    first_start = float(scenes[0].get("startTime", 0.0) or 0.0)
+    delta = float(req.targetStart) - first_start
+
+    for s in scenes:
+        s["startTime"] = max(0.0, round(float(s.get("startTime", 0.0) or 0.0) + delta, 2))
+        s["endTime"] = max(s["startTime"] + 1.0, round(float(s.get("endTime", 0.0) or 0.0) + delta, 2))
+
+    # Also shift subtitles if any
+    subtitles = video_data.get("subtitles", [])
+    if subtitles:
+        first_sub = float(subtitles[0].get("start", 0.0) or 0.0)
+        sub_delta = float(req.targetStart) - first_sub
+        for sub in subtitles:
+            sub["start"] = max(0.0, round(float(sub.get("start", 0.0) or 0.0) + sub_delta, 2))
+            sub["end"] = max(sub["start"] + 0.1, round(float(sub.get("end", 0.0) or 0.0) + sub_delta, 2))
+
+    video_data["aiKurguStartOffset"] = round(float(req.targetStart), 2)
+    total_dur = calculate_dynamic_timeline_duration(video_data, scenes)
+    video_data["totalDuration"] = total_dur
+
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(video_data, f, ensure_ascii=False, indent=2)
+
+    return {
+        "success": True,
+        "scenes": scenes,
+        "totalDuration": total_dur,
+        "aiKurguStartOffset": round(float(req.targetStart), 2)
+    }
+
 @app.put("/api/timeline/scenes")
 def update_timeline_scenes(req: TimelineUpdateScenesRequest):
     data_file = os.path.join(SRC_DIR, "generatedData.json")
@@ -1930,7 +1995,7 @@ def update_timeline_scenes(req: TimelineUpdateScenesRequest):
         
     video_data["scenes"] = req.scenes
     if req.scenes:
-        video_data["totalDuration"] = max([s.get("endTime", 10.0) for s in req.scenes])
+        video_data["totalDuration"] = calculate_dynamic_timeline_duration(video_data, req.scenes)
         s0 = req.scenes[0]
         for key in ["headerSubtitle", "headerLine1", "circledWord", "headerLine2", "highlightedText", "strikeWord", "layoutType", "illustrationUrl", "illustrationCaption", "illustrationStyle"]:
             if key in s0:
@@ -3929,9 +3994,56 @@ def get_timeline_data():
         "video_data": video_data,
         "scenes": scenes,
         "waveform": waveform,
-        "duration": video_data.get("totalDuration", 15.0),
+        "duration": calculate_dynamic_timeline_duration(video_data, scenes),
         "subtitles": video_data.get("subtitles", []),
         "words": video_data.get("words", [])
+    }
+
+
+class ShiftScenesRequest(BaseModel):
+    targetStart: float
+
+@app.post("/api/timeline/shift-scenes")
+def shift_scenes_offset(req: ShiftScenesRequest):
+    """Shift all AI notebook scenes so that the first scene starts at targetStart (e.g. after quote video)."""
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        video_data = json.load(f)
+
+    scenes = video_data.get("scenes", [])
+    if not scenes:
+        raise HTTPException(status_code=400, detail="Sahneler listesi boş.")
+
+    first_start = float(scenes[0].get("startTime", 0.0) or 0.0)
+    delta = float(req.targetStart) - first_start
+
+    for s in scenes:
+        s["startTime"] = max(0.0, round(float(s.get("startTime", 0.0) or 0.0) + delta, 2))
+        s["endTime"] = max(s["startTime"] + 1.0, round(float(s.get("endTime", 0.0) or 0.0) + delta, 2))
+
+    # Also shift subtitles if any
+    subtitles = video_data.get("subtitles", [])
+    if subtitles:
+        first_sub = float(subtitles[0].get("start", 0.0) or 0.0)
+        sub_delta = float(req.targetStart) - first_sub
+        for sub in subtitles:
+            sub["start"] = max(0.0, round(float(sub.get("start", 0.0) or 0.0) + sub_delta, 2))
+            sub["end"] = max(sub["start"] + 0.1, round(float(sub.get("end", 0.0) or 0.0) + sub_delta, 2))
+
+    video_data["aiKurguStartOffset"] = round(float(req.targetStart), 2)
+    total_dur = calculate_dynamic_timeline_duration(video_data, scenes)
+    video_data["totalDuration"] = total_dur
+
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(video_data, f, ensure_ascii=False, indent=2)
+
+    return {
+        "success": True,
+        "scenes": scenes,
+        "totalDuration": total_dur,
+        "aiKurguStartOffset": round(float(req.targetStart), 2)
     }
 
 @app.post("/api/timeline/audio")

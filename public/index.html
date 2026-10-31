@@ -3214,6 +3214,74 @@
     window.createFromPreset = createFromPreset;
 
     // 1. FETCH TIMELINE DATA FROM SERVER
+    // Dynamic timeline duration: Calculates the true maximum across ALL tracks (Scenes, Quotes, PIPs, Subtitles, Audio)
+    function calculateDynamicTimelineDuration(vData, scs) {
+      const ends = [5.0];
+      (scs || []).forEach(s => {
+        if (typeof s.endTime === 'number') ends.push(s.endTime);
+      });
+      ((vData && vData.quoteVideos) || []).forEach(q => {
+        const start = q.timelineStart || 0;
+        const dur = q.duration || Math.max(1, (q.trimEnd || 6) - (q.trimStart || 0));
+        ends.push(start + dur);
+      });
+      ((vData && vData.pipVideos) || []).forEach(p => {
+        const start = p.timelineStart || 0;
+        const dur = p.duration || Math.max(1, (p.trimEnd || 5) - (p.trimStart || 0));
+        ends.push(start + dur);
+      });
+      ((vData && vData.subtitles) || []).forEach(sub => {
+        if (typeof sub.end === 'number') ends.push(sub.end);
+      });
+      if (typeof (vData && vData.totalDuration) === 'number') {
+        ends.push(vData.totalDuration);
+      }
+      return Math.max(...ends);
+    }
+
+    // Shift all AI notebook scenes (and narration) to start right after the last active quote video
+    async function shiftAiScenesAfterQuote() {
+      const quotes = (videoData && videoData.quoteVideos) || [];
+      if (!quotes.length) {
+        showToast('Zaman tünelinde alıntı video bulunamadı. Kurgu 00:00 noktasında kalabilir.', 'info');
+        return;
+      }
+      // Find the furthest end of quote videos
+      let quoteEnd = 0;
+      quotes.forEach(q => {
+        const start = q.timelineStart || 0;
+        const dur = q.duration || Math.max(1, (q.trimEnd || 6) - (q.trimStart || 0));
+        quoteEnd = Math.max(quoteEnd, start + dur);
+      });
+
+      const targetStart = Math.round(quoteEnd * 10) / 10;
+      try {
+        const res = await fetch('/api/timeline/shift-scenes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ targetStart })
+        });
+        const data = await res.json();
+        if (data.success) {
+          scenes = data.scenes;
+          timelineDuration = data.totalDuration;
+          if (videoData) {
+            videoData.scenes = scenes;
+            videoData.totalDuration = data.totalDuration;
+            videoData.aiKurguStartOffset = data.aiKurguStartOffset;
+          }
+          renderTimeline();
+          renderLivePreviewCanvas();
+          updateTimeDisplays();
+          showToast(`🎬 Yapay zekâ kurgusu alıntı videonun bitişine (${targetStart}s) kaydırıldı!`, 'success');
+        } else {
+          showToast('Kaydırma hatası: ' + (data.detail || 'Bilinmiyor'), 'error');
+        }
+      } catch (err) {
+        showToast('Sunucu bağlantı hatası: ' + err.message, 'error');
+      }
+    }
+
     async function loadTimelineData() {
       try {
         const res = await fetch('/api/timeline/data');
@@ -3223,7 +3291,7 @@
         videoData = data.video_data || {};
         scenes = data.scenes || [];
         waveformPeaks = data.waveform || [];
-        timelineDuration = data.duration || 15.0;
+        timelineDuration = calculateDynamicTimelineDuration(data.video_data, data.scenes);
 
         // Sync title
         const title = videoData.topic || videoData.headerLine1 || 'Kısa Kıssa';
@@ -3354,7 +3422,62 @@
           <div class="trim-handle trim-right" title="Klip Bitişini Kırp"></div>
         `;
 
-        block.onclick = () => selectScene(s.id);
+        block.onclick = (e) => {
+          if (!hasMovedScene) selectScene(s.id);
+        };
+
+        // Enable Free Drag & Pan for Scene Block along the timeline
+        let hasMovedScene = false;
+        block.addEventListener('mousedown', (e) => {
+          if (e.target.closest('.trim-handle') || e.target.closest('button')) return;
+          e.stopPropagation();
+          isDraggingMediaClip = true;
+          hasMovedScene = false;
+          const startMouseX = e.clientX;
+          const initialStart = s.startTime || 0;
+          const duration = Math.max(1, (s.endTime || 10) - initialStart);
+
+          block.classList.add('opacity-90', 'shadow-2xl', 'ring-2', 'ring-amber-400');
+
+          function onMouseMove(moveEvt) {
+            const deltaX = moveEvt.clientX - startMouseX;
+            if (Math.abs(deltaX) > 3) hasMovedScene = true;
+            if (!hasMovedScene) return;
+
+            const pxSec = 40 * timelineZoom;
+            const deltaSec = deltaX / pxSec;
+            const newStart = Math.max(0, initialStart + deltaSec);
+            s.startTime = Math.round(newStart * 10) / 10;
+            s.endTime = Math.round((newStart + duration) * 10) / 10;
+
+            block.style.left = `${s.startTime * pxSec}px`;
+            timelineDuration = calculateDynamicTimelineDuration(videoData, scenes);
+            updatePlayheadPosition();
+          }
+
+          function onMouseUp() {
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseup', onMouseUp);
+            block.classList.remove('opacity-90', 'shadow-2xl', 'ring-2', 'ring-amber-400');
+            setTimeout(() => { isDraggingMediaClip = false; }, 50);
+
+            if (hasMovedScene) {
+              fetch('/api/timeline/scenes', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ scenes })
+              }).then(r => r.json()).then(res => {
+                timelineDuration = calculateDynamicTimelineDuration(videoData, scenes);
+                renderTimeline();
+                renderLivePreviewCanvas();
+                showToast(`Sahne başlangıcı ${s.startTime.toFixed(1)}s olarak güncellendi`, 'info');
+              }).catch(err => console.error(err));
+            }
+          }
+
+          window.addEventListener('mousemove', onMouseMove);
+          window.addEventListener('mouseup', onMouseUp);
+        });
 
         const leftHandle = block.querySelector('.trim-left');
         const rightHandle = block.querySelector('.trim-right');
@@ -4231,7 +4354,7 @@
         const data = await res.json();
         
         scenes = data.scenes || [];
-        timelineDuration = data.duration || 15.0;
+        timelineDuration = calculateDynamicTimelineDuration(videoData, scenes);
         activeSceneId = scenes[0]?.id || 'scene_1';
 
         renderTimeline();

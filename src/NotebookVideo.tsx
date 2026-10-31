@@ -372,7 +372,7 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
           );
         })}
 
-      {/* 1. Primary Spoken Voiceover (With smart auto-ducking when quote video is speaking) */}
+      {/* 1. Primary Spoken Voiceover (With smart auto-ducking and AI Kurgu start offset sync) */}
       {props.audioUrl && !props.audioMuted && (() => {
         const isAudibleQuoteActive = allQuoteVideos.some((qv) => {
           if (qv.muted) return false;
@@ -381,16 +381,23 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
           return currentTimeSec >= startSec && currentTimeSec <= (startSec + dur);
         });
         const effectiveVol = isAudibleQuoteActive ? 0.0 : (props.audioVolume ?? 1.0);
+        const firstSceneStart = (props.scenes && props.scenes.length > 0) ? (props.scenes[0].startTime || 0) : 0;
+        const audioOffsetSec = props.aiKurguStartOffset ?? firstSceneStart;
+
+        // If video is currently before the AI kurgu start, do not play voiceover yet
+        if (currentTimeSec < audioOffsetSec) return null;
 
         return (
-          <Audio
-            src={
-              props.audioUrl.startsWith('http://') || props.audioUrl.startsWith('https://')
-                ? props.audioUrl
-                : staticFile(props.audioUrl.replace(/^\/?(public\/)?/, ''))
-            }
-            volume={effectiveVol}
-          />
+          <Sequence from={Math.floor(audioOffsetSec * 30)}>
+            <Audio
+              src={
+                props.audioUrl.startsWith('http://') || props.audioUrl.startsWith('https://')
+                  ? props.audioUrl
+                  : staticFile(props.audioUrl.replace(/^\/?(public\/)?/, ''))
+              }
+              volume={effectiveVol}
+            />
+          </Sequence>
         );
       })()}
 

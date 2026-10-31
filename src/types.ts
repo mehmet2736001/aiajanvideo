@@ -213,6 +213,7 @@ export interface VideoScene {
   pipVideos?: PipVideoItem[];
   overlayImages?: OverlayImageItem[];
   quoteVideos?: QuoteVideoItem[];
+  aiKurguStartOffset?: number;
   language?: LanguageCode;
   direction?: TextDirection;
   isRTL?: boolean;

@@ -1,9 +1,9 @@
 {
-  "topic": "scsscs",
+  "topic": "wedwefewf",
   "theme": "notebook",
   "format": "9:16",
   "headerSubtitle": "Bölüm 1",
-  "headerLine1": "SCSSCS",
+  "headerLine1": "WEDWEFEWF",
   "circledWord": "İLK",
   "headerLine2": "Fikrini Buraya Yaz",
   "highlightedText": "Önemli Nokta",
@@ -12,76 +12,34 @@
     {
       "id": "scene_1",
       "headerSubtitle": "Bölüm 1",
-      "headerLine1": "SCSSCS",
+      "headerLine1": "WEDWEFEWF",
       "circledWord": "İLK",
       "headerLine2": "Fikrini Buraya Yaz",
       "highlightedText": "Önemli Nokta",
       "layoutType": "pip_split",
-      "startTime": 0.0,
-      "endTime": 10.0,
+      "startTime": 23.8,
+      "endTime": 33.8,
       "duration": 10.0
-    },
-    {
-      "id": "scene_2",
-      "startTime": 10.0,
-      "endTime": 20.0,
-      "layoutType": "cards",
-      "headerSubtitle": "Bölüm 2",
-      "headerLine1": "YENİ",
-      "circledWord": "BAŞLIK",
-      "headerLine2": "",
-      "highlightedText": "ÖNEMLİ NOKTA",
-      "strikeWord": "",
-      "doodleType": "book",
-      "cards": [
-        {
-          "id": "1",
-          "label": "Detay 1",
-          "value": "Açıklama 1",
-          "color": "#1e3a8a"
-        },
-        {
-          "id": "2",
-          "label": "Detay 2",
-          "value": "Açıklama 2",
-          "color": "#15803d"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Yazar",
-        "title": "Kaynak",
-        "quoteText": "Hakikat sabır ile anlaşılır."
-      },
-      "metricImpact": {
-        "bigNumber": "100%",
-        "bigLabel": "ÖNEMLİ",
-        "subheading": "Anahtar Fikir",
-        "keyTakeaway": "Özet"
-      },
-      "pipData": {
-        "title": "Yeni Sahne",
-        "caption": "Detay Görseli"
-      }
     }
   ],
   "subtitles": [
     {
-      "text": "scsscs",
-      "start": 0.0,
-      "end": 2.5
+      "text": "wedwefewf",
+      "start": 23.8,
+      "end": 26.3
     },
     {
       "text": "kurgulamaya hemen başla",
-      "start": 2.5,
-      "end": 5.0
+      "start": 26.3,
+      "end": 28.8
     }
   ],
-  "totalDuration": 20.0,
-  "created_at": "2026-10-31 00:48:10",
+  "totalDuration": 33.8,
+  "created_at": "2026-10-31 12:36:18",
   "quoteVideos": [
     {
-      "id": "quote_66d02d6e",
-      "videoUrl": "/public/uploads/YEMEK_YAPMAK_ZORUNDA_DE__L_M__baab47bd.mp4",
+      "id": "quote_5bdc8340",
+      "videoUrl": "/public/uploads/YEMEK_YAPMAK_ZORUNDA_DE__L_M__e4047d25.mp4",
       "trimStart": 1.8,
       "trimEnd": 25.6,
       "timelineStart": 0.0,
@@ -96,5 +54,6 @@
       "muted": false,
       "freezeAtEnd": false
     }
-  ]
+  ],
+  "aiKurguStartOffset": 23.8
 }

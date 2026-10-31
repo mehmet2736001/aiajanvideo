@@ -15,17 +15,38 @@ try {
 }
 
 export const RemotionRoot: React.FC = () => {
-  // Dynamically calculate duration from audio/subtitles with 1.5s outro breathing room
-  let dynamicDuration = 360;
-  if (activeProps && activeProps.subtitles && activeProps.subtitles.length > 0) {
-    const lastEnd = activeProps.subtitles[activeProps.subtitles.length - 1].end;
-    const effectiveSec = Math.max(lastEnd, (activeProps as any).totalDuration || 0);
-    dynamicDuration = Math.max(240, Math.ceil((effectiveSec + 1.5) * 30));
-  } else if ((activeProps as any)?.totalDuration) {
-    dynamicDuration = Math.max(240, Math.ceil(((activeProps as any).totalDuration + 1.5) * 30));
-  } else if (activeProps && (activeProps as any).durationInFrames) {
-    dynamicDuration = (activeProps as any).durationInFrames;
+  // Dynamically calculate duration considering ALL tracks: Scenes, Quote Videos, PIPs, Subtitles, Audio
+  let maxTrackSec = 5.0;
+  if (activeProps) {
+    if (activeProps.scenes) {
+      for (const s of activeProps.scenes) {
+        if (typeof s.endTime === 'number') maxTrackSec = Math.max(maxTrackSec, s.endTime);
+      }
+    }
+    if (activeProps.quoteVideos) {
+      for (const q of activeProps.quoteVideos) {
+        const start = q.timelineStart || 0;
+        const dur = q.duration || Math.max(1, (q.trimEnd || 6) - (q.trimStart || 0));
+        maxTrackSec = Math.max(maxTrackSec, start + dur);
+      }
+    }
+    if (activeProps.pipVideos) {
+      for (const p of activeProps.pipVideos) {
+        const start = p.timelineStart || 0;
+        const dur = p.duration || Math.max(1, (p.trimEnd || 5) - (p.trimStart || 0));
+        maxTrackSec = Math.max(maxTrackSec, start + dur);
+      }
+    }
+    if (activeProps.subtitles) {
+      for (const sub of activeProps.subtitles) {
+        if (typeof sub.end === 'number') maxTrackSec = Math.max(maxTrackSec, sub.end);
+      }
+    }
+    if (typeof (activeProps as any).totalDuration === 'number') {
+      maxTrackSec = Math.max(maxTrackSec, (activeProps as any).totalDuration);
+    }
   }
+  const dynamicDuration = Math.max(150, Math.ceil((maxTrackSec + 0.5) * 30));
 
   return (
     <>
