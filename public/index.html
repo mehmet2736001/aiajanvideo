@@ -109,6 +109,63 @@
       border: 1px solid rgba(234, 179, 8, 0.35) !important;
     }
 
+    /* FULLSCREEN CINEMA PREVIEW STYLES */
+    #preview-screen-container {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #preview-screen-container.in-fullscreen,
+    #preview-screen-container:fullscreen,
+    #preview-screen-container:-webkit-full-screen {
+      position: fixed !important;
+      inset: 0 !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      background: radial-gradient(circle at center, #0f172a 0%, #020617 100%) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 0 !important;
+      border: none !important;
+      padding: 1.5rem !important;
+      margin: 0 !important;
+      z-index: 999999 !important;
+    }
+
+    #preview-screen-container.in-fullscreen #notebook-preview,
+    #preview-screen-container:fullscreen #notebook-preview,
+    #preview-screen-container:-webkit-full-screen #notebook-preview {
+      height: 94vh !important;
+      width: auto !important;
+      aspect-ratio: 9 / 16 !important;
+      max-width: 94vw !important;
+      border-radius: 28px !important;
+      box-shadow: 0 0 70px rgba(0, 0, 0, 0.95), 0 0 30px rgba(245, 158, 11, 0.15) !important;
+      margin: auto !important;
+    }
+
+    #preview-screen-container.in-fullscreen #final-video,
+    #preview-screen-container:fullscreen #final-video,
+    #preview-screen-container:-webkit-full-screen #final-video {
+      height: 94vh !important;
+      width: auto !important;
+      aspect-ratio: 9 / 16 !important;
+      max-width: 94vw !important;
+      object-fit: contain !important;
+      border-radius: 24px !important;
+      box-shadow: 0 0 70px rgba(0, 0, 0, 0.95) !important;
+      margin: auto !important;
+    }
+
+    #preview-screen-container.in-fullscreen #btn-exit-fullscreen,
+    #preview-screen-container:fullscreen #btn-exit-fullscreen,
+    #preview-screen-container:-webkit-full-screen #btn-exit-fullscreen {
+      display: inline-flex !important;
+    }
+
     /* Precision Timeline Drag & Pan Styles (CapCut Standard) */
     #timeline-scroll-container {
       cursor: grab;
@@ -769,9 +826,14 @@
           <span class="font-bold text-slate-200">9:16 Önizleme</span>
           <span id="preview-mode-tag" class="text-[9px] bg-slate-800 text-cyan-300 border border-slate-700 px-1.5 py-0.2 rounded font-mono">📝 Canlı Taslak</span>
         </div>
-        <button onclick="togglePreviewDisplayMode()" id="btn-toggle-display-mode" class="text-[11px] text-amber-300 hover:text-white transition flex items-center gap-1 font-semibold">
-          <i class="fa-solid fa-film"></i> <span id="text-toggle-display">MP4 Video</span>
-        </button>
+        <div class="flex items-center gap-1.5">
+          <button onclick="togglePreviewDisplayMode()" id="btn-toggle-display-mode" class="text-[11px] text-amber-300 hover:text-white transition flex items-center gap-1 font-semibold">
+            <i class="fa-solid fa-film"></i> <span id="text-toggle-display">MP4 Video</span>
+          </button>
+          <button onclick="togglePreviewFullscreen(event)" title="Tam Ekran Önizleme (Çift Tıklayın)" class="text-[11px] text-slate-400 hover:text-amber-400 transition flex items-center justify-center w-6 h-6 rounded bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 ml-0.5">
+            <i id="icon-preview-fullscreen" class="fa-solid fa-expand text-[10px]"></i>
+          </button>
+        </div>
       </div>
 
       <!-- 9:16 PHONE MOCKUP PREVIEW MONITOR -->
@@ -782,8 +844,13 @@
           <div class="w-1.5 h-1.5 rounded-full bg-black/60"></div>
         </div>
 
-        <!-- Screen Container -->
-        <div class="relative w-full h-full rounded-[28px] overflow-hidden bg-slate-950 flex flex-col">
+        <!-- Screen Container (Double Click to toggle Fullscreen) -->
+        <div id="preview-screen-container" ondblclick="togglePreviewFullscreen(event)" title="Tam Ekran Yapmak İçin Çift Tıklayın" class="relative w-full h-full rounded-[28px] overflow-hidden bg-slate-950 flex flex-col cursor-pointer transition-all duration-200">
+          
+          <!-- Floating Exit Fullscreen Button (Visible in Fullscreen) -->
+          <button id="btn-exit-fullscreen" onclick="togglePreviewFullscreen(event)" title="Tam Ekrandan Çık (ESC veya Çift Tıkla)" class="hidden fixed top-5 right-6 z-50 bg-slate-900/95 hover:bg-slate-800 text-amber-400 hover:text-white px-3.5 py-1.5 rounded-full border border-slate-700 shadow-2xl backdrop-blur-md text-xs font-semibold items-center gap-1.5 transition active:scale-95">
+            <i class="fa-solid fa-compress"></i> <span>Tam Ekrandan Çık</span>
+          </button>
           
           <!-- MP4 Video Player (hidden when in live canvas mode) -->
           <video id="final-video" controls class="w-full h-full object-cover hidden z-30" src="/out/video.mp4" playsinline preload="auto"></video>
@@ -4943,6 +5010,73 @@
         return false;
       }
     }
+
+    // 7.1. FULLSCREEN PREVIEW CONTROLS (DOUBLE CLICK SUPPORT)
+    function togglePreviewFullscreen(e) {
+      if (e) {
+        const target = e.target;
+        if (target && (target.closest('button') && target.closest('button').id !== 'btn-exit-fullscreen' && target.closest('button').title?.indexOf('Tam Ekran') === -1)) {
+          return;
+        }
+        if (target && (target.closest('input') || target.closest('select') || target.closest('textarea'))) {
+          return;
+        }
+      }
+
+      const container = document.getElementById('preview-screen-container');
+      if (!container) return;
+
+      const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || container.classList.contains('in-fullscreen'));
+
+      if (!isFs) {
+        if (container.requestFullscreen) {
+          container.requestFullscreen().catch(err => {
+            console.warn('requestFullscreen fallback:', err);
+            setPreviewFullscreenState(true);
+          });
+        } else if (container.webkitRequestFullscreen) {
+          container.webkitRequestFullscreen();
+        } else {
+          setPreviewFullscreenState(true);
+        }
+      } else {
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+          if (document.exitFullscreen) {
+            document.exitFullscreen().catch(() => {});
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
+        }
+        setPreviewFullscreenState(false);
+      }
+    }
+
+    function setPreviewFullscreenState(active) {
+      const container = document.getElementById('preview-screen-container');
+      const icon = document.getElementById('icon-preview-fullscreen');
+      const exitBtn = document.getElementById('btn-exit-fullscreen');
+      if (!container) return;
+
+      if (active) {
+        container.classList.add('in-fullscreen');
+        if (icon) icon.className = 'fa-solid fa-compress text-[10px] text-amber-400';
+        if (exitBtn) exitBtn.style.display = 'inline-flex';
+        showToast('📺 Tam ekran modundasınız (Çıkmak için tekrar çift tıklayın veya ESC)', 'info');
+      } else {
+        container.classList.remove('in-fullscreen');
+        if (icon) icon.className = 'fa-solid fa-expand text-[10px]';
+        if (exitBtn) exitBtn.style.display = 'none';
+      }
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      setPreviewFullscreenState(isFs);
+    });
+    document.addEventListener('webkitfullscreenchange', () => {
+      const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      setPreviewFullscreenState(isFs);
+    });
 
     // 7. PREVIEW DISPLAY (CANVAS VS VIDEO)
     function togglePreviewDisplayMode() {
