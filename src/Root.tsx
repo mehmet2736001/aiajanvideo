@@ -7,7 +7,7 @@ let activeProps = defaultVideoData;
 try {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const generated = require('./generatedData.json');
-  if (generated && (generated.headerLine1 || generated.headerMain || generated.headerSubtitle)) {
+  if (generated && (generated.headerLine1 || generated.headerMain || generated.headerSubtitle || (generated.scenes && generated.scenes.length > 0))) {
     activeProps = generated;
   }
 } catch (e) {
@@ -59,6 +59,27 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={activeProps}
+        calculateMetadata={({ props }) => {
+          let maxTrackSec = 5.0;
+          const p = props || activeProps;
+          if (p.scenes) {
+            for (const s of p.scenes) {
+              if (typeof s.endTime === 'number') maxTrackSec = Math.max(maxTrackSec, s.endTime);
+            }
+          }
+          if (p.quoteVideos) {
+            for (const q of p.quoteVideos) {
+              const start = q.timelineStart || 0;
+              const dur = q.duration || Math.max(1, (q.trimEnd || 6) - (q.trimStart || 0));
+              maxTrackSec = Math.max(maxTrackSec, start + dur);
+            }
+          }
+          if (typeof p.totalDuration === 'number') {
+            maxTrackSec = Math.max(maxTrackSec, p.totalDuration);
+          }
+          const durFrames = Math.max(150, Math.ceil((maxTrackSec + 0.5) * 30));
+          return { durationInFrames: durFrames };
+        }}
       />
 
       {/* 2. 16:9 Landscape (YouTube Long-form, Desktop, TV) */}

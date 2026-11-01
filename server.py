@@ -140,6 +140,7 @@ from scripts.tts_engine import (
     MUSIC_CATALOG
 )
 from scripts.image_engine import generate_ai_illustration
+from scripts.animation_engine import create_scene_2d_animation, craft_2d_animation_prompt_with_omni
 from scripts.multilingual_engine import (
     SUPPORTED_LANGUAGES,
     clone_project_to_all_languages,
@@ -276,6 +277,18 @@ class MultilingualCloneRequest(BaseModel):
 class MultilingualSwitchRequest(BaseModel):
     project_id: str
     language: str
+
+class Scene2DAnimationRequest(BaseModel):
+    scene_id: str
+    prompt: Optional[str] = None
+    style: Optional[str] = "2d_anime"
+    model: Optional[str] = "gemini-omni-1.1-flash"
+    duration: Optional[float] = None
+
+class CraftPromptRequest(BaseModel):
+    scene_id: str
+    style: Optional[str] = "2d_anime"
+    model: Optional[str] = "gemini-omni-1.1-flash"
 
 class SceneRegenerateRequest(BaseModel):
     prompt_override: Optional[str] = None
@@ -2485,6 +2498,108 @@ def update_single_scene(scene_id: str, scene_patch: Dict[str, Any]):
     with open(data_file, "w", encoding="utf-8") as f:
         json.dump(video_data, f, ensure_ascii=False, indent=2)
     return {"success": True, "scene": target, "video_data": video_data}
+
+
+@app.post("/api/scene/craft-2d-prompt")
+def api_craft_2d_prompt(req: CraftPromptRequest):
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        video_data = json.load(f)
+    scenes = ensure_scenes_structure(video_data)
+    target = next((s for s in scenes if s.get("id") == req.scene_id), None)
+    if not target:
+        raise HTTPException(status_code=404, detail="Sahne bulunamadı.")
+    
+    scene_text = (
+        target.get("headerSubtitle", "") + " " +
+        target.get("headerLine1", "") + " " +
+        target.get("highlightedText", "") + " " +
+        (target.get("quoteSpotlight", {}).get("quoteText", "") if isinstance(target.get("quoteSpotlight"), dict) else "")
+    ).strip()
+    if not scene_text:
+        scene_text = video_data.get("narration", "Dağlı güneşli bir günde yürüyen derviş")[:120]
+    
+    prompt = craft_2d_animation_prompt_with_omni(scene_text, style=req.style or "2d_anime", pool=pool)
+    return {"success": True, "prompt": prompt}
+
+@app.post("/api/scene/generate-2d-animation")
+def api_generate_scene_2d_animation(req: Scene2DAnimationRequest):
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        video_data = json.load(f)
+    scenes = ensure_scenes_structure(video_data)
+    target = next((s for s in scenes if s.get("id") == req.scene_id), None)
+    if not target:
+        raise HTTPException(status_code=404, detail="Sahne bulunamadı.")
+    
+    st = float(target.get("startTime", 0.0) or 0.0)
+    en = float(target.get("endTime", 10.0) or 10.0)
+    scene_dur = max(4.0, min(16.0, en - st)) if req.duration is None else float(req.duration)
+
+    scene_text = (
+        target.get("headerSubtitle", "") + " " +
+        target.get("headerLine1", "") + " " +
+        target.get("highlightedText", "") + " " +
+        (target.get("quoteSpotlight", {}).get("quoteText", "") if isinstance(target.get("quoteSpotlight"), dict) else "")
+    ).strip()
+    if not scene_text:
+        scene_text = video_data.get("narration", "Dağlı güneşli bir günde yürüyen derviş")[:120]
+
+    try:
+        anim_res = create_scene_2d_animation(
+            scene_text=scene_text,
+            duration=scene_dur,
+            style=req.style or "2d_anime",
+            pool=pool,
+            custom_prompt=req.prompt
+        )
+        target["videoUrl"] = anim_res["videoUrl"]
+        target["animationVideoUrl"] = anim_res["relativeUrl"]
+        target["animationPrompt"] = anim_res["prompt"]
+        target["animationStyle"] = req.style or "2d_anime"
+        target["brollType"] = "none"
+
+        with open(data_file, "w", encoding="utf-8") as f:
+            json.dump(video_data, f, ensure_ascii=False, indent=2)
+
+        return {"success": True, "scene": target, "animation": anim_res}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"2D Animasyon üretimi başarısız: {str(e)}")
+
+@app.post("/api/timeline/generate-all-2d-animations")
+def api_generate_all_2d_animations(req: dict = {}):
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        video_data = json.load(f)
+    scenes = ensure_scenes_structure(video_data)
+    style = req.get("style", "2d_anime")
+
+    results = []
+    for s in scenes:
+        st = float(s.get("startTime", 0.0) or 0.0)
+        en = float(s.get("endTime", 10.0) or 10.0)
+        dur = max(4.0, min(16.0, en - st))
+        stext = (s.get("headerSubtitle", "") + " " + s.get("headerLine1", "") + " " + s.get("highlightedText", "")).strip() or video_data.get("narration", "Manevi yolculuk")[:80]
+        try:
+            anim = create_scene_2d_animation(scene_text=stext, duration=dur, style=style, pool=pool)
+            s["videoUrl"] = anim["videoUrl"]
+            s["animationVideoUrl"] = anim["relativeUrl"]
+            s["animationPrompt"] = anim["prompt"]
+            s["animationStyle"] = style
+            s["brollType"] = "none"
+            results.append(anim)
+        except Exception as e:
+            print(f"Error animating scene {s.get('id')}: {e}")
+
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(video_data, f, ensure_ascii=False, indent=2)
+    return {"success": True, "scenes": scenes, "count": len(results)}
 
 @app.post("/api/timeline/scenes/trim")
 def api_trim_scene(req: SceneTrimRequest):

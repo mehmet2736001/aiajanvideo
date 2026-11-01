@@ -211,6 +211,9 @@ export interface VideoScene {
   brollOpacity?: number;
   pipData?: { title?: string; subtitle?: string; caption?: string; badge?: string };
   videoUrl?: string;
+  animationVideoUrl?: string;
+  animationPrompt?: string;
+  animationStyle?: string;
   pipVideos?: PipVideoItem[];
   overlayImages?: OverlayImageItem[];
   quoteVideos?: QuoteVideoItem[];
@@ -273,6 +276,9 @@ export interface VideoData {
   durationMode?: 'quick' | 'deep' | 'custom_audio';
   totalDuration?: number;
   videoUrl?: string;
+  animationVideoUrl?: string;
+  animationPrompt?: string;
+  animationStyle?: string;
   audioMuted?: boolean;
   audioVolume?: number;
   pipVideos?: PipVideoItem[];

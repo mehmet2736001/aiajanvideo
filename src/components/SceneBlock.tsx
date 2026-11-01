@@ -1,5 +1,5 @@
 import React from 'react';
-import { interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
+import { interpolate, staticFile, useCurrentFrame, useVideoConfig, Video } from 'remotion';
 import { VideoScene } from '../types';
 import { CardGrid } from './CardGrid';
 import { FlowchartView } from './FlowchartView';
@@ -54,6 +54,17 @@ export const SceneBlock: React.FC<SceneBlockProps> = ({
   const isQuoteLayout = layout === 'quote_spotlight';
   const isCinematicAmbient = layout === 'cinematic_ambient';
 
+  const animVideo = scene.animationVideoUrl || scene.videoUrl;
+  let resolvedAnimSrc = '';
+  if (animVideo) {
+    const cleanPath = animVideo.replace(/^\/?public\//, '').replace(/^\//, '');
+    try {
+      resolvedAnimSrc = staticFile(cleanPath);
+    } catch (e) {
+      resolvedAnimSrc = animVideo;
+    }
+  }
+
   return (
     <div
       style={{
@@ -69,6 +80,46 @@ export const SceneBlock: React.FC<SceneBlockProps> = ({
         direction: activeRTL ? 'rtl' : 'ltr',
       }}
     >
+      {/* 2D Animasyon Video Katmanı (Gemini Omni ile Üretilen) */}
+      {resolvedAnimSrc ? (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: 1080,
+            height: 1920,
+            zIndex: 0,
+            pointerEvents: 'none',
+            overflow: 'hidden',
+          }}
+        >
+          <Video
+            src={resolvedAnimSrc}
+            loop
+            muted
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              filter: 'contrast(1.05) brightness(0.92) saturate(1.15)',
+            }}
+          />
+          {/* Subtle cinematic vignette for crisp subtitle & title readability */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              background:
+                'radial-gradient(ellipse at center, rgba(5,7,14,0.1) 0%, rgba(5,7,14,0.6) 75%, rgba(3,5,10,0.85) 100%)',
+              pointerEvents: 'none',
+            }}
+          />
+        </div>
+      ) : null}
       {/* Top Spacer */}
       <div style={{ height: theme === 'chalkboard' ? 30 : isQuoteLayout ? 35 : 55 }} />
 
