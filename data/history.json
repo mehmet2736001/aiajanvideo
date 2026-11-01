@@ -1,5 +1,430 @@
 [
   {
+    "id": "3472be4e",
+    "topic": "🎬 AI Yönetmen: HİKMETİN İZİNDE",
+    "theme": "dark_minimalist",
+    "layoutType": "pip_split",
+    "durationMode": "3 Sahne (30s)",
+    "created_at": "2026-11-01 20:23",
+    "headerMain": "HİKMETİN İZİNDE",
+    "thumbnail_url": "/public/illustrations/anim_key_ebe27e4b.jpg",
+    "video_data": {
+      "topic": "HİKMETİN İZİNDE",
+      "theme": "dark_minimalist",
+      "format": "9:16",
+      "is_empty": false,
+      "narration": "Hz. Ali efendimizin ilmi ve cesareti. Dervis dag patikasinda gunesli gunde yurur.",
+      "headerSubtitle": "",
+      "headerLine1": "",
+      "circledWord": "",
+      "headerLine2": "",
+      "highlightedText": "",
+      "layoutType": "cinematic_ambient",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "headerSubtitle": "Manevi Yolculuk",
+          "headerLine1": "HİKMETİN İZİNDE",
+          "highlightedText": "ASIRLARIN BİLGELİĞİ",
+          "visualDescription": "Dağ yolunda yürüyen bir derviş, rüzgarda savrulan yeşil kaftan, güneş ışıkları",
+          "layoutType": "cinematic_ambient",
+          "animationVideoUrl": "/public/videos/anim_vid_d12b2407.mp4",
+          "videoUrl": "/public/videos/anim_vid_d12b2407.mp4",
+          "animationPrompt": "A humble Sufi dervish with green robe and wooden staff walking along a winding mountain path on a bright sunny day, majestic green mountains, sunbeams streaming down, wind blowing his robe, Studio Ghibli 2D anime aesthetic, vertical 9:16",
+          "illustrationUrl": "/public/illustrations/anim_key_ebe27e4b.jpg",
+          "brollType": "2d_animation",
+          "animationContinuityIndex": 1
+        },
+        {
+          "id": "scene_2",
+          "startTime": 10.0,
+          "endTime": 20.0,
+          "headerSubtitle": "Zihinsel Dönüşüm",
+          "headerLine1": "GİZLİ GERÇEK",
+          "highlightedText": "KALBE DOKUNAN SIR",
+          "visualDescription": "1. sahneden devam eden derviş bir pınarın başında durur, tefekkür eder",
+          "layoutType": "cinematic_ambient",
+          "animationVideoUrl": "/public/videos/anim_vid_0ac3cc2f.mp4",
+          "videoUrl": "/public/videos/anim_vid_0ac3cc2f.mp4",
+          "animationPrompt": "A humble Sufi dervish with green robe and wooden staff walking along a winding mountain path on a bright sunny day, majestic green mountains, sunbeams streaming down, wind blowing his robe, Studio Ghibli 2D anime aesthetic, vertical 9:16",
+          "illustrationUrl": "/public/illustrations/test_dervish.jpg",
+          "brollType": "2d_animation",
+          "animationContinuityIndex": 2
+        },
+        {
+          "id": "scene_3",
+          "startTime": 20.0,
+          "endTime": 30.0,
+          "headerSubtitle": "Ayet-i Kerime",
+          "headerLine1": "KUTLU SÖZ",
+          "highlightedText": "HER ZORLUKLA BİR KOLAYLIK VARDIR",
+          "visualDescription": "Tezhibli daktilo ayet çerçevesi, huzur dolu gökyüzü ve hafif ışık hüzmeleri",
+          "layoutType": "quote_spotlight",
+          "animationVideoUrl": "/public/videos/anim_vid_d85572f4.mp4",
+          "videoUrl": "/public/videos/anim_vid_d85572f4.mp4",
+          "animationPrompt": "2D animated aesthetic scene showing Tezhibli daktilo ayet çerçevesi, huzur dolu gökyüzü ve hafif ışık hüzmeleri. Continuous sequential scene directly following previous scene #2. Maintain exact same character appearance, color palette, lighting atmosphere, and environment details. Seamless visual transition picking up directly from the preceding scene's ending point. Vertical 9:16 aspect ratio., Studio Ghibli style, vertical 9:16",
+          "illustrationUrl": "/public/illustrations/test_dervish.jpg",
+          "brollType": "2d_animation",
+          "animationContinuityIndex": 3
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "HİKMETİN İZİNDE - ASIRLARIN BİLGELİĞİ",
+          "start": 0.0,
+          "end": 10.0
+        },
+        {
+          "text": "GİZLİ GERÇEK - KALBE DOKUNAN SIR",
+          "start": 10.0,
+          "end": 20.0
+        },
+        {
+          "text": "KUTLU SÖZ - HER ZORLUKLA BİR KOLAYLIK VARDIR",
+          "start": 20.0,
+          "end": 30.0
+        }
+      ],
+      "words": [],
+      "quoteVideos": [],
+      "pipVideos": [],
+      "overlayImages": [],
+      "audioUrl": "/public/audio.mp3",
+      "brollType": "2d_animation",
+      "totalDuration": 26.19,
+      "created_at": "2026-11-01 20:20:00"
+    }
+  },
+  {
+    "id": "594dd97a",
+    "topic": "🎬 AI Yönetmen: HİKMETİN İZİNDE",
+    "theme": "dark_minimalist",
+    "layoutType": "pip_split",
+    "durationMode": "3 Sahne (30s)",
+    "created_at": "2026-11-01 20:05",
+    "headerMain": "HİKMETİN İZİNDE",
+    "thumbnail_url": "/public/illustrations/anim_key_055521e5.jpg",
+    "video_data": {
+      "topic": "HİKMETİN İZİNDE",
+      "theme": "dark_minimalist",
+      "format": "9:16",
+      "is_empty": false,
+      "narration": "Hz. Ali efendimizin ilmi ve adaleti. İlk 20 saniye derviş dağ yolunda yürür. Ardından Şüphesiz Allah sabredenlerle beraberdir ayeti ve tefekkürü açıklanır.",
+      "headerSubtitle": "",
+      "headerLine1": "",
+      "circledWord": "",
+      "headerLine2": "",
+      "highlightedText": "",
+      "layoutType": "pip_split",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "headerSubtitle": "Manevi Yolculuk",
+          "headerLine1": "HİKMETİN İZİNDE",
+          "highlightedText": "ASIRLARIN BİLGELİĞİ",
+          "visualDescription": "Dağ yolunda yürüyen bir derviş, rüzgarda savrulan yeşil kaftan, güneş ışıkları",
+          "layoutType": "pip_split",
+          "animationVideoUrl": "/public/videos/anim_vid_d1564543.mp4",
+          "videoUrl": "/public/videos/anim_vid_d1564543.mp4",
+          "animationPrompt": "A stunning wide establishing opening scene in high-end Studio Ghibli 2D anime style, vertical 9:16 aspect ratio. A serene dervish walks slowly along a narrow, winding dirt mountain path. He wears a heavy, flowing emerald-green caftan billowing dramatically in the gentle mountain wind, featuring intricate traditional stitching, alongside a tall conical felt cap. The grand natural landscape is filled with ancient mossy trees, vibrant alpine wildflowers, and majestic misty mountain peaks soaring in the background. Warm, golden hour sunlight pierces through the foliage, casting intense cinematic volumetric sunbeams and god rays across the trail. Floating leaves and sparkling dust motes dance in the breeze. Hand-painted watercolor background textures, clean anime line art, rich vibrant color palette, evocative spiritual atmosphere, shot from a dynamic low-angle camera perspective.",
+          "illustrationUrl": "/public/illustrations/anim_key_055521e5.jpg",
+          "brollType": "none",
+          "animationContinuityIndex": 1
+        },
+        {
+          "id": "scene_2",
+          "startTime": 10.0,
+          "endTime": 20.0,
+          "headerSubtitle": "Zihinsel Dönüşüm",
+          "headerLine1": "GİZLİ GERÇEK",
+          "highlightedText": "KALBE DOKUNAN SIR",
+          "visualDescription": "1. sahneden devam eden derviş bir pınarın başında durur, tefekkür eder",
+          "layoutType": "pip_split",
+          "animationVideoUrl": "/public/videos/anim_vid_f0b24e34.mp4",
+          "videoUrl": "/public/videos/anim_vid_f0b24e34.mp4",
+          "animationPrompt": "A serene dervish stands in quiet contemplation beside a natural stone water spring in a lush forest, masterfully rendered in detailed Studio Ghibli 2D anime style. The dervish wears humble, flowing earthy-brown robes and a tall woolen hat, looking down thoughtfully at the clear, gushing spring water. Sunbeams from the golden hour sun filter through ancient mossy trees, casting soft glowing light and shimmering dust motes into the air. A gentle breeze rustles the leaves and sways the edges of his robes. In the distant background, soft misty mountain peaks outline the horizon under a warm sky. High-end hand-drawn painterly aesthetic, rich vibrant color palette, continuous sequential storybook frame, vertical 9:16 aspect ratio composition.",
+          "illustrationUrl": "/public/illustrations/test_dervish.jpg",
+          "brollType": "none",
+          "animationContinuityIndex": 2
+        },
+        {
+          "id": "scene_3",
+          "startTime": 20.0,
+          "endTime": 30.0,
+          "headerSubtitle": "Ayet-i Kerime",
+          "headerLine1": "KUTLU SÖZ",
+          "highlightedText": "HER ZORLUKLA BİR KOLAYLIK VARDIR",
+          "visualDescription": "Tezhibli daktilo ayet çerçevesi, huzur dolu gökyüzü ve hafif ışık hüzmeleri",
+          "layoutType": "quote_spotlight",
+          "animationVideoUrl": "/public/videos/anim_vid_06e431c3.mp4",
+          "videoUrl": "/public/videos/anim_vid_06e431c3.mp4",
+          "animationPrompt": "A peaceful 2D Studio Ghibli style animation scene in vertical 9:16 aspect ratio. A serene Sufi dervish wearing flowing cream-colored traditional robes and a tall felt hat stands quietly in a high mountain meadow during golden hour. Soft wind gently sways his garments, tall grass, and nearby ancient pine branches. Intricate, faint golden tezhib illumination motifs and delicate glowing calligraphy motes float subtly through soft volumetric sunbeams filtering through the quiet sky. In the background, majestic hand-painted mountain ridges stretch toward a glowing, tranquil horizon. Soft atmospheric dust particles, vintage warmth, serene spiritual atmosphere, exquisitely detailed hand-drawn watercolor background, fine line art, rich warm palette, cinematic vertical framing.",
+          "illustrationUrl": "/public/illustrations/test_dervish.jpg",
+          "brollType": "none",
+          "animationContinuityIndex": 3
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "HİKMETİN İZİNDE - ASIRLARIN BİLGELİĞİ",
+          "start": 0.0,
+          "end": 10.0
+        },
+        {
+          "text": "GİZLİ GERÇEK - KALBE DOKUNAN SIR",
+          "start": 10.0,
+          "end": 20.0
+        },
+        {
+          "text": "KUTLU SÖZ - HER ZORLUKLA BİR KOLAYLIK VARDIR",
+          "start": 20.0,
+          "end": 30.0
+        }
+      ],
+      "words": [],
+      "quoteVideos": [],
+      "pipVideos": [],
+      "overlayImages": [],
+      "audioUrl": null,
+      "brollType": "none",
+      "totalDuration": 30.0,
+      "created_at": "2026-11-01 18:47:10"
+    }
+  },
+  {
+    "id": "bca58509",
+    "topic": "🎬 AI Yönetmen: HİKMETİN İZİNDE",
+    "theme": "dark_minimalist",
+    "layoutType": "pip_split",
+    "durationMode": "3 Sahne (30s)",
+    "created_at": "2026-11-01 20:03",
+    "headerMain": "HİKMETİN İZİNDE",
+    "thumbnail_url": "/public/illustrations/anim_key_dae6d7bb.webp",
+    "video_data": {
+      "topic": "HİKMETİN İZİNDE",
+      "theme": "dark_minimalist",
+      "format": "9:16",
+      "is_empty": false,
+      "narration": "Hz. Ali efendimizin ilmi ve cesareti. İlk 20 saniye derviş dağ yolunda yürür. Ardından Şüphesiz Allah sabredenlerle beraberdir ayeti ve tefekkürü açıklanır.",
+      "headerSubtitle": "",
+      "headerLine1": "",
+      "circledWord": "",
+      "headerLine2": "",
+      "highlightedText": "",
+      "layoutType": "pip_split",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "headerSubtitle": "Manevi Yolculuk",
+          "headerLine1": "HİKMETİN İZİNDE",
+          "highlightedText": "ASIRLARIN BİLGELİĞİ",
+          "visualDescription": "Dağ yolunda yürüyen bir derviş, rüzgarda savrulan yeşil kaftan, güneş ışıkları",
+          "layoutType": "pip_split",
+          "animationVideoUrl": "/public/videos/anim_vid_e73c22b6.mp4",
+          "videoUrl": "/public/videos/anim_vid_e73c22b6.mp4",
+          "animationPrompt": "Studio Ghibli style 2D anime establishing opening scene, vertical 9:16 aspect ratio. A serene, lonely dervish walking gracefully along a narrow winding dirt path on a breathtaking mountain ridge. The dervish is adorned in a flowing emerald green kaftan that billows dynamically in a soft mountain breeze, paired with a traditional tall felt sikke hat. The environment features grand, hand-painted anime mountains shrouded in soft morning mist, ancient pine trees, and colorful alpine wildflowers swaying along the trail. Radiant golden hour sunlight filters through the mountain peaks, creating dreamy, ethereal sunbeams and volumetric light hitting floating dust particles. Rich watercolor textures, expressive wind movement, warm cinematic color palette, peaceful spiritual atmosphere, high-end 2D animation keyframe art.",
+          "illustrationUrl": "/public/illustrations/anim_key_dae6d7bb.webp",
+          "brollType": "none",
+          "animationContinuityIndex": 1
+        },
+        {
+          "id": "scene_2",
+          "startTime": 10.0,
+          "endTime": 20.0,
+          "headerSubtitle": "Zihinsel Dönüşüm",
+          "headerLine1": "GİZLİ GERÇEK",
+          "highlightedText": "KALBE DOKUNAN SIR",
+          "visualDescription": "1. sahneden devam eden derviş bir pınarın başında durur, tefekkür eder",
+          "layoutType": "pip_split",
+          "animationVideoUrl": "/public/videos/anim_vid_76f2a3c9.mp4",
+          "videoUrl": "/public/videos/anim_vid_76f2a3c9.mp4",
+          "animationPrompt": "Studio Ghibli 2D anime animation keyframe, vertical 9:16 aspect ratio. An elderly Sufi dervish with a long flowing white beard, dressed in a humble beige coarse-wool robe and a tall brownish felt dervish cap, stands serenely beside a natural bubbling stone spring. He is in quiet contemplation, watching the crystal-clear water ripple over mossy river stones. The soft wind gently sways his robes and beard. Set in a lush, hand-painted countryside with towering ancient trees, vibrant wildflowers, and soft misty mountains in the background. Warm golden hour sunlight pierces through the foliage, casting brilliant volumetric sunbeams, god rays, and floating golden dust motes around him. Peaceful, contemplative, nostalgic atmosphere, high-end 2D traditional anime aesthetic with rich watercolor background details and clean hand-drawn line art.",
+          "illustrationUrl": "/public/illustrations/test_dervish.jpg",
+          "brollType": "none",
+          "animationContinuityIndex": 2
+        },
+        {
+          "id": "scene_3",
+          "startTime": 20.0,
+          "endTime": 30.0,
+          "headerSubtitle": "Ayet-i Kerime",
+          "headerLine1": "KUTLU SÖZ",
+          "highlightedText": "HER ZORLUKLA BİR KOLAYLIK VARDIR",
+          "visualDescription": "Tezhibli daktilo ayet çerçevesi, huzur dolu gökyüzü ve hafif ışık hüzmeleri",
+          "layoutType": "quote_spotlight",
+          "animationVideoUrl": "/public/videos/anim_vid_3c2b3f31.mp4",
+          "videoUrl": "/public/videos/anim_vid_3c2b3f31.mp4",
+          "animationPrompt": "Studio Ghibli style 2D anime animation frame, vertical 9:16 aspect ratio. A serene dervish character wearing traditional flowing robes, standing peacefully in an enchanted natural landscape. In the foreground, an exquisite frame adorned with intricate golden tezhib illuminated manuscript artwork surrounds aged typewriter parchment with calligraphic verse. Soft, ethereal sunbeams filter through a dreamy, wide open sky filled with gentle drifting clouds. Lush rolling green mountains and lush trees rustle softly in a calming breeze. Warm golden hour lighting, soft volumetric rays, peaceful and spiritual atmosphere, hand-drawn aesthetic, watercolor painted background, masterfully detailed 2D visual, seamless cinematic quality.",
+          "illustrationUrl": "/public/illustrations/test_dervish.jpg",
+          "brollType": "none",
+          "animationContinuityIndex": 3
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "HİKMETİN İZİNDE - ASIRLARIN BİLGELİĞİ",
+          "start": 0.0,
+          "end": 10.0
+        },
+        {
+          "text": "GİZLİ GERÇEK - KALBE DOKUNAN SIR",
+          "start": 10.0,
+          "end": 20.0
+        },
+        {
+          "text": "KUTLU SÖZ - HER ZORLUKLA BİR KOLAYLIK VARDIR",
+          "start": 20.0,
+          "end": 30.0
+        }
+      ],
+      "words": [],
+      "quoteVideos": [],
+      "pipVideos": [],
+      "overlayImages": [],
+      "audioUrl": null,
+      "brollType": "none",
+      "totalDuration": 30.0,
+      "created_at": "2026-11-01 18:47:10"
+    }
+  },
+  {
+    "id": "3b60fb5e",
+    "topic": "🎬 AI Yönetmen: İLMİN VE CESARETİN İZİNDE",
+    "theme": "dark_minimalist",
+    "layoutType": "pip_split",
+    "durationMode": "3 Sahne (30s)",
+    "created_at": "2026-11-01 19:54",
+    "headerMain": "İLMİN VE CESARETİN İZİNDE",
+    "thumbnail_url": "/public/illustrations/anim_key_fcb23a78.jpg",
+    "video_data": {
+      "topic": "İLMİN VE CESARETİN İZİNDE",
+      "theme": "dark_minimalist",
+      "format": "9:16",
+      "is_empty": false,
+      "narration": "Hz. Ali efendimizin ilmi ve cesareti. İlk 20 saniye derviş dağ yolunda yürür. Ardından Şüphesiz Allah sabredenlerle beraberdir ayeti ve tefekkürü açıklanır.",
+      "headerSubtitle": "",
+      "headerLine1": "",
+      "circledWord": "",
+      "headerLine2": "",
+      "highlightedText": "",
+      "layoutType": "pip_split",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "headerSubtitle": "Yolculuğun Başlangıcı",
+          "headerLine1": "İLMİN VE CESARETİN İZİNDE",
+          "highlightedText": "Dağ Yolu",
+          "visualDescription": "Uzak açıyla başlayan sahnede, sarp ve kayalık bir dağ yolunda yürüyen dervişin arkadan çekimi. Kamera yavaşça yaklaşır, rüzgarda dalgalanan hırkası ve gün batımının altın sarısı ışıkları ekrana yansır.",
+          "layoutType": "pip_split",
+          "animationVideoUrl": "/public/videos/anim_vid_9bad86e7.mp4",
+          "videoUrl": "/public/videos/anim_vid_9bad86e7.mp4",
+          "animationPrompt": "A vertical 9:16 establishing shot in high-end Studio Ghibli 2D anime style. A solitary dervish seen from behind, walking slowly down a steep, rugged, rocky mountain trail. The character wears a traditional, loose, flowing wool cloak that ripples dynamically in a dramatic mountain breeze. Majestic, jagged alpine mountain peaks rise in the background with sparse, ancient pine trees clinging to the cliffs. Glowing golden hour sunset illuminates the scene, casting warm honey-colored sunbeams and crepuscular rays through the misty air. Beautiful hand-painted background art, soft nostalgic lighting, detailed 2D line art, atmospheric wind particles floating in the light, cinematic depth of field.",
+          "illustrationUrl": "/public/illustrations/anim_key_fcb23a78.jpg",
+          "brollType": "none",
+          "animationContinuityIndex": 1
+        },
+        {
+          "id": "scene_2",
+          "startTime": 10.0,
+          "endTime": 20.0,
+          "headerSubtitle": "Adım Adım Sabır",
+          "headerLine1": "TEFEKKÜR VE YÜRÜYÜŞ",
+          "highlightedText": "Derin Düşünce",
+          "visualDescription": "1. sahnede dervişin attığı son adımın birebir devamı olarak, kamera dervişin yüzüne ve kararlı gözlerine odaklanır. Yürüyüşü kesintisiz sürerken, arka plandaki dağ silüetleri hafifçe bulanıklaşarak içsel derinliğe geçiş yapar.",
+          "layoutType": "pip_split",
+          "animationVideoUrl": "/public/videos/anim_vid_05716b76.mp4",
+          "videoUrl": "/public/videos/anim_vid_05716b76.mp4",
+          "animationPrompt": "A cinematic 2D anime close-up tracking shot in the iconic Studio Ghibli art style, continuing seamlessly from a walking motion. Focus on a humble dervish's serene yet determined face, his sharp resolute eyes filled with spiritual depth and inner peace. He wears a traditional flowing coarse-woven earthy robe and a tall felt sikke hat, with his garments gently swaying in a soft mountain breeze. The camera locks onto his focused expression as he walks steadily forward. In the background, majestic layered mountain silhouettes and towering ancient pine trees subtly blur into a soft, atmospheric bokeh, creating an ethereal sense of contemplative depth. Warm golden hour sunlight streams from behind the peaks, casting brilliant volumetric sunbeams and glowing rim lighting across his silhouette. Floating golden dust motes drift peacefully through the air. Painterly hand-drawn aesthetic, rich vibrant color palette, highly detailed background art, vertical 9:16 aspect ratio.",
+          "illustrationUrl": "/public/illustrations/test_dervish.jpg",
+          "brollType": "none",
+          "animationContinuityIndex": 2
+        },
+        {
+          "id": "scene_3",
+          "startTime": 20.0,
+          "endTime": 30.0,
+          "headerSubtitle": "İlahi Müjde",
+          "headerLine1": "ŞÜPHESİZ ALLAH SABREDENLERLE BERABERDİR",
+          "highlightedText": "Ayet-i Kerime",
+          "visualDescription": "Derviş duraklar ve ellerini göğe doğru açar. Ekranın ortasında zarif altın varaklı bir İslami çerçeve belirir. Metin, izleyicinin kalbine dokunacak şekilde daktilo efektiyle harf harf ekrana yazılır.",
+          "layoutType": "quote_spotlight",
+          "animationVideoUrl": "/public/videos/anim_vid_097730b0.mp4",
+          "videoUrl": "/public/videos/anim_vid_097730b0.mp4",
+          "animationPrompt": "Studio Ghibli aesthetic 2D animation, medium wide shot of a serene Sufi dervish pausing on a picturesque mountain summit, raising his hands open palms upward toward the sky in a spiritual gesture. He wears a tall traditional beige felt sikke hat and layered, flowing off-white and earth-toned cotton robes that billow softly in a gentle breeze. An elegant, subtle gold-leaf Islamic geometric floral frame delicately borders the center frame. Breathtaking landscape with towering ancient trees, rolling green hills, and tall grass whispering in the wind. Radiant golden hour sunbeams piercing through soft clouds, illuminated dust motes floating in the air, creating a tranquil and magical atmosphere. Hand-drawn visual style, painterly watercolor backgrounds, fine line art, dynamic wind movement, warm color palette, vertical 9:16 aspect ratio.",
+          "illustrationUrl": "/public/illustrations/test_dervish.jpg",
+          "brollType": "none",
+          "animationContinuityIndex": 3
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "İLMİN VE CESARETİN İZİNDE - Dağ Yolu",
+          "start": 0.0,
+          "end": 10.0
+        },
+        {
+          "text": "TEFEKKÜR VE YÜRÜYÜŞ - Derin Düşünce",
+          "start": 10.0,
+          "end": 20.0
+        },
+        {
+          "text": "ŞÜPHESİZ ALLAH SABREDENLERLE BERABERDİR - Ayet-i Kerime",
+          "start": 20.0,
+          "end": 30.0
+        }
+      ],
+      "words": [],
+      "quoteVideos": [],
+      "pipVideos": [],
+      "overlayImages": [],
+      "audioUrl": null,
+      "brollType": "none",
+      "totalDuration": 30.0,
+      "created_at": "2026-11-01 18:47:10"
+    }
+  },
+  {
+    "id": "2bf3eb04",
+    "topic": "cevap2",
+    "theme": "notebook",
+    "layoutType": "pip_split",
+    "durationMode": "Boş Proje",
+    "created_at": "2026-11-01 18:47:10",
+    "headerMain": "Yeni Boş Proje",
+    "thumbnail_url": "/out/thumbnail.png",
+    "video_data": {
+      "topic": "cevap2",
+      "theme": "notebook",
+      "format": "9:16",
+      "is_empty": true,
+      "narration": "",
+      "headerSubtitle": "",
+      "headerLine1": "",
+      "circledWord": "",
+      "headerLine2": "",
+      "highlightedText": "",
+      "layoutType": "pip_split",
+      "scenes": [],
+      "subtitles": [],
+      "words": [],
+      "quoteVideos": [],
+      "pipVideos": [],
+      "overlayImages": [],
+      "audioUrl": null,
+      "brollType": "none",
+      "totalDuration": 0.0,
+      "created_at": "2026-11-01 18:47:10"
+    }
+  },
+  {
     "id": "2309c6da",
     "topic": "cevap001",
     "theme": "notebook",
@@ -8471,3131 +8896,6 @@
       ],
       "totalDuration": 10.0,
       "created_at": "2026-10-29 21:59:51"
-    }
-  },
-  {
-    "id": "35d26582",
-    "topic": "İbn-i Sina ve Tıbbın Kanunu: Orta Çağ'ın En Büyük Hekiminin Sırrı",
-    "theme": "parchment",
-    "layoutType": "pip_split",
-    "durationMode": "quick",
-    "created_at": "2026-10-29 01:02",
-    "headerMain": "TIBBIN KANUNU ASIRLARA YÖN VEREN DEHA",
-    "narration": "Orta Çağ'ın karanlığında yükselen bir meşale... İbn-i Sina, yazdığı El-Kanun fi't-Tıbb kitabı ile sadece kendi çağını değil, yüzyıllar sonraki modern tıbbı da şekillendirdi. Peki ama bu büyük hekimin sırrı neydi?",
-    "hookScore": 98,
-    "key_used": "asdxcxc005@gmail.com",
-    "model_used": "gemini-3.5-flash-lite",
-    "thumbnail_url": "/out/thumbnail.png?t=1793224925",
-    "video_data": {
-      "directorDecision": {
-        "theme": "parchment",
-        "layoutType": "pip_split",
-        "illustrationPrompt": "Vintage oil painting of Ibn Sina in a medieval library surrounded by ancient medical manuscripts, anatomical scrolls, glass flasks, dramatic golden hour lighting, cinematic composition, 8k resolution",
-        "illustrationCaption": "El-Kanun fi't-Tıbb",
-        "brollType": "ink",
-        "durationMode": "quick",
-        "particles": "dust",
-        "ambientPattern": "islamic_geometric",
-        "doodleType": "book",
-        "directorReason": "Orta Çağ tıbbının tarihi ve felsefi derinliğini yansıtmak için parşömen tema ve pip_split görsel kurgusu seçildi."
-      },
-      "requiredIcons": [
-        "book",
-        "scale",
-        "brain",
-        "atom",
-        "hourglass"
-      ],
-      "headerSubtitle": "Orta Çağ'ın Sırrı",
-      "headerLine1": "TIBBIN",
-      "circledWord": "KANUNU",
-      "headerLine2": "İBN-İ SİNA",
-      "highlightedText": "ASIRLARA YÖN VEREN DEHA",
-      "strikeWord": "TESADÜF",
-      "layoutType": "pip_split",
-      "cards": [
-        {
-          "id": "1",
-          "label": "El-Kanun",
-          "value": "5 Cilt",
-          "icon": "book",
-          "color": "#1e3a8a",
-          "iconAssetPath": "assets/icons/book.svg"
-        },
-        {
-          "id": "2",
-          "label": "Modern Tıp",
-          "value": "Temel Taş",
-          "icon": "scale",
-          "color": "#15803d",
-          "iconAssetPath": "assets/icons/scale.svg"
-        },
-        {
-          "id": "3",
-          "label": "Teşhis",
-          "value": "Karantina",
-          "icon": "atom",
-          "color": "#d97706",
-          "iconAssetPath": "assets/icons/atom.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "Batı Tıbbı (Skolastik)",
-        "leftSubtitle": "Batıl İnançlar",
-        "leftPoints": [
-          "Hastalığı cinlere bağlama",
-          "Karantina bilinci yok",
-          "Deneyden uzak dogma"
-        ],
-        "leftColor": "#dc2626",
-        "rightTitle": "İbn-i Sina Tıbbı",
-        "rightSubtitle": "Bilimsel Metot",
-        "rightPoints": [
-          "Hastalığın bulaş yolu (mikrop)",
-          "Karantina ve hijyen",
-          "Klinik deney ve gözlem"
-        ],
-        "rightColor": "#16a34a",
-        "verdict": "İbn-i Sina, modern tıbbın ve deneysel metodun temellerini yüz yıllar önce attı."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Adım",
-          "title": "Gözlem",
-          "desc": "Hastalıkların doğasını titizlikle inceledi.",
-          "color": "#1e3a8a"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Adım",
-          "title": "Karantina",
-          "desc": "Bulaşıcı hastalıklar için tecrit yöntemini buldu.",
-          "color": "#d97706"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Adım",
-          "title": "Külliyat",
-          "desc": "Yazdığı eserler Avrupa'da yüzyıllarca ders kitabı oldu.",
-          "color": "#15803d"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "İbn-i Sina",
-        "title": "EL-KANUN Fİ'T-TIBB",
-        "quoteText": "Tıp, insan bedeninin sağlık ve hastalık hallerini konu edinen, bu sayede sağlığın korunduğu ve kaybedildiğinde yeniden getirildiği ilimdir.",
-        "sourceRef": "Tıbbın Kanunu, Giriş"
-      },
-      "metricImpact": {
-        "bigNumber": "600+",
-        "bigLabel": "YIL BOYUNCA",
-        "subheading": "Avrupa Üniversitelerinde Ana Kitap",
-        "keyTakeaway": "Doğu'nun ışığı Batı'nın karanlığını aydınlattı."
-      },
-      "gridExplosion": {
-        "title": "BİLİMİN KÖŞETAŞLARI",
-        "subtitle": "Tıbbın Kanunu'nda Yer Alan Yüzlerce Mucizevi Tedavi",
-        "iconType": "book",
-        "itemCount": 9,
-        "badgeText": "EVRENSEL MİRAS",
-        "iconAssetPath": "assets/icons/book.svg"
-      },
-      "triConcept": {
-        "badge": "YENİLİKÇİ YAKLAŞIM",
-        "concept1": {
-          "title": "FARMAKOLOJİ",
-          "subtitle": "Bitkisel İlaçlar",
-          "icon": "atom",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        "concept2": {
-          "title": "PSİKOSOMATİK",
-          "subtitle": "Ruh ve Beden",
-          "icon": "brain",
-          "color": "#ef4444",
-          "iconAssetPath": "assets/icons/brain.svg"
-        },
-        "concept3": {
-          "title": "CERRAHİ",
-          "subtitle": "Hassas Müdahale",
-          "icon": "scale",
-          "color": "#facc15",
-          "iconAssetPath": "assets/icons/scale.svg"
-        },
-        "bottomNote": "MODERN TIP ONUN METOTLARININ ÜZERİNE KURULDU"
-      },
-      "timeline": {
-        "startYear": "MS 980",
-        "endYear": "MS 1037",
-        "durationLabel": "Ömür",
-        "title": "Bir Dâhinin Çağı",
-        "ayahArabic": "",
-        "ayahTranslation": "Bilgi ve hikmet müminin yitik malıdır, onu nerede bulursa almalıdır.",
-        "ayahRef": "Hadis-i Şerif"
-      },
-      "narration": "Orta Çağ'ın karanlığında yükselen bir meşale... İbn-i Sina, yazdığı El-Kanun fi't-Tıbb kitabı ile sadece kendi çağını değil, yüzyıllar sonraki modern tıbbı da şekillendirdi. Peki ama bu büyük hekimin sırrı neydi?",
-      "viral": {
-        "hookScore": 98,
-        "viralTitles": [
-          "İbn-i Sina'nın Tıbbın Kanunu'ndaki Gizli Sır!",
-          "Avrupa'nın Yüzyıllarca Ders Kitabı Olarak Okuttuğu Deha"
-        ],
-        "hashtags": [
-          "#ibnisina",
-          "#tıp",
-          "#tarih",
-          "#belgesel",
-          "#bilim",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden tıp tarihi onu...",
-        "description": "İbn-i Sina'nın tıbba kazandırdığı devrim niteliğindeki yenilikler ve El-Kanun fi't-Tıbb'ın sırrı."
-      },
-      "theme": "parchment",
-      "durationMode": "quick",
-      "particles": "none",
-      "ambientPattern": "none",
-      "doodleType": "auto",
-      "filmGrain": "subtle",
-      "lightLeaks": "auto",
-      "cameraMotion": "handheld",
-      "accentType": "none",
-      "socialHandle": "@birkissa",
-      "musicTrack": "ambient_mystic.wav",
-      "ttsProvider": "edge_tts",
-      "voiceId": "en-US-AndrewMultilingualNeural",
-      "emotionTone": "documentary",
-      "illustrationUrl": "illustrations/ill_69d0e8fe.jpg",
-      "illustrationCaption": "İbn-i Sina & Tıbbın Kanunu",
-      "illustrationStyle": "polaroid",
-      "brollType": "ink",
-      "brollOpacity": 0.18,
-      "_acquired_assets": [
-        {
-          "name": "book",
-          "type": "grid_icon",
-          "path": "assets/icons/book.svg"
-        },
-        {
-          "name": "atom",
-          "type": "concept_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "brain",
-          "type": "concept_icon",
-          "path": "assets/icons/brain.svg"
-        },
-        {
-          "name": "scale",
-          "type": "concept_icon",
-          "path": "assets/icons/scale.svg"
-        },
-        {
-          "name": "book",
-          "type": "card_icon",
-          "path": "assets/icons/book.svg"
-        },
-        {
-          "name": "scale",
-          "type": "card_icon",
-          "path": "assets/icons/scale.svg"
-        },
-        {
-          "name": "atom",
-          "type": "card_icon",
-          "path": "assets/icons/atom.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "Ortaçan karanlığında yükselen",
-          "start": 0.0,
-          "end": 2.0,
-          "words": [
-            {
-              "word": "Ortaçan",
-              "start": 0.0,
-              "end": 0.66
-            },
-            {
-              "word": "karanlığında",
-              "start": 0.66,
-              "end": 1.34
-            },
-            {
-              "word": "yükselen",
-              "start": 1.34,
-              "end": 2.0
-            }
-          ]
-        },
-        {
-          "text": "bir meşale. İbnisina,",
-          "start": 2.0,
-          "end": 3.76,
-          "words": [
-            {
-              "word": "bir",
-              "start": 2.0,
-              "end": 2.16
-            },
-            {
-              "word": "meşale.",
-              "start": 2.16,
-              "end": 2.72
-            },
-            {
-              "word": "İbnisina,",
-              "start": 3.16,
-              "end": 3.76
-            }
-          ]
-        },
-        {
-          "text": "yazdığı elkanın fititip",
-          "start": 4.26,
-          "end": 5.78,
-          "words": [
-            {
-              "word": "yazdığı",
-              "start": 4.26,
-              "end": 4.72
-            },
-            {
-              "word": "elkanın",
-              "start": 4.72,
-              "end": 5.3
-            },
-            {
-              "word": "fititip",
-              "start": 5.3,
-              "end": 5.78
-            }
-          ]
-        },
-        {
-          "text": "kitabıyla sadece kendi",
-          "start": 5.78,
-          "end": 7.46,
-          "words": [
-            {
-              "word": "kitabıyla",
-              "start": 5.78,
-              "end": 6.28
-            },
-            {
-              "word": "sadece",
-              "start": 6.28,
-              "end": 7.0
-            },
-            {
-              "word": "kendi",
-              "start": 7.0,
-              "end": 7.46
-            }
-          ]
-        },
-        {
-          "text": "çağını değil. Yüz",
-          "start": 7.46,
-          "end": 8.74,
-          "words": [
-            {
-              "word": "çağını",
-              "start": 7.46,
-              "end": 7.84
-            },
-            {
-              "word": "değil.",
-              "start": 7.84,
-              "end": 8.06
-            },
-            {
-              "word": "Yüz",
-              "start": 8.54,
-              "end": 8.74
-            }
-          ]
-        },
-        {
-          "text": "yıllar sonraki modern",
-          "start": 8.74,
-          "end": 9.96,
-          "words": [
-            {
-              "word": "yıllar",
-              "start": 8.74,
-              "end": 9.06
-            },
-            {
-              "word": "sonraki",
-              "start": 9.06,
-              "end": 9.58
-            },
-            {
-              "word": "modern",
-              "start": 9.58,
-              "end": 9.96
-            }
-          ]
-        },
-        {
-          "text": "tıp bu da",
-          "start": 9.96,
-          "end": 10.6,
-          "words": [
-            {
-              "word": "tıp",
-              "start": 9.96,
-              "end": 10.3
-            },
-            {
-              "word": "bu",
-              "start": 10.3,
-              "end": 10.48
-            },
-            {
-              "word": "da",
-              "start": 10.48,
-              "end": 10.6
-            }
-          ]
-        },
-        {
-          "text": "şekillendirdi. Peki ama",
-          "start": 10.6,
-          "end": 12.38,
-          "words": [
-            {
-              "word": "şekillendirdi.",
-              "start": 10.6,
-              "end": 11.42
-            },
-            {
-              "word": "Peki",
-              "start": 11.9,
-              "end": 12.1
-            },
-            {
-              "word": "ama",
-              "start": 12.1,
-              "end": 12.38
-            }
-          ]
-        },
-        {
-          "text": "bu büyük hekimin",
-          "start": 12.38,
-          "end": 13.38,
-          "words": [
-            {
-              "word": "bu",
-              "start": 12.38,
-              "end": 12.62
-            },
-            {
-              "word": "büyük",
-              "start": 12.62,
-              "end": 12.94
-            },
-            {
-              "word": "hekimin",
-              "start": 12.94,
-              "end": 13.38
-            }
-          ]
-        },
-        {
-          "text": "sürüneydi.",
-          "start": 13.38,
-          "end": 14.12,
-          "words": [
-            {
-              "word": "sürüneydi.",
-              "start": 13.38,
-              "end": 14.12
-            }
-          ]
-        }
-      ],
-      "words": [
-        {
-          "word": "Ortaçan",
-          "start": 0.0,
-          "end": 0.66
-        },
-        {
-          "word": "karanlığında",
-          "start": 0.66,
-          "end": 1.34
-        },
-        {
-          "word": "yükselen",
-          "start": 1.34,
-          "end": 2.0
-        },
-        {
-          "word": "bir",
-          "start": 2.0,
-          "end": 2.16
-        },
-        {
-          "word": "meşale.",
-          "start": 2.16,
-          "end": 2.72
-        },
-        {
-          "word": "İbnisina,",
-          "start": 3.16,
-          "end": 3.76
-        },
-        {
-          "word": "yazdığı",
-          "start": 4.26,
-          "end": 4.72
-        },
-        {
-          "word": "elkanın",
-          "start": 4.72,
-          "end": 5.3
-        },
-        {
-          "word": "fititip",
-          "start": 5.3,
-          "end": 5.78
-        },
-        {
-          "word": "kitabıyla",
-          "start": 5.78,
-          "end": 6.28
-        },
-        {
-          "word": "sadece",
-          "start": 6.28,
-          "end": 7.0
-        },
-        {
-          "word": "kendi",
-          "start": 7.0,
-          "end": 7.46
-        },
-        {
-          "word": "çağını",
-          "start": 7.46,
-          "end": 7.84
-        },
-        {
-          "word": "değil.",
-          "start": 7.84,
-          "end": 8.06
-        },
-        {
-          "word": "Yüz",
-          "start": 8.54,
-          "end": 8.74
-        },
-        {
-          "word": "yıllar",
-          "start": 8.74,
-          "end": 9.06
-        },
-        {
-          "word": "sonraki",
-          "start": 9.06,
-          "end": 9.58
-        },
-        {
-          "word": "modern",
-          "start": 9.58,
-          "end": 9.96
-        },
-        {
-          "word": "tıp",
-          "start": 9.96,
-          "end": 10.3
-        },
-        {
-          "word": "bu",
-          "start": 10.3,
-          "end": 10.48
-        },
-        {
-          "word": "da",
-          "start": 10.48,
-          "end": 10.6
-        },
-        {
-          "word": "şekillendirdi.",
-          "start": 10.6,
-          "end": 11.42
-        },
-        {
-          "word": "Peki",
-          "start": 11.9,
-          "end": 12.1
-        },
-        {
-          "word": "ama",
-          "start": 12.1,
-          "end": 12.38
-        },
-        {
-          "word": "bu",
-          "start": 12.38,
-          "end": 12.62
-        },
-        {
-          "word": "büyük",
-          "start": 12.62,
-          "end": 12.94
-        },
-        {
-          "word": "hekimin",
-          "start": 12.94,
-          "end": 13.38
-        },
-        {
-          "word": "sürüneydi.",
-          "start": 13.38,
-          "end": 14.12
-        }
-      ],
-      "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "88f7ccd2",
-    "topic": "Zaman ve Görelilik: Neden Geleceğe Yolculuk Mümkün?",
-    "theme": "neon_cyber",
-    "layoutType": "flowchart",
-    "durationMode": "deep",
-    "created_at": "2026-10-29 00:44",
-    "headerMain": "GELECEĞE YOLCULUK ASLA ZAMANIN GÖRELİLİĞİ",
-    "narration": "Zamanın her yerde aynı akmadığını biliyor muydunuz? Albert Einstein'ın görelilik teorisine göre, bir gün ışık hızına yakın seyahat edebilen uzay gemileri yaparsak, geleceğe gitmek hayal olmaktan çıkar. Sizin için sadece haftalar geçerken, dünyada yüzyıllar akıp gidebilir. Geleceğe yolculuk matematiksel olarak mümkündür; soru 'nasıl', değil 'ne zaman'.",
-    "hookScore": 98,
-    "key_used": "asdxcxc005@gmail.com",
-    "model_used": "gemini-3.5-flash-lite",
-    "thumbnail_url": "/out/thumbnail.png?t=1793223876",
-    "video_data": {
-      "directorDecision": {
-        "theme": "neon_cyber",
-        "layoutType": "flowchart",
-        "durationMode": "deep",
-        "particles": "stars",
-        "ambientPattern": "cosmic",
-        "doodleType": "hourglass",
-        "directorReason": "Zaman, görelilik ve geleceğe yolculuk teması için uzay-zaman sürekliliğini temsil eden 'neon_cyber' tema ve 'flowchart' şablonu seçildi."
-      },
-      "requiredIcons": [
-        "hourglass",
-        "atom",
-        "infinity",
-        "compass",
-        "lightbulb"
-      ],
-      "headerSubtitle": "Zamanın Ötesinde",
-      "headerLine1": "GELECEĞE YOLCULUK",
-      "circledWord": "ASLA",
-      "headerLine2": "İMKANSIZ DEĞİL",
-      "highlightedText": "ZAMANIN GÖRELİLİĞİ",
-      "strikeWord": "HAYAL",
-      "layoutType": "flowchart",
-      "cards": [
-        {
-          "id": "1",
-          "label": "Işık Hızı",
-          "value": "300.000 km/s",
-          "icon": "atom",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        {
-          "id": "2",
-          "label": "Zaman Dilimi",
-          "value": "Bükülebilir",
-          "icon": "hourglass",
-          "color": "#a855f7",
-          "iconAssetPath": "assets/icons/hourglass.svg"
-        },
-        {
-          "id": "3",
-          "label": "İkizler Paradoksu",
-          "value": "Farklı Yaş",
-          "icon": "infinity",
-          "color": "#facc15",
-          "iconAssetPath": "assets/icons/infinity.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "Klasik Fizik",
-        "leftSubtitle": "Mutlak Zaman",
-        "leftPoints": [
-          "Her yerde aynı akan saniyeler",
-          "Sabit ve evrensel saat",
-          "Değişmez geçmiş ve gelecek"
-        ],
-        "leftColor": "#ef4444",
-        "rightTitle": "Einstein Göreliliği",
-        "rightSubtitle": "Esnek Zaman-Uzay",
-        "rightPoints": [
-          "Hızlandıkça yavaşlayan saatler",
-          "Çekim gücüyle bükülen uzay",
-          "Geleceğe bilet: Işık hızı"
-        ],
-        "rightColor": "#3b82f6",
-        "verdict": "Albert Einstein'ın teorisi, zamanın mutlak değil, hıza bağlı göreceli bir akış olduğunu kanıtladı."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Adım",
-          "title": "Işık Hızına Yaklaşmak",
-          "desc": "Uzay geminiz ışık hızının %99'una ulaştığında dış dünyada yıllar geçer.",
-          "color": "#38bdf8"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Adım",
-          "title": "Zamanın Yavaşlaması",
-          "desc": "Sizin için sadece aylar geçerken, Dünya'da nesiller değişir.",
-          "color": "#a855f7"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Adım",
-          "title": "Geleceğe Varış",
-          "desc": "Gemiye geri döndüğünüzde kendinizi yıllar sonrasının dünyasında bulursunuz.",
-          "color": "#22c55e"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Albert Einstein",
-        "title": "İzafiyet Teorisi",
-        "quoteText": "Zaman, algıladığımızdan çok daha esnektir. Hız ve kütle, saatin tik taklarını yavaşlatabilir.",
-        "sourceRef": "Özel Görelilik Kuramı"
-      },
-      "metricImpact": {
-        "bigNumber": "%99.9",
-        "bigLabel": "IŞIK HIZI",
-        "subheading": "Zamanı Durdurmanın veya Geleceğe Gitmenin Anahtarı",
-        "keyTakeaway": "Geleceğe yolculuk bilimsel olarak mümkündür; tek sınır teknolojimiz."
-      },
-      "gridExplosion": {
-        "title": "ZAMAN BÜKÜLMESİ",
-        "subtitle": "Evrenin En Büyük Gizemi",
-        "iconType": "atom",
-        "itemCount": 9,
-        "badgeText": "KOD: RELATIVITY",
-        "iconAssetPath": "assets/icons/atom.svg"
-      },
-      "triConcept": {
-        "badge": "ZAMANIN ÜÇ BOYUTU",
-        "concept1": {
-          "title": "HIZ",
-          "subtitle": "Zamanı Yavaşlatır",
-          "icon": "atom",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        "concept2": {
-          "title": "KÜTLE ÇEKİM",
-          "subtitle": "Saatleri Büker",
-          "icon": "hourglass",
-          "color": "#facc15",
-          "iconAssetPath": "assets/icons/hourglass.svg"
-        },
-        "concept3": {
-          "title": "GELECEK",
-          "subtitle": "Bugünün Yolculuğu",
-          "icon": "infinity",
-          "color": "#a855f7",
-          "iconAssetPath": "assets/icons/infinity.svg"
-        },
-        "bottomNote": "EINSTEIN'IN EVRENİNDE GEÇMİŞE DÖNÜŞ YOKTUR, AMA GELECEK AÇIKTIR"
-      },
-      "timeline": {
-        "startYear": "Şimdi",
-        "endYear": "100 Yıl Sonra",
-        "durationLabel": "Işık Hızı Yolculuğu",
-        "title": "Geleceğe Yolculuk Süreci",
-        "ayahArabic": "",
-        "ayahTranslation": "Zaman, gözlemcinin konumuna ve hızına göre şekillenir.",
-        "ayahRef": "Modern Fizik Prensibi"
-      },
-      "narration": "Zamanın her yerde aynı akmadığını biliyor muydunuz? Albert Einstein'ın görelilik teorisine göre, bir gün ışık hızına yakın seyahat edebilen uzay gemileri yaparsak, geleceğe gitmek hayal olmaktan çıkar. Sizin için sadece haftalar geçerken, dünyada yüzyıllar akıp gidebilir. Geleceğe yolculuk matematiksel olarak mümkündür; soru 'nasıl', değil 'ne zaman'.",
-      "viral": {
-        "hookScore": 98,
-        "viralTitles": [
-          "Geleceğe Gitmek Neden Mümkün? Zamanın Gizli Yüzü!",
-          "Einstein Haklıydı: Zamanı Bükmek ve Geleceğe Yolculuk!"
-        ],
-        "hashtags": [
-          "#bilim",
-          "#fizik",
-          "#einstein",
-          "#zaman",
-          "#gelecek",
-          "#shorts",
-          "#keşfet"
-        ],
-        "loopEnding": "ve işte bu yüzden zaman sadece...",
-        "description": "Zamanın göreliliği, ışık hızı ve geleceğe yolculuğun ardındaki büyüleyici bilimsel gerçekler."
-      },
-      "theme": "neon_cyber",
-      "durationMode": "deep",
-      "particles": "stars",
-      "ambientPattern": "cosmic",
-      "doodleType": "hourglass",
-      "filmGrain": "subtle",
-      "lightLeaks": "auto",
-      "cameraMotion": "handheld",
-      "accentType": "none",
-      "socialHandle": "@bilgikosesi",
-      "musicTrack": "ambient_documentary.wav",
-      "ttsProvider": "edge_tts",
-      "voiceId": "en-US-AndrewMultilingualNeural",
-      "emotionTone": "documentary",
-      "_acquired_assets": [
-        {
-          "name": "cosmic",
-          "type": "watermark",
-          "path": "assets/watermarks/cosmic.svg"
-        },
-        {
-          "name": "atom",
-          "type": "grid_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "atom",
-          "type": "concept_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "concept_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "infinity",
-          "type": "concept_icon",
-          "path": "assets/icons/infinity.svg"
-        },
-        {
-          "name": "atom",
-          "type": "card_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "card_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "infinity",
-          "type": "card_icon",
-          "path": "assets/icons/infinity.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "Zamanın her yerde",
-          "start": 0.0,
-          "end": 1.44,
-          "words": [
-            {
-              "word": "Zamanın",
-              "start": 0.0,
-              "end": 0.78
-            },
-            {
-              "word": "her",
-              "start": 0.78,
-              "end": 1.0
-            },
-            {
-              "word": "yerde",
-              "start": 1.0,
-              "end": 1.44
-            }
-          ]
-        },
-        {
-          "text": "aynı akmadığını biliyor",
-          "start": 1.44,
-          "end": 3.08,
-          "words": [
-            {
-              "word": "aynı",
-              "start": 1.44,
-              "end": 1.84
-            },
-            {
-              "word": "akmadığını",
-              "start": 1.84,
-              "end": 2.6
-            },
-            {
-              "word": "biliyor",
-              "start": 2.6,
-              "end": 3.08
-            }
-          ]
-        },
-        {
-          "text": "muydunuz. Albert Einstein",
-          "start": 3.08,
-          "end": 5.38,
-          "words": [
-            {
-              "word": "muydunuz.",
-              "start": 3.08,
-              "end": 3.9
-            },
-            {
-              "word": "Albert",
-              "start": 4.36,
-              "end": 4.68
-            },
-            {
-              "word": "Einstein",
-              "start": 4.68,
-              "end": 5.38
-            }
-          ]
-        },
-        {
-          "text": "'ın görellilik teorisine",
-          "start": 5.38,
-          "end": 7.22,
-          "words": [
-            {
-              "word": "'ın",
-              "start": 5.38,
-              "end": 5.96
-            },
-            {
-              "word": "görellilik",
-              "start": 5.96,
-              "end": 6.62
-            },
-            {
-              "word": "teorisine",
-              "start": 6.62,
-              "end": 7.22
-            }
-          ]
-        },
-        {
-          "text": "göre bir gün",
-          "start": 7.22,
-          "end": 8.74,
-          "words": [
-            {
-              "word": "göre",
-              "start": 7.22,
-              "end": 7.82
-            },
-            {
-              "word": "bir",
-              "start": 7.82,
-              "end": 8.38
-            },
-            {
-              "word": "gün",
-              "start": 8.38,
-              "end": 8.74
-            }
-          ]
-        },
-        {
-          "text": "ışık hızına yakın",
-          "start": 8.74,
-          "end": 10.0,
-          "words": [
-            {
-              "word": "ışık",
-              "start": 8.74,
-              "end": 9.18
-            },
-            {
-              "word": "hızına",
-              "start": 9.18,
-              "end": 9.58
-            },
-            {
-              "word": "yakın",
-              "start": 9.58,
-              "end": 10.0
-            }
-          ]
-        },
-        {
-          "text": "seyahat edebilen uzay",
-          "start": 10.0,
-          "end": 11.56,
-          "words": [
-            {
-              "word": "seyahat",
-              "start": 10.0,
-              "end": 10.56
-            },
-            {
-              "word": "edebilen",
-              "start": 10.56,
-              "end": 11.18
-            },
-            {
-              "word": "uzay",
-              "start": 11.18,
-              "end": 11.56
-            }
-          ]
-        },
-        {
-          "text": "gemileri yaparsak. Geleceği",
-          "start": 11.56,
-          "end": 14.06,
-          "words": [
-            {
-              "word": "gemileri",
-              "start": 11.56,
-              "end": 12.04
-            },
-            {
-              "word": "yaparsak.",
-              "start": 12.04,
-              "end": 13.08
-            },
-            {
-              "word": "Geleceği",
-              "start": 13.4,
-              "end": 14.06
-            }
-          ]
-        },
-        {
-          "text": "gitmek hayal olmaktan",
-          "start": 14.06,
-          "end": 15.74,
-          "words": [
-            {
-              "word": "gitmek",
-              "start": 14.06,
-              "end": 14.54
-            },
-            {
-              "word": "hayal",
-              "start": 14.54,
-              "end": 15.06
-            },
-            {
-              "word": "olmaktan",
-              "start": 15.06,
-              "end": 15.74
-            }
-          ]
-        },
-        {
-          "text": "çıkar. Sizin için",
-          "start": 15.74,
-          "end": 17.62,
-          "words": [
-            {
-              "word": "çıkar.",
-              "start": 15.74,
-              "end": 16.12
-            },
-            {
-              "word": "Sizin",
-              "start": 16.82,
-              "end": 17.32
-            },
-            {
-              "word": "için",
-              "start": 17.32,
-              "end": 17.62
-            }
-          ]
-        },
-        {
-          "text": "sadece haftalar geçerken",
-          "start": 17.62,
-          "end": 19.88,
-          "words": [
-            {
-              "word": "sadece",
-              "start": 17.62,
-              "end": 18.18
-            },
-            {
-              "word": "haftalar",
-              "start": 18.18,
-              "end": 18.92
-            },
-            {
-              "word": "geçerken",
-              "start": 18.92,
-              "end": 19.88
-            }
-          ]
-        },
-        {
-          "text": "dünyada yüz yıllar",
-          "start": 19.88,
-          "end": 21.9,
-          "words": [
-            {
-              "word": "dünyada",
-              "start": 19.88,
-              "end": 21.02
-            },
-            {
-              "word": "yüz",
-              "start": 21.02,
-              "end": 21.3
-            },
-            {
-              "word": "yıllar",
-              "start": 21.3,
-              "end": 21.9
-            }
-          ]
-        },
-        {
-          "text": "akıp gidebilir. Geleceği",
-          "start": 21.9,
-          "end": 24.08,
-          "words": [
-            {
-              "word": "akıp",
-              "start": 21.9,
-              "end": 22.34
-            },
-            {
-              "word": "gidebilir.",
-              "start": 22.34,
-              "end": 22.88
-            },
-            {
-              "word": "Geleceği",
-              "start": 23.38,
-              "end": 24.08
-            }
-          ]
-        },
-        {
-          "text": "yolculuk matematiksel olarak",
-          "start": 24.08,
-          "end": 26.12,
-          "words": [
-            {
-              "word": "yolculuk",
-              "start": 24.08,
-              "end": 24.76
-            },
-            {
-              "word": "matematiksel",
-              "start": 24.76,
-              "end": 25.68
-            },
-            {
-              "word": "olarak",
-              "start": 25.68,
-              "end": 26.12
-            }
-          ]
-        },
-        {
-          "text": "mümkündür. Soru nasıl",
-          "start": 26.12,
-          "end": 28.8,
-          "words": [
-            {
-              "word": "mümkündür.",
-              "start": 26.12,
-              "end": 27.12
-            },
-            {
-              "word": "Soru",
-              "start": 27.12,
-              "end": 28.22
-            },
-            {
-              "word": "nasıl",
-              "start": 28.22,
-              "end": 28.8
-            }
-          ]
-        },
-        {
-          "text": "dayı ne zaman?",
-          "start": 28.8,
-          "end": 30.32,
-          "words": [
-            {
-              "word": "dayı",
-              "start": 28.8,
-              "end": 29.74
-            },
-            {
-              "word": "ne",
-              "start": 29.74,
-              "end": 29.96
-            },
-            {
-              "word": "zaman?",
-              "start": 29.96,
-              "end": 30.32
-            }
-          ]
-        }
-      ],
-      "words": [
-        {
-          "word": "Zamanın",
-          "start": 0.0,
-          "end": 0.78
-        },
-        {
-          "word": "her",
-          "start": 0.78,
-          "end": 1.0
-        },
-        {
-          "word": "yerde",
-          "start": 1.0,
-          "end": 1.44
-        },
-        {
-          "word": "aynı",
-          "start": 1.44,
-          "end": 1.84
-        },
-        {
-          "word": "akmadığını",
-          "start": 1.84,
-          "end": 2.6
-        },
-        {
-          "word": "biliyor",
-          "start": 2.6,
-          "end": 3.08
-        },
-        {
-          "word": "muydunuz.",
-          "start": 3.08,
-          "end": 3.9
-        },
-        {
-          "word": "Albert",
-          "start": 4.36,
-          "end": 4.68
-        },
-        {
-          "word": "Einstein",
-          "start": 4.68,
-          "end": 5.38
-        },
-        {
-          "word": "'ın",
-          "start": 5.38,
-          "end": 5.96
-        },
-        {
-          "word": "görellilik",
-          "start": 5.96,
-          "end": 6.62
-        },
-        {
-          "word": "teorisine",
-          "start": 6.62,
-          "end": 7.22
-        },
-        {
-          "word": "göre",
-          "start": 7.22,
-          "end": 7.82
-        },
-        {
-          "word": "bir",
-          "start": 7.82,
-          "end": 8.38
-        },
-        {
-          "word": "gün",
-          "start": 8.38,
-          "end": 8.74
-        },
-        {
-          "word": "ışık",
-          "start": 8.74,
-          "end": 9.18
-        },
-        {
-          "word": "hızına",
-          "start": 9.18,
-          "end": 9.58
-        },
-        {
-          "word": "yakın",
-          "start": 9.58,
-          "end": 10.0
-        },
-        {
-          "word": "seyahat",
-          "start": 10.0,
-          "end": 10.56
-        },
-        {
-          "word": "edebilen",
-          "start": 10.56,
-          "end": 11.18
-        },
-        {
-          "word": "uzay",
-          "start": 11.18,
-          "end": 11.56
-        },
-        {
-          "word": "gemileri",
-          "start": 11.56,
-          "end": 12.04
-        },
-        {
-          "word": "yaparsak.",
-          "start": 12.04,
-          "end": 13.08
-        },
-        {
-          "word": "Geleceği",
-          "start": 13.4,
-          "end": 14.06
-        },
-        {
-          "word": "gitmek",
-          "start": 14.06,
-          "end": 14.54
-        },
-        {
-          "word": "hayal",
-          "start": 14.54,
-          "end": 15.06
-        },
-        {
-          "word": "olmaktan",
-          "start": 15.06,
-          "end": 15.74
-        },
-        {
-          "word": "çıkar.",
-          "start": 15.74,
-          "end": 16.12
-        },
-        {
-          "word": "Sizin",
-          "start": 16.82,
-          "end": 17.32
-        },
-        {
-          "word": "için",
-          "start": 17.32,
-          "end": 17.62
-        },
-        {
-          "word": "sadece",
-          "start": 17.62,
-          "end": 18.18
-        },
-        {
-          "word": "haftalar",
-          "start": 18.18,
-          "end": 18.92
-        },
-        {
-          "word": "geçerken",
-          "start": 18.92,
-          "end": 19.88
-        },
-        {
-          "word": "dünyada",
-          "start": 19.88,
-          "end": 21.02
-        },
-        {
-          "word": "yüz",
-          "start": 21.02,
-          "end": 21.3
-        },
-        {
-          "word": "yıllar",
-          "start": 21.3,
-          "end": 21.9
-        },
-        {
-          "word": "akıp",
-          "start": 21.9,
-          "end": 22.34
-        },
-        {
-          "word": "gidebilir.",
-          "start": 22.34,
-          "end": 22.88
-        },
-        {
-          "word": "Geleceği",
-          "start": 23.38,
-          "end": 24.08
-        },
-        {
-          "word": "yolculuk",
-          "start": 24.08,
-          "end": 24.76
-        },
-        {
-          "word": "matematiksel",
-          "start": 24.76,
-          "end": 25.68
-        },
-        {
-          "word": "olarak",
-          "start": 25.68,
-          "end": 26.12
-        },
-        {
-          "word": "mümkündür.",
-          "start": 26.12,
-          "end": 27.12
-        },
-        {
-          "word": "Soru",
-          "start": 27.12,
-          "end": 28.22
-        },
-        {
-          "word": "nasıl",
-          "start": 28.22,
-          "end": 28.8
-        },
-        {
-          "word": "dayı",
-          "start": 28.8,
-          "end": 29.74
-        },
-        {
-          "word": "ne",
-          "start": 29.74,
-          "end": 29.96
-        },
-        {
-          "word": "zaman?",
-          "start": 29.96,
-          "end": 30.32
-        }
-      ],
-      "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "8d5fbdf1",
-    "topic": "Zaman ve Görelilik: Neden Geleceğe Yolculuk Mümkün?",
-    "theme": "neon_cyber",
-    "layoutType": "flowchart",
-    "durationMode": "deep",
-    "created_at": "2026-10-29 00:40",
-    "headerMain": "ZAMAN VE GÖRELİLİK GELECEK IŞIK HIZI VE BÜKÜLEN ZAMAN",
-    "narration": "Zamanın akıp gittiğini sanırız; oysa zaman, hızlandıkça esneyen elastik bir dokudur. Einstein'ın kanıtladığı gibi, eğer ışık hızına yakın seyahat edebilirseniz, sizin için birkaç ay sürerken dünyada yıllar geçecektir. Geleceğe yolculuk imkansız değil; sadece fizik kurallarını doğru okumaktan ibaret.",
-    "hookScore": 98,
-    "key_used": "asdxcxc005@gmail.com",
-    "model_used": "gemini-3.5-flash-lite",
-    "thumbnail_url": "/out/thumbnail.png?t=1793223645",
-    "video_data": {
-      "directorDecision": {
-        "theme": "neon_cyber",
-        "layoutType": "flowchart",
-        "durationMode": "deep",
-        "particles": "stars",
-        "ambientPattern": "cosmic",
-        "doodleType": "hourglass",
-        "directorReason": "Zaman ve görelilik konsepti için neon siber tuval, kozmik arka plan ve akış şeması düzeni seçildi."
-      },
-      "requiredIcons": [
-        "hourglass",
-        "atom",
-        "infinity",
-        "compass"
-      ],
-      "headerSubtitle": "Kozmik Hakikat",
-      "headerLine1": "ZAMAN VE GÖRELİLİK",
-      "circledWord": "GELECEK",
-      "headerLine2": "MÜMKÜN MÜ?",
-      "highlightedText": "IŞIK HIZI VE BÜKÜLEN ZAMAN",
-      "strikeWord": "İMKANSIZ",
-      "layoutType": "flowchart",
-      "cards": [
-        {
-          "id": "1",
-          "label": "Işık Hızı",
-          "value": "300.000 km/s",
-          "icon": "atom",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        {
-          "id": "2",
-          "label": "Zaman Genleşmesi",
-          "value": "Yavaşlama",
-          "icon": "hourglass",
-          "color": "#8b5cf6",
-          "iconAssetPath": "assets/icons/hourglass.svg"
-        },
-        {
-          "id": "3",
-          "label": "Gelecek",
-          "value": "Mutlak Yolculuk",
-          "icon": "infinity",
-          "color": "#ec4899",
-          "iconAssetPath": "assets/icons/infinity.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "Klasik Algı",
-        "leftSubtitle": "Hız Her Yerde Aynı",
-        "leftPoints": [
-          "Zaman herkes için aynı akar",
-          "Geçmiş geride kalmıştır",
-          "Gelecek erişilemezdir"
-        ],
-        "leftColor": "#64748b",
-        "rightTitle": "Einstein'ın Göreliliği",
-        "rightSubtitle": "Zaman Esnektir",
-        "rightPoints": [
-          "Hız arttıkça zaman yavaşlar",
-          "Yerçekimi zamanı büker",
-          "Geleceğe gitmek fiziksel olarak mümkündür"
-        ],
-        "rightColor": "#38bdf8",
-        "verdict": "Zaman mutlak değil, görelidir; yeterince hızlı hareket ederseniz geleceğe bilet alabilirsiniz."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Adım",
-          "title": "Mutlak Zamanın Sonu",
-          "desc": "Einstein, zamanın herkes için aynı akmadığını kanıtladı.",
-          "color": "#38bdf8"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Adım",
-          "title": "Işık Hızına Yaklaşmak",
-          "desc": "Hızlandıkça uzay-zaman dokusu bükülür, saatler yavaşlar.",
-          "color": "#8b5cf6"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Adım",
-          "title": "Gelecekte Uyanmak",
-          "desc": "Yüksek hızlı bir seyahatten dönen astronot, dünyadakilere göre geleceğe gitmiştir.",
-          "color": "#ec4899"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Albert Einstein",
-        "title": "GÖRELİLİK TEORİSİ",
-        "quoteText": "Zaman, saatlerin ölçtüğü şeyden ibarettir ve gözlemcinin hızına göre bükülür.",
-        "sourceRef": "Özel Görelilik, 1905"
-      },
-      "metricImpact": {
-        "bigNumber": "%99.9",
-        "bigLabel": "IŞIK HIZI",
-        "subheading": "Zamanın Durma Noktasına Yaklaştığı An",
-        "keyTakeaway": "Geleceğe yolculuk bir bilim kurgu değil, matematiğin ve fiziğin kesin emridir."
-      },
-      "gridExplosion": {
-        "title": "ZAMANIN BOYUTLARI",
-        "subtitle": "Evrenin Dokusunda Saklı Görelilik",
-        "iconType": "atom",
-        "itemCount": 9,
-        "badgeText": "KOZMİK KANUN",
-        "iconAssetPath": "assets/icons/atom.svg"
-      },
-      "triConcept": {
-        "badge": "FİZİKSEL GERÇEKLİK",
-        "concept1": {
-          "title": "HIZ",
-          "subtitle": "Zamanı Yavaşlatır",
-          "icon": "atom",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        "concept2": {
-          "title": "KÜTLE",
-          "subtitle": "Uzay-Zamanı Büker",
-          "icon": "hourglass",
-          "color": "#a855f7",
-          "iconAssetPath": "assets/icons/hourglass.svg"
-        },
-        "concept3": {
-          "title": "GELECEK",
-          "subtitle": "Ulaşılaiblir Hedef",
-          "icon": "infinity",
-          "color": "#f43f5e",
-          "iconAssetPath": "assets/icons/infinity.svg"
-        },
-        "bottomNote": "GÖRELİLİK GELECEĞİN KAPISINI ARALAR"
-      },
-      "timeline": {
-        "startYear": "1905",
-        "endYear": "Gelecek",
-        "durationLabel": "Işık Hızı",
-        "title": "Zamanın Bükülmesi",
-        "ayahArabic": "",
-        "ayahTranslation": "Zaman bükülür, hız artar ve gelecek bugüne dönüşür.",
-        "ayahRef": "Modern Fizik"
-      },
-      "narration": "Zamanın akıp gittiğini sanırız; oysa zaman, hızlandıkça esneyen elastik bir dokudur. Einstein'ın kanıtladığı gibi, eğer ışık hızına yakın seyahat edebilirseniz, sizin için birkaç ay sürerken dünyada yıllar geçecektir. Geleceğe yolculuk imkansız değil; sadece fizik kurallarını doğru okumaktan ibaret.",
-      "viral": {
-        "hookScore": 98,
-        "viralTitles": [
-          "Geleceğe Yolculuk Neden Mümkün? Einstein'ın Gizli Teorisi!",
-          "Işık Hızına Ulaşırsanız Ne Olur? Zaman Bükülmesi!"
-        ],
-        "hashtags": [
-          "#fizik",
-          "#einstein",
-          "#zaman",
-          "#uzay",
-          "#bilim",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden zaman...",
-        "description": "Zamanın göreceli yapısı ve geleceğe seyahat etmenin fiziksel imkanları üzerine etkileyici bir inceleme."
-      },
-      "theme": "neon_cyber",
-      "durationMode": "deep",
-      "particles": "stars",
-      "ambientPattern": "cosmic",
-      "doodleType": "hourglass",
-      "filmGrain": "subtle",
-      "lightLeaks": "auto",
-      "cameraMotion": "handheld",
-      "accentType": "none",
-      "socialHandle": "@bilgikosesi",
-      "musicTrack": "ambient_documentary.wav",
-      "ttsProvider": "edge_tts",
-      "voiceId": "en-US-AndrewMultilingualNeural",
-      "emotionTone": "documentary",
-      "_acquired_assets": [
-        {
-          "name": "cosmic",
-          "type": "watermark",
-          "path": "assets/watermarks/cosmic.svg"
-        },
-        {
-          "name": "atom",
-          "type": "grid_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "atom",
-          "type": "concept_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "concept_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "infinity",
-          "type": "concept_icon",
-          "path": "assets/icons/infinity.svg"
-        },
-        {
-          "name": "atom",
-          "type": "card_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "card_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "infinity",
-          "type": "card_icon",
-          "path": "assets/icons/infinity.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "Zamanın akıp gittiğiniz",
-          "start": 0.0,
-          "end": 1.86,
-          "words": [
-            {
-              "word": "Zamanın",
-              "start": 0.0,
-              "end": 0.84
-            },
-            {
-              "word": "akıp",
-              "start": 0.84,
-              "end": 1.24
-            },
-            {
-              "word": "gittiğiniz",
-              "start": 1.24,
-              "end": 1.86
-            }
-          ]
-        },
-        {
-          "text": "sanırız, oysa zaman,",
-          "start": 1.86,
-          "end": 3.66,
-          "words": [
-            {
-              "word": "sanırız,",
-              "start": 1.86,
-              "end": 2.58
-            },
-            {
-              "word": "oysa",
-              "start": 2.76,
-              "end": 3.2
-            },
-            {
-              "word": "zaman,",
-              "start": 3.2,
-              "end": 3.66
-            }
-          ]
-        },
-        {
-          "text": "hızlandıkça esneyen elastik",
-          "start": 4.18,
-          "end": 6.48,
-          "words": [
-            {
-              "word": "hızlandıkça",
-              "start": 4.18,
-              "end": 5.06
-            },
-            {
-              "word": "esneyen",
-              "start": 5.06,
-              "end": 5.74
-            },
-            {
-              "word": "elastik",
-              "start": 5.74,
-              "end": 6.48
-            }
-          ]
-        },
-        {
-          "text": "bir dokudur. Aynı",
-          "start": 6.48,
-          "end": 8.18,
-          "words": [
-            {
-              "word": "bir",
-              "start": 6.48,
-              "end": 6.72
-            },
-            {
-              "word": "dokudur.",
-              "start": 6.72,
-              "end": 7.46
-            },
-            {
-              "word": "Aynı",
-              "start": 7.9,
-              "end": 8.18
-            }
-          ]
-        },
-        {
-          "text": "şi tayinın kanıtladığı",
-          "start": 8.18,
-          "end": 9.7,
-          "words": [
-            {
-              "word": "şi",
-              "start": 8.18,
-              "end": 8.38
-            },
-            {
-              "word": "tayinın",
-              "start": 8.38,
-              "end": 8.94
-            },
-            {
-              "word": "kanıtladığı",
-              "start": 8.94,
-              "end": 9.7
-            }
-          ]
-        },
-        {
-          "text": "gibi, eğer ışık",
-          "start": 9.7,
-          "end": 11.22,
-          "words": [
-            {
-              "word": "gibi,",
-              "start": 9.7,
-              "end": 10.04
-            },
-            {
-              "word": "eğer",
-              "start": 10.44,
-              "end": 10.84
-            },
-            {
-              "word": "ışık",
-              "start": 10.84,
-              "end": 11.22
-            }
-          ]
-        },
-        {
-          "text": "hızına yakın seyahat",
-          "start": 11.22,
-          "end": 12.62,
-          "words": [
-            {
-              "word": "hızına",
-              "start": 11.22,
-              "end": 11.64
-            },
-            {
-              "word": "yakın",
-              "start": 11.64,
-              "end": 12.06
-            },
-            {
-              "word": "seyahat",
-              "start": 12.06,
-              "end": 12.62
-            }
-          ]
-        },
-        {
-          "text": "edebilirsiniz. Sizin için",
-          "start": 12.62,
-          "end": 14.94,
-          "words": [
-            {
-              "word": "edebilirsiniz.",
-              "start": 12.62,
-              "end": 13.64
-            },
-            {
-              "word": "Sizin",
-              "start": 14.16,
-              "end": 14.64
-            },
-            {
-              "word": "için",
-              "start": 14.64,
-              "end": 14.94
-            }
-          ]
-        },
-        {
-          "text": "birkaç ay sürerken",
-          "start": 14.94,
-          "end": 16.46,
-          "words": [
-            {
-              "word": "birkaç",
-              "start": 14.94,
-              "end": 15.66
-            },
-            {
-              "word": "ay",
-              "start": 15.66,
-              "end": 15.78
-            },
-            {
-              "word": "sürerken",
-              "start": 15.78,
-              "end": 16.46
-            }
-          ]
-        },
-        {
-          "text": "dünyada yıllar geçecektir.",
-          "start": 16.46,
-          "end": 18.72,
-          "words": [
-            {
-              "word": "dünyada",
-              "start": 16.46,
-              "end": 17.22
-            },
-            {
-              "word": "yıllar",
-              "start": 17.22,
-              "end": 17.68
-            },
-            {
-              "word": "geçecektir.",
-              "start": 17.68,
-              "end": 18.72
-            }
-          ]
-        },
-        {
-          "text": "Geleceği yolculuk imkansız",
-          "start": 19.18,
-          "end": 21.36,
-          "words": [
-            {
-              "word": "Geleceği",
-              "start": 19.18,
-              "end": 19.86
-            },
-            {
-              "word": "yolculuk",
-              "start": 19.86,
-              "end": 20.54
-            },
-            {
-              "word": "imkansız",
-              "start": 20.54,
-              "end": 21.36
-            }
-          ]
-        },
-        {
-          "text": "değil, sadece fizik",
-          "start": 21.36,
-          "end": 23.32,
-          "words": [
-            {
-              "word": "değil,",
-              "start": 21.36,
-              "end": 21.78
-            },
-            {
-              "word": "sadece",
-              "start": 22.28,
-              "end": 22.6
-            },
-            {
-              "word": "fizik",
-              "start": 22.6,
-              "end": 23.32
-            }
-          ]
-        },
-        {
-          "text": "kurallarını doğru okumaktan",
-          "start": 23.32,
-          "end": 25.24,
-          "words": [
-            {
-              "word": "kurallarını",
-              "start": 23.32,
-              "end": 24.04
-            },
-            {
-              "word": "doğru",
-              "start": 24.04,
-              "end": 24.36
-            },
-            {
-              "word": "okumaktan",
-              "start": 24.36,
-              "end": 25.24
-            }
-          ]
-        },
-        {
-          "text": "ibaret.",
-          "start": 25.24,
-          "end": 25.72,
-          "words": [
-            {
-              "word": "ibaret.",
-              "start": 25.24,
-              "end": 25.72
-            }
-          ]
-        }
-      ],
-      "words": [
-        {
-          "word": "Zamanın",
-          "start": 0.0,
-          "end": 0.84
-        },
-        {
-          "word": "akıp",
-          "start": 0.84,
-          "end": 1.24
-        },
-        {
-          "word": "gittiğiniz",
-          "start": 1.24,
-          "end": 1.86
-        },
-        {
-          "word": "sanırız,",
-          "start": 1.86,
-          "end": 2.58
-        },
-        {
-          "word": "oysa",
-          "start": 2.76,
-          "end": 3.2
-        },
-        {
-          "word": "zaman,",
-          "start": 3.2,
-          "end": 3.66
-        },
-        {
-          "word": "hızlandıkça",
-          "start": 4.18,
-          "end": 5.06
-        },
-        {
-          "word": "esneyen",
-          "start": 5.06,
-          "end": 5.74
-        },
-        {
-          "word": "elastik",
-          "start": 5.74,
-          "end": 6.48
-        },
-        {
-          "word": "bir",
-          "start": 6.48,
-          "end": 6.72
-        },
-        {
-          "word": "dokudur.",
-          "start": 6.72,
-          "end": 7.46
-        },
-        {
-          "word": "Aynı",
-          "start": 7.9,
-          "end": 8.18
-        },
-        {
-          "word": "şi",
-          "start": 8.18,
-          "end": 8.38
-        },
-        {
-          "word": "tayinın",
-          "start": 8.38,
-          "end": 8.94
-        },
-        {
-          "word": "kanıtladığı",
-          "start": 8.94,
-          "end": 9.7
-        },
-        {
-          "word": "gibi,",
-          "start": 9.7,
-          "end": 10.04
-        },
-        {
-          "word": "eğer",
-          "start": 10.44,
-          "end": 10.84
-        },
-        {
-          "word": "ışık",
-          "start": 10.84,
-          "end": 11.22
-        },
-        {
-          "word": "hızına",
-          "start": 11.22,
-          "end": 11.64
-        },
-        {
-          "word": "yakın",
-          "start": 11.64,
-          "end": 12.06
-        },
-        {
-          "word": "seyahat",
-          "start": 12.06,
-          "end": 12.62
-        },
-        {
-          "word": "edebilirsiniz.",
-          "start": 12.62,
-          "end": 13.64
-        },
-        {
-          "word": "Sizin",
-          "start": 14.16,
-          "end": 14.64
-        },
-        {
-          "word": "için",
-          "start": 14.64,
-          "end": 14.94
-        },
-        {
-          "word": "birkaç",
-          "start": 14.94,
-          "end": 15.66
-        },
-        {
-          "word": "ay",
-          "start": 15.66,
-          "end": 15.78
-        },
-        {
-          "word": "sürerken",
-          "start": 15.78,
-          "end": 16.46
-        },
-        {
-          "word": "dünyada",
-          "start": 16.46,
-          "end": 17.22
-        },
-        {
-          "word": "yıllar",
-          "start": 17.22,
-          "end": 17.68
-        },
-        {
-          "word": "geçecektir.",
-          "start": 17.68,
-          "end": 18.72
-        },
-        {
-          "word": "Geleceği",
-          "start": 19.18,
-          "end": 19.86
-        },
-        {
-          "word": "yolculuk",
-          "start": 19.86,
-          "end": 20.54
-        },
-        {
-          "word": "imkansız",
-          "start": 20.54,
-          "end": 21.36
-        },
-        {
-          "word": "değil,",
-          "start": 21.36,
-          "end": 21.78
-        },
-        {
-          "word": "sadece",
-          "start": 22.28,
-          "end": 22.6
-        },
-        {
-          "word": "fizik",
-          "start": 22.6,
-          "end": 23.32
-        },
-        {
-          "word": "kurallarını",
-          "start": 23.32,
-          "end": 24.04
-        },
-        {
-          "word": "doğru",
-          "start": 24.04,
-          "end": 24.36
-        },
-        {
-          "word": "okumaktan",
-          "start": 24.36,
-          "end": 25.24
-        },
-        {
-          "word": "ibaret.",
-          "start": 25.24,
-          "end": 25.72
-        }
-      ],
-      "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "c9402306",
-    "topic": "🎙️ Ses Yükleme: zamanın herkes için aynı aktığınız sanıyorsunuz yanılıyorsun...",
-    "theme": "neon_cyber",
-    "layoutType": "quote_spotlight",
-    "durationMode": "4 Sahne (37s)",
-    "created_at": "2026-10-28 22:31",
-    "headerMain": "ZAMANIN AKIŞI YANILGI Albert Einstein Genel Görelilik",
-    "narration": "zamanın herkes için aynı aktığınız sanıyorsunuz yanılıyorsunuz. Albert Einstein şey taynın genel göreli kurumina göre kötüle çekimi artık çazaman yavaşlar. Yani dünyanın merkezine daha yakın olan deniz seviyesinde zaman daha yavaş akarken. Evir istli bir yüksek dağların zirvesinde kötüle çekimi azı aldığı için zaman daha hızlı akar. Atomik saatlerle doğrulanan bu sıra göre yüksek dağlar da yaşayanlar deniz seviyesinde kileri göre. Nili saniyelerce daha hızlı yaşlanmaktadır.",
-    "hookScore": 96,
-    "key_used": "asdxcxc005@gmail.com",
-    "model_used": "gemini-3.5-flash-lite",
-    "thumbnail_url": "/out/thumbnail.png?t=1793215908",
-    "video_data": {
-      "directorDecision": {
-        "theme": "neon_cyber",
-        "particles": "dust",
-        "ambientPattern": "atom",
-        "directorReason": "Albert Einstein'ın genel görelilik kuramı ve zamanın göreceliği teması için 'neon_cyber' ve bilimsel verileri vurgulayan şablonlar seçilmiştir."
-      },
-      "requiredIcons": [
-        "hourglass",
-        "atom",
-        "compass",
-        "infinity"
-      ],
-      "scenes": [
-        {
-          "id": "scene_1",
-          "startTime": 0.0,
-          "endTime": 9.19,
-          "layoutType": "quote_spotlight",
-          "headerSubtitle": "01 / GÖRELİLİK",
-          "headerLine1": "ZAMANIN AKIŞI",
-          "circledWord": "YANILGI",
-          "headerLine2": "",
-          "highlightedText": "Albert Einstein Genel Görelilik",
-          "strikeWord": "AYNI",
-          "cards": null,
-          "vsData": null,
-          "flowchartSteps": null,
-          "quoteSpotlight": {
-            "author": "Albert Einstein",
-            "quote": "Zamanın herkes için aynı aktığını sanıyorsunuz, yanılıyorsunuz.",
-            "badge": "FİZİK",
-            "highlightWords": [
-              "zaman",
-              "aynı",
-              "yanılıyorsunuz"
-            ]
-          },
-          "metricImpact": null,
-          "gridExplosion": null,
-          "triConcept": null,
-          "timeline": null
-        },
-        {
-          "id": "scene_2",
-          "startTime": 9.19,
-          "endTime": 18.39,
-          "layoutType": "metric_impact",
-          "headerSubtitle": "02 / ÇEKİM KUVVETİ",
-          "headerLine1": "KÜTLE ÇEKİMİ",
-          "circledWord": "YAVAŞLAR",
-          "headerLine2": "",
-          "highlightedText": "Deniz Seviyesi ve Zaman",
-          "strikeWord": "SABİT",
-          "cards": null,
-          "vsData": null,
-          "flowchartSteps": null,
-          "quoteSpotlight": null,
-          "metricImpact": {
-            "mainMetric": "%0",
-            "label": "Zamanın Sabitliği",
-            "description": "Dünyanın merkezine yakın yerlerde kütle çekimi nedeniyle zaman daha yavaş akar.",
-            "trend": "down"
-          },
-          "gridExplosion": null,
-          "triConcept": null,
-          "timeline": null
-        },
-        {
-          "id": "scene_3",
-          "startTime": 18.39,
-          "endTime": 27.58,
-          "layoutType": "vs_split",
-          "headerSubtitle": "03 / RTK & DAĞLAR",
-          "headerLine1": "YÜKSEK ZİRVELER",
-          "circledWord": "HIZLI",
-          "headerLine2": "",
-          "highlightedText": "Dağ Zirvelerinde Zaman",
-          "strikeWord": "AYNI",
-          "cards": null,
-          "vsData": {
-            "leftTitle": "DENİZ SEVİYESİ",
-            "leftValue": "Yavaş Zaman",
-            "rightTitle": "YÜKSEK DAĞLAR",
-            "rightValue": "Hızlı Zaman",
-            "winner": "right"
-          },
-          "flowchartSteps": null,
-          "quoteSpotlight": null,
-          "metricImpact": null,
-          "gridExplosion": null,
-          "triConcept": null,
-          "timeline": null
-        },
-        {
-          "id": "scene_4",
-          "startTime": 27.58,
-          "endTime": 36.77,
-          "layoutType": "flowchart",
-          "headerSubtitle": "04 / ATOMİK SAAT",
-          "headerLine1": "KESİN KANIT",
-          "circledWord": "MİLİSANİYE",
-          "headerLine2": "",
-          "highlightedText": "Atomik Saatler İle Doğrulama",
-          "strikeWord": "HAYAL",
-          "cards": null,
-          "vsData": null,
-          "flowchartSteps": [
-            {
-              "stepNumber": "1",
-              "title": "Ölçüm",
-              "description": "Atomik saatler ile hassas testler"
-            },
-            {
-              "stepNumber": "2",
-              "title": "Fark",
-              "description": "Yüksekte yaşayanlar daha hızlı yaşlanır"
-            },
-            {
-              "stepNumber": "3",
-              "title": "Sonuç",
-              "description": "Milisaniyelerle ölçülen gerçeklik"
-            }
-          ],
-          "quoteSpotlight": null,
-          "metricImpact": null,
-          "gridExplosion": null,
-          "triConcept": null,
-          "timeline": null
-        }
-      ],
-      "viral": {
-        "hookScore": 96,
-        "viralTitles": [
-          "Zaman Herkes İçin Aynı Akmıyor! ⏳",
-          "Dağda Yaşayanlar Daha Hızlı Yaşlanıyor!"
-        ],
-        "hashtags": [
-          "#einstein",
-          "#fizik",
-          "#zaman",
-          "#bilim",
-          "#shorts"
-        ],
-        "loopEnding": "...ve bu yüzden zaman herkes için farklı akar.",
-        "description": "Albert Einstein'ın genel görelilik teorisi ve kütle çekiminin zaman üzerindeki etkisini anlatan viral kısa video."
-      },
-      "theme": "neon_cyber",
-      "particles": "dust",
-      "ambientPattern": "atom",
-      "socialHandle": "@birkissa",
-      "audioUrl": "audio.mp3",
-      "subtitles": [
-        {
-          "text": "zamanın herkes için",
-          "start": 0.0,
-          "end": 1.7
-        },
-        {
-          "text": "aynı aktığınız sanıyorsunuz",
-          "start": 1.7,
-          "end": 3.84
-        },
-        {
-          "text": "yanılıyorsunuz. Albert Einstein",
-          "start": 3.84,
-          "end": 6.12
-        },
-        {
-          "text": "şey taynın genel",
-          "start": 6.12,
-          "end": 7.18
-        },
-        {
-          "text": "göreli kurumina göre",
-          "start": 7.18,
-          "end": 8.62
-        },
-        {
-          "text": "kötüle çekimi artık",
-          "start": 8.62,
-          "end": 9.98
-        },
-        {
-          "text": "çazaman yavaşlar. Yani",
-          "start": 9.98,
-          "end": 12.32
-        },
-        {
-          "text": "dünyanın merkezine daha",
-          "start": 12.32,
-          "end": 14.06
-        },
-        {
-          "text": "yakın olan deniz",
-          "start": 14.06,
-          "end": 15.18
-        },
-        {
-          "text": "seviyesinde zaman daha",
-          "start": 15.18,
-          "end": 16.68
-        },
-        {
-          "text": "yavaş akarken. Evir",
-          "start": 16.68,
-          "end": 18.94
-        },
-        {
-          "text": "istli bir yüksek",
-          "start": 18.94,
-          "end": 19.96
-        },
-        {
-          "text": "dağların zirvesinde kötüle",
-          "start": 19.96,
-          "end": 21.94
-        },
-        {
-          "text": "çekimi azı aldığı",
-          "start": 21.94,
-          "end": 22.86
-        },
-        {
-          "text": "için zaman daha",
-          "start": 22.86,
-          "end": 24.08
-        },
-        {
-          "text": "hızlı akar. Atomik",
-          "start": 24.08,
-          "end": 26.24
-        },
-        {
-          "text": "saatlerle doğrulanan bu",
-          "start": 26.24,
-          "end": 27.96
-        },
-        {
-          "text": "sıra göre yüksek",
-          "start": 27.96,
-          "end": 29.1
-        },
-        {
-          "text": "dağlar da yaşayanlar",
-          "start": 29.1,
-          "end": 30.6
-        },
-        {
-          "text": "deniz seviyesinde kileri",
-          "start": 30.6,
-          "end": 32.0
-        },
-        {
-          "text": "göre. Nili saniyelerce",
-          "start": 32.0,
-          "end": 34.6
-        },
-        {
-          "text": "daha hızlı yaşlanmaktadır.",
-          "start": 34.6,
-          "end": 36.54
-        }
-      ],
-      "words": [
-        {
-          "text": "zamanın",
-          "start": 0.0,
-          "end": 0.84
-        },
-        {
-          "text": "herkes",
-          "start": 0.84,
-          "end": 1.24
-        },
-        {
-          "text": "için",
-          "start": 1.24,
-          "end": 1.7
-        },
-        {
-          "text": "aynı",
-          "start": 1.7,
-          "end": 2.1
-        },
-        {
-          "text": "aktığınız",
-          "start": 2.1,
-          "end": 2.78
-        },
-        {
-          "text": "sanıyorsunuz",
-          "start": 2.78,
-          "end": 3.84
-        },
-        {
-          "text": "yanılıyorsunuz.",
-          "start": 3.84,
-          "end": 4.94
-        },
-        {
-          "text": "Albert",
-          "start": 5.28,
-          "end": 5.64
-        },
-        {
-          "text": "Einstein",
-          "start": 5.64,
-          "end": 6.12
-        },
-        {
-          "text": "şey",
-          "start": 6.12,
-          "end": 6.3
-        },
-        {
-          "text": "taynın",
-          "start": 6.3,
-          "end": 6.76
-        },
-        {
-          "text": "genel",
-          "start": 6.76,
-          "end": 7.18
-        },
-        {
-          "text": "göreli",
-          "start": 7.18,
-          "end": 7.58
-        },
-        {
-          "text": "kurumina",
-          "start": 7.58,
-          "end": 8.34
-        },
-        {
-          "text": "göre",
-          "start": 8.34,
-          "end": 8.62
-        },
-        {
-          "text": "kötüle",
-          "start": 8.62,
-          "end": 9.18
-        },
-        {
-          "text": "çekimi",
-          "start": 9.18,
-          "end": 9.54
-        },
-        {
-          "text": "artık",
-          "start": 9.54,
-          "end": 9.98
-        },
-        {
-          "text": "çazaman",
-          "start": 9.98,
-          "end": 10.68
-        },
-        {
-          "text": "yavaşlar.",
-          "start": 10.68,
-          "end": 11.68
-        },
-        {
-          "text": "Yani",
-          "start": 12.06,
-          "end": 12.32
-        },
-        {
-          "text": "dünyanın",
-          "start": 12.32,
-          "end": 13.0
-        },
-        {
-          "text": "merkezine",
-          "start": 13.0,
-          "end": 13.78
-        },
-        {
-          "text": "daha",
-          "start": 13.78,
-          "end": 14.06
-        },
-        {
-          "text": "yakın",
-          "start": 14.06,
-          "end": 14.48
-        },
-        {
-          "text": "olan",
-          "start": 14.48,
-          "end": 14.76
-        },
-        {
-          "text": "deniz",
-          "start": 14.76,
-          "end": 15.18
-        },
-        {
-          "text": "seviyesinde",
-          "start": 15.18,
-          "end": 15.94
-        },
-        {
-          "text": "zaman",
-          "start": 15.94,
-          "end": 16.38
-        },
-        {
-          "text": "daha",
-          "start": 16.38,
-          "end": 16.68
-        },
-        {
-          "text": "yavaş",
-          "start": 16.68,
-          "end": 17.08
-        },
-        {
-          "text": "akarken.",
-          "start": 17.08,
-          "end": 17.84
-        },
-        {
-          "text": "Evir",
-          "start": 18.68,
-          "end": 18.94
-        },
-        {
-          "text": "istli",
-          "start": 18.94,
-          "end": 19.34
-        },
-        {
-          "text": "bir",
-          "start": 19.34,
-          "end": 19.52
-        },
-        {
-          "text": "yüksek",
-          "start": 19.52,
-          "end": 19.96
-        },
-        {
-          "text": "dağların",
-          "start": 19.96,
-          "end": 20.5
-        },
-        {
-          "text": "zirvesinde",
-          "start": 20.5,
-          "end": 21.34
-        },
-        {
-          "text": "kötüle",
-          "start": 21.34,
-          "end": 21.94
-        },
-        {
-          "text": "çekimi",
-          "start": 21.94,
-          "end": 22.22
-        },
-        {
-          "text": "azı",
-          "start": 22.22,
-          "end": 22.52
-        },
-        {
-          "text": "aldığı",
-          "start": 22.52,
-          "end": 22.86
-        },
-        {
-          "text": "için",
-          "start": 22.86,
-          "end": 23.26
-        },
-        {
-          "text": "zaman",
-          "start": 23.26,
-          "end": 23.7
-        },
-        {
-          "text": "daha",
-          "start": 23.7,
-          "end": 24.08
-        },
-        {
-          "text": "hızlı",
-          "start": 24.08,
-          "end": 24.5
-        },
-        {
-          "text": "akar.",
-          "start": 24.5,
-          "end": 24.98
-        },
-        {
-          "text": "Atomik",
-          "start": 25.58,
-          "end": 26.24
-        },
-        {
-          "text": "saatlerle",
-          "start": 26.24,
-          "end": 27.0
-        },
-        {
-          "text": "doğrulanan",
-          "start": 27.0,
-          "end": 27.72
-        },
-        {
-          "text": "bu",
-          "start": 27.72,
-          "end": 27.96
-        },
-        {
-          "text": "sıra",
-          "start": 27.96,
-          "end": 28.3
-        },
-        {
-          "text": "göre",
-          "start": 28.3,
-          "end": 28.62
-        },
-        {
-          "text": "yüksek",
-          "start": 28.62,
-          "end": 29.1
-        },
-        {
-          "text": "dağlar",
-          "start": 29.1,
-          "end": 29.6
-        },
-        {
-          "text": "da",
-          "start": 29.6,
-          "end": 29.78
-        },
-        {
-          "text": "yaşayanlar",
-          "start": 29.78,
-          "end": 30.6
-        },
-        {
-          "text": "deniz",
-          "start": 30.6,
-          "end": 30.96
-        },
-        {
-          "text": "seviyesinde",
-          "start": 30.96,
-          "end": 31.7
-        },
-        {
-          "text": "kileri",
-          "start": 31.7,
-          "end": 32.0
-        },
-        {
-          "text": "göre.",
-          "start": 32.0,
-          "end": 33.0
-        },
-        {
-          "text": "Nili",
-          "start": 33.28,
-          "end": 33.56
-        },
-        {
-          "text": "saniyelerce",
-          "start": 33.56,
-          "end": 34.6
-        },
-        {
-          "text": "daha",
-          "start": 34.6,
-          "end": 34.92
-        },
-        {
-          "text": "hızlı",
-          "start": 34.92,
-          "end": 35.34
-        },
-        {
-          "text": "yaşlanmaktadır.",
-          "start": 35.34,
-          "end": 36.54
-        }
-      ],
-      "narration": "zamanın herkes için aynı aktığınız sanıyorsunuz yanılıyorsunuz. Albert Einstein şey taynın genel göreli kurumina göre kötüle çekimi artık çazaman yavaşlar. Yani dünyanın merkezine daha yakın olan deniz seviyesinde zaman daha yavaş akarken. Evir istli bir yüksek dağların zirvesinde kötüle çekimi azı aldığı için zaman daha hızlı akar. Atomik saatlerle doğrulanan bu sıra göre yüksek dağlar da yaşayanlar deniz seviyesinde kileri göre. Nili saniyelerce daha hızlı yaşlanmaktadır.",
-      "totalDuration": 36.77,
-      "durationMode": "custom_audio",
-      "layoutType": "quote_spotlight",
-      "headerSubtitle": "01 / GÖRELİLİK",
-      "headerLine1": "ZAMANIN AKIŞI",
-      "circledWord": "YANILGI",
-      "headerLine2": "",
-      "highlightedText": "Albert Einstein Genel Görelilik",
-      "strikeWord": "AYNI",
-      "quoteSpotlight": {
-        "author": "Albert Einstein",
-        "quote": "Zamanın herkes için aynı aktığını sanıyorsunuz, yanılıyorsunuz.",
-        "badge": "FİZİK",
-        "highlightWords": [
-          "zaman",
-          "aynı",
-          "yanılıyorsunuz"
-        ]
-      },
-      "_acquired_assets": [
-        {
-          "name": "atom",
-          "type": "watermark",
-          "path": "assets/watermarks/fingerprint.svg"
-        }
-      ]
-    }
-  },
-  {
-    "id": "270c28a0",
-    "topic": "Albert Einstein ve zamanın dağlarda neden daha hızlı aktığı sırrı",
-    "theme": "neon_cyber",
-    "layoutType": "vs_split",
-    "durationMode": "deep",
-    "created_at": "2026-10-28 00:39",
-    "headerMain": "EINSTEIN VE DAĞLARDAKI ZAMAN GÖRELİLİK SIRRI",
-    "narration": "Zamanın herkes için aynı aktığını sanıyorsanız yanılıyorsunuz. Albert Einstein'ın Genel Görelilik kuramına göre kütleçekimi arttıkça zaman yavaşlar. Yani Dünya'nın merkezine daha yakın olan deniz seviyesinde zaman daha yavaş akarken, Everest gibi yüksek dağların zirvesinde kütleçekimi azaldığı için zaman daha hızlı akar. Atomic saatlerle doğrulanan bu sırra göre yüksek dağlarda yaşayanlar deniz seviyesindekilere göre milisaniyelerce daha hızlı yaşlanmaktadır.",
-    "hookScore": 98,
-    "key_used": "asdxcxc005@gmail.com",
-    "model_used": "gemini-3.5-flash",
-    "thumbnail_url": "/out/thumbnail.png?t=1793137147",
-    "video_data": {
-      "directorDecision": {
-        "theme": "neon_cyber",
-        "layoutType": "vs_split",
-        "durationMode": "deep",
-        "particles": "stars",
-        "ambientPattern": "cosmic",
-        "doodleType": "hourglass",
-        "directorReason": "Einstein'ın genel görelilik kuramını ve zamanın yükseklerde neden daha hızlı aktığını etkileyici biçimde anlatmak için neon cyber teması, deniz seviyesi ile dağ zirvesini kıyaslayan VS şablonu ve kozmik efektler seçildi."
-      },
-      "requiredIcons": [
-        "hourglass",
-        "atom",
-        "infinity",
-        "compass"
-      ],
-      "headerSubtitle": "Zamanın Gizli Ritmi",
-      "headerLine1": "EINSTEIN VE DAĞLARDAKI",
-      "circledWord": "ZAMAN",
-      "headerLine2": "MUCİZESİ",
-      "highlightedText": "GÖRELİLİK SIRRI",
-      "strikeWord": "SABİT ZAMAN",
-      "layoutType": "vs_split",
-      "cards": [
-        {
-          "id": "1",
-          "label": "Kütleçekim Effect",
-          "value": "Zamanı Büküyor",
-          "icon": "atom",
-          "color": "#0284c7",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        {
-          "id": "2",
-          "label": "Dağ Zirvesi",
-          "value": "Daha Hızlı",
-          "icon": "hourglass",
-          "color": "#ec4899",
-          "iconAssetPath": "assets/icons/hourglass.svg"
-        },
-        {
-          "id": "3",
-          "label": "Görelilik",
-          "value": "1915 Teorisi",
-          "icon": "infinity",
-          "color": "#8b5cf6",
-          "iconAssetPath": "assets/icons/infinity.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "Deniz Seviyesi",
-        "leftSubtitle": "Güçlü Kütleçekim",
-        "leftPoints": [
-          "Dünyanın merkezine yakınlık",
-          "Yoğun kütleçekim alanı",
-          "Saatler daha YAVAŞ çalışır"
-        ],
-        "leftColor": "#3b82f6",
-        "rightTitle": "Dağ Zirvesi",
-        "rightSubtitle": "Zayıf Kütleçekim",
-        "rightPoints": [
-          "Dünya merkezinden uzaklaşma",
-          "Azalan kütleçekim baskısı",
-          "Saatler daha HIZLI çalışır"
-        ],
-        "rightColor": "#ec4899",
-        "verdict": "Einstein'ın keşfettiği gibi: Kütleçekim ne kadar güçlüyse, zaman o kadar yavaşlar!"
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Adım",
-          "title": "Kütle Dokusu",
-          "desc": "Büyük kütleler uzay-zaman dokusunu bir çarşaf gibi büker.",
-          "color": "#3b82f6"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Adım",
-          "title": "Çekim Gücü",
-          "desc": "Merkeze yakın yerlerde kütleçekim zamanı yavaşlatır.",
-          "color": "#8b5cf6"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Adım",
-          "title": "Zirvedeki Fark",
-          "desc": "Dağ zirvesinde çekim zayıfladığı için zaman daha hızlı akar.",
-          "color": "#ec4899"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Albert Einstein",
-        "title": "Genel Görelilik (1915)",
-        "quoteText": "Yerçekimi sadece cisimleri çekmez; zamanın bizzat kendisini de yavaşlatır.",
-        "sourceRef": "Annalen der Physik"
-      },
-      "metricImpact": {
-        "bigNumber": "0.00000009",
-        "bigLabel": "SANİYE FARK",
-        "subheading": "Everest Zirvesinde Yaşlanan Biri",
-        "keyTakeaway": "Ömrü boyunca yüksekte yaşayan biri, deniz seviyesindekine göre milisaniyelerce daha hızlı yaşlanır."
-      },
-      "gridExplosion": {
-        "title": "GÖRELİ ZAMAN SAATLERİ",
-        "subtitle": "Her Yükseklikte Zaman Farklı Miktarda Hızlanır",
-        "iconType": "hourglass",
-        "itemCount": 12,
-        "badgeText": "UZAY-ZAMAN BÜKÜLMESİ",
-        "iconAssetPath": "assets/icons/hourglass.svg"
-      },
-      "triConcept": {
-        "badge": "FİZİKSEL HAKİKAT",
-        "concept1": {
-          "title": "KÜTLE",
-          "subtitle": "Uzay-Zamanı Büküşü",
-          "icon": "atom",
-          "color": "#0284c7",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        "concept2": {
-          "title": "ZAMAN",
-          "subtitle": "Akan Mutlak Olmayan Boyut",
-          "icon": "hourglass",
-          "color": "#ec4899",
-          "iconAssetPath": "assets/icons/hourglass.svg"
-        },
-        "concept3": {
-          "title": "ÇEKİM",
-          "subtitle": "Zamanın Hız Ayarı",
-          "icon": "infinity",
-          "color": "#8b5cf6",
-          "iconAssetPath": "assets/icons/infinity.svg"
-        },
-        "bottomNote": "YÜKSEKLİK ARTTIKÇA ZAMANIN AKIŞ HIZI ARTIYOR"
-      },
-      "timeline": {
-        "startYear": "Deniz Seviyesi",
-        "endYear": "Dağ Zirvesi",
-        "durationLabel": "Zaman Hızlanır",
-        "title": "Kütleçekimsel Zaman Genleşmesi",
-        "ayahArabic": "",
-        "ayahTranslation": "",
-        "ayahRef": ""
-      },
-      "narration": "Zamanın herkes için aynı aktığını sanıyorsanız yanılıyorsunuz. Albert Einstein'ın Genel Görelilik kuramına göre kütleçekimi arttıkça zaman yavaşlar. Yani Dünya'nın merkezine daha yakın olan deniz seviyesinde zaman daha yavaş akarken, Everest gibi yüksek dağların zirvesinde kütleçekimi azaldığı için zaman daha hızlı akar. Atomic saatlerle doğrulanan bu sırra göre yüksek dağlarda yaşayanlar deniz seviyesindekilere göre milisaniyelerce daha hızlı yaşlanmaktadır.",
-      "viral": {
-        "hookScore": 98,
-        "viralTitles": [
-          "Dağlarda Zaman Neden DAHA HIZLI Akar? Einstein'ın Gizli Sırrı!",
-          "Everest'te Yaşayanlar Neden Daha Hızlı Yaşlanıyor?"
-        ],
-        "hashtags": [
-          "#einstein",
-          "#fizik",
-          "#zaman",
-          "#bilim",
-          "#görelilik",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden zaman asla...",
-        "description": "Albert Einstein'ın kütleçekimsel zaman genleşmesi ve dağlarda zamanın neden daha hızlı aktığının bilimsel açıklaması."
-      },
-      "theme": "neon_cyber",
-      "durationMode": "deep",
-      "particles": "stars",
-      "ambientPattern": "cosmic",
-      "doodleType": "hourglass",
-      "socialHandle": "@birkissa",
-      "_acquired_assets": [
-        {
-          "name": "cosmic",
-          "type": "watermark",
-          "path": "assets/watermarks/cosmic.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "grid_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "atom",
-          "type": "concept_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "concept_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "infinity",
-          "type": "concept_icon",
-          "path": "assets/icons/infinity.svg"
-        },
-        {
-          "name": "atom",
-          "type": "card_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "card_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "infinity",
-          "type": "card_icon",
-          "path": "assets/icons/infinity.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "Zamanın herkes için",
-          "start": 0.0,
-          "end": 1.68
-        },
-        {
-          "text": "aynı aktığını sanıyorsanız",
-          "start": 1.68,
-          "end": 3.78
-        },
-        {
-          "text": "yanılıyorsunuz. Albert Einstein'ın",
-          "start": 3.78,
-          "end": 6.1
-        },
-        {
-          "text": "Genel Görelilik kuramına",
-          "start": 6.28,
-          "end": 7.84
-        },
-        {
-          "text": "göre kütleçekimi arttıkça",
-          "start": 7.84,
-          "end": 9.1
-        },
-        {
-          "text": "zaman yavaşlar. Yani",
-          "start": 9.1,
-          "end": 11.74
-        },
-        {
-          "text": "Dünya'nın merkezine daha",
-          "start": 12.06,
-          "end": 13.76
-        },
-        {
-          "text": "yakın olan deniz",
-          "start": 13.76,
-          "end": 14.76
-        },
-        {
-          "text": "seviyesinde zaman daha",
-          "start": 14.76,
-          "end": 16.7
-        },
-        {
-          "text": "yavaş akarken, Everest",
-          "start": 16.7,
-          "end": 18.96
-        },
-        {
-          "text": "gibi yüksek dağların",
-          "start": 18.96,
-          "end": 19.94
-        },
-        {
-          "text": "zirvesinde kütleçekimi azaldığı",
-          "start": 20.46,
-          "end": 22.22
-        },
-        {
-          "text": "için zaman daha",
-          "start": 22.22,
-          "end": 23.72
-        },
-        {
-          "text": "hızlı akar. Atomic",
-          "start": 23.72,
-          "end": 26.26
-        },
-        {
-          "text": "saatlerle doğrulanan bu",
-          "start": 26.26,
-          "end": 28.28
-        },
-        {
-          "text": "sırra göre yüksek",
-          "start": 28.28,
-          "end": 29.6
-        },
-        {
-          "text": "dağlarda yaşayanlar deniz",
-          "start": 29.6,
-          "end": 31.72
-        },
-        {
-          "text": "seviyesindekilere göre milisaniyelerce",
-          "start": 31.72,
-          "end": 33.84
-        },
-        {
-          "text": "daha hızlı yaşlanmaktadır.",
-          "start": 33.84,
-          "end": 35.32
-        }
-      ],
-      "audioUrl": "audio.mp3"
     }
   }
 ]

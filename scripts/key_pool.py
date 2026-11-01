@@ -238,9 +238,9 @@ class KeyPoolManager:
 
         # Models to try in cascade if primary model is rate limited or quota restricted
         models_to_try = [selected_model]
-        if selected_model not in ["gemini-3.5-flash", "gemini-3.5-flash-lite"]:
-            models_to_try.append("gemini-3.5-flash")
-            models_to_try.append("gemini-3.5-flash-lite")
+        for m in ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"]:
+            if m not in models_to_try:
+                models_to_try.append(m)
 
         for current_model in models_to_try:
             errors = []

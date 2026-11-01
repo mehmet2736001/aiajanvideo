@@ -646,7 +646,7 @@ def create_new_blank_project(req: CreateProjectRequest):
         "circledWord": "",
         "headerLine2": "",
         "highlightedText": "",
-        "layoutType": "pip_split",
+        "layoutType": "cinematic_ambient",
         "scenes": [],
         "subtitles": [],
         "words": [],
@@ -654,7 +654,7 @@ def create_new_blank_project(req: CreateProjectRequest):
         "pipVideos": [],
         "overlayImages": [],
         "audioUrl": None,
-        "brollType": "none",
+        "brollType": "2d_animation",
         "totalDuration": 0.0,
         "created_at": time.strftime("%Y-%m-%d %H:%M:%S")
     }
@@ -668,7 +668,7 @@ def create_new_blank_project(req: CreateProjectRequest):
         "id": new_id,
         "topic": title,
         "theme": req.theme or "dark_minimalist",
-        "layoutType": req.layoutType or "pip_split",
+        "layoutType": req.layoutType or "cinematic_ambient",
         "durationMode": "Boş Proje",
         "created_at": time.strftime("%Y-%m-%d %H:%M:%S"),
         "headerMain": "Yeni Boş Proje",
@@ -2595,10 +2595,93 @@ def api_generate_all_2d_animations(req: dict = {}):
 # ==========================================
 # INTERACTIVE AI DIRECTOR & 2D CONTINUITY ENGINE
 # ==========================================
+@app.post("/api/ai-director/transcribe-audio")
+async def api_ai_director_transcribe_audio(
+    file: UploadFile = File(...),
+    transcript: Optional[str] = Form(None)
+):
+    """
+    Saves user voice/audio to /public/audio.mp3, extracts duration, and
+    performs millisecond acoustic transcription using Whisper tiny.
+    """
+    if not file:
+        raise HTTPException(status_code=400, detail="Lütfen bir ses dosyası seçin.")
+
+    ext = os.path.splitext(file.filename)[1].lower() if file.filename else ".mp3"
+    temp_path = os.path.join(PUBLIC_DIR, f"temp_{uuid.uuid4().hex[:8]}{ext}")
+    final_audio_path = os.path.join(PUBLIC_DIR, "audio.mp3")
+
+    try:
+        with open(temp_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
+        # Convert to standard 24kHz audio via FFmpeg
+        cmd = ["ffmpeg", "-y", "-i", temp_path, "-ar", "24000", "-ac", "1", final_audio_path]
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+    except Exception as e:
+        print(f"[Transcribe Audio] FFmpeg conversion notice: {e}")
+        try:
+            shutil.copyfile(temp_path, final_audio_path)
+        except Exception:
+            pass
+    finally:
+        if os.path.exists(temp_path):
+            try:
+                os.remove(temp_path)
+            except Exception:
+                pass
+
+    total_duration = probe_audio_duration(final_audio_path)
+    if total_duration <= 0:
+        total_duration = 30.0
+
+    raw_words = []
+    whisper_text = ""
+    try:
+        w_model = get_whisper()
+        if w_model:
+            w_res = w_model.transcribe(final_audio_path, word_timestamps=True, language="tr", fp16=False)
+            whisper_text = clean_text_apostrophes(w_res.get("text", "").strip())
+            for seg in w_res.get("segments", []):
+                for w in seg.get("words", []):
+                    w_text = w.get("word", "").strip()
+                    if w_text:
+                        raw_words.append({
+                            "word": w_text,
+                            "text": w_text,
+                            "start": round(w.get("start", 0), 2),
+                            "end": round(w.get("end", 0), 2)
+                        })
+    except Exception as we:
+        print(f"[Whisper Transcribe] Extraction error: {we}")
+
+    user_transcript = (transcript or "").strip()
+    if user_transcript:
+        clean_user_text = fix_turkish_orthography_and_compounds(user_transcript)
+        words, subtitles = align_custom_transcript_to_audio(clean_user_text, total_duration, raw_words)
+        final_text = " ".join([w.get("text") or w.get("word") or "" for w in words]).strip() or clean_user_text
+    elif raw_words:
+        words = stitch_whisper_word_tokens(raw_words)
+        subtitles = build_subtitle_chunks(words, chunk_size=3)
+        final_text = whisper_text or " ".join([w["word"] for w in words]).strip()
+    else:
+        final_text = whisper_text or file.filename.replace(ext, "")
+        words = []
+        subtitles = generate_subtitles_fallback(final_text, total_duration)
+
+    return {
+        "success": True,
+        "text": final_text,
+        "duration": total_duration,
+        "audio_url": "/public/audio.mp3",
+        "words": words,
+        "subtitles": subtitles
+    }
+
 class DirectorProposeRequest(BaseModel):
     text: Optional[str] = None
     transcript: Optional[str] = None
-    model: Optional[str] = "gemini-3.5-flash-lite"
+    model: Optional[str] = "gemini-2.5-flash"
     auto_mode: Optional[bool] = False
 
 @app.post("/api/ai-director/propose")
@@ -2613,7 +2696,8 @@ def api_ai_director_propose(req: DirectorProposeRequest):
         "Kullanıcıya 30 saniye için 10'ar saniyelik 3 sahne (0-10s, 10-20s, 20-30s) planı ve "
         "3 farklı çarpıcı görsel stil seçeneği sun. "
         "2. sahnenin 1. karesi, 1. sahnenin son karesinden devam edecek şekilde pürüzsüz görsel devamlılık tasarla. "
-        "3. sahnede hikmetli söz / ayet alıntısı çerçevesi ve daktilo altyazı vurgulanacak. "
+        "1. ve 2. sahnede 'cinematic_ambient' (sade, ferah, ekranda gereksiz kart/şablon kalabalığı olmayan) düzen kullan. "
+        "3. sahnede 'quote_spotlight' ile hikmetli söz / ayet alıntısı çerçevesi ve daktilo altyazı vurgulanacak. "
         "ÇIKTIYI SADECE GEÇERLİ JSON OLARAK VER."
     )
 
@@ -2632,8 +2716,8 @@ Lütfen şu JSON formatında yanıt ver:
       "headerSubtitle": "Tarihsel Giriş",
       "headerLine1": "BAŞLIK 1",
       "highlightedText": "Önemli Vurgu",
-      "visualDescription": "1. sahne görsel ve derviş/mekan tasviri...",
-      "layoutType": "pip_split"
+      "visualDescription": "1. sahne görsel ve mekan tasviri, Studio Ghibli 2D anime...",
+      "layoutType": "cinematic_ambient"
     }},
     {{
       "id": "scene_2",
@@ -2643,7 +2727,7 @@ Lütfen şu JSON formatında yanıt ver:
       "headerLine1": "BAŞLIK 2",
       "highlightedText": "Hikmet Adımı",
       "visualDescription": "1. sahnenin son karesinden devam eden kesintisiz hareket tasviri...",
-      "layoutType": "pip_split"
+      "layoutType": "cinematic_ambient"
     }},
     {{
       "id": "scene_3",
@@ -2688,10 +2772,18 @@ Lütfen şu JSON formatında yanıt ver:
         elif "```" in cleaned:
             cleaned = cleaned.split("```")[1].split("```")[0].strip()
         parsed = json.loads(cleaned)
+        proposed = parsed.get("proposed_scenes", [])
+        for idx, sc in enumerate(proposed):
+            if idx == len(proposed) - 1:
+                sc["layoutType"] = "quote_spotlight"
+            else:
+                sc["layoutType"] = "cinematic_ambient"
+            sc["brollType"] = "2d_animation"
+
         return {
             "success": True,
             "analysis_summary": parsed.get("analysis_summary", "Metniniz başarıyla analiz edildi."),
-            "proposed_scenes": parsed.get("proposed_scenes", []),
+            "proposed_scenes": proposed,
             "style_options": parsed.get("style_options", []),
             "raw_text": content_text
         }
@@ -2747,6 +2839,8 @@ class DirectorExecuteRequest(BaseModel):
     narration: Optional[str] = ""
     custom_instructions: Optional[str] = ""
     audio_url: Optional[str] = None
+    whisper_words: Optional[list] = None
+    whisper_subtitles: Optional[list] = None
 
 @app.post("/api/ai-director/execute-plan")
 def api_ai_director_execute_plan(req: DirectorExecuteRequest):
@@ -2767,56 +2861,67 @@ def api_ai_director_execute_plan(req: DirectorExecuteRequest):
             s["visualDescription"] = f"{vd}. Not: {req.custom_instructions.strip()}"
 
     print(f"[AI Director] Executing 3x 10s continuous 2D animation generation with style '{chosen_style}'...")
-    from scripts.key_pool import pool
-    synced_scenes = generate_continuous_scene_animations(base_scenes, base_style=chosen_style, pool=pool)
+    try:
+        from scripts.key_pool import pool
+        synced_scenes = generate_continuous_scene_animations(base_scenes, base_style=chosen_style, pool=pool)
 
-    total_dur = 30.0
-    subtitles = []
-    if synced_scenes:
-        for idx, sc in enumerate(synced_scenes):
-            subtitles.append({
-                "text": sc.get("headerLine1", "") + " - " + sc.get("highlightedText", ""),
-                "start": float(sc.get("startTime", idx * 10.0)),
-                "end": float(sc.get("endTime", (idx + 1) * 10.0))
-            })
+        total_dur = 30.0
+        subtitles = []
+        if synced_scenes:
+            for idx, sc in enumerate(synced_scenes):
+                subtitles.append({
+                    "text": sc.get("headerLine1", "") + " - " + sc.get("highlightedText", ""),
+                    "start": float(sc.get("startTime", idx * 10.0)),
+                    "end": float(sc.get("endTime", (idx + 1) * 10.0))
+                })
 
-    video_data["is_empty"] = False
-    video_data["topic"] = synced_scenes[0].get("headerLine1", "Sinematik 2D Animasyon")
-    video_data["scenes"] = synced_scenes
-    video_data["subtitles"] = subtitles
-    video_data["totalDuration"] = total_dur
-    video_data["theme"] = "dark_minimalist"
-    video_data["brollType"] = "none"
-    if req.narration:
-        video_data["narration"] = req.narration
-    if req.audio_url:
-        video_data["audioUrl"] = req.audio_url
+        video_data["is_empty"] = False
+        video_data["topic"] = synced_scenes[0].get("headerLine1", "Sinematik 2D Animasyon")
+        video_data["scenes"] = synced_scenes
+        video_data["subtitles"] = req.whisper_subtitles if req.whisper_subtitles else subtitles
+        video_data["words"] = req.whisper_words if req.whisper_words else []
+        video_data["totalDuration"] = total_dur
+        video_data["theme"] = "dark_minimalist"
+        video_data["brollType"] = "2d_animation"
+        if req.narration:
+            video_data["narration"] = req.narration
+        if req.audio_url:
+            video_data["audioUrl"] = req.audio_url
+            af_path = os.path.join(PUBLIC_DIR, "audio.mp3")
+            if os.path.exists(af_path):
+                ad = probe_audio_duration(af_path)
+                if ad > 0:
+                    video_data["totalDuration"] = round(ad, 2)
 
-    with open(data_file, "w", encoding="utf-8") as f:
-        json.dump(video_data, f, ensure_ascii=False, indent=2)
+        with open(data_file, "w", encoding="utf-8") as f:
+            json.dump(video_data, f, ensure_ascii=False, indent=2)
 
-    history = load_history()
-    hist_id = str(uuid.uuid4())[:8]
-    new_hist = {
-        "id": hist_id,
-        "topic": f"🎬 AI Yönetmen: {video_data['topic']}",
-        "theme": "dark_minimalist",
-        "layoutType": "pip_split",
-        "durationMode": f"3 Sahne (30s)",
-        "created_at": time.strftime("%Y-%m-%d %H:%M"),
-        "headerMain": video_data['topic'],
-        "thumbnail_url": synced_scenes[0].get("illustrationUrl") or "/out/thumbnail.png",
-        "video_data": video_data
-    }
-    history.insert(0, new_hist)
-    save_history(history[:30])
+        history = load_history()
+        hist_id = str(uuid.uuid4())[:8]
+        new_hist = {
+            "id": hist_id,
+            "topic": f"🎬 AI Yönetmen: {video_data['topic']}",
+            "theme": "dark_minimalist",
+            "layoutType": "pip_split",
+            "durationMode": f"3 Sahne (30s)",
+            "created_at": time.strftime("%Y-%m-%d %H:%M"),
+            "headerMain": video_data['topic'],
+            "thumbnail_url": synced_scenes[0].get("illustrationUrl") or "/out/thumbnail.png",
+            "video_data": video_data
+        }
+        history.insert(0, new_hist)
+        save_history(history[:30])
 
-    return {
-        "success": True,
-        "scenes": synced_scenes,
-        "totalDuration": total_dur,
-        "message": "30 saniyelik 3 kesintisiz 2D animasyon sahnesi pürüzsüz devamlılıkla oluşturuldu!"
-    }
+        return {
+            "success": True,
+            "scenes": synced_scenes,
+            "totalDuration": total_dur,
+            "message": "30 saniyelik 3 kesintisiz 2D animasyon sahnesi pürüzsüz devamlılıkla oluşturuldu!"
+        }
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"2D Kurgu üretimi başarısız: {str(e)}")
 
 
 class DirectorChatRequest(BaseModel):

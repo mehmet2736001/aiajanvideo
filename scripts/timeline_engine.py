@@ -59,47 +59,16 @@ def extract_audio_waveform(audio_path: str, num_peaks: int = 100) -> List[float]
 def ensure_scenes_structure(video_data: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
     Ensures that video_data has a valid, properly indexed scenes array.
-    If project is empty or has no scenes and no content, leaves scenes empty.
+    If project is empty or has no scenes, returns empty list without injecting dummy template scenes.
     """
     if video_data.get("is_empty"):
+        video_data["scenes"] = []
         return []
 
-    scenes = video_data.get("scenes", [])
-    if scenes is None:
-        scenes = []
-
-    # If completely empty project without narration or topic, DO NOT force dummy scenes
+    scenes = video_data.get("scenes")
     if not scenes or len(scenes) == 0:
-        if not video_data.get("narration") and not video_data.get("headerLine1") and not video_data.get("topic"):
-            video_data["scenes"] = []
-            return []
-        
-        # Only wrap if legacy single-scene data was explicitly present with real content
-        total_dur = float(video_data.get("totalDuration", 15.0) or 15.0)
-        s1 = {
-            "id": "scene_1",
-            "startTime": 0.0,
-            "endTime": round(total_dur, 2),
-            "layoutType": video_data.get("layoutType", "pip_split"),
-            "headerSubtitle": video_data.get("headerSubtitle", ""),
-            "headerLine1": video_data.get("headerLine1", ""),
-            "circledWord": video_data.get("circledWord", ""),
-            "headerLine2": video_data.get("headerLine2", ""),
-            "highlightedText": video_data.get("highlightedText", ""),
-            "strikeWord": video_data.get("strikeWord", ""),
-            "doodleType": video_data.get("doodleType", "galaxy"),
-            "illustrationUrl": video_data.get("illustrationUrl", ""),
-            "illustrationCaption": video_data.get("illustrationCaption", ""),
-            "illustrationStyle": video_data.get("illustrationStyle", "2d_anime"),
-            "brollType": video_data.get("brollType", "none"),
-            "brollOpacity": video_data.get("brollOpacity", 0.18),
-            "cards": video_data.get("cards", []),
-            "quoteSpotlight": video_data.get("quoteSpotlight", {}),
-            "metricImpact": video_data.get("metricImpact", {}),
-            "pipData": video_data.get("pipData", {}),
-        }
-        scenes = [s1]
-        video_data["scenes"] = scenes
+        video_data["scenes"] = []
+        return []
 
     return scenes
 

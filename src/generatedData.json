@@ -1,22 +1,88 @@
 {
-  "topic": "Yeni Boş Proje",
+  "topic": "HİKMETİN İZİNDE",
   "theme": "dark_minimalist",
   "format": "9:16",
-  "is_empty": true,
-  "narration": "",
+  "is_empty": false,
+  "narration": "Hz. Ali efendimizin ilmi ve cesareti. Dervis dag patikasinda gunesli gunde yurur.",
   "headerSubtitle": "",
   "headerLine1": "",
   "circledWord": "",
   "headerLine2": "",
   "highlightedText": "",
-  "layoutType": "pip_split",
-  "scenes": [],
-  "subtitles": [],
+  "layoutType": "cinematic_ambient",
+  "scenes": [
+    {
+      "id": "scene_1",
+      "startTime": 0.0,
+      "endTime": 10.0,
+      "headerSubtitle": "Manevi Yolculuk",
+      "headerLine1": "HİKMETİN İZİNDE",
+      "highlightedText": "ASIRLARIN BİLGELİĞİ",
+      "visualDescription": "Dağ yolunda yürüyen bir derviş, rüzgarda savrulan yeşil kaftan, güneş ışıkları",
+      "layoutType": "cinematic_ambient",
+      "animationVideoUrl": "/public/videos/anim_vid_d12b2407.mp4",
+      "videoUrl": "/public/videos/anim_vid_d12b2407.mp4",
+      "animationPrompt": "A humble Sufi dervish with green robe and wooden staff walking along a winding mountain path on a bright sunny day, majestic green mountains, sunbeams streaming down, wind blowing his robe, Studio Ghibli 2D anime aesthetic, vertical 9:16",
+      "illustrationUrl": "/public/illustrations/anim_key_ebe27e4b.jpg",
+      "brollType": "2d_animation",
+      "animationContinuityIndex": 1
+    },
+    {
+      "id": "scene_2",
+      "startTime": 10.0,
+      "endTime": 20.0,
+      "headerSubtitle": "Zihinsel Dönüşüm",
+      "headerLine1": "GİZLİ GERÇEK",
+      "highlightedText": "KALBE DOKUNAN SIR",
+      "visualDescription": "1. sahneden devam eden derviş bir pınarın başında durur, tefekkür eder",
+      "layoutType": "cinematic_ambient",
+      "animationVideoUrl": "/public/videos/anim_vid_0ac3cc2f.mp4",
+      "videoUrl": "/public/videos/anim_vid_0ac3cc2f.mp4",
+      "animationPrompt": "A humble Sufi dervish with green robe and wooden staff walking along a winding mountain path on a bright sunny day, majestic green mountains, sunbeams streaming down, wind blowing his robe, Studio Ghibli 2D anime aesthetic, vertical 9:16",
+      "illustrationUrl": "/public/illustrations/test_dervish.jpg",
+      "brollType": "2d_animation",
+      "animationContinuityIndex": 2
+    },
+    {
+      "id": "scene_3",
+      "startTime": 20.0,
+      "endTime": 30.0,
+      "headerSubtitle": "Ayet-i Kerime",
+      "headerLine1": "KUTLU SÖZ",
+      "highlightedText": "HER ZORLUKLA BİR KOLAYLIK VARDIR",
+      "visualDescription": "Tezhibli daktilo ayet çerçevesi, huzur dolu gökyüzü ve hafif ışık hüzmeleri",
+      "layoutType": "quote_spotlight",
+      "animationVideoUrl": "/public/videos/anim_vid_d85572f4.mp4",
+      "videoUrl": "/public/videos/anim_vid_d85572f4.mp4",
+      "animationPrompt": "2D animated aesthetic scene showing Tezhibli daktilo ayet çerçevesi, huzur dolu gökyüzü ve hafif ışık hüzmeleri. Continuous sequential scene directly following previous scene #2. Maintain exact same character appearance, color palette, lighting atmosphere, and environment details. Seamless visual transition picking up directly from the preceding scene's ending point. Vertical 9:16 aspect ratio., Studio Ghibli style, vertical 9:16",
+      "illustrationUrl": "/public/illustrations/test_dervish.jpg",
+      "brollType": "2d_animation",
+      "animationContinuityIndex": 3
+    }
+  ],
+  "subtitles": [
+    {
+      "text": "HİKMETİN İZİNDE - ASIRLARIN BİLGELİĞİ",
+      "start": 0.0,
+      "end": 10.0
+    },
+    {
+      "text": "GİZLİ GERÇEK - KALBE DOKUNAN SIR",
+      "start": 10.0,
+      "end": 20.0
+    },
+    {
+      "text": "KUTLU SÖZ - HER ZORLUKLA BİR KOLAYLIK VARDIR",
+      "start": 20.0,
+      "end": 30.0
+    }
+  ],
   "words": [],
   "quoteVideos": [],
   "pipVideos": [],
   "overlayImages": [],
-  "audioUrl": null,
-  "brollType": "none",
-  "totalDuration": 0.0
+  "audioUrl": "/public/audio.mp3",
+  "brollType": "2d_animation",
+  "totalDuration": 26.19,
+  "created_at": "2026-11-01 20:20:00"
 }
