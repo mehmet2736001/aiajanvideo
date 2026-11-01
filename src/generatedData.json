@@ -18,28 +18,42 @@
     {
       "id": "scene_1",
       "layoutType": "quote_spotlight",
-      "headerSubtitle": "Ahlaki Hakikat",
-      "headerLine1": "MUKADDES",
-      "circledWord": "YUVA",
-      "headerLine2": "",
-      "highlightedText": "BENCİL MENFAAT DEĞİL",
-      "strikeWord": "ZORUNDA DEĞİLİM",
+      "headerSubtitle": "ZİHİNSEL DÖNÜŞÜM",
+      "headerLine1": "GİZLİ GERÇEK",
+      "circledWord": "CEVAP",
+      "headerLine2": "SONUNDA ORTAYA ÇIKTI",
+      "highlightedText": "HER ŞEYİ DEĞİŞTİRECEK",
+      "strikeWord": "İMKANSIZ",
       "quoteSpotlight": {
-        "speaker": "Hikmetli Bakış",
-        "title": "AİLE ANLAYIŞI",
-        "quoteText": "Evlilik hak alma savaşı değil, vazife bilinciyle inşa edilen mukaddes bir yuvadır."
+        "speaker": "BİLİNMEYEN",
+        "title": "KAYIT",
+        "quoteText": "Asıl cevap aradığın yerde değil, bakmaya korktuğun yerde saklı."
       },
       "startTime": 23.8,
       "endTime": 37.03,
-      "isVerse": true,
-      "verseBadge": "AYET / HİKMETLİ SÖZ",
-      "typewriter": true,
-      "underlinedWords": [
-        "allah",
-        "mukaddes",
-        "yuva",
-        "vazife"
-      ]
+      "illustrationCaption": "Defterdeki o satır...",
+      "metricImpact": {
+        "bigNumber": "%99",
+        "bigLabel": "YANLIŞ BİLİYORDUN",
+        "subheading": "Algoritmik gerçekler",
+        "keyTakeaway": "Bakış açını şimdi değiştir"
+      },
+      "cards": [
+        {
+          "id": "1",
+          "label": "Algı",
+          "value": "Yanılsama",
+          "color": "#1e3a8a"
+        },
+        {
+          "id": "2",
+          "label": "Gerçek",
+          "value": "Farkındalık",
+          "color": "#15803d"
+        }
+      ],
+      "illustrationStyle": "polaroid",
+      "brollType": "none"
     },
     {
       "id": "scene_2",
@@ -956,11 +970,11 @@
     }
   ],
   "audioUrl": "/public/audio.mp3",
-  "headerSubtitle": "Ahlaki Hakikat",
-  "headerLine1": "MUKADDES",
-  "circledWord": "YUVA",
-  "highlightedText": "BENCİL MENFAAT DEĞİL",
-  "strikeWord": "ZORUNDA DEĞİLİM",
+  "headerSubtitle": "ZİHİNSEL DÖNÜŞÜM",
+  "headerLine1": "GİZLİ GERÇEK",
+  "circledWord": "CEVAP",
+  "highlightedText": "HER ŞEYİ DEĞİŞTİRECEK",
+  "strikeWord": "İMKANSIZ",
   "layoutType": "quote_spotlight",
   "quoteSpotlight": {
     "speaker": "Hikmetli Bakış",
@@ -986,5 +1000,8 @@
       "freezeAtEnd": false
     }
   ],
-  "totalDuration": 63.5
+  "totalDuration": 63.5,
+  "headerLine2": "SONUNDA ORTAYA ÇIKTI",
+  "illustrationCaption": "Defterdeki o satır...",
+  "illustrationStyle": "polaroid"
 }

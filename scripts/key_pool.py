@@ -12,54 +12,140 @@ JSON_PATH = os.path.join(DATA_DIR, "api_keys.json")
 DEFAULT_MODEL = "gemini-3.5-flash-lite"
 
 SUPPORTED_MODELS = [
+    # --- GEMINI 4 SERİSİ (FLAGSHIP & NEXT-GEN) ---
+    {
+        "id": "gemini-4-argon",
+        "name": "Gemini 4 Argon",
+        "series": "Gemini 4",
+        "badge": "🪐 4. Nesil Flagship (Argon)",
+        "desc": "Google'ın yeni nesil 4. seri Argon mimarisi; ultra derin akıl yürütme ve devasa kurgusal bağlam."
+    },
+    {
+        "id": "gemma-4-31b-it",
+        "name": "Gemma 4 31B IT",
+        "series": "Gemini 4 / Gemma",
+        "badge": "🔬 DeepMind 31B Talimat",
+        "desc": "Google DeepMind'ın 31 milyar parametreli açık ağırlıklı 4. nesil talimat ve mantık motoru."
+    },
+    {
+        "id": "gemma-4-26b-a4b-it",
+        "name": "Gemma 4 26B A4B IT",
+        "series": "Gemini 4 / Gemma",
+        "badge": "⚡ Optimize 4. Nesil",
+        "desc": "Yüksek verimli multimodal 26B mimarisi, hızlı ve keskin senaryo yapılandırması."
+    },
+
+    # --- GEMINI 3.8 & 3.7 SERİSİ (YENİ NESİL ULTRA HIZLI FLASH) ---
+    {
+        "id": "gemini-3.8-flash",
+        "name": "Gemini 3.8 Flash",
+        "series": "Gemini 3.8",
+        "badge": "⚡ Ultra Hızlı 3.8 Çekirdeği",
+        "desc": "Gemini 3 serisinin en yeni 3.8 sürümü, anlık metin ve senaryo analizi için optimize edildi."
+    },
+    {
+        "id": "gemini-3.7-flash",
+        "name": "Gemini 3.7 Flash",
+        "series": "Gemini 3.7",
+        "badge": "💡 Hibrit Düşünme Motoru",
+        "desc": "Gelişmiş akıl yürütme yetenekleri ile dinamik Flash hızını birleştiren 3.7 nesli."
+    },
+    {
+        "id": "gemini-3.6-flash",
+        "name": "Gemini 3.6 Flash",
+        "series": "Gemini 3.6",
+        "badge": "🚀 Kararlı Flash 3.6",
+        "desc": "Yüksek kurgusal zeka, akıcı Türkçe anlatım ve derin bağlam analizi."
+    },
+
+    # --- GEMINI 3.5 & 3 SERİSİ (PRODÜKSİYON STANDARTLARI) ---
     {
         "id": "gemini-3.5-flash-lite",
         "name": "Gemini 3.5 Flash Lite",
-        "series": "Gemini 3",
-        "badge": "Varsayılan (Ultra Hızlı)",
+        "series": "Gemini 3.5",
+        "badge": "⚡ Varsayılan (Ultra Hızlı)",
         "desc": "Google'ın yeni nesil Gemini 3 mimarisi, en düşük gecikme ve anlık JSON kurgu üretimi."
     },
     {
         "id": "gemini-3.5-flash",
         "name": "Gemini 3.5 Flash",
-        "series": "Gemini 3",
-        "badge": "Dengeli & Güçlü",
+        "series": "Gemini 3.5",
+        "badge": "🚀 Dengeli & Güçlü",
         "desc": "Yüksek kurgusal zeka, akıcı Türkçe anlatım ve derin bağlam analizi."
+    },
+    {
+        "id": "gemini-3.1-pro-preview",
+        "name": "Gemini 3.1 Pro Preview",
+        "series": "Gemini 3.1",
+        "badge": "🧠 En Yüksek Akıl Yürütme",
+        "desc": "En derin felsefi, bilimsel ve tefekkür çıkarımları için Pro akıl yürütme motoru."
+    },
+    {
+        "id": "gemini-3.1-flash-lite",
+        "name": "Gemini 3.1 Flash Lite",
+        "series": "Gemini 3.1",
+        "badge": "🎯 Hafif & Seri",
+        "desc": "Kompakt ve ekonomik 3.1 Flash mimarisi."
     },
     {
         "id": "gemini-3-flash-preview",
         "name": "Gemini 3 Flash Preview",
         "series": "Gemini 3",
-        "badge": "Yeni Nesil Preview",
+        "badge": "🔮 Yeni Nesil Preview",
         "desc": "Gemini 3 serisinin deneysel önizleme sürümü."
     },
+
+    # --- GEMINI OMNI & LATEST SERİSİ ---
     {
-        "id": "gemini-3.1-pro-preview",
-        "name": "Gemini 3.1 Pro Preview",
-        "series": "Gemini 3",
-        "badge": "En Yüksek Akıl Yürütme",
-        "desc": "En derin felsefi, bilimsel ve tefekkür çıkarımları için Pro akıl yürütme motoru."
+        "id": "gemini-omni-1.1-flash",
+        "name": "Gemini Omni 1.1 Flash",
+        "series": "Omni",
+        "badge": "🌐 Çok Modlu Omni",
+        "desc": "Görsel, ses ve metin füzyonlu çok modlu Omni modeli."
     },
     {
-        "id": "gemini-2.5-flash",
-        "name": "Gemini 2.5 Flash",
-        "series": "Gemini 2.5",
-        "badge": "Stabil Hızlı",
-        "desc": "Klasik ve stabil hızlı üretim motoru."
-    },
-    {
-        "id": "gemini-2.5-pro",
-        "name": "Gemini 2.5 Pro",
-        "series": "Gemini 2.5",
-        "badge": "Klasik Pro",
-        "desc": "Yüksek doğruluk ve detaylı senaryo kurma yeteneği."
+        "id": "gemini-omni-flash-preview",
+        "name": "Gemini Omni Flash Preview",
+        "series": "Omni",
+        "badge": "🔮 Omni Önizleme",
+        "desc": "Gelişmiş multimodal medya analizi sağlayan Omni önizleme motoru."
     },
     {
         "id": "gemini-flash-latest",
         "name": "Gemini Flash Latest",
         "series": "Latest",
-        "badge": "Daima Güncel",
-        "desc": "Google Cloud'daki en son Flash model checkpoint'i."
+        "badge": "🔄 Daima Güncel",
+        "desc": "Google Cloud'daki en son kararlı Flash model checkpoint'i."
+    },
+    {
+        "id": "gemini-pro-latest",
+        "name": "Gemini Pro Latest",
+        "series": "Latest",
+        "badge": "🔄 Daima Güncel Pro",
+        "desc": "Google Cloud'daki en son kararlı Pro model checkpoint'i."
+    },
+
+    # --- GEMINI 2.5 SERİSİ (KLASİK) ---
+    {
+        "id": "gemini-2.5-pro",
+        "name": "Gemini 2.5 Pro",
+        "series": "Gemini 2.5",
+        "badge": "🏛️ Klasik Pro",
+        "desc": "Yüksek doğruluk ve detaylı senaryo kurma yeteneği."
+    },
+    {
+        "id": "gemini-2.5-flash",
+        "name": "Gemini 2.5 Flash",
+        "series": "Gemini 2.5",
+        "badge": "🏛️ Stabil Hızlı",
+        "desc": "Klasik ve stabil hızlı üretim motoru."
+    },
+    {
+        "id": "gemini-2.5-flash-lite",
+        "name": "Gemini 2.5 Flash-Lite",
+        "series": "Gemini 2.5",
+        "badge": "🏛️ Hafif Klasik",
+        "desc": "Minimum gecikmeli klasik Flash Lite."
     }
 ]
 
@@ -144,17 +230,23 @@ class KeyPoolManager:
             return True, "Vertex/Proxy Key (Doğrudan test desteklenmiyor)"
 
     def query_with_rotation(self, prompt: str, system_instruction: str = "", model: str = DEFAULT_MODEL) -> Tuple[Optional[str], Optional[str]]:
-        """Rotates through active Gemini direct keys until one succeeds"""
+        """Rotates through active Gemini direct keys until one succeeds, with intelligent fallback cascade"""
         selected_model = model or DEFAULT_MODEL
         active_keys = self.get_active_keys("gemini_direct")
         if not active_keys:
-            # Try any direct key
             active_keys = [k for k in self.keys if k.get("key_type") == "gemini_direct"]
 
-        errors = []
-        for key_item in active_keys:
-            api_key = key_item["api_key"]
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/{selected_model}:generateContent?key={api_key}"
+        # Models to try in cascade if primary model is rate limited or quota restricted
+        models_to_try = [selected_model]
+        if selected_model not in ["gemini-3.5-flash", "gemini-3.5-flash-lite"]:
+            models_to_try.append("gemini-3.5-flash")
+            models_to_try.append("gemini-3.5-flash-lite")
+
+        for current_model in models_to_try:
+            errors = []
+            for key_item in active_keys:
+                api_key = key_item["api_key"]
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{current_model}:generateContent?key={api_key}"
             
             payload = {
                 "contents": [{"parts": [{"text": prompt}]}]
@@ -172,7 +264,7 @@ class KeyPoolManager:
                     key_item["last_used_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
                     key_item["status"] = "healthy"
                     self.save_keys()
-                    return text, key_item["key_name"]
+                    return text, f"{key_item['key_name']} ({current_model})"
                 else:
                     err = res.json().get("error", {}).get("message", res.text[:80])
                     key_item["error_count"] = key_item.get("error_count", 0) + 1
@@ -190,7 +282,8 @@ class KeyPoolManager:
                 self.save_keys()
                 continue
 
-        print("Tüm anahtarlar denendi, hatalar:", errors)
+        print(f"[KeyPool] {current_model} ile tm anahtarlar denendi, sonu alnamad. Hatalar: {len(errors)}")
+
         return None, None
 
 pool = KeyPoolManager()

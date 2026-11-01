@@ -695,11 +695,35 @@
 
           <div>
             <label class="block font-bold text-slate-300 mb-1">Gemini AI Modeli</label>
-            <select id="select-gemini-model" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
-              <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite (Varsayılan)</option>
-              <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash (Dengeli)</option>
-              <option value="gemini-3-flash-preview">🔮 Gemini 3 Flash Preview</option>
-              <option value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview</option>
+            <select id="select-gemini-model" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none focus:border-amber-400/60">
+              <optgroup label="🪐 Gemini 4 & Gemma 4 Serisi (Next-Gen Flagship)">
+                <option value="gemini-4-argon">🪐 Gemini 4 Argon (4. Nesil Flagship & Deep Reasoning)</option>
+                <option value="gemma-4-31b-it">🔬 Gemma 4 31B IT (Google DeepMind 31B Mantık Motoru)</option>
+                <option value="gemma-4-26b-a4b-it">⚡ Gemma 4 26B A4B IT (Optimize 4. Nesil Multimodal)</option>
+              </optgroup>
+              <optgroup label="⚡ Gemini 3.8 & 3.7 Serisi (Yeni Nesil Hızlı Flash)">
+                <option value="gemini-3.8-flash">⚡ Gemini 3.8 Flash (Ultra Hızlı 3.8 Çekirdeği)</option>
+                <option value="gemini-3.7-flash">💡 Gemini 3.7 Flash (Hibrit Düşünme & Akıl Yürütme)</option>
+                <option value="gemini-3.6-flash">🚀 Gemini 3.6 Flash (Kararlı Flash 3.6)</option>
+              </optgroup>
+              <optgroup label="💎 Gemini 3.5 & 3 Serisi (Prodüksiyon Standartları)">
+                <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite (Varsayılan - Ultra Hızlı)</option>
+                <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash (Dengeli & Güçlü Kurgu)</option>
+                <option value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview (En Yüksek Felsefi & İlmi Derinlik)</option>
+                <option value="gemini-3.1-flash-lite">🎯 Gemini 3.1 Flash Lite (Hafif & Seri Mimari)</option>
+                <option value="gemini-3-flash-preview">🔮 Gemini 3 Flash Preview (Deneysel Önizleme)</option>
+              </optgroup>
+              <optgroup label="🌐 Gemini Omni & En Son Güncellemeler (Latest)">
+                <option value="gemini-omni-1.1-flash">🌐 Gemini Omni 1.1 Flash (Multimodal Füzyon)</option>
+                <option value="gemini-omni-flash-preview">🔮 Gemini Omni Flash Preview (Çok Modlu Önizleme)</option>
+                <option value="gemini-flash-latest">🔄 Gemini Flash Latest (Daima En Güncel Flash)</option>
+                <option value="gemini-pro-latest">🔄 Gemini Pro Latest (Daima En Güncel Pro)</option>
+              </optgroup>
+              <optgroup label="🏛️ Gemini 2.5 Serisi (Klasik)">
+                <option value="gemini-2.5-pro">🏛️ Gemini 2.5 Pro (Klasik Pro)</option>
+                <option value="gemini-2.5-flash">🏛️ Gemini 2.5 Flash (Stabil Hızlı)</option>
+                <option value="gemini-2.5-flash-lite">🏛️ Gemini 2.5 Flash-Lite (Hafif Klasik)</option>
+              </optgroup>
             </select>
           </div>
 
@@ -751,10 +775,35 @@
           <!-- Gemini Model -->
           <div>
             <label class="block font-bold text-slate-300 mb-1 text-[11px]">Gemini Kurgu Modeli</label>
-            <select id="select-ai-audio-model" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
-              <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite (Önerilen & Hızlı)</option>
-              <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash (Dengeli)</option>
-              <option value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview</option>
+            <select id="select-ai-audio-model" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none focus:border-amber-400/60">
+              <optgroup label="🪐 Gemini 4 & Gemma 4 Serisi (Next-Gen Flagship)">
+                <option value="gemini-4-argon">🪐 Gemini 4 Argon (4. Nesil Flagship & Deep Reasoning)</option>
+                <option value="gemma-4-31b-it">🔬 Gemma 4 31B IT (Google DeepMind 31B Mantık Motoru)</option>
+                <option value="gemma-4-26b-a4b-it">⚡ Gemma 4 26B A4B IT (Optimize 4. Nesil Multimodal)</option>
+              </optgroup>
+              <optgroup label="⚡ Gemini 3.8 & 3.7 Serisi (Yeni Nesil Hızlı Flash)">
+                <option value="gemini-3.8-flash">⚡ Gemini 3.8 Flash (Ultra Hızlı 3.8 Çekirdeği)</option>
+                <option value="gemini-3.7-flash">💡 Gemini 3.7 Flash (Hibrit Düşünme & Akıl Yürütme)</option>
+                <option value="gemini-3.6-flash">🚀 Gemini 3.6 Flash (Kararlı Flash 3.6)</option>
+              </optgroup>
+              <optgroup label="💎 Gemini 3.5 & 3 Serisi (Prodüksiyon Standartları)">
+                <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite (Varsayılan - Ultra Hızlı)</option>
+                <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash (Dengeli & Güçlü Kurgu)</option>
+                <option value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview (En Yüksek Felsefi & İlmi Derinlik)</option>
+                <option value="gemini-3.1-flash-lite">🎯 Gemini 3.1 Flash Lite (Hafif & Seri Mimari)</option>
+                <option value="gemini-3-flash-preview">🔮 Gemini 3 Flash Preview (Deneysel Önizleme)</option>
+              </optgroup>
+              <optgroup label="🌐 Gemini Omni & En Son Güncellemeler (Latest)">
+                <option value="gemini-omni-1.1-flash">🌐 Gemini Omni 1.1 Flash (Multimodal Füzyon)</option>
+                <option value="gemini-omni-flash-preview">🔮 Gemini Omni Flash Preview (Çok Modlu Önizleme)</option>
+                <option value="gemini-flash-latest">🔄 Gemini Flash Latest (Daima En Güncel Flash)</option>
+                <option value="gemini-pro-latest">🔄 Gemini Pro Latest (Daima En Güncel Pro)</option>
+              </optgroup>
+              <optgroup label="🏛️ Gemini 2.5 Serisi (Klasik)">
+                <option value="gemini-2.5-pro">🏛️ Gemini 2.5 Pro (Klasik Pro)</option>
+                <option value="gemini-2.5-flash">🏛️ Gemini 2.5 Flash (Stabil Hızlı)</option>
+                <option value="gemini-2.5-flash-lite">🏛️ Gemini 2.5 Flash-Lite (Hafif Klasik)</option>
+              </optgroup>
             </select>
           </div>
 
@@ -1619,20 +1668,53 @@
             ></textarea>
           </div>
 
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-3 gap-2.5">
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">Gemini Modeli</label>
+              <select id="mission-input-model" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
+              <optgroup label="🪐 Gemini 4 & Gemma 4 Serisi (Next-Gen Flagship)">
+                <option value="gemini-4-argon">🪐 Gemini 4 Argon (4. Nesil Flagship & Deep Reasoning)</option>
+                <option value="gemma-4-31b-it">🔬 Gemma 4 31B IT (Google DeepMind 31B Mantık Motoru)</option>
+                <option value="gemma-4-26b-a4b-it">⚡ Gemma 4 26B A4B IT (Optimize 4. Nesil Multimodal)</option>
+              </optgroup>
+              <optgroup label="⚡ Gemini 3.8 & 3.7 Serisi (Yeni Nesil Hızlı Flash)">
+                <option value="gemini-3.8-flash">⚡ Gemini 3.8 Flash (Ultra Hızlı 3.8 Çekirdeği)</option>
+                <option value="gemini-3.7-flash">💡 Gemini 3.7 Flash (Hibrit Düşünme & Akıl Yürütme)</option>
+                <option value="gemini-3.6-flash">🚀 Gemini 3.6 Flash (Kararlı Flash 3.6)</option>
+              </optgroup>
+              <optgroup label="💎 Gemini 3.5 & 3 Serisi (Prodüksiyon Standartları)">
+                <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite (Varsayılan - Ultra Hızlı)</option>
+                <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash (Dengeli & Güçlü Kurgu)</option>
+                <option value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview (En Yüksek Felsefi & İlmi Derinlik)</option>
+                <option value="gemini-3.1-flash-lite">🎯 Gemini 3.1 Flash Lite (Hafif & Seri Mimari)</option>
+                <option value="gemini-3-flash-preview">🔮 Gemini 3 Flash Preview (Deneysel Önizleme)</option>
+              </optgroup>
+              <optgroup label="🌐 Gemini Omni & En Son Güncellemeler (Latest)">
+                <option value="gemini-omni-1.1-flash">🌐 Gemini Omni 1.1 Flash (Multimodal Füzyon)</option>
+                <option value="gemini-omni-flash-preview">🔮 Gemini Omni Flash Preview (Çok Modlu Önizleme)</option>
+                <option value="gemini-flash-latest">🔄 Gemini Flash Latest (Daima En Güncel Flash)</option>
+                <option value="gemini-pro-latest">🔄 Gemini Pro Latest (Daima En Güncel Pro)</option>
+              </optgroup>
+              <optgroup label="🏛️ Gemini 2.5 Serisi (Klasik)">
+                <option value="gemini-2.5-pro">🏛️ Gemini 2.5 Pro (Klasik Pro)</option>
+                <option value="gemini-2.5-flash">🏛️ Gemini 2.5 Flash (Stabil Hızlı)</option>
+                <option value="gemini-2.5-flash-lite">🏛️ Gemini 2.5 Flash-Lite (Hafif Klasik)</option>
+              </optgroup>
+              </select>
+            </div>
             <div>
               <label class="block font-bold text-slate-300 mb-1">Seslendirici (Anlatıcı)</label>
-              <select id="mission-input-voice" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
-                <option value="en-US-AndrewMultilingualNeural" selected>🎙️ Andrew (Tok Belgesel & Anlatıcı)</option>
-                <option value="tr-TR-AhmetNeural">🎙️ Ahmet (Resmi ve Vurgulu)</option>
+              <select id="mission-input-voice" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
+                <option value="en-US-AndrewMultilingualNeural" selected>🎙️ Andrew (Tok Belgesel)</option>
+                <option value="tr-TR-AhmetNeural">🎙️ Ahmet (Resmi & Vurgulu)</option>
                 <option value="tr-TR-EmelNeural">🎙️ Emel (Sakin & Mistik)</option>
               </select>
             </div>
             <div>
               <label class="block font-bold text-slate-300 mb-1">Kurgu Derinliği</label>
-              <select id="mission-input-duration-mode" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
-                <option value="deep" selected>⏱️ Derin Kurgu (3-4 Sahne, ~30-45s)</option>
-                <option value="short">⚡ Hızlı Shorts (2-3 Sahne, ~15-25s)</option>
+              <select id="mission-input-duration-mode" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
+                <option value="deep" selected>⏱️ Derin Kurgu (3-4 Sahne)</option>
+                <option value="short">⚡ Hızlı Shorts (2-3 Sahne)</option>
               </select>
             </div>
           </div>
@@ -7222,6 +7304,11 @@
       const missionTextEl = document.getElementById('mission-input-text');
       if (missionTextEl) missionTextEl.value = topic;
 
+      const sidebarModel = document.getElementById('select-gemini-model')?.value;
+      if (sidebarModel && document.getElementById('mission-input-model')) {
+        document.getElementById('mission-input-model').value = sidebarModel;
+      }
+
       const ttsVoice = document.getElementById('tts-voice')?.value;
       if (ttsVoice && document.getElementById('mission-input-voice')) {
         document.getElementById('mission-input-voice').value = ttsVoice;
@@ -7678,6 +7765,13 @@
       const modal = document.getElementById('modal-ai-mission-hud');
       if (!modal) return;
       modal.classList.remove('hidden');
+
+      // Sync model selector from sidebar if set
+      const sidebarModel = document.getElementById('select-gemini-model')?.value;
+      if (sidebarModel && document.getElementById('mission-input-model')) {
+        document.getElementById('mission-input-model').value = sidebarModel;
+      }
+
       switchMissionInputTab(mode);
 
       document.getElementById('ai-mission-view-input').classList.remove('hidden');
@@ -7798,12 +7892,14 @@
           title.innerText = '2. Görev Yürütülüyor: Sinematik Sahneler Kurgulanıyor...';
           setStepActive(2, 'Kurgulanıyor...', '0-20s tarihsel mistik atmosfer ve 20-40s daktilo ayet çerçevesi ile SFX eşleşmesi tasarlanıyor.');
 
+          const selectedModel = document.getElementById('mission-input-model')?.value || document.getElementById('select-gemini-model')?.value || 'gemini-3.5-flash-lite';
           const response = await fetch('/api/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               topic: topicText,
               mode: 'auto',
+              model: selectedModel,
               voice_id: voiceId,
               duration_mode: durationMode,
               start_after_quote: true
@@ -7826,10 +7922,12 @@
           title.innerText = '2. Görev Yürütülüyor: Ses Senkronu ve Daktilo Ayet Çerçevesi...';
           setStepActive(2, 'Kurgulanıyor...', 'Ses dalgasına uygun çok sahneli storyboard ve daktilo ayet kutusu kurgulanıyor.');
 
+          const selectedAudioModel = document.getElementById('mission-input-model')?.value || document.getElementById('select-ai-audio-model')?.value || 'gemini-3.5-flash-lite';
           const formData = new FormData();
           formData.append('file', selectedMissionAudioFile);
           if (customTrans) formData.append('transcript', customTrans);
           formData.append('mode', 'auto');
+          formData.append('model', selectedAudioModel);
           formData.append('scene_duration', '12');
           formData.append('start_after_quote', 'true');
 

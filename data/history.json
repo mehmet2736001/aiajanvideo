@@ -1,5 +1,761 @@
 [
   {
+    "id": "06c0ebdb",
+    "topic": "İlim ve akıl hakikatin iki kanadıdır",
+    "theme": "dark_minimalist",
+    "layoutType": "quote_spotlight",
+    "durationMode": "3 Sahne (19s)",
+    "created_at": "2026-11-01 11:49",
+    "headerMain": "HİKMETİN ÖZÜ İKİ KANAT",
+    "narration": "Tek kanatla uçmaya çalışan kuş düşmeye mahkûmdur. Sadece akıl insanı gurura, sadece ilim ise taklide sürükler. Hakikate ulaşmak mı istiyorsun? Unutma: İlim ve akıl hakikatin iki kanadıdır. Bu iki kanat birleştiğinde insan idrakin zirvesine ulaşır.",
+    "hookScore": 96,
+    "key_used": "mehmetortabakan@gmail.com (gemini-3.5-flash)",
+    "model_used": "gemini-3.8-flash",
+    "thumbnail_url": "/out/thumbnail.png?t=1793522992",
+    "video_data": {
+      "directorDecision": {
+        "eraDetected": "İslam Felsefesi ve Hikmet Geleneği",
+        "verseDetected": "Hikmetli Söz / Kelam-ı Kibar",
+        "underlinedKeywords": [
+          "ilim",
+          "akıl",
+          "hakikat",
+          "idrak",
+          "tefekkür",
+          "hikmet"
+        ],
+        "theme": "dark_minimalist",
+        "particles": "dust",
+        "ambientPattern": "fingerprint",
+        "doodleType": "none",
+        "directorReason": "Derin felsefi ve manevi bir hakikati vurgulamak adına karanlık minimalist tema, altın sarısı kelime vurguları ve dengeli karşılaştırma sahneleri tercih edilmiştir."
+      },
+      "requiredIcons": [
+        "book",
+        "brain",
+        "sun",
+        "scale"
+      ],
+      "theme": "dark_minimalist",
+      "narration": "Tek kanatla uçmaya çalışan kuş düşmeye mahkûmdur. Sadece akıl insanı gurura, sadece ilim ise taklide sürükler. Hakikate ulaşmak mı istiyorsun? Unutma: İlim ve akıl hakikatin iki kanadıdır. Bu iki kanat birleştiğinde insan idrakin zirvesine ulaşır.",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "layoutType": "quote_spotlight",
+          "headerSubtitle": "Hakikate Yükseliş",
+          "headerLine1": "HİKMETİN",
+          "circledWord": "ÖZÜ",
+          "headerLine2": "",
+          "highlightedText": "İKİ KANAT",
+          "strikeWord": "TEK TARAFLI",
+          "underlinedWords": [
+            "ilim",
+            "akıl",
+            "hakikat"
+          ],
+          "quoteSpotlight": {
+            "speaker": "Hikmet Geleneği",
+            "title": "HİKMET DERSLERİ",
+            "quoteText": "İlim ve akıl hakikatin iki kanadıdır.",
+            "isVerse": false,
+            "verseBadge": "HİKMETLİ SÖZ",
+            "typewriter": true
+          },
+          "startTime": 0.0,
+          "endTime": 6.39,
+          "isVerse": true,
+          "verseBadge": "AYET / HİKMETLİ SÖZ",
+          "typewriter": true
+        },
+        {
+          "id": "scene_2",
+          "layoutType": "vs_split",
+          "headerSubtitle": "Denge ve Zirve",
+          "headerLine1": "TEK KANAT",
+          "circledWord": "ÇÖKÜŞ",
+          "headerLine2": "GETİRİR",
+          "highlightedText": "ÇİFT KANATLI İDRAK",
+          "strikeWord": "KÖR İNANÇ",
+          "underlinedWords": [
+            "tefekkür",
+            "idrak"
+          ],
+          "vsData": {
+            "leftTitle": "Eksik Yaklaşım",
+            "leftSubtitle": "Tek Kanatlı Görüş",
+            "leftPoints": [
+              "Sadece Akıl: Gurur ve Şüphe",
+              "Sadece İlim: Kuru Ezber ve Taklit",
+              "Hakikatten Uzaklaşma"
+            ],
+            "rightTitle": "Sentez ve Denge",
+            "rightSubtitle": "Hakikat Yolu",
+            "rightPoints": [
+              "Derin Tefekkür ve İrade",
+              "İlahi Marifete Ulaşma",
+              "İdrakin Zirvesine Yükseliş"
+            ],
+            "verdict": "Hakikat, hem aklın nuru hem de ilmin meşalesi birleştiğinde tecelli eder."
+          },
+          "startTime": 6.39,
+          "endTime": 12.77
+        },
+        {
+          "id": "scene_3",
+          "layoutType": "cards",
+          "headerSubtitle": "Marifet Basamakları",
+          "headerLine1": "HAKİKATE",
+          "circledWord": "GİDEN",
+          "headerLine2": "YOL",
+          "highlightedText": "YÜKSEK İDRAK",
+          "strikeWord": "",
+          "underlinedWords": [
+            "hikmet"
+          ],
+          "cards": [
+            {
+              "id": "1",
+              "label": "İlim",
+              "value": "Hakikat Bilgisi",
+              "icon": "book",
+              "color": "#1e3a8a"
+            },
+            {
+              "id": "2",
+              "label": "Akıl",
+              "value": "Tefekkür Gücü",
+              "icon": "brain",
+              "color": "#d97706"
+            },
+            {
+              "id": "3",
+              "label": "Hakikat",
+              "value": "İlahi İdrak",
+              "icon": "sun",
+              "color": "#15803d"
+            }
+          ],
+          "startTime": 12.77,
+          "endTime": 19.16
+        }
+      ],
+      "viral": {
+        "hookScore": 96,
+        "viralTitles": [
+          "Tek Kanatla Uçamazsın! Hakikatin İki Kanadı Nedir?",
+          "İlim mi Akıl mı? Hakikate Nasıl Ulaşılır?",
+          "İlim ve Akıl Hakikatin İki Kanadıdır!"
+        ],
+        "hashtags": [
+          "#hikmet",
+          "#felsefe",
+          "#ilim",
+          "#akıl",
+          "#tefekkür",
+          "#shorts"
+        ],
+        "loopEnding": "ve işte insan bu iki kanatla yükselir.",
+        "description": "İlim ve aklın birleşimiyle hakikate ulaşma yolculuğunu keşfedin. Hikmet dersleri ve derin tefekkür."
+      },
+      "durationMode": "short",
+      "particles": "dust",
+      "ambientPattern": "fingerprint",
+      "doodleType": "none",
+      "filmGrain": "subtle",
+      "lightLeaks": "auto",
+      "cameraMotion": "handheld",
+      "accentType": "none",
+      "socialHandle": "@birkissa",
+      "musicTrack": "ambient_music.wav",
+      "ttsProvider": "edge_tts",
+      "voiceId": "en-US-AndrewMultilingualNeural",
+      "emotionTone": "documentary",
+      "brollType": "none",
+      "brollOpacity": 0.18,
+      "_acquired_assets": [
+        {
+          "name": "fingerprint",
+          "type": "watermark",
+          "path": "assets/watermarks/fingerprint.svg"
+        }
+      ],
+      "aiKurguStartOffset": 0.0,
+      "subtitles": [
+        {
+          "text": "Tek kanatla uçmaya",
+          "start": 0.0,
+          "end": 1.18,
+          "words": [
+            {
+              "word": "Tek",
+              "text": "Tek",
+              "start": 0.0,
+              "end": 0.28
+            },
+            {
+              "word": "kanatla",
+              "text": "kanatla",
+              "start": 0.28,
+              "end": 0.8
+            },
+            {
+              "word": "uçmaya",
+              "text": "uçmaya",
+              "start": 0.8,
+              "end": 1.18
+            }
+          ]
+        },
+        {
+          "text": "çalışan kuş düşmeye",
+          "start": 1.18,
+          "end": 2.6,
+          "words": [
+            {
+              "word": "çalışan",
+              "text": "çalışan",
+              "start": 1.18,
+              "end": 1.7
+            },
+            {
+              "word": "kuş",
+              "text": "kuş",
+              "start": 1.7,
+              "end": 2.24
+            },
+            {
+              "word": "düşmeye",
+              "text": "düşmeye",
+              "start": 2.24,
+              "end": 2.6
+            }
+          ]
+        },
+        {
+          "text": "mahkemmedir. Sadece akıl",
+          "start": 2.6,
+          "end": 4.78,
+          "words": [
+            {
+              "word": "mahkemmedir.",
+              "text": "mahkemmedir.",
+              "start": 2.6,
+              "end": 3.32
+            },
+            {
+              "word": "Sadece",
+              "text": "Sadece",
+              "start": 3.84,
+              "end": 4.2
+            },
+            {
+              "word": "akıl",
+              "text": "akıl",
+              "start": 4.2,
+              "end": 4.78
+            }
+          ]
+        },
+        {
+          "text": "insanı gurura, sadece",
+          "start": 4.78,
+          "end": 6.42,
+          "words": [
+            {
+              "word": "insanı",
+              "text": "insanı",
+              "start": 4.78,
+              "end": 5.32
+            },
+            {
+              "word": "gurura,",
+              "text": "gurura,",
+              "start": 5.32,
+              "end": 5.68
+            },
+            {
+              "word": "sadece",
+              "text": "sadece",
+              "start": 6.08,
+              "end": 6.42
+            }
+          ]
+        },
+        {
+          "text": "ilim ise takide",
+          "start": 6.42,
+          "end": 7.68,
+          "words": [
+            {
+              "word": "ilim",
+              "text": "ilim",
+              "start": 6.42,
+              "end": 6.84
+            },
+            {
+              "word": "ise",
+              "text": "ise",
+              "start": 6.84,
+              "end": 7.08
+            },
+            {
+              "word": "takide",
+              "text": "takide",
+              "start": 7.08,
+              "end": 7.68
+            }
+          ]
+        },
+        {
+          "text": "sürükler. Hakikate ulaşmak mı",
+          "start": 7.68,
+          "end": 9.94,
+          "words": [
+            {
+              "word": "sürükler.",
+              "text": "sürükler.",
+              "start": 7.68,
+              "end": 8.24
+            },
+            {
+              "word": "Hakikate",
+              "text": "Hakikate",
+              "start": 8.8,
+              "end": 9.28
+            },
+            {
+              "word": "ulaşmak",
+              "text": "ulaşmak",
+              "start": 9.28,
+              "end": 9.8
+            },
+            {
+              "word": "mı",
+              "text": "mı",
+              "start": 9.8,
+              "end": 9.94
+            }
+          ]
+        },
+        {
+          "text": "istiyorsun?",
+          "start": 9.94,
+          "end": 10.34,
+          "words": [
+            {
+              "word": "istiyorsun?",
+              "text": "istiyorsun?",
+              "start": 9.94,
+              "end": 10.34
+            }
+          ]
+        },
+        {
+          "text": "Unutma, ilim ve",
+          "start": 10.98,
+          "end": 12.2,
+          "words": [
+            {
+              "word": "Unutma,",
+              "text": "Unutma,",
+              "start": 10.98,
+              "end": 11.4
+            },
+            {
+              "word": "ilim",
+              "text": "ilim",
+              "start": 11.8,
+              "end": 12.08
+            },
+            {
+              "word": "ve",
+              "text": "ve",
+              "start": 12.08,
+              "end": 12.2
+            }
+          ]
+        },
+        {
+          "text": "akıl hakikatin iki",
+          "start": 12.2,
+          "end": 13.52,
+          "words": [
+            {
+              "word": "akıl",
+              "text": "akıl",
+              "start": 12.2,
+              "end": 12.64
+            },
+            {
+              "word": "hakikatin",
+              "text": "hakikatin",
+              "start": 12.64,
+              "end": 13.18
+            },
+            {
+              "word": "iki",
+              "text": "iki",
+              "start": 13.18,
+              "end": 13.52
+            }
+          ]
+        },
+        {
+          "text": "kanadıdır. Bu iki",
+          "start": 13.52,
+          "end": 14.92,
+          "words": [
+            {
+              "word": "kanadıdır.",
+              "text": "kanadıdır.",
+              "start": 13.52,
+              "end": 14.02
+            },
+            {
+              "word": "Bu",
+              "text": "Bu",
+              "start": 14.4,
+              "end": 14.68
+            },
+            {
+              "word": "iki",
+              "text": "iki",
+              "start": 14.68,
+              "end": 14.92
+            }
+          ]
+        },
+        {
+          "text": "kanat birleştiğinde insan",
+          "start": 14.92,
+          "end": 16.56,
+          "words": [
+            {
+              "word": "kanat",
+              "text": "kanat",
+              "start": 14.92,
+              "end": 15.32
+            },
+            {
+              "word": "birleştiğinde",
+              "text": "birleştiğinde",
+              "start": 15.32,
+              "end": 16.06
+            },
+            {
+              "word": "insan",
+              "text": "insan",
+              "start": 16.06,
+              "end": 16.56
+            }
+          ]
+        },
+        {
+          "text": "idraakin zirvesine ulaşıf.",
+          "start": 16.56,
+          "end": 18.36,
+          "words": [
+            {
+              "word": "idraakin",
+              "text": "idraakin",
+              "start": 16.56,
+              "end": 17.32
+            },
+            {
+              "word": "zirvesine",
+              "text": "zirvesine",
+              "start": 17.32,
+              "end": 17.88
+            },
+            {
+              "word": "ulaşıf.",
+              "text": "ulaşıf.",
+              "start": 17.88,
+              "end": 18.36
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "word": "Tek",
+          "text": "Tek",
+          "start": 0.0,
+          "end": 0.28
+        },
+        {
+          "word": "kanatla",
+          "text": "kanatla",
+          "start": 0.28,
+          "end": 0.8
+        },
+        {
+          "word": "uçmaya",
+          "text": "uçmaya",
+          "start": 0.8,
+          "end": 1.18
+        },
+        {
+          "word": "çalışan",
+          "text": "çalışan",
+          "start": 1.18,
+          "end": 1.7
+        },
+        {
+          "word": "kuş",
+          "text": "kuş",
+          "start": 1.7,
+          "end": 2.24
+        },
+        {
+          "word": "düşmeye",
+          "text": "düşmeye",
+          "start": 2.24,
+          "end": 2.6
+        },
+        {
+          "word": "mahkemmedir.",
+          "text": "mahkemmedir.",
+          "start": 2.6,
+          "end": 3.32
+        },
+        {
+          "word": "Sadece",
+          "text": "Sadece",
+          "start": 3.84,
+          "end": 4.2
+        },
+        {
+          "word": "akıl",
+          "text": "akıl",
+          "start": 4.2,
+          "end": 4.78
+        },
+        {
+          "word": "insanı",
+          "text": "insanı",
+          "start": 4.78,
+          "end": 5.32
+        },
+        {
+          "word": "gurura,",
+          "text": "gurura,",
+          "start": 5.32,
+          "end": 5.68
+        },
+        {
+          "word": "sadece",
+          "text": "sadece",
+          "start": 6.08,
+          "end": 6.42
+        },
+        {
+          "word": "ilim",
+          "text": "ilim",
+          "start": 6.42,
+          "end": 6.84
+        },
+        {
+          "word": "ise",
+          "text": "ise",
+          "start": 6.84,
+          "end": 7.08
+        },
+        {
+          "word": "takide",
+          "text": "takide",
+          "start": 7.08,
+          "end": 7.68
+        },
+        {
+          "word": "sürükler.",
+          "text": "sürükler.",
+          "start": 7.68,
+          "end": 8.24
+        },
+        {
+          "word": "Hakikate",
+          "text": "Hakikate",
+          "start": 8.8,
+          "end": 9.28
+        },
+        {
+          "word": "ulaşmak",
+          "text": "ulaşmak",
+          "start": 9.28,
+          "end": 9.8
+        },
+        {
+          "word": "mı",
+          "text": "mı",
+          "start": 9.8,
+          "end": 9.94
+        },
+        {
+          "word": "istiyorsun?",
+          "text": "istiyorsun?",
+          "start": 9.94,
+          "end": 10.34
+        },
+        {
+          "word": "Unutma,",
+          "text": "Unutma,",
+          "start": 10.98,
+          "end": 11.4
+        },
+        {
+          "word": "ilim",
+          "text": "ilim",
+          "start": 11.8,
+          "end": 12.08
+        },
+        {
+          "word": "ve",
+          "text": "ve",
+          "start": 12.08,
+          "end": 12.2
+        },
+        {
+          "word": "akıl",
+          "text": "akıl",
+          "start": 12.2,
+          "end": 12.64
+        },
+        {
+          "word": "hakikatin",
+          "text": "hakikatin",
+          "start": 12.64,
+          "end": 13.18
+        },
+        {
+          "word": "iki",
+          "text": "iki",
+          "start": 13.18,
+          "end": 13.52
+        },
+        {
+          "word": "kanadıdır.",
+          "text": "kanadıdır.",
+          "start": 13.52,
+          "end": 14.02
+        },
+        {
+          "word": "Bu",
+          "text": "Bu",
+          "start": 14.4,
+          "end": 14.68
+        },
+        {
+          "word": "iki",
+          "text": "iki",
+          "start": 14.68,
+          "end": 14.92
+        },
+        {
+          "word": "kanat",
+          "text": "kanat",
+          "start": 14.92,
+          "end": 15.32
+        },
+        {
+          "word": "birleştiğinde",
+          "text": "birleştiğinde",
+          "start": 15.32,
+          "end": 16.06
+        },
+        {
+          "word": "insan",
+          "text": "insan",
+          "start": 16.06,
+          "end": 16.56
+        },
+        {
+          "word": "idraakin",
+          "text": "idraakin",
+          "start": 16.56,
+          "end": 17.32
+        },
+        {
+          "word": "zirvesine",
+          "text": "zirvesine",
+          "start": 17.32,
+          "end": 17.88
+        },
+        {
+          "word": "ulaşıf.",
+          "text": "ulaşıf.",
+          "start": 17.88,
+          "end": 18.36
+        }
+      ],
+      "audioUrl": "/public/audio.mp3",
+      "headerSubtitle": "Hakikate Yükseliş",
+      "headerLine1": "HİKMETİN",
+      "circledWord": "ÖZÜ",
+      "highlightedText": "İKİ KANAT",
+      "strikeWord": "TEK TARAFLI",
+      "layoutType": "quote_spotlight",
+      "quoteSpotlight": {
+        "speaker": "Hikmet Geleneği",
+        "title": "HİKMET DERSLERİ",
+        "quoteText": "İlim ve akıl hakikatin iki kanadıdır.",
+        "isVerse": false,
+        "verseBadge": "HİKMETLİ SÖZ",
+        "typewriter": true
+      },
+      "totalDuration": 19.16
+    }
+  },
+  {
+    "id": "ae25a48b",
+    "topic": "cevap1",
+    "theme": "notebook",
+    "layoutType": "pip_split",
+    "durationMode": "10s",
+    "created_at": "2026-11-01 11:37:47",
+    "headerMain": "CEVAP1",
+    "thumbnail_url": "/out/thumbnail.png",
+    "video_data": {
+      "topic": "cevap1",
+      "theme": "notebook",
+      "format": "9:16",
+      "headerSubtitle": "Bölüm 1",
+      "headerLine1": "CEVAP1",
+      "circledWord": "İLK",
+      "headerLine2": "Fikrini Buraya Yaz",
+      "highlightedText": "Önemli Nokta",
+      "layoutType": "pip_split",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "headerSubtitle": "Bölüm 1",
+          "headerLine1": "CEVAP1",
+          "circledWord": "İLK",
+          "headerLine2": "Fikrini Buraya Yaz",
+          "highlightedText": "Önemli Nokta",
+          "layoutType": "pip_split",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "duration": 10.0
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "cevap1",
+          "start": 0.0,
+          "end": 2.5
+        },
+        {
+          "text": "kurgulamaya hemen başla",
+          "start": 2.5,
+          "end": 5.0
+        }
+      ],
+      "totalDuration": 10.0,
+      "created_at": "2026-11-01 11:37:47"
+    }
+  },
+  {
     "id": "64d513c4",
     "topic": "tarafların birbirine \"sana bunu yapmak zorunda değilim\" diyerek nefsini dayattığı bencil bir menfaat şebekesi değil... herkesin kendi vazifesini, Allah rızası için yerine getirdiği mukaddes bir yuvadır!",
     "theme": "dark_minimalist",
@@ -11024,611 +11780,6 @@
           "text": "haber vermiştir.",
           "start": 32.26,
           "end": 33.4
-        }
-      ],
-      "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "666b025f",
-    "topic": "ben islami bir karanlık tema kullanarak kıyamet 3-4 ayetinde geçen parmak ucundaki sırrı anlatan video yap",
-    "theme": "dark_minimalist",
-    "layoutType": "grid_explosion",
-    "durationMode": "deep",
-    "created_at": "2026-10-28 00:19",
-    "headerMain": "PARMAK UCUNDAKİ BÜYÜK MİLYARLARCA MÜHÜR",
-    "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir.",
-    "hookScore": 99,
-    "key_used": "asdxcxc009@gmail.com",
-    "thumbnail_url": "/out/thumbnail.png?t=1793135969",
-    "video_data": {
-      "directorDecision": {
-        "theme": "dark_minimalist",
-        "layoutType": "grid_explosion",
-        "durationMode": "deep",
-        "particles": "dust",
-        "ambientPattern": "fingerprint",
-        "doodleType": "none",
-        "directorReason": "İslami tefekkür ve biyolojik mühür vurgusu için karanlık minimal tuval ve parmak izi odaklı grid patlaması seçildi."
-      },
-      "requiredIcons": [
-        "fingerprint",
-        "dna",
-        "scale"
-      ],
-      "headerSubtitle": "Akıl Almaz Sır",
-      "headerLine1": "PARMAK UCUNDAKİ",
-      "circledWord": "BÜYÜK",
-      "headerLine2": "SIR",
-      "highlightedText": "MİLYARLARCA MÜHÜR",
-      "strikeWord": "TESADÜF",
-      "layoutType": "grid_explosion",
-      "cards": [
-        {
-          "id": "1",
-          "label": "DNA Şifresi",
-          "value": "%100 Aynı",
-          "icon": "dna",
-          "color": "#1e3a8a",
-          "iconAssetPath": "assets/icons/dna.svg"
-        },
-        {
-          "id": "2",
-          "label": "İkizler",
-          "value": "Farklı İz",
-          "icon": "fingerprint",
-          "color": "#15803d",
-          "iconAssetPath": "assets/icons/fingerprint.svg"
-        },
-        {
-          "id": "3",
-          "label": "Tesviye",
-          "value": "1400 Yıl",
-          "icon": "scale",
-          "color": "#d97706",
-          "iconAssetPath": "assets/icons/scale.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "DNA Benzerliği",
-        "leftSubtitle": "Genler Birebir Aynı",
-        "leftPoints": [
-          "Aynı genetik kod",
-          "Aynı kan grubu",
-          "Aynı fiziksel yapı"
-        ],
-        "leftColor": "#dc2626",
-        "rightTitle": "Parmak Uçları",
-        "rightSubtitle": "Eşsiz Biyolojik Mühür",
-        "rightPoints": [
-          "Anne karnında mikro temas",
-          "Asla değişmeyen geometri",
-          "Milyarlarca insanda tek"
-        ],
-        "rightColor": "#16a34a",
-        "verdict": "İkizlerin DNA'sı bile aynıyken, parmak izi her insanı tek ve eşsiz kılar."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Aşama",
-          "title": "Büyük Soru",
-          "desc": "Çürüyüp dağılan kemikler nasıl diriltilecek?",
-          "color": "#1e3a8a"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Kırılma",
-          "title": "En İnce Detay",
-          "desc": "Kur'an beyne değil, parmak ucunun milimetrik çizgilerine işaret etti.",
-          "color": "#d97706"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Hakikat",
-          "title": "Tesviye Sırrı",
-          "desc": "19. yüzyılda keşfedilen biometrik imza asırlar önce haber verildi.",
-          "color": "#15803d"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Kıyamet Suresi",
-        "title": "4. AYET",
-        "quoteText": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
-        "sourceRef": "Kıyamet Suresi, 3-4"
-      },
-      "metricImpact": {
-        "bigNumber": "8 MİLYAR",
-        "bigLabel": "İNSAN İÇİNDE",
-        "subheading": "Hiçbirinin Parmak İzi Aynı Değil",
-        "keyTakeaway": "Çünkü her insan varoluşun altına atılmış özel bir imzadır."
-      },
-      "gridExplosion": {
-        "title": "MİLYARLARCA İNSAN",
-        "subtitle": "Hiçbirinin Parmak İzi Birbirine Benzemeğecek Şekilde Yaratıldı",
-        "iconType": "fingerprint",
-        "itemCount": 12,
-        "badgeText": "EŞSİZ BİYOLOJİK MÜHÜR",
-        "iconAssetPath": "assets/icons/fingerprint.svg"
-      },
-      "triConcept": {
-        "badge": "BEKLENEN CEVAP",
-        "concept1": {
-          "title": "BEYİN",
-          "subtitle": "En Karmaşık Hafıza",
-          "icon": "brain",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/brain.svg"
-        },
-        "concept2": {
-          "title": "KALP",
-          "subtitle": "Yaşam Merkezi",
-          "icon": "heart",
-          "color": "#ef4444",
-          "iconAssetPath": "assets/icons/heart.svg"
-        },
-        "concept3": {
-          "title": "GÖZ",
-          "subtitle": "Hassas Mercek",
-          "icon": "eye",
-          "color": "#facc15",
-          "iconAssetPath": "assets/icons/eye.svg"
-        },
-        "bottomNote": "FAKAT KUR'AN PARMAK UCUNA ODAKLANDI"
-      },
-      "timeline": {
-        "startYear": "Kıyamet",
-        "endYear": "Diriliş",
-        "durationLabel": "Tesviye",
-        "title": "Kusursuz Dizilim",
-        "ayahArabic": "",
-        "ayahTranslation": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
-        "ayahRef": "Kıyamet Suresi, 3-4"
-      },
-      "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir.",
-      "viral": {
-        "hookScore": 99,
-        "viralTitles": [
-          "Parmak Ucundaki BÜYÜK Sır! Kıyamet Suresi 3-4",
-          "İkizlerin Bile Farklı: 1400 Yıl Önceki Akıl Almaz Detay!"
-        ],
-        "hashtags": [
-          "#bilim",
-          "#kuran",
-          "#parmakizi",
-          "#mucize",
-          "#tefekkür",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden her insan aslında...",
-        "description": "Parmak uçlarındaki dermatoglif şifresi ve Kıyamet Suresi'nin mucizevi detayları."
-      },
-      "theme": "dark_minimalist",
-      "durationMode": "deep",
-      "particles": "dust",
-      "ambientPattern": "fingerprint",
-      "doodleType": "none",
-      "socialHandle": "@birkissa",
-      "_acquired_assets": [
-        {
-          "name": "fingerprint",
-          "type": "watermark",
-          "path": "assets/watermarks/fingerprint.svg"
-        },
-        {
-          "name": "fingerprint",
-          "type": "grid_icon",
-          "path": "assets/icons/fingerprint.svg"
-        },
-        {
-          "name": "brain",
-          "type": "concept_icon",
-          "path": "assets/icons/brain.svg"
-        },
-        {
-          "name": "heart",
-          "type": "concept_icon",
-          "path": "assets/icons/heart.svg"
-        },
-        {
-          "name": "eye",
-          "type": "concept_icon",
-          "path": "assets/icons/eye.svg"
-        },
-        {
-          "name": "dna",
-          "type": "card_icon",
-          "path": "assets/icons/dna.svg"
-        },
-        {
-          "name": "fingerprint",
-          "type": "card_icon",
-          "path": "assets/icons/fingerprint.svg"
-        },
-        {
-          "name": "scale",
-          "type": "card_icon",
-          "path": "assets/icons/scale.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "DNA'sı yüzde yüz",
-          "start": 0.0,
-          "end": 1.72
-        },
-        {
-          "text": "aynı olan tek",
-          "start": 1.72,
-          "end": 2.88
-        },
-        {
-          "text": "yumurta ikizlerini bile",
-          "start": 2.88,
-          "end": 4.48
-        },
-        {
-          "text": "birbirinden ayıran tek",
-          "start": 4.48,
-          "end": 6.02
-        },
-        {
-          "text": "bir sır vardır.",
-          "start": 6.02,
-          "end": 7.06
-        },
-        {
-          "text": "Çürüyüp toprak olduktan",
-          "start": 7.98,
-          "end": 9.62
-        },
-        {
-          "text": "sonra nasıl diriltileceğini",
-          "start": 9.62,
-          "end": 11.6
-        },
-        {
-          "text": "soranlara, Kur'an tam",
-          "start": 11.6,
-          "end": 13.32
-        },
-        {
-          "text": "da parmak uçlarına",
-          "start": 13.32,
-          "end": 14.18
-        },
-        {
-          "text": "işaret ederek cevap",
-          "start": 14.18,
-          "end": 15.82
-        },
-        {
-          "text": "verdi. Milyarlarca insanın",
-          "start": 15.82,
-          "end": 18.14
-        },
-        {
-          "text": "her biri, parmak",
-          "start": 18.14,
-          "end": 19.5
-        },
-        {
-          "text": "ucundaki o eşsiz",
-          "start": 19.94,
-          "end": 21.38
-        },
-        {
-          "text": "mühürle yeniden var",
-          "start": 21.38,
-          "end": 23.02
-        },
-        {
-          "text": "edilir.",
-          "start": 23.02,
-          "end": 23.3
-        }
-      ],
-      "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "7280fae7",
-    "topic": "Albert Einstein ve zamanın dağlarda neden daha hızlı aktığı sırrı",
-    "theme": "blueprint",
-    "layoutType": "tri_concept",
-    "durationMode": "deep",
-    "created_at": "2026-10-27 23:51",
-    "headerMain": "DAĞLARDA ZAMAN NEDEN EINSTEIN'IN BÜYÜK SIRRI",
-    "narration": "Zamanın her yerde aynı aktığını mı sanıyorsunuz? Yanılıyorsunuz. Albert Einstein'ın devrim niteliğindeki teorisine göre, kütleçekim uzay-zaman dokusunu büker. Deniz seviyesinden yüksekklere, dağların zirvesine çıktıkça Dünya'nın kütleçekimi zayıflar. Çekimin zayıfladığı yerde zaman, ovadakilere göre daha hızlı akar. Everest'in tepesindekiler, deniz kenarındakilere kıyasla gelecekte yaşarlar.",
-    "hookScore": 98,
-    "key_used": "mehmetortabakan@gmail.com",
-    "thumbnail_url": "/out/thumbnail.png?t=1793134293",
-    "video_data": {
-      "directorDecision": {
-        "theme": "blueprint",
-        "layoutType": "tri_concept",
-        "durationMode": "deep",
-        "particles": "stars",
-        "ambientPattern": "cosmic",
-        "doodleType": "galaxy",
-        "directorReason": "Albert Einstein, görelilik ve zamanın akış hızı (kütleçekimsel zaman genişlemesi) evrensel bir bilim konusu olduğu için 'blueprint' teması ve kozmik atmosfer seçilmiştir."
-      },
-      "requiredIcons": [
-        "atom",
-        "hourglass",
-        "infinity",
-        "compass"
-      ],
-      "headerSubtitle": "Zamanın Gizli Yasası",
-      "headerLine1": "DAĞLARDA ZAMAN",
-      "circledWord": "NEDEN",
-      "headerLine2": "HIZLI AKAR?",
-      "highlightedText": "EINSTEIN'IN BÜYÜK SIRRI",
-      "strikeWord": "SABİT",
-      "layoutType": "tri_concept",
-      "cards": [
-        {
-          "id": "1",
-          "label": "Deniz Seviyesi",
-          "value": "Ağır Kütle",
-          "icon": "hourglass",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/hourglass.svg"
-        },
-        {
-          "id": "2",
-          "label": "Zirve Noktası",
-          "value": "Zayıf Çekim",
-          "icon": "atom",
-          "color": "#facc15",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        {
-          "id": "3",
-          "label": "Sonuç",
-          "value": "Hızlı Zaman",
-          "icon": "infinity",
-          "color": "#ef4444",
-          "iconAssetPath": "assets/icons/infinity.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "Dünya'nın Merkezi",
-        "leftSubtitle": "Yoğun Kütleçekim",
-        "leftPoints": [
-          "Kütle zamanı büker",
-          "Saatler daha yavaş ticks",
-          "Yer çekimi maksimum"
-        ],
-        "leftColor": "#3b82f6",
-        "rightTitle": "Dağların Zirvesi",
-        "rightSubtitle": "Zayıf Kütleçekim",
-        "rightPoints": [
-          "Merkezden uzakta",
-          "Zaman daha hızlı akar",
-          "Fizik kuralları değişir"
-        ],
-        "rightColor": "#eab308",
-        "verdict": "Yüksekte yaşayanlar, deniz seviyesindekilere göre çok az da olsa gelecekte yaşarlar."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Aşama",
-          "title": "Bükülen Uzay-Zaman",
-          "desc": "Einstein, kütlenin uzay-zaman dokusunu esnettiğini kanıtladı.",
-          "color": "#3b82f6"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Kırılma",
-          "title": "Çekim Azaldıkça",
-          "desc": "Yeryüzünden uzaklaştıkça kütleçekim zayıflar ve zaman hız kazanır.",
-          "color": "#eab308"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Hakikat",
-          "title": "Zirve Sırrı",
-          "desc": "Everest'in tepesinde saatler, okyanus kıyısına göre daha hızlı ilerler.",
-          "color": "#ef4444"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Albert Einstein",
-        "title": "GÖRELİLİK TEORİSİ",
-        "quoteText": "Zaman mutlak değildir; gözlemcinin konumuna ve kütleçekim alanına göre değişir.",
-        "sourceRef": "Genel Görelilik, 1915"
-      },
-      "metricImpact": {
-        "bigNumber": "NANosaniye",
-        "bigLabel": "FARK",
-        "subheading": "Dağda ve OVADA Zamanın Akış Hızı",
-        "keyTakeaway": "Zaman evrenin her yerinde aynı akmaz; kütleçekim zamanın efendisidir."
-      },
-      "gridExplosion": {
-        "title": "UZAY-ZAMAN DOKUSU",
-        "subtitle": "Kütleçekimin Etkilediği Katmanlar",
-        "iconType": "atom",
-        "itemCount": 9,
-        "badgeText": "GÖRELİLİK KANUNU",
-        "iconAssetPath": "assets/icons/atom.svg"
-      },
-      "triConcept": {
-        "badge": "EINSTEIN'IN ÜÇLÜSÜ",
-        "concept1": {
-          "title": "KÜTLE",
-          "subtitle": "Uzayı Büker",
-          "icon": "atom",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        "concept2": {
-          "title": "YÜKSEKLİK",
-          "subtitle": "Çekimi Azaltır",
-          "icon": "compass",
-          "color": "#facc15",
-          "iconAssetPath": "assets/icons/compass.svg"
-        },
-        "concept3": {
-          "title": "ZAMAN",
-          "subtitle": "Hız Kazanır",
-          "icon": "infinity",
-          "color": "#ef4444",
-          "iconAssetPath": "assets/icons/infinity.svg"
-        },
-        "bottomNote": "DAĞLARDA YAŞAM KONTROLÜ"
-      },
-      "timeline": {
-        "startYear": "1905",
-        "endYear": "1915",
-        "durationLabel": "10 Yıl",
-        "title": "Evrenin Yeniden Yazılışı",
-        "ayahArabic": "",
-        "ayahTranslation": "Zaman, kütlenin ellerinde şekillenen esnek bir kumaştır.",
-        "ayahRef": "Modern Fizik"
-      },
-      "narration": "Zamanın her yerde aynı aktığını mı sanıyorsunuz? Yanılıyorsunuz. Albert Einstein'ın devrim niteliğindeki teorisine göre, kütleçekim uzay-zaman dokusunu büker. Deniz seviyesinden yüksekklere, dağların zirvesine çıktıkça Dünya'nın kütleçekimi zayıflar. Çekimin zayıfladığı yerde zaman, ovadakilere göre daha hızlı akar. Everest'in tepesindekiler, deniz kenarındakilere kıyasla gelecekte yaşarlar.",
-      "viral": {
-        "hookScore": 98,
-        "viralTitles": [
-          "Dağlarda Zaman Neden Daha Hızlı Akar? Einstein'ın Çılgın Sırrı!",
-          "Yüksekte Yaşayanlar Gelecekte mi Yaşıyor? Zamanın Şoke Eden Gerçeği!"
-        ],
-        "hashtags": [
-          "#einstein",
-          "#fizik",
-          "#zaman",
-          "#bilim",
-          "#uzay",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden aslında...",
-        "description": "Kütleçekimsel zaman genişlemesi ve dağlarda zamanın neden hızlı aktığının bilimsel açıklaması."
-      },
-      "theme": "blueprint",
-      "durationMode": "deep",
-      "particles": "stars",
-      "ambientPattern": "cosmic",
-      "doodleType": "galaxy",
-      "socialHandle": "@bilimkosesi",
-      "_acquired_assets": [
-        {
-          "name": "cosmic",
-          "type": "watermark",
-          "path": "assets/watermarks/cosmic.svg"
-        },
-        {
-          "name": "atom",
-          "type": "grid_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "atom",
-          "type": "concept_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "compass",
-          "type": "concept_icon",
-          "path": "assets/icons/compass.svg"
-        },
-        {
-          "name": "infinity",
-          "type": "concept_icon",
-          "path": "assets/icons/infinity.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "card_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "atom",
-          "type": "card_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "infinity",
-          "type": "card_icon",
-          "path": "assets/icons/infinity.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "Zamanın her yerde",
-          "start": 0.0,
-          "end": 1.42
-        },
-        {
-          "text": "aynı aktığını mı",
-          "start": 1.42,
-          "end": 2.64
-        },
-        {
-          "text": "sanıyorsunuz? Yanılıyorsunuz. Albert",
-          "start": 2.64,
-          "end": 6.5
-        },
-        {
-          "text": "Einstein'ın devrim niteliğindeki",
-          "start": 6.5,
-          "end": 8.48
-        },
-        {
-          "text": "teorisine göre, kütleçekim",
-          "start": 8.48,
-          "end": 10.42
-        },
-        {
-          "text": "uzay-zaman dokusunu büker.",
-          "start": 10.92,
-          "end": 12.44
-        },
-        {
-          "text": "Deniz seviyesinden yüksekklere,",
-          "start": 12.44,
-          "end": 14.82
-        },
-        {
-          "text": "dağların zirvesine çıktıkça",
-          "start": 14.82,
-          "end": 18.32
-        },
-        {
-          "text": "Dünya'nın kütleçekimi zayıflar.",
-          "start": 18.32,
-          "end": 20.0
-        },
-        {
-          "text": "Çekimin zayıfladığı yerde",
-          "start": 20.0,
-          "end": 23.0
-        },
-        {
-          "text": "zaman, ovadakilere göre",
-          "start": 23.0,
-          "end": 24.88
-        },
-        {
-          "text": "daha hızlı akar.",
-          "start": 24.88,
-          "end": 26.02
-        },
-        {
-          "text": "Everest'in tepesindekiler, deniz",
-          "start": 26.44,
-          "end": 28.92
-        },
-        {
-          "text": "kenarındakilere kıyasla gelecekte",
-          "start": 29.34,
-          "end": 31.5
-        },
-        {
-          "text": "yaşarlar.",
-          "start": 31.5,
-          "end": 32.22
         }
       ],
       "audioUrl": "audio.mp3"
