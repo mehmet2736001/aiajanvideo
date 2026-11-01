@@ -1,5 +1,1041 @@
 [
   {
+    "id": "bca77055",
+    "topic": "🎙️ Ses Yükleme: Sana mı kaldı İslam fıkhında Fetvalar Vermek, Hüküm Kesmek? ...",
+    "theme": "dark_minimalist",
+    "layoutType": "quote_spotlight",
+    "durationMode": "3 Sahne (26s)",
+    "created_at": "2026-11-01 17:25",
+    "headerMain": "SANA MI KALDI",
+    "narration": "Sana mı kaldı İslam fıkhında Fetvalar Vermek, Hüküm Kesmek? Şimdi biz Kur'an'ı Peygamber Sünnetini, Sahabe Hayatını ve Asırlık İslam Alimlerini bir kenara bırakıp da, Bu diğiniz senden mi öğreneceğiz? Kur'an'dan tek bir ayet oku desen, Sünnetten sahip idelil getir desen, Geli buazını düğümlenecek insanlardan mı öğreneceğiz bu güzeli İslam'ı? Bütün derdiniz bitti de!",
+    "hookScore": 99,
+    "key_used": "mehmetortabakan@gmail.com (gemini-3.5-flash-lite)",
+    "model_used": "gemini-3.5-flash-lite",
+    "thumbnail_url": "/out/thumbnail.png?t=1793543148",
+    "video_data": {
+      "directorDecision": {
+        "theme": "dark_minimalist",
+        "particles": "dust",
+        "ambientPattern": "fingerprint",
+        "directorReason": "İslam fıkhı ve ilim konusundaki eleştirel ve sorgulayıcı tona uygun olarak, dinamik ve vurucu sahneler kurgulandı."
+      },
+      "requiredIcons": [
+        "scale",
+        "brain",
+        "book",
+        "shield"
+      ],
+      "scenes": [
+        {
+          "id": "scene_1",
+          "startTime": 0.0,
+          "endTime": 8.73,
+          "layoutType": "quote_spotlight",
+          "headerSubtitle": "İSLAM FIKHINDA HÜKÜM",
+          "headerLine1": "SANA",
+          "circledWord": "MI",
+          "headerLine2": "",
+          "highlightedText": "KALDI",
+          "strikeWord": "",
+          "isVerse": true,
+          "verseBadge": "AYET-İ KERİME",
+          "typewriter": true,
+          "underlinedWords": [],
+          "cards": null,
+          "vsData": null,
+          "flowchartSteps": null,
+          "quoteSpotlight": {
+            "speaker": "Ses Kaydı",
+            "quoteText": "Sana mı kaldı İslam fıkhında Fetvalar Vermek, Hüküm Kesmek?"
+          },
+          "metricImpact": null,
+          "gridExplosion": null,
+          "triConcept": null,
+          "timeline": null
+        },
+        {
+          "id": "scene_2",
+          "startTime": 8.73,
+          "endTime": 17.46,
+          "layoutType": "cinematic_ambient",
+          "headerSubtitle": "ASIRLIK İLİM VE SÜNNET",
+          "headerLine1": "SANA",
+          "circledWord": "MI",
+          "headerLine2": "",
+          "highlightedText": "KALDI",
+          "strikeWord": "",
+          "isVerse": false,
+          "verseBadge": "",
+          "typewriter": false,
+          "underlinedWords": [],
+          "cards": null,
+          "vsData": null,
+          "flowchartSteps": null,
+          "quoteSpotlight": {
+            "speaker": "Ses Kaydı",
+            "quoteText": "Kur'an'ı Peygamber Sünnetini ve Asırlık İslam Alimlerini bir kenara bırakıp da..."
+          },
+          "metricImpact": null,
+          "gridExplosion": null,
+          "triConcept": null,
+          "timeline": null
+        },
+        {
+          "id": "scene_3",
+          "startTime": 17.46,
+          "endTime": 26.19,
+          "layoutType": "vs_split",
+          "headerSubtitle": "HAKİKAT VE CEHALET",
+          "headerLine1": "SANA",
+          "circledWord": "MI",
+          "headerLine2": "",
+          "highlightedText": "KALDI",
+          "strikeWord": "",
+          "isVerse": false,
+          "verseBadge": "",
+          "typewriter": false,
+          "underlinedWords": [],
+          "cards": null,
+          "vsData": {
+            "leftTitle": "Zan / Yanılgı",
+            "leftSubtitle": "Görünen",
+            "leftPoints": [
+              "Yüzeysel algı",
+              "Nefsin dayatması"
+            ],
+            "rightTitle": "Hakikat",
+            "rightSubtitle": "Gerçek Olan",
+            "rightPoints": [
+              "Derin anlam",
+              "Allah rızası"
+            ],
+            "verdict": "Hakikat daima ayrıntılarda ve ilahi rızada gizlidir."
+          },
+          "flowchartSteps": null,
+          "quoteSpotlight": {
+            "speaker": "Ses Kaydı",
+            "quoteText": "Kur'an'dan tek bir ayet oku desen, delil getiremeyecek insanlardan mı öğreneceğiz?"
+          },
+          "metricImpact": null,
+          "gridExplosion": null,
+          "triConcept": null,
+          "timeline": null
+        }
+      ],
+      "viral": {
+        "hookScore": 99,
+        "viralTitles": [
+          "Sana mı kaldı fetva vermek?",
+          "İslam'ı kimden öğreniyoruz?"
+        ],
+        "hashtags": [
+          "#islam",
+          "#fıkıh",
+          "#ilmi",
+          "#shorts",
+          "#viral"
+        ],
+        "loopEnding": "Bütün derdiniz bitti de!",
+        "description": "Kullanıcının ses kaydıyla üretilen mini-belgesel tarzı etkileyici video şeması."
+      },
+      "theme": "dark_minimalist",
+      "particles": "dust",
+      "ambientPattern": "fingerprint",
+      "socialHandle": "@birkissa",
+      "audioUrl": "/public/audio.mp3",
+      "filmGrain": "subtle",
+      "lightLeaks": "auto",
+      "cameraMotion": "handheld",
+      "accentType": "none",
+      "musicTrack": "ambient_music.wav",
+      "brollType": "none",
+      "aiKurguStartOffset": 0.0,
+      "subtitles": [
+        {
+          "text": "Sana mı kaldı",
+          "start": 0.0,
+          "end": 0.94,
+          "words": [
+            {
+              "word": "Sana",
+              "text": "Sana",
+              "start": 0.0,
+              "end": 0.42
+            },
+            {
+              "word": "mı",
+              "text": "mı",
+              "start": 0.42,
+              "end": 0.62
+            },
+            {
+              "word": "kaldı",
+              "text": "kaldı",
+              "start": 0.62,
+              "end": 0.94
+            }
+          ]
+        },
+        {
+          "text": "İslam fıkhında Fetvalar",
+          "start": 0.94,
+          "end": 2.64,
+          "words": [
+            {
+              "word": "İslam",
+              "text": "İslam",
+              "start": 0.94,
+              "end": 1.32
+            },
+            {
+              "word": "fıkhında",
+              "text": "fıkhında",
+              "start": 1.32,
+              "end": 1.88
+            },
+            {
+              "word": "Fetvalar",
+              "text": "Fetvalar",
+              "start": 1.88,
+              "end": 2.64
+            }
+          ]
+        },
+        {
+          "text": "Vermek, Hüküm Kesmek?",
+          "start": 2.64,
+          "end": 4.24,
+          "words": [
+            {
+              "word": "Vermek,",
+              "text": "Vermek,",
+              "start": 2.64,
+              "end": 3.16
+            },
+            {
+              "word": "Hüküm",
+              "text": "Hüküm",
+              "start": 3.3,
+              "end": 3.62
+            },
+            {
+              "word": "Kesmek?",
+              "text": "Kesmek?",
+              "start": 3.62,
+              "end": 4.24
+            }
+          ]
+        },
+        {
+          "text": "Şimdi biz Kur'an'ı",
+          "start": 4.76,
+          "end": 6.24,
+          "words": [
+            {
+              "word": "Şimdi",
+              "text": "Şimdi",
+              "start": 4.76,
+              "end": 5.06
+            },
+            {
+              "word": "biz",
+              "text": "biz",
+              "start": 5.06,
+              "end": 5.68
+            },
+            {
+              "word": "Kur'an'ı",
+              "text": "Kur'an'ı",
+              "start": 5.68,
+              "end": 6.24
+            }
+          ]
+        },
+        {
+          "text": "Peygamber Sünnetini, Sahabe",
+          "start": 6.24,
+          "end": 8.48,
+          "words": [
+            {
+              "word": "Peygamber",
+              "text": "Peygamber",
+              "start": 6.24,
+              "end": 7.18
+            },
+            {
+              "word": "Sünnetini,",
+              "text": "Sünnetini,",
+              "start": 7.18,
+              "end": 7.98
+            },
+            {
+              "word": "Sahabe",
+              "text": "Sahabe",
+              "start": 8.16,
+              "end": 8.48
+            }
+          ]
+        },
+        {
+          "text": "Hayatını ve Asırlık",
+          "start": 8.48,
+          "end": 10.1,
+          "words": [
+            {
+              "word": "Hayatını",
+              "text": "Hayatını",
+              "start": 8.48,
+              "end": 9.24
+            },
+            {
+              "word": "ve",
+              "text": "ve",
+              "start": 9.24,
+              "end": 9.7
+            },
+            {
+              "word": "Asırlık",
+              "text": "Asırlık",
+              "start": 9.7,
+              "end": 10.1
+            }
+          ]
+        },
+        {
+          "text": "İslam Alimlerini bir",
+          "start": 10.1,
+          "end": 11.42,
+          "words": [
+            {
+              "word": "İslam",
+              "text": "İslam",
+              "start": 10.1,
+              "end": 10.5
+            },
+            {
+              "word": "Alimlerini",
+              "text": "Alimlerini",
+              "start": 10.5,
+              "end": 11.16
+            },
+            {
+              "word": "bir",
+              "text": "bir",
+              "start": 11.16,
+              "end": 11.42
+            }
+          ]
+        },
+        {
+          "text": "kenara bırakıp da,",
+          "start": 11.42,
+          "end": 12.7,
+          "words": [
+            {
+              "word": "kenara",
+              "text": "kenara",
+              "start": 11.42,
+              "end": 11.74
+            },
+            {
+              "word": "bırakıp",
+              "text": "bırakıp",
+              "start": 11.74,
+              "end": 12.22
+            },
+            {
+              "word": "da,",
+              "text": "da,",
+              "start": 12.22,
+              "end": 12.7
+            }
+          ]
+        },
+        {
+          "text": "Bu diğiniz senden mi",
+          "start": 12.74,
+          "end": 13.82,
+          "words": [
+            {
+              "word": "Bu",
+              "text": "Bu",
+              "start": 12.74,
+              "end": 12.88
+            },
+            {
+              "word": "diğiniz",
+              "text": "diğiniz",
+              "start": 12.88,
+              "end": 13.24
+            },
+            {
+              "word": "senden",
+              "text": "senden",
+              "start": 13.24,
+              "end": 13.68
+            },
+            {
+              "word": "mi",
+              "text": "mi",
+              "start": 13.68,
+              "end": 13.82
+            }
+          ]
+        },
+        {
+          "text": "öğreneceğiz?",
+          "start": 13.82,
+          "end": 14.56,
+          "words": [
+            {
+              "word": "öğreneceğiz?",
+              "text": "öğreneceğiz?",
+              "start": 13.82,
+              "end": 14.56
+            }
+          ]
+        },
+        {
+          "text": "Kur'an'dan tek bir",
+          "start": 15.04,
+          "end": 16.0,
+          "words": [
+            {
+              "word": "Kur'an'dan",
+              "text": "Kur'an'dan",
+              "start": 15.04,
+              "end": 15.56
+            },
+            {
+              "word": "tek",
+              "text": "tek",
+              "start": 15.56,
+              "end": 15.76
+            },
+            {
+              "word": "bir",
+              "text": "bir",
+              "start": 15.76,
+              "end": 16.0
+            }
+          ]
+        },
+        {
+          "text": "ayet oku desen, Sünnetten",
+          "start": 16.0,
+          "end": 17.92,
+          "words": [
+            {
+              "word": "ayet",
+              "text": "ayet",
+              "start": 16.0,
+              "end": 16.48
+            },
+            {
+              "word": "oku",
+              "text": "oku",
+              "start": 16.48,
+              "end": 16.96
+            },
+            {
+              "word": "desen,",
+              "text": "desen,",
+              "start": 16.96,
+              "end": 17.44
+            },
+            {
+              "word": "Sünnetten",
+              "text": "Sünnetten",
+              "start": 17.44,
+              "end": 17.92
+            }
+          ]
+        },
+        {
+          "text": "sahip idelil getir desen,",
+          "start": 17.92,
+          "end": 19.58,
+          "words": [
+            {
+              "word": "sahip",
+              "text": "sahip",
+              "start": 17.92,
+              "end": 18.34
+            },
+            {
+              "word": "idelil",
+              "text": "idelil",
+              "start": 18.34,
+              "end": 18.75
+            },
+            {
+              "word": "getir",
+              "text": "getir",
+              "start": 18.75,
+              "end": 19.16
+            },
+            {
+              "word": "desen,",
+              "text": "desen,",
+              "start": 19.16,
+              "end": 19.58
+            }
+          ]
+        },
+        {
+          "text": "Geli buazını düğümlenecek",
+          "start": 19.8,
+          "end": 21.28,
+          "words": [
+            {
+              "word": "Geli",
+              "text": "Geli",
+              "start": 19.8,
+              "end": 20.06
+            },
+            {
+              "word": "buazını",
+              "text": "buazını",
+              "start": 20.06,
+              "end": 20.58
+            },
+            {
+              "word": "düğümlenecek",
+              "text": "düğümlenecek",
+              "start": 20.58,
+              "end": 21.28
+            }
+          ]
+        },
+        {
+          "text": "insanlardan mı öğreneceğiz",
+          "start": 21.28,
+          "end": 22.78,
+          "words": [
+            {
+              "word": "insanlardan",
+              "text": "insanlardan",
+              "start": 21.28,
+              "end": 22.1
+            },
+            {
+              "word": "mı",
+              "text": "mı",
+              "start": 22.1,
+              "end": 22.22
+            },
+            {
+              "word": "öğreneceğiz",
+              "text": "öğreneceğiz",
+              "start": 22.22,
+              "end": 22.78
+            }
+          ]
+        },
+        {
+          "text": "bu güzeli İslam'ı?",
+          "start": 22.78,
+          "end": 24.1,
+          "words": [
+            {
+              "word": "bu",
+              "text": "bu",
+              "start": 22.78,
+              "end": 22.98
+            },
+            {
+              "word": "güzeli",
+              "text": "güzeli",
+              "start": 22.98,
+              "end": 23.38
+            },
+            {
+              "word": "İslam'ı?",
+              "text": "İslam'ı?",
+              "start": 23.38,
+              "end": 24.1
+            }
+          ]
+        },
+        {
+          "text": "Bütün derdiniz bitti de!",
+          "start": 24.5,
+          "end": 26.06,
+          "words": [
+            {
+              "word": "Bütün",
+              "text": "Bütün",
+              "start": 24.5,
+              "end": 24.84
+            },
+            {
+              "word": "derdiniz",
+              "text": "derdiniz",
+              "start": 24.84,
+              "end": 25.38
+            },
+            {
+              "word": "bitti",
+              "text": "bitti",
+              "start": 25.38,
+              "end": 25.72
+            },
+            {
+              "word": "de!",
+              "text": "de!",
+              "start": 25.72,
+              "end": 26.06
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "word": "Sana",
+          "text": "Sana",
+          "start": 0.0,
+          "end": 0.42
+        },
+        {
+          "word": "mı",
+          "text": "mı",
+          "start": 0.42,
+          "end": 0.62
+        },
+        {
+          "word": "kaldı",
+          "text": "kaldı",
+          "start": 0.62,
+          "end": 0.94
+        },
+        {
+          "word": "İslam",
+          "text": "İslam",
+          "start": 0.94,
+          "end": 1.32
+        },
+        {
+          "word": "fıkhında",
+          "text": "fıkhında",
+          "start": 1.32,
+          "end": 1.88
+        },
+        {
+          "word": "Fetvalar",
+          "text": "Fetvalar",
+          "start": 1.88,
+          "end": 2.64
+        },
+        {
+          "word": "Vermek,",
+          "text": "Vermek,",
+          "start": 2.64,
+          "end": 3.16
+        },
+        {
+          "word": "Hüküm",
+          "text": "Hüküm",
+          "start": 3.3,
+          "end": 3.62
+        },
+        {
+          "word": "Kesmek?",
+          "text": "Kesmek?",
+          "start": 3.62,
+          "end": 4.24
+        },
+        {
+          "word": "Şimdi",
+          "text": "Şimdi",
+          "start": 4.76,
+          "end": 5.06
+        },
+        {
+          "word": "biz",
+          "text": "biz",
+          "start": 5.06,
+          "end": 5.68
+        },
+        {
+          "word": "Kur'an'ı",
+          "text": "Kur'an'ı",
+          "start": 5.68,
+          "end": 6.24
+        },
+        {
+          "word": "Peygamber",
+          "text": "Peygamber",
+          "start": 6.24,
+          "end": 7.18
+        },
+        {
+          "word": "Sünnetini,",
+          "text": "Sünnetini,",
+          "start": 7.18,
+          "end": 7.98
+        },
+        {
+          "word": "Sahabe",
+          "text": "Sahabe",
+          "start": 8.16,
+          "end": 8.48
+        },
+        {
+          "word": "Hayatını",
+          "text": "Hayatını",
+          "start": 8.48,
+          "end": 9.24
+        },
+        {
+          "word": "ve",
+          "text": "ve",
+          "start": 9.24,
+          "end": 9.7
+        },
+        {
+          "word": "Asırlık",
+          "text": "Asırlık",
+          "start": 9.7,
+          "end": 10.1
+        },
+        {
+          "word": "İslam",
+          "text": "İslam",
+          "start": 10.1,
+          "end": 10.5
+        },
+        {
+          "word": "Alimlerini",
+          "text": "Alimlerini",
+          "start": 10.5,
+          "end": 11.16
+        },
+        {
+          "word": "bir",
+          "text": "bir",
+          "start": 11.16,
+          "end": 11.42
+        },
+        {
+          "word": "kenara",
+          "text": "kenara",
+          "start": 11.42,
+          "end": 11.74
+        },
+        {
+          "word": "bırakıp",
+          "text": "bırakıp",
+          "start": 11.74,
+          "end": 12.22
+        },
+        {
+          "word": "da,",
+          "text": "da,",
+          "start": 12.22,
+          "end": 12.7
+        },
+        {
+          "word": "Bu",
+          "text": "Bu",
+          "start": 12.74,
+          "end": 12.88
+        },
+        {
+          "word": "diğiniz",
+          "text": "diğiniz",
+          "start": 12.88,
+          "end": 13.24
+        },
+        {
+          "word": "senden",
+          "text": "senden",
+          "start": 13.24,
+          "end": 13.68
+        },
+        {
+          "word": "mi",
+          "text": "mi",
+          "start": 13.68,
+          "end": 13.82
+        },
+        {
+          "word": "öğreneceğiz?",
+          "text": "öğreneceğiz?",
+          "start": 13.82,
+          "end": 14.56
+        },
+        {
+          "word": "Kur'an'dan",
+          "text": "Kur'an'dan",
+          "start": 15.04,
+          "end": 15.56
+        },
+        {
+          "word": "tek",
+          "text": "tek",
+          "start": 15.56,
+          "end": 15.76
+        },
+        {
+          "word": "bir",
+          "text": "bir",
+          "start": 15.76,
+          "end": 16.0
+        },
+        {
+          "word": "ayet",
+          "text": "ayet",
+          "start": 16.0,
+          "end": 16.3
+        },
+        {
+          "word": "oku desen,",
+          "text": "oku desen,",
+          "start": 16.3,
+          "end": 17.08
+        },
+        {
+          "word": "Sünnetten",
+          "text": "Sünnetten",
+          "start": 17.26,
+          "end": 17.92
+        },
+        {
+          "word": "sahip",
+          "text": "sahip",
+          "start": 17.92,
+          "end": 18.3
+        },
+        {
+          "word": "idelil",
+          "text": "idelil",
+          "start": 18.3,
+          "end": 18.78
+        },
+        {
+          "word": "getir desen,",
+          "text": "getir desen,",
+          "start": 18.78,
+          "end": 19.58
+        },
+        {
+          "word": "Geli",
+          "text": "Geli",
+          "start": 19.8,
+          "end": 20.06
+        },
+        {
+          "word": "buazını",
+          "text": "buazını",
+          "start": 20.06,
+          "end": 20.58
+        },
+        {
+          "word": "düğümlenecek",
+          "text": "düğümlenecek",
+          "start": 20.58,
+          "end": 21.28
+        },
+        {
+          "word": "insanlardan",
+          "text": "insanlardan",
+          "start": 21.28,
+          "end": 22.1
+        },
+        {
+          "word": "mı",
+          "text": "mı",
+          "start": 22.1,
+          "end": 22.22
+        },
+        {
+          "word": "öğreneceğiz",
+          "text": "öğreneceğiz",
+          "start": 22.22,
+          "end": 22.78
+        },
+        {
+          "word": "bu",
+          "text": "bu",
+          "start": 22.78,
+          "end": 22.98
+        },
+        {
+          "word": "güzeli",
+          "text": "güzeli",
+          "start": 22.98,
+          "end": 23.38
+        },
+        {
+          "word": "İslam'ı?",
+          "text": "İslam'ı?",
+          "start": 23.38,
+          "end": 24.1
+        },
+        {
+          "word": "Bütün",
+          "text": "Bütün",
+          "start": 24.5,
+          "end": 24.84
+        },
+        {
+          "word": "derdiniz",
+          "text": "derdiniz",
+          "start": 24.84,
+          "end": 25.38
+        },
+        {
+          "word": "bitti",
+          "text": "bitti",
+          "start": 25.38,
+          "end": 25.72
+        },
+        {
+          "word": "de!",
+          "text": "de!",
+          "start": 25.72,
+          "end": 26.06
+        }
+      ],
+      "narration": "Sana mı kaldı İslam fıkhında Fetvalar Vermek, Hüküm Kesmek? Şimdi biz Kur'an'ı Peygamber Sünnetini, Sahabe Hayatını ve Asırlık İslam Alimlerini bir kenara bırakıp da, Bu diğiniz senden mi öğreneceğiz? Kur'an'dan tek bir ayet oku desen, Sünnetten sahip idelil getir desen, Geli buazını düğümlenecek insanlardan mı öğreneceğiz bu güzeli İslam'ı? Bütün derdiniz bitti de!",
+      "durationMode": "custom_audio",
+      "layoutType": "quote_spotlight",
+      "headerSubtitle": "İSLAM FIKHINDA HÜKÜM",
+      "headerLine1": "SANA",
+      "circledWord": "MI",
+      "headerLine2": "",
+      "highlightedText": "KALDI",
+      "strikeWord": "",
+      "quoteSpotlight": {
+        "speaker": "Ses Kaydı",
+        "quoteText": "Sana mı kaldı İslam fıkhında Fetvalar Vermek, Hüküm Kesmek?"
+      },
+      "_acquired_assets": [
+        {
+          "name": "fingerprint",
+          "type": "watermark",
+          "path": "assets/watermarks/fingerprint.svg"
+        }
+      ],
+      "sfxMarkers": [
+        {
+          "time": 0.0,
+          "file": "pen_draw.wav",
+          "label": "Ayet & Hat Kalemi SFX"
+        },
+        {
+          "time": 8.73,
+          "file": "page_turn.wav",
+          "label": "Sayfa Çevirme SFX"
+        },
+        {
+          "time": 17.46,
+          "file": "page_turn.wav",
+          "label": "Sayfa Çevirme SFX"
+        }
+      ],
+      "totalDuration": 26.19
+    }
+  },
+  {
+    "id": "36be69cd",
+    "topic": "cevap1",
+    "theme": "notebook",
+    "layoutType": "pip_split",
+    "durationMode": "10s",
+    "created_at": "2026-11-01 17:13:23",
+    "headerMain": "CEVAP1",
+    "thumbnail_url": "/out/thumbnail.png",
+    "video_data": {
+      "topic": "cevap1",
+      "theme": "notebook",
+      "format": "9:16",
+      "headerSubtitle": "Bölüm 1",
+      "headerLine1": "CEVAP1",
+      "circledWord": "İLK",
+      "headerLine2": "Fikrini Buraya Yaz",
+      "highlightedText": "Önemli Nokta",
+      "layoutType": "pip_split",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "headerSubtitle": "Bölüm 1",
+          "headerLine1": "CEVAP1",
+          "circledWord": "İLK",
+          "headerLine2": "Fikrini Buraya Yaz",
+          "highlightedText": "Önemli Nokta",
+          "layoutType": "pip_split",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "duration": 10.0
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "cevap1",
+          "start": 0.0,
+          "end": 2.5
+        },
+        {
+          "text": "kurgulamaya hemen başla",
+          "start": 2.5,
+          "end": 5.0
+        }
+      ],
+      "totalDuration": 10.0,
+      "created_at": "2026-11-01 17:13:23"
+    }
+  },
+  {
+    "id": "157ee7da",
+    "topic": "cevap 1",
+    "theme": "notebook",
+    "layoutType": "pip_split",
+    "durationMode": "10s",
+    "created_at": "2026-11-01 16:47:14",
+    "headerMain": "CEVAP 1",
+    "thumbnail_url": "/out/thumbnail.png",
+    "video_data": {
+      "topic": "cevap 1",
+      "theme": "notebook",
+      "format": "9:16",
+      "headerSubtitle": "Bölüm 1",
+      "headerLine1": "CEVAP 1",
+      "circledWord": "İLK",
+      "headerLine2": "Fikrini Buraya Yaz",
+      "highlightedText": "Önemli Nokta",
+      "layoutType": "pip_split",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "headerSubtitle": "Bölüm 1",
+          "headerLine1": "CEVAP 1",
+          "circledWord": "İLK",
+          "headerLine2": "Fikrini Buraya Yaz",
+          "highlightedText": "Önemli Nokta",
+          "layoutType": "pip_split",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "duration": 10.0
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "cevap 1",
+          "start": 0.0,
+          "end": 2.5
+        },
+        {
+          "text": "kurgulamaya hemen başla",
+          "start": 2.5,
+          "end": 5.0
+        }
+      ],
+      "totalDuration": 10.0,
+      "created_at": "2026-11-01 16:47:14"
+    }
+  },
+  {
     "id": "06c0ebdb",
     "topic": "İlim ve akıl hakikatin iki kanadıdır",
     "theme": "dark_minimalist",
@@ -10837,949 +11873,6 @@
           "text": "ilüzyondur.",
           "start": 34.98,
           "end": 35.28
-        }
-      ],
-      "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "df01f0b1",
-    "topic": "Albert Einstein ve zamanın dağlarda neden daha hızlı aktığı sırrı",
-    "theme": "blueprint",
-    "layoutType": "vs_split",
-    "durationMode": "quick",
-    "created_at": "2026-10-28 00:36",
-    "headerMain": "DAĞLARDA ZAMAN DAHA HIZLI EINSTEIN'IN ZAMAN GİZEMİ",
-    "narration": "Albert Einstein'a göre zaman herkes için aynı akmaz! Eğer bir dağın zirvesinde yaşıyorsanız, deniz seviyesindeki insanlara göre daha hızlı yaşlanırsınız. Bunun nedeni Kütleçekimsel Zaman Genleşmesidir. Dünya'nın kütlesi uzay-zamanı büker. Merkeze ne kadar yakınsanız yerçekimi o kadar güçlüdür ve zaman o kadar yavaş akar. Dağlarda yerçekimi azaldığı için saatler daha hızlı çalışır!",
-    "hookScore": 98,
-    "key_used": "asdxcxc005@gmail.com",
-    "model_used": "gemini-3.5-flash",
-    "thumbnail_url": "/out/thumbnail.png?t=1793136962",
-    "video_data": {
-      "directorDecision": {
-        "theme": "blueprint",
-        "layoutType": "vs_split",
-        "durationMode": "quick",
-        "particles": "stars",
-        "ambientPattern": "cosmic",
-        "doodleType": "hourglass",
-        "directorReason": "Einstein'ın görelilik kuramı ve kütleçekimsel zaman genleşmesini bilimsel bir karşılaştırmayla anlatmak için teknik blueprint teması ve vs_split şablonu seçildi."
-      },
-      "requiredIcons": [
-        "hourglass",
-        "infinity",
-        "atom",
-        "compass",
-        "scale"
-      ],
-      "headerSubtitle": "Görelilik Sırrı",
-      "headerLine1": "DAĞLARDA ZAMAN",
-      "circledWord": "DAHA HIZLI",
-      "headerLine2": "AKAR!",
-      "highlightedText": "EINSTEIN'IN ZAMAN GİZEMİ",
-      "strikeWord": "SABİT ZAMAN",
-      "layoutType": "vs_split",
-      "cards": [
-        {
-          "id": "1",
-          "label": "Yerçekimi",
-          "value": "Zamanı Büker",
-          "icon": "atom",
-          "color": "#0284c7",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        {
-          "id": "2",
-          "label": "Deniz Seviyesi",
-          "value": "Daha Yavaş",
-          "icon": "hourglass",
-          "color": "#2563eb",
-          "iconAssetPath": "assets/icons/hourglass.svg"
-        },
-        {
-          "id": "3",
-          "label": "Dağ Zirvesi",
-          "value": "Daha Hızlı",
-          "icon": "compass",
-          "color": "#dc2626",
-          "iconAssetPath": "assets/icons/compass.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "Deniz Seviyesi",
-        "leftSubtitle": "Güçlü Kütleçekim",
-        "leftPoints": [
-          "Dünya merkezine yakın",
-          "Yerçekimi dokusu daha yoğun",
-          "Zaman daha YAVAŞ akar"
-        ],
-        "leftColor": "#2563eb",
-        "rightTitle": "Dağ Zirvesi",
-        "rightSubtitle": "Zayıf Kütleçekim",
-        "rightPoints": [
-          "Dünya merkezinden uzak",
-          "Uzay-zaman bükülmesi az",
-          "Zaman daha HIZLI akar"
-        ],
-        "rightColor": "#dc2626",
-        "verdict": "Einstein haklıydı: Kütleçekimi azaldıkça zamanın akış hızı artar!"
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Teori",
-          "title": "Genel Görelilik",
-          "desc": "Einstein kütlenin uzay-zamanı büktüğünü kanıtladı.",
-          "color": "#0284c7"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Etki",
-          "title": "Kütleçekim Bükülmesi",
-          "desc": "Merkeze yaklaştıkça saatlerin ritmi yavaşlar.",
-          "color": "#2563eb"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Sonuç",
-          "title": "Yükseklik Farkı",
-          "desc": "Everest zirvesinde saatler deniz seviyesine göre daha hızlı işler.",
-          "color": "#dc2626"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Albert Einstein",
-        "title": "Genel Görelilik Kuramı",
-        "quoteText": "Yerçekimi bir kuvvet değildir; kütlenin uzay-zaman geometrisinde oluşturduğu bükülmedir.",
-        "sourceRef": "1915 Görelilik Teorisi"
-      },
-      "metricImpact": {
-        "bigNumber": "0.00000009",
-        "bigLabel": "SANİYE FARK",
-        "subheading": "Dağ Zirvesinde Yaşayanların Yılda Kazandığı Ekstra Zaman",
-        "keyTakeaway": "Zaman mutlak bir sabit değil, kütleçekimine bağlı dinamik bir algıdır."
-      },
-      "gridExplosion": {
-        "title": "UZAY-ZAMAN BÜKÜLMESİ",
-        "subtitle": "Evrenin Her Noktasında Zaman Farklı Hızda Akar",
-        "iconType": "hourglass",
-        "itemCount": 12,
-        "badgeText": "KÜTLEÇEKİMSEL ZAMAN GENLEŞMESİ",
-        "iconAssetPath": "assets/icons/hourglass.svg"
-      },
-      "triConcept": {
-        "badge": "ZAMANIN 3 BOYUTU",
-        "concept1": {
-          "title": "KÜTLE",
-          "subtitle": "Uzay-Zamanı Bükendir",
-          "icon": "atom",
-          "color": "#0284c7",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        "concept2": {
-          "title": "YERÇEKİMİ",
-          "subtitle": "Zamanı Yavaşlatandır",
-          "icon": "scale",
-          "color": "#2563eb",
-          "iconAssetPath": "assets/icons/scale.svg"
-        },
-        "concept3": {
-          "title": "YÜKSEKLİK",
-          "subtitle": "Zamanı Hızlandırandır",
-          "icon": "compass",
-          "color": "#dc2626",
-          "iconAssetPath": "assets/icons/compass.svg"
-        },
-        "bottomNote": "EINSTEIN'IN DEVRİM YARATAN KEŞFİ"
-      },
-      "timeline": {
-        "startYear": "1915",
-        "endYear": "Bugün",
-        "durationLabel": "Görelilik",
-        "title": "Zamanın Bükülmesi",
-        "ayahArabic": "",
-        "ayahTranslation": "Kütle büyüdükçe zaman yavaşlar, kütleden uzaklaştıkça zaman hızlanır.",
-        "ayahRef": "Fizik Yasası"
-      },
-      "narration": "Albert Einstein'a göre zaman herkes için aynı akmaz! Eğer bir dağın zirvesinde yaşıyorsanız, deniz seviyesindeki insanlara göre daha hızlı yaşlanırsınız. Bunun nedeni Kütleçekimsel Zaman Genleşmesidir. Dünya'nın kütlesi uzay-zamanı büker. Merkeze ne kadar yakınsanız yerçekimi o kadar güçlüdür ve zaman o kadar yavaş akar. Dağlarda yerçekimi azaldığı için saatler daha hızlı çalışır!",
-      "viral": {
-        "hookScore": 98,
-        "viralTitles": [
-          "Dağlarda Zaman Neden DAHA HIZLI Akar? Einstein'ın Sırrı!",
-          "Deniz Seviyesinde Yaşayanlar Daha Yavaş Yaşlanıyor!"
-        ],
-        "hashtags": [
-          "#bilim",
-          "#einstein",
-          "#fizik",
-          "#zaman",
-          "#uzay",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden Everest zirvesinde saatler...",
-        "description": "Albert Einstein'ın Genel Görelilik Kuramı ve dağlarda zamanın neden daha hızlı aktığının şaşırtıcı açıklaması."
-      },
-      "theme": "blueprint",
-      "durationMode": "quick",
-      "particles": "stars",
-      "ambientPattern": "cosmic",
-      "doodleType": "hourglass",
-      "socialHandle": "@birkissa",
-      "_acquired_assets": [
-        {
-          "name": "cosmic",
-          "type": "watermark",
-          "path": "assets/watermarks/cosmic.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "grid_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "atom",
-          "type": "concept_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "scale",
-          "type": "concept_icon",
-          "path": "assets/icons/scale.svg"
-        },
-        {
-          "name": "compass",
-          "type": "concept_icon",
-          "path": "assets/icons/compass.svg"
-        },
-        {
-          "name": "atom",
-          "type": "card_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "card_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "compass",
-          "type": "card_icon",
-          "path": "assets/icons/compass.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "Albert Einstein'a göre",
-          "start": 0.0,
-          "end": 1.08
-        },
-        {
-          "text": "zaman herkes için",
-          "start": 1.08,
-          "end": 2.12
-        },
-        {
-          "text": "aynı akmaz! Eğer",
-          "start": 2.12,
-          "end": 3.44
-        },
-        {
-          "text": "bir dağın zirvesinde",
-          "start": 4.66,
-          "end": 5.7
-        },
-        {
-          "text": "yaşıyorsanız, deniz seviyesindeki",
-          "start": 5.7,
-          "end": 8.32
-        },
-        {
-          "text": "insanlara göre daha",
-          "start": 8.32,
-          "end": 10.76
-        },
-        {
-          "text": "hızlı yaşlanırsınız. Bunun",
-          "start": 10.76,
-          "end": 12.96
-        },
-        {
-          "text": "nedeni Kütleçekimsel Zaman",
-          "start": 12.96,
-          "end": 14.66
-        },
-        {
-          "text": "Genleşmesidir. Dünya'nın kütlesi",
-          "start": 14.66,
-          "end": 18.4
-        },
-        {
-          "text": "uzay-zamanı büker. Merkeze",
-          "start": 18.4,
-          "end": 19.88
-        },
-        {
-          "text": "ne kadar yakınsanız",
-          "start": 20.52,
-          "end": 21.6
-        },
-        {
-          "text": "yerçekimi o kadar",
-          "start": 21.6,
-          "end": 23.42
-        },
-        {
-          "text": "güçlüdür ve zaman",
-          "start": 23.42,
-          "end": 24.66
-        },
-        {
-          "text": "o kadar yavaş",
-          "start": 24.66,
-          "end": 25.58
-        },
-        {
-          "text": "akar. Dağlarda yerçekimi",
-          "start": 25.58,
-          "end": 28.18
-        },
-        {
-          "text": "azaldığı için saatler",
-          "start": 28.18,
-          "end": 29.68
-        },
-        {
-          "text": "daha hızlı çalışır!",
-          "start": 29.68,
-          "end": 31.22
-        }
-      ],
-      "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "ea52bbdc",
-    "topic": "ben islami bir karanlık tema kullanarak kıyamet 3-4 ayetinde geçen parmak ucundaki sırrı anlatan video yap",
-    "theme": "dark_minimalist",
-    "layoutType": "grid_explosion",
-    "durationMode": "deep",
-    "created_at": "2026-10-28 00:34",
-    "headerMain": "PARMAK UCUNDAKİ BÜYÜK MİLYARLARCA MÜHÜR",
-    "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir.",
-    "hookScore": 99,
-    "key_used": "mehmet2736005@gmail.com",
-    "model_used": "gemini-3.5-flash-lite",
-    "thumbnail_url": "/out/thumbnail.png?t=1793136865",
-    "video_data": {
-      "directorDecision": {
-        "theme": "dark_minimalist",
-        "layoutType": "grid_explosion",
-        "durationMode": "deep",
-        "particles": "dust",
-        "ambientPattern": "fingerprint",
-        "doodleType": "none",
-        "directorReason": "İslami tefekkür ve biyolojik mühür vurgusu için karanlık minimal tuval ve parmak izi odaklı grid patlaması seçildi."
-      },
-      "requiredIcons": [
-        "fingerprint",
-        "dna",
-        "scale"
-      ],
-      "headerSubtitle": "Akıl Almaz Sır",
-      "headerLine1": "PARMAK UCUNDAKİ",
-      "circledWord": "BÜYÜK",
-      "headerLine2": "SIR",
-      "highlightedText": "MİLYARLARCA MÜHÜR",
-      "strikeWord": "TESADÜF",
-      "layoutType": "grid_explosion",
-      "cards": [
-        {
-          "id": "1",
-          "label": "DNA Şifresi",
-          "value": "%100 Aynı",
-          "icon": "dna",
-          "color": "#1e3a8a",
-          "iconAssetPath": "assets/icons/dna.svg"
-        },
-        {
-          "id": "2",
-          "label": "İkizler",
-          "value": "Farklı İz",
-          "icon": "fingerprint",
-          "color": "#15803d",
-          "iconAssetPath": "assets/icons/fingerprint.svg"
-        },
-        {
-          "id": "3",
-          "label": "Tesviye",
-          "value": "1400 Yıl",
-          "icon": "scale",
-          "color": "#d97706",
-          "iconAssetPath": "assets/icons/scale.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "DNA Benzerliği",
-        "leftSubtitle": "Genler Birebir Aynı",
-        "leftPoints": [
-          "Aynı genetik kod",
-          "Aynı kan grubu",
-          "Aynı fiziksel yapı"
-        ],
-        "leftColor": "#dc2626",
-        "rightTitle": "Parmak Uçları",
-        "rightSubtitle": "Eşsiz Biyolojik Mühür",
-        "rightPoints": [
-          "Anne karnında mikro temas",
-          "Asla değişmeyen geometri",
-          "Milyarlarca insanda tek"
-        ],
-        "rightColor": "#16a34a",
-        "verdict": "İkizlerin DNA'sı bile aynıyken, parmak izi her insanı tek ve eşsiz kılar."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Aşama",
-          "title": "Büyük Soru",
-          "desc": "Çürüyüp dağılan kemikler nasıl diriltilecek?",
-          "color": "#1e3a8a"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Kırılma",
-          "title": "En İnce Detay",
-          "desc": "Kur'an genel kemiklere değil, parmak ucunun milimetrik çizgilerine işaret etti.",
-          "color": "#d97706"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Hakikat",
-          "title": "Tesviye Sırrı",
-          "desc": "19. yüzyılda keşfedilen biometrik imza asırlar önce haber verildi.",
-          "color": "#15803d"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Kıyamet Suresi",
-        "title": "4. AYET",
-        "quoteText": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
-        "sourceRef": "Kıyamet Suresi, 3-4"
-      },
-      "metricImpact": {
-        "bigNumber": "8 MİLYAR",
-        "bigLabel": "İNSAN İÇİNDE",
-        "subheading": "Hiçbirinin Parmak İzi Aynı Değil",
-        "keyTakeaway": "Çünkü her insan varoluşun altına atılmış özel bir imzadır."
-      },
-      "gridExplosion": {
-        "title": "MİLYARLARCA İNSAN",
-        "subtitle": "Hiçbirinin Parmak İzi Birbirine Benzemeyecek Şekilde Yaratıldı",
-        "iconType": "fingerprint",
-        "itemCount": 12,
-        "badgeText": "EŞSİZ BİYOLOJİK MÜHÜR",
-        "iconAssetPath": "assets/icons/fingerprint.svg"
-      },
-      "triConcept": {
-        "badge": "BEKLENEN CEVAP",
-        "concept1": {
-          "title": "BEYİN",
-          "subtitle": "En Karmaşık Hafıza",
-          "icon": "brain",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/brain.svg"
-        },
-        "concept2": {
-          "title": "KALP",
-          "subtitle": "Yaşam Merkezi",
-          "icon": "heart",
-          "color": "#ef4444",
-          "iconAssetPath": "assets/icons/heart.svg"
-        },
-        "concept3": {
-          "title": "GÖZ",
-          "subtitle": "Hassas Mercek",
-          "icon": "eye",
-          "color": "#facc15",
-          "iconAssetPath": "assets/icons/eye.svg"
-        },
-        "bottomNote": "FAKAT KUR'AN PARMAK UCUNA ODAKLANDI"
-      },
-      "timeline": {
-        "startYear": "Kıyamet",
-        "endYear": "Diriliş",
-        "durationLabel": "Tesviye",
-        "title": "Kusursuz Dizilim",
-        "ayahArabic": "",
-        "ayahTranslation": "Evet, bizim onun parmak uçlarını bile derleyip yeniden düzene koymaya gücümüz yeter.",
-        "ayahRef": "Kıyamet Suresi, 3-4"
-      },
-      "narration": "DNA'sı yüzde yüz aynı olan tek yumurta ikizlerini bile birbirinden ayıran tek bir sır vardır. Çürüyüp toprak olduktan sonra nasıl diriltileceğini soranlara, Kur'an tam da parmak uçlarına işaret ederek cevap verdi. Milyarlarca insanın her biri, parmak ucundaki o eşsiz mühürle yeniden var edilir.",
-      "viral": {
-        "hookScore": 99,
-        "viralTitles": [
-          "Parmak Ucundaki BÜYÜK Sır! Kıyamet Suresi 3-4",
-          "İkizlerin Bile Farklı: 1400 Yıl Önceki Akıl Almaz Detay!"
-        ],
-        "hashtags": [
-          "#bilim",
-          "#kuran",
-          "#parmakizi",
-          "#mucize",
-          "#tefekkür",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden her insan aslında...",
-        "description": "Parmak uçlarındaki dermatoglif şifresi ve Kıyamet Suresi'nin mucizevi detayları."
-      },
-      "theme": "dark_minimalist",
-      "durationMode": "deep",
-      "particles": "dust",
-      "ambientPattern": "fingerprint",
-      "doodleType": "none",
-      "socialHandle": "@birkissa",
-      "_acquired_assets": [
-        {
-          "name": "fingerprint",
-          "type": "watermark",
-          "path": "assets/watermarks/fingerprint.svg"
-        },
-        {
-          "name": "fingerprint",
-          "type": "grid_icon",
-          "path": "assets/icons/fingerprint.svg"
-        },
-        {
-          "name": "brain",
-          "type": "concept_icon",
-          "path": "assets/icons/brain.svg"
-        },
-        {
-          "name": "heart",
-          "type": "concept_icon",
-          "path": "assets/icons/heart.svg"
-        },
-        {
-          "name": "eye",
-          "type": "concept_icon",
-          "path": "assets/icons/eye.svg"
-        },
-        {
-          "name": "dna",
-          "type": "card_icon",
-          "path": "assets/icons/dna.svg"
-        },
-        {
-          "name": "fingerprint",
-          "type": "card_icon",
-          "path": "assets/icons/fingerprint.svg"
-        },
-        {
-          "name": "scale",
-          "type": "card_icon",
-          "path": "assets/icons/scale.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "DNA'sı yüzde yüz",
-          "start": 0.0,
-          "end": 1.72
-        },
-        {
-          "text": "aynı olan tek",
-          "start": 1.72,
-          "end": 2.88
-        },
-        {
-          "text": "yumurta ikizlerini bile",
-          "start": 2.88,
-          "end": 4.48
-        },
-        {
-          "text": "birbirinden ayıran tek",
-          "start": 4.48,
-          "end": 6.02
-        },
-        {
-          "text": "bir sır vardır.",
-          "start": 6.02,
-          "end": 7.06
-        },
-        {
-          "text": "Çürüyüp toprak olduktan",
-          "start": 7.98,
-          "end": 9.64
-        },
-        {
-          "text": "sonra nasıl diriltileceğini",
-          "start": 9.64,
-          "end": 11.6
-        },
-        {
-          "text": "soranlara, Kur'an tam",
-          "start": 11.6,
-          "end": 13.32
-        },
-        {
-          "text": "da parmak uçlarına",
-          "start": 13.32,
-          "end": 14.16
-        },
-        {
-          "text": "işaret ederek cevap",
-          "start": 14.16,
-          "end": 15.8
-        },
-        {
-          "text": "verdi. Milyarlarca insanın",
-          "start": 15.8,
-          "end": 18.14
-        },
-        {
-          "text": "her biri, parmak",
-          "start": 18.14,
-          "end": 19.5
-        },
-        {
-          "text": "ucundaki o eşsiz",
-          "start": 19.94,
-          "end": 21.38
-        },
-        {
-          "text": "mühürle yeniden var",
-          "start": 21.38,
-          "end": 23.0
-        },
-        {
-          "text": "edilir.",
-          "start": 23.0,
-          "end": 23.3
-        }
-      ],
-      "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "af7dc3dc",
-    "topic": "Rabbimiz Kur'an'da bal arılarına hitap ederken اتَّخِذِي (edin) ve فَاسْلُكِي (gir, takip et) kelimelerini dişi kalıpta kullanır. أَنِ اتَّخِذِي مِنَ الْجِبَالِ بُيُوتًا ... Bu mucizevi ifadeler, kovanda yuva yapan ve bal üreten işçi arıların dişi olduğuna işaret eder.",
-    "theme": "dark_minimalist",
-    "layoutType": "quote_spotlight",
-    "durationMode": "deep",
-    "created_at": "2026-10-28 00:22",
-    "headerMain": "BAL ARISI DİŞİ اتَّخِذِي VE فَاسْلُكِي",
-    "narration": "Rabbimiz Kur'an'da bal arılarına hitap ederken اتَّخِذِي yani 'edin' ve فَاسْلُكِي yani 'gir, takip et' kelimelerini erkek için değil, dişi kalıpta kullanır. Nahl Suresi'ndeki bu mucizevi ifadeler, kovanda yuva yapan ve bal üreten işçi arıların tamamının dişi olduğuna işaret eder. İnsanların arıların kralı sandığı dönemde, Kur'an işçi arıların dişi olduğunu gramer inceliğiyle asırlar öncesinden haber vermiştir.",
-    "hookScore": 98,
-    "key_used": "asdxcxc005@gmail.com",
-    "thumbnail_url": "/out/thumbnail.png?t=1793136126",
-    "video_data": {
-      "directorDecision": {
-        "theme": "dark_minimalist",
-        "layoutType": "quote_spotlight",
-        "durationMode": "deep",
-        "particles": "dust",
-        "ambientPattern": "islamic_geometric",
-        "doodleType": "none",
-        "directorReason": "Kur'an'daki gramer mucizesi ve bal arısı ayetinin derin tefekkür boyutu için dark_minimalist tema ve quote_spotlight düzeni seçildi."
-      },
-      "requiredIcons": [
-        "book",
-        "shield",
-        "compass"
-      ],
-      "headerSubtitle": "Kur'an'daki Gizli Detay",
-      "headerLine1": "BAL ARISI",
-      "circledWord": "DİŞİ",
-      "headerLine2": "MUCİZESİ",
-      "highlightedText": "اتَّخِذِي VE فَاسْلُكِي",
-      "strikeWord": "TESADÜF",
-      "layoutType": "quote_spotlight",
-      "cards": [
-        {
-          "id": "1",
-          "label": "Ayet Emri",
-          "labelEn": "Command",
-          "value": "اتَّخِذِي",
-          "icon": "book",
-          "color": "#d97706",
-          "iconAssetPath": "assets/icons/book.svg"
-        },
-        {
-          "id": "2",
-          "label": "Takip Et",
-          "labelEn": "Follow",
-          "value": "فَاسْلُكِي",
-          "icon": "compass",
-          "color": "#15803d",
-          "iconAssetPath": "assets/icons/compass.svg"
-        },
-        {
-          "id": "3",
-          "label": "Bilimsel Gerçek",
-          "labelEn": "Science",
-          "value": "İşçi Arılar Dişi",
-          "icon": "shield",
-          "color": "#1e3a8a",
-          "iconAssetPath": "assets/icons/shield.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "Eski Arapça Grameri",
-        "leftSubtitle": "Genel Hitap Sanılan",
-        "leftPoints": [
-          "Arapçada erkelik-dişilik ayrımı",
-          "Genel çoğul formları",
-          "Yüzeysel okumalar"
-        ],
-        "leftColor": "#dc2626",
-        "rightTitle": "Kur'an'ın Kelime Seçimi",
-        "rightSubtitle": "Dişi Kalıpta Emir (اتَّخِذِي)",
-        "rightPoints": [
-          "Sadece dişilere söylenen fiil ekleri",
-          "Kovandaki üreticilere nokta atışı hitap",
-          "Modern entomolojinin doğruladığı hakikat"
-        ],
-        "rightColor": "#16a34a",
-        "verdict": "1400 yıl önce arı kovanındaki işçilerin dişi olduğunu bilen bir hitap tarzı."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. Aşama",
-          "title": "İlahi Hitap",
-          "desc": "Nahl Suresi'nde arılara verilen emirler dişi kalıpta (اتَّخِذِي) geldi.",
-          "color": "#1e3a8a"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Kırılma",
-          "title": "Biyolojik Gerçek",
-          "desc": "Asırlar boyunca insanlar arıların kralı olduğunu sandı, arıların dişi olduğunu çok geç öğrendi.",
-          "color": "#d97706"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Hakikat",
-          "title": "Kusursuz İlim",
-          "desc": "Balı üreten ve yuva yapan işçi arıların tamamının dişi olduğu bilimsel olarak kanıtlandı.",
-          "color": "#15803d"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Nahl Suresi",
-        "title": "68-69. AYET",
-        "quoteText": "Rabbin bal arısına vahyetti: 'Dağlardan, ağaçlardan ve insanların kurdukları çardaklardan kendine evler edin (اتَّخِذِي). Sonra meyvelerin hepsinden ye, ardından Rabbinin sana kolaylaştırdığı yollara boyun eğerek gir (فَاسْلُكِي).'",
-        "sourceRef": "Nahl Suresi, 68-69"
-      },
-      "metricImpact": {
-        "bigNumber": "%100",
-        "bigLabel": "İŞÇİ ARI DİŞİDİR",
-        "subheading": "1400 Yıl Önce Kur'an'da Bildirildi",
-        "keyTakeaway": "Kelime eklerindeki bu muazzam detay, Kur'an'ın ilahi kelam olduğunun apaçık delilidir."
-      },
-      "gridExplosion": {
-        "title": "KOVANDAKİ MİMAR",
-        "subtitle": "Petekleri Ören ve Balı Üretenler",
-        "iconType": "shield",
-        "itemCount": 6,
-        "badgeText": "DİŞİ İŞÇİ ARILAR",
-        "iconAssetPath": "assets/icons/shield.svg"
-      },
-      "triConcept": {
-        "badge": "NAHL SURESİ MUCİZESİ",
-        "concept1": {
-          "title": "YUVA",
-          "subtitle": "اتَّخِذِي (Edin)",
-          "icon": "book",
-          "color": "#38bdf8",
-          "iconAssetPath": "assets/icons/book.svg"
-        },
-        "concept2": {
-          "title": "YOL",
-          "subtitle": "فَاسْلُكِي (Gir/Takip Et)",
-          "icon": "compass",
-          "color": "#facc15",
-          "iconAssetPath": "assets/icons/compass.svg"
-        },
-        "concept3": {
-          "title": "HAKİKAT",
-          "subtitle": "Dişi Kalıp Hitap",
-          "icon": "shield",
-          "color": "#ef4444",
-          "iconAssetPath": "assets/icons/shield.svg"
-        },
-        "bottomNote": "BİLİMİN YÜZYILLAR SONRA KEŞFETTİĞİ GERÇEK"
-      },
-      "timeline": {
-        "startYear": "1400 Yıl Önce",
-        "endYear": "Modern Bilim",
-        "durationLabel": "Keşif",
-        "title": "Kur'an'ın Dil Mucizesi",
-        "ayahArabic": "أَنِ اتَّخِذِي مِنَ الْجِبَالِ بُيُوتًا وَمِنَ الشَّجَرِ وَمِمَّا يَعْرِشُونَ",
-        "ayahTranslation": "Dağlardan, ağaçlardan ve insanların kurdukları çardaklardan kendine evler edin.",
-        "ayahRef": "Nahl Suresi, 68"
-      },
-      "narration": "Rabbimiz Kur'an'da bal arılarına hitap ederken اتَّخِذِي yani 'edin' ve فَاسْلُكِي yani 'gir, takip et' kelimelerini erkek için değil, dişi kalıpta kullanır. Nahl Suresi'ndeki bu mucizevi ifadeler, kovanda yuva yapan ve bal üreten işçi arıların tamamının dişi olduğuna işaret eder. İnsanların arıların kralı sandığı dönemde, Kur'an işçi arıların dişi olduğunu gramer inceliğiyle asırlar öncesinden haber vermiştir.",
-      "viral": {
-        "hookScore": 98,
-        "viralTitles": [
-          "Kur'an'daki Arı Mucizesi! Tek Kelime Her Şeyi Değiştirdi",
-          "Bal Arıları Hakkında 1400 Yıllık Sır: Bilim Bunu Yeni Keşfetti"
-        ],
-        "hashtags": [
-          "#kuran",
-          "#mucize",
-          "#balarısı",
-          "#nahl_suresi",
-          "#islamibilgi",
-          "#shorts"
-        ],
-        "loopEnding": "ve işte bu yüzden kelimeler...",
-        "description": "Nahl Suresi'nde bal arılarına yapılan dişi hitabın (اتَّخِذِي) modern bilimle muazzam uyumu."
-      },
-      "theme": "dark_minimalist",
-      "durationMode": "deep",
-      "particles": "dust",
-      "ambientPattern": "islamic_geometric",
-      "doodleType": "none",
-      "socialHandle": "@birkissa",
-      "_acquired_assets": [
-        {
-          "name": "islamic_geometric",
-          "type": "watermark",
-          "path": "assets/watermarks/islamic_geometric.svg"
-        },
-        {
-          "name": "shield",
-          "type": "grid_icon",
-          "path": "assets/icons/shield.svg"
-        },
-        {
-          "name": "book",
-          "type": "concept_icon",
-          "path": "assets/icons/book.svg"
-        },
-        {
-          "name": "compass",
-          "type": "concept_icon",
-          "path": "assets/icons/compass.svg"
-        },
-        {
-          "name": "shield",
-          "type": "concept_icon",
-          "path": "assets/icons/shield.svg"
-        },
-        {
-          "name": "book",
-          "type": "card_icon",
-          "path": "assets/icons/book.svg"
-        },
-        {
-          "name": "compass",
-          "type": "card_icon",
-          "path": "assets/icons/compass.svg"
-        },
-        {
-          "name": "shield",
-          "type": "card_icon",
-          "path": "assets/icons/shield.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "Rabbimiz Kur'an'da bal",
-          "start": 0.0,
-          "end": 1.72
-        },
-        {
-          "text": "arılarına hitap ederken",
-          "start": 1.72,
-          "end": 3.16
-        },
-        {
-          "text": "اتَّخِذِي yani 'edin'",
-          "start": 3.16,
-          "end": 5.06
-        },
-        {
-          "text": "ve فَاسْلُكِي yani",
-          "start": 5.06,
-          "end": 6.3
-        },
-        {
-          "text": "'gir, takip et'",
-          "start": 7.14,
-          "end": 8.98
-        },
-        {
-          "text": "kelimelerini erkek için",
-          "start": 8.98,
-          "end": 10.24
-        },
-        {
-          "text": "değil, dişi kalıpta",
-          "start": 10.78,
-          "end": 12.36
-        },
-        {
-          "text": "kullanır. Nahl Suresi'ndeki",
-          "start": 12.66,
-          "end": 14.2
-        },
-        {
-          "text": "bu mucizevi ifadeler,",
-          "start": 14.2,
-          "end": 16.98
-        },
-        {
-          "text": "kovanda yuva yapan",
-          "start": 16.98,
-          "end": 18.06
-        },
-        {
-          "text": "ve bal üreten",
-          "start": 18.06,
-          "end": 19.38
-        },
-        {
-          "text": "işçi arıların tamamının",
-          "start": 19.38,
-          "end": 21.12
-        },
-        {
-          "text": "dişi olduğuna işaret",
-          "start": 21.12,
-          "end": 22.48
-        },
-        {
-          "text": "eder. İnsanların arıların",
-          "start": 23.28,
-          "end": 25.34
-        },
-        {
-          "text": "kralı sandığı dönemde,",
-          "start": 25.34,
-          "end": 27.26
-        },
-        {
-          "text": "Kur'an işçi arıların",
-          "start": 27.26,
-          "end": 28.62
-        },
-        {
-          "text": "dişi olduğunu gramer",
-          "start": 28.62,
-          "end": 29.98
-        },
-        {
-          "text": "inceliğiyle asırlar öncesinden",
-          "start": 29.98,
-          "end": 32.26
-        },
-        {
-          "text": "haber vermiştir.",
-          "start": 32.26,
-          "end": 33.4
         }
       ],
       "audioUrl": "audio.mp3"
