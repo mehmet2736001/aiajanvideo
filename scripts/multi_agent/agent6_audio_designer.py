@@ -37,13 +37,28 @@ class AudioDesignAgent(BaseAgent):
         total_duration = state.transcription.duration
         project_id = state.project_id
 
+        if not orig_voice or not os.path.exists(orig_voice):
+            clean_txt = state.transcription.clean_text or "Video seslendirmesi"
+            temp_voice = os.path.join(AUDIO_OUT_DIR, f"tts_{project_id}.mp3")
+            try:
+                from gtts import gTTS
+                tts = gTTS(text=clean_txt, lang="tr")
+                tts.save(temp_voice)
+                orig_voice = temp_voice
+            except Exception:
+                cmd_silence = ["ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono", "-t", str(total_duration), temp_voice]
+                subprocess.run(cmd_silence, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+                orig_voice = temp_voice
+            state.audio_file = orig_voice
+
         if on_progress:
             on_progress(self.agent_id, "running", {
                 "message": f"Ses tasarımı devrede: BGM seçimi, ducking (-18 dB) ve {len(scenes)} sahne geçiş SFX'i planlanıyor..."
             })
 
         # 1. Select appropriate BGM based on style/mood
-        bgm_filename = "ambient_mystic.wav" if "miniature" in state.visual_style else "ambient_documentary.wav"
+        vis_style = getattr(state, "visual_style", "cinematic_photoreal") or "cinematic_photoreal"
+        bgm_filename = "ambient_mystic.wav" if ("miniature" in vis_style or state.selected_track == "vector_infographic") else "ambient_documentary.wav"
         bgm_path = os.path.join(SFX_DIR, bgm_filename)
         if not os.path.exists(bgm_path):
             bgm_path = os.path.join(SFX_DIR, "ambient_music.wav")

@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Agent 1: Transkripsiyon ve Hizalama Ajanı (Speech & Timing Specialist)
-Görevi: Sesi metne dökmek ve her kelimenin milisaniye hassasiyetindeki zaman damgalarını çıkarmak.
-Girdi: Ham ses dosyası (audio_file).
-Çıktı: Kelime ve cümle bazlı zaman damgası içeren TranscriptionData.
+Agent 1: Ses / Metin Ayrıştırma Ajanı (Transcribe & Text Parsing Agent)
+Görevi:
+  1. Girdi ses ise Whisper/faster-whisper ile milisaniye hassasiyetinde kelime zamanlamalarını çıkarır.
+  2. Girdi metin ise metni cümle bazlı sahnelere böler ve tahmini konuşma sürelerini hesaplar.
 """
 import os
+import re
 import subprocess
-from typing import Optional, Callable
+from typing import Optional, Callable, List
 from .base_agent import BaseAgent
-from .state import ProjectState, PipelinePhase, TranscriptionData, WordTiming
+from .state import ProjectState, PipelinePhase, TranscriptionData, WordTiming, SentenceBeat
 
 
 def probe_audio_duration(file_path: str) -> float:
@@ -24,11 +25,37 @@ def probe_audio_duration(file_path: str) -> float:
         return 15.0
 
 
+def estimate_turkish_text_duration(text: str) -> float:
+    """
+    Estimates natural Turkish speaking duration:
+    Average rate: ~2.8 words/second, +0.35s punctuation pauses.
+    """
+    words = [w for w in text.split() if w.strip()]
+    if not words:
+        return 6.0
+    word_count = len(words)
+    comma_count = text.count(",") + text.count(";")
+    period_count = text.count(".") + text.count("!") + text.count("?")
+    
+    base_sec = word_count / 2.7
+    pause_sec = (comma_count * 0.25) + (period_count * 0.45)
+    return round(max(5.0, base_sec + pause_sec), 2)
+
+
+def split_text_into_sentences(text: str) -> List[str]:
+    clean = re.sub(r"\s+", " ", text).strip()
+    sentences = re.split(r"(?<=[.!?…])\s+", clean)
+    filtered = [s.strip() for s in sentences if len(s.strip()) > 3]
+    if not filtered:
+        return [clean] if clean else ["Başlangıç sahnesi"]
+    return filtered
+
+
 class TranscribeAlignAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             agent_id=1,
-            name="Transkripsiyon & Hizalama Ajanı",
+            name="Ses / Metin Ayrıştırma Ajanı",
             required_phase=PipelinePhase.PHASE_0_IDLE,
             target_phase=PipelinePhase.PHASE_1_TRANSCRIBED
         )
@@ -38,83 +65,137 @@ class TranscribeAlignAgent(BaseAgent):
         state: ProjectState,
         on_progress: Optional[Callable[[int, str, dict], None]] = None
     ) -> ProjectState:
-        if not os.path.exists(state.audio_file):
-            raise FileNotFoundError(f"Ses dosyası bulunamadı: {state.audio_file}")
+        has_audio = bool(state.audio_file and os.path.exists(state.audio_file))
+        raw_text = (state.raw_input_text or state.custom_transcript or "").strip()
 
-        total_duration = probe_audio_duration(state.audio_file)
-        if on_progress:
-            on_progress(self.agent_id, "running", {
-                "message": f"Ses süresi ölçüldü: {total_duration:.2f}s. Whisper modeli yükleniyor..."
-            })
+        # PATH A: Audio Input provided
+        if has_audio:
+            state.input_type = "audio"
+            total_duration = probe_audio_duration(state.audio_file)
+            if on_progress:
+                on_progress(self.agent_id, "running", {
+                    "message": f"Ses süresi: {total_duration:.2f}s. Whisper modeli kelime zamanlamalarını çıkarıyor..."
+                })
 
-        import whisper
-        # Load fast & accurate whisper model
-        whisper_model = whisper.load_model("tiny")
+            import whisper
+            whisper_model = whisper.load_model("tiny")
+            w_res = whisper_model.transcribe(
+                state.audio_file,
+                word_timestamps=True,
+                language="tr",
+                fp16=False
+            )
 
-        if on_progress:
-            on_progress(self.agent_id, "running", {
-                "message": "Whisper milisaniye fonetik zamanlaması deşifre ediliyor..."
-            })
-
-        w_res = whisper_model.transcribe(
-            state.audio_file,
-            word_timestamps=True,
-            language="tr",
-            fp16=False
-        )
-
-        raw_words = []
-        for seg in w_res.get("segments", []):
-            for w in seg.get("words", []):
-                w_text = w.get("word", "").strip()
-                if w_text:
-                    raw_words.append(
-                        WordTiming(
-                            word=w_text,
-                            start=round(float(w.get("start", 0)), 2),
-                            end=round(float(w.get("end", 0)), 2),
-                            confidence=round(float(w.get("probability", 1.0)), 2)
+            raw_words: List[WordTiming] = []
+            for seg in w_res.get("segments", []):
+                for w in seg.get("words", []):
+                    w_text = w.get("word", "").strip()
+                    if w_text:
+                        raw_words.append(
+                            WordTiming(
+                                word=w_text,
+                                start=round(float(w.get("start", 0)), 2),
+                                end=round(float(w.get("end", 0)), 2),
+                                confidence=round(float(w.get("probability", 1.0)), 2)
+                            )
                         )
-                    )
 
-        full_raw_text = w_res.get("text", "").strip()
+            full_transcript = (w_res.get("text", "") or "").strip()
+            clean_text = raw_text if raw_text else (full_transcript or " ".join([w.word for w in raw_words]))
 
-        # If user passed custom transcript, use that text while maintaining acoustic anchor
-        if state.custom_transcript and state.custom_transcript.strip():
-            clean_text = state.custom_transcript.strip()
-            # If whisper had words, retain timings; otherwise synthesize linear word timings
-            if not raw_words:
-                words_list = clean_text.split()
-                dur_per_word = total_duration / max(1, len(words_list))
-                raw_words = [
-                    WordTiming(
-                        word=w,
-                        start=round(i * dur_per_word, 2),
-                        end=round(min(total_duration, (i + 1) * dur_per_word), 2)
+            # Split into sentence beats using whisper word timestamps
+            sentences = split_text_into_sentences(clean_text)
+            sentence_beats: List[SentenceBeat] = []
+            cur_idx = 0
+
+            for s_idx, sent in enumerate(sentences):
+                sent_words = [w.strip() for w in sent.split()]
+                if not sent_words:
+                    continue
+                match_words = raw_words[cur_idx:cur_idx + len(sent_words)]
+                if match_words:
+                    s_start = match_words[0].start
+                    s_end = match_words[-1].end
+                    cur_idx += len(sent_words)
+                else:
+                    s_start = round(s_idx * (total_duration / len(sentences)), 2)
+                    s_end = round((s_idx + 1) * (total_duration / len(sentences)), 2)
+
+                sentence_beats.append(
+                    SentenceBeat(
+                        sentence_id=s_idx + 1,
+                        text=sent,
+                        start=s_start,
+                        end=s_end,
+                        duration=round(max(1.0, s_end - s_start), 2),
+                        emphasis_words=sent_words[:2]
                     )
-                    for i, w in enumerate(words_list)
-                ]
+                )
+
+            state.transcription = TranscriptionData(
+                input_type="audio",
+                raw_text=full_transcript,
+                clean_text=clean_text,
+                duration=total_duration,
+                words=raw_words,
+                sentence_beats=sentence_beats,
+                language="tr"
+            )
+
+        # PATH B: Pure Text Input provided
         else:
-            clean_text = full_raw_text or " ".join([w.word for w in raw_words])
+            state.input_type = "text"
+            if not raw_text:
+                raw_text = "Tefekkür ve hakikat arayışında sabır ve ilmin önemi."
 
-        if not clean_text:
-            clean_text = "Konuşma metni tespit edilemedi."
+            total_duration = estimate_turkish_text_duration(raw_text)
+            sentences = split_text_into_sentences(raw_text)
 
-        # Populate state
-        state.transcription = TranscriptionData(
-            raw_text=full_raw_text,
-            clean_text=clean_text,
-            duration=round(total_duration, 2),
-            words=raw_words,
-            language=w_res.get("language", "tr")
-        )
+            if on_progress:
+                on_progress(self.agent_id, "running", {
+                    "message": f"Metin {len(sentences)} sahneye bölünüyor, tahmini konuşma süresi: {total_duration:.1f}s..."
+                })
+
+            all_words = raw_text.split()
+            dur_per_word = total_duration / max(1, len(all_words))
+            synth_words: List[WordTiming] = []
+
+            for i, w in enumerate(all_words):
+                st = round(i * dur_per_word, 2)
+                en = round(min(total_duration, (i + 1) * dur_per_word), 2)
+                synth_words.append(WordTiming(word=w, start=st, end=en, confidence=0.98))
+
+            sentence_beats: List[SentenceBeat] = []
+            dur_per_sent = total_duration / max(1, len(sentences))
+            for s_idx, sent in enumerate(sentences):
+                s_start = round(s_idx * dur_per_sent, 2)
+                s_end = round((s_idx + 1) * dur_per_sent, 2)
+                sent_words = [w.strip() for w in sent.split()]
+                sentence_beats.append(
+                    SentenceBeat(
+                        sentence_id=s_idx + 1,
+                        text=sent,
+                        start=s_start,
+                        end=s_end,
+                        duration=round(max(1.0, s_end - s_start), 2),
+                        emphasis_words=sent_words[:2]
+                    )
+                )
+
+            state.transcription = TranscriptionData(
+                input_type="text",
+                raw_text=raw_text,
+                clean_text=raw_text,
+                duration=total_duration,
+                words=synth_words,
+                sentence_beats=sentence_beats,
+                language="tr"
+            )
 
         return state
 
     def _validate_contract(self, state: ProjectState) -> None:
         if not state.transcription:
-            raise ValueError("1. Ajan Kontrat Hatası: 'transcription' verisi oluşturulmadı!")
+            raise ValueError("TranscribeAlignAgent kontrat hatası: transcription objesi boş!")
         if state.transcription.duration <= 0:
-            raise ValueError("1. Ajan Kontrat Hatası: Ses süresi geçersiz (0 veya negatif)!")
-        if not state.transcription.words and not state.transcription.clean_text:
-            raise ValueError("1. Ajan Kontrat Hatası: Transkript kelimeleri boş olamaz!")
+            raise ValueError("TranscribeAlignAgent kontrat hatası: süre sıfır veya negatif!")

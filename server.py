@@ -2608,15 +2608,18 @@ async def api_multi_agent_start(
     voice_id: Optional[str] = Form("en-US-AndrewMultilingualNeural"),
     visual_style: Optional[str] = Form("cinematic_photoreal"),
     aspect_ratio: Optional[str] = Form("9:16"),
-    custom_transcript: Optional[str] = Form(None)
+    custom_transcript: Optional[str] = Form(None),
+    auto_approve: Optional[bool] = Form(False)
 ):
     job_id = str(uuid.uuid4())[:8]
 
     # Resolve audio file
     final_audio_path = os.path.join(PUBLIC_DIR, "audio.mp3")
     effective_transcript = custom_transcript or ""
+    has_audio_input = False
 
     if file and file.filename:
+        has_audio_input = True
         ext = os.path.splitext(file.filename)[1].lower() if file.filename else ".mp3"
         temp_path = os.path.join(PUBLIC_DIR, f"upload_{job_id}{ext}")
         with open(temp_path, "wb") as buf:
@@ -2632,6 +2635,7 @@ async def api_multi_agent_start(
             except Exception:
                 pass
     elif audio_path and os.path.exists(audio_path):
+        has_audio_input = True
         final_audio_path = audio_path
     elif text and text.strip():
         # Text-to-speech synthesis if text prompt provided
@@ -2646,26 +2650,28 @@ async def api_multi_agent_start(
                 lang="tr"
             )
             final_audio_path = os.path.join(PUBLIC_DIR, "audio.mp3")
+            has_audio_input = True
         except Exception as tts_err:
             print(f"[Multi-Agent API] TTS synthesis notice: {tts_err}")
-            # Fallback gTTS
             try:
                 from gtts import gTTS
                 tts = gTTS(text=effective_transcript, lang="tr")
                 tts.save(final_audio_path)
+                has_audio_input = True
             except Exception as ge:
-                print(f"[Multi-Agent API] gTTS error: {ge}")
-    elif not os.path.exists(final_audio_path):
-        raise HTTPException(status_code=400, detail="Lütfen bir ses dosyası (.mp3 / .wav) yükleyin veya metin girin.")
+                print(f"[Multi-Agent API] gTTS fallback notice: {ge}")
+
+    audio_arg = final_audio_path if (has_audio_input and os.path.exists(final_audio_path)) else None
 
     def run_orchestrator_job():
         try:
-            orchestrator.execute_pipeline(
-                audio_file=final_audio_path,
+            orchestrator.start_pipeline(
+                audio_file=audio_arg,
+                text=effective_transcript or text,
                 project_id=job_id,
                 aspect_ratio=aspect_ratio or "9:16",
-                visual_style=visual_style or "2d_anime",
-                custom_transcript=effective_transcript or None
+                custom_transcript=effective_transcript or None,
+                auto_approve=bool(auto_approve)
             )
         except Exception as e:
             print(f"[Multi-Agent API] Job {job_id} error: {e}")
@@ -2675,9 +2681,41 @@ async def api_multi_agent_start(
     return {
         "success": True,
         "job_id": job_id,
-        "message": "7 Ajanlı video üretim hattı başlatıldı.",
+        "message": "Çift hatlı çoklu ajan video üretim hattı başlatıldı.",
         "aspect_ratio": aspect_ratio,
-        "visual_style": visual_style
+        "visual_style": visual_style,
+        "auto_approve": auto_approve
+    }
+
+class SelectTrackRequest(BaseModel):
+    job_id: str
+    selected_track: str  # "cinematic" or "vector_infographic"
+
+@app.post("/api/multi-agent/select-track")
+def api_multi_agent_select_track(req: SelectTrackRequest, background_tasks: BackgroundTasks):
+    state = orchestrator.get_job_state(req.job_id)
+    if not state:
+        raise HTTPException(status_code=404, detail="Ajan işi bulunamadı.")
+    
+    from scripts.multi_agent.state import PipelinePhase
+    if state.current_phase != PipelinePhase.PHASE_1_AWAITING_USER_SELECTION:
+        raise HTTPException(
+            status_code=400,
+            detail=f"İş onay bekleyen aşamada değil. Mevcut Aşama: '{state.current_phase.value}'"
+        )
+
+    def run_resume():
+        try:
+            orchestrator.resume_with_selection(req.job_id, req.selected_track)
+        except Exception as e:
+            print(f"[Multi-Agent API] Resume error for {req.job_id}: {e}")
+
+    background_tasks.add_task(run_resume)
+    return {
+        "success": True,
+        "job_id": req.job_id,
+        "selected_track": req.selected_track,
+        "message": f"Kullanıcı seçimi '{req.selected_track.upper()}' onaylandı, üretim başlatıldı."
     }
 
 @app.get("/api/multi-agent/status/{job_id}")

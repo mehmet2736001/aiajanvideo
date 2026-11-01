@@ -38,7 +38,15 @@ class AssemblyAgent(BaseAgent):
     ) -> ProjectState:
         t0 = time.time()
         project_id = state.project_id
-        media_assets = state.media_assets.assets
+        if state.selected_track == "vector_infographic" and state.vector_assets:
+            media_assets = state.vector_assets.assets
+        elif state.media_assets:
+            media_assets = state.media_assets.assets
+        elif state.vector_assets:
+            media_assets = state.vector_assets.assets
+        else:
+            raise ValueError("Montaj için hiçbir video varlığı (medya veya vektör) bulunamadı!")
+
         mixed_audio = state.audio_design.mixed_audio_file
         ass_path = state.typography.ass_file_path
         total_duration = state.transcription.duration
@@ -139,8 +147,16 @@ class AssemblyAgent(BaseAgent):
         data_file = os.path.join(SRC_DIR, "generatedData.json")
         scenes_data = []
 
+        active_assets = []
+        if state.selected_track == "vector_infographic" and state.vector_assets:
+            active_assets = state.vector_assets.assets
+        elif state.media_assets:
+            active_assets = state.media_assets.assets
+        elif state.vector_assets:
+            active_assets = state.vector_assets.assets
+
         for idx, sc in enumerate(state.storyboard.scenes):
-            media = state.media_assets.assets[idx] if idx < len(state.media_assets.assets) else None
+            media = active_assets[idx] if idx < len(active_assets) else None
             vid_url = media.video_url if media else "/public/videos/test_dervish_anim.mp4"
 
             scenes_data.append({
@@ -154,7 +170,7 @@ class AssemblyAgent(BaseAgent):
                 "layoutType": sc.layout_type,
                 "videoUrl": vid_url,
                 "animationVideoUrl": vid_url,
-                "brollType": "2d_animation",
+                "brollType": "vector_infographic" if state.selected_track == "vector_infographic" else "cinematic_documentary",
                 "spokenText": sc.spoken_text,
                 "narration": sc.spoken_text
             })

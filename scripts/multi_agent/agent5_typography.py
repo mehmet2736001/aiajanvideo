@@ -37,6 +37,20 @@ class TypographyAgent(BaseAgent):
             target_phase=PipelinePhase.PHASE_5_SUBTITLES_COMPOSED
         )
 
+    def can_execute(self, state: ProjectState):
+        valid_phases = [
+            PipelinePhase.PHASE_4_ASSETS_GENERATED,
+            PipelinePhase.PHASE_4A_DIFFUSION_RENDERED,
+            PipelinePhase.PHASE_4B_REMOTION_RENDERED
+        ]
+        if state.current_phase not in valid_phases:
+            return (
+                False,
+                f"Kural İhlali: [{self.agent_id}. {self.name}] çalıştırılamaz! "
+                f"Gerekli Aşama: 4A (Difüzyon) veya 4B (Remotion), Mevcut Aşama: '{state.current_phase.value}'."
+            )
+        return True, "Geçerli"
+
     def _process(
         self,
         state: ProjectState,
