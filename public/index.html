@@ -384,8 +384,8 @@
               <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
                 <i class="fa-solid fa-microphone-lines"></i>
               </div>
-              <div class="font-extrabold text-sm text-white group-hover:text-purple-300 transition">Ses & Metin ile Kurgula</div>
-              <p class="text-xs text-slate-400 mt-1 leading-relaxed">Kendi sesinizi yükleyin; metninizi yapıştırın. Yapıştırdığınız metin ekranda hatasız ve birebir aksın.</p>
+              <div class="font-extrabold text-sm text-white group-hover:text-purple-300 transition">7 Ajanlı Otonom Kurgu (Ses & Metin)</div>
+              <p class="text-xs text-slate-400 mt-1 leading-relaxed">Kendi sesinizi veya metninizi verin; 7 uzman ajan sırayla transkriptten nihai montaja kadar yönetsin.</p>
               <input type="file" id="dash-audio-upload" accept="audio/*" class="hidden" onchange="uploadDashboardAudio(this.files[0])">
             </div>
             <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-purple-400 font-bold">
@@ -615,9 +615,9 @@
             </label>
 
             <!-- Detailed Panel Button -->
-            <button onclick="openAudioUploadModal()" class="flex items-center justify-center gap-1.5 p-2 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 text-purple-300 rounded-xl transition font-bold text-[11px] text-center">
-              <i class="fa-solid fa-sliders text-purple-400"></i>
-              <span>Ses & Metin Modalı</span>
+            <button onclick="openAiMissionModal('mp3')" class="flex items-center justify-center gap-1.5 p-2 bg-gradient-to-r from-amber-500/20 to-purple-600/20 hover:from-amber-500/30 hover:to-purple-600/30 border border-amber-500/40 text-amber-300 rounded-xl transition font-bold text-[11px] text-center">
+              <i class="fa-solid fa-users-gear text-amber-400"></i>
+              <span>7 Ajanlı Kurgu</span>
             </button>
           </div>
 
@@ -1725,9 +1725,9 @@
     </div>
   </div>
 
-  <!-- ================= 3-STAGE AI MISSION PROGRESS & PRODUCTION MODAL ================= -->
+  <!-- ================= 7-AGENT AUTONOMOUS AI PRODUCTION MODAL ================= -->
   <div id="modal-ai-mission-hud" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-[#0b101d] border border-amber-500/40 rounded-3xl max-w-xl w-full p-6 space-y-5 shadow-2xl relative overflow-hidden">
+    <div class="bg-[#0b101d] border border-amber-500/40 rounded-3xl max-w-2xl w-full p-6 space-y-5 shadow-2xl relative overflow-hidden">
       <!-- Glow ambient decorations -->
       <div class="absolute -top-24 -right-24 w-52 h-52 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute -bottom-24 -left-24 w-52 h-52 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -1736,14 +1736,14 @@
       <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-400 via-purple-500 to-indigo-600 text-white flex items-center justify-center text-lg font-bold shadow-lg shadow-amber-500/20">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <i class="fa-solid fa-users-gear"></i>
           </div>
           <div>
             <h3 class="text-base font-extrabold text-white flex items-center gap-2">
-              <span>3 Aşamalı Yapay Zekâ Kurgu Motoru</span>
-              <span class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-mono">FAZ 3 PRO</span>
+              <span>7 Uzman Ajanlı Video Prodüksiyon Merkezi</span>
+              <span class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-mono">1 ORKESTRATÖR + 6 UZMAN</span>
             </h3>
-            <p class="text-[11px] text-slate-400">1. Analiz • 2. Tarihsel & Daktilo Ayet Planı • 3. Zaman Tüneline Dağıtım</p>
+            <p class="text-[11px] text-slate-400">Katı Durum Kontrolü (Gatekeeper): Bir ajan görevini bitirmeden sonraki ajana asla geçilemez.</p>
           </div>
         </div>
         <div class="flex items-center gap-3">
@@ -1751,7 +1751,7 @@
             <span class="text-[10px] font-bold text-slate-300 flex items-center gap-1">
               <i class="fa-solid fa-robot text-amber-400"></i> Oto Mod:
             </span>
-            <label class="relative inline-flex items-center cursor-pointer" title="Açık: Doğrudan üretir. Kapalı: Önerileri size sunar ve seçim yaptırır.">
+            <label class="relative inline-flex items-center cursor-pointer" title="Açık: Tüm ajanları kesintisiz sırayla çalıştırır. Kapalı: Sahneleri önceden seçtirir.">
               <input type="checkbox" id="modal-toggle-ai-auto-mode" class="sr-only peer" checked onchange="handleAutoModeToggle(this.checked)">
               <div class="w-7 h-3.5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-500"></div>
               <span id="modal-label-ai-auto-mode" class="ml-1 text-[9px] font-bold text-amber-400">Açık</span>
@@ -1771,7 +1771,7 @@
             <i class="fa-solid fa-file-lines text-amber-400"></i> Metin ile Üret
           </button>
           <button id="btn-mission-tab-mp3" onclick="switchMissionInputTab('mp3')" class="flex-1 py-2 rounded-xl text-center font-bold text-slate-400 hover:text-white transition flex items-center justify-center gap-1.5">
-            <i class="fa-solid fa-microphone text-purple-400"></i> Kendi MP3 Dosyan ile Üret
+            <i class="fa-solid fa-microphone text-purple-400"></i> Kendi Ses / MP3 Dosyan ile Üret
           </button>
         </div>
 
@@ -1791,48 +1791,26 @@
             </div>
             <textarea
               id="mission-input-text"
-              rows="4"
+              rows="3"
               placeholder="Metninizi buraya yazın veya yapıştırın. Örn: Hz. Ali efendimizin ilmi ve adaleti anlatılır. Arkasından 'Şüphesiz Allah sabredenlerle beraberdir' ayeti ve derin tefekkürü açıklanır..."
               class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-2xl p-3 text-slate-100 placeholder-slate-500 focus:outline-none transition leading-relaxed resize-none"
             ></textarea>
           </div>
 
-          <div class="grid grid-cols-3 gap-2.5">
+          <div class="grid grid-cols-4 gap-2">
             <div>
               <label class="block font-bold text-slate-300 mb-1">Gemini Modeli</label>
               <select id="mission-input-model" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
-              <optgroup label="🪐 Gemini 4 & Gemma 4 Serisi (Next-Gen Flagship)">
-                <option value="gemini-4-argon">🪐 Gemini 4 Argon (4. Nesil Flagship & Deep Reasoning)</option>
-                <option value="gemma-4-31b-it">🔬 Gemma 4 31B IT (Google DeepMind 31B Mantık Motoru)</option>
-                <option value="gemma-4-26b-a4b-it">⚡ Gemma 4 26B A4B IT (Optimize 4. Nesil Multimodal)</option>
-              </optgroup>
-              <optgroup label="⚡ Gemini 3.8 & 3.7 Serisi (Yeni Nesil Hızlı Flash)">
-                <option value="gemini-3.8-flash">⚡ Gemini 3.8 Flash (Ultra Hızlı 3.8 Çekirdeği)</option>
-                <option value="gemini-3.7-flash">💡 Gemini 3.7 Flash (Hibrit Düşünme & Akıl Yürütme)</option>
-                <option value="gemini-3.6-flash">🚀 Gemini 3.6 Flash (Kararlı Flash 3.6)</option>
-              </optgroup>
-              <optgroup label="💎 Gemini 3.5 & 3 Serisi (Prodüksiyon Standartları)">
-                <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite (Varsayılan - Ultra Hızlı)</option>
-                <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash (Dengeli & Güçlü Kurgu)</option>
-                <option value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview (En Yüksek Felsefi & İlmi Derinlik)</option>
-                <option value="gemini-3.1-flash-lite">🎯 Gemini 3.1 Flash Lite (Hafif & Seri Mimari)</option>
-                <option value="gemini-3-flash-preview">🔮 Gemini 3 Flash Preview (Deneysel Önizleme)</option>
-              </optgroup>
-              <optgroup label="🌐 Gemini Omni & En Son Güncellemeler (Latest)">
-                <option value="gemini-omni-1.1-flash">🌐 Gemini Omni 1.1 Flash (Multimodal Füzyon)</option>
-                <option value="gemini-omni-flash-preview">🔮 Gemini Omni Flash Preview (Çok Modlu Önizleme)</option>
-                <option value="gemini-flash-latest">🔄 Gemini Flash Latest (Daima En Güncel Flash)</option>
-                <option value="gemini-pro-latest">🔄 Gemini Pro Latest (Daima En Güncel Pro)</option>
-              </optgroup>
-              <optgroup label="🏛️ Gemini 2.5 Serisi (Klasik)">
-                <option value="gemini-2.5-pro">🏛️ Gemini 2.5 Pro (Klasik Pro)</option>
-                <option value="gemini-2.5-flash">🏛️ Gemini 2.5 Flash (Stabil Hızlı)</option>
-                <option value="gemini-2.5-flash-lite">🏛️ Gemini 2.5 Flash-Lite (Hafif Klasik)</option>
-              </optgroup>
+                <option value="gemini-3.5-flash-lite" selected>⚡ Gemini 3.5 Flash Lite</option>
+                <option value="gemini-4-argon">🪐 Gemini 4 Argon</option>
+                <option value="gemini-3.8-flash">⚡ Gemini 3.8 Flash</option>
+                <option value="gemini-3.7-flash">💡 Gemini 3.7 Flash</option>
+                <option value="gemini-3.5-flash">🚀 Gemini 3.5 Flash</option>
+                <option value="gemini-omni-1.1-flash">🌐 Gemini Omni 1.1 Flash</option>
               </select>
             </div>
             <div>
-              <label class="block font-bold text-slate-300 mb-1">Seslendirici (Anlatıcı)</label>
+              <label class="block font-bold text-slate-300 mb-1">Seslendirici</label>
               <select id="mission-input-voice" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
                 <option value="en-US-AndrewMultilingualNeural" selected>🎙️ Andrew (Tok Belgesel)</option>
                 <option value="tr-TR-AhmetNeural">🎙️ Ahmet (Resmi & Vurgulu)</option>
@@ -1840,10 +1818,19 @@
               </select>
             </div>
             <div>
-              <label class="block font-bold text-slate-300 mb-1">Kurgu Derinliği</label>
-              <select id="mission-input-duration-mode" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
-                <option value="deep" selected>⏱️ Derin Kurgu (3-4 Sahne)</option>
-                <option value="short">⚡ Hızlı Shorts (2-3 Sahne)</option>
+              <label class="block font-bold text-slate-300 mb-1">Görsel Tarz</label>
+              <select id="mission-input-style" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
+                <option value="2d_anime" selected>🎨 Studio Ghibli 2D Anime</option>
+                <option value="cinematic">🎬 Sinematik Foto-Gerçekçi</option>
+                <option value="mystic">📜 Tezhib & Mistik Gravür</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">En-Boy Oranı</label>
+              <select id="mission-input-aspect" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
+                <option value="9:16" selected>📱 9:16 Dikey Shorts</option>
+                <option value="16:9">🖥️ 16:9 Yatay Video</option>
+                <option value="1:1">🔲 1:1 Kare Gönderi</option>
               </select>
             </div>
           </div>
@@ -1858,15 +1845,34 @@
             <div id="mission-mp3-drop-label" class="text-xs text-slate-300 font-semibold">
               <span class="text-white group-hover:text-purple-300 transition">MP3 veya WAV dosyanızı seçin</span>
             </div>
-            <span class="text-[10px] text-slate-500">Maks 100MB • Otomatik Whisper Fonetik Hizalama</span>
+            <span class="text-[10px] text-slate-500">Maks 100MB • 1. Ajan Faster-Whisper Milisaniye Fonetik Hizalama Yapacak</span>
             <input type="file" id="mission-mp3-file-input" accept="audio/*" class="hidden" onchange="handleMissionAudioSelected(this.files[0])">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">Görsel Tarz</label>
+              <select id="mission-mp3-style" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
+                <option value="2d_anime" selected>🎨 Studio Ghibli 2D Anime</option>
+                <option value="cinematic">🎬 Sinematik Foto-Gerçekçi</option>
+                <option value="mystic">📜 Tezhib & Mistik Gravür</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-300 mb-1">En-Boy Oranı</label>
+              <select id="mission-mp3-aspect" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
+                <option value="9:16" selected>📱 9:16 Dikey Shorts</option>
+                <option value="16:9">🖥️ 16:9 Yatay Video</option>
+                <option value="1:1">🔲 1:1 Kare Gönderi</option>
+              </select>
+            </div>
           </div>
 
           <div>
             <label class="block font-bold text-slate-300 mb-1">Metin Transkripti (İsteğe Bağlı - %100 Birebir Eşleşme)</label>
             <textarea
               id="mission-mp3-transcript"
-              rows="3"
+              rows="2"
               placeholder="Ses kaydında okunan metni buraya yapıştırabilirsiniz (Ayet ve kelime koruması için önerilir)..."
               class="w-full bg-[#070a12] border border-slate-800 focus:border-purple-400 rounded-2xl p-2.5 text-slate-200 placeholder-slate-500 focus:outline-none transition leading-relaxed resize-none"
             ></textarea>
@@ -1874,69 +1880,167 @@
         </div>
 
         <!-- Footer Submit Button -->
-        <div class="pt-2 border-t border-slate-800/80 flex items-center justify-end gap-3">
-          <button onclick="closeAiMissionModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold transition">
-            Vazgeç
-          </button>
-          <button onclick="startAiMissionPipeline()" id="btn-mission-submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs flex items-center gap-2 shadow-lg shadow-amber-500/25 transition">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span>3 Aşamalı Kurguyu Başlat</span>
-          </button>
+        <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
+          <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-lock text-amber-400"></i>
+            <span>Tüm 7 ajan sıralı kontrat denetimiyle çalışacaktır.</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="closeAiMissionModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold transition">
+              Vazgeç
+            </button>
+            <button onclick="startAiMissionPipeline()" id="btn-mission-submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs flex items-center gap-2 shadow-lg shadow-amber-500/25 transition">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>7 Ajanlı Üretimi Başlat</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- VIEW B: LIVE ANIMATED 3-STAGE MISSION PROGRESS HUD -->
-      <div id="ai-mission-view-hud" class="hidden space-y-4 text-xs">
+      <!-- VIEW B: LIVE ANIMATED 7-AGENT MISSION PROGRESS HUD -->
+      <div id="ai-mission-view-hud" class="hidden space-y-3 text-xs">
         <div class="text-center space-y-1 pb-1">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-[10px] font-bold">
             <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-            <span>YAPAY ZEKÂ SİNEMATİK ÜRETİM DEVREDE</span>
+            <span>0. ORKESTRATÖR AJAN • DURUM & KONTRAT YÖNETİMİ</span>
           </div>
-          <h4 id="mission-hud-main-title" class="text-sm font-extrabold text-white">Görev Yürütülüyor...</h4>
+          <h4 id="mission-hud-main-title" class="text-sm font-extrabold text-white">7 Ajanlı Video Prodüksiyon Hattı Başlatılıyor...</h4>
+          <div class="flex items-center justify-center gap-2 text-[10px] text-amber-300/80 bg-amber-500/5 py-1 px-3 rounded-xl border border-amber-500/20 max-w-lg mx-auto">
+            <i class="fa-solid fa-shield-halved text-amber-400"></i>
+            <span><strong>Katı Sıralı Kural:</strong> Bir ajan görevini ve dosya kontratını bitirmeden sonraki ajana asla geçilemez!</span>
+          </div>
         </div>
 
-        <!-- 3 Animated Stepper Cards -->
-        <div class="space-y-3">
-          <!-- STAGE 1 CARD -->
-          <div id="mission-step-card-1" class="p-3.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-start gap-3 transition-all duration-300">
-            <div id="mission-step-icon-1" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-sm font-bold shrink-0">
-              <span>1</span>
-            </div>
-            <div class="flex-1 space-y-1">
-              <div class="flex items-center justify-between">
-                <span class="font-extrabold text-white text-xs">1. GÖREV: ANALİZ AŞAMASI</span>
-                <span id="mission-step-status-1" class="text-[10px] font-mono text-slate-500">Bekliyor</span>
+        <!-- 7 Agent Stepper Cards Container -->
+        <div class="space-y-2 max-h-[350px] overflow-y-auto pr-1">
+          <!-- AGENT 1 -->
+          <div id="agent-card-1" class="p-2.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-center justify-between gap-3 transition-all duration-300">
+            <div class="flex items-center gap-2.5 flex-1 min-w-0">
+              <div id="agent-icon-1" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold shrink-0">
+                <span>1</span>
               </div>
-              <p id="mission-step-desc-1" class="text-[11px] text-slate-400 leading-tight">Metin ve ses frekansları taranıyor; tarihsel dönem ve ayet/hadis kısımları ayrıştırılıyor.</p>
+              <div class="truncate">
+                <div class="flex items-center gap-2">
+                  <span class="font-extrabold text-white text-xs">1. Transkripsiyon & Fonetik Hizalama Ajanı</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-800 font-mono">Faster-Whisper STT</span>
+                </div>
+                <p id="agent-desc-1" class="text-[10px] text-slate-400 truncate">Ses dosyasını okur; milisaniye hassasiyetli kelime zaman damgalarını çıkarır.</p>
+              </div>
             </div>
+            <span id="agent-status-1" class="text-[10px] font-mono px-2 py-0.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-500 font-bold shrink-0">🔒 Kilitli</span>
           </div>
 
-          <!-- STAGE 2 CARD -->
-          <div id="mission-step-card-2" class="p-3.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-start gap-3 transition-all duration-300">
-            <div id="mission-step-icon-2" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-sm font-bold shrink-0">
-              <span>2</span>
-            </div>
-            <div class="flex-1 space-y-1">
-              <div class="flex items-center justify-between">
-                <span class="font-extrabold text-white text-xs">2. GÖREV: PLANLAMA AŞAMASI</span>
-                <span id="mission-step-status-2" class="text-[10px] font-mono text-slate-500">Bekliyor</span>
+          <!-- AGENT 2 -->
+          <div id="agent-card-2" class="p-2.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-center justify-between gap-3 transition-all duration-300">
+            <div class="flex items-center gap-2.5 flex-1 min-w-0">
+              <div id="agent-icon-2" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold shrink-0">
+                <span>2</span>
               </div>
-              <p id="mission-step-desc-2" class="text-[11px] text-slate-400 leading-tight">Tarihsel atmosfer (0-20s) ve tezhibli daktilo ayet çerçevesi (20-40s) ile SFX eşleşmesi planlanıyor.</p>
+              <div class="truncate">
+                <div class="flex items-center gap-2">
+                  <span class="font-extrabold text-white text-xs">2. Senaryo & Sahne Yönetmeni Ajanı</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800 font-mono">Ritim & Beat</span>
+                </div>
+                <p id="agent-desc-2" class="text-[10px] text-slate-400 truncate">Metnin duygu ve vurgularını analiz ederek konuşmayı 2-8s sahne dilimlerine böler.</p>
+              </div>
             </div>
+            <span id="agent-status-2" class="text-[10px] font-mono px-2 py-0.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-500 font-bold shrink-0">🔒 Kilitli</span>
           </div>
 
-          <!-- STAGE 3 CARD -->
-          <div id="mission-step-card-3" class="p-3.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-start gap-3 transition-all duration-300">
-            <div id="mission-step-icon-3" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-sm font-bold shrink-0">
-              <span>3</span>
-            </div>
-            <div class="flex-1 space-y-1">
-              <div class="flex items-center justify-between">
-                <span class="font-extrabold text-white text-xs">3. GÖREV: UYGULAMA & ZAMAN TÜNELİ</span>
-                <span id="mission-step-status-3" class="text-[10px] font-mono text-slate-500">Bekliyor</span>
+          <!-- AGENT 3 -->
+          <div id="agent-card-3" class="p-2.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-center justify-between gap-3 transition-all duration-300">
+            <div class="flex items-center gap-2.5 flex-1 min-w-0">
+              <div id="agent-icon-3" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold shrink-0">
+                <span>3</span>
               </div>
-              <p id="mission-step-desc-3" class="text-[11px] text-slate-400 leading-tight">Tüm veriler (Video, Alıntı, MP3, SFX, Daktilo Altyazı) zaman tüneline sıfır gecikmeyle kenetleniyor.</p>
+              <div class="truncate">
+                <div class="flex items-center gap-2">
+                  <span class="font-extrabold text-white text-xs">3. Görsel Sanat Yönetmeni Ajanı</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-pink-950 text-pink-300 border border-pink-800 font-mono">Prompt & Devamlılık</span>
+                </div>
+                <p id="agent-desc-3" class="text-[10px] text-slate-400 truncate">Sahneler için sinematik İngilizce video üretim promptları ve kare devamlılığı üretir.</p>
+              </div>
             </div>
+            <span id="agent-status-3" class="text-[10px] font-mono px-2 py-0.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-500 font-bold shrink-0">🔒 Kilitli</span>
+          </div>
+
+          <!-- AGENT 4 -->
+          <div id="agent-card-4" class="p-2.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-center justify-between gap-3 transition-all duration-300">
+            <div class="flex items-center gap-2.5 flex-1 min-w-0">
+              <div id="agent-icon-4" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold shrink-0">
+                <span>4</span>
+              </div>
+              <div class="truncate">
+                <div class="flex items-center gap-2">
+                  <span class="font-extrabold text-white text-xs">4. Medya Üretim & Çağrı Ajanı</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800 font-mono">Gemini Omni / Video</span>
+                </div>
+                <p id="agent-desc-4" class="text-[10px] text-slate-400 truncate">Video üretim modellerini tetikler, üretilen MP4 dosyalarını indirir ve doğrular.</p>
+              </div>
+            </div>
+            <span id="agent-status-4" class="text-[10px] font-mono px-2 py-0.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-500 font-bold shrink-0">🔒 Kilitli</span>
+          </div>
+
+          <!-- AGENT 5 -->
+          <div id="agent-card-5" class="p-2.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-center justify-between gap-3 transition-all duration-300">
+            <div class="flex items-center gap-2.5 flex-1 min-w-0">
+              <div id="agent-icon-5" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold shrink-0">
+                <span>5</span>
+              </div>
+              <div class="truncate">
+                <div class="flex items-center gap-2">
+                  <span class="font-extrabold text-white text-xs">5. Dinamik Tipografi & Altyazı Ajanı</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-yellow-950 text-yellow-300 border border-yellow-800 font-mono">Altın Vurgulu .ASS</span>
+                </div>
+                <p id="agent-desc-5" class="text-[10px] text-slate-400 truncate">Kelime zaman damgalarıyla konuşulan kelimenin altın renkle parladığı .ass dosyası oluşturur.</p>
+              </div>
+            </div>
+            <span id="agent-status-5" class="text-[10px] font-mono px-2 py-0.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-500 font-bold shrink-0">🔒 Kilitli</span>
+          </div>
+
+          <!-- AGENT 6 -->
+          <div id="agent-card-6" class="p-2.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-center justify-between gap-3 transition-all duration-300">
+            <div class="flex items-center gap-2.5 flex-1 min-w-0">
+              <div id="agent-icon-6" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold shrink-0">
+                <span>6</span>
+              </div>
+              <div class="truncate">
+                <div class="flex items-center gap-2">
+                  <span class="font-extrabold text-white text-xs">6. Ses Tasarımı & Ambiyans Ajanı</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-teal-950 text-teal-300 border border-teal-800 font-mono">BGM & -18dB Ducking</span>
+                </div>
+                <p id="agent-desc-6" class="text-[10px] text-slate-400 truncate">Müziği sese göre -18dB kısar (ducking), sahne geçişlerine SFX ekler.</p>
+              </div>
+            </div>
+            <span id="agent-status-6" class="text-[10px] font-mono px-2 py-0.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-500 font-bold shrink-0">🔒 Kilitli</span>
+          </div>
+
+          <!-- AGENT 7 -->
+          <div id="agent-card-7" class="p-2.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-center justify-between gap-3 transition-all duration-300">
+            <div class="flex items-center gap-2.5 flex-1 min-w-0">
+              <div id="agent-icon-7" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold shrink-0">
+                <span>7</span>
+              </div>
+              <div class="truncate">
+                <div class="flex items-center gap-2">
+                  <span class="font-extrabold text-white text-xs">7. Montaj & Render Modülü</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800 font-mono">FFmpeg Derleyici</span>
+                </div>
+                <p id="agent-desc-7" class="text-[10px] text-slate-400 truncate">Video klipleri, ducked miksajı ve altyazıları birleştirip nihai MP4'ü derler.</p>
+              </div>
+            </div>
+            <span id="agent-status-7" class="text-[10px] font-mono px-2 py-0.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-500 font-bold shrink-0">🔒 Kilitli</span>
+          </div>
+        </div>
+
+        <!-- Real-time Console Log Drawer -->
+        <div class="border border-slate-800 bg-[#04060b] rounded-2xl p-2.5 font-mono text-[10px] space-y-1">
+          <div class="flex items-center justify-between text-slate-400 border-b border-slate-800/80 pb-1">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-terminal text-amber-400"></i> Canlı Orkestratör & Ajan Konsolu</span>
+            <span id="mission-hud-timer" class="text-amber-400 font-bold">00:00</span>
+          </div>
+          <div id="mission-hud-log-stream" class="h-16 overflow-y-auto space-y-0.5 text-slate-300 leading-tight">
+            <div class="text-slate-500">Boru hattı başlatılması bekleniyor...</div>
           </div>
         </div>
 
@@ -1946,15 +2050,18 @@
             <i class="fa-solid fa-circle-check"></i>
           </div>
           <div>
-            <h5 class="text-sm font-extrabold text-white">🎉 Kurgu Başarıyla Tamamlandı!</h5>
-            <p class="text-[11px] text-emerald-300/80">Sahneler, ayet çerçevesi, ses dalgası ve SFX'ler zaman tüneline aktarıldı.</p>
+            <h5 class="text-sm font-extrabold text-white">🎉 Tüm 7 Ajan Görevini Kusursuz Tamamladı!</h5>
+            <p id="mission-complete-summary" class="text-[11px] text-emerald-300/80">Nihai MP4 video derlendi, zaman tüneline aktarıldı ve oynatmaya hazır.</p>
           </div>
           <div class="flex items-center justify-center gap-2 pt-1">
             <button onclick="finishMissionAndPlay()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 hover:scale-105 transition">
-              <i class="fa-solid fa-play"></i> <span>Senkronize Oynat</span>
+              <i class="fa-solid fa-play"></i> <span>Zaman Tünelinde Oynat</span>
             </button>
-            <button onclick="closeAiMissionModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition">
-              Kapat & İncele
+            <button id="btn-download-final-video" onclick="downloadFinalRenderedVideo()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-download"></i> <span>MP4 İndir</span>
+            </button>
+            <button onclick="closeAiMissionModal()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition">
+              Kapat
             </button>
           </div>
         </div>
@@ -3920,8 +4027,8 @@
 
     async function uploadDashboardAudio(file) {
       if (!file) return;
-      openAudioUploadModal();
-      handleModalAudioSelected(file);
+      openAiMissionModal('mp3');
+      handleMissionAudioSelected(file);
     }
 
     async function loadDashboardPresets() {
@@ -8452,176 +8559,258 @@
       }
     }
 
+    let currentAgentJobId = null;
+    let agentPollInterval = null;
+    let agentStartTime = 0;
+    let agentTimerInterval = null;
+    let lastRenderedFinalVideoUrl = null;
+    let lastLoggedPhase = null;
+
+    function appendAgentLog(msg, color = 'text-slate-300') {
+      const logStream = document.getElementById('mission-hud-log-stream');
+      if (!logStream) return;
+      const row = document.createElement('div');
+      const timeStr = new Date().toTimeString().split(' ')[0];
+      row.className = `${color} leading-tight`;
+      row.innerText = `[${timeStr}] ${msg}`;
+      logStream.appendChild(row);
+      logStream.scrollTop = logStream.scrollHeight;
+    }
+
+    function setAgentCardStatus(agentNum, state, descText) {
+      const card = document.getElementById(`agent-card-${agentNum}`);
+      const icon = document.getElementById(`agent-icon-${agentNum}`);
+      const status = document.getElementById(`agent-status-${agentNum}`);
+      const desc = document.getElementById(`agent-desc-${agentNum}`);
+      if (!card || !icon || !status) return;
+
+      if (descText && desc) desc.innerText = descText;
+
+      if (state === 'locked') {
+        card.className = 'p-2.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-center justify-between gap-3 transition-all duration-300 opacity-60';
+        icon.className = 'w-8 h-8 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center text-xs font-bold shrink-0';
+        icon.innerHTML = `<span>${agentNum}</span>`;
+        status.className = 'text-[10px] font-mono px-2 py-0.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-500 font-bold shrink-0';
+        status.innerText = '🔒 Kilitli';
+      } else if (state === 'running') {
+        card.className = 'p-2.5 rounded-2xl border border-amber-400 bg-gradient-to-r from-amber-950/40 via-slate-900 to-amber-950/40 ring-1 ring-amber-400/50 flex items-center justify-between gap-3 transition-all duration-300 shadow-md shadow-amber-500/10';
+        icon.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-xs font-bold shrink-0 animate-pulse';
+        icon.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+        status.className = 'text-[10px] font-mono px-2 py-0.5 rounded-lg border border-amber-400/60 bg-amber-500/20 text-amber-300 font-bold shrink-0 animate-pulse';
+        status.innerText = '⚡ Çalışıyor...';
+      } else if (state === 'success') {
+        card.className = 'p-2.5 rounded-2xl border border-emerald-500/40 bg-emerald-950/20 flex items-center justify-between gap-3 transition-all duration-300';
+        icon.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0';
+        icon.innerHTML = '<i class="fa-solid fa-check"></i>';
+        status.className = 'text-[10px] font-mono px-2 py-0.5 rounded-lg border border-emerald-500/40 bg-emerald-500/20 text-emerald-400 font-bold shrink-0';
+        status.innerText = '✅ Tamamlandı';
+      } else if (state === 'failed') {
+        card.className = 'p-2.5 rounded-2xl border border-rose-500/40 bg-rose-950/20 flex items-center justify-between gap-3 transition-all duration-300';
+        icon.className = 'w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xs font-bold shrink-0';
+        icon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+        status.className = 'text-[10px] font-mono px-2 py-0.5 rounded-lg border border-rose-500/40 bg-rose-500/20 text-rose-400 font-bold shrink-0';
+        status.innerText = '❌ Hata';
+      }
+    }
+
     async function startAiMissionPipeline() {
       const isTextTab = !document.getElementById('mission-panel-text').classList.contains('hidden');
-      const isAutoMode = document.getElementById('toggle-ai-auto-mode')?.checked ?? true;
       const selectedModel = document.getElementById('mission-input-model')?.value || 'gemini-3.5-flash-lite';
+
+      let visualStyle = '2d_anime';
+      let aspectRatio = '9:16';
+      let textContent = '';
+      let voiceId = 'en-US-AndrewMultilingualNeural';
+      let customTranscript = '';
+
+      const formData = new FormData();
+
+      if (isTextTab) {
+        textContent = document.getElementById('mission-input-text')?.value.trim() || '';
+        if (!textContent) {
+          alert('Lütfen bir video metni veya konusu girin.');
+          return;
+        }
+        visualStyle = document.getElementById('mission-input-style')?.value || '2d_anime';
+        aspectRatio = document.getElementById('mission-input-aspect')?.value || '9:16';
+        voiceId = document.getElementById('mission-input-voice')?.value || 'en-US-AndrewMultilingualNeural';
+
+        formData.append('text', textContent);
+        formData.append('voice_id', voiceId);
+      } else {
+        if (!selectedMissionAudioFile) {
+          alert('Lütfen bir MP3 veya WAV ses dosyası seçin.');
+          return;
+        }
+        visualStyle = document.getElementById('mission-mp3-style')?.value || '2d_anime';
+        aspectRatio = document.getElementById('mission-mp3-aspect')?.value || '9:16';
+        customTranscript = document.getElementById('mission-mp3-transcript')?.value.trim() || '';
+
+        formData.append('file', selectedMissionAudioFile);
+        if (customTranscript) formData.append('custom_transcript', customTranscript);
+      }
+
+      formData.append('visual_style', visualStyle);
+      formData.append('aspect_ratio', aspectRatio);
 
       // Switch to HUD View
       document.getElementById('ai-mission-view-input').classList.add('hidden');
       document.getElementById('ai-mission-view-hud').classList.remove('hidden');
       document.getElementById('mission-hud-complete').classList.add('hidden');
 
-      const card1 = document.getElementById('mission-step-card-1');
-      const card2 = document.getElementById('mission-step-card-2');
-      const card3 = document.getElementById('mission-step-card-3');
-      const icon1 = document.getElementById('mission-step-icon-1');
-      const icon2 = document.getElementById('mission-step-icon-2');
-      const icon3 = document.getElementById('mission-step-icon-3');
-      const status1 = document.getElementById('mission-step-status-1');
-      const status2 = document.getElementById('mission-step-status-2');
-      const status3 = document.getElementById('mission-step-status-3');
-      const desc1 = document.getElementById('mission-step-desc-1');
-      const desc2 = document.getElementById('mission-step-desc-2');
-      const desc3 = document.getElementById('mission-step-desc-3');
-      const title = document.getElementById('mission-hud-main-title');
-
-      function setStepActive(stepNum, statusText, descText) {
-        [card1, card2, card3].forEach((c, idx) => {
-          const num = idx + 1;
-          const ic = [icon1, icon2, icon3][idx];
-          const st = [status1, status2, status3][idx];
-          if (num < stepNum) {
-            c.className = 'p-3.5 rounded-2xl border border-emerald-500/40 bg-emerald-950/20 flex items-start gap-3 transition-all duration-300';
-            ic.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold shrink-0';
-            ic.innerHTML = '<i class="fa-solid fa-check"></i>';
-            st.className = 'text-[10px] font-mono text-emerald-400 font-bold';
-            st.innerText = 'Tamamlandı ✓';
-          } else if (num === stepNum) {
-            c.className = 'p-3.5 rounded-2xl border border-amber-400/80 bg-gradient-to-r from-amber-950/30 via-slate-900 to-amber-950/30 ring-2 ring-amber-400/30 flex items-start gap-3 transition-all duration-300 shadow-lg shadow-amber-500/10';
-            ic.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-sm font-bold shrink-0 animate-pulse';
-            ic.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-            st.className = 'text-[10px] font-mono text-amber-300 font-bold';
-            st.innerText = statusText || 'İşleniyor...';
-          } else {
-            c.className = 'p-3.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-start gap-3 transition-all duration-300 opacity-60';
-            ic.className = 'w-8 h-8 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center text-sm font-bold shrink-0';
-            ic.innerHTML = `<span>${num}</span>`;
-            st.className = 'text-[10px] font-mono text-slate-500';
-            st.innerText = 'Bekliyor';
-          }
-        });
+      // Reset all 7 agent cards to locked
+      for (let i = 1; i <= 7; i++) {
+        setAgentCardStatus(i, 'locked');
       }
 
+      const logStream = document.getElementById('mission-hud-log-stream');
+      if (logStream) logStream.innerHTML = '';
+      appendAgentLog('0. Orkestratör Ajan devrede. Katı Durum Kapısı (State Gatekeeper) etkinleştirildi.', 'text-amber-300 font-bold');
+
+      // Start timer
+      agentStartTime = Date.now();
+      if (agentTimerInterval) clearInterval(agentTimerInterval);
+      const timerEl = document.getElementById('mission-hud-timer');
+      agentTimerInterval = setInterval(() => {
+        if (!timerEl) return;
+        const elapsed = Math.floor((Date.now() - agentStartTime) / 1000);
+        const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+        const s = String(elapsed % 60).padStart(2, '0');
+        timerEl.innerText = `${m}:${s}`;
+      }, 1000);
+
       try {
-        let topicText = '';
-        let audioUrl = null;
-        let whisperWords = [];
-        let whisperSubtitles = [];
+        setAgentCardStatus(1, 'running', 'Ajan 1 başlatılıyor: Faster-Whisper fonetik hizalama...');
+        appendAgentLog('Sunucuya 7 ajanlı iş isteği iletiliyor...', 'text-slate-400');
 
-        if (isTextTab) {
-          topicText = document.getElementById('mission-input-text').value.trim();
-          if (!topicText) throw new Error('Lütfen bir metin veya konu girin.');
-          title.innerText = '1. Görev: Metin & Sahne Analizi Yürütülüyor...';
-          setStepActive(1, 'Analiz Ediliyor...', 'Metin frekansları taranıyor, ilk 30 saniye ve sahne devamlılığı planlanıyor.');
-        } else {
-          if (!selectedMissionAudioFile) throw new Error('Lütfen bir MP3 veya ses dosyası seçin.');
-          title.innerText = '1. Görev: Whisper Ses Dosyasını Çözümlüyor...';
-          setStepActive(1, 'Ses Çözümleniyor...', 'Whisper milisaniye fonetik zamanlaması taranıyor ve ses kaydından metin çıkarılıyor...');
+        const startRes = await fetch('/api/multi-agent/start', {
+          method: 'POST',
+          body: formData
+        });
 
-          const customTrans = document.getElementById('mission-mp3-transcript')?.value.trim() || '';
-          const audioForm = new FormData();
-          audioForm.append('file', selectedMissionAudioFile);
-          if (customTrans) audioForm.append('transcript', customTrans);
+        if (!startRes.ok) {
+          const errData = await startRes.json().catch(() => ({}));
+          throw new Error(errData.detail || '7 Ajanlı video hattı başlatılamadı.');
+        }
 
-          const transRes = await fetch('/api/ai-director/transcribe-audio', {
-            method: 'POST',
-            body: audioForm
-          });
+        const startData = await startRes.json();
+        currentAgentJobId = startData.job_id;
+        appendAgentLog(`İş ID atandı: ${currentAgentJobId}. Orkestratör sıralı ajan zincirini yönetiyor.`, 'text-cyan-400');
 
-          if (!transRes.ok) {
-            const errData = await transRes.json().catch(() => ({}));
-            throw new Error(errData.detail || 'Ses analizi ve transkripsiyon başarısız.');
+        lastLoggedPhase = null;
+
+        // Start polling agent status
+        if (agentPollInterval) clearInterval(agentPollInterval);
+        agentPollInterval = setInterval(async () => {
+          try {
+            const statusRes = await fetch(`/api/multi-agent/status/${currentAgentJobId}`);
+            if (!statusRes.ok) return;
+            const data = await statusRes.json();
+            updateAgentHudFromState(data);
+          } catch (pollErr) {
+            console.warn('[Multi-Agent HUD] Polling notice:', pollErr);
           }
-
-          const transData = await transRes.json();
-          topicText = transData.text || customTrans || selectedMissionAudioFile.name.replace(/\.[^/.]+$/, "");
-          audioUrl = transData.audio_url || '/public/audio.mp3';
-          whisperWords = transData.words || [];
-          whisperSubtitles = transData.subtitles || [];
-
-          title.innerText = '1. Görev: Metin & Sahne Analizi Yürütülüyor...';
-          setStepActive(1, 'Analiz Ediliyor...', 'Çıkarılan metin frekansları taranıyor ve 3 sahnelik kurgu tasarlanıyor.');
-        }
-
-        // Call AI Director Propose endpoint
-        const propRes = await fetch('/api/ai-director/propose', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: topicText, model: selectedModel, auto_mode: isAutoMode })
-        });
-
-        if (!propRes.ok) {
-          const errData = await propRes.json().catch(() => ({}));
-          throw new Error(errData.detail || 'Kurgu analizi başarısız');
-        }
-
-        const proposalData = await propRes.json();
-        proposalData.audio_url = audioUrl;
-        proposalData.whisper_words = whisperWords;
-        proposalData.whisper_subtitles = whisperSubtitles;
-
-        // If Auto Mode is OFF -> present proposal view to user!
-        if (!isAutoMode) {
-          renderProposalModalView(proposalData);
-          return;
-        }
-
-        // Auto Mode is ON -> Proceed immediately!
-        title.innerText = '2. Görev: 3x 10s Kesintisiz 2D Animasyon Üretiliyor...';
-        setStepActive(2, 'Kurgulanıyor...', 'Studio Ghibli 2D Anime estetiğinde kesintisiz devamlılıkla 30s video sentezleniyor.');
-
-        currentAiProposal = proposalData;
-        selectedProposalStyle = (proposalData.style_options && proposalData.style_options[0]?.id) || '2d_anime';
-
-        const execRes = await fetch('/api/ai-director/execute-plan', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            selected_style: selectedProposalStyle,
-            scenes: proposalData.proposed_scenes,
-            narration: topicText,
-            custom_instructions: '',
-            audio_url: audioUrl,
-            whisper_words: whisperWords,
-            whisper_subtitles: whisperSubtitles
-          })
-        });
-
-        if (!execRes.ok) {
-          const errData = await execRes.json().catch(() => ({}));
-          throw new Error(errData.detail || '2D Kurgu üretimi başarısız');
-        }
-
-        // 3. GÖREV: UYGULAMA & ZAMAN TÜNELİNE DAĞITIM
-        title.innerText = '3. Görev Yürütülüyor: Zaman Tüneline Dağıtım...';
-        setStepActive(3, 'Dağıtılıyor...', '2D Animasyon videoları ve katmanlar sıfır gecikmeyle yerleştiriliyor.');
-
-        await loadTimelineData();
-        renderTimeline();
-        renderLivePreviewCanvas();
-        renderSceneInspector();
-        renderLeftScenesList();
-        updateTimeDisplays();
-
-        [card1, card2, card3].forEach((c, idx) => {
-          const ic = [icon1, icon2, icon3][idx];
-          const st = [status1, status2, status3][idx];
-          c.className = 'p-3.5 rounded-2xl border border-emerald-500/40 bg-emerald-950/20 flex items-start gap-3 transition-all duration-300';
-          ic.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold shrink-0';
-          ic.innerHTML = '<i class="fa-solid fa-check"></i>';
-          st.className = 'text-[10px] font-mono text-emerald-400 font-bold';
-          st.innerText = 'Tamamlandı ✓';
-        });
-
-        title.innerText = '🎉 3 Aşamalı Kurgu Başarıyla Tamamlandı!';
-        document.getElementById('mission-hud-complete').classList.remove('hidden');
+        }, 1000);
 
       } catch (err) {
+        clearInterval(agentTimerInterval);
+        appendAgentLog(`Hata: ${err.message}`, 'text-rose-400 font-bold');
         alert('Hata: ' + err.message);
         document.getElementById('ai-mission-view-input').classList.remove('hidden');
         document.getElementById('ai-mission-view-hud').classList.add('hidden');
       }
+    }
+
+    function updateAgentHudFromState(data) {
+      const title = document.getElementById('mission-hud-main-title');
+      const phase = data.current_phase;
+      const logs = data.agent_logs || {};
+
+      // Phase-to-agent mapping with ironclad sequence
+      const phaseOrder = [
+        'phase_0_idle',
+        'phase_1_transcribed',
+        'phase_2_storyboarded',
+        'phase_3_art_directed',
+        'phase_4_assets_generated',
+        'phase_5_subtitles_composed',
+        'phase_6_audio_designed',
+        'phase_7_assembled'
+      ];
+
+      const currentIdx = phaseOrder.indexOf(phase);
+
+      if (lastLoggedPhase !== phase) {
+        lastLoggedPhase = phase;
+        appendAgentLog(`Durum Geçişi: ${phase} onaylandı. Sonraki ajan için kapı açıldı.`, 'text-amber-400');
+      }
+
+      // Update Agent 1 to 7 statuses
+      for (let i = 1; i <= 7; i++) {
+        const agentLog = logs[i] || logs[String(i)];
+        if (i < currentIdx) {
+          const dur = agentLog?.duration_sec ? `(${agentLog.duration_sec}s)` : '';
+          setAgentCardStatus(i, 'success', `Görev başarıyla tamamlandı ${dur}. Kontrat onaylandı.`);
+        } else if (i === currentIdx) {
+          // This agent is actively running
+          const agentNames = [
+            '',
+            '1. Ajan: Faster-Whisper fonetik hizalama...',
+            '2. Ajan: 2-8s ritim ve sahne beat segmentasyonu...',
+            '3. Ajan: Sinematik prompt mühendisliği & devamlılık...',
+            '4. Ajan: Gemini Omni / Video klipleri sentezleniyor...',
+            '5. Ajan: Renk vurgulu altın .ass altyazısı oluşturuluyor...',
+            '6. Ajan: BGM -18dB Ducking & SFX miksleniyor...',
+            '7. Ajan: FFmpeg final video montajı alınıyor...'
+          ];
+          setAgentCardStatus(i, 'running', agentNames[i] || 'Görev yürütülüyor...');
+          if (title) title.innerText = `Orkestratör: ${agentNames[i]}`;
+        } else {
+          setAgentCardStatus(i, 'locked', `Kilitli: Önceki ajan (${i-1}) görevini tamamlamadan çalışamaz.`);
+        }
+      }
+
+      // If phase 7 is completed
+      if (phase === 'phase_7_assembled') {
+        if (agentPollInterval) clearInterval(agentPollInterval);
+        if (agentTimerInterval) clearInterval(agentTimerInterval);
+
+        for (let i = 1; i <= 7; i++) {
+          setAgentCardStatus(i, 'success');
+        }
+
+        if (title) title.innerText = '🎉 Tüm 7 Ajan Görevini Kusursuz Tamamladı!';
+        appendAgentLog('🎉 Tüm 7 ajan görevini bitirdi. Final MP4 render edildi ve doğrulandı!', 'text-emerald-400 font-bold');
+
+        lastRenderedFinalVideoUrl = data.assembly?.final_video_url || `/public/videos/final_${data.project_id}.mp4`;
+
+        const summaryEl = document.getElementById('mission-complete-summary');
+        if (summaryEl && data.assembly) {
+          const mb = (data.assembly.file_size_bytes / (1024 * 1024)).toFixed(2);
+          summaryEl.innerText = `Nihai Video: ${data.assembly.duration.toFixed(1)} sn • ${data.assembly.resolution} • ${mb} MB • Sıfır hata ile derlendi.`;
+        }
+
+        document.getElementById('mission-hud-complete')?.classList.remove('hidden');
+
+        // Automatically reload timeline
+        loadTimelineData().then(() => {
+          renderTimeline();
+          renderLivePreviewCanvas();
+          renderSceneInspector();
+          renderLeftScenesList();
+          updateTimeDisplays();
+        });
+
+        showToast('🎬 7 Ajanlı video başarıyla üretildi ve zaman tüneline aktarıldı!', 'success');
+      }
+    }
+
+    function downloadFinalRenderedVideo() {
+      if (!lastRenderedFinalVideoUrl) {
+        showToast('Henüz video çıktısı bulunamadı.', 'warning');
+        return;
+      }
+      window.open(lastRenderedFinalVideoUrl, '_blank');
     }
 
     function finishMissionAndPlay() {

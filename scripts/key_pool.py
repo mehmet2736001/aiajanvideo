@@ -242,47 +242,47 @@ class KeyPoolManager:
             if m not in models_to_try:
                 models_to_try.append(m)
 
-        for current_model in models_to_try:
+        for current_model in models_to_try[:2]:  # Try primary and first fallback
             errors = []
-            for key_item in active_keys:
+            for key_item in active_keys[:6]:  # Try top 6 healthiest keys
                 api_key = key_item["api_key"]
                 url = f"https://generativelanguage.googleapis.com/v1beta/models/{current_model}:generateContent?key={api_key}"
             
-            payload = {
-                "contents": [{"parts": [{"text": prompt}]}]
-            }
-            if system_instruction:
-                payload["systemInstruction"] = {"parts": [{"text": system_instruction}]}
+                payload = {
+                    "contents": [{"parts": [{"text": prompt}]}]
+                }
+                if system_instruction:
+                    payload["systemInstruction"] = {"parts": [{"text": system_instruction}]}
 
-            try:
-                res = requests.post(url, json=payload, timeout=15)
-                if res.status_code == 200:
-                    data = res.json()
-                    text = data["candidates"][0]["content"]["parts"][0]["text"]
-                    key_item["daily_request_count"] += 1
-                    key_item["success_count"] = key_item.get("success_count", 0) + 1
-                    key_item["last_used_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
-                    key_item["status"] = "healthy"
-                    self.save_keys()
-                    return text, f"{key_item['key_name']} ({current_model})"
-                else:
-                    err = res.json().get("error", {}).get("message", res.text[:80])
+                try:
+                    res = requests.post(url, json=payload, timeout=4)
+                    if res.status_code == 200:
+                        data = res.json()
+                        text = data["candidates"][0]["content"]["parts"][0]["text"]
+                        key_item["daily_request_count"] += 1
+                        key_item["success_count"] = key_item.get("success_count", 0) + 1
+                        key_item["last_used_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+                        key_item["status"] = "healthy"
+                        self.save_keys()
+                        return text, f"{key_item['key_name']} ({current_model})"
+                    else:
+                        err = res.json().get("error", {}).get("message", res.text[:80])
+                        key_item["error_count"] = key_item.get("error_count", 0) + 1
+                        key_item["last_error_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+                        key_item["last_error_message"] = err
+                        errors.append(f"{key_item['id']} ({err[:40]})")
+                        if res.status_code in [429, 503]:
+                            key_item["status"] = "rate_limited"
+                        self.save_keys()
+                        continue
+                except Exception as e:
                     key_item["error_count"] = key_item.get("error_count", 0) + 1
-                    key_item["last_error_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
-                    key_item["last_error_message"] = err
-                    errors.append(f"{key_item['id']} ({err[:40]})")
-                    if res.status_code in [429, 503]:
-                        key_item["status"] = "rate_limited"
+                    key_item["last_error_message"] = str(e)
+                    errors.append(f"{key_item['id']} ({str(e)[:40]})")
                     self.save_keys()
                     continue
-            except Exception as e:
-                key_item["error_count"] = key_item.get("error_count", 0) + 1
-                key_item["last_error_message"] = str(e)
-                errors.append(f"{key_item['id']} ({str(e)[:40]})")
-                self.save_keys()
-                continue
 
-        print(f"[KeyPool] {current_model} ile tm anahtarlar denendi, sonu alnamad. Hatalar: {len(errors)}")
+            print(f"[KeyPool] {current_model} ile tüm anahtarlar denendi, sonuç alınamadı. Hatalar: {len(errors)}")
 
         return None, None
 

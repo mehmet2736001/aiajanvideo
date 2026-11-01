@@ -2593,6 +2593,102 @@ def api_generate_all_2d_animations(req: dict = {}):
     return {"success": True, "scenes": scenes, "count": len(results)}
 
 # ==========================================
+# MULTI-AGENT VIDEO PIPELINE (7-AGENT SYSTEM)
+# ==========================================
+from scripts.multi_agent import MasterOrchestrator
+
+orchestrator = MasterOrchestrator()
+
+@app.post("/api/multi-agent/start")
+async def api_multi_agent_start(
+    background_tasks: BackgroundTasks,
+    file: Optional[UploadFile] = File(None),
+    audio_path: Optional[str] = Form(None),
+    text: Optional[str] = Form(None),
+    voice_id: Optional[str] = Form("en-US-AndrewMultilingualNeural"),
+    visual_style: Optional[str] = Form("2d_anime"),
+    aspect_ratio: Optional[str] = Form("9:16"),
+    custom_transcript: Optional[str] = Form(None)
+):
+    job_id = str(uuid.uuid4())[:8]
+
+    # Resolve audio file
+    final_audio_path = os.path.join(PUBLIC_DIR, "audio.mp3")
+    effective_transcript = custom_transcript or ""
+
+    if file and file.filename:
+        ext = os.path.splitext(file.filename)[1].lower() if file.filename else ".mp3"
+        temp_path = os.path.join(PUBLIC_DIR, f"upload_{job_id}{ext}")
+        with open(temp_path, "wb") as buf:
+            shutil.copyfileobj(file.file, buf)
+        try:
+            cmd = ["ffmpeg", "-y", "-i", temp_path, "-ac", "1", "-ar", "24000", final_audio_path]
+            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+        except Exception:
+            shutil.copyfile(temp_path, final_audio_path)
+        if os.path.exists(temp_path):
+            try:
+                os.remove(temp_path)
+            except Exception:
+                pass
+    elif audio_path and os.path.exists(audio_path):
+        final_audio_path = audio_path
+    elif text and text.strip():
+        # Text-to-speech synthesis if text prompt provided
+        effective_transcript = text.strip()
+        try:
+            from scripts.tts_engine import generate_full_narration_pipeline
+            res = generate_full_narration_pipeline(
+                narration_text=effective_transcript,
+                provider="edge_tts",
+                voice_id=voice_id or "en-US-AndrewMultilingualNeural",
+                emotion_tone="documentary",
+                lang="tr"
+            )
+            final_audio_path = os.path.join(PUBLIC_DIR, "audio.mp3")
+        except Exception as tts_err:
+            print(f"[Multi-Agent API] TTS synthesis notice: {tts_err}")
+            # Fallback gTTS
+            try:
+                from gtts import gTTS
+                tts = gTTS(text=effective_transcript, lang="tr")
+                tts.save(final_audio_path)
+            except Exception as ge:
+                print(f"[Multi-Agent API] gTTS error: {ge}")
+    elif not os.path.exists(final_audio_path):
+        raise HTTPException(status_code=400, detail="Lütfen bir ses dosyası (.mp3 / .wav) yükleyin veya metin girin.")
+
+    def run_orchestrator_job():
+        try:
+            orchestrator.execute_pipeline(
+                audio_file=final_audio_path,
+                project_id=job_id,
+                aspect_ratio=aspect_ratio or "9:16",
+                visual_style=visual_style or "2d_anime",
+                custom_transcript=effective_transcript or None
+            )
+        except Exception as e:
+            print(f"[Multi-Agent API] Job {job_id} error: {e}")
+
+    background_tasks.add_task(run_orchestrator_job)
+
+    return {
+        "success": True,
+        "job_id": job_id,
+        "message": "7 Ajanlı video üretim hattı başlatıldı.",
+        "aspect_ratio": aspect_ratio,
+        "visual_style": visual_style
+    }
+
+@app.get("/api/multi-agent/status/{job_id}")
+def api_multi_agent_status(job_id: str):
+    state = orchestrator.get_job_state(job_id)
+    if not state:
+        raise HTTPException(status_code=404, detail="Ajan işi bulunamadı.")
+    return state.dict()
+
+
+# ==========================================
 # INTERACTIVE AI DIRECTOR & 2D CONTINUITY ENGINE
 # ==========================================
 @app.post("/api/ai-director/transcribe-audio")

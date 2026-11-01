@@ -1,0 +1,192 @@
+# -*- coding: utf-8 -*-
+"""
+Multi-Agent Video Production System - State & Schema Definitions
+Strict Pydantic models and state machine phases to enforce sequential agent execution.
+"""
+from enum import Enum
+from typing import List, Optional, Dict, Any
+from pydantic import BaseModel, Field
+import time
+
+
+class PipelinePhase(str, Enum):
+    PHASE_0_IDLE = "phase_0_idle"
+    PHASE_1_TRANSCRIBED = "phase_1_transcribed"
+    PHASE_2_STORYBOARDED = "phase_2_storyboarded"
+    PHASE_3_ART_DIRECTED = "phase_3_art_directed"
+    PHASE_4_ASSETS_GENERATED = "phase_4_assets_generated"
+    PHASE_5_SUBTITLES_COMPOSED = "phase_5_subtitles_composed"
+    PHASE_6_AUDIO_DESIGNED = "phase_6_audio_designed"
+    PHASE_7_ASSEMBLED = "phase_7_assembled"
+
+
+class AgentStatus(str, Enum):
+    PENDING = "pending"
+    RUNNING = "running"
+    SUCCESS = "success"
+    FAILED = "failed"
+    SKIPPED = "skipped"
+
+
+# ==========================================
+# 1. TRANSCRIBE AGENT SCHEMAS
+# ==========================================
+class WordTiming(BaseModel):
+    word: str
+    start: float
+    end: float
+    confidence: float = 1.0
+
+
+class TranscriptionData(BaseModel):
+    raw_text: str
+    clean_text: str
+    duration: float
+    words: List[WordTiming]
+    language: str = "tr"
+    created_at: str = Field(default_factory=lambda: time.strftime("%Y-%m-%d %H:%M:%S"))
+
+
+# ==========================================
+# 2. STORYBOARD & DIRECTOR AGENT SCHEMAS
+# ==========================================
+class SceneBeat(BaseModel):
+    scene_id: int
+    start: float
+    end: float
+    duration: float
+    spoken_text: str
+    concept: str
+    mood: str
+    camera_movement: str = "slow_zoom_in"
+    emphasis_keywords: List[str] = Field(default_factory=list)
+    layout_type: str = "cinematic_ambient"
+
+
+class StoryboardData(BaseModel):
+    scenes: List[SceneBeat]
+    total_scenes: int
+    total_duration: float
+    emotional_arc: str = "inspiring"
+
+
+# ==========================================
+# 3. ART DIRECTOR AGENT SCHEMAS
+# ==========================================
+class ScenePrompt(BaseModel):
+    scene_id: int
+    visual_prompt: str
+    negative_prompt: str = "blurry, low quality, distorted, extra limbs, ugly, text, watermark"
+    aspect_ratio: str = "9:16"
+    camera_movement: str = "slow_zoom_in"
+    style: str = "2d_anime"
+    continuity_notes: str = ""
+
+
+class ArtDirectionData(BaseModel):
+    prompts: List[ScenePrompt]
+    global_style: str = "2d_anime"
+    color_palette: str = "golden sunbeams, rich emerald and deep earth tones"
+
+
+# ==========================================
+# 4. MEDIA WORKER AGENT SCHEMAS
+# ==========================================
+class SceneMediaAsset(BaseModel):
+    scene_id: int
+    video_file: str
+    video_url: str
+    thumbnail_file: Optional[str] = None
+    duration: float
+    width: int = 720
+    height: int = 1280
+    verified: bool = False
+    file_size_bytes: int = 0
+
+
+class MediaWorkerData(BaseModel):
+    assets: List[SceneMediaAsset]
+    all_verified: bool = False
+    total_size_bytes: int = 0
+
+
+# ==========================================
+# 5. TYPOGRAPHY & SUBTITLE AGENT SCHEMAS
+# ==========================================
+class TypographyData(BaseModel):
+    ass_file_path: str
+    ass_url: str
+    subtitle_chunks: List[Dict[str, Any]] = Field(default_factory=list)
+    style_name: str = "TikTok_Gold_Pop"
+    font_name: str = "Arial"
+    primary_color: str = "&H00FFFFFF"
+    highlight_color: str = "&H00D7FF"  # Vivid gold/yellow
+
+
+# ==========================================
+# 6. AUDIO & SFX DESIGN AGENT SCHEMAS
+# ==========================================
+class SfxEvent(BaseModel):
+    timestamp: float
+    sfx_file: str
+    volume: float = 0.6
+    description: str = "transition"
+
+
+class AudioDesignData(BaseModel):
+    mixed_audio_file: str
+    mixed_audio_url: str
+    bgm_file: str
+    bgm_volume_ducked_db: float = -18.0
+    sfx_events: List[SfxEvent] = Field(default_factory=list)
+    total_duration: float
+
+
+# ==========================================
+# 7. ASSEMBLY & RENDER AGENT SCHEMAS
+# ==========================================
+class AssemblyData(BaseModel):
+    final_video_file: str
+    final_video_url: str
+    duration: float
+    file_size_bytes: int
+    resolution: str = "720x1280"
+    render_time_sec: float = 0.0
+
+
+# ==========================================
+# MASTER PROJECT STATE
+# ==========================================
+class AgentStepLog(BaseModel):
+    agent_id: int
+    agent_name: str
+    status: AgentStatus = AgentStatus.PENDING
+    started_at: Optional[str] = None
+    finished_at: Optional[str] = None
+    duration_sec: float = 0.0
+    error: Optional[str] = None
+    details: Dict[str, Any] = Field(default_factory=dict)
+
+
+class ProjectState(BaseModel):
+    project_id: str
+    audio_file: str
+    aspect_ratio: str = "9:16"
+    visual_style: str = "2d_anime"
+    custom_transcript: Optional[str] = None
+
+    current_phase: PipelinePhase = PipelinePhase.PHASE_0_IDLE
+    agent_logs: Dict[int, AgentStepLog] = Field(default_factory=dict)
+
+    # Agent Data Containers
+    transcription: Optional[TranscriptionData] = None
+    storyboard: Optional[StoryboardData] = None
+    art_direction: Optional[ArtDirectionData] = None
+    media_assets: Optional[MediaWorkerData] = None
+    typography: Optional[TypographyData] = None
+    audio_design: Optional[AudioDesignData] = None
+    assembly: Optional[AssemblyData] = None
+
+    errors: List[str] = Field(default_factory=list)
+    created_at: str = Field(default_factory=lambda: time.strftime("%Y-%m-%d %H:%M:%S"))
+    updated_at: str = Field(default_factory=lambda: time.strftime("%Y-%m-%d %H:%M:%S"))
