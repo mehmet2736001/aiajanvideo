@@ -76,17 +76,17 @@ class StoryboardData(BaseModel):
 class ScenePrompt(BaseModel):
     scene_id: int
     visual_prompt: str
-    negative_prompt: str = "blurry, low quality, distorted, extra limbs, ugly, text, watermark"
+    negative_prompt: str = "cartoon, anime, 3d render, illustration, drawing, flat vector, blurry, distorted, watermark, text"
     aspect_ratio: str = "9:16"
-    camera_movement: str = "slow_zoom_in"
-    style: str = "2d_anime"
+    camera_movement: str = "slow_push_in"
+    style: str = "cinematic_photoreal"
     continuity_notes: str = ""
 
 
 class ArtDirectionData(BaseModel):
     prompts: List[ScenePrompt]
-    global_style: str = "2d_anime"
-    color_palette: str = "golden sunbeams, rich emerald and deep earth tones"
+    global_style: str = "cinematic_photoreal"
+    color_palette: str = "35mm natural tones, volumetric golden light, organic depth"
 
 
 # ==========================================
@@ -172,7 +172,7 @@ class ProjectState(BaseModel):
     project_id: str
     audio_file: str
     aspect_ratio: str = "9:16"
-    visual_style: str = "2d_anime"
+    visual_style: str = "cinematic_photoreal"
     custom_transcript: Optional[str] = None
 
     current_phase: PipelinePhase = PipelinePhase.PHASE_0_IDLE

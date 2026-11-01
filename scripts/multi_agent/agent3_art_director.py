@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Agent 3: Görsel Sanat Yönetmeni Ajanı (Art Director & Prompt Engineer)
-Görevi: Sahne konseptlerini video üretim modellerinin (Runway, Kling, Flux, Gemini Omni)
-en iyi anlayacağı İngilizce sinematik prompt'lara çevirmek ve görsel devamlılığı sağlamak.
-Girdi: 2. Ajan'dan gelen StoryboardData ve seçilen görsel tarz.
-Çıktı: Sahne bazlı İngilizce video üretim promptları (ArtDirectionData).
+Agent 3: Görsel Sanat Yönetmeni Ajanı (Art Director & Cinematic Prompt Engineer)
+Görevi: Sahne konseptlerini video difüzyon modellerinin (Google Veo 2, Kling 1.5, Runway Gen-3, Flux.1)
+en iyi anlayacağı sinematik, fotogerçekçi teknik İngilizce kamera ve ışık promptlarına dönüştürmek.
+Girdi: 2. Ajan'dan gelen StoryboardData ve seçilen sinematik görsel tarz.
+Çıktı: Sahne bazlı İngilizce sinematik video üretim promptları (ArtDirectionData).
 """
 import json
 from typing import Optional, Callable, List
 from .base_agent import BaseAgent
 from .state import ProjectState, PipelinePhase, ArtDirectionData, ScenePrompt
+from scripts.animation_engine import CINEMATIC_STYLES, NEGATIVE_PROMPT_CINEMATIC, normalize_style_key
 
 
 class ArtDirectorAgent(BaseAgent):
@@ -27,20 +28,21 @@ class ArtDirectorAgent(BaseAgent):
         on_progress: Optional[Callable[[int, str, dict], None]] = None
     ) -> ProjectState:
         storyboard = state.storyboard
-        style = state.visual_style or "2d_anime"
+        raw_style = state.visual_style or "cinematic_photoreal"
+        clean_style = normalize_style_key(raw_style)
         aspect_ratio = state.aspect_ratio or "9:16"
 
         if on_progress:
             on_progress(self.agent_id, "running", {
-                "message": f"Sanat yönetimi başlatıldı: '{style}' estetiğinde {len(storyboard.scenes)} sahne için promptlar hazırlanıyor..."
+                "message": f"Sinematik sanat yönetimi devrede: '{clean_style}' fotogerçekçi formatında {len(storyboard.scenes)} sahne promptu hazırlanıyor..."
             })
 
-        prompts = self._craft_prompts(storyboard.scenes, style, aspect_ratio)
+        prompts = self._craft_prompts(storyboard.scenes, clean_style, aspect_ratio)
 
         state.art_direction = ArtDirectionData(
             prompts=prompts,
-            global_style=style,
-            color_palette="divine gold, emerald robes, natural misty earth tones"
+            global_style=clean_style,
+            color_palette="cinematic 35mm tones, warm volumetric golden light, deep organic contrast"
         )
 
         return state
@@ -53,21 +55,20 @@ class ArtDirectorAgent(BaseAgent):
     ) -> List[ScenePrompt]:
         from scripts.key_pool import pool
 
-        style_descriptions = {
-            "2d_anime": "Studio Ghibli 2D anime aesthetic, hand-drawn anime background, vibrant natural colors, soft volumetric lighting, Makoto Shinkai sky",
-            "2d_dervish_miniature": "Traditional Ottoman Persian Islamic miniature art style, intricate gold foil leaf tezhib motifs, mystical spiritual depth",
-            "cinematic_photoreal": "Hyper-realistic cinematic 8k, RED Komodo 6K shot, photorealistic volumetric sunbeams, shallow depth of field, anamorphic bokeh",
-            "2d_watercolor": "Artistic lyrical watercolor painting, flowing ink splashes, pastel tones, divine light wash"
-        }
-        style_prompt_core = style_descriptions.get(style, style_descriptions["2d_anime"])
+        clean_style = normalize_style_key(style)
+        style_prompt_core = CINEMATIC_STYLES[clean_style]
 
         prompts_result = []
 
         system_instruction = (
-            "You are a World-Class Art Director & Cinematic AI Prompt Engineer. "
-            "Convert each scene beat into a hyper-detailed English video generation prompt. "
-            "CRITICAL: Maintain absolute character and environmental continuity between sequential scenes. "
-            "Scene 2 must visually pick up from Scene 1's closing frame. Scene 3 continues to the climactic wisdom/ayah frame. "
+            "You are a World-Class National Geographic & BBC Earth Cinematographer and AI Prompt Director "
+            "for high-end Video Diffusion Engines (Google Veo 2, Kling 1.5, Runway Gen-3, Flux.1). "
+            "Convert each scene beat into a hyper-detailed, photorealistic English video generation prompt for documentary B-roll. "
+            "Include technical camera specs: 35mm anamorphic or macro lens, f/1.4 aperture, cinematic lighting, "
+            "volumetric god rays, shallow depth of field, natural motion blur, authentic film grain, and subtle camera movement. "
+            "CRITICAL: Maintain absolute character, tone, and environmental continuity between sequential scenes. "
+            "Scene 2 must visually pick up from Scene 1's closing frame. "
+            "CRITICAL: NEVER use cartoon, anime, 3d render, illustration, drawing, flat vector, or painting terms. "
             "OUTPUT STRICT VALID JSON ONLY."
         )
 
@@ -86,7 +87,7 @@ class ArtDirectorAgent(BaseAgent):
 Visual Style Core: {style_prompt_core}
 Aspect Ratio: {aspect_ratio}
 
-Scenes to engineer:
+Scenes to engineer for 35mm photorealistic documentary video:
 {json.dumps(user_input_scenes, ensure_ascii=False, indent=2)}
 
 Please return this JSON format:
@@ -94,15 +95,15 @@ Please return this JSON format:
   "prompts": [
     {{
       "scene_id": 1,
-      "visual_prompt": "Ultra-detailed English prompt describing characters, lighting, environment, camera angle...",
-      "negative_prompt": "blurry, low quality, distorted, watermark, deformed limbs, text",
-      "camera_movement": "slow zoom in"
+      "visual_prompt": "Ultra-detailed photorealistic English prompt describing subject, ARRI Alexa 65 camera, 35mm lens, volumetric lighting, authentic textures...",
+      "negative_prompt": "cartoon, anime, 3d render, illustration, drawing, flat vector, blurry, distorted, watermark, text",
+      "camera_movement": "slow cinematic push in"
     }}
   ]
 }}
 """
         try:
-            raw_res, _ = pool.query_with_rotation(query, system_instruction=system_instruction, model="gemini-2.5-flash")
+            raw_res, _ = pool.query_with_rotation(query, system_instruction=system_instruction, model="gemini-3.5-flash-lite")
             cleaned = raw_res.strip()
             if "```json" in cleaned:
                 cleaned = cleaned.split("```json")[1].split("```")[0].strip()
@@ -114,15 +115,15 @@ Please return this JSON format:
             if ai_prompts and len(ai_prompts) >= len(scenes):
                 for idx, ap in enumerate(ai_prompts):
                     s_id = idx + 1
-                    cont_note = "Establishing opening scene" if idx == 0 else f"Continuity from scene {idx}"
+                    cont_note = "Establishing opening scene" if idx == 0 else f"Photoreal continuity from scene {idx}"
                     prompts_result.append(
                         ScenePrompt(
                             scene_id=s_id,
                             visual_prompt=f"{ap.get('visual_prompt', '')}, {style_prompt_core}, {aspect_ratio}",
-                            negative_prompt=ap.get("negative_prompt", "blurry, distorted, low quality, watermark, text"),
+                            negative_prompt=NEGATIVE_PROMPT_CINEMATIC,
                             aspect_ratio=aspect_ratio,
                             camera_movement=ap.get("camera_movement", scenes[idx].camera_movement),
-                            style=style,
+                            style=clean_style,
                             continuity_notes=cont_note
                         )
                     )
@@ -130,39 +131,86 @@ Please return this JSON format:
         except Exception as e:
             print(f"[Art Director Agent] Gemini prompt engineering fallback: {e}")
 
-        # High-End Heuristic Fallback
+        # High-End Heuristic Fallback matching the selected cinematic documentary style
         for idx, s in enumerate(scenes):
             s_id = s.scene_id
-            if idx == 0:
-                p_text = (
-                    f"A humble Sufi dervish with green robe and wooden staff walking along a winding mountain path "
-                    f"on a bright sunny day, majestic mountain vistas, streaming golden sunbeams, gentle mountain breeze. "
-                    f"Establishing wide shot, {style_prompt_core}, aspect ratio {aspect_ratio}"
-                )
-                cont = "Establishing opening scene"
-            elif idx == len(scenes) - 1:
-                p_text = (
-                    f"Ancient illuminated golden manuscript open on a rustic wooden stand in a tranquil sacred library, "
-                    f"soft celestial light illuminating gold-leaf calligraphy and intricate tezhib floral borders, particles of light floating. "
-                    f"Slow cinematic push, {style_prompt_core}, aspect ratio {aspect_ratio}"
-                )
-                cont = f"Seamless continuation from scene {idx} ending into sacred revelation"
-            else:
-                p_text = (
-                    f"The same Sufi dervish continuing his contemplative journey on a stone bridge overlooking a cascading mountain stream, "
-                    f"same emerald robe, serene expression, warm atmospheric sunset lighting, continuous sequential shot from previous scene {idx}. "
-                    f"Slow pan camera movement, {style_prompt_core}, aspect ratio {aspect_ratio}"
-                )
-                cont = f"Continuous sequential motion matching character and colors from scene {idx}"
+            if clean_style == "historical_documentary":
+                if idx == 0:
+                    p_text = (
+                        f"Macro cinematic 35mm documentary shot of ancient illuminated parchment manuscripts, "
+                        f"antique quill pen on a dark aged wooden lectern, divine golden light rays streaming from high windows, "
+                        f"dust motes floating in chiaroscuro lighting, shallow depth of field, photorealistic 8k, aspect ratio {aspect_ratio}"
+                    )
+                elif idx == len(scenes) - 1:
+                    p_text = (
+                        f"Extreme close-up macro shot of gold-leaf calligraphy and intricate tezhib floral borders on aged parchment, "
+                        f"warm celestial illumination, particles of light floating, sacred reverent atmosphere, "
+                        f"photorealistic 8k, aspect ratio {aspect_ratio}"
+                    )
+                else:
+                    p_text = (
+                        f"Continuous sequential macro shot of ancient leather-bound manuscripts stacked in a tranquil sacred library, "
+                        f"same warm golden illumination, slow cinematic pan, shallow depth of field, "
+                        f"photorealistic 8k, aspect ratio {aspect_ratio}"
+                    )
+            elif clean_style == "macro_biometrics":
+                if idx == 0:
+                    p_text = (
+                        f"Ultra-macro 8k scientific documentary footage of human biometric fingerprint ridges, "
+                        f"delicate skin texture, organic micro-details, shallow depth of field, cinematic lighting, aspect ratio {aspect_ratio}"
+                    )
+                elif idx == len(scenes) - 1:
+                    p_text = (
+                        f"Extreme macro close-up of human iris with intricate crystalline patterns and glowing depth, "
+                        f"biological wonder, shallow depth of field, 8k photorealistic, aspect ratio {aspect_ratio}"
+                    )
+                else:
+                    p_text = (
+                        f"Pulsing microscopic cellular structures and glowing neural synapses, "
+                        f"complex biological symmetry, scientific documentary b-roll, 8k photorealistic, aspect ratio {aspect_ratio}"
+                    )
+            elif clean_style == "dramatic_tefekkur":
+                if idx == 0:
+                    p_text = (
+                        f"Moody dramatic documentary shot of a contemplative solitary silhouette on a dark mountain ridge, "
+                        f"gazing into majestic deep space cosmos with drifting stardust, volumetric rays, 8k, aspect ratio {aspect_ratio}"
+                    )
+                elif idx == len(scenes) - 1:
+                    p_text = (
+                        f"Luminous celestial nebulae and glowing stardust floating in infinite dark space, "
+                        f"spiritual reverence, awe-inspiring cosmological documentary shot, 35mm film grain, 8k, aspect ratio {aspect_ratio}"
+                    )
+                else:
+                    p_text = (
+                        f"Atmospheric volumetric god rays piercing through dramatic misty clouds at dusk, "
+                        f"epic natural horizon, contemplative spiritual depth, cinematic 35mm, aspect ratio {aspect_ratio}"
+                    )
+            else: # Default cinematic_photoreal
+                if idx == 0:
+                    p_text = (
+                        f"Cinematic photorealistic 35mm shot of a humble traveler with earth-tone cloak walking along a misty mountain path, "
+                        f"volumetric morning sunbeams filtering through ancient trees, shallow depth of field, ARRI Alexa 65, 8k, aspect ratio {aspect_ratio}"
+                    )
+                elif idx == len(scenes) - 1:
+                    p_text = (
+                        f"Macro cinematic shot of an ancient open book with sacred verse, warm golden illumination falling on aged paper, "
+                        f"floating dust particles, peaceful contemplation, photorealistic 8k, aspect ratio {aspect_ratio}"
+                    )
+                else:
+                    p_text = (
+                        f"Continuous sequential shot of the traveler pausing by a cascading mountain stream, "
+                        f"natural cinematic lighting, atmospheric mist, shallow depth of field, 8k, aspect ratio {aspect_ratio}"
+                    )
 
+            cont = "Establishing opening scene" if idx == 0 else f"Seamless sequential continuity from scene {idx}"
             prompts_result.append(
                 ScenePrompt(
                     scene_id=s_id,
                     visual_prompt=p_text,
-                    negative_prompt="blurry, distorted, low quality, watermark, extra fingers, text overlay",
+                    negative_prompt=NEGATIVE_PROMPT_CINEMATIC,
                     aspect_ratio=aspect_ratio,
                     camera_movement=s.camera_movement,
-                    style=style,
+                    style=clean_style,
                     continuity_notes=cont
                 )
             )

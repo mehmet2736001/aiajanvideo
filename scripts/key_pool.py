@@ -238,13 +238,13 @@ class KeyPoolManager:
 
         # Models to try in cascade if primary model is rate limited or quota restricted
         models_to_try = [selected_model]
-        for m in ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"]:
+        for m in ["gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-3.8-flash", "gemini-flash-latest"]:
             if m not in models_to_try:
                 models_to_try.append(m)
 
-        for current_model in models_to_try[:2]:  # Try primary and first fallback
+        for current_model in models_to_try[:3]:  # Try primary and up to 2 fallbacks
             errors = []
-            for key_item in active_keys[:6]:  # Try top 6 healthiest keys
+            for key_item in active_keys[:8]:  # Try top 8 healthiest keys
                 api_key = key_item["api_key"]
                 url = f"https://generativelanguage.googleapis.com/v1beta/models/{current_model}:generateContent?key={api_key}"
             
@@ -255,7 +255,7 @@ class KeyPoolManager:
                     payload["systemInstruction"] = {"parts": [{"text": system_instruction}]}
 
                 try:
-                    res = requests.post(url, json=payload, timeout=4)
+                    res = requests.post(url, json=payload, timeout=12)
                     if res.status_code == 200:
                         data = res.json()
                         text = data["candidates"][0]["content"]["parts"][0]["text"]

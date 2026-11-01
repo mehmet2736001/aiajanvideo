@@ -457,7 +457,7 @@ def generate_studio_audio_and_subtitles(
 def get_index():
     index_file = os.path.join(PUBLIC_DIR, "index.html")
     if os.path.exists(index_file):
-        return FileResponse(index_file)
+        return FileResponse(index_file, headers={"Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache", "Expires": "0"})
     return {"message": "Notebook Video AI Pro Server Running"}
 
 @app.get("/api/keys")
@@ -654,7 +654,7 @@ def create_new_blank_project(req: CreateProjectRequest):
         "pipVideos": [],
         "overlayImages": [],
         "audioUrl": None,
-        "brollType": "2d_animation",
+        "brollType": "cinematic_documentary",
         "totalDuration": 0.0,
         "created_at": time.strftime("%Y-%m-%d %H:%M:%S")
     }
@@ -2606,7 +2606,7 @@ async def api_multi_agent_start(
     audio_path: Optional[str] = Form(None),
     text: Optional[str] = Form(None),
     voice_id: Optional[str] = Form("en-US-AndrewMultilingualNeural"),
-    visual_style: Optional[str] = Form("2d_anime"),
+    visual_style: Optional[str] = Form("cinematic_photoreal"),
     aspect_ratio: Optional[str] = Form("9:16"),
     custom_transcript: Optional[str] = Form(None)
 ):
@@ -2777,7 +2777,7 @@ async def api_ai_director_transcribe_audio(
 class DirectorProposeRequest(BaseModel):
     text: Optional[str] = None
     transcript: Optional[str] = None
-    model: Optional[str] = "gemini-2.5-flash"
+    model: Optional[str] = "gemini-3.5-flash-lite"
     auto_mode: Optional[bool] = False
 
 @app.post("/api/ai-director/propose")
@@ -2787,13 +2787,14 @@ def api_ai_director_propose(req: DirectorProposeRequest):
         raise HTTPException(status_code=400, detail="Analiz için bir metin veya ses transkripti gereklidir.")
 
     system_instruction = (
-        "Sen sinematik 2D animasyon ve video prodüksiyonu yapan uzman bir AI Video Yönetmenisin. "
+        "Sen sinematik belgesel ve profesyonel video prodüksiyonu yapan uzman bir AI Video Yönetmenisin. "
         "Kullanıcının verdiği metni (özellikle ilk 30 saniyesini) analiz et. "
         "Kullanıcıya 30 saniye için 10'ar saniyelik 3 sahne (0-10s, 10-20s, 20-30s) planı ve "
-        "3 farklı çarpıcı görsel stil seçeneği sun. "
+        "4 farklı fotogerçekçi sinematik belgesel stili seçeneği sun. "
         "2. sahnenin 1. karesi, 1. sahnenin son karesinden devam edecek şekilde pürüzsüz görsel devamlılık tasarla. "
-        "1. ve 2. sahnede 'cinematic_ambient' (sade, ferah, ekranda gereksiz kart/şablon kalabalığı olmayan) düzen kullan. "
+        "1. ve 2. sahnede 'cinematic_ambient' (sade, ferah, ekranda gereksiz kart/şablon kalabalığı olmayan, 35mm B-roll odaklı) düzen kullan. "
         "3. sahnede 'quote_spotlight' ile hikmetli söz / ayet alıntısı çerçevesi ve daktilo altyazı vurgulanacak. "
+        "ASLA 2D çizim, anime veya karikatür önerme; tamamen fotogerçekçi 35mm belgesel B-roll tasarla. "
         "ÇIKTIYI SADECE GEÇERLİ JSON OLARAK VER."
     )
 
@@ -2812,7 +2813,7 @@ Lütfen şu JSON formatında yanıt ver:
       "headerSubtitle": "Tarihsel Giriş",
       "headerLine1": "BAŞLIK 1",
       "highlightedText": "Önemli Vurgu",
-      "visualDescription": "1. sahne görsel ve mekan tasviri, Studio Ghibli 2D anime...",
+      "visualDescription": "1. sahne için 35mm fotogerçekçi sinematik kamera ve mekan tasviri...",
       "layoutType": "cinematic_ambient"
     }},
     {{
@@ -2822,7 +2823,7 @@ Lütfen şu JSON formatında yanıt ver:
       "headerSubtitle": "Dönüşüm & Hareket",
       "headerLine1": "BAŞLIK 2",
       "highlightedText": "Hikmet Adımı",
-      "visualDescription": "1. sahnenin son karesinden devam eden kesintisiz hareket tasviri...",
+      "visualDescription": "1. sahnenin son karesinden devam eden kesintisiz 35mm kamera hareketi...",
       "layoutType": "cinematic_ambient"
     }},
     {{
@@ -2832,28 +2833,34 @@ Lütfen şu JSON formatında yanıt ver:
       "headerSubtitle": "Hikmetli Söz / Ayet",
       "headerLine1": "AYET VE HİKMET",
       "highlightedText": "Altın Öğüt",
-      "visualDescription": "Ayet çerçevesi, daktilo yazı ve huşu veren arka plan...",
+      "visualDescription": "Kadim el yazması rahle, daktilo altyazı ve huşu veren ilahi ışık...",
       "layoutType": "quote_spotlight"
     }}
   ],
   "style_options": [
     {{
-      "id": "2d_anime",
-      "name": "Studio Ghibli 2D Anime",
-      "description": "Işıltılı doğa renkleri, rüzgarda dalgalanan kumaşlar, altın güneş ışıkları.",
+      "id": "cinematic_photoreal",
+      "name": "Sinematik Gerçekçi (35mm Film)",
+      "description": "ARRI Alexa 65 sinematik ışık, 35mm lens, sığ alan derinliği ve 8K fotogerçekçi doku.",
       "badge": "Önerilen"
     }},
     {{
-      "id": "2d_dervish_miniature",
-      "name": "İslami Minyatür & Sanatsal Hat",
-      "description": "Geleneksel altın varak işlemeleri, manevi derinlik ve tezhib motifleri.",
-      "badge": "Tarihsel"
+      "id": "historical_documentary",
+      "name": "Tarihsel Belgesel (Kadim El Yazmaları)",
+      "description": "Antik parşömenler, ahşap rahle, altın güneş huzmeleri ve havada süzülen toz zerreleri.",
+      "badge": "Belgesel"
     }},
     {{
-      "id": "2d_watercolor",
-      "name": "Sinematik Suluboya & Işık Hüzmesi",
-      "description": "Pastel ve yumuşak geçişler, lirik atmosfer, sanatsal fırça darbeleri.",
-      "badge": "Sanatsal"
+      "id": "macro_biometrics",
+      "name": "Makro Bilim & Biyoloji (Parmak İzi / Hücre)",
+      "description": "İnsan parmak izi kıvrımları, makro iris, hücreler ve biyolojik mükemmellik.",
+      "badge": "Bilimsel"
+    }},
+    {{
+      "id": "dramatic_tefekkur",
+      "name": "Karanlık & Dramatik Tefekkür (Kainat & Işık)",
+      "description": "Karanlık uzayda parlayan yıldız tozları, silüet tefekkür ve ilahi ışık huzmeleri.",
+      "badge": "Tefekkür"
     }}
   ]
 }}
@@ -2874,7 +2881,7 @@ Lütfen şu JSON formatında yanıt ver:
                 sc["layoutType"] = "quote_spotlight"
             else:
                 sc["layoutType"] = "cinematic_ambient"
-            sc["brollType"] = "2d_animation"
+            sc["brollType"] = "cinematic_documentary"
 
         return {
             "success": True,
@@ -2896,8 +2903,8 @@ Lütfen şu JSON formatında yanıt ver:
                     "headerSubtitle": "Manevi Yolculuk",
                     "headerLine1": "HİKMETİN İZİNDE",
                     "highlightedText": "ASIRLARIN BİLGELİĞİ",
-                    "visualDescription": "Dağ yolunda yürüyen bir derviş, rüzgarda savrulan yeşil kaftan, güneş ışıkları",
-                    "layoutType": "pip_split"
+                    "visualDescription": "Sisli dağ yolunda tefekkür eden bir yolcu, sabah güneşinin altın ışık huzmeleri, 35mm film",
+                    "layoutType": "cinematic_ambient"
                 },
                 {
                     "id": "scene_2",
@@ -2906,8 +2913,8 @@ Lütfen şu JSON formatında yanıt ver:
                     "headerSubtitle": "Zihinsel Dönüşüm",
                     "headerLine1": "GİZLİ GERÇEK",
                     "highlightedText": "KALBE DOKUNAN SIR",
-                    "visualDescription": "1. sahneden devam eden derviş bir pınarın başında durur, tefekkür eder",
-                    "layoutType": "pip_split"
+                    "visualDescription": "1. sahneden devam eden yolcu dağ pınarının başında durur, tefekkür eder, sığ alan derinliği",
+                    "layoutType": "cinematic_ambient"
                 },
                 {
                     "id": "scene_3",
@@ -2916,21 +2923,22 @@ Lütfen şu JSON formatında yanıt ver:
                     "headerSubtitle": "Ayet-i Kerime",
                     "headerLine1": "KUTLU SÖZ",
                     "highlightedText": "HER ZORLUKLA BİR KOLAYLIK VARDIR",
-                    "visualDescription": "Tezhibli daktilo ayet çerçevesi, huzur dolu gökyüzü ve hafif ışık hüzmeleri",
+                    "visualDescription": "Kadim el yazması açık rahle, daktilo ayet yazısı, süzülen altın toz zerreleri",
                     "layoutType": "quote_spotlight"
                 }
             ],
             "style_options": [
-                {"id": "2d_anime", "name": "Studio Ghibli 2D Anime", "description": "Işıltılı doğa renkleri, rüzgarda dalgalanan kumaşlar.", "badge": "Önerilen"},
-                {"id": "2d_dervish_miniature", "name": "İslami Minyatür & Sanatsal Hat", "description": "Geleneksel altın varak, manevi derinlik.", "badge": "Tarihsel"},
-                {"id": "2d_watercolor", "name": "Sinematik Suluboya", "description": "Pastel ve yumuşak geçişler, lirik atmosfer.", "badge": "Sanatsal"}
+                {"id": "cinematic_photoreal", "name": "Sinematik Gerçekçi (35mm Film)", "description": "ARRI Alexa 65 sinematik ışık, 35mm lens, 8K doku.", "badge": "Önerilen"},
+                {"id": "historical_documentary", "name": "Tarihsel Belgesel (Kadim El Yazmaları)", "description": "Antik parşömenler, ahşap rahle, altın güneş huzmeleri.", "badge": "Belgesel"},
+                {"id": "macro_biometrics", "name": "Makro Bilim & Biyoloji", "description": "İnsan parmak izi kıvrımları, iris, hücreler.", "badge": "Bilimsel"},
+                {"id": "dramatic_tefekkur", "name": "Karanlık & Dramatik Tefekkür", "description": "Kainat, stardust ve ilahi ışık huzmeleri.", "badge": "Tefekkür"}
             ],
             "raw_text": content_text
         }
 
 
 class DirectorExecuteRequest(BaseModel):
-    selected_style: Optional[str] = "2d_anime"
+    selected_style: Optional[str] = "cinematic_photoreal"
     scenes: list
     narration: Optional[str] = ""
     custom_instructions: Optional[str] = ""
@@ -2946,7 +2954,7 @@ def api_ai_director_execute_plan(req: DirectorExecuteRequest):
     with open(data_file, "r", encoding="utf-8") as f:
         video_data = json.load(f)
 
-    chosen_style = req.selected_style or "2d_anime"
+    chosen_style = req.selected_style or "cinematic_photoreal"
     base_scenes = req.scenes or []
     if not base_scenes:
         raise HTTPException(status_code=400, detail="Uygulanacak sahne listesi boş olamaz.")
@@ -2956,7 +2964,7 @@ def api_ai_director_execute_plan(req: DirectorExecuteRequest):
             vd = s.get("visualDescription", "")
             s["visualDescription"] = f"{vd}. Not: {req.custom_instructions.strip()}"
 
-    print(f"[AI Director] Executing 3x 10s continuous 2D animation generation with style '{chosen_style}'...")
+    print(f"[AI Director] Executing 3x 10s continuous 35mm cinematic documentary generation with style '{chosen_style}'...")
     try:
         from scripts.key_pool import pool
         synced_scenes = generate_continuous_scene_animations(base_scenes, base_style=chosen_style, pool=pool)
@@ -2972,13 +2980,13 @@ def api_ai_director_execute_plan(req: DirectorExecuteRequest):
                 })
 
         video_data["is_empty"] = False
-        video_data["topic"] = synced_scenes[0].get("headerLine1", "Sinematik 2D Animasyon")
+        video_data["topic"] = synced_scenes[0].get("headerLine1", "Sinematik Belgesel Video")
         video_data["scenes"] = synced_scenes
         video_data["subtitles"] = req.whisper_subtitles if req.whisper_subtitles else subtitles
         video_data["words"] = req.whisper_words if req.whisper_words else []
         video_data["totalDuration"] = total_dur
         video_data["theme"] = "dark_minimalist"
-        video_data["brollType"] = "2d_animation"
+        video_data["brollType"] = "cinematic_documentary"
         if req.narration:
             video_data["narration"] = req.narration
         if req.audio_url:

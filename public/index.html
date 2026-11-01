@@ -1270,27 +1270,27 @@
         </select>
       </div>
 
-      <!-- GEMINI OMNI 2D ANİMASYON VİDEO PANELİ -->
-      <div class="p-3.5 rounded-2xl bg-gradient-to-b from-indigo-950/40 via-purple-950/20 to-[#070a12] border border-indigo-500/40 shadow-xl space-y-3">
+      <!-- SİNEMATİK BELGESEL VİDEO PANELİ (I2V DIFFUSION) -->
+      <div class="p-3.5 rounded-2xl bg-gradient-to-b from-amber-950/40 via-purple-950/20 to-[#070a12] border border-amber-500/40 shadow-xl space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <div class="w-6 h-6 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs font-bold">
-              <i class="fa-solid fa-clapperboard"></i>
+            <div class="w-6 h-6 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs font-bold">
+              <i class="fa-solid fa-film"></i>
             </div>
-            <span class="text-xs font-extrabold text-indigo-200">2D Animasyon Video (Gemini Omni)</span>
+            <span class="text-xs font-extrabold text-amber-200">Sinematik Belgesel Video (I2V Diffusion)</span>
           </div>
-          <span class="text-[9px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 px-2 py-0.5 rounded-full font-mono font-bold">Omni 2D</span>
+          <span class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-mono font-bold">35mm I2V</span>
         </div>
 
-        <!-- 2D Video Preview Player if exists -->
+        <!-- Video Preview Player if exists -->
         <div id="inspect-anim-player-container" class="hidden">
-          <div class="relative rounded-xl overflow-hidden border border-indigo-500/40 bg-black aspect-[9/16] max-h-[160px] mx-auto flex items-center justify-center group">
+          <div class="relative rounded-xl overflow-hidden border border-amber-500/40 bg-black aspect-[9/16] max-h-[160px] mx-auto flex items-center justify-center group">
             <video id="inspect-anim-video-preview" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
-            <button onclick="removeActiveScene2dAnimation()" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-red-600/80 hover:bg-red-500 text-white flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 transition shadow" title="2D Animasyon Videosunu Sil">
+            <button onclick="removeActiveScene2dAnimation()" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-red-600/80 hover:bg-red-500 text-white flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 transition shadow" title="Sinematik Videoyu Sil">
               <i class="fa-solid fa-trash-can"></i>
             </button>
-            <div class="absolute bottom-1 left-2 right-2 text-[9px] text-indigo-200 font-bold bg-black/60 px-1.5 py-0.5 rounded truncate">
-              <i class="fa-solid fa-circle-play text-indigo-400 mr-1"></i> 2D Animasyon Aktif
+            <div class="absolute bottom-1 left-2 right-2 text-[9px] text-amber-200 font-bold bg-black/60 px-1.5 py-0.5 rounded truncate">
+              <i class="fa-solid fa-circle-play text-amber-400 mr-1"></i> Sinematik B-Roll Aktif
             </div>
           </div>
         </div>
@@ -1298,41 +1298,41 @@
         <!-- Animation Prompt Input -->
         <div class="space-y-1">
           <div class="flex items-center justify-between text-[10px]">
-            <label class="font-bold text-slate-300">2D Sahne Animasyon Tarifi</label>
-            <button type="button" onclick="autoCraft2dPromptForActiveScene()" class="text-indigo-400 hover:text-indigo-300 font-bold flex items-center gap-1 transition">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Omni ile Çıkar</span>
+            <label class="font-bold text-slate-300">35mm Kamera & Sahne Tarifi</label>
+            <button type="button" onclick="autoCraft2dPromptForActiveScene()" class="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 transition">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Gemini ile Çıkar</span>
             </button>
           </div>
-          <textarea id="inspect-anim-prompt" rows="2" placeholder="Örn: Dağlı güneşli bir günde dağ patikasında asasıyla yürüyen derviş, Studio Ghibli 2D anime tarzı, 9:16..." class="w-full bg-[#030712] border border-indigo-900/60 focus:border-indigo-500 rounded-xl p-2 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none transition"></textarea>
+          <textarea id="inspect-anim-prompt" rows="2" placeholder="Örn: Antik rahlede açık kadim el yazması, süzülen altın toz zerreleri, chiaroscuro ışık, 35mm sinematik film, 8k..." class="w-full bg-[#030712] border border-amber-900/60 focus:border-amber-500 rounded-xl p-2 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none transition"></textarea>
         </div>
 
         <!-- Style Selector -->
         <div class="space-y-1">
-          <label class="block text-[10px] font-bold text-slate-300">2D Çizim & Animasyon Stili</label>
-          <select id="inspect-anim-style" class="w-full bg-[#030712] border border-indigo-900/60 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs focus:outline-none">
-            <option value="2d_anime" selected>🌸 2D Anime & Ghibli Stili (Makoto Shinkai)</option>
-            <option value="2d_dervish_miniature">🕌 Minyatür & İslami 2D Çizim (Tezhip)</option>
-            <option value="2d_watercolor">🎨 Canlı Sulu Boya & Guaj Animasyon</option>
-            <option value="2d_flat_vector">📐 Modern 2D Vektör (Kurzgesagt Stili)</option>
-            <option value="2d_comic">🎞️ Klasik Çizgi Roman / Tarihsel Çizim</option>
+          <label class="block text-[10px] font-bold text-slate-300">Sinematik Belgesel Stili</label>
+          <select id="inspect-anim-style" class="w-full bg-[#030712] border border-amber-900/60 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs focus:outline-none">
+            <option value="cinematic_photoreal" selected>🎬 Sinematik Gerçekçi (35mm Film / 8K)</option>
+            <option value="historical_documentary">📜 Tarihsel Belgesel (Kadim El Yazmaları)</option>
+            <option value="macro_biometrics">🔬 Makro Bilim & Biyoloji (Parmak İzi / Hücre)</option>
+            <option value="dramatic_tefekkur">🌌 Karanlık & Dramatik Tefekkür (Kainat & Işık)</option>
           </select>
         </div>
 
         <!-- Action Button -->
-        <button type="button" onclick="generateActiveScene2dAnimation()" id="btn-generate-scene-anim" class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold py-2 px-3 rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-2">
-          <i class="fa-solid fa-bolt text-yellow-300"></i>
-          <span>Gemini Omni ile 2D Animasyon Üret</span>
+        <button type="button" onclick="generateActiveScene2dAnimation()" id="btn-generate-scene-anim" class="w-full bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black py-2 px-3 rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-clapperboard"></i>
+          <span>35mm Sinematik B-Roll Üret (I2V)</span>
         </button>
       </div>
 
       <!-- Arkaplan Video & Animasyon (B-Roll) -->
       <div class="space-y-1 text-slate-300">
         <div class="flex items-center justify-between">
-          <label class="block text-[11px] font-bold">Arkaplan Animasyon Videosu (B-Roll)</label>
-          <span id="inspect-broll-status-pill" class="text-[9px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 px-2 py-0.5 rounded-full font-mono font-bold">2D Aktif</span>
+          <label class="block text-[11px] font-bold">Sinematik Belgesel Videosu (B-Roll)</label>
+          <span id="inspect-broll-status-pill" class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-mono font-bold">Sinematik Aktif</span>
         </div>
         <select id="inspect-broll-type" onchange="updateActiveSceneField('brollType', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs focus:outline-none font-semibold">
-          <option value="2d_animation" selected>🎬 2D Sinematik Animasyon (Gemini Omni - Aktif)</option>
+          <option value="cinematic_documentary" selected>🎬 Sinematik Belgesel B-Roll (35mm I2V - Aktif)</option>
+          <option value="2d_animation">🎬 2D Sinematik B-Roll (Aktif)</option>
           <option value="gold_dust">✨ Altın Tozu & Parıltı (gold_dust)</option>
           <option value="cosmic">🌌 Derin Kozmik & Galaksi (cosmic)</option>
           <option value="clouds">☁️ Sinematik Bulutlar (clouds)</option>
@@ -1818,11 +1818,12 @@
               </select>
             </div>
             <div>
-              <label class="block font-bold text-slate-300 mb-1">Görsel Tarz</label>
+              <label class="block font-bold text-slate-300 mb-1">Sinematik Tarz</label>
               <select id="mission-input-style" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
-                <option value="2d_anime" selected>🎨 Studio Ghibli 2D Anime</option>
-                <option value="cinematic">🎬 Sinematik Foto-Gerçekçi</option>
-                <option value="mystic">📜 Tezhib & Mistik Gravür</option>
+                <option value="cinematic_photoreal" selected>🎬 Sinematik Gerçekçi (35mm Film / 8K)</option>
+                <option value="historical_documentary">📜 Tarihsel Belgesel (Kadim El Yazmaları)</option>
+                <option value="macro_biometrics">🔬 Makro Bilim & Biyoloji (Parmak İzi / Hücre)</option>
+                <option value="dramatic_tefekkur">🌌 Karanlık & Dramatik Tefekkür (Kainat & Işık)</option>
               </select>
             </div>
             <div>
@@ -1851,11 +1852,12 @@
 
           <div class="grid grid-cols-2 gap-2.5">
             <div>
-              <label class="block font-bold text-slate-300 mb-1">Görsel Tarz</label>
+              <label class="block font-bold text-slate-300 mb-1">Sinematik Tarz</label>
               <select id="mission-mp3-style" class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-2 py-2 text-slate-200 text-xs focus:outline-none">
-                <option value="2d_anime" selected>🎨 Studio Ghibli 2D Anime</option>
-                <option value="cinematic">🎬 Sinematik Foto-Gerçekçi</option>
-                <option value="mystic">📜 Tezhib & Mistik Gravür</option>
+                <option value="cinematic_photoreal" selected>🎬 Sinematik Gerçekçi (35mm Film / 8K)</option>
+                <option value="historical_documentary">📜 Tarihsel Belgesel (Kadim El Yazmaları)</option>
+                <option value="macro_biometrics">🔬 Makro Bilim & Biyoloji (Parmak İzi / Hücre)</option>
+                <option value="dramatic_tefekkur">🌌 Karanlık & Dramatik Tefekkür (Kainat & Işık)</option>
               </select>
             </div>
             <div>
@@ -1972,10 +1974,10 @@
               </div>
               <div class="truncate">
                 <div class="flex items-center gap-2">
-                  <span class="font-extrabold text-white text-xs">4. Medya Üretim & Çağrı Ajanı</span>
-                  <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800 font-mono">Gemini Omni / Video</span>
+                  <span class="font-extrabold text-white text-xs">4. Medya Üretim & Çağrı Ajanı (I2V)</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800 font-mono">Sinematik I2V (Veo / Kling / Flux)</span>
                 </div>
-                <p id="agent-desc-4" class="text-[10px] text-slate-400 truncate">Video üretim modellerini tetikler, üretilen MP4 dosyalarını indirir ve doğrular.</p>
+                <p id="agent-desc-4" class="text-[10px] text-slate-400 truncate">Flux.1 ile 8K fotogerçekçi ana kare üretir; Veo / Kling I2V motoruyla 35mm kamera hareketine dönüştürür.</p>
               </div>
             </div>
             <span id="agent-status-4" class="text-[10px] font-mono px-2 py-0.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-500 font-bold shrink-0">🔒 Kilitli</span>
@@ -2079,13 +2081,13 @@
           </p>
         </div>
 
-        <!-- 3 Visual Style Options -->
+        <!-- 4 Visual Style Options -->
         <div>
           <label class="block font-bold text-slate-200 mb-2 flex items-center justify-between">
-            <span>Önerilen 2D Görsel Stili Seçin:</span>
+            <span>Önerilen Sinematik Belgesel Stilini Seçin:</span>
             <span class="text-[10px] text-slate-400 font-normal">Tek tıkla değiştirilebilir</span>
           </label>
-          <div id="proposal-styles-container" class="grid grid-cols-3 gap-2.5">
+          <div id="proposal-styles-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2">
             <!-- Dynamically populated style cards -->
           </div>
         </div>
@@ -2107,7 +2109,7 @@
           <input
             type="text"
             id="proposal-custom-tweak"
-            placeholder="Örn: 'Dervişin elbisesini yeşil yap', '2. sahneye ayet kutusu ekle', 'Kamerayı daha çok yaklaştır'..."
+            placeholder="Örn: 'Kamera açısını daha yukarı al', '2. sahneye ayet çerçevesi ekle', 'Işık huzmelerini artır'..."
             class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-3 py-2 text-slate-200 placeholder-slate-500 focus:outline-none transition"
           >
         </div>
@@ -2119,7 +2121,7 @@
           </button>
           <button onclick="executeApprovedAiProposal()" id="btn-proposal-execute" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs flex items-center gap-2 shadow-lg shadow-amber-500/25 transition">
             <i class="fa-solid fa-clapperboard"></i>
-            <span>🚀 Bu Kurguyla Başlat (3x 10s 2D Video Üret)</span>
+            <span>🚀 Bu Kurguyla Başlat (3x 10s Sinematik Video Üret)</span>
           </button>
         </div>
       </div>
@@ -2294,13 +2296,13 @@
           </p>
         </div>
 
-        <!-- 3 Visual Style Options -->
+        <!-- 4 Visual Style Options -->
         <div>
           <label class="block font-bold text-slate-200 mb-2 flex items-center justify-between">
-            <span>Önerilen 2D Görsel Stili Seçin:</span>
+            <span>Önerilen Sinematik Belgesel Stilini Seçin:</span>
             <span class="text-[10px] text-slate-400 font-normal">Tek tıkla değiştirilebilir</span>
           </label>
-          <div id="proposal-styles-container" class="grid grid-cols-3 gap-2.5">
+          <div id="proposal-styles-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2">
             <!-- Dynamically populated style cards -->
           </div>
         </div>
@@ -2322,7 +2324,7 @@
           <input
             type="text"
             id="proposal-custom-tweak"
-            placeholder="Örn: 'Dervişin elbisesini yeşil yap', '2. sahneye ayet kutusu ekle', 'Kamerayı daha çok yaklaştır'..."
+            placeholder="Örn: 'Kamera açısını daha yukarı al', '2. sahneye ayet çerçevesi ekle', 'Işık huzmelerini artır'..."
             class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-3 py-2 text-slate-200 placeholder-slate-500 focus:outline-none transition"
           >
         </div>
@@ -2334,7 +2336,7 @@
           </button>
           <button onclick="executeApprovedAiProposal()" id="btn-proposal-execute" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs flex items-center gap-2 shadow-lg shadow-amber-500/25 transition">
             <i class="fa-solid fa-clapperboard"></i>
-            <span>🚀 Bu Kurguyla Başlat (3x 10s 2D Video Üret)</span>
+            <span>🚀 Bu Kurguyla Başlat (3x 10s Sinematik Video Üret)</span>
           </button>
         </div>
       </div>
@@ -4016,8 +4018,27 @@
       }
     }
 
-    function quickCreateProject(format) {
-      openNewProjectModal(format);
+    async function quickCreateProject(format) {
+      try {
+        showToast(`${format} formatında tamamen boş proje açılıyor...`, 'info');
+        const res = await fetch('/api/projects/new', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: `Yeni Proje (${format})`,
+            format: format || '9:16',
+            theme: 'dark_minimalist',
+            layoutType: 'cinematic_ambient'
+          })
+        });
+        const d = await res.json();
+        if (!res.ok) throw new Error(d.detail || 'Proje oluşturulamadı');
+        await loadTimelineData();
+        switchAppView('editor');
+        showToast('✓ Tamamen boş proje hazır! Zaman tüneli ve önizleme temizlendi.', 'success');
+      } catch (err) {
+        showToast('Hata: ' + err.message, 'error');
+      }
     }
 
     window.openNewProjectModal = openNewProjectModal;
@@ -5366,7 +5387,13 @@
       if (document.getElementById('inspect-broll-type')) {
         const hasAnim = Boolean(s.animationVideoUrl || s.videoUrl);
         const pill = document.getElementById('inspect-broll-status-pill');
-        if (hasAnim && (s.brollType === '2d_animation' || !s.brollType || s.brollType === 'none')) {
+        if (s.brollType === 'cinematic_documentary' || (hasAnim && (!s.brollType || s.brollType === 'none'))) {
+          document.getElementById('inspect-broll-type').value = 'cinematic_documentary';
+          if (pill) {
+            pill.innerText = '🎬 Sinematik I2V Aktif';
+            pill.className = 'text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-mono font-bold';
+          }
+        } else if (hasAnim && s.brollType === '2d_animation') {
           document.getElementById('inspect-broll-type').value = '2d_animation';
           if (pill) {
             pill.innerText = '🎬 2D Omni Aktif';
@@ -8380,7 +8407,7 @@
     }
 
     let currentAiProposal = null;
-    let selectedProposalStyle = '2d_anime';
+    let selectedProposalStyle = 'cinematic_photoreal';
 
     function handleAutoModeToggle(isChecked) {
       const label = document.getElementById('label-ai-auto-mode');
@@ -8410,7 +8437,7 @@
 
     function renderProposalModalView(data) {
       currentAiProposal = data;
-      selectedProposalStyle = (data.style_options && data.style_options[0]?.id) || '2d_anime';
+      selectedProposalStyle = (data.style_options && data.style_options[0]?.id) || 'cinematic_photoreal';
 
       const summaryEl = document.getElementById('proposal-analysis-summary');
       if (summaryEl) {
@@ -8617,7 +8644,7 @@
       const isTextTab = !document.getElementById('mission-panel-text').classList.contains('hidden');
       const selectedModel = document.getElementById('mission-input-model')?.value || 'gemini-3.5-flash-lite';
 
-      let visualStyle = '2d_anime';
+      let visualStyle = 'cinematic_photoreal';
       let aspectRatio = '9:16';
       let textContent = '';
       let voiceId = 'en-US-AndrewMultilingualNeural';
@@ -8631,7 +8658,7 @@
           alert('Lütfen bir video metni veya konusu girin.');
           return;
         }
-        visualStyle = document.getElementById('mission-input-style')?.value || '2d_anime';
+        visualStyle = document.getElementById('mission-input-style')?.value || 'cinematic_photoreal';
         aspectRatio = document.getElementById('mission-input-aspect')?.value || '9:16';
         voiceId = document.getElementById('mission-input-voice')?.value || 'en-US-AndrewMultilingualNeural';
 
@@ -8642,7 +8669,7 @@
           alert('Lütfen bir MP3 veya WAV ses dosyası seçin.');
           return;
         }
-        visualStyle = document.getElementById('mission-mp3-style')?.value || '2d_anime';
+        visualStyle = document.getElementById('mission-mp3-style')?.value || 'cinematic_photoreal';
         aspectRatio = document.getElementById('mission-mp3-aspect')?.value || '9:16';
         customTranscript = document.getElementById('mission-mp3-transcript')?.value.trim() || '';
 
@@ -8827,7 +8854,7 @@
       if (!activeSceneId) return;
       showToast('✨ Gemini Omni sahneyi analiz edip 2D animasyon tarifini çıkarıyor...', 'info');
       try {
-        const style = document.getElementById('inspect-anim-style')?.value || '2d_anime';
+        const style = document.getElementById('inspect-anim-style')?.value || 'cinematic_photoreal';
         const res = await fetch('/api/scene/craft-2d-prompt', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -8836,7 +8863,7 @@
         const d = await res.json();
         if (d.prompt && document.getElementById('inspect-anim-prompt')) {
           document.getElementById('inspect-anim-prompt').value = d.prompt;
-          showToast('✨ Gemini Omni 2D sahne animasyon tarifini hazırladı!', 'success');
+          showToast('✨ 35mm Sinematik Belgesel B-roll tarifini hazırladı!', 'success');
         }
       } catch (err) {
         showToast('Hata: ' + err.message, 'error');
@@ -8849,12 +8876,12 @@
       const originalHtml = btn ? btn.innerHTML : '';
       if (btn) {
         btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-yellow-300"></i> <span>Gemini Omni 2D Animasyon Üretiyor...</span>';
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-yellow-300"></i> <span>Sinematik I2V Video Üretiliyor...</span>';
       }
       try {
         const prompt = document.getElementById('inspect-anim-prompt')?.value.trim();
-        const style = document.getElementById('inspect-anim-style')?.value || '2d_anime';
-        showToast('🎨 Gemini Omni 2D animasyon videosunu hazırlıyor (5-8 sn)...', 'info');
+        const style = document.getElementById('inspect-anim-style')?.value || 'cinematic_photoreal';
+        showToast('🎨 35mm Sinematik Belgesel B-roll videosu hazırlanıyor...', 'info');
 
         const res = await fetch('/api/scene/generate-2d-animation', {
           method: 'POST',
@@ -8862,7 +8889,7 @@
           body: JSON.stringify({ scene_id: activeSceneId, prompt, style })
         });
         const d = await res.json();
-        if (!res.ok) throw new Error(d.detail || '2D Animasyon üretilemedi');
+        if (!res.ok) throw new Error(d.detail || 'Sinematik video üretilemedi');
 
         // Update local scene
         const s = scenes.find(sc => sc.id === activeSceneId);
@@ -8872,7 +8899,7 @@
         renderSceneInspector();
         renderTimeline();
         renderLivePreviewCanvas();
-        showToast('🎉 Gemini Omni 2D Animasyon Videosu Başarıyla Üretildi!', 'success');
+        showToast('🎉 Sinematik Belgesel B-Roll Videosu Başarıyla Üretildi!', 'success');
       } catch (err) {
         showToast('Animasyon Hatası: ' + err.message, 'error');
       } finally {
@@ -8897,17 +8924,17 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ animationVideoUrl: null, videoUrl: null })
       });
-      showToast('2D Animasyon videosu sahneden kaldırıldı.', 'info');
+      showToast('Sinematik video sahneden kaldırıldı.', 'info');
     }
 
     async function generateAllScenes2dAnimation() {
-      if (!confirm('Tüm sahneler için Gemini Omni ile 2D Animasyon Videosu üretilecek. Devam edilsin mi?')) return;
-      showToast('🎬 Tüm sahneler için Gemini Omni 2D animasyon motoru başlatıldı...', 'info');
+      if (!confirm('Tüm sahneler için Sinematik Belgesel Videosu (I2V) üretilecek. Devam edilsin mi?')) return;
+      showToast('🎬 Tüm sahneler için Sinematik I2V motoru başlatıldı...', 'info');
       try {
         const res = await fetch('/api/timeline/generate-all-2d-animations', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ style: '2d_anime' })
+          body: JSON.stringify({ style: 'cinematic_photoreal' })
         });
         const d = await res.json();
         if (!res.ok) throw new Error(d.detail || 'Toplu animasyon üretilemedi');

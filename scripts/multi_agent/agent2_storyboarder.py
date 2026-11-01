@@ -100,7 +100,7 @@ Lütfen şu JSON formatında yanıt ver:
 }}
 """
         try:
-            raw_res, _ = pool.query_with_rotation(prompt, system_instruction=system_instruction, model="gemini-2.5-flash")
+            raw_res, _ = pool.query_with_rotation(prompt, system_instruction=system_instruction, model="gemini-3.5-flash-lite")
             cleaned = raw_res.strip()
             if "```json" in cleaned:
                 cleaned = cleaned.split("```json")[1].split("```")[0].strip()

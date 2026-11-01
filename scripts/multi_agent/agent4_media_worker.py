@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Agent 4: Medya Üretim ve Çağrı Ajanı (Asset Dispatcher & Worker)
-Görevi: 3. Ajan'dan gelen promptları video/görsel API'larına iletmek,
-üretilen dosyaları indirmek, doğrulamak ve MP4 video dosyalarını hazır etmek.
+Agent 4: Medya Üretim ve Çağrı Ajanı (Asset Dispatcher & I2V Worker)
+Görevi: 3. Ajan'dan gelen sinematik promptları Image-to-Video (I2V) difüzyon hattına iletmek,
+üretilen 35mm MP4 dosyalarını indirmek, doğrulamak ve hazır etmek.
+Pipeline (I2V):
+1. T2I: 8K fotogerçekçi ana kare oluşturur.
+2. I2V: 35mm sinematik kamera hareketiyle (slow push-in, floating dust, volumetric shimmer) MP4 üretir.
 Girdi: 3. Ajan'dan gelen ArtDirectionData ve 2. Ajan'dan gelen sahne süreleri.
-Çıktı: Doğrulanmış yerel video dosyaları listesi (MediaWorkerData).
+Çıktı: Doğrulanmış yerel 35mm video dosyaları listesi (MediaWorkerData).
 """
 import os
 import subprocess
@@ -12,6 +15,12 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Optional, Callable, List
 from .base_agent import BaseAgent
 from .state import ProjectState, PipelinePhase, MediaWorkerData, SceneMediaAsset
+from scripts.animation_engine import (
+    create_cinematic_documentary_video,
+    synthesize_cinematic_i2v_video,
+    get_curated_cinematic_fallback,
+    normalize_style_key
+)
 
 
 VIDEOS_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "public", "videos")
@@ -40,7 +49,7 @@ class MediaWorkerAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             agent_id=4,
-            name="Medya Üretim & Çağrı Ajanı",
+            name="Medya Üretim & Çağrı Ajanı (I2V)",
             required_phase=PipelinePhase.PHASE_3_ART_DIRECTED,
             target_phase=PipelinePhase.PHASE_4_ASSETS_GENERATED
         )
@@ -50,16 +59,16 @@ class MediaWorkerAgent(BaseAgent):
         state: ProjectState,
         on_progress: Optional[Callable[[int, str, dict], None]] = None
     ) -> ProjectState:
-        from scripts.animation_engine import create_scene_2d_animation
         from scripts.key_pool import pool
 
         prompts = state.art_direction.prompts
         scenes = state.storyboard.scenes
-        style = state.visual_style or "2d_anime"
+        raw_style = state.visual_style or "cinematic_photoreal"
+        clean_style = normalize_style_key(raw_style)
 
         if on_progress:
             on_progress(self.agent_id, "running", {
-                "message": f"Medya üretimi başlatıldı: {len(prompts)} sahne paralel olarak sentezleniyor..."
+                "message": f"Sinematik I2V medya üretimi devrede: {len(prompts)} sahne 35mm formatında sentezleniyor..."
             })
 
         def process_scene_asset(item):
@@ -68,23 +77,25 @@ class MediaWorkerAgent(BaseAgent):
             dur = float(scene.duration if scene else 10.0)
             if dur <= 0:
                 dur = 10.0
+            cam = p.camera_movement or (scene.camera_movement if scene else "slow_push_in")
 
-            print(f"[Media Worker Agent] Synthesizing video for Scene {p.scene_id} ({dur:.1f}s)...")
+            print(f"[Media Worker Agent] Synthesizing 35mm I2V video for Scene {p.scene_id} ({dur:.1f}s)...")
 
-            anim_res = None
+            cinematic_res = None
             try:
-                anim_res = create_scene_2d_animation(
+                cinematic_res = create_cinematic_documentary_video(
                     scene_text=p.visual_prompt,
                     duration=dur,
-                    style=style,
+                    style=clean_style,
                     pool=pool,
-                    custom_prompt=p.visual_prompt
+                    custom_prompt=p.visual_prompt,
+                    camera_movement=cam
                 )
             except Exception as e:
-                print(f"[Media Worker Agent] create_scene_2d_animation error for Scene {p.scene_id}: {e}")
+                print(f"[Media Worker Agent] create_cinematic_documentary_video error for Scene {p.scene_id}: {e}")
 
-            if anim_res and isinstance(anim_res, dict) and anim_res.get("videoUrl"):
-                raw_url = anim_res["videoUrl"]
+            if cinematic_res and isinstance(cinematic_res, dict) and cinematic_res.get("videoUrl"):
+                raw_url = cinematic_res["videoUrl"]
                 clean_filename = os.path.basename(raw_url)
                 full_video_path = os.path.join(VIDEOS_DIR, clean_filename)
 
@@ -93,27 +104,26 @@ class MediaWorkerAgent(BaseAgent):
                         scene_id=p.scene_id,
                         video_file=full_video_path,
                         video_url=f"/public/videos/{clean_filename}",
-                        thumbnail_file=anim_res.get("keyframeUrl"),
+                        thumbnail_file=cinematic_res.get("keyframeUrl"),
                         duration=dur,
                         verified=True,
                         file_size_bytes=os.path.getsize(full_video_path)
                     )
 
-            # Robust local fallback if remote generation times out
-            fallback_name = "test_dervish_anim.mp4"
-            fallback_path = os.path.join(VIDEOS_DIR, fallback_name)
-            if not os.path.exists(fallback_path):
-                # Synthesize clean 10s MP4 if test dervish doesn't exist
-                key_path = os.path.join(ILLUST_DIR, "test_dervish.jpg")
-                from scripts.animation_engine import synthesize_2d_animation_video
-                fallback_path = synthesize_2d_animation_video(key_path, duration=dur)
-                fallback_name = os.path.basename(fallback_path)
+            # Robust fallback using curated 35mm documentary keyframe
+            curated_still = get_curated_cinematic_fallback(clean_style)
+            fallback_path = synthesize_cinematic_i2v_video(
+                curated_still,
+                duration=dur,
+                camera_movement=cam
+            )
+            fallback_name = os.path.basename(fallback_path)
 
             return SceneMediaAsset(
                 scene_id=p.scene_id,
                 video_file=fallback_path,
                 video_url=f"/public/videos/{fallback_name}",
-                thumbnail_file="/public/illustrations/test_dervish.jpg",
+                thumbnail_file=f"/public/illustrations/{os.path.basename(curated_still)}",
                 duration=dur,
                 verified=True,
                 file_size_bytes=os.path.getsize(fallback_path) if os.path.exists(fallback_path) else 100000
@@ -144,4 +154,4 @@ class MediaWorkerAgent(BaseAgent):
             raise ValueError("4. Ajan Kontrat Hatası: Medya varlıkları listesi boş!")
         for a in state.media_assets.assets:
             if not a.verified or not os.path.exists(a.video_file):
-                raise ValueError(f"4. Ajan Kontrat Hatası: Sahne {a.scene_id} video dosyası doğrulanamadı ({a.video_file})!")
+                raise ValueError(f"4. Ajan Kontrat Hatası: Sahne {a.scene_id} 35mm video dosyası doğrulanamadı ({a.video_file})!")
