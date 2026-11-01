@@ -20,6 +20,9 @@ export const QuoteSpotlightView: React.FC<QuoteSpotlightViewProps> = ({
   const isBlueprint = theme === 'blueprint';
   const isParchment = theme === 'parchment';
   const isKraft = theme === 'kraft';
+  const isDarkMotion = theme === 'dark_minimalist' || theme === 'gold_luxury' || theme === 'neon_cyber';
+  const isGold = theme === 'gold_luxury';
+  const isNeon = theme === 'neon_cyber';
 
   const paperScale = spring({
     frame: frame - startFrame,
@@ -33,7 +36,9 @@ export const QuoteSpotlightView: React.FC<QuoteSpotlightViewProps> = ({
     config: { damping: 10, mass: 0.7 },
   });
 
-  const paperBg = isChalkboard
+  const paperBg = isDarkMotion
+    ? 'rgba(10, 15, 26, 0.82)'
+    : isChalkboard
     ? 'rgba(20, 36, 28, 0.95)'
     : isBlueprint
     ? 'rgba(12, 40, 70, 0.95)'
@@ -43,7 +48,11 @@ export const QuoteSpotlightView: React.FC<QuoteSpotlightViewProps> = ({
     ? '#ede0c8'
     : '#ffffff';
 
-  const borderColor = isChalkboard
+  const borderColor = isNeon
+    ? '#38bdf8'
+    : isDarkMotion || isGold
+    ? 'rgba(245, 158, 11, 0.7)'
+    : isChalkboard
     ? '#86efac'
     : isBlueprint
     ? '#38bdf8'
@@ -51,8 +60,8 @@ export const QuoteSpotlightView: React.FC<QuoteSpotlightViewProps> = ({
     ? '#92400e'
     : '#1e3a8a';
 
-  const textPrimary = isChalkboard || isBlueprint ? '#ffffff' : '#0f172a';
-  const textMuted = isChalkboard ? '#cbd5e1' : isBlueprint ? '#93c5fd' : '#475569';
+  const textPrimary = isDarkMotion || isChalkboard || isBlueprint ? '#ffffff' : '#0f172a';
+  const textMuted = isDarkMotion ? '#94a3b8' : isChalkboard ? '#cbd5e1' : isBlueprint ? '#93c5fd' : '#475569';
 
   const isVerse = (quoteSpotlight as any).isVerse || (quoteSpotlight.title && (quoteSpotlight.title.toLowerCase().includes('ayet') || quoteSpotlight.title.toLowerCase().includes('sure') || quoteSpotlight.title.toLowerCase().includes('hadis')));
   const badgeText = (quoteSpotlight as any).verseBadge || (isVerse ? 'AYET-İ KERİME' : (quoteSpotlight.title || 'HİKMETLİ SÖZ'));
@@ -125,21 +134,23 @@ export const QuoteSpotlightView: React.FC<QuoteSpotlightViewProps> = ({
           textAlign: 'center',
         }}
       >
-        {/* Washi Masking Tape on Top */}
-        <div
-          style={{
-            position: 'absolute',
-            top: -16,
-            left: '50%',
-            transform: 'translateX(-50%) rotate(2deg)',
-            width: 140,
-            height: 32,
-            backgroundColor: 'rgba(251, 191, 36, 0.85)',
-            borderLeft: '3px dashed rgba(217, 119, 6, 0.5)',
-            borderRight: '3px dashed rgba(217, 119, 6, 0.5)',
-            boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
-          }}
-        />
+        {/* Washi Masking Tape on Top (for light/notebook themes only) */}
+        {!isDarkMotion && (
+          <div
+            style={{
+              position: 'absolute',
+              top: -16,
+              left: '50%',
+              transform: 'translateX(-50%) rotate(2deg)',
+              width: 140,
+              height: 32,
+              backgroundColor: 'rgba(251, 191, 36, 0.85)',
+              borderLeft: '3px dashed rgba(217, 119, 6, 0.5)',
+              borderRight: '3px dashed rgba(217, 119, 6, 0.5)',
+              boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+            }}
+          />
+        )}
 
         {/* Big Decorative Quotation Marks */}
         <div

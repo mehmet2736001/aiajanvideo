@@ -249,8 +249,8 @@ class GenerateRequest(BaseModel):
     illustration_prompt: Optional[str] = None
     illustration_caption: Optional[str] = None
     illustration_style: Optional[str] = "polaroid" # polaroid, torn_paper, clean_frame
-    broll_type: Optional[str] = "none" # none, cosmic, clouds, waves, ink
-    broll_opacity: Optional[float] = 0.18
+    broll_type: Optional[str] = "gold_dust" # none, cosmic, clouds, waves, ink
+    broll_opacity: Optional[float] = 0.80
     start_offset: Optional[float] = None
     start_after_quote: Optional[bool] = True
 
@@ -1043,22 +1043,46 @@ async def upload_audio_and_generate_multiscene(
     # 8. Gemini 3 Director Prompt for Multi-Scene Storyboard
     effective_model = model or DEFAULT_MODEL
     prompt = f"""Sen viral YouTube Shorts, TikTok ve Mini-Belgesel prodüksiyonlarının BAŞ YAPAY ZEKA YÖNETMENİ ve senaristisin.
-Kullanıcı kendi ses kaydını yükledi!
-Toplam Ses Süresi: {total_duration:.1f} saniye.
-Tam Ses Dökümü: '{full_transcript}'
+Kullanıcı Talebi / Girdisi: '{topic}'
+Çalışma Modu: {'🤖 AI YÖNETMEN MODU (Tüm şablon, tasarım ve arkaplan kararlarını sen özgürce ver)' if is_auto else f'🛠️ MANUEL KULLANICI MODU (Seçilen: Tema: {req.theme}, Şablon: {req.layout_type}, Süre: {req.duration_mode})'}
 
-Bu ses {num_scenes} ardışık bölüme/sahneye ayrıldı. Her sahne yaklaşık {total_duration / num_scenes:.1f} saniye sürmektedir:
-{json.dumps(scene_slices, ensure_ascii=False, indent=2)}
+KRİTİK TASARIM KURALLARI (KULLANICI MEMNUNİYETİ İÇİN 1 NUMARALI KURAL):
+1. ASLA VE ASLA TEKDÜZE VEYA SABİT BİR ŞABLONA BAĞLI KALMA!
+   Her sahnede şablon düzenine ('layoutType') ve arkaplan videosuna ('brollType') konunun derinliğine ve ritmine göre KENDİN ÖZGÜRCE KARAR VER.
+2. EKRAN ASLA KALABALIK VE ÜST ÜSTE BİNMİŞ 5-6 SATIRLIK BAŞLIKLARLA BOĞULMAYACAK!
+   Tasarım SADE, ZARİF, FERAH ve MODERN olmalı. Ekranın en az %60'ı arkaplandaki animasyon videosuna ve ferah boşluğa kalmalıdır.
+3. BAŞLIK ALANLARINI ZORLA DOLDURMA:
+   - 'quote_spotlight' (Alıntı/Ayet/Hadis) sahnelerinde: Üstte yalnızca tek bir zarif kategori hapı ('headerSubtitle': örn: "MUKADDES YUVA & İLAHİ RIZA") yeterlidir. 'headerLine1', 'circledWord', 'headerLine2', 'highlightedText' ve 'strikeWord' alanlarını BOŞ STRİNG ("") bırak! Bu sayede alıntı kutusu arkaplan animasyon videosunun üzerinde zarafetle parlar.
+   - 'cinematic_ambient' (Sinematik Arkaplan) sahnelerinde: Yalnızca tek satırlık vurucu bir başlık ('headerLine1') ve alt kategori ('headerSubtitle') üret.
+   - 'vs_split' (Karşılaştırma), 'cards' (Kartlar), 'metric_impact' (Metrik): Başlığı tek bir satırda tut ('headerLine1'), gereksiz çember ve fosforlu bantları boş bırak.
+4. ARKAPLAN ANİMASYON VİDEOSU ('brollType'):
+   Arkaplanda kesintisiz hareket eden sinematik bir video oynatılacaktır. Konuya göre en uygununu seç:
+   - 'gold_dust': İlahi, felsefi, manevi, evlilik, aile, ahlak ve kutsal konular için altın tozu ve parıltı.
+   - 'cosmic': Kainat, varoluş, derin düşünce ve felsefe için derin uzay.
+   - 'clouds': Dinginlik, huzur ve tefekkür için sinematik bulutlar.
+   - 'ink': Tarihsel anlatımlar, sahabeler ve hikmet için mistik mürekkep.
+   - 'waves': Okyanus, derinlik ve akış için dalgalar.
+   'brollType' ASLA 'none' KALMAYACAK!
 
-GÖREVİN:
-1. Temayı belirle: 'dark_minimalist' | 'gold_luxury' | 'neon_cyber' | 'parchment' | 'notebook' | 'kraft' | 'chalkboard' | 'blueprint'
-   (KURAL: İslami / derin tefekkür dendiğinde KESİNLİKLE 'dark_minimalist' veya 'gold_luxury'; Bilim / teknoloji / evren için 'neon_cyber' veya 'blueprint'; Tarih / felsefe için 'parchment' veya 'kraft')
-2. HER BİR BÖLÜM (SCENE) İÇİN ({num_scenes} adet):
-   - Önceki sahnenin bittiği yerden devam edecek şekilde ve görsel monotonluğu kırmak için FARKLI bir şablon (layoutType) seç:
-     'quote_spotlight' | 'vs_split' | 'cards' | 'metric_impact' | 'grid_explosion' | 'tri_concept' | 'pip_split'
-   - Sahneye özel 'headerSubtitle', 'headerLine1', 'circledWord', 'headerLine2', 'highlightedText', 'strikeWord' oluştur.
-   - Seçtiğin layoutType'a uygun zengin içerik verisini (cards, vsData, flowchartSteps, quoteSpotlight, metricImpact, gridExplosion, triConcept) üret.
-3. 'requiredIcons': Senaryolarda geçen tüm ikon isimleri (örn: ['fingerprint', 'dna', 'atom', 'brain', 'heart', 'eye', 'scale', 'hourglass', 'book', 'lightbulb', 'compass', 'shield', 'infinity']).
+3 AŞAMALI SİNEMATİK PRODÜKSİYON GÖREVİN:
+
+GÖREV 1: DERİN ANLAMSAL ANALİZ
+Kullanıcının yazdığı metni derinlemesine analiz et:
+1. Tarihsel Dönem ve Varlık Analizi (Asr-ı Saadet, Sahabeler, Kur'an, Felsefe vb.).
+2. Ayet / Hadis / Hikmet Tespiti.
+3. Canlı Altı Çizilecek 4-6 Kavram ('underlinedKeywords', örn: ["vazife", "allah rızası", "mukaddes", "huzur", "ihsan"]).
+
+GÖREV 2: {word_req} PROFESYONEL TÜRKÇE SESLENDİRME METNİ ('narration') YAZ.
+Kullanıcının verdiği metnin özüne ve felsefesine tam olarak sadık kal!
+
+GÖREV 3: BU SENARYOYU DİNAMİK, FERAH VE MONOTONLUKTAN UZAK SAHNELERE ('scenes') AYIR:
+- Her sahnenin 'layoutType' değerine konunun akışına göre KENDİN KARAR VER:
+  * 'quote_spotlight': Alıntı, ayet meali, hadis veya hikmetli fıkhi kural.
+  * 'cinematic_ambient': Seslendirme ve hareketli arkaplanın başrolde olduğu, sade ve ferah sahne.
+  * 'vs_split': İki zihniyetin çarpıştığı yer (örn: Bencil Menfaat Şebekesi vs Allah Rızası Güden Mukaddes Yuva).
+  * 'cards': 2-3 adet zarif floating kart.
+  * 'metric_impact': Çarpıcı oran veya ilke (örn: 1 İLKE, %100 VAZİFE).
+- Her sahneye uygun 'brollType' ata ('gold_dust', 'cosmic', 'clouds', 'ink', 'waves').
 
 SADECE SAF GEÇERLİ JSON DÖNDÜR:
 {{

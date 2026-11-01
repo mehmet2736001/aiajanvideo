@@ -6,7 +6,8 @@ export type LayoutType =
   | 'metric_impact'
   | 'grid_explosion'
   | 'tri_concept'
-  | 'pip_split';
+  | 'pip_split'
+  | 'cinematic_ambient';
 
 export type LanguageCode = 'tr' | 'en' | 'ar' | 'es';
 export type TextDirection = 'ltr' | 'rtl';
@@ -206,7 +207,7 @@ export interface VideoScene {
   illustrationCaption?: string;
   illustrationStyle?: 'polaroid' | 'torn_paper' | 'clean_frame' | 'none';
   brollUrl?: string;
-  brollType?: 'none' | 'cosmic' | 'ink' | 'clouds' | 'waves';
+  brollType?: 'none' | 'cosmic' | 'ink' | 'clouds' | 'waves' | 'gold_dust' | string;
   brollOpacity?: number;
   pipData?: { title?: string; subtitle?: string; caption?: string; badge?: string };
   videoUrl?: string;
@@ -256,7 +257,7 @@ export interface VideoData {
   illustrationCaption?: string;
   illustrationStyle?: 'polaroid' | 'torn_paper' | 'clean_frame' | 'none';
   brollUrl?: string;
-  brollType?: 'none' | 'cosmic' | 'ink' | 'clouds' | 'waves';
+  brollType?: 'none' | 'cosmic' | 'ink' | 'clouds' | 'waves' | 'gold_dust' | string;
   brollOpacity?: number;
   pipData?: { title?: string; subtitle?: string; caption?: string; badge?: string };
   narration?: string;

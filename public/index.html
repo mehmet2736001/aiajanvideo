@@ -1034,11 +1034,15 @@
           <!-- Live Canvas Mockup -->
           <div id="notebook-preview" class="w-full h-full theme-notebook text-slate-900 flex flex-col p-4 relative font-hand overflow-hidden select-none transition-all duration-300">
             
+            <!-- Sinematik Arkaplan Hareketli Video Katmanı (B-Roll) -->
+            <video id="pv-broll-video" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none transition-opacity duration-700 opacity-80" src="/public/broll/gold_dust.mp4"></video>
+            <div id="pv-broll-vignette" class="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-black/45 via-black/15 to-black/80"></div>
+
             <!-- Red Margin Line -->
-            <div id="pv-margin" class="absolute left-6 top-0 bottom-0 w-[1.5px] bg-red-400 opacity-60"></div>
+            <div id="pv-margin" class="absolute left-6 top-0 bottom-0 w-[1.5px] bg-red-400 opacity-60 z-[2]"></div>
 
             <!-- Spiral Holes -->
-            <div id="pv-holes" class="w-full flex justify-around mb-2 pt-2 pl-4">
+            <div id="pv-holes" class="w-full flex justify-around mb-2 pt-2 pl-4 z-[2]">
               <div class="w-2 h-2 rounded-full bg-slate-900"></div>
               <div class="w-2 h-2 rounded-full bg-slate-900"></div>
               <div class="w-2 h-2 rounded-full bg-slate-900"></div>
@@ -1052,16 +1056,20 @@
               Sahne 1 / 1 (0:00 - 0:15)
             </div>
 
-            <!-- Header Titles -->
-            <div class="text-center pt-1">
-              <div id="pv-sub" class="text-xs font-bold text-emerald-700">Kısa Kıssa</div>
-              <div id="pv-line1" class="text-lg font-extrabold text-blue-900 leading-tight">İBN-İ SİNA</div>
-              <div class="text-sm font-extrabold text-blue-900 flex items-center justify-center gap-1.5 my-0.5">
-                <span id="pv-circle" class="border-2 border-red-600 rounded-full px-2 py-0.5 text-blue-950 -rotate-2">40 KEZ</span>
-                <span id="pv-line2">OKUDUĞU HALDE</span>
+            <!-- Header Titles Container -->
+            <div id="pv-header-container" class="text-center pt-1 relative z-10">
+              <div id="pv-sub-wrapper" class="flex justify-center mb-1">
+                <div id="pv-sub" class="text-xs font-bold text-amber-300">Kısa Kıssa</div>
               </div>
-              <div class="mt-0.5">
-                <span id="pv-high" class="bg-yellow-200 text-red-700 font-extrabold px-2 py-0.5 rounded text-base -rotate-1 inline-block">NEDEN ANLAMADI?</span>
+              <div id="pv-titles-wrapper">
+                <div id="pv-line1" class="text-lg font-extrabold text-blue-900 leading-tight">İBN-İ SİNA</div>
+                <div id="pv-row-circle" class="text-sm font-extrabold text-blue-900 flex items-center justify-center gap-1.5 my-0.5">
+                  <span id="pv-circle" class="border-2 border-red-600 rounded-full px-2 py-0.5 text-blue-950 -rotate-2">40 KEZ</span>
+                  <span id="pv-line2">OKUDUĞU HALDE</span>
+                </div>
+                <div id="pv-row-high" class="mt-0.5">
+                  <span id="pv-high" class="bg-yellow-200 text-red-700 font-extrabold px-2 py-0.5 rounded text-base -rotate-1 inline-block">NEDEN ANLAMADI?</span>
+                </div>
               </div>
             </div>
 
@@ -1216,12 +1224,26 @@
       <div class="space-y-1.5">
         <label class="block font-bold text-slate-300">Şablon Düzeni (Layout)</label>
         <select id="inspect-layout-type" onchange="updateActiveSceneField('layoutType', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
-          <option value="pip_split">🖼️ PiP Split (Polaroid / Yırtık Kağıt)</option>
+          <option value="quote_spotlight">💬 Alıntı & Söz (Sade & Odaklı)</option>
+          <option value="cinematic_ambient">🌌 Sinematik Arkaplan & Sade Metin</option>
+          <option value="vs_split">⚖️ VS Karşılaştırma</option>
           <option value="cards">🃏 Kartlar & Liste</option>
-          <option value="vs_split">⚔️ VS Karşılaştırma</option>
+          <option value="metric_impact">📊 Büyük Metrik / Rakam</option>
+          <option value="pip_split">🖼️ PiP Split (Polaroid / Yırtık Kağıt)</option>
           <option value="flowchart">🗺️ Akış Şeması</option>
-          <option value="quote_spotlight">💬 Alıntı & Söz</option>
-          <option value="metricImpact">📊 Büyük Metrik / Rakam</option>
+        </select>
+      </div>
+
+      <!-- B-Roll Background Video Selector for Scene -->
+      <div class="space-y-1.5">
+        <label class="block font-bold text-slate-300">Arkaplan Animasyon Videosu (B-Roll)</label>
+        <select id="inspect-broll-type" onchange="updateActiveSceneField('brollType', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
+          <option value="gold_dust">✨ Altın Tozu & Parıltı (gold_dust)</option>
+          <option value="cosmic">🌌 Derin Kozmik & Galaksi (cosmic)</option>
+          <option value="clouds">☁️ Sinematik Bulutlar (clouds)</option>
+          <option value="ink">🖋️ Mistik Mürekkep & Duman (ink)</option>
+          <option value="waves">🌊 Okyanus & Derin Dalgalar (waves)</option>
+          <option value="none">🚫 Düz Statik Zemin (none)</option>
         </select>
       </div>
 
@@ -4987,7 +5009,10 @@
       document.getElementById('inspector-scene-title').innerText = `Sahne ${idx} Denetçisi`;
       document.getElementById('inspector-scene-bounds').innerText = `${s.startTime?.toFixed(1)}s - ${s.endTime?.toFixed(1)}s`;
 
-      document.getElementById('inspect-layout-type').value = s.layoutType || 'pip_split';
+      document.getElementById('inspect-layout-type').value = s.layoutType || 'quote_spotlight';
+      if (document.getElementById('inspect-broll-type')) {
+        document.getElementById('inspect-broll-type').value = s.brollType || (videoData && videoData.brollType) || 'gold_dust';
+      }
       document.getElementById('inspect-header-sub').value = s.headerSubtitle || '';
       document.getElementById('inspect-header-line1').value = s.headerLine1 || '';
       document.getElementById('inspect-circled-word').value = s.circledWord || '';
@@ -6014,18 +6039,128 @@
       const s = scenes.find(sc => sc.id === activeSceneId) || scenes[0];
       if (!s) return;
 
-      // Header Texts
-      document.getElementById('pv-sub').innerText = s.headerSubtitle || 'Kısa Kıssa';
-      document.getElementById('pv-line1').innerText = s.headerLine1 || 'BAŞLIK';
-      document.getElementById('pv-circle').innerText = s.circledWord || 'VURGU';
-      document.getElementById('pv-line2').innerText = s.headerLine2 || '';
-      document.getElementById('pv-high').innerText = s.highlightedText || 'ÖNEMLİ KAVRAM';
-
-      // Middle Dynamic Content based on layout
-      const mid = document.getElementById('pv-middle-area');
       const layout = s.layoutType || 'pip_split';
 
-      if (layout === 'pip_split' || s.illustrationUrl) {
+      // 1. Play Background Animated Video (B-Roll)
+      const broll = s.brollType || (videoData && videoData.brollType) || 'gold_dust';
+      const brollVideo = document.getElementById('pv-broll-video');
+      if (brollVideo) {
+        if (broll === 'none') {
+          brollVideo.style.display = 'none';
+        } else {
+          brollVideo.style.display = 'block';
+          const targetSrc = `/public/broll/${broll}.mp4`;
+          if (!brollVideo.src.includes(targetSrc)) {
+            brollVideo.src = targetSrc;
+            brollVideo.load();
+            brollVideo.play().catch(() => {});
+          }
+        }
+      }
+
+      // 2. Clean Header Management based on Layout
+      const titlesWrapper = document.getElementById('pv-titles-wrapper');
+      const pvSub = document.getElementById('pv-sub');
+
+      if (layout === 'quote_spotlight') {
+        // Alıntı sahnesinde ekranı boğan 5 satırlık başlıklar GİZLENİR!
+        if (titlesWrapper) titlesWrapper.style.display = 'none';
+        if (pvSub) {
+          pvSub.className = 'inline-block px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 font-extrabold text-[11px] uppercase tracking-wider backdrop-blur-md shadow-lg shadow-amber-950/40';
+          pvSub.innerText = s.headerSubtitle || 'HİKMET VE MANEVİYAT';
+        }
+      } else if (layout === 'cinematic_ambient') {
+        // Sinematik arkaplan sahnesinde yalnızca ferah ve sade tek başlık
+        if (titlesWrapper) {
+          titlesWrapper.style.display = 'block';
+          document.getElementById('pv-line1').innerText = s.headerLine1 || s.headerSubtitle || '';
+          document.getElementById('pv-line1').className = 'text-xl font-black text-white leading-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]';
+          const circleRow = document.getElementById('pv-row-circle');
+          if (circleRow) circleRow.style.display = 'none';
+          const highRow = document.getElementById('pv-row-high');
+          if (highRow) {
+            if (s.highlightedText) {
+              highRow.style.display = 'block';
+              document.getElementById('pv-high').innerText = s.highlightedText;
+              document.getElementById('pv-high').className = 'bg-amber-500/25 border border-amber-400/50 text-amber-200 font-extrabold px-3 py-1 rounded-xl text-xs inline-block shadow-lg';
+            } else {
+              highRow.style.display = 'none';
+            }
+          }
+        }
+        if (pvSub) {
+          pvSub.className = 'inline-block px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-bold tracking-wider uppercase mb-1';
+          pvSub.innerText = s.headerSubtitle || '';
+        }
+      } else {
+        // Diğer şablonlar (cards, vs_split, metric_impact, pip_split)
+        if (titlesWrapper) {
+          titlesWrapper.style.display = 'block';
+          document.getElementById('pv-line1').innerText = s.headerLine1 || 'BAŞLIK';
+          document.getElementById('pv-line1').className = 'text-base font-extrabold text-blue-900 leading-tight';
+          const circleRow = document.getElementById('pv-row-circle');
+          if (circleRow) {
+            if (s.circledWord || s.headerLine2) {
+              circleRow.style.display = 'flex';
+              document.getElementById('pv-circle').innerText = s.circledWord || '';
+              document.getElementById('pv-line2').innerText = s.headerLine2 || '';
+            } else {
+              circleRow.style.display = 'none';
+            }
+          }
+          const highRow = document.getElementById('pv-row-high');
+          if (highRow) {
+            if (s.highlightedText) {
+              highRow.style.display = 'block';
+              document.getElementById('pv-high').innerText = s.highlightedText;
+              document.getElementById('pv-high').className = 'bg-yellow-200 text-red-700 font-extrabold px-2 py-0.5 rounded text-base -rotate-1 inline-block';
+            } else {
+              highRow.style.display = 'none';
+            }
+          }
+        }
+        if (pvSub) {
+          pvSub.className = 'text-xs font-bold text-amber-400';
+          pvSub.innerText = s.headerSubtitle || 'Kısa Kıssa';
+        }
+      }
+
+      // 3. Middle Dynamic Content based on layout
+      const mid = document.getElementById('pv-middle-area');
+
+      if (layout === 'cinematic_ambient') {
+        mid.innerHTML = `
+          <div class="my-auto text-center px-4">
+            <div class="w-12 h-12 mx-auto rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 text-lg mb-3 shadow-[0_0_20px_rgba(245,158,11,0.3)] animate-pulse">
+              <i class="fa-solid fa-sparkles"></i>
+            </div>
+            <div class="text-xs text-slate-200 font-semibold max-w-[260px] mx-auto leading-relaxed drop-shadow">
+              Arkaplanda sinematik animasyon videosu akışı eşliğinde seslendirme odaklı sade anlatım
+            </div>
+          </div>
+        `;
+      } else if (layout === 'vs_split') {
+        const vs = s.vsData || {
+          leftTitle: 'Bencil Menfaat', leftPoints: ['Zorunda değilim tavrı', 'Sürekli hak yarışı'],
+          rightTitle: 'Mukaddes Yuva', rightPoints: ['İlahi vazife bilinci', 'Karşılıklı vefa ve ihsan']
+        };
+        mid.innerHTML = `
+          <div class="grid grid-cols-2 gap-2 my-auto max-w-[310px] mx-auto w-full">
+            <div class="p-2.5 rounded-2xl bg-rose-950/60 border border-rose-500/40 text-center backdrop-blur-md">
+              <div class="text-[10px] font-extrabold text-rose-300 uppercase truncate">${vs.leftTitle || 'Menfaat'}</div>
+              <div class="text-[9px] text-slate-300 mt-1.5 space-y-1 text-left">
+                ${(vs.leftPoints || []).slice(0, 3).map(p => `<div>• ${p}</div>`).join('')}
+              </div>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-emerald-950/60 border border-emerald-500/40 text-center backdrop-blur-md">
+              <div class="text-[10px] font-extrabold text-emerald-300 uppercase truncate">${vs.rightTitle || 'Mukaddes Yuva'}</div>
+              <div class="text-[9px] text-slate-300 mt-1.5 space-y-1 text-left">
+                ${(vs.rightPoints || []).slice(0, 3).map(p => `<div>• ${p}</div>`).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (layout === 'pip_split' || s.illustrationUrl) {
         const illUrl = s.illustrationUrl || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80';
         const isPolaroid = s.illustrationStyle !== 'torn_paper';
         
@@ -6094,7 +6229,7 @@
             </div>
           </div>
         `;
-      } else if (layout === 'metricImpact') {
+      } else if (layout === 'metric_impact' || layout === 'metricImpact') {
         const m = s.metricImpact || { bigNumber: '40x', bigLabel: 'KEZ OKUNDU', subheading: 'Anlaşılamayan Hakikat' };
         mid.innerHTML = `
           <div class="text-center my-auto">
@@ -6137,7 +6272,6 @@
       renderPipPreviewOverlay();
       renderPngPreviewOverlay();
     }
-
 
     // ==========================================
     // LIVE PREVIEW OVERLAYS (QUOTE, PIP, PNG)

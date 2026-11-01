@@ -183,10 +183,12 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
       />
 
       {/* 3.5 Sinematik B-Roll Stok Medya KatmanÄ± (Faz 8) */}
+      {/* 3.5 Sinematik Canli B-Roll Arkaplan Video Katmani */}
       <BRollOverlay
-        type={props.brollType || 'none'}
+        type={props.brollType && props.brollType !== 'none' ? props.brollType : (isDarkMotion ? (activeTheme === 'gold_luxury' ? 'gold_dust' : 'cosmic') : 'cosmic')}
         brollUrl={props.brollUrl}
-        opacity={props.brollOpacity ?? 0.18}
+        opacity={props.brollOpacity ?? 0.8}
+        blendMode="normal"
       />
 
       {/* Decorative Doodles (Only for Notebook / Kraft / Blueprint) */}

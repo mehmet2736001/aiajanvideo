@@ -18,16 +18,26 @@
     {
       "id": "scene_1",
       "layoutType": "quote_spotlight",
-      "headerSubtitle": "ZİHİNSEL DÖNÜŞÜM",
-      "headerLine1": "GİZLİ GERÇEK",
-      "circledWord": "CEVAP",
-      "headerLine2": "SONUNDA ORTAYA ÇIKTI",
-      "highlightedText": "HER ŞEYİ DEĞİŞTİRECEK",
-      "strikeWord": "İMKANSIZ",
+      "headerSubtitle": "AİLE HUKUKU & İLAHİ VAZİFE",
+      "headerLine1": "",
+      "circledWord": "",
+      "headerLine2": "",
+      "highlightedText": "",
+      "strikeWord": "",
       "quoteSpotlight": {
-        "speaker": "BİLİNMEYEN",
-        "title": "KAYIT",
-        "quoteText": "Asıl cevap aradığın yerde değil, bakmaya korktuğun yerde saklı."
+        "speaker": "Ahlaki ve Manevi İlke",
+        "title": "MUKADDES YUVA",
+        "quoteText": "Aile; nefislerin dayatıldığı bir menfaat şebekesi değil, herkesin vazifesini Allah rızası için yerine getirdiği mukaddes bir yuvadır.",
+        "isVerse": false,
+        "verseBadge": "HİKMETLİ HAKİKAT",
+        "typewriter": true,
+        "underlinedWords": [
+          "menfaat",
+          "vazife",
+          "allah rızası",
+          "mukaddes",
+          "yuva"
+        ]
       },
       "startTime": 23.8,
       "endTime": 37.03,
@@ -53,17 +63,17 @@
         }
       ],
       "illustrationStyle": "polaroid",
-      "brollType": "none"
+      "brollType": "gold_dust"
     },
     {
       "id": "scene_2",
       "layoutType": "vs_split",
-      "headerSubtitle": "Paradigma Çatışması",
-      "headerLine1": "NEFSİN",
-      "circledWord": "DAYATMASI",
-      "headerLine2": "VS İLAHİ RIZA",
-      "highlightedText": "MENFAAT ŞEBEKESİ",
-      "strikeWord": "BENCİLLİK",
+      "headerSubtitle": "ZİHNİYET ÇATIŞMASI",
+      "headerLine1": "MENFAAT ŞEBEKESİ VS MUKADDES YUVA",
+      "circledWord": "",
+      "headerLine2": "",
+      "highlightedText": "",
+      "strikeWord": "",
       "vsData": {
         "leftTitle": "Menfaat Şebekesi",
         "leftSubtitle": "Nefsin Dayatması",
@@ -82,14 +92,15 @@
         "verdict": "Hak arayışıyla tükenen evlilikler değil, vazife bilinciyle yaşayan mukaddes yuvalar kazanır."
       },
       "startTime": 37.03,
-      "endTime": 50.27
+      "endTime": 50.27,
+      "brollType": "gold_dust"
     },
     {
       "id": "scene_3",
-      "layoutType": "cards",
-      "headerSubtitle": "Huzurun Reçetesi",
-      "headerLine1": "HUZURUN",
-      "circledWord": "TEMELİ",
+      "layoutType": "cinematic_ambient",
+      "headerSubtitle": "HUZURUN SIRRI",
+      "headerLine1": "HAK YARIŞTIRMAK DEĞİL, VAZİFEYİ İFA ETMEK KAZANDIRIR",
+      "circledWord": "",
       "headerLine2": "",
       "highlightedText": "ALLAH RIZASI",
       "strikeWord": "",
@@ -117,7 +128,8 @@
         }
       ],
       "startTime": 50.27,
-      "endTime": 63.5
+      "endTime": 63.5,
+      "brollType": "gold_dust"
     }
   ],
   "viral": {
@@ -150,8 +162,8 @@
   "ttsProvider": "edge_tts",
   "voiceId": "en-US-AndrewMultilingualNeural",
   "emotionTone": "documentary",
-  "brollType": "none",
-  "brollOpacity": 0.18,
+  "brollType": "gold_dust",
+  "brollOpacity": 0.85,
   "_acquired_assets": [
     {
       "name": "fingerprint",
