@@ -852,6 +852,18 @@
               <i class="fa-solid fa-microphone text-xs"></i> <span>+ MP3 Ekle</span>
             </button>
           </div>
+
+          <!-- AI Otonom Mod Toggle Switch -->
+          <div class="flex items-center justify-between pt-1.5 border-t border-purple-500/20">
+            <span class="text-[10px] font-bold text-slate-300 flex items-center gap-1">
+              <i class="fa-solid fa-robot text-amber-400"></i> AI Otonom Mod
+            </span>
+            <label class="relative inline-flex items-center cursor-pointer" title="Açık: Yapay zekâ her şeye otomatik karar verir. Kapalı: Önerileri size sunar ve seçim yaptırır.">
+              <input type="checkbox" id="toggle-ai-auto-mode" class="sr-only peer" checked onchange="handleAutoModeToggle(this.checked)">
+              <div class="w-8 h-4 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-yellow-500"></div>
+              <span id="label-ai-auto-mode" class="ml-1.5 text-[9px] font-bold text-amber-400">Açık</span>
+            </label>
+          </div>
         </div>
 
         <!-- Page Turn -->
@@ -1037,6 +1049,27 @@
             <!-- Sinematik Arkaplan Hareketli Video Katmanı (B-Roll) -->
             <video id="pv-broll-video" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none transition-opacity duration-700 opacity-80" src="/public/broll/gold_dust.mp4"></video>
             <div id="pv-broll-vignette" class="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-black/45 via-black/15 to-black/80"></div>
+
+            <!-- Pristine Studio Empty Canvas State Placeholder -->
+            <div id="pv-empty-state" class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-slate-950/95 z-20">
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500/20 via-purple-500/20 to-indigo-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 text-3xl mb-4 shadow-xl shadow-amber-500/10">
+                <i class="fa-solid fa-clapperboard"></i>
+              </div>
+              <h3 class="text-white font-extrabold text-base mb-1.5 flex items-center gap-2">
+                <span>🎬 Stüdyo Hazır: Yeni Proje</span>
+              </h3>
+              <p class="text-slate-400 text-xs max-w-xs leading-relaxed mb-4">
+                Önceden belirlenmiş şablon yok. Metninizi girin veya MP3 yükleyin; yapay zekâ sahnelere, 2D animasyonlara ve ses senkronuna otonom karar verecektir.
+              </p>
+              <div class="flex items-center gap-2">
+                <button onclick="openAiMissionModal('text')" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-md transition flex items-center gap-1.5">
+                  <i class="fa-solid fa-file-lines"></i> <span>+ Metin Ekle</span>
+                </button>
+                <button onclick="openAiMissionModal('mp3')" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-purple-300 border border-purple-500/30 font-bold text-xs transition flex items-center gap-1.5">
+                  <i class="fa-solid fa-microphone"></i> <span>+ MP3 Ekle</span>
+                </button>
+              </div>
+            </div>
 
             <!-- Red Margin Line -->
             <div id="pv-margin" class="absolute left-6 top-0 bottom-0 w-[1.5px] bg-red-400 opacity-60 z-[2]"></div>
@@ -1709,9 +1742,21 @@
             <p class="text-[11px] text-slate-400">1. Analiz • 2. Tarihsel & Daktilo Ayet Planı • 3. Zaman Tüneline Dağıtım</p>
           </div>
         </div>
-        <button onclick="closeAiMissionModal()" class="text-slate-400 hover:text-white transition w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center">
-          <i class="fa-solid fa-xmark text-sm"></i>
-        </button>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-900 border border-slate-800">
+            <span class="text-[10px] font-bold text-slate-300 flex items-center gap-1">
+              <i class="fa-solid fa-robot text-amber-400"></i> Oto Mod:
+            </span>
+            <label class="relative inline-flex items-center cursor-pointer" title="Açık: Doğrudan üretir. Kapalı: Önerileri size sunar ve seçim yaptırır.">
+              <input type="checkbox" id="modal-toggle-ai-auto-mode" class="sr-only peer" checked onchange="handleAutoModeToggle(this.checked)">
+              <div class="w-7 h-3.5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-500"></div>
+              <span id="modal-label-ai-auto-mode" class="ml-1 text-[9px] font-bold text-amber-400">Açık</span>
+            </label>
+          </div>
+          <button onclick="closeAiMissionModal()" class="text-slate-400 hover:text-white transition w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center">
+            <i class="fa-solid fa-xmark text-sm"></i>
+          </button>
+        </div>
       </div>
 
       <!-- VIEW A: INPUT CONFIGURATION -->
@@ -1910,6 +1955,63 @@
           </div>
         </div>
       </div>
+
+      <!-- VIEW C: INTERACTIVE AI DIRECTOR PROPOSAL VIEW (When Auto Mode is OFF) -->
+      <div id="ai-mission-view-proposal" class="hidden space-y-4 text-xs">
+        <div class="p-3.5 rounded-2xl bg-gradient-to-r from-amber-950/40 via-purple-950/30 to-slate-900 border border-amber-500/40 space-y-1.5">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+            <span class="font-extrabold text-amber-300 text-xs">🎬 AI Yönetmen Analiz Raporu & Öneriler</span>
+          </div>
+          <p id="proposal-analysis-summary" class="text-slate-300 text-[11px] leading-relaxed">
+            Metnini analiz ettim ve çarpıcı videolar oluşturmak için sana öneriler sunuyorum. Seçeneklerden birini seç veya isteklerini belirt, üretime başlayayım.
+          </p>
+        </div>
+
+        <!-- 3 Visual Style Options -->
+        <div>
+          <label class="block font-bold text-slate-200 mb-2 flex items-center justify-between">
+            <span>Önerilen 2D Görsel Stili Seçin:</span>
+            <span class="text-[10px] text-slate-400 font-normal">Tek tıkla değiştirilebilir</span>
+          </label>
+          <div id="proposal-styles-container" class="grid grid-cols-3 gap-2.5">
+            <!-- Dynamically populated style cards -->
+          </div>
+        </div>
+
+        <!-- 3x 10-Second Continuous Scenes Breakdown -->
+        <div>
+          <label class="block font-bold text-slate-200 mb-1.5 flex items-center justify-between">
+            <span>30 Saniyelik Kurgu Planı (3x 10s Kesintisiz Devamlılık):</span>
+            <span class="text-[10px] text-amber-400 font-mono">1. kareden son kareye pürüzsüz</span>
+          </label>
+          <div id="proposal-scenes-container" class="space-y-2 max-h-48 overflow-y-auto pr-1">
+            <!-- Dynamically populated 3 scenes -->
+          </div>
+        </div>
+
+        <!-- Custom Instructions Tweak -->
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">AI Yönetmene Özel İstek / Değişiklik Notu (İsteğe Bağlı):</label>
+          <input
+            type="text"
+            id="proposal-custom-tweak"
+            placeholder="Örn: 'Dervişin elbisesini yeşil yap', '2. sahneye ayet kutusu ekle', 'Kamerayı daha çok yaklaştır'..."
+            class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-3 py-2 text-slate-200 placeholder-slate-500 focus:outline-none transition"
+          >
+        </div>
+
+        <!-- Proposal Action Buttons -->
+        <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
+          <button onclick="backToMissionInput()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-left"></i> <span>Geri</span>
+          </button>
+          <button onclick="executeApprovedAiProposal()" id="btn-proposal-execute" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs flex items-center gap-2 shadow-lg shadow-amber-500/25 transition">
+            <i class="fa-solid fa-clapperboard"></i>
+            <span>🚀 Bu Kurguyla Başlat (3x 10s 2D Video Üret)</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2066,6 +2168,63 @@
         <div id="audio-step-3" class="flex items-center gap-2 text-slate-500 font-medium">
           <i class="fa-regular fa-circle text-[10px]"></i>
           <span>Zaman tüneli dalga formu (waveform) ve sahneler üretiliyor</span>
+        </div>
+      </div>
+
+      <!-- VIEW C: INTERACTIVE AI DIRECTOR PROPOSAL VIEW (When Auto Mode is OFF) -->
+      <div id="ai-mission-view-proposal" class="hidden space-y-4 text-xs">
+        <div class="p-3.5 rounded-2xl bg-gradient-to-r from-amber-950/40 via-purple-950/30 to-slate-900 border border-amber-500/40 space-y-1.5">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+            <span class="font-extrabold text-amber-300 text-xs">🎬 AI Yönetmen Analiz Raporu & Öneriler</span>
+          </div>
+          <p id="proposal-analysis-summary" class="text-slate-300 text-[11px] leading-relaxed">
+            Metnini analiz ettim ve çarpıcı videolar oluşturmak için sana öneriler sunuyorum. Seçeneklerden birini seç veya isteklerini belirt, üretime başlayayım.
+          </p>
+        </div>
+
+        <!-- 3 Visual Style Options -->
+        <div>
+          <label class="block font-bold text-slate-200 mb-2 flex items-center justify-between">
+            <span>Önerilen 2D Görsel Stili Seçin:</span>
+            <span class="text-[10px] text-slate-400 font-normal">Tek tıkla değiştirilebilir</span>
+          </label>
+          <div id="proposal-styles-container" class="grid grid-cols-3 gap-2.5">
+            <!-- Dynamically populated style cards -->
+          </div>
+        </div>
+
+        <!-- 3x 10-Second Continuous Scenes Breakdown -->
+        <div>
+          <label class="block font-bold text-slate-200 mb-1.5 flex items-center justify-between">
+            <span>30 Saniyelik Kurgu Planı (3x 10s Kesintisiz Devamlılık):</span>
+            <span class="text-[10px] text-amber-400 font-mono">1. kareden son kareye pürüzsüz</span>
+          </label>
+          <div id="proposal-scenes-container" class="space-y-2 max-h-48 overflow-y-auto pr-1">
+            <!-- Dynamically populated 3 scenes -->
+          </div>
+        </div>
+
+        <!-- Custom Instructions Tweak -->
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">AI Yönetmene Özel İstek / Değişiklik Notu (İsteğe Bağlı):</label>
+          <input
+            type="text"
+            id="proposal-custom-tweak"
+            placeholder="Örn: 'Dervişin elbisesini yeşil yap', '2. sahneye ayet kutusu ekle', 'Kamerayı daha çok yaklaştır'..."
+            class="w-full bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-3 py-2 text-slate-200 placeholder-slate-500 focus:outline-none transition"
+          >
+        </div>
+
+        <!-- Proposal Action Buttons -->
+        <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
+          <button onclick="backToMissionInput()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-left"></i> <span>Geri</span>
+          </button>
+          <button onclick="executeApprovedAiProposal()" id="btn-proposal-execute" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs flex items-center gap-2 shadow-lg shadow-amber-500/25 transition">
+            <i class="fa-solid fa-clapperboard"></i>
+            <span>🚀 Bu Kurguyla Başlat (3x 10s 2D Video Üret)</span>
+          </button>
         </div>
       </div>
     </div>
@@ -3826,7 +3985,8 @@
     // 1. FETCH TIMELINE DATA FROM SERVER
     // Dynamic timeline duration: Calculates the true maximum across ALL tracks (Scenes, Quotes, PIPs, Subtitles, Audio)
     function calculateDynamicTimelineDuration(vData, scs) {
-      const ends = [5.0];
+      if (vData && vData.is_empty) return 0.0;
+      const ends = [0.0];
       (scs || []).forEach(s => {
         if (typeof s.endTime === 'number') ends.push(s.endTime);
       });
@@ -3843,10 +4003,11 @@
       ((vData && vData.subtitles) || []).forEach(sub => {
         if (typeof sub.end === 'number') ends.push(sub.end);
       });
-      if (typeof (vData && vData.totalDuration) === 'number') {
-        ends.push(vData.totalDuration);
+      const maxEnd = Math.max(...ends);
+      if (maxEnd === 0.0 && typeof (vData && vData.totalDuration) === 'number' && vData.totalDuration > 0 && !vData.is_empty) {
+        return vData.totalDuration;
       }
-      return Math.max(...ends);
+      return maxEnd;
     }
 
     // Shift all AI notebook scenes (and narration) to start right after the last active quote video
@@ -3903,19 +4064,22 @@
         waveformPeaks = data.waveform || [];
         timelineDuration = calculateDynamicTimelineDuration(data.video_data, data.scenes);
 
-        // Sync title
-        const title = videoData.topic || videoData.headerLine1 || 'Kısa Kıssa';
-        document.getElementById('header-editor-title').innerText = `Editor — S1 ${title}`;
+        // Sync title & activeScene
+        if (videoData.is_empty || scenes.length === 0) {
+          activeSceneId = null;
+          document.getElementById('header-editor-title').innerText = 'Editor — Yeni Boş Proje';
+        } else {
+          const title = videoData.topic || videoData.headerLine1 || 'Kısa Kıssa';
+          document.getElementById('header-editor-title').innerText = `Editor — ${title}`;
+          if (!scenes.find(s => s.id === activeSceneId) && scenes.length > 0) {
+            activeSceneId = scenes[0].id;
+          }
+        }
 
         // Sync format dropdown
         const aspectSel = document.getElementById('video-aspect-ratio');
         if (aspectSel && videoData.format) {
           aspectSel.value = videoData.format;
-        }
-
-        // Ensure activeSceneId is valid
-        if (!scenes.find(s => s.id === activeSceneId) && scenes.length > 0) {
-          activeSceneId = scenes[0].id;
         }
 
         // Sync custom transcript in sidebar
@@ -3995,6 +4159,11 @@
     function renderVideoTrack(pxPerSec) {
       const track = document.getElementById('track-video');
       track.innerHTML = '';
+
+      if (!scenes || scenes.length === 0) {
+        track.innerHTML = '<div class="absolute inset-0 flex items-center justify-center text-slate-500 text-xs italic tracking-wider select-none pointer-events-none"><i class="fa-solid fa-film text-amber-500/70 mr-2"></i> Zaman tüneli boş · Kurguya başlamak için sol panelden metin yazın veya MP3 yükleyin</div>';
+        return;
+      }
 
       scenes.forEach((s, idx) => {
         const start = s.startTime || 0;
@@ -5064,7 +5233,19 @@
 
     function renderSceneInspector() {
       const s = scenes.find(sc => sc.id === activeSceneId) || scenes[0];
-      if (!s) return;
+      const titleEl = document.getElementById('inspector-scene-title');
+      const boundsEl = document.getElementById('inspector-scene-bounds');
+      if (!s || (videoData && videoData.is_empty) || scenes.length === 0) {
+        if (titleEl) titleEl.innerText = 'Sahne Denetçisi (Boş)';
+        if (boundsEl) boundsEl.innerText = '0.0s - 0.0s';
+        ['inspect-header-sub', 'inspect-header-line1', 'inspect-circled-word', 'inspect-header-line2', 'inspect-highlight-text', 'inspect-ill-caption'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+        const animCont = document.getElementById('inspect-anim-player-container');
+        if (animCont) animCont.classList.add('hidden');
+        return;
+      }
 
       const idx = scenes.indexOf(s) + 1;
       document.getElementById('inspector-scene-title').innerText = `Sahne ${idx} Denetçisi`;
@@ -6116,7 +6297,31 @@
 
     function renderLivePreviewCanvas() {
       const s = scenes.find(sc => sc.id === activeSceneId) || scenes[0];
-      if (!s) return;
+      const emptyStateEl = document.getElementById('pv-empty-state');
+      const brollVideo = document.getElementById('pv-broll-video');
+      const pill = document.getElementById('preview-scene-pill');
+      const margin = document.getElementById('pv-margin');
+      const holes = document.getElementById('pv-holes');
+
+      if (!s || (videoData && videoData.is_empty) || scenes.length === 0) {
+        if (emptyStateEl) emptyStateEl.classList.remove('hidden');
+        if (brollVideo) brollVideo.style.display = 'none';
+        if (pill) pill.style.display = 'none';
+        if (margin) margin.style.display = 'none';
+        if (holes) holes.style.display = 'none';
+        ['pv-header-container', 'pv-layout-pip', 'pv-layout-cards', 'pv-layout-quote', 'pv-layout-metric', 'pv-layout-vs', 'pv-layout-flowchart'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = 'none';
+        });
+        return;
+      }
+
+      if (emptyStateEl) emptyStateEl.classList.add('hidden');
+      if (pill) pill.style.display = 'block';
+      if (margin) margin.style.display = 'block';
+      if (holes) holes.style.display = 'flex';
+      const headerContainer = document.getElementById('pv-header-container');
+      if (headerContainer) headerContainer.style.display = 'block';
 
       const layout = s.layoutType || 'pip_split';
 
@@ -7145,6 +7350,11 @@
       list.innerHTML = '';
       document.getElementById('media-scene-count').innerText = scenes.length;
 
+      if (!scenes || scenes.length === 0) {
+        list.innerHTML = '<div class="p-4 text-center text-slate-500 text-xs italic">Henüz sahne oluşturulmadı</div>';
+        return;
+      }
+
       scenes.forEach((s, i) => {
         const item = document.createElement('div');
         const isActive = s.id === activeSceneId;
@@ -8045,9 +8255,189 @@
       }
     }
 
+    let currentAiProposal = null;
+    let selectedProposalStyle = '2d_anime';
+
+    function handleAutoModeToggle(isChecked) {
+      const label = document.getElementById('label-ai-auto-mode');
+      if (label) label.innerText = isChecked ? 'Açık' : 'Kapalı';
+      const modalToggle = document.getElementById('modal-toggle-ai-auto-mode');
+      if (modalToggle && modalToggle.checked !== isChecked) modalToggle.checked = isChecked;
+      const modalLabel = document.getElementById('modal-label-ai-auto-mode');
+      if (modalLabel) modalLabel.innerText = isChecked ? 'Açık' : 'Kapalı';
+    }
+
+    function backToMissionInput() {
+      document.getElementById('ai-mission-view-proposal')?.classList.add('hidden');
+      document.getElementById('ai-mission-view-input')?.classList.remove('hidden');
+      document.getElementById('ai-mission-view-hud')?.classList.add('hidden');
+    }
+
+    function selectProposalStyle(styleId) {
+      selectedProposalStyle = styleId;
+      document.querySelectorAll('.proposal-style-card').forEach(card => {
+        if (card.getAttribute('data-style-id') === styleId) {
+          card.className = 'proposal-style-card p-3 rounded-2xl border-2 border-amber-400 bg-amber-500/10 cursor-pointer transition shadow-md shadow-amber-500/10';
+        } else {
+          card.className = 'proposal-style-card p-3 rounded-2xl border border-slate-800 bg-[#070a12] hover:border-slate-700 cursor-pointer transition opacity-70 hover:opacity-100';
+        }
+      });
+    }
+
+    function renderProposalModalView(data) {
+      currentAiProposal = data;
+      selectedProposalStyle = (data.style_options && data.style_options[0]?.id) || '2d_anime';
+
+      const summaryEl = document.getElementById('proposal-analysis-summary');
+      if (summaryEl) {
+        summaryEl.innerHTML = `<strong>Özet (İlk 30 Saniye):</strong> ${data.analysis_summary || 'Metniniz analiz edildi.'}`;
+      }
+
+      const stylesContainer = document.getElementById('proposal-styles-container');
+      if (stylesContainer) {
+        stylesContainer.innerHTML = '';
+        (data.style_options || []).forEach((opt, idx) => {
+          const isSelected = opt.id === selectedProposalStyle;
+          const card = document.createElement('div');
+          card.setAttribute('data-style-id', opt.id);
+          card.className = `proposal-style-card p-3 rounded-2xl border ${isSelected ? 'border-2 border-amber-400 bg-amber-500/10 shadow-md shadow-amber-500/10' : 'border-slate-800 bg-[#070a12] hover:border-slate-700 opacity-70 hover:opacity-100'} cursor-pointer transition`;
+          card.onclick = () => selectProposalStyle(opt.id);
+          card.innerHTML = `
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-extrabold text-white text-[11px] truncate">${opt.name}</span>
+              <span class="text-[9px] px-1.5 py-0.2 rounded-full font-bold ${idx === 0 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-slate-800 text-slate-400'}">${opt.badge || 'Seçenek'}</span>
+            </div>
+            <p class="text-[10px] text-slate-400 leading-tight">${opt.description}</p>
+          `;
+          stylesContainer.appendChild(card);
+        });
+      }
+
+      const scenesContainer = document.getElementById('proposal-scenes-container');
+      if (scenesContainer) {
+        scenesContainer.innerHTML = '';
+        (data.proposed_scenes || []).forEach((sc, idx) => {
+          const item = document.createElement('div');
+          item.className = 'p-2.5 rounded-xl border border-slate-800 bg-[#070a12] flex items-start gap-2.5 text-slate-300';
+          const continuityBadge = idx > 0 ? '<div class="text-[9px] text-amber-400 font-mono font-bold mt-1">↳ 1. karesi, önceki sahnenin son karesinden devam eder</div>' : '';
+          item.innerHTML = `
+            <span class="w-6 h-6 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold font-mono text-[11px] shrink-0">
+              ${idx + 1}
+            </span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white text-[11px]">${sc.headerLine1 || sc.headerSubtitle || ('Sahne ' + (idx + 1))}</span>
+                <span class="text-[9px] font-mono text-cyan-400">${sc.startTime?.toFixed(1) || (idx * 10).toFixed(1)}s - ${sc.endTime?.toFixed(1) || ((idx + 1) * 10).toFixed(1)}s (10.0s)</span>
+              </div>
+              <p class="text-[10px] text-slate-400 leading-relaxed mt-0.5">${sc.visualDescription || sc.highlightedText || ''}</p>
+              ${continuityBadge}
+            </div>
+          `;
+          scenesContainer.appendChild(item);
+        });
+      }
+
+      document.getElementById('ai-mission-view-input')?.classList.add('hidden');
+      document.getElementById('ai-mission-view-hud')?.classList.add('hidden');
+      document.getElementById('ai-mission-view-proposal')?.classList.remove('hidden');
+    }
+
+    async function executeApprovedAiProposal() {
+      if (!currentAiProposal || !currentAiProposal.proposed_scenes) return;
+
+      const customTweak = document.getElementById('proposal-custom-tweak')?.value.trim() || '';
+
+      document.getElementById('ai-mission-view-proposal')?.classList.add('hidden');
+      document.getElementById('ai-mission-view-hud')?.classList.remove('hidden');
+      document.getElementById('mission-hud-complete')?.classList.add('hidden');
+
+      const title = document.getElementById('mission-hud-main-title');
+      const card1 = document.getElementById('mission-step-card-1');
+      const card2 = document.getElementById('mission-step-card-2');
+      const card3 = document.getElementById('mission-step-card-3');
+      const icon1 = document.getElementById('mission-step-icon-1');
+      const icon2 = document.getElementById('mission-step-icon-2');
+      const icon3 = document.getElementById('mission-step-icon-3');
+      const status1 = document.getElementById('mission-step-status-1');
+      const status2 = document.getElementById('mission-step-status-2');
+      const status3 = document.getElementById('mission-step-status-3');
+      const desc2 = document.getElementById('mission-step-desc-2');
+
+      card1.className = 'p-3.5 rounded-2xl border border-emerald-500/40 bg-emerald-950/20 flex items-start gap-3 transition-all duration-300';
+      icon1.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold shrink-0';
+      icon1.innerHTML = '<i class="fa-solid fa-check"></i>';
+      status1.className = 'text-[10px] font-mono text-emerald-400 font-bold';
+      status1.innerText = 'Tamamlandı ✓';
+
+      title.innerText = '2. Görev Yürütülüyor: 3x 10s Kesintisiz 2D Animasyon Üretiliyor...';
+      card2.className = 'p-3.5 rounded-2xl border border-amber-400/80 bg-gradient-to-r from-amber-950/30 via-slate-900 to-amber-950/30 ring-2 ring-amber-400/30 flex items-start gap-3 transition-all duration-300 shadow-lg shadow-amber-500/10';
+      icon2.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-sm font-bold shrink-0 animate-pulse';
+      icon2.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+      status2.className = 'text-[10px] font-mono text-amber-300 font-bold';
+      status2.innerText = 'Üretiliyor...';
+      desc2.innerText = '1. kareden son kareye kesintisiz devamlılıkla 3 adet 10 saniyelik 2D video sentezleniyor.';
+
+      try {
+        const response = await fetch('/api/ai-director/execute-plan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            selected_style: selectedProposalStyle,
+            scenes: currentAiProposal.proposed_scenes,
+            narration: currentAiProposal.raw_text || '',
+            custom_instructions: customTweak,
+            audio_url: currentAiProposal.audio_url || null
+          })
+        });
+
+        if (!response.ok) {
+          const errData = await response.json().catch(() => ({}));
+          throw new Error(errData.detail || '2D Kurgu üretimi başarısız');
+        }
+
+        const resData = await response.json();
+
+        card2.className = 'p-3.5 rounded-2xl border border-emerald-500/40 bg-emerald-950/20 flex items-start gap-3 transition-all duration-300';
+        icon2.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold shrink-0';
+        icon2.innerHTML = '<i class="fa-solid fa-check"></i>';
+        status2.className = 'text-[10px] font-mono text-emerald-400 font-bold';
+        status2.innerText = 'Tamamlandı ✓';
+
+        title.innerText = '3. Görev Yürütülüyor: Zaman Tüneline Dağıtım...';
+        card3.className = 'p-3.5 rounded-2xl border border-amber-400/80 bg-gradient-to-r from-amber-950/30 via-slate-900 to-amber-950/30 ring-2 ring-amber-400/30 flex items-start gap-3 transition-all duration-300 shadow-lg shadow-amber-500/10';
+        icon3.className = 'w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-sm font-bold shrink-0 animate-pulse';
+        icon3.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+        status3.className = 'text-[10px] font-mono text-amber-300 font-bold';
+        status3.innerText = 'Dağıtılıyor...';
+
+        await loadTimelineData();
+        renderTimeline();
+        renderLivePreviewCanvas();
+        renderSceneInspector();
+        renderLeftScenesList();
+        updateTimeDisplays();
+
+        card3.className = 'p-3.5 rounded-2xl border border-emerald-500/40 bg-emerald-950/20 flex items-start gap-3 transition-all duration-300';
+        icon3.className = 'w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold shrink-0';
+        icon3.innerHTML = '<i class="fa-solid fa-check"></i>';
+        status3.className = 'text-[10px] font-mono text-emerald-400 font-bold';
+        status3.innerText = 'Tamamlandı ✓';
+
+        title.innerText = '🎉 30s Kesintisiz 2D Animasyon Kurgusu Başarıyla Tamamlandı!';
+        document.getElementById('mission-hud-complete')?.classList.remove('hidden');
+        showToast('🎬 3 adet 10 saniyelik 2D animasyon sahnesi pürüzsüz devamlılıkla oluşturuldu!', 'success');
+      } catch (err) {
+        alert('Hata: ' + err.message);
+        document.getElementById('ai-mission-view-proposal')?.classList.remove('hidden');
+        document.getElementById('ai-mission-view-hud')?.classList.add('hidden');
+      }
+    }
+
     async function startAiMissionPipeline() {
       const isTextTab = !document.getElementById('mission-panel-text').classList.contains('hidden');
-      
+      const isAutoMode = document.getElementById('toggle-ai-auto-mode')?.checked ?? true;
+      const selectedModel = document.getElementById('mission-input-model')?.value || 'gemini-3.5-flash-lite';
+
       // Switch to HUD View
       document.getElementById('ai-mission-view-input').classList.add('hidden');
       document.getElementById('ai-mission-view-hud').classList.remove('hidden');
@@ -8095,85 +8485,78 @@
       }
 
       try {
-        // 1. GÖREV: ANALİZ AŞAMASI
-        title.innerText = '1. Görev Yürütülüyor: Metin & Ses Ayrıştırma...';
-        setStepActive(1, 'Analiz Ediliyor...', 'Metin frekansları taranıyor, tarihsel varlıklar ve ayet/hadis referansları saptanıyor.');
+        title.innerText = '1. Görev: Metin & Sahne Analizi Yürütülüyor...';
+        setStepActive(1, 'Analiz Ediliyor...', 'Metin frekansları taranıyor, ilk 30 saniye ve sahne devamlılığı planlanıyor.');
 
-        let apiResult = null;
+        let topicText = '';
+        let audioUrl = null;
 
         if (isTextTab) {
-          const topicText = document.getElementById('mission-input-text').value.trim();
-          const voiceId = document.getElementById('mission-input-voice').value;
-          const durationMode = document.getElementById('mission-input-duration-mode').value;
+          topicText = document.getElementById('mission-input-text').value.trim();
           if (!topicText) throw new Error('Lütfen bir metin veya konu girin.');
-
-          await new Promise(r => setTimeout(r, 600));
-          desc1.innerHTML = 'Metin analiz edildi: <strong>Tarihsel anlatım</strong> ve <strong>Ayet odak bloğu</strong> tespit edildi. 4 anahtar kavram işaretlendi.';
-
-          // 2. GÖREV: PLANLAMA AŞAMASI
-          title.innerText = '2. Görev Yürütülüyor: Sinematik Sahneler Kurgulanıyor...';
-          setStepActive(2, 'Kurgulanıyor...', '0-20s tarihsel mistik atmosfer ve 20-40s daktilo ayet çerçevesi ile SFX eşleşmesi tasarlanıyor.');
-
-          const selectedModel = document.getElementById('mission-input-model')?.value || document.getElementById('select-gemini-model')?.value || 'gemini-3.5-flash-lite';
-          const response = await fetch('/api/generate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              topic: topicText,
-              mode: 'auto',
-              model: selectedModel,
-              voice_id: voiceId,
-              duration_mode: durationMode,
-              start_after_quote: true
-            })
-          });
-          if (!response.ok) {
-            const errData = await response.json().catch(() => ({}));
-            throw new Error(errData.detail || 'Kurgu üretilemedi');
-          }
-          apiResult = await response.json();
         } else {
-          // MP3 tab
           if (!selectedMissionAudioFile) throw new Error('Lütfen bir MP3 veya ses dosyası seçin.');
           const customTrans = document.getElementById('mission-mp3-transcript').value.trim();
+          topicText = customTrans || selectedMissionAudioFile.name.replace(/\.[^/.]+$/, "");
+          audioUrl = '/public/audio.mp3';
+        }
 
-          await new Promise(r => setTimeout(r, 600));
-          desc1.innerHTML = 'Ses dosyası okundu: <strong>Whisper milisaniye fonetik zamanlaması</strong> ve Ayet mealleri ayrıştırıldı.';
+        // Call AI Director Propose endpoint
+        const propRes = await fetch('/api/ai-director/propose', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: topicText, model: selectedModel, auto_mode: isAutoMode })
+        });
 
-          // 2. GÖREV: PLANLAMA AŞAMASI
-          title.innerText = '2. Görev Yürütülüyor: Ses Senkronu ve Daktilo Ayet Çerçevesi...';
-          setStepActive(2, 'Kurgulanıyor...', 'Ses dalgasına uygun çok sahneli storyboard ve daktilo ayet kutusu kurgulanıyor.');
+        if (!propRes.ok) {
+          const errData = await propRes.json().catch(() => ({}));
+          throw new Error(errData.detail || 'Kurgu analizi başarısız');
+        }
 
-          const selectedAudioModel = document.getElementById('mission-input-model')?.value || document.getElementById('select-ai-audio-model')?.value || 'gemini-3.5-flash-lite';
-          const formData = new FormData();
-          formData.append('file', selectedMissionAudioFile);
-          if (customTrans) formData.append('transcript', customTrans);
-          formData.append('mode', 'auto');
-          formData.append('model', selectedAudioModel);
-          formData.append('scene_duration', '12');
-          formData.append('start_after_quote', 'true');
+        const proposalData = await propRes.json();
+        proposalData.audio_url = audioUrl;
 
-          const response = await fetch('/api/timeline/generate-from-audio', {
-            method: 'POST',
-            body: formData
-          });
-          if (!response.ok) {
-            const errData = await response.json().catch(() => ({}));
-            throw new Error(errData.detail || 'Ses analizi yapılamadı');
-          }
-          apiResult = await response.json();
+        // If Auto Mode is OFF -> present proposal view to user!
+        if (!isAutoMode) {
+          renderProposalModalView(proposalData);
+          return;
+        }
+
+        // Auto Mode is ON -> Proceed immediately!
+        title.innerText = '2. Görev: 3x 10s Kesintisiz 2D Animasyon Üretiliyor...';
+        setStepActive(2, 'Kurgulanıyor...', 'Studio Ghibli 2D Anime estetiğinde kesintisiz devamlılıkla 30s video sentezleniyor.');
+
+        currentAiProposal = proposalData;
+        selectedProposalStyle = (proposalData.style_options && proposalData.style_options[0]?.id) || '2d_anime';
+
+        const execRes = await fetch('/api/ai-director/execute-plan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            selected_style: selectedProposalStyle,
+            scenes: proposalData.proposed_scenes,
+            narration: topicText,
+            custom_instructions: '',
+            audio_url: audioUrl
+          })
+        });
+
+        if (!execRes.ok) {
+          const errData = await execRes.json().catch(() => ({}));
+          throw new Error(errData.detail || '2D Kurgu üretimi başarısız');
         }
 
         // 3. GÖREV: UYGULAMA & ZAMAN TÜNELİNE DAĞITIM
         title.innerText = '3. Görev Yürütülüyor: Zaman Tüneline Dağıtım...';
-        setStepActive(3, 'Dağıtılıyor...', 'Video, Alıntı, MP3, SFX ve Daktilo Altyazı katmanları sıfır gecikmeyle yerleştiriliyor.');
+        setStepActive(3, 'Dağıtılıyor...', '2D Animasyon videoları ve katmanlar sıfır gecikmeyle yerleştiriliyor.');
 
         await loadTimelineData();
         renderTimeline();
         renderLivePreviewCanvas();
+        renderSceneInspector();
+        renderLeftScenesList();
         updateTimeDisplays();
 
-        // Mark all steps completed
         [card1, card2, card3].forEach((c, idx) => {
           const ic = [icon1, icon2, icon3][idx];
           const st = [status1, status2, status3][idx];
@@ -8302,11 +8685,181 @@
       }
     }
 
+    // ==========================================
+    // INTERACTIVE AI DIRECTOR CHAT AGENT (JS)
+    // ==========================================
+    function toggleAiDirectorChat() {
+      const drawer = document.getElementById('ai-director-chat-drawer');
+      if (!drawer) return;
+      drawer.classList.toggle('translate-x-full');
+      if (!drawer.classList.contains('translate-x-full')) {
+        document.getElementById('ai-chat-input')?.focus();
+      }
+    }
+
+    function sendQuickChatMessage(txt) {
+      const input = document.getElementById('ai-chat-input');
+      if (input) {
+        input.value = txt;
+        sendAiDirectorMessage();
+      }
+    }
+
+    async function sendAiDirectorMessage() {
+      const input = document.getElementById('ai-chat-input');
+      const msg = input?.value.trim();
+      if (!msg) return;
+      input.value = '';
+
+      const chatBox = document.getElementById('ai-chat-messages');
+      if (chatBox) {
+        chatBox.innerHTML += `
+          <div class="flex items-start justify-end gap-2">
+            <div class="bg-amber-500/20 border border-amber-500/30 text-amber-200 rounded-2xl rounded-tr-sm p-2.5 leading-relaxed max-w-[85%] text-xs">
+              ${msg}
+            </div>
+            <div class="w-6 h-6 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] shrink-0 font-bold">
+              Sen
+            </div>
+          </div>
+        `;
+        const typingId = 'typing-' + Date.now();
+        chatBox.innerHTML += `
+          <div id="${typingId}" class="flex items-start gap-2">
+            <div class="w-6 h-6 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[10px] shrink-0 font-bold">
+              AI
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tl-sm p-2.5 text-slate-400 leading-relaxed max-w-[85%] text-xs flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+              <span>Yönetmen düşünüyor...</span>
+            </div>
+          </div>
+        `;
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        try {
+          const res = await fetch('/api/ai-director/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg, current_scenes: scenes })
+          });
+          const data = await res.json();
+          document.getElementById(typingId)?.remove();
+
+          chatBox.innerHTML += `
+            <div class="flex items-start gap-2">
+              <div class="w-6 h-6 rounded-lg bg-gradient-to-tr from-amber-400 to-indigo-600 text-white flex items-center justify-center text-[10px] shrink-0 font-bold shadow-sm">
+                AI
+              </div>
+              <div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tl-sm p-2.5 text-slate-200 leading-relaxed max-w-[85%] text-xs whitespace-pre-wrap">
+                ${data.reply || 'Talebiniz kaydedildi ve kurguya uygulandı.'}
+              </div>
+            </div>
+          `;
+          chatBox.scrollTop = chatBox.scrollHeight;
+
+          if (data.updated_scenes) {
+            await loadTimelineData();
+            renderTimeline();
+            renderLivePreviewCanvas();
+            renderSceneInspector();
+            showToast('🎬 AI Yönetmen kurguyu güncelledi!', 'success');
+          }
+        } catch (err) {
+          document.getElementById(typingId)?.remove();
+          chatBox.innerHTML += `
+            <div class="flex items-start gap-2">
+              <div class="w-6 h-6 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center text-[10px] shrink-0 font-bold">!</div>
+              <div class="bg-red-950/30 border border-red-500/30 rounded-2xl p-2 text-red-300 text-xs">Hata: ${err.message}</div>
+            </div>
+          `;
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
+      }
+    }
+
     window.autoCraft2dPromptForActiveScene = autoCraft2dPromptForActiveScene;
     window.generateActiveScene2dAnimation = generateActiveScene2dAnimation;
     window.removeActiveScene2dAnimation = removeActiveScene2dAnimation;
     window.generateAllScenes2dAnimation = generateAllScenes2dAnimation;
+    window.toggleAiDirectorChat = toggleAiDirectorChat;
+    window.sendAiDirectorMessage = sendAiDirectorMessage;
+    window.sendQuickChatMessage = sendQuickChatMessage;
+    window.handleAutoModeToggle = handleAutoModeToggle;
+    window.selectProposalStyle = selectProposalStyle;
+    window.executeApprovedAiProposal = executeApprovedAiProposal;
+    window.backToMissionInput = backToMissionInput;
 
   </script>
+
+  <!-- ================= AI DIRECTOR CHAT DRAWER ================= -->
+  <div id="ai-director-chat-drawer" class="fixed top-0 right-0 bottom-0 w-80 sm:w-96 bg-[#090d16] border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+    <!-- Header -->
+    <div class="p-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/60 backdrop-blur">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-400 to-indigo-600 text-white flex items-center justify-center text-sm shadow-md">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div>
+          <h4 class="font-extrabold text-white text-xs">AI Yönetmen Asistanı</h4>
+          <span class="text-[9px] text-emerald-400 font-mono flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Gemini Omni Devrede
+          </span>
+        </div>
+      </div>
+      <button onclick="toggleAiDirectorChat()" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+    </div>
+
+    <!-- Chat Messages -->
+    <div id="ai-chat-messages" class="flex-1 overflow-y-auto p-3.5 space-y-3 text-xs">
+      <div class="flex items-start gap-2">
+        <div class="w-6 h-6 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-[10px] shrink-0 font-bold">
+          AI
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl rounded-tl-sm p-3 text-slate-200 leading-relaxed max-w-[85%] text-xs">
+          Merhaba! Ben kurgu yönetmeninizim. Sahneler, 2D animasyonlar, derviş tasviri veya ayet çerçevesi hakkında dilediğinizi bana yazabilirsiniz.
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Chips -->
+    <div class="px-3 py-2 border-t border-slate-800/60 bg-slate-950/40 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+      <button onclick="sendQuickChatMessage('Dervişin elbisesini yeşil yap')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] transition border border-slate-700/50">
+        🌿 Yeşil Elbise
+      </button>
+      <button onclick="sendQuickChatMessage('3. sahneye ayet çerçevesi ve daktilo altyazı ekle')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] transition border border-slate-700/50">
+        📜 Ayet Çerçevesi
+      </button>
+      <button onclick="sendQuickChatMessage('Arka plana güneş ışıkları ve dağ yolu ekle')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] transition border border-slate-700/50">
+        🌄 Dağ & Güneş
+      </button>
+      <button onclick="sendQuickChatMessage('Görsel stili İslami Minyatüre çevir')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] transition border border-slate-700/50">
+        🎨 Minyatür Stili
+      </button>
+    </div>
+
+    <!-- Input Footer -->
+    <div class="p-3 border-t border-slate-800 bg-slate-900/80 flex items-center gap-2">
+      <input
+        type="text"
+        id="ai-chat-input"
+        placeholder="Yönetmene talimat verin (Enter)..."
+        class="flex-1 bg-[#070a12] border border-slate-800 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition"
+        onkeydown="if(event.key==='Enter') sendAiDirectorMessage()"
+      >
+      <button onclick="sendAiDirectorMessage()" id="btn-send-ai-chat" class="w-8 h-8 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 flex items-center justify-center font-bold shadow transition shrink-0">
+        <i class="fa-solid fa-paper-plane text-xs"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating AI Director Chat Trigger Button -->
+  <button onclick="toggleAiDirectorChat()" id="btn-floating-ai-chat" title="AI Yönetmen Asistanı ile Konuş" class="fixed bottom-6 right-6 z-40 px-3.5 py-2 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-black text-xs shadow-2xl shadow-amber-500/40 hover:scale-105 active:scale-95 transition flex items-center gap-2 border border-amber-300/40">
+    <i class="fa-solid fa-comments text-sm"></i>
+    <span>AI Yönetmen</span>
+    <span class="w-2 h-2 rounded-full bg-emerald-700 animate-pulse"></span>
+  </button>
 </body>
 </html>

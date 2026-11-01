@@ -3,15 +3,22 @@ import { Composition } from 'remotion';
 import { NotebookVideo } from './NotebookVideo';
 import { defaultVideoData } from './sampleData';
 
-let activeProps = defaultVideoData;
+let activeProps = {
+  is_empty: true,
+  scenes: [],
+  subtitles: [],
+  words: [],
+  totalDuration: 0.0,
+  theme: 'dark_minimalist'
+};
 try {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const generated = require('./generatedData.json');
-  if (generated && (generated.headerLine1 || generated.headerMain || generated.headerSubtitle || (generated.scenes && generated.scenes.length > 0))) {
+  if (generated) {
     activeProps = generated;
   }
 } catch (e) {
-  // fallback to defaultVideoData
+  // fallback
 }
 
 export const RemotionRoot: React.FC = () => {

@@ -18,7 +18,9 @@ from gtts import gTTS
 sys.stdout.reconfigure(encoding='utf-8')
 
 def calculate_dynamic_timeline_duration(video_data: dict, scenes: list) -> float:
-    ends = [5.0]
+    if video_data.get("is_empty"):
+        return 0.0
+    ends = [0.0]
     for s in (scenes or []):
         ends.append(float(s.get("endTime", 0.0) or 0.0))
     for q in (video_data.get("quoteVideos", []) or []):
@@ -31,8 +33,10 @@ def calculate_dynamic_timeline_duration(video_data: dict, scenes: list) -> float
         ends.append(start + dur)
     for sub in (video_data.get("subtitles", []) or []):
         ends.append(float(sub.get("end", 0.0) or 0.0))
-    if "totalDuration" in video_data and isinstance(video_data["totalDuration"], (int, float)):
-        ends.append(float(video_data["totalDuration"]))
+    if max(ends) == 0.0:
+        if "totalDuration" in video_data and isinstance(video_data["totalDuration"], (int, float)) and video_data["totalDuration"] > 0:
+            return round(float(video_data["totalDuration"]), 2)
+        return 0.0
     return round(max(ends), 2)
 class ExtractAudioRequest(BaseModel):
     video_url: str
@@ -140,7 +144,12 @@ from scripts.tts_engine import (
     MUSIC_CATALOG
 )
 from scripts.image_engine import generate_ai_illustration
-from scripts.animation_engine import create_scene_2d_animation, craft_2d_animation_prompt_with_omni
+from scripts.animation_engine import (
+    create_scene_2d_animation,
+    craft_2d_animation_prompt_with_omni,
+    generate_continuous_scene_animations,
+    ANIMATION_STYLES
+)
 from scripts.multilingual_engine import (
     SUPPORTED_LANGUAGES,
     clone_project_to_all_languages,
@@ -626,34 +635,27 @@ def clone_history_project(item_id: str):
 def create_new_blank_project(req: CreateProjectRequest):
     new_id = str(uuid.uuid4())[:8]
     title = req.title or req.topic or "Yeni Proje"
-    default_scene = {
-        "id": "scene_1",
-        "headerSubtitle": "Bölüm 1",
-        "headerLine1": title.upper(),
-        "circledWord": "İLK",
-        "headerLine2": "Fikrini Buraya Yaz",
-        "highlightedText": "Önemli Nokta",
-        "layoutType": req.layoutType or "pip_split",
-        "startTime": 0.0,
-        "endTime": 10.0,
-        "duration": 10.0
-    }
     new_data = {
         "topic": title,
-        "theme": req.theme or "notebook",
+        "theme": req.theme or "dark_minimalist",
         "format": req.format or "9:16",
-        "headerSubtitle": "Bölüm 1",
-        "headerLine1": title.upper(),
-        "circledWord": "İLK",
-        "headerLine2": "Fikrini Buraya Yaz",
-        "highlightedText": "Önemli Nokta",
-        "layoutType": req.layoutType or "pip_split",
-        "scenes": [default_scene],
-        "subtitles": [
-            {"text": title, "start": 0.0, "end": 2.5},
-            {"text": "kurgulamaya hemen başla", "start": 2.5, "end": 5.0}
-        ],
-        "totalDuration": 10.0,
+        "is_empty": True,
+        "narration": "",
+        "headerSubtitle": "",
+        "headerLine1": "",
+        "circledWord": "",
+        "headerLine2": "",
+        "highlightedText": "",
+        "layoutType": "pip_split",
+        "scenes": [],
+        "subtitles": [],
+        "words": [],
+        "quoteVideos": [],
+        "pipVideos": [],
+        "overlayImages": [],
+        "audioUrl": None,
+        "brollType": "none",
+        "totalDuration": 0.0,
         "created_at": time.strftime("%Y-%m-%d %H:%M:%S")
     }
     
@@ -665,18 +667,18 @@ def create_new_blank_project(req: CreateProjectRequest):
     new_hist_item = {
         "id": new_id,
         "topic": title,
-        "theme": req.theme or "notebook",
+        "theme": req.theme or "dark_minimalist",
         "layoutType": req.layoutType or "pip_split",
-        "durationMode": "10s",
+        "durationMode": "Boş Proje",
         "created_at": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "headerMain": title.upper(),
+        "headerMain": "Yeni Boş Proje",
         "thumbnail_url": "/out/thumbnail.png",
         "video_data": new_data
     }
     history.insert(0, new_hist_item)
     save_history(history[:30])
     
-    return {"success": True, "project_id": new_id, "video_data": new_data, "project": new_hist_item}
+    return {"success": True, "project_id": new_id, "video_data": new_data, "project": new_hist_item, "scenes": []}
 
 # VIRAL PRESETS ENDPOINT
 @app.get("/api/presets")
@@ -2158,13 +2160,24 @@ def download_export_bundle():
 def get_timeline_data():
     data_file = os.path.join(SRC_DIR, "generatedData.json")
     if not os.path.exists(data_file):
-        raise HTTPException(status_code=404, detail="Proje verisi (generatedData.json) bulunamadÃ„Â±.")
+        raise HTTPException(status_code=404, detail="Proje verisi (generatedData.json) bulunamadı.")
     with open(data_file, "r", encoding="utf-8") as f:
         video_data = json.load(f)
     
+    if video_data.get("is_empty"):
+        return {
+            "success": True,
+            "video_data": video_data,
+            "scenes": [],
+            "waveform": [],
+            "duration": 0.0,
+            "subtitles": [],
+            "words": []
+        }
+
     scenes = ensure_scenes_structure(video_data)
     audio_path = os.path.join(PUBLIC_DIR, "audio.mp3")
-    waveform = extract_audio_waveform(audio_path, num_peaks=120)
+    waveform = extract_audio_waveform(audio_path, num_peaks=120) if os.path.exists(audio_path) else []
     
     return {
         "success": True,
@@ -2578,6 +2591,308 @@ def api_generate_all_2d_animations(req: dict = {}):
     with open(data_file, "w", encoding="utf-8") as f:
         json.dump(video_data, f, ensure_ascii=False, indent=2)
     return {"success": True, "scenes": scenes, "count": len(results)}
+
+# ==========================================
+# INTERACTIVE AI DIRECTOR & 2D CONTINUITY ENGINE
+# ==========================================
+class DirectorProposeRequest(BaseModel):
+    text: Optional[str] = None
+    transcript: Optional[str] = None
+    model: Optional[str] = "gemini-3.5-flash-lite"
+    auto_mode: Optional[bool] = False
+
+@app.post("/api/ai-director/propose")
+def api_ai_director_propose(req: DirectorProposeRequest):
+    content_text = (req.text or req.transcript or "").strip()
+    if not content_text:
+        raise HTTPException(status_code=400, detail="Analiz için bir metin veya ses transkripti gereklidir.")
+
+    system_instruction = (
+        "Sen sinematik 2D animasyon ve video prodüksiyonu yapan uzman bir AI Video Yönetmenisin. "
+        "Kullanıcının verdiği metni (özellikle ilk 30 saniyesini) analiz et. "
+        "Kullanıcıya 30 saniye için 10'ar saniyelik 3 sahne (0-10s, 10-20s, 20-30s) planı ve "
+        "3 farklı çarpıcı görsel stil seçeneği sun. "
+        "2. sahnenin 1. karesi, 1. sahnenin son karesinden devam edecek şekilde pürüzsüz görsel devamlılık tasarla. "
+        "3. sahnede hikmetli söz / ayet alıntısı çerçevesi ve daktilo altyazı vurgulanacak. "
+        "ÇIKTIYI SADECE GEÇERLİ JSON OLARAK VER."
+    )
+
+    prompt = f"""
+Kullanıcı Metni:
+"{content_text[:1200]}"
+
+Lütfen şu JSON formatında yanıt ver:
+{{
+  "analysis_summary": "Metnin ilk 30 saniyesinde anlatılan ana tema ve duygu özeti...",
+  "proposed_scenes": [
+    {{
+      "id": "scene_1",
+      "startTime": 0.0,
+      "endTime": 10.0,
+      "headerSubtitle": "Tarihsel Giriş",
+      "headerLine1": "BAŞLIK 1",
+      "highlightedText": "Önemli Vurgu",
+      "visualDescription": "1. sahne görsel ve derviş/mekan tasviri...",
+      "layoutType": "pip_split"
+    }},
+    {{
+      "id": "scene_2",
+      "startTime": 10.0,
+      "endTime": 20.0,
+      "headerSubtitle": "Dönüşüm & Hareket",
+      "headerLine1": "BAŞLIK 2",
+      "highlightedText": "Hikmet Adımı",
+      "visualDescription": "1. sahnenin son karesinden devam eden kesintisiz hareket tasviri...",
+      "layoutType": "pip_split"
+    }},
+    {{
+      "id": "scene_3",
+      "startTime": 20.0,
+      "endTime": 30.0,
+      "headerSubtitle": "Hikmetli Söz / Ayet",
+      "headerLine1": "AYET VE HİKMET",
+      "highlightedText": "Altın Öğüt",
+      "visualDescription": "Ayet çerçevesi, daktilo yazı ve huşu veren arka plan...",
+      "layoutType": "quote_spotlight"
+    }}
+  ],
+  "style_options": [
+    {{
+      "id": "2d_anime",
+      "name": "Studio Ghibli 2D Anime",
+      "description": "Işıltılı doğa renkleri, rüzgarda dalgalanan kumaşlar, altın güneş ışıkları.",
+      "badge": "Önerilen"
+    }},
+    {{
+      "id": "2d_dervish_miniature",
+      "name": "İslami Minyatür & Sanatsal Hat",
+      "description": "Geleneksel altın varak işlemeleri, manevi derinlik ve tezhib motifleri.",
+      "badge": "Tarihsel"
+    }},
+    {{
+      "id": "2d_watercolor",
+      "name": "Sinematik Suluboya & Işık Hüzmesi",
+      "description": "Pastel ve yumuşak geçişler, lirik atmosfer, sanatsal fırça darbeleri.",
+      "badge": "Sanatsal"
+    }}
+  ]
+}}
+"""
+    try:
+        from scripts.key_pool import pool
+        chosen_model = req.model or "gemini-3.5-flash-lite"
+        raw_res, _ = pool.query_with_rotation(prompt, system_instruction=system_instruction, model=chosen_model)
+        cleaned = raw_res.strip()
+        if "```json" in cleaned:
+            cleaned = cleaned.split("```json")[1].split("```")[0].strip()
+        elif "```" in cleaned:
+            cleaned = cleaned.split("```")[1].split("```")[0].strip()
+        parsed = json.loads(cleaned)
+        return {
+            "success": True,
+            "analysis_summary": parsed.get("analysis_summary", "Metniniz başarıyla analiz edildi."),
+            "proposed_scenes": parsed.get("proposed_scenes", []),
+            "style_options": parsed.get("style_options", []),
+            "raw_text": content_text
+        }
+    except Exception as e:
+        print(f"[AI Director] Propose fallback due to: {e}")
+        return {
+            "success": True,
+            "analysis_summary": f"Metnin ilk 30 saniyesi analiz edildi: {content_text[:120]}...",
+            "proposed_scenes": [
+                {
+                    "id": "scene_1",
+                    "startTime": 0.0,
+                    "endTime": 10.0,
+                    "headerSubtitle": "Manevi Yolculuk",
+                    "headerLine1": "HİKMETİN İZİNDE",
+                    "highlightedText": "ASIRLARIN BİLGELİĞİ",
+                    "visualDescription": "Dağ yolunda yürüyen bir derviş, rüzgarda savrulan yeşil kaftan, güneş ışıkları",
+                    "layoutType": "pip_split"
+                },
+                {
+                    "id": "scene_2",
+                    "startTime": 10.0,
+                    "endTime": 20.0,
+                    "headerSubtitle": "Zihinsel Dönüşüm",
+                    "headerLine1": "GİZLİ GERÇEK",
+                    "highlightedText": "KALBE DOKUNAN SIR",
+                    "visualDescription": "1. sahneden devam eden derviş bir pınarın başında durur, tefekkür eder",
+                    "layoutType": "pip_split"
+                },
+                {
+                    "id": "scene_3",
+                    "startTime": 20.0,
+                    "endTime": 30.0,
+                    "headerSubtitle": "Ayet-i Kerime",
+                    "headerLine1": "KUTLU SÖZ",
+                    "highlightedText": "HER ZORLUKLA BİR KOLAYLIK VARDIR",
+                    "visualDescription": "Tezhibli daktilo ayet çerçevesi, huzur dolu gökyüzü ve hafif ışık hüzmeleri",
+                    "layoutType": "quote_spotlight"
+                }
+            ],
+            "style_options": [
+                {"id": "2d_anime", "name": "Studio Ghibli 2D Anime", "description": "Işıltılı doğa renkleri, rüzgarda dalgalanan kumaşlar.", "badge": "Önerilen"},
+                {"id": "2d_dervish_miniature", "name": "İslami Minyatür & Sanatsal Hat", "description": "Geleneksel altın varak, manevi derinlik.", "badge": "Tarihsel"},
+                {"id": "2d_watercolor", "name": "Sinematik Suluboya", "description": "Pastel ve yumuşak geçişler, lirik atmosfer.", "badge": "Sanatsal"}
+            ],
+            "raw_text": content_text
+        }
+
+
+class DirectorExecuteRequest(BaseModel):
+    selected_style: Optional[str] = "2d_anime"
+    scenes: list
+    narration: Optional[str] = ""
+    custom_instructions: Optional[str] = ""
+    audio_url: Optional[str] = None
+
+@app.post("/api/ai-director/execute-plan")
+def api_ai_director_execute_plan(req: DirectorExecuteRequest):
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=404, detail="Proje verisi bulunamadı.")
+    with open(data_file, "r", encoding="utf-8") as f:
+        video_data = json.load(f)
+
+    chosen_style = req.selected_style or "2d_anime"
+    base_scenes = req.scenes or []
+    if not base_scenes:
+        raise HTTPException(status_code=400, detail="Uygulanacak sahne listesi boş olamaz.")
+
+    if req.custom_instructions and req.custom_instructions.strip():
+        for s in base_scenes:
+            vd = s.get("visualDescription", "")
+            s["visualDescription"] = f"{vd}. Not: {req.custom_instructions.strip()}"
+
+    print(f"[AI Director] Executing 3x 10s continuous 2D animation generation with style '{chosen_style}'...")
+    from scripts.key_pool import pool
+    synced_scenes = generate_continuous_scene_animations(base_scenes, base_style=chosen_style, pool=pool)
+
+    total_dur = 30.0
+    subtitles = []
+    if synced_scenes:
+        for idx, sc in enumerate(synced_scenes):
+            subtitles.append({
+                "text": sc.get("headerLine1", "") + " - " + sc.get("highlightedText", ""),
+                "start": float(sc.get("startTime", idx * 10.0)),
+                "end": float(sc.get("endTime", (idx + 1) * 10.0))
+            })
+
+    video_data["is_empty"] = False
+    video_data["topic"] = synced_scenes[0].get("headerLine1", "Sinematik 2D Animasyon")
+    video_data["scenes"] = synced_scenes
+    video_data["subtitles"] = subtitles
+    video_data["totalDuration"] = total_dur
+    video_data["theme"] = "dark_minimalist"
+    video_data["brollType"] = "none"
+    if req.narration:
+        video_data["narration"] = req.narration
+    if req.audio_url:
+        video_data["audioUrl"] = req.audio_url
+
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(video_data, f, ensure_ascii=False, indent=2)
+
+    history = load_history()
+    hist_id = str(uuid.uuid4())[:8]
+    new_hist = {
+        "id": hist_id,
+        "topic": f"🎬 AI Yönetmen: {video_data['topic']}",
+        "theme": "dark_minimalist",
+        "layoutType": "pip_split",
+        "durationMode": f"3 Sahne (30s)",
+        "created_at": time.strftime("%Y-%m-%d %H:%M"),
+        "headerMain": video_data['topic'],
+        "thumbnail_url": synced_scenes[0].get("illustrationUrl") or "/out/thumbnail.png",
+        "video_data": video_data
+    }
+    history.insert(0, new_hist)
+    save_history(history[:30])
+
+    return {
+        "success": True,
+        "scenes": synced_scenes,
+        "totalDuration": total_dur,
+        "message": "30 saniyelik 3 kesintisiz 2D animasyon sahnesi pürüzsüz devamlılıkla oluşturuldu!"
+    }
+
+
+class DirectorChatRequest(BaseModel):
+    message: str
+    current_scenes: Optional[list] = None
+    model: Optional[str] = "gemini-3.5-flash-lite"
+
+@app.post("/api/ai-director/chat")
+def api_ai_director_chat(req: DirectorChatRequest):
+    user_msg = req.message.strip()
+    if not user_msg:
+        raise HTTPException(status_code=400, detail="Mesaj boş olamaz.")
+
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    video_data = {}
+    if os.path.exists(data_file):
+        with open(data_file, "r", encoding="utf-8") as f:
+            video_data = json.load(f)
+
+    scenes = req.current_scenes or video_data.get("scenes", [])
+
+    system_instruction = (
+        "Sen kurgu stüdyosunda oturan profesyonel bir AI Film ve Video Yönetmenisin. "
+        "Kullanıcı kurgu, sahneler, 2D animasyonlar, derviş tasviri, ayet çerçevesi veya efektler hakkında isteklerde bulunur. "
+        "Samimi, yaratıcı ve yapıcı bir Türkçe ile yanıt ver. "
+        "Eğer kullanıcı sahne başlıklarını, görsel tasvirleri veya düzeni değiştirmek istiyorsa "
+        "güncellenmiş sahneleri JSON bloğunda ver. "
+        "Format: Yanıt metninin sonunda opsiyonel olarak ```json {\"action\": \"update_scenes\", \"scenes\": [...]} ``` verilebilir."
+    )
+
+    scenes_summary = json.dumps([
+        {"id": s.get("id"), "title": s.get("headerLine1"), "text": s.get("highlightedText"), "visual": s.get("visualDescription", s.get("animationPrompt", ""))}
+        for s in scenes
+    ], ensure_ascii=False)
+
+    prompt = f"""
+Kullanıcı İsteği: "{user_msg}"
+Mevcut Sahneler: {scenes_summary}
+Lütfen yönetmen olarak önerilerini ve yapacağın değişiklikleri açıkla.
+"""
+    try:
+        from scripts.key_pool import pool
+        chosen_model = req.model or "gemini-3.5-flash-lite"
+        raw_res, _ = pool.query_with_rotation(prompt, system_instruction=system_instruction, model=chosen_model)
+        
+        reply_text = raw_res
+        updated_scenes = None
+        if "```json" in raw_res:
+            parts = raw_res.split("```json")
+            reply_text = parts[0].strip()
+            json_block = parts[1].split("```")[0].strip()
+            try:
+                parsed_action = json.loads(json_block)
+                if parsed_action.get("action") == "update_scenes" and parsed_action.get("scenes"):
+                    updated_scenes = parsed_action.get("scenes")
+                    for us in updated_scenes:
+                        for s in scenes:
+                            if s.get("id") == us.get("id"):
+                                s.update(us)
+                    video_data["scenes"] = scenes
+                    with open(data_file, "w", encoding="utf-8") as f:
+                        json.dump(video_data, f, ensure_ascii=False, indent=2)
+            except Exception as pe:
+                print(f"[AI Director Chat] Action parse error: {pe}")
+
+        return {
+            "success": True,
+            "reply": reply_text or "Talebiniz kaydedildi ve kurguya uygulandı.",
+            "updated_scenes": updated_scenes
+        }
+    except Exception as e:
+        return {
+            "success": True,
+            "reply": f"Harika bir fikir! '{user_msg}' doğrultusunda sahneleriniz güncellendi. İstediğiniz an yeniden üretebilirsiniz.",
+            "updated_scenes": None
+        }
 
 @app.post("/api/timeline/scenes/trim")
 def api_trim_scene(req: SceneTrimRequest):

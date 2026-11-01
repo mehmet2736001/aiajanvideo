@@ -59,28 +59,38 @@ def extract_audio_waveform(audio_path: str, num_peaks: int = 100) -> List[float]
 def ensure_scenes_structure(video_data: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
     Ensures that video_data has a valid, properly indexed scenes array.
-    If single-scene data is present, packages it into scene_1.
+    If project is empty or has no scenes and no content, leaves scenes empty.
     """
-    scenes = video_data.get("scenes", [])
-    total_dur = float(video_data.get("totalDuration", 15.0) or 15.0)
+    if video_data.get("is_empty"):
+        return []
 
+    scenes = video_data.get("scenes", [])
+    if scenes is None:
+        scenes = []
+
+    # If completely empty project without narration or topic, DO NOT force dummy scenes
     if not scenes or len(scenes) == 0:
-        # Wrap root single-scene into scenes[0]
+        if not video_data.get("narration") and not video_data.get("headerLine1") and not video_data.get("topic"):
+            video_data["scenes"] = []
+            return []
+        
+        # Only wrap if legacy single-scene data was explicitly present with real content
+        total_dur = float(video_data.get("totalDuration", 15.0) or 15.0)
         s1 = {
             "id": "scene_1",
             "startTime": 0.0,
             "endTime": round(total_dur, 2),
             "layoutType": video_data.get("layoutType", "pip_split"),
-            "headerSubtitle": video_data.get("headerSubtitle", "Kısa Kıssa"),
-            "headerLine1": video_data.get("headerLine1", "NEDEN"),
-            "circledWord": video_data.get("circledWord", "SIR"),
+            "headerSubtitle": video_data.get("headerSubtitle", ""),
+            "headerLine1": video_data.get("headerLine1", ""),
+            "circledWord": video_data.get("circledWord", ""),
             "headerLine2": video_data.get("headerLine2", ""),
-            "highlightedText": video_data.get("highlightedText", "ASIRLARIN BİLGELİĞİ"),
+            "highlightedText": video_data.get("highlightedText", ""),
             "strikeWord": video_data.get("strikeWord", ""),
             "doodleType": video_data.get("doodleType", "galaxy"),
             "illustrationUrl": video_data.get("illustrationUrl", ""),
             "illustrationCaption": video_data.get("illustrationCaption", ""),
-            "illustrationStyle": video_data.get("illustrationStyle", "polaroid"),
+            "illustrationStyle": video_data.get("illustrationStyle", "2d_anime"),
             "brollType": video_data.get("brollType", "none"),
             "brollOpacity": video_data.get("brollOpacity", 0.18),
             "cards": video_data.get("cards", []),
@@ -98,21 +108,31 @@ def delete_scene_from_timeline(video_data: Dict[str, Any], scene_id: str) -> Dic
     """
     Deletes the specified scene from video_data.scenes, recalculates sequential
     timestamps without gaps, and updates src/generatedData.json.
+    Allows deleting all scenes to return to a pristine empty state.
     """
-    scenes = ensure_scenes_structure(video_data)
-    if len(scenes) <= 1:
-        raise ValueError("En az 1 sahne kalmalıdır. Sahneyi silmek yerine içeriğini düzenleyebilirsiniz.")
+    scenes = video_data.get("scenes", [])
+    if not scenes:
+        video_data["scenes"] = []
+        video_data["is_empty"] = True
+        return video_data
 
     # Find and remove
     new_scenes = [s for s in scenes if s.get("id") != scene_id]
     if len(new_scenes) == len(scenes):
         raise ValueError(f"'{scene_id}' kimlikli sahne bulunamadı.")
 
+    if len(new_scenes) == 0:
+        video_data["scenes"] = []
+        video_data["is_empty"] = True
+        video_data["totalDuration"] = 0.0
+        return video_data
+
     # Re-calculate sequential start and end times
     cur_time = 0.0
     for idx, s in enumerate(new_scenes):
         s["id"] = f"scene_{idx + 1}"
         orig_dur = s.get("endTime", 12.0) - s.get("startTime", 0.0)
+        s["startTime"] = round(cur_time, 2)
         dur = max(3.0, orig_dur)
         s["startTime"] = round(cur_time, 2)
         cur_time += dur
@@ -120,8 +140,8 @@ def delete_scene_from_timeline(video_data: Dict[str, Any], scene_id: str) -> Dic
 
     video_data["scenes"] = new_scenes
     video_data["totalDuration"] = round(cur_time, 2)
+    video_data["is_empty"] = False
 
-    # Sync root properties to scene 1
     if new_scenes:
         s0 = new_scenes[0]
         for key in ["headerSubtitle", "headerLine1", "circledWord", "headerLine2", "highlightedText", "strikeWord", "layoutType", "illustrationUrl", "illustrationCaption", "illustrationStyle"]:

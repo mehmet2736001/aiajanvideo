@@ -1,5 +1,54 @@
 [
   {
+    "id": "2309c6da",
+    "topic": "cevap001",
+    "theme": "notebook",
+    "layoutType": "pip_split",
+    "durationMode": "10s",
+    "created_at": "2026-11-01 17:47:36",
+    "headerMain": "CEVAP001",
+    "thumbnail_url": "/out/thumbnail.png",
+    "video_data": {
+      "topic": "cevap001",
+      "theme": "notebook",
+      "format": "9:16",
+      "headerSubtitle": "Bölüm 1",
+      "headerLine1": "CEVAP001",
+      "circledWord": "İLK",
+      "headerLine2": "Fikrini Buraya Yaz",
+      "highlightedText": "Önemli Nokta",
+      "layoutType": "pip_split",
+      "scenes": [
+        {
+          "id": "scene_1",
+          "headerSubtitle": "Bölüm 1",
+          "headerLine1": "CEVAP001",
+          "circledWord": "İLK",
+          "headerLine2": "Fikrini Buraya Yaz",
+          "highlightedText": "Önemli Nokta",
+          "layoutType": "pip_split",
+          "startTime": 0.0,
+          "endTime": 10.0,
+          "duration": 10.0
+        }
+      ],
+      "subtitles": [
+        {
+          "text": "cevap001",
+          "start": 0.0,
+          "end": 2.5
+        },
+        {
+          "text": "kurgulamaya hemen başla",
+          "start": 2.5,
+          "end": 5.0
+        }
+      ],
+      "totalDuration": 10.0,
+      "created_at": "2026-11-01 17:47:36"
+    }
+  },
+  {
     "id": "bca77055",
     "topic": "🎙️ Ses Yükleme: Sana mı kaldı İslam fıkhında Fetvalar Vermek, Hüküm Kesmek? ...",
     "theme": "dark_minimalist",
@@ -11544,335 +11593,6 @@
           "text": "daha hızlı yaşlanmaktadır.",
           "start": 33.84,
           "end": 35.32
-        }
-      ],
-      "audioUrl": "audio.mp3"
-    }
-  },
-  {
-    "id": "b2a51031",
-    "topic": "Albert Einstein ve zamanın dağlarda neden daha hızlı aktığı sırrı",
-    "theme": "blueprint",
-    "layoutType": "vs_split",
-    "durationMode": "deep",
-    "created_at": "2026-10-28 00:37",
-    "headerMain": "ZAMAN DAĞLARDA NE DEN DAHA HIZLI KÜTLEÇEKİMSEL ZAMAN BÜKÜLMESİ",
-    "narration": "Zamanın her yerde aynı hızda aktığını sanıyorsanız yanılıyorsunuz. Albert Einstein, kütleçekiminin uzay ve zamanı büktüğünü keşfetti. Deniz seviyesinde yerçekimi daha güçlü olduğu için zaman daha yavaş akar. Bir dağın tepesine çıktığınızda ise yerçekimi azalır ve zaman hızlanır. Evet, dağda yaşayan bir insan deniz kenarındakine göre mikrosaniyelerle daha hızlı yaşlanır. Zaman mutlak değil, bastığınız toprağın kütlesine bağlı bir ilüzyondur.",
-    "hookScore": 98,
-    "key_used": "asdxcxc005@gmail.com",
-    "model_used": "gemini-3.5-flash",
-    "thumbnail_url": "/out/thumbnail.png?t=1793137039",
-    "video_data": {
-      "directorDecision": {
-        "theme": "blueprint",
-        "layoutType": "vs_split",
-        "durationMode": "deep",
-        "particles": "stars",
-        "ambientPattern": "cosmic",
-        "doodleType": "hourglass",
-        "directorReason": "Einstein'ın görelilik teorisini ve kütleçekimsel zaman genişlemesini bilimsel bir şema estetiğiyle anlatmak için blueprint teması ve dağ-deniz karşılaştırmalı vs_split düzeni seçildi."
-      },
-      "requiredIcons": [
-        "hourglass",
-        "atom",
-        "infinity",
-        "compass"
-      ],
-      "headerSubtitle": "Einstein'ın Görelilik Sırrı",
-      "headerLine1": "ZAMAN DAĞLARDA NE DEN",
-      "circledWord": "DAHA HIZLI",
-      "headerLine2": "AKIYOR?",
-      "highlightedText": "KÜTLEÇEKİMSEL ZAMAN BÜKÜLMESİ",
-      "strikeWord": "SABİT ZAMAN",
-      "layoutType": "vs_split",
-      "cards": [
-        {
-          "id": "1",
-          "label": "Deniz Seviyesi",
-          "value": "Yüksek Yerçekimi",
-          "icon": "atom",
-          "color": "#1e3a8a",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        {
-          "id": "2",
-          "label": "Dağ Zirvesi",
-          "value": "Düşük Yerçekimi",
-          "icon": "hourglass",
-          "color": "#0284c7",
-          "iconAssetPath": "assets/icons/hourglass.svg"
-        },
-        {
-          "id": "3",
-          "label": "Görünmez Bükülme",
-          "value": "Uzay-Zaman",
-          "icon": "infinity",
-          "color": "#7c3aed",
-          "iconAssetPath": "assets/icons/infinity.svg"
-        }
-      ],
-      "vsData": {
-        "leftTitle": "Deniz Seviyesi",
-        "leftSubtitle": "Dünya Merkezine Yakın",
-        "leftPoints": [
-          "Daha güçlü kütleçekimi",
-          "Uzay-zaman daha çok bükülür",
-          "Saatler DAHA YAVAŞ akar"
-        ],
-        "leftColor": "#0284c7",
-        "rightTitle": "Dağ Zirvesi",
-        "rightSubtitle": "Yüksek Rakım",
-        "rightPoints": [
-          "Daha zayıf kütleçekimi",
-          "Uzay-zaman daha az bükülür",
-          "Saatler DAHA HIZLI akar"
-        ],
-        "rightColor": "#f59e0b",
-        "verdict": "Einstein haklıydı: Yerçekimi ne kadar güçlüyse, zaman o kadar yavaşlar."
-      },
-      "flowchartSteps": [
-        {
-          "stepNumber": 1,
-          "badge": "1. İlke",
-          "title": "Kütleçekim Kuvveti",
-          "desc": "Dünyanın kütlesi etrafındaki uzay-zaman dokusunu büker.",
-          "color": "#0284c7"
-        },
-        {
-          "stepNumber": 2,
-          "badge": "2. Etki",
-          "title": "Yükseklik Farkı",
-          "desc": "Dağlara çıktıkça merkeze olan mesafe artar, kütleçekimi azalır.",
-          "color": "#7c3aed"
-        },
-        {
-          "stepNumber": 3,
-          "badge": "3. Sonuç",
-          "title": "Zaman Genişlemesi",
-          "desc": "Zaman sabit bir nehir değildir; zirvedeki saatler daha hızlı atar.",
-          "color": "#f59e0b"
-        }
-      ],
-      "quoteSpotlight": {
-        "speaker": "Albert Einstein",
-        "title": "Genel Görelilik Teorisi (1915)",
-        "quoteText": "Yerçekimi bir kuvvet değildir; kütlenin uzay ve zaman dokusunda yarattığı bir bükülmedir.",
-        "sourceRef": "General Theory of Relativity"
-      },
-      "metricImpact": {
-        "bigNumber": "90 NANOSANİYE",
-        "bigLabel": "ÖMÜR BOYU FARK",
-        "subheading": "Dağda Yaşayanlar Daha Hızlı Yaşlanır",
-        "keyTakeaway": "Everest'in tepesinde geçirilen bir ömürde zaman deniz seviyesine göre mikrosaniyelerce daha hızlı geçer."
-      },
-      "gridExplosion": {
-        "title": "UZAY-ZAMAN BÜKÜLMESİ",
-        "subtitle": "Evrenin Her Noktasında Zaman Farklı Hızda Akar",
-        "iconType": "hourglass",
-        "itemCount": 12,
-        "badgeText": "GÖRELİLİK GERÇEĞİ",
-        "iconAssetPath": "assets/icons/hourglass.svg"
-      },
-      "triConcept": {
-        "badge": "EINSTEIN'IN FORMÜLÜ",
-        "concept1": {
-          "title": "KÜTLE",
-          "subtitle": "Uzayı BÜKER",
-          "icon": "atom",
-          "color": "#0284c7",
-          "iconAssetPath": "assets/icons/atom.svg"
-        },
-        "concept2": {
-          "title": "YERÇEKİMİ",
-          "subtitle": "Zamanı YAVAŞLATIR",
-          "icon": "hourglass",
-          "color": "#7c3aed",
-          "iconAssetPath": "assets/icons/hourglass.svg"
-        },
-        "concept3": {
-          "title": "RAKIM",
-          "subtitle": "Zamanı HIZLANDIRIR",
-          "icon": "infinity",
-          "color": "#f59e0b",
-          "iconAssetPath": "assets/icons/infinity.svg"
-        },
-        "bottomNote": "ZAMAN EVRENSEL BİR SABİT DEĞİLDİR"
-      },
-      "timeline": {
-        "startYear": "1915",
-        "endYear": "Günümüz",
-        "durationLabel": "İspatlanan Gerçek",
-        "title": "Atomik Saat Deneyleri",
-        "ayahArabic": "",
-        "ayahTranslation": "Hassas atomik saatler dağın tepesine götürüldüğünde, deniz seviyesindekilere göre daha hızlı çalıştığı kanıtlandı.",
-        "ayahRef": "NIST Atomik Saat Deneyi"
-      },
-      "narration": "Zamanın her yerde aynı hızda aktığını sanıyorsanız yanılıyorsunuz. Albert Einstein, kütleçekiminin uzay ve zamanı büktüğünü keşfetti. Deniz seviyesinde yerçekimi daha güçlü olduğu için zaman daha yavaş akar. Bir dağın tepesine çıktığınızda ise yerçekimi azalır ve zaman hızlanır. Evet, dağda yaşayan bir insan deniz kenarındakine göre mikrosaniyelerle daha hızlı yaşlanır. Zaman mutlak değil, bastığınız toprağın kütlesine bağlı bir ilüzyondur.",
-      "viral": {
-        "hookScore": 98,
-        "viralTitles": [
-          "Dağlarda Zaman Neden Daha Hızlı Akar? Einstein'ın Gizemi!",
-          "Zaman Sabit Değil! Everest Tepesinde Neden Hızlı Yaşlanırsın?"
-        ],
-        "hashtags": [
-          "#einstein",
-          "#fizik",
-          "#zaman",
-          "#bilim",
-          "#görelilik",
-          "#shorts"
-        ],
-        "loopEnding": "İşte bu yüzden aslında evrende...",
-        "description": "Albert Einstein'ın kütleçekimsel zaman genişlemesi teorisi ve dağlarda zamanın neden daha hızlı aktığının muazzam bilimi."
-      },
-      "theme": "blueprint",
-      "durationMode": "deep",
-      "particles": "stars",
-      "ambientPattern": "cosmic",
-      "doodleType": "hourglass",
-      "socialHandle": "@birkissa",
-      "_acquired_assets": [
-        {
-          "name": "cosmic",
-          "type": "watermark",
-          "path": "assets/watermarks/cosmic.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "grid_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "atom",
-          "type": "concept_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "concept_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "infinity",
-          "type": "concept_icon",
-          "path": "assets/icons/infinity.svg"
-        },
-        {
-          "name": "atom",
-          "type": "card_icon",
-          "path": "assets/icons/atom.svg"
-        },
-        {
-          "name": "hourglass",
-          "type": "card_icon",
-          "path": "assets/icons/hourglass.svg"
-        },
-        {
-          "name": "infinity",
-          "type": "card_icon",
-          "path": "assets/icons/infinity.svg"
-        }
-      ],
-      "subtitles": [
-        {
-          "text": "Zamanın her yerde",
-          "start": 0.0,
-          "end": 1.4
-        },
-        {
-          "text": "aynı hızda aktığını",
-          "start": 1.4,
-          "end": 2.86
-        },
-        {
-          "text": "sanıyorsanız yanılıyorsunuz. Albert",
-          "start": 2.86,
-          "end": 5.68
-        },
-        {
-          "text": "Einstein, kütleçekiminin uzay",
-          "start": 5.68,
-          "end": 8.38
-        },
-        {
-          "text": "ve zamanı büktüğünü",
-          "start": 8.68,
-          "end": 10.24
-        },
-        {
-          "text": "keşfetti. Deniz seviyesinde",
-          "start": 10.24,
-          "end": 12.78
-        },
-        {
-          "text": "yerçekimi daha güçlü",
-          "start": 12.78,
-          "end": 13.84
-        },
-        {
-          "text": "olduğu için zaman",
-          "start": 13.84,
-          "end": 15.1
-        },
-        {
-          "text": "daha yavaş akar.",
-          "start": 15.52,
-          "end": 16.92
-        },
-        {
-          "text": "Bir dağın tepesine",
-          "start": 17.28,
-          "end": 18.58
-        },
-        {
-          "text": "çıktığınızda ise yerçekimi",
-          "start": 18.58,
-          "end": 20.14
-        },
-        {
-          "text": "azalır ve zaman",
-          "start": 20.14,
-          "end": 21.78
-        },
-        {
-          "text": "hızlanır. Evet, dağda",
-          "start": 21.78,
-          "end": 24.08
-        },
-        {
-          "text": "yaşayan bir insan",
-          "start": 24.08,
-          "end": 25.04
-        },
-        {
-          "text": "deniz kenarındakine göre",
-          "start": 25.04,
-          "end": 26.68
-        },
-        {
-          "text": "mikrosaniyelerle daha hızlı",
-          "start": 26.68,
-          "end": 28.86
-        },
-        {
-          "text": "yaşlanır. Zaman mutlak",
-          "start": 28.86,
-          "end": 30.88
-        },
-        {
-          "text": "değil, bastığınız toprağın",
-          "start": 30.88,
-          "end": 33.1
-        },
-        {
-          "text": "kütlesine bağlı bir",
-          "start": 33.1,
-          "end": 34.98
-        },
-        {
-          "text": "ilüzyondur.",
-          "start": 34.98,
-          "end": 35.28
         }
       ],
       "audioUrl": "audio.mp3"

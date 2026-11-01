@@ -37,6 +37,34 @@ export const NotebookVideo: React.FC<VideoData> = (props) => {
   const { durationInFrames, fps, width, height } = useVideoConfig();
   const currentTimeSec = frame / fps;
 
+  if (props.is_empty || (!props.scenes || props.scenes.length === 0)) {
+    return (
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#07090e',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#64748b',
+          fontFamily: 'system-ui, -apple-system, sans-serif',
+          textAlign: 'center',
+          padding: 40,
+        }}
+      >
+        <div style={{ fontSize: 64, marginBottom: 20, opacity: 0.5 }}>🎬</div>
+        <div style={{ fontSize: 24, fontWeight: 700, color: '#94a3b8', marginBottom: 10 }}>
+          Stüdyo Hazır: Yeni Proje
+        </div>
+        <div style={{ fontSize: 15, color: '#475569', maxWidth: 450, lineHeight: 1.5 }}>
+          Yapay zekâ kurgusu bekleniyor. Sol panelden metin girin veya MP3 yükleyin.
+        </div>
+      </div>
+    );
+  }
+
   const isHorizontal = width > height;
   const isSquare = width === height;
 

@@ -198,11 +198,85 @@ def create_scene_2d_animation(
     video_path = synthesize_2d_animation_video(keyframe_path, duration=duration)
     video_filename = os.path.basename(video_path)
 
-    return {
-        "videoUrl": f"/public/videos/{video_filename}",
-        "relativeUrl": f"videos/{video_filename}",
-        "prompt": final_prompt,
-        "style": style,
-        "duration": duration,
-        "keyframeUrl": f"/public/illustrations/{os.path.basename(keyframe_path)}"
-    }
+def extract_last_frame_from_video(video_path: str, out_image_path: str) -> bool:
+    """
+    Extracts the last frame of a video using FFmpeg to serve as the visual
+    starting point or continuity reference for the consecutive scene.
+    """
+    try:
+        cmd = [
+            "ffmpeg", "-y", "-sseof", "-0.1", "-i", video_path,
+            "-update", "1", "-q:v", "2", out_image_path
+        ]
+        res = subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        return res.returncode == 0 and os.path.exists(out_image_path)
+    except Exception as e:
+        print(f"[Animation Engine] extract_last_frame error: {e}")
+        return False
+
+
+def generate_continuous_scene_animations(
+    scenes: list,
+    base_style: str = "2d_anime",
+    pool = None,
+    on_progress = None
+) -> list:
+    """
+    Generates 3 consecutive 10-second (or custom length) 2D animations
+    ensuring frame & narrative continuity:
+    The 1st frame / visual elements of Scene 2 continue seamlessly from Scene 1's end frame.
+    Scene 3 continues from Scene 2.
+    """
+    updated_scenes = []
+    previous_keyframe = None
+    previous_summary = ""
+
+    for idx, sc in enumerate(scenes):
+        dur = float(sc.get("endTime", 10.0) - sc.get("startTime", 0.0))
+        if dur <= 0:
+            dur = 10.0
+
+        title = sc.get("headerLine1") or sc.get("headerSubtitle") or sc.get("highlightedText") or f"Sahne {idx+1}"
+        narration_slice = sc.get("narration") or sc.get("visualDescription") or title
+
+        # Build continuity context for consecutive scenes
+        if idx == 0:
+            continuity_prompt_suffix = "Establishing opening scene. Vertical 9:16 aspect ratio."
+        else:
+            continuity_prompt_suffix = (
+                f"Continuous sequential scene directly following previous scene #{idx}. "
+                f"Maintain exact same character appearance, color palette, lighting atmosphere, and environment details. "
+                f"Seamless visual transition picking up directly from the preceding scene's ending point. Vertical 9:16 aspect ratio."
+            )
+
+        print(f"[Animation Engine] Generating continuous 2D animation for Scene {idx+1}/{len(scenes)} ({dur:.1f}s)...")
+        if on_progress:
+            on_progress(idx + 1, len(scenes), f"Sahne {idx+1} 2D animasyonu pürüzsüz devamlılıkla üretiliyor...")
+
+        # Craft prompt with continuity
+        crafted_prompt = craft_2d_animation_prompt_with_omni(
+            scene_text=f"{narration_slice}. {continuity_prompt_suffix}",
+            style=base_style,
+            pool=pool
+        )
+
+        anim_result = create_scene_2d_animation(
+            scene_text=narration_slice,
+            duration=dur,
+            style=base_style,
+            pool=pool,
+            custom_prompt=crafted_prompt
+        )
+
+        sc_copy = dict(sc)
+        sc_copy["animationVideoUrl"] = anim_result["videoUrl"]
+        sc_copy["videoUrl"] = anim_result["videoUrl"]
+        sc_copy["animationPrompt"] = anim_result["prompt"]
+        sc_copy["illustrationUrl"] = anim_result["keyframeUrl"]
+        sc_copy["brollType"] = "none" # 2D animation video takes precedence as background
+        sc_copy["animationContinuityIndex"] = idx + 1
+        updated_scenes.append(sc_copy)
+
+        previous_summary = crafted_prompt[:120]
+
+    return updated_scenes
