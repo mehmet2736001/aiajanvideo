@@ -278,6 +278,7 @@ class ProjectState(BaseModel):
     aspect_ratio: str = "9:16"
     visual_style: str = "cinematic_photoreal"
     custom_transcript: Optional[str] = None
+    custom_instructions: Optional[str] = None
 
     # Track Decision & Branching
     selected_track: Optional[TrackType] = None

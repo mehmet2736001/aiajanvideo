@@ -229,42 +229,45 @@ class KeyPoolManager:
         else:
             return True, "Vertex/Proxy Key (Doğrudan test desteklenmiyor)"
 
-    def query_with_rotation(self, prompt: str, system_instruction: str = "", model: str = DEFAULT_MODEL) -> Tuple[Optional[str], Optional[str]]:
-        """Rotates through active Gemini direct keys until one succeeds, with intelligent fallback cascade"""
+    def query_chat_multimodal(self, contents: List[Dict], system_instruction: str = "", model: str = DEFAULT_MODEL) -> Tuple[Optional[str], Optional[str]]:
+        """Rotates through active Gemini direct keys with multi-turn chat and multimodal support, with intelligent fallback cascade"""
         selected_model = model or DEFAULT_MODEL
         active_keys = self.get_active_keys("gemini_direct")
         if not active_keys:
             active_keys = [k for k in self.keys if k.get("key_type") == "gemini_direct"]
 
-        # Models to try in cascade if primary model is rate limited or quota restricted
+        # Models to try in cascade if primary model is rate limited, quota restricted, or not found
         models_to_try = [selected_model]
-        for m in ["gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-3.8-flash", "gemini-flash-latest"]:
+        for m in ["gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-flash-latest"]:
             if m not in models_to_try:
                 models_to_try.append(m)
 
         for current_model in models_to_try[:3]:  # Try primary and up to 2 fallbacks
             errors = []
-            for key_item in active_keys[:8]:  # Try top 8 healthiest keys
+            for key_item in active_keys[:10]:  # Try top 10 healthiest keys
                 api_key = key_item["api_key"]
                 url = f"https://generativelanguage.googleapis.com/v1beta/models/{current_model}:generateContent?key={api_key}"
             
                 payload = {
-                    "contents": [{"parts": [{"text": prompt}]}]
+                    "contents": contents
                 }
                 if system_instruction:
                     payload["systemInstruction"] = {"parts": [{"text": system_instruction}]}
 
                 try:
-                    res = requests.post(url, json=payload, timeout=12)
+                    res = requests.post(url, json=payload, timeout=25)
                     if res.status_code == 200:
                         data = res.json()
-                        text = data["candidates"][0]["content"]["parts"][0]["text"]
+                        candidates = data.get("candidates", [])
+                        if not candidates:
+                            continue
+                        text = candidates[0].get("content", {}).get("parts", [{}])[0].get("text", "")
                         key_item["daily_request_count"] += 1
                         key_item["success_count"] = key_item.get("success_count", 0) + 1
                         key_item["last_used_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
                         key_item["status"] = "healthy"
                         self.save_keys()
-                        return text, f"{key_item['key_name']} ({current_model})"
+                        return text, f"{key_item.get('key_name', 'Gemini Key')} ({current_model})"
                     else:
                         err = res.json().get("error", {}).get("message", res.text[:80])
                         key_item["error_count"] = key_item.get("error_count", 0) + 1
@@ -282,9 +285,17 @@ class KeyPoolManager:
                     self.save_keys()
                     continue
 
-            print(f"[KeyPool] {current_model} ile tüm anahtarlar denendi, sonuç alınamadı. Hatalar: {len(errors)}")
+            print(f"[KeyPool] {current_model} ile anahtarlar denendi, sonuç alınamadı. Hatalar: {len(errors)}")
 
         return None, None
+
+    def query_with_rotation(self, prompt: str, system_instruction: str = "", model: str = DEFAULT_MODEL) -> Tuple[Optional[str], Optional[str]]:
+        """Rotates through active Gemini direct keys until one succeeds, with intelligent fallback cascade"""
+        return self.query_chat_multimodal(
+            contents=[{"role": "user", "parts": [{"text": prompt}]}],
+            system_instruction=system_instruction,
+            model=model
+        )
 
 pool = KeyPoolManager()
 

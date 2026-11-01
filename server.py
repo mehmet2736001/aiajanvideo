@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import uuid
 import zipfile
+import base64
 from typing import Optional, List, Dict, Any
 from fastapi import FastAPI, HTTPException, BackgroundTasks, Request, UploadFile, File, Form
 from fastapi.staticfiles import StaticFiles
@@ -16,6 +17,19 @@ from pydantic import BaseModel
 from gtts import gTTS
 
 sys.stdout.reconfigure(encoding='utf-8')
+
+if sys.platform == 'win32':
+    import asyncio
+    try:
+        from asyncio.proactor_events import _ProactorBasePipeTransport
+        _orig_call_connection_lost = _ProactorBasePipeTransport._call_connection_lost
+        def _silence_connection_lost(self, exc):
+            if isinstance(exc, (ConnectionResetError, ConnectionAbortedError, OSError)):
+                return
+            _orig_call_connection_lost(self, exc)
+        _ProactorBasePipeTransport._call_connection_lost = _silence_connection_lost
+    except Exception:
+        pass
 
 def calculate_dynamic_timeline_duration(video_data: dict, scenes: list) -> float:
     if video_data.get("is_empty"):
@@ -971,23 +985,24 @@ async def upload_audio_and_generate_multiscene(
     total_duration = probe_audio_duration(target_audio_path)
 
     # 4. Whisper millisecond word-level alignment & full transcription
+    raw_whisper_words = []
+    w_res = {}
     try:
         whisper_m = get_whisper()
-        w_res = whisper_m.transcribe(target_audio_path, word_timestamps=True, language="tr", fp16=False)
+        if whisper_m:
+            w_res = whisper_m.transcribe(target_audio_path, word_timestamps=True, language="tr", fp16=False)
+            for seg in w_res.get("segments", []):
+                for w in seg.get("words", []):
+                    w_text = w["word"].strip()
+                    if w_text:
+                        raw_whisper_words.append({
+                            "word": w_text,
+                            "text": w_text,
+                            "start": round(w["start"], 2),
+                            "end": round(w["end"], 2)
+                        })
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Whisper ses çözümleme hatası: {str(e)}")
-
-    raw_whisper_words = []
-    for seg in w_res.get("segments", []):
-        for w in seg.get("words", []):
-            w_text = w["word"].strip()
-            if w_text:
-                raw_whisper_words.append({
-                    "word": w_text,
-                    "text": w_text,
-                    "start": round(w["start"], 2),
-                    "end": round(w["end"], 2)
-                })
+        print(f"[Whisper Notice] Whisper extraction fallback: {e}")
 
     user_transcript = (transcript or "").strip()
     if user_transcript:
@@ -2690,6 +2705,7 @@ async def api_multi_agent_start(
 class SelectTrackRequest(BaseModel):
     job_id: str
     selected_track: str  # "cinematic" or "vector_infographic"
+    custom_instructions: Optional[str] = None
 
 @app.post("/api/multi-agent/select-track")
 def api_multi_agent_select_track(req: SelectTrackRequest, background_tasks: BackgroundTasks):
@@ -2706,7 +2722,11 @@ def api_multi_agent_select_track(req: SelectTrackRequest, background_tasks: Back
 
     def run_resume():
         try:
-            orchestrator.resume_with_selection(req.job_id, req.selected_track)
+            orchestrator.resume_with_selection(
+                job_id=req.job_id,
+                selected_track=req.selected_track,
+                custom_instructions=req.custom_instructions
+            )
         except Exception as e:
             print(f"[Multi-Agent API] Resume error for {req.job_id}: {e}")
 
@@ -3140,6 +3160,374 @@ Lütfen yönetmen olarak önerilerini ve yapacağın değişiklikleri açıkla.
             "reply": f"Harika bir fikir! '{user_msg}' doğrultusunda sahneleriniz güncellendi. İstediğiniz an yeniden üretebilirsiniz.",
             "updated_scenes": None
         }
+
+# ========================================================
+# ARGON 4 — İSLAMİ VİDEO İSTİŞARE VE ÜRETİM SİSTEMİ
+# ========================================================
+
+class Argon4ChatRequest(BaseModel):
+    message: str = ""
+    history: Optional[List[Dict[str, Any]]] = []
+    media_base64: Optional[str] = None
+    media_mime: Optional[str] = None
+    media_name: Optional[str] = None
+    model: Optional[str] = "gemini-3.5-flash-lite"
+
+class Argon4ApplyRequest(BaseModel):
+    production_package: str
+    custom_title: Optional[str] = None
+    custom_format: Optional[str] = None
+    theme: Optional[str] = "dark_minimalist"
+
+SKILLS_PATH = os.path.join(os.path.dirname(__file__), "skills.md")
+
+def get_argon4_system_prompt() -> str:
+    if os.path.exists(SKILLS_PATH):
+        try:
+            with open(SKILLS_PATH, "r", encoding="utf-8") as f:
+                content = f.read().strip()
+                if content:
+                    return content
+        except Exception as e:
+            print(f"[Argon 4] skills.md okunurken hata: {e}")
+    return """Sen Argon 4 modelisin. İslami içerik, tefekkür ve görsel kurgu istişare uzmanısın.
+İnsanlara Allah'ı, İslam'ı, Kur'an hakikatlerini ve Ahiret gününü anlatan tefekkür videoları hazırlarsın.
+Hikmetli, edepli, samimi ve derttaş bir üslup kullanırsın.
+Kullanıcı 'başla', 'üret' veya 'devam et' dediğinde 4 bölümlük tam üretim paketini tek bir mesajda eksiksiz teslim edersin."""
+
+def parse_argon4_package_to_project(package_text: str, custom_title: Optional[str] = None, custom_format: Optional[str] = None, theme: str = "dark_minimalist") -> dict:
+    title = custom_title
+    if not title:
+        for line in package_text.splitlines():
+            clean_l = re.sub(r'[*#_`"]', '', line).strip()
+            if any(k in clean_l.lower() for k in ["video başlığı", "başlık", "konsept:"]):
+                if ":" in clean_l:
+                    cand = clean_l.split(":", 1)[1].strip()
+                    if cand and len(cand) > 2 and not cand.startswith("http"):
+                        title = cand
+                        break
+        if not title:
+            title = "Kabir Kapısındaki İlk Gece: Sessiz Çığlık"
+
+    fmt = custom_format
+    if not fmt:
+        if "16:9" in package_text:
+            fmt = "16:9"
+        else:
+            fmt = "9:16"
+
+    # Voiceover / Narration
+    narration = ""
+    m_vo = re.search(r'Bölüm 2[^\n]*\n+(.*?)(?=###\s*Bölüm 3|Bölüm 3:|$)', package_text, re.DOTALL | re.IGNORECASE)
+    if m_vo:
+        narration = m_vo.group(1).strip()
+    else:
+        paragraphs = [p.strip() for p in package_text.split("\n\n") if len(p.strip()) > 50]
+        narration = " ".join(paragraphs[:3]) if paragraphs else package_text[:500]
+
+    # Clean meta-instructions like (Metin, yapay zekanın...)
+    clean_narr = re.sub(r'^\s*[\(\[\*]+[^\)\]\*]*(?:yapay zek|vakur|tonla|seslendirme|okuma|bölüm)[^\)\]\*]*[\)\]\*]+\s*', '', narration, flags=re.IGNORECASE | re.DOTALL)
+    clean_narr = re.sub(r'[\*\#\_`]', '', clean_narr).strip()
+    clean_lines = [l.strip() for l in clean_narr.splitlines() if not ((l.strip().startswith('(') and l.strip().endswith(')')) or (l.strip().startswith('[') and l.strip().endswith(']')) or l.strip() == '---')]
+    narration_clean = " ".join([l for l in clean_lines if l])
+
+    # Available high quality media assets
+    broll_options = ["gold_dust", "cosmic", "clouds", "ink", "waves"]
+    cinematic_videos = [
+        "/public/videos/cinematic_vid_ad2b1f83.mp4",
+        "/public/videos/cinematic_vid_d0f0b443.mp4",
+        "/public/videos/cinematic_vid_f1e201e6.mp4",
+        "/public/videos/cinematic_vid_a939b29f.mp4",
+        "/public/videos/cinematic_vid_c234cf3f.mp4",
+        "/public/videos/cinematic_vid_c8104c8b.mp4",
+        "/public/videos/cinematic_vid_cedc9c27.mp4",
+        "/public/videos/cinematic_vid_d74e3ec2.mp4",
+        "/public/videos/cinematic_vid_e368376a.mp4"
+    ]
+    illustrations = [
+        "/public/illustrations/test_cinematic_manuscript.jpg",
+        "/public/illustrations/cinematic_key_7a9cc9d8.webp",
+        "/public/illustrations/test_dervish.jpg",
+        "/public/illustrations/cinematic_key_133986da.webp",
+        "/public/illustrations/cinematic_key_4b9e0ace.webp",
+        "/public/illustrations/cinematic_key_7ff205fd.webp"
+    ]
+    islamic_titles = [
+        "Sessiz Çığlık",
+        "Gaflet Muhasebesi",
+        "Kabir Eşiği",
+        "Büyük İbret",
+        "Uyanış Çağrısı",
+        "Sonsuz Vuslat"
+    ]
+    subtitles_pool = [
+        "Kabir Kapısı",
+        "Tekâsür Uyarısı",
+        "Hz. Osman'ın İbreti",
+        "Büyük Tövbe",
+        "Hesap Günü",
+        "İlahi Nizam"
+    ]
+    keywords_pool = [
+        "Son Nefes",
+        "Tekâsür",
+        "İlk Durak",
+        "Rabbine Dön",
+        "Hesap",
+        "Tefekkür",
+        "Tövbe",
+        "Secde",
+        "Ahiret",
+        "Hakikat"
+    ]
+
+    # Scenes from Section 3
+    m_sec3 = re.search(r'Bölüm 3[^\n]*\n+(.*?)(?=###\s*Bölüm 4|Bölüm 4:|$)', package_text, re.DOTALL | re.IGNORECASE)
+    sec3_text = m_sec3.group(1).strip() if m_sec3 else package_text
+
+    raw_scenes = re.findall(r'(?:Sahne\s*\d+[:\.]?|\d+\.\s*Sahne[:\.]?)(.*?)(?=(?:Sahne\s*\d+|\d+\.\s*Sahne|$))', sec3_text, re.DOTALL | re.IGNORECASE)
+
+    sentences = [s.strip() for s in re.split(r'[\.\!\?]+', narration_clean) if len(s.strip()) > 5]
+    if not sentences:
+        sentences = [narration_clean]
+
+    # Create between 4 to 6 scenes for optimal pacing
+    scene_count = min(max(len(raw_scenes), 4), 6)
+    if len(raw_scenes) == 0:
+        raw_scenes = [f"İslami tefekkür ve nurani atmosfer: {sentences[min(i, len(sentences)-1)]}" for i in range(scene_count)]
+
+    # Distribute sentences across scenes
+    sentence_chunks = []
+    chunk_size = max(1, len(sentences) // scene_count)
+    for i in range(scene_count):
+        start_idx = i * chunk_size
+        end_idx = (i + 1) * chunk_size if i < scene_count - 1 else len(sentences)
+        chunk_sentences = sentences[start_idx:end_idx]
+        sentence_chunks.append(". ".join(chunk_sentences) + ("." if chunk_sentences else ""))
+
+    dur_per_scene = 8.0 if fmt == "9:16" else 12.0
+    total_dur = 0.0
+    scenes = []
+
+    for idx in range(scene_count):
+        raw_desc = raw_scenes[idx] if idx < len(raw_scenes) else raw_scenes[-1]
+        clean_desc = raw_desc.strip().replace("**", "").replace("*", "").strip()
+        clean_desc = re.sub(r'--ar\s+[0-9:]+', '', clean_desc).strip()
+
+        spoken_slice = sentence_chunks[idx] if idx < len(sentence_chunks) and sentence_chunks[idx] else sentences[min(idx, len(sentences)-1)]
+        s_dur = dur_per_scene
+
+        # Clean, meaningful scene title
+        scene_title = ""
+        if "|" in raw_desc:
+            part_after = raw_desc.split("|", 1)[1].split(")")[0].split(":")[0].strip()
+            if len(part_after) > 2:
+                scene_title = re.sub(r'[*#_`"\(]', '', part_after).strip()
+        if not scene_title:
+            first_line = clean_desc.split("\n")[0]
+            clean_first = re.sub(r'\([0-9:\-\s\|\.]+\)', '', first_line).strip()
+            clean_first = clean_first.replace("Görsel Tarif", "").replace("Görsel", "").strip(": ")
+            if clean_first and len(clean_first) > 2 and not clean_first.startswith("("):
+                scene_title = clean_first[:35]
+            else:
+                scene_title = islamic_titles[idx % len(islamic_titles)]
+
+        scene_sub = subtitles_pool[idx % len(subtitles_pool)]
+
+        highlighted = keywords_pool[idx % len(keywords_pool)]
+        for kw in keywords_pool:
+            if kw.lower() in spoken_slice.lower() or kw.lower() in scene_title.lower():
+                highlighted = kw
+                break
+
+        assigned_video = cinematic_videos[idx % len(cinematic_videos)]
+        assigned_ill = illustrations[idx % len(illustrations)]
+        assigned_broll = broll_options[idx % len(broll_options)]
+
+        scenes.append({
+            "id": f"scene_{idx+1}",
+            "startTime": round(total_dur, 2),
+            "endTime": round(total_dur + s_dur, 2),
+            "duration": round(s_dur, 2),
+            "headerSubtitle": scene_sub,
+            "headerLine1": scene_title,
+            "highlightedText": highlighted,
+            "spokenText": spoken_slice,
+            "narration": spoken_slice,
+            "visualDescription": clean_desc,
+            "animationPrompt": clean_desc,
+            "layoutType": "cinematic_ambient",
+            "brollType": assigned_broll,
+            "videoUrl": assigned_video,
+            "animationVideoUrl": assigned_video,
+            "illustrationUrl": assigned_ill,
+            "animationStyle": "cinematic_photoreal"
+        })
+        total_dur += s_dur
+
+    project_id = str(uuid.uuid4())[:8]
+    subs = generate_subtitles_fallback(narration_clean, total_dur) if 'generate_subtitles_fallback' in globals() else []
+
+    project_data = {
+        "id": project_id,
+        "topic": title,
+        "theme": theme or "dark_minimalist",
+        "format": fmt,
+        "is_empty": False,
+        "narration": narration_clean,
+        "headerMain": title,
+        "headerSubtitle": "Argon 4 İslami Tefekkür",
+        "headerLine1": scenes[0]["headerLine1"],
+        "highlightedText": scenes[0]["highlightedText"],
+        "layoutType": "cinematic_ambient",
+        "brollType": "gold_dust",
+        "videoUrl": scenes[0]["videoUrl"],
+        "animationVideoUrl": scenes[0]["animationVideoUrl"],
+        "illustrationUrl": scenes[0]["illustrationUrl"],
+        "scenes": scenes,
+        "subtitles": subs,
+        "words": [],
+        "quoteVideos": [],
+        "pipVideos": [],
+        "overlayImages": [],
+        "audioUrl": "/public/audio.mp3",
+        "totalDuration": round(total_dur, 2),
+        "created_at": time.strftime("%Y-%m-%d %H:%M:%S")
+    }
+    return project_data
+
+@app.post("/api/argon4/chat")
+async def api_argon4_chat(req: Argon4ChatRequest):
+    user_msg = req.message.strip()
+    system_instruction = get_argon4_system_prompt()
+
+    contents = []
+    # Build conversation history
+    for item in (req.history or []):
+        role = item.get("role", "user")
+        if role in ["assistant", "ai", "model"]:
+            role = "model"
+        else:
+            role = "user"
+        text = item.get("content") or item.get("text") or ""
+        parts = []
+        if text:
+            parts.append({"text": text})
+        if parts:
+            contents.append({"role": role, "parts": parts})
+
+    current_parts = []
+    if req.media_base64 and req.media_mime:
+        current_parts.append({
+            "inlineData": {
+                "mimeType": req.media_mime,
+                "data": req.media_base64
+            }
+        })
+    if user_msg:
+        current_parts.append({"text": user_msg})
+    elif req.media_base64:
+        current_parts.append({"text": "Yüklediğim bu medya dosyasını İslami kurgu, ayet ve tefekkür edebi çerçevesinde analiz et ve istişaremize kat."})
+    else:
+        current_parts.append({"text": "Selamünaleyküm, İslami video projemize bismillah diyerek başlayalım."})
+
+    contents.append({"role": "user", "parts": current_parts})
+
+    from scripts.key_pool import pool
+    chosen_model = req.model or "gemini-3.5-flash-lite"
+
+    reply_text, key_info = pool.query_chat_multimodal(
+        contents=contents,
+        system_instruction=system_instruction,
+        model=chosen_model
+    )
+
+    if not reply_text:
+        raise HTTPException(status_code=500, detail="Key havuzundaki aktif anahtarlardan yanıt alınamadı. Lütfen tekrar deneyin.")
+
+    is_prod = bool(
+        ("Bölüm 1" in reply_text or "Bölüm 2" in reply_text or "Bölüm 3" in reply_text) or
+        ("Bölüm" in reply_text and "Voiceover" in reply_text) or
+        ("Tam AI Seslendirme" in reply_text)
+    )
+
+    return {
+        "success": True,
+        "reply": reply_text,
+        "key_info": key_info or "Gemini Key Pool",
+        "is_production_package": is_prod
+    }
+
+@app.post("/api/argon4/upload-media")
+async def api_argon4_upload_media(file: UploadFile = File(...)):
+    if not file:
+        raise HTTPException(status_code=400, detail="Dosya seçilmedi")
+
+    ext = os.path.splitext(file.filename)[1].lower() if file.filename else ""
+    filename = f"argon_{uuid.uuid4().hex[:8]}_{file.filename}"
+    upload_dir = os.path.join(PUBLIC_DIR, "uploads")
+    os.makedirs(upload_dir, exist_ok=True)
+    save_path = os.path.join(upload_dir, filename)
+
+    content_bytes = await file.read()
+    with open(save_path, "wb") as f:
+        f.write(content_bytes)
+
+    mime_type = file.content_type or "application/octet-stream"
+    if not file.content_type or file.content_type == "application/octet-stream":
+        if ext in [".mp3", ".wav", ".m4a", ".aac", ".ogg"]:
+            mime_type = "audio/mp3" if ext == ".mp3" else f"audio/{ext.lstrip('.')}"
+        elif ext in [".png", ".jpg", ".jpeg", ".webp"]:
+            mime_type = "image/png" if ext == ".png" else "image/jpeg"
+        elif ext in [".mp4", ".mov", ".webm"]:
+            mime_type = "video/mp4"
+
+    b64_str = base64.b64encode(content_bytes).decode("utf-8")
+
+    return {
+        "success": True,
+        "filename": file.filename,
+        "url": f"/public/uploads/{filename}",
+        "mime": mime_type,
+        "base64": b64_str,
+        "size_kb": round(len(content_bytes) / 1024, 1)
+    }
+
+@app.post("/api/argon4/apply-to-project")
+async def api_argon4_apply_to_project(req: Argon4ApplyRequest):
+    data_file = os.path.join(SRC_DIR, "generatedData.json")
+    project_data = parse_argon4_package_to_project(
+        package_text=req.production_package,
+        custom_title=req.custom_title,
+        custom_format=req.custom_format,
+        theme=req.theme or "dark_minimalist"
+    )
+
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(project_data, f, ensure_ascii=False, indent=2)
+
+    history = load_history()
+    history.insert(0, {
+        "id": project_data["id"],
+        "topic": project_data["topic"],
+        "theme": project_data["theme"],
+        "format": project_data["format"],
+        "totalDuration": project_data["totalDuration"],
+        "scene_count": len(project_data.get("scenes", [])),
+        "created_at": project_data["created_at"],
+        "audio_status": "none",
+        "video_status": "draft"
+    })
+    save_history(history)
+
+    return {
+        "success": True,
+        "project_id": project_data["id"],
+        "title": project_data["topic"],
+        "format": project_data["format"],
+        "scenes_count": len(project_data.get("scenes", [])),
+        "totalDuration": project_data["totalDuration"]
+    }
 
 @app.post("/api/timeline/scenes/trim")
 def api_trim_scene(req: SceneTrimRequest):

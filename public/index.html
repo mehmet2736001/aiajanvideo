@@ -305,6 +305,11 @@
       </div>
 
       <div class="flex items-center gap-2">
+        <button onclick="openArgon4Modal()" class="bg-gradient-to-r from-emerald-600 via-amber-500 to-amber-600 hover:from-emerald-500 hover:to-amber-500 text-white font-extrabold text-xs px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-lg shadow-amber-500/25 active:scale-95 border border-amber-300/40">
+          <i class="fa-solid fa-moon-stars text-amber-300 text-sm"></i>
+          <span>Yapay Zeka ile Üretmeye Başla</span>
+          <span class="text-[9px] bg-emerald-950/80 text-emerald-300 border border-emerald-400/40 px-1.5 py-0.2 rounded font-mono font-bold">Argon 4</span>
+        </button>
         <button onclick="openKeyPoolModal()" class="px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition text-xs font-semibold flex items-center gap-1.5 border border-slate-700/60">
           <i class="fa-solid fa-key text-amber-400"></i> Key Havuzu (<span id="dash-key-count">136</span>)
         </button>
@@ -320,6 +325,41 @@
 
     <div class="max-w-7xl w-full mx-auto p-6 md:p-8 space-y-8 flex-1">
       
+      <!-- ARGON 4 — İSLAMİ VİDEO İSTİŞARE & ÜRETİM HERO BANNER -->
+      <div onclick="openArgon4Modal()" class="relative overflow-hidden p-6 md:p-8 rounded-3xl bg-gradient-to-r from-[#07131e] via-[#0d1c2d] to-[#1c1409] border border-amber-500/40 hover:border-amber-400 transition cursor-pointer shadow-2xl group">
+        <div class="absolute -top-16 -right-16 w-56 h-56 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -left-16 w-56 h-56 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+          <div class="flex items-start md:items-center gap-4">
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-3xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-emerald-500 flex items-center justify-center text-slate-950 font-black text-2xl md:text-3xl shadow-xl shadow-amber-500/30 group-hover:scale-105 transition shrink-0">
+              <i class="fa-solid fa-kaaba"></i>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[11px] uppercase tracking-wider font-extrabold text-amber-400 font-mono flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Argon 4 İstişare Uzmanı
+                </span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">Key Havuzu Aktif (23+ Gemini Key)</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Shorts 9:16 & Yatay 16:9</span>
+              </div>
+              <h2 class="text-xl md:text-2xl font-black text-white mt-1 group-hover:text-amber-300 transition">
+                Yapay Zeka ile Üretmeye Başla (Argon 4)
+              </h2>
+              <p class="text-xs md:text-sm text-slate-300 mt-1 max-w-3xl leading-relaxed">
+                İnsanlara Allah’ı (c.c.), Kur'an hakikatlerini ve Ahiret gününü anlatan; kalpleri titreten, derin tefekkür uyandıran ve izleyenlere ibret veren videolar hazırlamak için Argon 4 ile istişare edin. Ses, görüntü veya video yükleyin, ortak karar alın ve tek tıkla kurguya aktarın.
+              </p>
+            </div>
+          </div>
+          <button class="px-6 py-3 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 text-slate-950 font-black text-xs md:text-sm shadow-xl shadow-amber-500/20 group-hover:translate-x-1 transition flex items-center gap-2 whitespace-nowrap shrink-0">
+            <i class="fa-solid fa-comments"></i>
+            <span>İstişareye Başla</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+      </div>
+
       <!-- HERO: HIZLI PROJE BAŞLAT (FORMAT KARTLARI) -->
       <div>
         <div class="flex items-center justify-between mb-4">
@@ -500,6 +540,9 @@
 
     <!-- CENTER TOOLS: Media, Multilingual (Faz 9), Autopilot & Key Pool -->
     <div class="hidden md:flex items-center gap-1.5 bg-[#070a12] p-1 rounded-2xl border border-slate-800/80 text-xs font-semibold">
+      <button onclick="openArgon4Modal()" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-950 to-amber-950 hover:from-emerald-900 hover:to-amber-900 text-amber-300 border border-amber-500/40 transition flex items-center gap-1.5 font-bold shadow-sm">
+        <i class="fa-solid fa-moon-stars text-amber-400"></i> Argon 4
+      </button>
       <button onclick="toggleMediaDrawer()" class="px-3 py-1.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5">
         <i class="fa-solid fa-folder-open text-cyan-400"></i> Medya Aktar
       </button>
@@ -1235,7 +1278,7 @@
     </main>
 
     <!-- RIGHT PANEL: SCENE INSPECTOR & AI REGENERATOR (320px) -->
-    <aside id="right-inspector" class="w-80 border-l border-slate-800/80 bg-[#0d1322] flex flex-col shrink-0 overflow-y-auto p-4 space-y-4 text-xs">
+    <aside id="right-inspector" class="w-80 border-l border-slate-800/80 bg-[#0d1322] flex flex-col shrink-0 overflow-y-auto p-4 space-y-3.5 text-xs">
       
       <!-- Inspector Header -->
       <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
@@ -1256,41 +1299,27 @@
         </button>
       </div>
 
-      <!-- Layout Selector for Scene -->
-      <div class="space-y-1.5">
-        <label class="block font-bold text-slate-300">Şablon Düzeni (Layout)</label>
-        <select id="inspect-layout-type" onchange="updateActiveSceneField('layoutType', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
-          <option value="quote_spotlight">💬 Alıntı & Söz (Sade & Odaklı)</option>
-          <option value="cinematic_ambient">🌌 Sinematik Arkaplan & Sade Metin</option>
-          <option value="vs_split">⚖️ VS Karşılaştırma</option>
-          <option value="cards">🃏 Kartlar & Liste</option>
-          <option value="metric_impact">📊 Büyük Metrik / Rakam</option>
-          <option value="pip_split">🖼️ PiP Split (Polaroid / Yırtık Kağıt)</option>
-          <option value="flowchart">🗺️ Akış Şeması</option>
-        </select>
-      </div>
-
-      <!-- SİNEMATİK BELGESEL VİDEO PANELİ (I2V DIFFUSION) -->
+      <!-- SADE & ODAKLI: SİNEMATİK / VEKTÖREL AI ARKA PLAN VİDEOSU -->
       <div class="p-3.5 rounded-2xl bg-gradient-to-b from-amber-950/40 via-purple-950/20 to-[#070a12] border border-amber-500/40 shadow-xl space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <div class="w-6 h-6 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs font-bold">
               <i class="fa-solid fa-film"></i>
             </div>
-            <span class="text-xs font-extrabold text-amber-200">Sinematik Belgesel Video (I2V Diffusion)</span>
+            <span class="text-xs font-extrabold text-amber-200">Arkaplan AI Videosu</span>
           </div>
-          <span class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-mono font-bold">35mm I2V</span>
+          <span id="inspect-broll-status-pill" class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-mono font-bold">🎬 AI Video Aktif</span>
         </div>
 
         <!-- Video Preview Player if exists -->
-        <div id="inspect-anim-player-container" class="hidden">
-          <div class="relative rounded-xl overflow-hidden border border-amber-500/40 bg-black aspect-[9/16] max-h-[160px] mx-auto flex items-center justify-center group">
+        <div id="inspect-anim-player-container">
+          <div class="relative rounded-xl overflow-hidden border border-amber-500/40 bg-black aspect-[9/16] max-h-[170px] mx-auto flex items-center justify-center group shadow-lg">
             <video id="inspect-anim-video-preview" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
-            <button onclick="removeActiveScene2dAnimation()" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-red-600/80 hover:bg-red-500 text-white flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 transition shadow" title="Sinematik Videoyu Sil">
+            <button onclick="removeActiveScene2dAnimation()" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-red-600/80 hover:bg-red-500 text-white flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 transition shadow" title="Videoyu Kaldır">
               <i class="fa-solid fa-trash-can"></i>
             </button>
-            <div class="absolute bottom-1 left-2 right-2 text-[9px] text-amber-200 font-bold bg-black/60 px-1.5 py-0.5 rounded truncate">
-              <i class="fa-solid fa-circle-play text-amber-400 mr-1"></i> Sinematik B-Roll Aktif
+            <div class="absolute bottom-1 left-2 right-2 text-[9px] text-amber-200 font-bold bg-black/70 px-1.5 py-0.5 rounded truncate backdrop-blur-sm">
+              <i class="fa-solid fa-circle-play text-amber-400 mr-1"></i> Kesintisiz B-Roll
             </div>
           </div>
         </div>
@@ -1298,122 +1327,135 @@
         <!-- Animation Prompt Input -->
         <div class="space-y-1">
           <div class="flex items-center justify-between text-[10px]">
-            <label class="font-bold text-slate-300">35mm Kamera & Sahne Tarifi</label>
+            <label class="font-bold text-slate-300">Yapay Zekâ Görsel / Kamera Promptu</label>
             <button type="button" onclick="autoCraft2dPromptForActiveScene()" class="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 transition">
               <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Gemini ile Çıkar</span>
             </button>
           </div>
-          <textarea id="inspect-anim-prompt" rows="2" placeholder="Örn: Antik rahlede açık kadim el yazması, süzülen altın toz zerreleri, chiaroscuro ışık, 35mm sinematik film, 8k..." class="w-full bg-[#030712] border border-amber-900/60 focus:border-amber-500 rounded-xl p-2 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none transition"></textarea>
+          <textarea id="inspect-anim-prompt" rows="2" placeholder="Örn: 35mm cinematic film shot, shallow depth of field, volumetric light..." class="w-full bg-[#030712] border border-amber-900/60 focus:border-amber-500 rounded-xl p-2 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none transition resize-none"></textarea>
         </div>
 
-        <!-- Style Selector -->
-        <div class="space-y-1">
-          <label class="block text-[10px] font-bold text-slate-300">Sinematik Belgesel Stili</label>
-          <select id="inspect-anim-style" class="w-full bg-[#030712] border border-amber-900/60 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs focus:outline-none">
-            <option value="cinematic_photoreal" selected>🎬 Sinematik Gerçekçi (35mm Film / 8K)</option>
-            <option value="historical_documentary">📜 Tarihsel Belgesel (Kadim El Yazmaları)</option>
-            <option value="macro_biometrics">🔬 Makro Bilim & Biyoloji (Parmak İzi / Hücre)</option>
-            <option value="dramatic_tefekkur">🌌 Karanlık & Dramatik Tefekkür (Kainat & Işık)</option>
-          </select>
+        <!-- Style Selector & Background Engine -->
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[10px] font-bold text-slate-300 mb-1">Görsel Tarz</label>
+            <select id="inspect-anim-style" class="w-full bg-[#030712] border border-amber-900/60 rounded-xl px-2 py-1.5 text-slate-200 text-xs focus:outline-none">
+              <option value="cinematic_photoreal" selected>🎬 Sinematik (35mm / 8K)</option>
+              <option value="vector_infographic">🎨 2D Vektörel İnfografik</option>
+              <option value="historical_documentary">📜 Tarihsel Belgesel</option>
+              <option value="macro_biometrics">🔬 Makro Biyoloji</option>
+              <option value="dramatic_tefekkur">🌌 Karanlık Tefekkür</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold text-slate-300 mb-1">Arka Plan Kaynağı</label>
+            <select id="inspect-broll-type" onchange="updateActiveSceneField('brollType', this.value)" class="w-full bg-[#030712] border border-amber-900/60 rounded-xl px-2 py-1.5 text-slate-200 text-xs focus:outline-none font-semibold">
+              <option value="cinematic_documentary" selected>🎬 AI Video (Aktif)</option>
+              <option value="2d_animation">🎨 2D Vektör / Animasyon</option>
+              <option value="gold_dust">✨ Altın Tozu</option>
+              <option value="cosmic">🌌 Kozmik</option>
+              <option value="none">🚫 Düz Zemin</option>
+            </select>
+          </div>
         </div>
 
         <!-- Action Button -->
         <button type="button" onclick="generateActiveScene2dAnimation()" id="btn-generate-scene-anim" class="w-full bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black py-2 px-3 rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-2">
           <i class="fa-solid fa-clapperboard"></i>
-          <span>35mm Sinematik B-Roll Üret (I2V)</span>
+          <span>Bu Sahne İçin AI Video Üret</span>
         </button>
       </div>
 
-      <!-- Arkaplan Video & Animasyon (B-Roll) -->
-      <div class="space-y-1 text-slate-300">
-        <div class="flex items-center justify-between">
-          <label class="block text-[11px] font-bold">Sinematik Belgesel Videosu (B-Roll)</label>
-          <span id="inspect-broll-status-pill" class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-mono font-bold">Sinematik Aktif</span>
-        </div>
-        <select id="inspect-broll-type" onchange="updateActiveSceneField('brollType', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs focus:outline-none font-semibold">
-          <option value="cinematic_documentary" selected>🎬 Sinematik Belgesel B-Roll (35mm I2V - Aktif)</option>
-          <option value="2d_animation">🎬 2D Sinematik B-Roll (Aktif)</option>
-          <option value="gold_dust">✨ Altın Tozu & Parıltı (gold_dust)</option>
-          <option value="cosmic">🌌 Derin Kozmik & Galaksi (cosmic)</option>
-          <option value="clouds">☁️ Sinematik Bulutlar (clouds)</option>
-          <option value="ink">🖋️ Mistik Mürekkep & Duman (ink)</option>
-          <option value="waves">🌊 Okyanus & Derin Dalgalar (waves)</option>
-          <option value="none">🚫 Düz Statik Zemin (none)</option>
+      <!-- SAHNE METNİ & SESLENDİRME (NARRATION / SPOKEN TEXT) -->
+      <div class="space-y-1">
+        <label class="block font-bold text-slate-300 flex items-center justify-between">
+          <span>Sahne Konuşma / Seslendirme Metni</span>
+          <span class="text-[9px] text-cyan-400 font-mono">Birebir Senkron</span>
+        </label>
+        <textarea id="inspect-scene-narration" rows="2" oninput="updateActiveSceneField('narration', this.value); updateActiveSceneField('spokenText', this.value)" placeholder="Bu sahnede seslendirilen cümle..." class="w-full bg-[#070a12] border border-slate-800 rounded-xl p-2 text-slate-200 text-xs focus:outline-none focus:border-amber-400 transition resize-none"></textarea>
+      </div>
+
+      <!-- GÖRSEL DÜZEN (LAYOUT) -->
+      <div class="space-y-1">
+        <label class="block font-bold text-slate-300">Ekran Yerleşimi (Layout)</label>
+        <select id="inspect-layout-type" onchange="updateActiveSceneField('layoutType', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
+          <option value="cinematic_ambient">🌌 Sade Sinematik Tam Ekran (Tavsiye Edilen)</option>
+          <option value="vector_infographic">🎨 2D Vektörel İnfografik (Remotion)</option>
+          <option value="quote_spotlight">📜 Daktilo Altyazılı Ayet / Alıntı Çerçevesi</option>
+          <option value="pip_split">🖼️ PiP Bölünmüş Ekran (Polaroid / Kart)</option>
+          <option value="vs_split">⚖️ VS Karşılaştırma</option>
+          <option value="cards">🃏 Liste Kartları</option>
         </select>
       </div>
 
-      <!-- Transition Selector for Scene (CapCut / VN Stili) -->
-      <div class="space-y-1.5">
-        <div class="flex items-center justify-between">
-          <label class="block font-bold text-slate-300">Geçiş Efekti (Transition)</label>
-          <span class="text-[9px] bg-cyan-950/40 text-cyan-400 border border-cyan-800 px-1.5 py-0.2 rounded font-mono">⧗ CapCut</span>
-        </div>
-        <select id="inspect-transition-type" onchange="updateActiveSceneField('transitionType', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-2 text-slate-200 text-xs focus:outline-none">
-          <option value="page_turn" selected>📖 Defter Sayfası Çevirme (3D Turn)</option>
-          <option value="paper_tear">📄 Kağıt Yırtılması (Tear Dissolve)</option>
-          <option value="ink_bleed">🖋️ Mürekkep Yayılması (Ink Splash)</option>
-          <option value="zoom_punch">⚡ Zoom Punch & Flaş</option>
-          <option value="cut">🚫 Düz Kesim (Cut)</option>
-        </select>
-      </div>
-
-      <!-- Text Inputs for Scene -->
-      <div class="space-y-2.5">
+      <!-- İĞNE NOKTASINDAN BÖL -->
+      <div class="p-2.5 bg-[#070a12] border border-slate-800 rounded-2xl flex items-center justify-between">
         <div>
-          <label class="block text-slate-400 mb-1">Alt Başlık (headerSubtitle)</label>
-          <input type="text" id="inspect-header-sub" oninput="updateActiveSceneField('headerSubtitle', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs">
+          <div class="font-bold text-white text-[11px]">İğne Noktasından Böl</div>
+          <div class="text-[9px] text-slate-400">Zaman damgasından 2 sahneye böler.</div>
         </div>
-        <div>
-          <label class="block text-slate-400 mb-1">Büyük Başlık (headerLine1)</label>
-          <input type="text" id="inspect-header-line1" oninput="updateActiveSceneField('headerLine1', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs font-bold">
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-slate-400 mb-1">Çemberli Kelime</label>
-            <input type="text" id="inspect-circled-word" oninput="updateActiveSceneField('circledWord', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs">
-          </div>
-          <div>
-            <label class="block text-slate-400 mb-1">İkinci Satır</label>
-            <input type="text" id="inspect-header-line2" oninput="updateActiveSceneField('headerLine2', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs">
-          </div>
-        </div>
-        <div>
-          <label class="block text-slate-400 mb-1">Fosforlu Vurgu (highlightedText)</label>
-          <input type="text" id="inspect-highlight-text" oninput="updateActiveSceneField('highlightedText', this.value)" class="w-full bg-[#070a12] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs text-amber-300">
-        </div>
-      </div>
-
-      <!-- Illustration / Polaroid Settings -->
-      <div class="p-3 bg-[#070a12] border border-slate-800 rounded-2xl space-y-2">
-        <label class="block font-bold text-slate-300">İllüstrasyon / Görsel Kart</label>
-        <div class="grid grid-cols-2 gap-2">
-          <select id="inspect-ill-style" onchange="updateActiveSceneField('illustrationStyle', this.value)" class="bg-[#0c1220] border border-slate-800 rounded-xl px-2 py-1.5 text-slate-200 text-xs">
-            <option value="polaroid">📸 Polaroid</option>
-            <option value="torn_paper">📄 Yırtık Kağıt</option>
-          </select>
-          <select id="inspect-doodle" onchange="updateActiveSceneField('doodleType', this.value)" class="bg-[#0c1220] border border-slate-800 rounded-xl px-2 py-1.5 text-slate-200 text-xs">
-            <option value="galaxy">🌌 Galaksi</option>
-            <option value="hourglass">⏳ Kum Saati</option>
-            <option value="book">📖 Kitap</option>
-            <option value="lightbulb">💡 Ampul</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-[11px] text-slate-400 mb-1">Görsel Açıklaması (Caption)</label>
-          <input type="text" id="inspect-ill-caption" oninput="updateActiveSceneField('illustrationCaption', this.value)" class="w-full bg-[#0c1220] border border-slate-800 rounded-xl px-2.5 py-1.5 text-slate-200 text-xs">
-        </div>
-      </div>
-
-      <!-- Split Scene Tool -->
-      <div class="p-3 bg-[#070a12] border border-slate-800 rounded-2xl flex items-center justify-between">
-        <div>
-          <div class="font-bold text-white">İğne Noktasından Böl</div>
-          <div class="text-[10px] text-slate-400">Geçerli zaman damgasından 2 sahneye böler.</div>
-        </div>
-        <button onclick="splitSceneAtPlayhead()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-xl font-bold transition flex items-center gap-1">
+        <button onclick="splitSceneAtPlayhead()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-xl font-bold transition flex items-center gap-1 text-[11px]">
           <i class="fa-solid fa-scissors"></i> Böl
         </button>
       </div>
+
+      <!-- GELİŞMİŞ ŞABLON VE TİPOGRAFİ DETAYLARI (AKORDEON İÇİNDE GİZLİ) -->
+      <details class="group border border-slate-800/80 rounded-2xl bg-[#070a12] p-2.5 transition">
+        <summary class="font-bold text-slate-400 hover:text-white cursor-pointer flex items-center justify-between select-none">
+          <span class="flex items-center gap-1.5 text-[11px]"><i class="fa-solid fa-sliders text-amber-400/80"></i> Manuel Başlık & Kart Ayarları</span>
+          <i class="fa-solid fa-chevron-down text-[10px] text-slate-500 group-open:rotate-180 transition-transform"></i>
+        </summary>
+        <div class="mt-3 space-y-2.5 border-t border-slate-800/60 pt-2.5">
+          <div>
+            <label class="block text-slate-400 mb-0.5 text-[10px]">Alt Başlık (headerSubtitle)</label>
+            <input type="text" id="inspect-header-sub" oninput="updateActiveSceneField('headerSubtitle', this.value)" class="w-full bg-[#030712] border border-slate-800 rounded-xl px-2 py-1 text-slate-200 text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-0.5 text-[10px]">Büyük Başlık (headerLine1)</label>
+            <input type="text" id="inspect-header-line1" oninput="updateActiveSceneField('headerLine1', this.value)" class="w-full bg-[#030712] border border-slate-800 rounded-xl px-2 py-1 text-slate-200 text-xs font-bold">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-slate-400 mb-0.5 text-[10px]">Çemberli Kelime</label>
+              <input type="text" id="inspect-circled-word" oninput="updateActiveSceneField('circledWord', this.value)" class="w-full bg-[#030712] border border-slate-800 rounded-xl px-2 py-1 text-slate-200 text-xs">
+            </div>
+            <div>
+              <label class="block text-slate-400 mb-0.5 text-[10px]">İkinci Satır</label>
+              <input type="text" id="inspect-header-line2" oninput="updateActiveSceneField('headerLine2', this.value)" class="w-full bg-[#030712] border border-slate-800 rounded-xl px-2 py-1 text-slate-200 text-xs">
+            </div>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-0.5 text-[10px]">Fosforlu Vurgu (highlightedText)</label>
+            <input type="text" id="inspect-highlight-text" oninput="updateActiveSceneField('highlightedText', this.value)" class="w-full bg-[#030712] border border-slate-800 rounded-xl px-2 py-1 text-slate-200 text-xs text-amber-300">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-0.5">İllüstrasyon Kartı</label>
+              <select id="inspect-ill-style" onchange="updateActiveSceneField('illustrationStyle', this.value)" class="w-full bg-[#030712] border border-slate-800 rounded-xl px-2 py-1 text-slate-200 text-xs">
+                <option value="polaroid">📸 Polaroid</option>
+                <option value="torn_paper">📄 Yırtık Kağıt</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-0.5">Doodle</label>
+              <select id="inspect-doodle" onchange="updateActiveSceneField('doodleType', this.value)" class="w-full bg-[#030712] border border-slate-800 rounded-xl px-2 py-1 text-slate-200 text-xs">
+                <option value="galaxy">🌌 Galaksi</option>
+                <option value="hourglass">⏳ Kum Saati</option>
+                <option value="book">📖 Kitap</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-0.5">Geçiş Efekti</label>
+            <select id="inspect-transition-type" onchange="updateActiveSceneField('transitionType', this.value)" class="w-full bg-[#030712] border border-slate-800 rounded-xl px-2 py-1 text-slate-200 text-xs">
+              <option value="page_turn">📖 Defter Sayfası Çevirme</option>
+              <option value="paper_tear">📄 Kağıt Yırtılması</option>
+              <option value="zoom_punch">⚡ Zoom Punch & Flaş</option>
+              <option value="cut">🚫 Düz Kesim</option>
+            </select>
+          </div>
+        </div>
+      </details>
 
     </aside>
 
@@ -1913,8 +1955,78 @@
           </div>
         </div>
 
+        <!-- INTERACTIVE RECOMMENDATION CHECKPOINT CARD (Shown when AWAIT_USER_SELECTION) -->
+        <div id="mission-hud-recommendation" class="hidden p-4 rounded-3xl bg-gradient-to-b from-[#111827] via-[#090d16] to-[#04060b] border-2 border-amber-400/90 shadow-2xl shadow-amber-500/20 space-y-3.5 animate-fadeIn">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-sm font-bold shadow-md shadow-amber-500/10">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </div>
+              <div>
+                <h4 class="font-extrabold text-white text-xs">Yapay Zekâ İçerik Analizi & Format Tavsiyesi</h4>
+                <p id="rec-card-reason" class="text-[10px] text-amber-300/90 font-medium"></p>
+              </div>
+            </div>
+            <span id="rec-card-recommended-badge" class="text-[9px] px-2.5 py-0.5 rounded-full font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 font-mono tracking-wider">TAVSİYE EDİLEN</span>
+          </div>
+
+          <p id="rec-card-summary" class="text-slate-200 text-xs leading-relaxed bg-[#0c1220] p-3 rounded-2xl border border-slate-800/80"></p>
+
+          <!-- 2 Format Seçenek Kartı -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <!-- Option 1: Cinematic Documentary -->
+            <div id="btn-choice-cinematic" onclick="submitUserTrackChoice('cinematic')" class="p-3.5 rounded-2xl border-2 border-slate-800 bg-[#070a12] hover:border-amber-400 hover:bg-amber-950/20 cursor-pointer transition shadow group flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-extrabold text-white text-xs flex items-center gap-1.5 group-hover:text-amber-300 transition">
+                    <i class="fa-solid fa-clapperboard text-amber-400"></i> [1] Sinematik Belgesel
+                  </span>
+                  <span id="rec-pill-cinematic" class="text-[9px] px-2 py-0.5 rounded-full font-mono bg-slate-800 text-slate-400 font-bold">35mm I2V</span>
+                </div>
+                <p class="text-[10px] text-slate-400 leading-relaxed">
+                  Flux anahtar kare ve Veo / Kling I2V difüzyon video motoru ile 8K fotogerçekçi sinematik b-roll sahneler.
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-bold text-amber-400">
+                <span>Bu Formatı Seç</span>
+                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+              </div>
+            </div>
+
+            <!-- Option 2: 2D Vector Infographic -->
+            <div id="btn-choice-vector" onclick="submitUserTrackChoice('vector_infographic')" class="p-3.5 rounded-2xl border-2 border-slate-800 bg-[#070a12] hover:border-cyan-400 hover:bg-cyan-950/20 cursor-pointer transition shadow group flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-extrabold text-white text-xs flex items-center gap-1.5 group-hover:text-cyan-300 transition">
+                    <i class="fa-solid fa-shapes text-cyan-400"></i> [2] 2D Vektörel İnfografik
+                  </span>
+                  <span id="rec-pill-vector" class="text-[9px] px-2 py-0.5 rounded-full font-mono bg-slate-800 text-slate-400 font-bold">Remotion 60fps</span>
+                </div>
+                <p class="text-[10px] text-slate-400 leading-relaxed">
+                  Sembolik metaforlar (SVG), React Remotion bileşenleri ve yay kinematiğiyle 60fps dinamik vektör animasyonu.
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-bold text-cyan-400">
+                <span>Bu Formatı Seç</span>
+                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Custom Instructions Tweak -->
+          <div class="pt-1">
+            <label class="block text-[10px] font-bold text-slate-300 mb-1">AI Ajanına Özel İstek / Revizyon Notu (İsteğe Bağlı):</label>
+            <input
+              type="text"
+              id="mission-user-instruction"
+              placeholder="Örn: 'Altın renkleri öne çıkar', 'Kamera hareketini daha yavaş yap'..."
+              class="w-full bg-[#030712] border border-slate-800 focus:border-amber-400 rounded-xl px-3 py-2 text-slate-200 text-xs placeholder:text-slate-600 focus:outline-none transition"
+            >
+          </div>
+        </div>
+
         <!-- 7 Agent Stepper Cards Container -->
-        <div class="space-y-2 max-h-[350px] overflow-y-auto pr-1">
+        <div id="mission-hud-stepper-container" class="space-y-2 max-h-[350px] overflow-y-auto pr-1">
           <!-- AGENT 1 -->
           <div id="agent-card-1" class="p-2.5 rounded-2xl border border-slate-800 bg-[#070a12] flex items-center justify-between gap-3 transition-all duration-300">
             <div class="flex items-center gap-2.5 flex-1 min-w-0">
@@ -2756,6 +2868,109 @@
         <button onclick="closeBackupModal()" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold text-xs">Kapat</button>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ================= ARGON 4 — İSLAMİ VİDEO İSTİŞARE VE ÜRETİM MODALI ================= -->
+  <div id="modal-argon4" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-3 md:p-6">
+    <div class="bg-[#090e18] border border-amber-500/40 rounded-3xl max-w-4xl w-full h-[90vh] flex flex-col shadow-2xl relative overflow-hidden">
+      <!-- Glow ambience -->
+      <div class="absolute -top-32 -right-32 w-72 h-72 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-32 -left-32 w-72 h-72 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Top Header -->
+      <div class="p-4 border-b border-slate-800/80 bg-slate-900/70 backdrop-blur flex items-center justify-between shrink-0 relative z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-emerald-500 text-slate-950 flex items-center justify-center text-lg font-black shadow-lg shadow-amber-500/20">
+            <i class="fa-solid fa-moon-stars"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-sm md:text-base font-extrabold text-white flex items-center gap-1.5">
+                <span>Argon 4</span>
+                <span class="text-amber-400 font-normal">|</span>
+                <span class="text-xs md:text-sm text-slate-200">İslami Video İstişare & Üretim</span>
+              </h3>
+              <span class="text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-mono font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Key Havuzu Aktif
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400">Kalpleri titreten ve derin tefekkür uyandıran videolar için hikmetli yol arkadaşınız</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="resetArgon4Session()" title="İstişareyi Baştan Başlat" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition border border-slate-700/60">
+            <i class="fa-solid fa-rotate-right text-amber-400"></i>
+            <span class="hidden sm:inline">Yenile</span>
+          </button>
+          <button onclick="closeArgon4Modal()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+            <i class="fa-solid fa-xmark text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Action Pills -->
+      <div class="px-4 py-2 border-b border-slate-800/60 bg-slate-950/60 flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
+        <span class="text-[10px] text-amber-400/80 font-bold uppercase tracking-wider shrink-0 flex items-center gap-1">
+          <i class="fa-solid fa-bolt"></i> İstişare Kısayolları:
+        </span>
+        <button onclick="sendArgon4QuickPrompt('Bana 3 sarsıcı İslami video konsepti öner')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-[11px] font-semibold border border-amber-500/30 transition flex items-center gap-1">
+          💡 3 Sarsıcı Konsept İste
+        </button>
+        <button onclick="sendArgon4QuickPrompt('Videonun formatı 9:16 Dikey Shorts / Reels olsun. İlk 3 saniyesi çok çarpıcı başlasın.')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold border border-slate-700 transition flex items-center gap-1">
+          📱 9:16 Shorts Formatı
+        </button>
+        <button onclick="sendArgon4QuickPrompt('Videonun formatı 16:9 Sinematik Yatay YouTube videosu olsun. Tarihten bugüne köprü kursun.')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold border border-slate-700 transition flex items-center gap-1">
+          🖥️ 16:9 Yatay YouTube Formatı
+        </button>
+        <button onclick="sendArgon4QuickPrompt('Harika, anlaştık! Şimdi 4 bölümlük tam üretim paketini baştan sona eksiksiz üret.')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-[11px] font-bold shadow transition flex items-center gap-1">
+          🚀 Şimdi Başla ve Üret!
+        </button>
+      </div>
+
+      <!-- Chat Messages Container -->
+      <div id="argon4-chat-messages" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 text-xs md:text-sm leading-relaxed">
+        <!-- Messages rendered dynamically -->
+      </div>
+
+      <!-- Typing Indicator -->
+      <div id="argon4-typing-indicator" class="hidden px-6 py-2.5 bg-slate-950/80 border-t border-slate-800/40 flex items-center gap-2 text-xs text-amber-300">
+        <i class="fa-solid fa-spinner fa-spin text-amber-400"></i>
+        <span>Argon 4 tefekkür ediyor ve key havuzundan yanıt hazırlıyor...</span>
+      </div>
+
+      <!-- Attachment Preview Pill (if media selected) -->
+      <div id="argon4-attachment-bar" class="hidden px-4 py-2 bg-amber-500/10 border-t border-amber-500/20 flex items-center justify-between text-xs">
+        <div class="flex items-center gap-2 text-amber-300">
+          <i id="argon4-attachment-icon" class="fa-solid fa-file text-sm"></i>
+          <span id="argon4-attachment-name" class="font-mono font-bold truncate max-w-xs">dosya.mp3</span>
+          <span id="argon4-attachment-size" class="text-[10px] text-slate-400">(0 KB)</span>
+          <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-bold">Multimodal Analize Hazır</span>
+        </div>
+        <button onclick="removeArgon4Attachment()" class="text-slate-400 hover:text-rose-400 transition"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Input Bar -->
+      <div class="p-3 md:p-4 border-t border-slate-800 bg-slate-900/90 backdrop-blur flex items-center gap-2 shrink-0 relative z-10">
+        <input type="file" id="argon4-media-input" accept="audio/*,image/*,video/*" class="hidden" onchange="handleArgon4MediaFile(event)">
+        <button onclick="document.getElementById('argon4-media-input').click()" title="Ses, Görsel veya Video Yükle & Analiz Et" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-amber-400 flex items-center justify-center transition border border-slate-700/80 shrink-0">
+          <i class="fa-solid fa-paperclip text-sm"></i>
+        </button>
+
+        <input
+          type="text"
+          id="argon4-chat-input"
+          placeholder="Argon 4'e mesajınızı, ayet/hadis talebinizi yazın veya 'başla' deyin (Enter)..."
+          class="flex-1 bg-[#060a12] border border-slate-800 focus:border-amber-400 rounded-xl px-4 py-2.5 text-xs md:text-sm text-white placeholder-slate-500 focus:outline-none transition shadow-inner"
+          onkeydown="if(event.key==='Enter') sendArgon4ChatMessage()"
+        >
+
+        <button onclick="sendArgon4ChatMessage()" id="argon4-btn-send" class="h-10 px-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-black text-xs md:text-sm flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/25 transition active:scale-95 shrink-0">
+          <span>Gönder</span>
+          <i class="fa-solid fa-paper-plane text-xs"></i>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -3979,8 +4194,8 @@
       const title = titleInput ? titleInput.value.trim() : 'Yeni Proje';
       const formatRadio = document.querySelector('input[name="new-proj-format"]:checked');
       const format = formatRadio ? formatRadio.value : '9:16';
-      const theme = document.getElementById('new-proj-theme')?.value || 'notebook';
-      const layout = document.getElementById('new-proj-layout')?.value || 'pip_split';
+      const theme = document.getElementById('new-proj-theme')?.value || 'dark_minimalist';
+      const layout = document.getElementById('new-proj-layout')?.value || 'cinematic_ambient';
 
       const btn = document.querySelector('button[onclick*="submitCreateNewProject"]');
       const origHtml = btn ? btn.innerHTML : '';
@@ -5384,10 +5599,16 @@
       document.getElementById('inspector-scene-bounds').innerText = `${s.startTime?.toFixed(1)}s - ${s.endTime?.toFixed(1)}s`;
 
       document.getElementById('inspect-layout-type').value = s.layoutType || 'cinematic_ambient';
+      const hasAnim = Boolean(s.animationVideoUrl || s.videoUrl);
+      const pill = document.getElementById('inspect-broll-status-pill');
       if (document.getElementById('inspect-broll-type')) {
-        const hasAnim = Boolean(s.animationVideoUrl || s.videoUrl);
-        const pill = document.getElementById('inspect-broll-status-pill');
-        if (s.brollType === 'cinematic_documentary' || (hasAnim && (!s.brollType || s.brollType === 'none'))) {
+        if (s.brollType === 'vector_infographic' || s.layoutType === 'vector_infographic') {
+          document.getElementById('inspect-broll-type').value = '2d_animation';
+          if (pill) {
+            pill.innerText = '🎨 2D Vektörel Aktif';
+            pill.className = 'text-[9px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 px-2 py-0.5 rounded-full font-mono font-bold';
+          }
+        } else if (s.brollType === 'cinematic_documentary' || (hasAnim && (!s.brollType || s.brollType === 'none'))) {
           document.getElementById('inspect-broll-type').value = 'cinematic_documentary';
           if (pill) {
             pill.innerText = '🎬 Sinematik I2V Aktif';
@@ -5396,7 +5617,7 @@
         } else if (hasAnim && s.brollType === '2d_animation') {
           document.getElementById('inspect-broll-type').value = '2d_animation';
           if (pill) {
-            pill.innerText = '🎬 2D Omni Aktif';
+            pill.innerText = '🎬 2D Animasyon Aktif';
             pill.className = 'text-[9px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 px-2 py-0.5 rounded-full font-mono font-bold';
           }
         } else {
@@ -5407,6 +5628,9 @@
           }
         }
       }
+
+      const narrEl = document.getElementById('inspect-scene-narration');
+      if (narrEl) narrEl.value = s.narration || s.spokenText || '';
       document.getElementById('inspect-header-sub').value = s.headerSubtitle || '';
       document.getElementById('inspect-header-line1').value = s.headerLine1 || '';
       document.getElementById('inspect-circled-word').value = s.circledWord || '';
@@ -5500,9 +5724,6 @@
     }
 
     async function deleteActiveScene() {
-      if (scenes.length <= 1) {
-        return alert('En az 1 sahne bulunmalıdır. Sahneyi silmek yerine içeriğini düzenleyebilirsiniz.');
-      }
       if (!confirm('Bu sahneyi zaman tünelinden silmek istediğinize emin misiniz?')) return;
       await deleteSceneById(activeSceneId);
     }
@@ -5515,7 +5736,8 @@
         
         scenes = data.scenes || [];
         timelineDuration = calculateDynamicTimelineDuration(videoData, scenes);
-        activeSceneId = scenes[0]?.id || 'scene_1';
+        activeSceneId = scenes.length > 0 ? scenes[0].id : null;
+        if (scenes.length === 0 && videoData) videoData.is_empty = true;
 
         renderTimeline();
         renderSceneInspector();
@@ -6470,21 +6692,34 @@
 
       if (emptyStateEl) emptyStateEl.classList.add('hidden');
       if (pill) pill.style.display = 'block';
-      if (margin) margin.style.display = 'block';
-      if (holes) holes.style.display = 'flex';
-      const headerContainer = document.getElementById('pv-header-container');
-      if (headerContainer) headerContainer.style.display = 'block';
 
-      const layout = s.layoutType || 'pip_split';
-
-      // 1. Play Background 2D Animation Video (Gemini Omni) or Ambient B-Roll
+      const layout = s.layoutType || 'cinematic_ambient';
       const animVideo = s.animationVideoUrl || s.videoUrl;
       const broll = s.brollType || (videoData && videoData.brollType) || 'gold_dust';
 
+      // Clean & Sade View: Hide notebook margins & holes when AI Video or Clean Layout is active
+      const isCleanVideoScene = Boolean(animVideo || layout === 'cinematic_ambient' || layout === 'vector_infographic');
+      if (margin) margin.style.display = isCleanVideoScene ? 'none' : 'block';
+      if (holes) holes.style.display = isCleanVideoScene ? 'none' : 'flex';
+
+      const nbPreview = document.getElementById('notebook-preview');
+      if (nbPreview) {
+        if (isCleanVideoScene) {
+          nbPreview.style.backgroundColor = '#000000';
+          nbPreview.style.backgroundImage = 'none';
+        } else {
+          nbPreview.style.backgroundColor = '';
+          nbPreview.style.backgroundImage = '';
+        }
+      }
+
+      const headerContainer = document.getElementById('pv-header-container');
+      if (headerContainer) headerContainer.style.display = isCleanVideoScene ? 'none' : 'block';
+
+      // 1. Play Background 2D Animation Video (Gemini Omni / Diffusion / Remotion)
       if (brollVideo) {
         let targetSrc = '';
         if (animVideo) {
-          // Play the scene's 2D Animation Video!
           targetSrc = animVideo.startsWith('/') ? animVideo : ('/public/' + animVideo);
         } else if (broll && broll !== 'none') {
           targetSrc = `/public/broll/${broll}.mp4`;
@@ -6492,6 +6727,7 @@
 
         if (targetSrc) {
           brollVideo.style.display = 'block';
+          brollVideo.style.opacity = '1';
           if (!brollVideo.src.includes(targetSrc)) {
             brollVideo.src = targetSrc;
             brollVideo.load();
@@ -6573,13 +6809,24 @@
       const mid = document.getElementById('pv-middle-area');
 
       if (layout === 'cinematic_ambient') {
+        const spoken = s.spokenText || s.narration || '';
         mid.innerHTML = `
-          <div class="my-auto text-center px-4">
-            <div class="w-12 h-12 mx-auto rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 text-lg mb-3 shadow-[0_0_20px_rgba(245,158,11,0.3)] animate-pulse">
-              <i class="fa-solid fa-sparkles"></i>
-            </div>
-            <div class="text-xs text-slate-200 font-semibold max-w-[260px] mx-auto leading-relaxed drop-shadow">
-              Arkaplanda sinematik animasyon videosu akışı eşliğinde seslendirme odaklı sade anlatım
+          <div class="my-auto px-4 max-w-[340px] mx-auto text-center">
+            <div class="p-5 rounded-3xl bg-slate-950/80 border border-amber-500/40 shadow-2xl backdrop-blur-md space-y-3">
+              <div class="flex items-center justify-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider font-mono">
+                <i class="fa-solid fa-star-and-crescent text-sm text-amber-300"></i>
+                <span>${s.headerSubtitle || 'İbret ve Tefekkür'}</span>
+              </div>
+              <p class="text-xs md:text-sm font-bold text-slate-100 leading-relaxed font-sans drop-shadow">
+                "${spoken}"
+              </p>
+              ${s.highlightedText ? `
+                <div class="pt-1">
+                  <span class="inline-block px-3 py-1 rounded-xl bg-amber-500/20 border border-amber-400/50 text-amber-300 font-extrabold text-xs shadow-md">
+                    ✨ ${s.highlightedText}
+                  </span>
+                </div>
+              ` : ''}
             </div>
           </div>
         `;
@@ -6604,7 +6851,20 @@
             </div>
           </div>
         `;
-      } else if (layout === 'pip_split' || s.illustrationUrl) {
+      } else if (layout === 'vector_infographic') {
+        const spoken = s.spokenText || s.narration || '';
+        mid.innerHTML = `
+          <div class="my-auto px-4 max-w-[320px] mx-auto text-center space-y-2">
+            <div class="w-14 h-14 mx-auto rounded-2xl bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-cyan-300 text-2xl shadow-[0_0_20px_rgba(6,182,212,0.4)] animate-pulse">
+              <i class="fa-solid fa-shapes"></i>
+            </div>
+            <div class="inline-block px-3 py-1 rounded-full bg-slate-950/80 border border-cyan-400/50 text-cyan-300 font-extrabold text-xs uppercase tracking-wider backdrop-blur-md shadow-lg">
+              ${s.headerLine1 || '2D Vektörel İnfografik'}
+            </div>
+            ${spoken ? `<p class="text-xs font-semibold text-slate-100 leading-relaxed drop-shadow bg-black/40 p-2.5 rounded-xl border border-white/10 backdrop-blur-sm">${spoken}</p>` : ''}
+          </div>
+        `;
+      } else if (layout === 'pip_split') {
         const illUrl = s.illustrationUrl || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80';
         const isPolaroid = s.illustrationStyle !== 'torn_paper';
         
@@ -8680,19 +8940,25 @@
       formData.append('visual_style', visualStyle);
       formData.append('aspect_ratio', aspectRatio);
 
+      const isAutoMode = (document.getElementById('modal-toggle-ai-auto-mode')?.checked ?? document.getElementById('toggle-ai-auto-mode')?.checked) ?? true;
+      formData.append('auto_approve', isAutoMode ? 'true' : 'false');
+
       // Switch to HUD View
       document.getElementById('ai-mission-view-input').classList.add('hidden');
       document.getElementById('ai-mission-view-hud').classList.remove('hidden');
       document.getElementById('mission-hud-complete').classList.add('hidden');
+      document.getElementById('mission-hud-recommendation')?.classList.add('hidden');
+      document.getElementById('mission-hud-stepper-container')?.classList.remove('hidden');
 
       // Reset all 7 agent cards to locked
       for (let i = 1; i <= 7; i++) {
         setAgentCardStatus(i, 'locked');
       }
 
+      window._autoSubmittedTrack = false;
       const logStream = document.getElementById('mission-hud-log-stream');
       if (logStream) logStream.innerHTML = '';
-      appendAgentLog('0. Orkestratör Ajan devrede. Katı Durum Kapısı (State Gatekeeper) etkinleştirildi.', 'text-amber-300 font-bold');
+      appendAgentLog('0. Orkestratör Ajan devrede. Çift Hatlı (Dual-Track) Durum Kapısı etkinleştirildi.', 'text-amber-300 font-bold');
 
       // Start timer
       agentStartTime = Date.now();
@@ -8707,8 +8973,8 @@
       }, 1000);
 
       try {
-        setAgentCardStatus(1, 'running', 'Ajan 1 başlatılıyor: Faster-Whisper fonetik hizalama...');
-        appendAgentLog('Sunucuya 7 ajanlı iş isteği iletiliyor...', 'text-slate-400');
+        setAgentCardStatus(1, 'running', 'Ajan 1 başlatılıyor: Fonetik zamanlama ve cümle ayrıştırma...');
+        appendAgentLog('Sunucuya çift hatlı multi-agent iş isteği iletiliyor...', 'text-slate-400');
 
         const startRes = await fetch('/api/multi-agent/start', {
           method: 'POST',
@@ -8722,7 +8988,7 @@
 
         const startData = await startRes.json();
         currentAgentJobId = startData.job_id;
-        appendAgentLog(`İş ID atandı: ${currentAgentJobId}. Orkestratör sıralı ajan zincirini yönetiyor.`, 'text-cyan-400');
+        appendAgentLog(`İş ID atandı: ${currentAgentJobId}. Orkestratör çift hatlı ajan zincirini yönetiyor.`, 'text-cyan-400');
 
         lastLoggedPhase = null;
 
@@ -8748,54 +9014,138 @@
       }
     }
 
+    async function submitUserTrackChoice(track) {
+      if (!currentAgentJobId) return;
+      const instruction = document.getElementById('mission-user-instruction')?.value.trim() || '';
+      appendAgentLog(`Format seçimi onaylandı: ${track === 'cinematic' ? 'Sinematik Belgesel (35mm I2V)' : '2D Vektörel İnfografik (Remotion)'}`, 'text-cyan-400 font-bold');
+
+      document.getElementById('mission-hud-recommendation')?.classList.add('hidden');
+      document.getElementById('mission-hud-stepper-container')?.classList.remove('hidden');
+      setAgentCardStatus(2, 'success', `Format onaylandı: ${track.toUpperCase()}`);
+
+      try {
+        const res = await fetch('/api/multi-agent/select-track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            job_id: currentAgentJobId,
+            selected_track: track,
+            custom_instructions: instruction
+          })
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.detail || 'Seçim iletilemedi');
+        }
+        appendAgentLog('Orkestratör seçilen motor branşını devreye soktu...', 'text-emerald-400');
+      } catch (err) {
+        alert('Seçim hatası: ' + err.message);
+      }
+    }
+
     function updateAgentHudFromState(data) {
       const title = document.getElementById('mission-hud-main-title');
       const phase = data.current_phase;
       const logs = data.agent_logs || {};
+      const rec = data.recommendation_card;
+      const isAutoMode = (document.getElementById('modal-toggle-ai-auto-mode')?.checked ?? document.getElementById('toggle-ai-auto-mode')?.checked) ?? true;
 
-      // Phase-to-agent mapping with ironclad sequence
-      const phaseOrder = [
-        'phase_0_idle',
-        'phase_1_transcribed',
-        'phase_2_storyboarded',
-        'phase_3_art_directed',
-        'phase_4_assets_generated',
-        'phase_5_subtitles_composed',
-        'phase_6_audio_designed',
-        'phase_7_assembled'
-      ];
+      // Handle interactive checkpoint
+      if (phase === 'phase_1_awaiting_user_selection' && rec) {
+        if (isAutoMode) {
+          if (!window._autoSubmittedTrack) {
+            window._autoSubmittedTrack = true;
+            appendAgentLog(`🤖 AI Otonom Mod devrede: '${rec.recommended_track}' otomatik seçildi, üretim başlatılıyor.`, 'text-amber-300 font-bold');
+            submitUserTrackChoice(rec.recommended_track);
+          }
+        } else {
+          document.getElementById('mission-hud-stepper-container')?.classList.add('hidden');
+          const recView = document.getElementById('mission-hud-recommendation');
+          if (recView) {
+            recView.classList.remove('hidden');
+            const summaryEl = document.getElementById('rec-card-summary');
+            if (summaryEl) summaryEl.innerText = rec.analysis_summary || 'Metin analiz edildi.';
+            const reasonEl = document.getElementById('rec-card-reason');
+            if (reasonEl) reasonEl.innerText = rec.recommendation_reason || 'Önerilen format belirlendi.';
 
-      const currentIdx = phaseOrder.indexOf(phase);
+            const isVec = rec.recommended_track === 'vector_infographic';
+            const cinCard = document.getElementById('btn-choice-cinematic');
+            const vecCard = document.getElementById('btn-choice-vector');
+            const cinPill = document.getElementById('rec-pill-cinematic');
+            const vecPill = document.getElementById('rec-pill-vector');
+
+            if (isVec) {
+              if (vecCard) vecCard.className = 'p-3.5 rounded-2xl border-2 border-cyan-400 bg-cyan-950/40 ring-2 ring-cyan-400/50 cursor-pointer transition shadow-lg group flex flex-col justify-between';
+              if (vecPill) { vecPill.innerText = '⚡ AI Tavsiyesi'; vecPill.className = 'text-[9px] px-2 py-0.5 rounded-full font-mono bg-cyan-500/30 text-cyan-200 border border-cyan-400/50 font-bold'; }
+              if (cinCard) cinCard.className = 'p-3.5 rounded-2xl border-2 border-slate-800 bg-[#070a12] hover:border-amber-400/80 cursor-pointer transition shadow group flex flex-col justify-between opacity-80 hover:opacity-100';
+            } else {
+              if (cinCard) cinCard.className = 'p-3.5 rounded-2xl border-2 border-amber-400 bg-amber-950/40 ring-2 ring-amber-400/50 cursor-pointer transition shadow-lg group flex flex-col justify-between';
+              if (cinPill) { cinPill.innerText = '⚡ AI Tavsiyesi'; cinPill.className = 'text-[9px] px-2 py-0.5 rounded-full font-mono bg-amber-500/30 text-amber-200 border border-amber-400/50 font-bold'; }
+              if (vecCard) vecCard.className = 'p-3.5 rounded-2xl border-2 border-slate-800 bg-[#070a12] hover:border-cyan-400/80 cursor-pointer transition shadow group flex flex-col justify-between opacity-80 hover:opacity-100';
+            }
+          }
+          if (title) title.innerText = '🤖 Orkestratör: Format Seçimi Bekleniyor (Oto Mod: Kapalı)';
+          setAgentCardStatus(1, 'success', 'Transkripsiyon & Fonetik Hizalama tamamlandı.');
+          setAgentCardStatus(2, 'running', 'Kullanıcı onayı bekleniyor: [1] Sinematik vs [2] 2D Vektörel...');
+          return;
+        }
+      } else {
+        window._autoSubmittedTrack = false;
+        document.getElementById('mission-hud-recommendation')?.classList.add('hidden');
+        document.getElementById('mission-hud-stepper-container')?.classList.remove('hidden');
+      }
 
       if (lastLoggedPhase !== phase) {
         lastLoggedPhase = phase;
         appendAgentLog(`Durum Geçişi: ${phase} onaylandı. Sonraki ajan için kapı açıldı.`, 'text-amber-400');
       }
 
-      // Update Agent 1 to 7 statuses
-      for (let i = 1; i <= 7; i++) {
-        const agentLog = logs[i] || logs[String(i)];
-        if (i < currentIdx) {
-          const dur = agentLog?.duration_sec ? `(${agentLog.duration_sec}s)` : '';
-          setAgentCardStatus(i, 'success', `Görev başarıyla tamamlandı ${dur}. Kontrat onaylandı.`);
-        } else if (i === currentIdx) {
-          // This agent is actively running
-          const agentNames = [
-            '',
-            '1. Ajan: Faster-Whisper fonetik hizalama...',
-            '2. Ajan: 2-8s ritim ve sahne beat segmentasyonu...',
-            '3. Ajan: Sinematik prompt mühendisliği & devamlılık...',
-            '4. Ajan: Gemini Omni / Video klipleri sentezleniyor...',
-            '5. Ajan: Renk vurgulu altın .ass altyazısı oluşturuluyor...',
-            '6. Ajan: BGM -18dB Ducking & SFX miksleniyor...',
-            '7. Ajan: FFmpeg final video montajı alınıyor...'
-          ];
-          setAgentCardStatus(i, 'running', agentNames[i] || 'Görev yürütülüyor...');
-          if (title) title.innerText = `Orkestratör: ${agentNames[i]}`;
-        } else {
-          setAgentCardStatus(i, 'locked', `Kilitli: Önceki ajan (${i-1}) görevini tamamlamadan çalışamaz.`);
-        }
-      }
+      const isVector = data.selected_track === 'vector_infographic';
+
+      // Phase progress logic
+      const isAgent1Done = phase !== 'phase_0_idle';
+      const isAgent2Done = ['phase_2_branch_selected', 'phase_3a_prompts_crafted', 'phase_3b_metaphors_mapped', 'phase_4a_diffusion_rendered', 'phase_4b_remotion_rendered', 'phase_5_subtitles_composed', 'phase_6_audio_designed', 'phase_7_assembled'].includes(phase);
+      const isAgent3Done = ['phase_3a_prompts_crafted', 'phase_3b_metaphors_mapped', 'phase_4a_diffusion_rendered', 'phase_4b_remotion_rendered', 'phase_5_subtitles_composed', 'phase_6_audio_designed', 'phase_7_assembled'].includes(phase);
+      const isAgent4Done = ['phase_4a_diffusion_rendered', 'phase_4b_remotion_rendered', 'phase_5_subtitles_composed', 'phase_6_audio_designed', 'phase_7_assembled'].includes(phase);
+      const isAgent5Done = ['phase_5_subtitles_composed', 'phase_6_audio_designed', 'phase_7_assembled'].includes(phase);
+      const isAgent6Done = ['phase_6_audio_designed', 'phase_7_assembled'].includes(phase);
+      const isAgent7Done = phase === 'phase_7_assembled';
+
+      // Agent 1
+      if (isAgent1Done) setAgentCardStatus(1, 'success', 'Transkripsiyon & Fonetik Hizalama tamamlandı.');
+      else setAgentCardStatus(1, 'running', 'Faster-Whisper fonetik hizalama...');
+
+      // Agent 2
+      if (isAgent2Done) setAgentCardStatus(2, 'success', `Format belirlendi: ${isVector ? '2D Vektörel İnfografik' : 'Sinematik Belgesel'}`);
+      else if (isAgent1Done) setAgentCardStatus(2, 'running', 'Semantik analiz & stil tavsiyesi üretiliyor...');
+      else setAgentCardStatus(2, 'locked');
+
+      // Agent 3 (Branch A vs Branch B)
+      const agent3Desc = isVector ? 'Soyut kavramlar SVG sembollerine eşleniyor...' : '35mm İngilizce sinematik promptlar yazılıyor...';
+      if (isAgent3Done) setAgentCardStatus(3, 'success', isVector ? 'Vektörel metaforlar başarıyla modellendi.' : 'Sinematik promptlar hazırlandı.');
+      else if (isAgent2Done) setAgentCardStatus(3, 'running', agent3Desc);
+      else setAgentCardStatus(3, 'locked');
+
+      // Agent 4 (Branch A vs Branch B)
+      const agent4Desc = isVector ? 'React Remotion bileşenleri ve 60fps MP4 derleniyor...' : 'Flux anahtar kare & Veo/Kling I2V sentezleniyor...';
+      if (isAgent4Done) setAgentCardStatus(4, 'success', isVector ? 'Remotion 60fps hareketli grafik klipleri üretildi.' : 'Sinematik 35mm difüzyon klipleri oluşturuldu.');
+      else if (isAgent3Done) setAgentCardStatus(4, 'running', agent4Desc);
+      else setAgentCardStatus(4, 'locked');
+
+      // Agent 5
+      if (isAgent5Done) setAgentCardStatus(5, 'success', 'Altın kelime karaoke .ASS altyazısı derlendi.');
+      else if (isAgent4Done) setAgentCardStatus(5, 'running', 'Tipografi & Dinamik Altyazı Ajanı...');
+      else setAgentCardStatus(5, 'locked');
+
+      // Agent 6
+      if (isAgent6Done) setAgentCardStatus(6, 'success', 'Müzik -18dB ducking ile seslendirmenin altına mikslendi.');
+      else if (isAgent5Done) setAgentCardStatus(6, 'running', 'BGM, -18dB Ducking & SFX miksleniyor...');
+      else setAgentCardStatus(6, 'locked');
+
+      // Agent 7
+      if (isAgent7Done) setAgentCardStatus(7, 'success', 'FFmpeg nihai MP4 video montajını tamamladı.');
+      else if (isAgent6Done) setAgentCardStatus(7, 'running', 'FFmpeg nihai montajı derliyor...');
+      else setAgentCardStatus(7, 'locked');
 
       // If phase 7 is completed
       if (phase === 'phase_7_assembled') {
@@ -9052,6 +9402,347 @@
     window.selectProposalStyle = selectProposalStyle;
     window.executeApprovedAiProposal = executeApprovedAiProposal;
     window.backToMissionInput = backToMissionInput;
+
+    // ==========================================
+    // ARGON 4 — İSLAMİ VİDEO İSTİŞARE & ÜRETİM SİSTEMİ
+    // ==========================================
+    let argon4ChatHistory = [];
+    let currentArgon4Attachment = null;
+    let latestProductionPackage = "";
+
+    function openArgon4Modal() {
+      const modal = document.getElementById('modal-argon4');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      if (argon4ChatHistory.length === 0) {
+        initArgon4Greeting();
+      }
+      setTimeout(() => {
+        const input = document.getElementById('argon4-chat-input');
+        if (input) input.focus();
+      }, 100);
+    }
+
+    function closeArgon4Modal() {
+      const modal = document.getElementById('modal-argon4');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function initArgon4Greeting() {
+      const initialGreeting = `Esselâmü aleyküm ve rahmetullâhi ve berekâtüh kıymetli yol arkadaşım. Ben **Argon 4**.
+
+İnsanlara Allah’ı (c.c.), İslam’ı, Kur'an hakikatlerini ve Ahiret gününü anlatan; kalpleri titreten ve derin tefekkür uyandıran videolar üretmek için buradayım.
+
+Aklınızda işlemek istediğiniz özel bir konu, ayet veya kıssa var mı? Eğer henüz netleşmediyse, istişaremizi başlatmak adına **3 sarsıcı video konsepti** sunuyorum:
+
+---
+
+### 1. Konsept: *“Görünmez Putlar ve Kırılan Aynalar”*
+* **Ayet & Hadis:** En'âm Suresi 76-79 & Buhârî (Dinarın ve şöhretin kulu olan helak olsun)
+* **Kıssa:** Hz. İbrahim’in (a.s.) putları kırmasından bugünün beğeni ve ekran putlarına uzanan ibret aynası.
+* **Görsel:** Gece mavisi ve çöl kehribarı, açık Mushaf, kırılan ayna ve altın varaklı İslami motifler.
+
+### 2. Konsept: *“Sessiz Çığlık: Kabir Kapısındaki İlk Gece”*
+* **Ayet & Hadis:** Tekâsür Suresi 1-2 & Tirmizî (Kabir ahiret duraklarının ilkidir)
+* **Kıssa:** Hz. Osman’ın (r.a.) kabir başında gözyaşları ve dünya meşgalesinin aniden kesilişi.
+* **Görsel:** Taş oda, titreyen kandil ışığı, açık Mushaf ve süzülen nurani ışık hüzmesi.
+
+### 3. Konsept: *“Tükenmeyen Zenginlik: Bir Hurma ile Kurtulanlar”*
+* **Ayet & Hadis:** Haşr Suresi 9 & Müslim (Sadaka malı eksiltmez)
+* **Kıssa:** Tebük Seferi'nde Hz. Ebubekir'in (r.a.) fedakarlığı ve iki avuç hurmasını veren sahabi.
+* **Görsel:** Mekke kerpiç evleri, çöl kumları, süzülen altın rengi güneş ve zarif Sülüs hat çerçeveleri.
+
+---
+
+Birlikte belirleyelim:
+1. Hangi konuyu veya kendi özel konunuzu işleyelim?
+2. Formatımız **Shorts (9:16)** mı yoksa **Yatay (16:9)** mu olsun?
+3. Elinizde analiz etmemi istediğiniz bir ses (tilavet), görsel veya video var mı?`;
+
+      argon4ChatHistory = [
+        { role: "assistant", content: initialGreeting, key_info: "Argon 4 İstişare Başlangıcı" }
+      ];
+      renderArgon4Messages();
+    }
+
+    function resetArgon4Session() {
+      argon4ChatHistory = [];
+      currentArgon4Attachment = null;
+      latestProductionPackage = "";
+      removeArgon4Attachment();
+      initArgon4Greeting();
+      showToast('Argon 4 istişare oturumu sıfırlandı.', 'info');
+    }
+
+    function formatArgon4Markdown(text) {
+      if (!text) return '';
+      return text
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/^### (.*$)/gim, '<h4 class="font-extrabold text-amber-300 text-sm mt-3 mb-1 border-b border-amber-500/20 pb-1">$1</h4>')
+        .replace(/^## (.*$)/gim, '<h3 class="font-extrabold text-white text-base mt-4 mb-2 flex items-center gap-1.5"><i class="fa-solid fa-star-and-crescent text-amber-400 text-xs"></i> $1</h3>')
+        .replace(/^# (.*$)/gim, '<h2 class="font-black text-amber-300 text-lg mt-4 mb-2">$1</h2>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em class="text-amber-200/90">$1</em>')
+        .replace(/---/g, '<hr class="border-slate-800 my-3">')
+        .replace(/^\* (.*$)/gim, '<div class="flex items-start gap-2 my-1 ml-1"><span class="text-amber-400 mt-0.5">•</span><span class="text-slate-300 leading-relaxed">$1</span></div>')
+        .replace(/^\- (.*$)/gim, '<div class="flex items-start gap-2 my-1 ml-1"><span class="text-amber-400 mt-0.5">•</span><span class="text-slate-300 leading-relaxed">$1</span></div>')
+        .replace(/^(\d+)\. (.*$)/gim, '<div class="flex items-start gap-2 my-1 ml-1"><span class="font-bold text-amber-400 font-mono text-[11px] mt-0.5">$1.</span><span class="text-slate-200 leading-relaxed">$2</span></div>')
+        .replace(/--ar\s+([0-9:]+)/g, '<span class="inline-block px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px] font-bold border border-amber-500/30">--ar $1</span>')
+        .replace(/\n\n/g, '<div class="h-2"></div>')
+        .replace(/\n/g, '<br>');
+    }
+
+    function renderArgon4Messages() {
+      const box = document.getElementById('argon4-chat-messages');
+      if (!box) return;
+
+      box.innerHTML = argon4ChatHistory.map((msg, idx) => {
+        if (msg.role === 'user') {
+          return `
+            <div class="flex justify-end">
+              <div class="max-w-[85%] bg-gradient-to-r from-slate-900 to-[#141c2e] border border-amber-500/30 rounded-2xl rounded-tr-sm p-3.5 text-white shadow-lg space-y-1">
+                <div class="flex items-center justify-end gap-1.5 text-[10px] text-amber-400 font-bold mb-1">
+                  <span>Siz (İstişare)</span>
+                  <i class="fa-solid fa-user text-xs"></i>
+                </div>
+                <div class="text-xs md:text-sm text-slate-100 whitespace-pre-wrap leading-relaxed">${msg.content}</div>
+              </div>
+            </div>
+          `;
+        } else {
+          const hasPackage = msg.is_production_package || msg.content.includes('Bölüm 1') || msg.content.includes('Bölüm 2') || msg.content.includes('Tam AI Seslendirme');
+          return `
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-emerald-500 text-slate-950 flex items-center justify-center text-sm shrink-0 font-bold shadow-md shadow-amber-500/20 mt-1">
+                <i class="fa-solid fa-moon-stars"></i>
+              </div>
+              <div class="flex-1 max-w-[92%] bg-[#0c121f] border border-slate-800 rounded-3xl rounded-tl-sm p-4 md:p-5 text-slate-200 shadow-xl space-y-2">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-amber-300 text-xs md:text-sm">Argon 4</span>
+                    <span class="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.2 rounded font-mono">İslami Video Uzmanı</span>
+                  </div>
+                  <span class="text-[10px] text-slate-500 font-mono">${msg.key_info || 'Gemini Key Pool'}</span>
+                </div>
+                <div class="text-xs md:text-sm leading-relaxed text-slate-200 space-y-1">
+                  ${formatArgon4Markdown(msg.content)}
+                </div>
+                ${hasPackage ? `
+                  <div class="mt-4 p-4 rounded-2xl bg-gradient-to-r from-emerald-950/80 via-slate-900 to-amber-950/80 border border-amber-500/50 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                    <div>
+                      <div class="text-xs md:text-sm font-black text-amber-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> 4 Bölümlük Üretim Paketi Hazır!
+                      </div>
+                      <p class="text-[11px] text-slate-300 mt-0.5">Senaryo, seslendirme ve sahneler doğrudan kurgu zaman tüneline aktarılmaya hazır.</p>
+                    </div>
+                    <button onclick="applyArgon4ToProject()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-black text-xs md:text-sm shadow-xl shadow-amber-500/30 flex items-center gap-2 transition active:scale-95 whitespace-nowrap">
+                      <i class="fa-solid fa-film text-slate-950"></i>
+                      <span>Kurgu Projesine Aktar & Stüdyoda Aç</span>
+                      <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }
+      }).join('');
+
+      box.scrollTop = box.scrollHeight;
+    }
+
+    async function handleArgon4MediaFile(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const bar = document.getElementById('argon4-attachment-bar');
+      const nameEl = document.getElementById('argon4-attachment-name');
+      const sizeEl = document.getElementById('argon4-attachment-size');
+      const iconEl = document.getElementById('argon4-attachment-icon');
+
+      nameEl.innerText = file.name;
+      sizeEl.innerText = `(${(file.size / 1024).toFixed(1)} KB) yükleniyor...`;
+      bar.classList.remove('hidden');
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const res = await fetch('/api/argon4/upload-media', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.detail || 'Medya yüklenemedi');
+
+        currentArgon4Attachment = {
+          filename: data.filename,
+          mime: data.mime,
+          base64: data.base64,
+          size_kb: data.size_kb,
+          url: data.url
+        };
+
+        sizeEl.innerText = `(${data.size_kb} KB)`;
+        if (data.mime.startsWith('audio/')) iconEl.className = 'fa-solid fa-file-audio text-cyan-400';
+        else if (data.mime.startsWith('image/')) iconEl.className = 'fa-solid fa-file-image text-emerald-400';
+        else if (data.mime.startsWith('video/')) iconEl.className = 'fa-solid fa-file-video text-rose-400';
+        showToast(`📎 '${file.name}' analize hazır olarak yüklendi!`, 'success');
+      } catch (err) {
+        showToast('Medya yükleme hatası: ' + err.message, 'error');
+        removeArgon4Attachment();
+      }
+    }
+
+    function removeArgon4Attachment() {
+      currentArgon4Attachment = null;
+      const bar = document.getElementById('argon4-attachment-bar');
+      const input = document.getElementById('argon4-media-input');
+      if (bar) bar.classList.add('hidden');
+      if (input) input.value = '';
+    }
+
+    async function sendArgon4ChatMessage() {
+      const input = document.getElementById('argon4-chat-input');
+      const text = input.value.trim();
+      if (!text && !currentArgon4Attachment) return;
+
+      let displayContent = text;
+      if (currentArgon4Attachment) {
+        displayContent = (text ? text + '\n\n' : '') + `📎 [Ekli Medya: ${currentArgon4Attachment.filename} (${currentArgon4Attachment.size_kb} KB)]`;
+      }
+
+      argon4ChatHistory.push({
+        role: 'user',
+        content: displayContent
+      });
+      input.value = '';
+      renderArgon4Messages();
+
+      const typing = document.getElementById('argon4-typing-indicator');
+      const btnSend = document.getElementById('argon4-btn-send');
+      if (typing) typing.classList.remove('hidden');
+      if (btnSend) btnSend.disabled = true;
+
+      const mediaToUpload = currentArgon4Attachment;
+      removeArgon4Attachment();
+
+      try {
+        const payload = {
+          message: text,
+          history: argon4ChatHistory.slice(0, -1),
+          media_base64: mediaToUpload ? mediaToUpload.base64 : null,
+          media_mime: mediaToUpload ? mediaToUpload.mime : null,
+          media_name: mediaToUpload ? mediaToUpload.filename : null,
+          model: "gemini-3.5-flash-lite"
+        };
+
+        const res = await fetch('/api/argon4/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.detail || 'Argon 4 yanıt veremedi.');
+        }
+
+        argon4ChatHistory.push({
+          role: 'assistant',
+          content: data.reply,
+          key_info: data.key_info,
+          is_production_package: data.is_production_package
+        });
+
+        if (data.is_production_package) {
+          latestProductionPackage = data.reply;
+          showToast('✨ 4 Bölümlük Üretim Paketi tamamlandı!', 'success');
+        }
+
+        renderArgon4Messages();
+      } catch (err) {
+        argon4ChatHistory.push({
+          role: 'assistant',
+          content: 'Hata oluştu: ' + err.message + '. Key havuzundaki diğer anahtarlarla tekrar deneyebilirsiniz.',
+          key_info: 'Hata Bildirimi'
+        });
+        renderArgon4Messages();
+        showToast('Hata: ' + err.message, 'error');
+      } finally {
+        if (typing) typing.classList.add('hidden');
+        if (btnSend) btnSend.disabled = false;
+      }
+    }
+
+    function sendArgon4QuickPrompt(promptText) {
+      const input = document.getElementById('argon4-chat-input');
+      if (input) {
+        input.value = promptText;
+        sendArgon4ChatMessage();
+      }
+    }
+
+    async function applyArgon4ToProject() {
+      if (!latestProductionPackage) {
+        for (let i = argon4ChatHistory.length - 1; i >= 0; i--) {
+          const c = argon4ChatHistory[i].content;
+          if (c && (c.includes('Bölüm 1') || c.includes('Bölüm 2') || c.includes('Bölüm 3'))) {
+            latestProductionPackage = c;
+            break;
+          }
+        }
+      }
+
+      if (!latestProductionPackage) {
+        showToast('Henüz üretilmiş bir üretim paketi bulunmuyor.', 'warning');
+        return;
+      }
+
+      showToast('🎬 İslami video projesi zaman tüneline aktarılıyor...', 'info');
+
+      try {
+        const res = await fetch('/api/argon4/apply-to-project', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            production_package: latestProductionPackage,
+            theme: "dark_minimalist"
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.detail || 'Projeye aktarılamadı.');
+        }
+
+        closeArgon4Modal();
+        await loadTimelineData();
+        switchAppView('editor');
+        setTimeout(() => {
+          renderTimeline();
+          renderLivePreviewCanvas();
+          renderSceneInspector();
+          const audioEl = document.getElementById('main-audio');
+          if (audioEl) {
+            audioEl.src = `/public/audio.mp3?t=${Date.now()}`;
+            audioEl.load();
+          }
+        }, 100);
+        showToast(`✨ '${data.title}' projesi (${data.scenes_count} Sahne, ${data.format}) stüdyoda açıldı!`, 'success');
+      } catch (err) {
+        showToast('Projeye aktarma hatası: ' + err.message, 'error');
+      }
+    }
+
+    window.openArgon4Modal = openArgon4Modal;
+    window.closeArgon4Modal = closeArgon4Modal;
+    window.resetArgon4Session = resetArgon4Session;
+    window.sendArgon4ChatMessage = sendArgon4ChatMessage;
+    window.sendArgon4QuickPrompt = sendArgon4QuickPrompt;
+    window.handleArgon4MediaFile = handleArgon4MediaFile;
+    window.removeArgon4Attachment = removeArgon4Attachment;
+    window.applyArgon4ToProject = applyArgon4ToProject;
 
   </script>
 

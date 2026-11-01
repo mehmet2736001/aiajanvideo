@@ -389,6 +389,7 @@ def create_cinematic_documentary_video(
     return {
         "videoUrl": f"/public/videos/{video_filename}",
         "relativeUrl": f"videos/{video_filename}",
+        "filePath": video_path,
         "prompt": final_prompt,
         "style": clean_style,
         "duration": duration,

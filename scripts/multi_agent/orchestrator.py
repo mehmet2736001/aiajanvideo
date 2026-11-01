@@ -175,6 +175,7 @@ class MasterOrchestrator:
         self,
         job_id: str,
         selected_track: str,
+        custom_instructions: Optional[str] = None,
         on_progress: Optional[Callable[[int, str, dict], None]] = None
     ) -> ProjectState:
         """
@@ -196,6 +197,9 @@ class MasterOrchestrator:
 
         chosen_track = TrackType(selected_track)
         state.selected_track = chosen_track
+        if custom_instructions and custom_instructions.strip():
+            state.custom_instructions = custom_instructions.strip()
+
         if state.recommendation_card:
             state.recommendation_card.selected_track = chosen_track
             state.recommendation_card.selected_at = time.strftime("%Y-%m-%d %H:%M:%S")
