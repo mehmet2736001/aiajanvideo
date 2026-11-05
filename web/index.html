@@ -609,8 +609,8 @@
         <!-- Video Oynatıcı Kolonu -->
         <div class="lg:col-span-7 flex flex-col items-center">
           <div id="videoContainerWrapper" class="relative rounded-2xl overflow-hidden border border-gold-500/40 bg-black gold-glow w-full max-w-[640px] aspect-video">
-            <video id="masterVideoPlayer" controls class="w-full h-full object-contain" poster="production_output/scenes/scene_01.png">
-              <source src="production_output/islami_video_el_kadir_v2.mp4" type="video/mp4">
+            <video id="masterVideoPlayer" controls class="w-full h-full object-contain" poster="/out/hud-112/pano.jpg">
+              <source src="/out/hud-112/hud-112.mp4" type="video/mp4">
               Tarayıcınız video oynatmayı desteklemiyor.
             </video>
 
@@ -1610,9 +1610,7 @@
         key_masked: 'Key #24 (AIzaSyD...9K2)',
         agent_id: '03_islami_kurgu',
         message: 'Kota sınırına ulaşıldı (HTTP 429: RESOURCE_EXHAUSTED). Anahtar motoru otomatik olarak 25. anahtara yönlendirdi.',
-        traceback: 'Traceback (most recent call last):
-  File "core/key_pool_engine.py", line 212, in generate_text
-requests.exceptions.HTTPError: 429 Client Error: Quota exceeded'
+        traceback: `Traceback (most recent call last):\n  File "core/key_pool_engine.py", line 212, in generate_text\nrequests.exceptions.HTTPError: 429 Client Error: Quota exceeded`
       });
     }
 
@@ -1804,7 +1802,7 @@ requests.exceptions.HTTPError: 429 Client Error: Quota exceeded'
           barWidth: 2,
           barGap: 2,
           barRadius: 2,
-          url: 'production_output/audio/halal_tefekkur_ambience.wav'
+          url: '/public/hud-112/ses.mp3'
         });
 
         wavesurfer.on('timeupdate', (currentTime) => {
@@ -1873,7 +1871,8 @@ requests.exceptions.HTTPError: 429 Client Error: Quota exceeded'
       try {
         const res = await fetch('/api/agents');
         if (!res.ok) return;
-        allAgents = await res.json();
+        const agData = await res.json();
+        allAgents = agData.agents || agData || [];
         const grid = document.getElementById('agentsGrid');
         grid.innerHTML = '';
         allAgents.forEach(ag => {
@@ -2260,6 +2259,45 @@ requests.exceptions.HTTPError: 429 Client Error: Quota exceeded'
 
     // UI Doldurma (Materyal İnceleme Masası)
     function renderPackageUI(pkg) {
+      if (!pkg) return;
+
+      // Master Video Player Dinamik Güncelleme
+      const vPlayer = document.getElementById('masterVideoPlayer');
+      if (vPlayer && pkg.video_url) {
+        vPlayer.src = pkg.video_url;
+        if (pkg.pano_url) vPlayer.poster = pkg.pano_url;
+        vPlayer.load();
+      }
+
+      // Başlık ve Kalite Güncelleme
+      const titleEl = document.getElementById('masterTitle');
+      if (titleEl && pkg.topic) {
+        titleEl.innerText = pkg.topic;
+      }
+
+      // Ses Dalgasını Güncelle
+      if (wavesurfer && pkg.audio_url) {
+        wavesurfer.load(pkg.audio_url);
+      }
+
+      // Senaryo Metni Güncelleme
+      if (pkg.script || pkg.voiceover_script) {
+        const scEl = document.getElementById('scriptTextarea');
+        if (scEl) {
+          scEl.value = pkg.script || pkg.voiceover_script;
+          onScriptEdited();
+        }
+      }
+
+      // Onay Kapısı Butonunu Aktif Et
+      const gateBtn = document.getElementById('btnApproveAndRender');
+      if (gateBtn) gateBtn.disabled = false;
+      const gatePill = document.getElementById('approvalGatePill');
+      if (gatePill) {
+        gatePill.className = 'text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
+        gatePill.innerText = '✓ Materyaller ve Video Hazır';
+      }
+
       // 1. İslami Kurgu
       if (pkg.islami_kurgu) {
         const k = pkg.islami_kurgu;

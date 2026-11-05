@@ -143,6 +143,51 @@ async def select_voice(req: SelectVoiceRequest):
 async def get_errors():
     return {"errors": []}
 
+class SetModelRequest(BaseModel):
+    model: str
+
+@app.post("/api/set_model")
+async def set_model(req: SetModelRequest):
+    return {"status": "success", "model": req.model}
+
+class ReportErrorRequest(BaseModel):
+    error: Optional[Dict[str, Any]] = None
+
+@app.post("/api/errors/report")
+async def report_error(req: ReportErrorRequest):
+    return {"status": "reported"}
+
+class UpdateScriptRequest(BaseModel):
+    script: str
+
+@app.post("/api/update_script")
+async def update_script(req: UpdateScriptRequest):
+    if "pre_render_package" in CURRENT_STATE:
+        CURRENT_STATE["pre_render_package"]["script"] = req.script
+    return {"status": "success"}
+
+class PrepareMaterialsRequest(BaseModel):
+    topic: str
+    style: Optional[str] = "Karma"
+    voice_id: Optional[str] = None
+    ambience_id: Optional[str] = None
+
+@app.post("/api/prepare_materials")
+async def prepare_materials(req: PrepareMaterialsRequest):
+    global CURRENT_VOICE
+    if req.voice_id:
+        CURRENT_VOICE = req.voice_id
+
+    topic = req.topic.strip() or CURRENT_STATE["pre_render_package"]["topic"]
+    pkg = CURRENT_STATE.get("pre_render_package", {})
+    pkg["topic"] = topic
+
+    return {
+        "status": "success",
+        "message": f"İstişare Heyeti toplandı. «{topic}» için materyaller hazırlandı.",
+        "package": pkg
+    }
+
 @app.post("/api/errors/clear")
 async def clear_errors():
     return {"status": "cleared"}
