@@ -44,10 +44,12 @@ class StudioOrchestrator:
         title: str,
         lines: list,
         category: str = "İslami Tefekkür",
-        comp_id: str = None
+        comp_id: str = None,
+        voice_id: str = None
     ) -> dict:
         print(f"\n=======================================================")
         print(f"🎬 [01_basyonetmen] PRODÜKSİYON BAŞLATILDI: {title}")
+        print(f"🎙️ Seçilen Turso Sesi: {voice_id or 'dervis (Varsayılan)'}")
         print(f"=======================================================\n")
 
         # 1. Klasörleri hazırla
@@ -58,7 +60,7 @@ class StudioOrchestrator:
 
         # 2. [08_ses_frekans - Bora] Seslendirme ve Senkronizasyon
         print("🎙️ [08_ses_frekans] Seslendirme ve milisaniyelik kelime zamanlaması çıkarılıyor...")
-        voice_result = synthesize_and_align(lines, public_dir)
+        voice_result = synthesize_and_align(lines, public_dir, voice_id=voice_id)
         duration = voice_result["duration_seconds"]
         word_count = voice_result["word_count"]
         print(f"   ✓ Ses tamamlandı: {duration:.2f} saniye, {word_count} kelime")

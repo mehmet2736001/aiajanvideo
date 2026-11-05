@@ -16,6 +16,7 @@ build/
 # Sensitive API Keys & Credentials (CRITICAL)
 api_keys.json
 api_keys.csv
+turso_credentials.json
 data/api_keys.json
 data/api_keys.csv
 data/keys.json

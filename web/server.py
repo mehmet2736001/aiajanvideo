@@ -9,7 +9,7 @@ if hasattr(sys.stderr, 'reconfigure'):
     sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
 import uvicorn
-from fastapi import FastAPI, BackgroundTasks, Request
+from fastapi import FastAPI, BackgroundTasks, Request, Response
 from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,6 +17,7 @@ from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 
 from core.orchestrator import StudioOrchestrator
+from core.turso_client import TursoVoiceClient
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 AGENTS_DIR = os.path.join(BASE_DIR, "brain", "agents")
@@ -42,6 +43,8 @@ if os.path.exists(os.path.join(BASE_DIR, "public")):
     app.mount("/public", StaticFiles(directory=os.path.join(BASE_DIR, "public")), name="public")
 
 orchestrator = StudioOrchestrator()
+turso_client = TursoVoiceClient()
+CURRENT_VOICE = "dervis"
 
 # Memory state
 CURRENT_STATE = {
@@ -99,7 +102,42 @@ async def list_agents():
 
 @app.get("/api/audio_library")
 async def get_audio_library():
-    return {"files": []}
+    try:
+        voices = turso_client.list_voices()
+        return {
+            "total": len(voices),
+            "active_voice_id": CURRENT_VOICE,
+            "voices": voices
+        }
+    except Exception as e:
+        return {"total": 0, "active_voice_id": CURRENT_VOICE, "voices": [], "error": str(e)}
+
+@app.get("/api/audio_sample/{voice_id}")
+async def get_audio_sample(voice_id: str):
+    try:
+        raw_bytes, mime = turso_client.get_sample_audio(voice_id)
+        if not raw_bytes:
+            return JSONResponse(status_code=404, content={"error": "Örnek ses bulunamadı"})
+        return Response(content=raw_bytes, media_type=mime or "audio/wav")
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.post("/api/voices/{voice_id}/favorite")
+async def toggle_voice_favorite(voice_id: str):
+    try:
+        is_fav = turso_client.toggle_favorite(voice_id)
+        return {"status": "success", "voice_id": voice_id, "is_favorite": is_fav}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+class SelectVoiceRequest(BaseModel):
+    voice_id: str
+
+@app.post("/api/voices/select")
+async def select_voice(req: SelectVoiceRequest):
+    global CURRENT_VOICE
+    CURRENT_VOICE = req.voice_id
+    return {"status": "success", "active_voice_id": CURRENT_VOICE}
 
 @app.get("/api/errors")
 async def get_errors():
@@ -142,14 +180,17 @@ class ProduceRequest(BaseModel):
     title: str
     lines: List[str]
     category: Optional[str] = "İslami Tefekkür"
+    voice_id: Optional[str] = None
 
 @app.post("/api/produce")
 async def produce_video(req: ProduceRequest):
+    selected_voice = req.voice_id or CURRENT_VOICE
     result = orchestrator.produce_video_from_lines(
         project_slug=req.project_slug,
         title=req.title,
         lines=req.lines,
-        category=req.category
+        category=req.category,
+        voice_id=selected_voice
     )
     if result.get("status") == "success":
         CURRENT_STATE["pre_render_package"] = {

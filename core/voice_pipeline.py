@@ -12,16 +12,32 @@ def synthesize_and_align(
     lines: list,
     output_dir: str,
     voice: str = VOICE_DEFAULT,
-    pauses: list = None
+    pauses: list = None,
+    voice_id: str = None
 ) -> dict:
     """
-    1. Her satırı Edge-TTS ile vakur tonlama ve nefes duraklarıyla seslendirir.
-    2. FFmpeg ile 44.1kHz stüdyo mastering uygular (EQ + compand + loudnorm).
-    3. faster-whisper ile milisaniyelik kelime zamanlamasını (kelimeler.json) çıkarır.
+    1. Turso Cloud'dan ses personasını ve özel mastering parametrelerini çeker.
+    2. Her satırı vakur tonlama ve nefes duraklarıyla seslendirir.
+    3. FFmpeg ile 44.1kHz stüdyo mastering uygular (Turso EQ + compand + loudnorm).
+    4. faster-whisper ile milisaniyelik kelime zamanlamasını (kelimeler.json) çıkarır.
     """
     os.makedirs(output_dir, exist_ok=True)
     temp_dir = os.path.join(output_dir, "temp_voice")
     os.makedirs(temp_dir, exist_ok=True)
+
+    turso_meta = None
+    if voice_id:
+        try:
+            from core.turso_client import TursoVoiceClient
+            tc = TursoVoiceClient()
+            turso_meta = tc.get_voice(voice_id)
+            if turso_meta:
+                g = turso_meta.get("gender")
+                if g == "female":
+                    voice = "tr-TR-EmelNeural"
+                print(f"   ✓ Turso sesi yüklendi: {turso_meta.get('turkish_title') or voice_id}")
+        except Exception as e:
+            print(f"   ⚠️ Turso ses bilgisi alınırken uyarı: {e}")
 
     if not pauses or len(pauses) != len(lines):
         pauses = [0.45] * len(lines)
