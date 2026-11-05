@@ -81,15 +81,27 @@ def synthesize_and_align(
                         "c": i
                     })
 
-        # Match text formatting
+        # Always match the exact script words proportionally across the spoken segment
         raw_words = raw_text.split()
-        if len(w_list) == len(raw_words):
-            for k in range(len(raw_words)):
-                w_list[k]["w"] = raw_words[k]
+        if len(w_list) > 0 and len(raw_words) > 0:
+            start_t = w_list[0]["s"]
+            end_t = w_list[-1]["e"]
+            step = (end_t - start_t) / len(raw_words)
+            matched_words = []
+            for k, rw in enumerate(raw_words):
+                matched_words.append({
+                    "w": rw,
+                    "s": round(start_t + k * step, 3),
+                    "e": round(start_t + (k + 1) * step, 3),
+                    "c": i
+                })
+            w_list = matched_words
 
         all_words.extend(w_list)
-        concat_lines.append(f"file '{std_line_f.replace(chr(92), '/')}'")
-        concat_lines.append(f"file '{silence_f.replace(chr(92), '/')}'")
+        abs_std = os.path.abspath(std_line_f).replace("\\", "/")
+        abs_sil = os.path.abspath(silence_f).replace("\\", "/")
+        concat_lines.append(f"file '{abs_std}'")
+        concat_lines.append(f"file '{abs_sil}'")
         current_offset += dur + p_dur
 
     # 3. Concatenate and apply studio mastering

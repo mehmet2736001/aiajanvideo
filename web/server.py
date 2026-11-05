@@ -47,13 +47,13 @@ orchestrator = StudioOrchestrator()
 CURRENT_STATE = {
     "status": "ready",
     "pre_render_package": {
-        "topic": "Ölüm Gerçekten Son Mu?",
-        "script": "Anne karnındaki bir bebeğe 'dışarıda devasa bir dünya var' desen, inanmazdı...\nÇünkü onun bildiği tek evren, o dar karanlıktı.\nDoğum anı, bebek için sanki bir yok oluştu.\nOysa dışarı adım attığında, gerçek hayat daha yeni başlıyordu.\nİşte ölüm de böyledir.\nSana son gibi görünen o dar kapı, aslında sonsuz bir aleme açılır.\nBeden bu toprağın rahmine bırakılır, ruh asıl vatanına uyanır.\nÖlüm bir bitiş değil, ebedi hayatın doğum sancısıdır.",
-        "scenes_count": 8,
-        "audio_url": "/public/olum-son-mu/ses.mp3",
-        "video_url": "/out/olum-son-mu/olum_son_mu.mp4",
-        "pano_url": "/out/olum-son-mu/pano.jpg",
-        "quality_score": 98
+        "topic": "Peygamberimizi Yaşlandıran Sır: Hûd 112",
+        "script": "Peygamberimizin saçlarına ak düşüren o sırrı biliyor musun?\nSahabe sordu: Ya Resulallah, seni ne böyle ihtiyarlattı?\nCevap tek bir sûreydi: Beni Hûd sûresi kocattı...\nO sûrede öyle bir emir vardı ki, heybeti dağları ezerdi:\nFestekim kemâ umirt... Emrolunduğun gibi dosdoğru ol!\nGönlünce yaşa değil, kolayına geldiği gibi hiç değil...\nKıldan ince, kılıçtan keskin bir istikamet terazisi.\nBir ömrü, zerrece sapmadan Hakkın rızasına hizalamak...\nİşte bu ilahi ağırlık, bir peygamberin saçlarını ağarttı.\nPeki senin istikametin bugün nereye bakıyor?",
+        "scenes_count": 10,
+        "audio_url": "/public/hud-112/ses.mp3",
+        "video_url": "/out/hud-112/hud-112.mp4",
+        "pano_url": "/out/hud-112/pano.jpg",
+        "quality_score": 95
     }
 }
 

@@ -11,5 +11,17 @@
     "status": "mastered",
     "output_path": "out/olum-son-mu/olum_son_mu.mp4",
     "pano_path": "out/olum-son-mu/pano.jpg"
+  },
+  {
+    "id": "vid_1793902445_hud-112",
+    "title": "Peygamberimizi Yaşlandıran Sır: Hûd 112",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 56.0,
+    "word_count": 78,
+    "quality_score": 95,
+    "status": "mastered",
+    "created_at": "2026-11-05T21:14:05.287312",
+    "output_path": "E:\\aivideoyap\\out\\hud-112\\hud-112.mp4",
+    "pano_path": "E:\\aivideoyap\\out\\hud-112\\pano.jpg"
   }
 ]

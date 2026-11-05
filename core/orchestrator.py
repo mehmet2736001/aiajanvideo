@@ -43,7 +43,8 @@ class StudioOrchestrator:
         project_slug: str,
         title: str,
         lines: list,
-        category: str = "İslami Tefekkür"
+        category: str = "İslami Tefekkür",
+        comp_id: str = None
     ) -> dict:
         print(f"\n=======================================================")
         print(f"🎬 [01_basyonetmen] PRODÜKSİYON BAŞLATILDI: {title}")
@@ -74,19 +75,34 @@ class StudioOrchestrator:
         print("🎨 [09_remotion_render] 1080x1920 30 FPS Remotion motoru çalıştırılıyor...")
         final_mp4 = os.path.join(proj_dir, f"{project_slug}.mp4")
 
-        # Render komutu
+        # Otomatik kompozisyon ID tespiti
+        target_index = f"src/{project_slug}/index.ts"
+        target_video = os.path.join(BASE_DIR, "src", project_slug, "Video.tsx")
+        comp_target = comp_id or "OlumSonMu"
+
+        if os.path.exists(target_video):
+            import re
+            try:
+                with open(target_video, "r", encoding="utf-8") as vf:
+                    v_content = vf.read()
+                    match = re.search(r'<Composition\s+id=["\']([^"\']+)["\']', v_content)
+                    if match:
+                        comp_target = match.group(1)
+            except Exception:
+                pass
+
+        if not os.path.exists(os.path.join(BASE_DIR, target_index)):
+            target_index = "src/olum-son-mu/index.ts"
+            comp_target = "OlumSonMu"
+
         render_cmd = [
             "npx.cmd" if os.name == "nt" else "npx",
             "remotion", "render",
-            f"src/{project_slug}/index.ts",
-            "OlumSonMu", # Veya parametrik kompozisyon id
+            target_index,
+            comp_target,
             final_mp4,
             "--concurrency=2"
         ]
-
-        # Eğer projeye özel index yoksa mevcut kompozisyonu kullan
-        if not os.path.exists(os.path.join(BASE_DIR, "src", project_slug, "index.ts")):
-            render_cmd[3] = "src/olum-son-mu/index.ts"
 
         try:
             subprocess.run(render_cmd, cwd=BASE_DIR, check=True)
