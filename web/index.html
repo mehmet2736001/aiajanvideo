@@ -285,17 +285,73 @@
       </div>
     </section>
 
-    <!-- 2. İSTİŞARE HEYETİ & ÖĞRETMENLER KURULU (11 UZMAN HOCA GENEL BAKIŞ) -->
-    <section>
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="font-display font-semibold text-gold-400 text-sm md:text-base flex items-center gap-2">
-          <i data-lucide="users" class="w-4 h-4"></i> İstişare Heyeti & Öğretmenler Kurulu (11 Uzman Hoca)
-        </h3>
-        <span class="text-xs text-slate-400">Herhangi bir hocamıza tıklayarak ilmi/teknik vazifesini, hafızasını (`memory.json`) ve fıkhi yetkilerini inceleyin.</span>
-      </div>
+    <!-- 2. TEK BAŞYÖNETMEN MASASI & POLİMORFİK GARDIROP -->
+    <section class="glass-panel rounded-2xl p-4 border border-gold-500/30 bg-gradient-to-r from-obsidian-950 via-obsidian-900 to-obsidian-950 shadow-xl">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+        
+        <!-- Sol: Başyönetmen Portre & Canlı Durum -->
+        <div class="flex items-center gap-3.5">
+          <div class="relative">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-gold-600 via-gold-400 to-amber-300 p-0.5 shadow-lg shadow-gold-500/20">
+              <div class="w-full h-full bg-obsidian-950 rounded-[14px] flex items-center justify-center text-2xl">
+                🎬
+              </div>
+            </div>
+            <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-obsidian-950 flex items-center justify-center">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+            </span>
+          </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" id="agentsGrid">
-        <!-- 11 Hoca kartı dinamik doldurulur -->
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h2 class="font-display font-bold text-base md:text-lg text-white">Başyönetmen Selim Bey</h2>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/40">Tek Yetkili Başyönetmen</span>
+              <span id="directorApiBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Canlı Gemini 3.8 / 3.5 Flash
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Tüm bürokrasi kaldırıldı. İslami tefekkür, senaryo, Remotion kod, Turso ses ve 48 kare denetim elbiselerinin tamamını tek zihinde kuşanır.
+            </p>
+          </div>
+        </div>
+
+        <!-- Orta / Sağ: 5 Temel Elbise ve Sohbet Kontrolleri -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="flex items-center gap-1.5 bg-obsidian-950/80 p-1.5 rounded-xl border border-slate-800 text-[11px]">
+            <span class="text-slate-500 text-[10px] px-1 font-semibold">Elbiseler:</span>
+            <button onclick="wearWardrobePrompt('İslami Tefekkür & İlim')" class="wardrobe-pill px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition flex items-center gap-1">
+              <span>🕌</span> <span>Tefekkür</span>
+            </button>
+            <button onclick="wearWardrobePrompt('Viral Kanca & Senaryo')" class="wardrobe-pill px-2.5 py-1 rounded-lg bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border border-sky-500/30 transition flex items-center gap-1">
+              <span>⚡</span> <span>Senaryo</span>
+            </button>
+            <button onclick="wearWardrobePrompt('Remotion Kod & Hareket')" class="wardrobe-pill px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition flex items-center gap-1">
+              <span>🎬</span> <span>Remotion</span>
+            </button>
+            <button onclick="wearWardrobePrompt('Turso Ses & Helal Akustik')" class="wardrobe-pill px-2.5 py-1 rounded-lg bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 transition flex items-center gap-1">
+              <span>🎙️</span> <span>Turso Ses</span>
+            </button>
+            <button onclick="wearWardrobePrompt('48 Kare Görsel Denetçi')" class="wardrobe-pill px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition flex items-center gap-1">
+              <span>👁️</span> <span>Denetim</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="startNewChatSession()" 
+                    class="px-3.5 py-2 rounded-xl bg-gold-500/20 hover:bg-gold-500/30 text-gold-300 border border-gold-500/40 text-xs font-bold transition flex items-center gap-1.5 shadow"
+                    title="Önceki sohbeti arşive kaldırıp temiz sayfa açar">
+              <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+              <span>Yeni Sohbet</span>
+            </button>
+            <button onclick="clearChatHistoryConfirm()" 
+                    class="p-2 rounded-xl bg-obsidian-900 hover:bg-red-500/20 text-slate-400 hover:text-red-400 border border-slate-800 transition"
+                    title="Sohbet geçmişini tamamen sil">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -314,10 +370,10 @@
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <span id="activeChannelTitle" class="font-bold text-sm text-gold-400">İstişare Meclisi (Genel Heyet)</span>
-                <span id="activeChannelBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-gold-500/15 text-gold-300 border border-gold-500/30">Moderatör: Selim Hoca</span>
+                <span id="activeChannelTitle" class="font-bold text-sm text-gold-400">Başyönetmen Selim Bey</span>
+                <span id="activeChannelBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-gold-500/15 text-gold-300 border border-gold-500/30">Tüm Yetkinlikler Kuşanıldı</span>
               </div>
-              <p id="activeChannelDesc" class="text-[10px] text-slate-400 truncate max-w-[340px]">Tüm hocalarımızın sıralı, derin düşünceyle istişare ettiği meclis salonu</p>
+              <p id="activeChannelDesc" class="text-[10px] text-slate-400 truncate max-w-[340px]">Asla unutulmayan kalıcı hafıza • Canlı Gemini API ile doğal diyalog</p>
             </div>
           </div>
 
@@ -332,31 +388,83 @@
         <!-- İÇ YAPI: SOL PANELDE KANALLAR LİSTESİ + SAĞ PANELDE SOHBET AKIŞI -->
         <div class="flex-1 flex gap-3 pt-3 overflow-hidden">
           
-          <!-- KANALLAR KENAR ÇUBUĞU (SUB-SIDEBAR) -->
-          <div class="w-48 sm:w-56 flex-shrink-0 flex flex-col gap-1 border-r border-slate-800/80 pr-2 overflow-y-auto">
+          <!-- SOL GARDIROP & STATÜ PANELİ (ELBİSELER & HAFIZA) -->
+          <div class="w-48 sm:w-56 flex-shrink-0 flex flex-col gap-2 border-r border-slate-800/80 pr-3 overflow-y-auto">
             
-            <!-- EN ÜST: GENEL GRUP SOHBETİ (İSTİŞARE MECLİSİ) -->
-            <button onclick="switchChannel('general')" id="chanBtn-general" 
-                    class="channel-item active w-full p-2.5 rounded-xl border border-gold-500/40 bg-gold-500/15 text-left flex items-center justify-between gap-2 transition hover:bg-gold-500/20 group">
-              <div class="flex items-center gap-2 overflow-hidden">
-                <span class="text-lg">👥</span>
-                <div class="truncate">
-                  <strong class="text-xs text-gold-400 block truncate group-hover:text-gold-300">İstişare Meclisi</strong>
-                  <span class="text-[9px] text-slate-400 block truncate">Genel Grup Sohbeti</span>
+            <!-- Aktif Başyönetmen Kartı -->
+            <div class="p-3 rounded-xl border border-gold-500/30 bg-gold-500/10 text-left space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🎬</span>
+                <div>
+                  <strong class="text-xs text-gold-300 block">Selim Bey</strong>
+                  <span class="text-[9px] text-slate-400 block font-mono">Tek Başyönetmen</span>
                 </div>
               </div>
-              <span id="unread-general" class="hidden text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-red-500 text-white font-mono shadow-sm">0</span>
-            </button>
-
-            <!-- AYRAÇ: 11 ÖĞRETMEN ODASI -->
-            <div class="text-[9px] font-extrabold uppercase tracking-wider text-slate-500 px-2 pt-2.5 pb-1 flex items-center justify-between">
-              <span>Öğretmenler (11 Hoca)</span>
-              <span class="text-[8px] text-slate-600">Birebir</span>
+              <div class="pt-2 border-t border-gold-500/20 space-y-1">
+                <div class="text-[9px] text-slate-400">Şu Anki Elbise:</div>
+                <div id="sideActiveWardrobe" class="text-[10px] font-bold text-gold-400 bg-obsidian-950/80 px-2 py-1 rounded border border-gold-500/20 truncate">
+                  Başyönetmen (Tüm Yetkinlikler)
+                </div>
+              </div>
             </div>
 
-            <!-- 11 Hoca Kanalları -->
-            <div class="space-y-1" id="teacherChannelsList">
-              <!-- Dinamik doldurulur -->
+            <!-- Elbise Değiştir Butonları -->
+            <div class="text-[9px] font-extrabold uppercase tracking-wider text-slate-500 px-1 pt-1 flex items-center justify-between">
+              <span>Elbise Kuşan</span>
+              <span class="text-[8px] text-slate-600">Polimorfik</span>
+            </div>
+
+            <div class="space-y-1 text-xs">
+              <button onclick="wearWardrobePrompt('İslami Tefekkür & İlim')" class="w-full p-2 rounded-xl border border-slate-800 hover:border-emerald-500/40 bg-obsidian-950 hover:bg-emerald-500/10 text-left flex items-center gap-2 transition group">
+                <span class="text-base">🕌</span>
+                <div class="truncate">
+                  <span class="text-slate-200 block text-xs group-hover:text-emerald-300 font-semibold">İslami Tefekkür</span>
+                  <span class="text-[9px] text-slate-500 block truncate">Ayet, Hadis, Hikmet</span>
+                </div>
+              </button>
+              <button onclick="wearWardrobePrompt('Viral Kanca & Senaryo')" class="w-full p-2 rounded-xl border border-slate-800 hover:border-sky-500/40 bg-obsidian-950 hover:bg-sky-500/10 text-left flex items-center gap-2 transition group">
+                <span class="text-base">⚡</span>
+                <div class="truncate">
+                  <span class="text-slate-200 block text-xs group-hover:text-sky-300 font-semibold">Viral Kanca</span>
+                  <span class="text-[9px] text-slate-500 block truncate">0-3s Hook & Ritim</span>
+                </div>
+              </button>
+              <button onclick="wearWardrobePrompt('Remotion Kod & Hareket')" class="w-full p-2 rounded-xl border border-slate-800 hover:border-amber-500/40 bg-obsidian-950 hover:bg-amber-500/10 text-left flex items-center gap-2 transition group">
+                <span class="text-base">🎬</span>
+                <div class="truncate">
+                  <span class="text-slate-200 block text-xs group-hover:text-amber-300 font-semibold">Remotion Kod</span>
+                  <span class="text-[9px] text-slate-500 block truncate">Saf SVG & Tipografi</span>
+                </div>
+              </button>
+              <button onclick="wearWardrobePrompt('Turso Ses & Helal Akustik')" class="w-full p-2 rounded-xl border border-slate-800 hover:border-purple-500/40 bg-obsidian-950 hover:bg-purple-500/10 text-left flex items-center gap-2 transition group">
+                <span class="text-base">🎙️</span>
+                <div class="truncate">
+                  <span class="text-slate-200 block text-xs group-hover:text-purple-300 font-semibold">Turso Ses</span>
+                  <span class="text-[9px] text-slate-500 block truncate">121 Ses Havuzu</span>
+                </div>
+              </button>
+              <button onclick="wearWardrobePrompt('48 Kare Görsel Denetçi')" class="w-full p-2 rounded-xl border border-slate-800 hover:border-rose-500/40 bg-obsidian-950 hover:bg-rose-500/10 text-left flex items-center gap-2 transition group">
+                <span class="text-base">👁️</span>
+                <div class="truncate">
+                  <span class="text-slate-200 block text-xs group-hover:text-rose-300 font-semibold">48 Kare Denetim</span>
+                  <span class="text-[9px] text-slate-500 block truncate">Görsel Estetik</span>
+                </div>
+              </button>
+            </div>
+
+            <!-- Hafıza & API Durumu -->
+            <div class="mt-auto pt-2 border-t border-slate-800/80 space-y-1.5 text-[10px]">
+              <div class="flex items-center justify-between text-slate-400">
+                <span>Hafıza:</span>
+                <span id="sideHistoryCount" class="font-mono text-gold-400 font-bold">1 Mesaj</span>
+              </div>
+              <div class="flex items-center justify-between text-slate-400">
+                <span>API Havuzu:</span>
+                <span class="font-mono text-emerald-400 font-bold">136 Anahtar</span>
+              </div>
+              <button onclick="startNewChatSession()" class="w-full py-1.5 px-2 rounded-lg bg-gold-500/15 hover:bg-gold-500/25 text-gold-300 border border-gold-500/30 text-[10px] font-bold transition flex items-center justify-center gap-1 shadow-sm">
+                <i data-lucide="plus" class="w-3 h-3"></i> Yeni Sohbet Aç
+              </button>
             </div>
 
           </div>
@@ -368,9 +476,10 @@
             <div id="quickChipsBar" class="flex items-center gap-1.5 pb-2 overflow-x-auto no-scrollbar border-b border-slate-800/60 text-[11px]">
               <span class="text-slate-500 text-[10px] whitespace-nowrap">Hızlı Fikirler:</span>
               <button onclick="sendQuickPrompt('Bana çarpıcı bir İslami tefekkür konusu öner.')" class="px-2 py-0.5 rounded-full bg-gold-500/10 hover:bg-gold-500/20 text-gold-300 border border-gold-500/20 whitespace-nowrap transition">💡 Konu Öner</button>
-              <button onclick="sendQuickPrompt('Nemrut ve Firavun'un kibrinin bir sivrisinekle yıkılışı üzerine kurgu yapalım.')" class="px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap transition">🏛️ Nemrut & Firavun</button>
+              <button onclick="sendQuickPrompt('Nemrut ve Firavun\'un kibrinin yıkılışı üzerine 50 saniyelik bir video kurgulayalım.')" class="px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap transition">🏛️ Nemrut & Firavun</button>
               <button onclick="sendQuickPrompt('Kün Fe Yekûn: Kâinattaki İlahi Kudret ve Mâtürîdî İtikadı üzerine kurgulayalım.')" class="px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap transition">🌌 Kün Fe Yekûn</button>
-              <button onclick="sendQuickPrompt('Kalbin sessiz zikri ve 100.000 kalp atışındaki acziyet üzerine çalışalım.')" class="px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap transition">💓 Kalbin Zikri</button>
+              <button onclick="sendQuickPrompt('Bu senaryoya Turso havuzumuzdan hangi derviş veya hatip sesi en uygun?')" class="px-2 py-0.5 rounded-full bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 whitespace-nowrap transition">🎙️ Turso Sesi Seç</button>
+              <button onclick="sendQuickPrompt('Remotion tipografi ve sahne geçiş kodlarını planlayalım.')" class="px-2 py-0.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 whitespace-nowrap transition">🎬 Remotion Kurgu</button>
             </div>
 
             <!-- Sohbet Mesajları Akış Alanı -->
@@ -954,193 +1063,151 @@
       lucide.createIcons();
       initWaveSurfer();
       initErrorStore();
-      buildTeacherChannelsSidebar();
       loadKeyPoolStatus();
-      loadAgents();
       loadState();
       loadAudioLibrary();
-      initDefaultChannelMessage();
+      loadDirectorStatus();
+      loadChatHistory();
     });
 
     // ===============================================================
-    // ÇOK KANALLI İLETİŞİM MOTORU (CHANNELS & UNREAD TRACKING)
+    // BAŞYÖNETMEN SELİM BEY - CANLI GEMİNİ MOTORU & KALICI HAFIZA
     // ===============================================================
 
-    function buildTeacherChannelsSidebar() {
-      const container = document.getElementById('teacherChannelsList');
-      if (!container) return;
-      container.innerHTML = '';
+    let currentActiveWardrobe = "Başyönetmen (Tüm Yetkinlikler)";
 
-      TEACHERS_META.forEach(t => {
-        const btn = document.createElement('button');
-        btn.id = `chanBtn-${t.id}`;
-        btn.onclick = () => switchChannel(t.id);
-        btn.className = 'channel-item w-full p-2 rounded-xl border border-transparent text-left flex items-center justify-between gap-1.5 transition hover:bg-slate-800/60 group relative';
-        btn.innerHTML = `
-          <div class="flex items-center gap-2 overflow-hidden">
-            <span class="text-base">${t.avatar}</span>
-            <div class="truncate">
-              <strong class="text-xs text-slate-200 block truncate group-hover:text-gold-300">${t.name}</strong>
-              <span class="text-[9px] text-slate-500 block truncate">${t.role.split('&')[0]}</span>
-            </div>
-          </div>
-          <div class="flex items-center gap-1">
-            <span id="unread-${t.id}" class="hidden text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-red-500 text-white font-mono shadow-sm">0</span>
-            <span id="chanWorking-${t.id}" class="hidden w-2 h-2 rounded-full bg-amber-400 animate-ping" title="Üzerinde Çalışıyor..."></span>
-          </div>
-        `;
-        container.appendChild(btn);
-      });
-    }
+    async function loadDirectorStatus() {
+      try {
+        const res = await fetch('/api/director/status');
+        if (!res.ok) return;
+        const data = await res.json();
+        currentActiveWardrobe = data.active_wardrobe || currentActiveWardrobe;
+        
+        const sideWardrobe = document.getElementById('sideActiveWardrobe');
+        if (sideWardrobe) sideWardrobe.innerText = currentActiveWardrobe;
 
-    function switchChannel(channelId) {
-      activeChannelId = channelId;
-
-      // 1. Kenar çubuğu butonlarının aktiflik durumunu güncelle
-      document.querySelectorAll('.channel-item').forEach(b => {
-        b.classList.remove('active', 'border-gold-500/40', 'bg-gold-500/15');
-      });
-      const activeBtn = document.getElementById(`chanBtn-${channelId}`);
-      if (activeBtn) {
-        activeBtn.classList.add('active', 'border-gold-500/40', 'bg-gold-500/15');
-      }
-
-      // 2. Okunmamış mesaj sayacını sıfırla
-      unreadCounts[channelId] = 0;
-      updateUnreadBadgeUI(channelId);
-
-      // 3. Kanal Üst Künyesini Güncelle
-      const avatarEl = document.getElementById('activeChannelAvatar');
-      const titleEl = document.getElementById('activeChannelTitle');
-      const badgeEl = document.getElementById('activeChannelBadge');
-      const descEl = document.getElementById('activeChannelDesc');
-      const chipsBar = document.getElementById('quickChipsBar');
-      const chatInput = document.getElementById('chatInput');
-
-      if (channelId === 'general') {
-        avatarEl.innerText = '👥';
-        titleEl.innerText = 'İstişare Meclisi (Genel Heyet)';
-        badgeEl.innerText = 'Moderatör: Selim Hoca';
-        descEl.innerText = 'Tüm hocalarımızın sıralı, derin düşünceyle istişare ettiği genel meclis salonu';
-        if (chipsBar) chipsBar.classList.remove('hidden');
-        if (chatInput) chatInput.placeholder = "Sayın Müdürüm, Selim Hoca'ya fikir verin veya meclise hitap edin (veya 'fikir ver')...";
-      } else {
-        const meta = TEACHERS_META.find(t => t.id === channelId) || TEACHERS_META[0];
-        avatarEl.innerText = meta.avatar;
-        titleEl.innerText = `${meta.full_title} ile Birebir`;
-        badgeEl.innerText = 'Derin Düşünme Odası';
-        descEl.innerText = `${meta.role} • İkili iletişim ve fıkhi/teknik istişare`;
-        if (chipsBar) chipsBar.classList.add('hidden');
-        if (chatInput) chatInput.placeholder = `${meta.name} Hocamıza doğrudan bir soru sorun veya talimat verin...`;
-      }
-
-      // 4. Sohbet akışını bu kanalın mesajlarıyla doldur
-      renderChannelFeed(channelId);
-    }
-
-    function updateUnreadBadgeUI(channelId) {
-      const badge = document.getElementById(`unread-${channelId}`);
-      if (!badge) return;
-      const count = unreadCounts[channelId] || 0;
-      if (count > 0) {
-        badge.innerText = count > 99 ? '99+' : count;
-        badge.classList.remove('hidden');
-      } else {
-        badge.classList.add('hidden');
+        const apiBadge = document.getElementById('directorApiBadge');
+        if (apiBadge && data.last_model_used) {
+          apiBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Canlı ${data.last_model_used}`;
+        }
+      } catch (e) {
+        console.warn('Director status yüklenemedi:', e);
       }
     }
 
-    function initDefaultChannelMessage() {
-      if (channelLogsStore['general'].length === 0) {
-        const welcomeMsg = {
-          timestamp: new Date().toLocaleTimeString(),
-          sender_id: '01_basyonetmen',
-          sender_name: 'Başöğretmen Selim Hoca',
-          receiver_name: 'Sayın Müdürümüz (Müdürlük Makamı)',
-          phase: 'KARSILAMA',
-          badge: 'MECLİS ÇEVRİMİÇİ',
-          message: 'Selâmün Aleyküm Sayın Müdürüm. 11 Uzman Hocamızla İstişare Meclisimizde emrinizdeyiz. Bugün hangi hakikati veya Esma-ül Hüsna tefekkürünü kalplere ulaştıralım? Aklınızdaki fikri yazın veya bana "fikir ver" deyin; birlikte olgunlaştıralım!'
-        };
-        channelLogsStore['general'].push(welcomeMsg);
-        channelLogsStore['01_basyonetmen'].push(welcomeMsg);
-      }
-      renderChannelFeed('general');
-    }
-
-    function renderChannelFeed(channelId) {
+    async function loadChatHistory() {
       const feed = document.getElementById('logFeed');
       if (!feed) return;
-      feed.innerHTML = '';
 
-      const msgs = channelLogsStore[channelId] || [];
-      document.getElementById('logCountBadge').innerText = `${msgs.length} Mesaj`;
+      try {
+        const res = await fetch('/api/chat/history');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const history = data.history || [];
 
-      if (msgs.length === 0) {
-        const meta = TEACHERS_META.find(t => t.id === channelId);
-        const name = meta ? meta.full_title : 'Hocamız';
-        const avatar = meta ? meta.avatar : '🤖';
-        feed.innerHTML = `
-          <div class="p-4 rounded-xl bg-obsidian-950/60 border border-slate-800 text-center space-y-2 my-auto">
-            <span class="text-3xl block">${avatar}</span>
-            <strong class="text-gold-400 text-xs block">${name} ile Özel İstişare Odası</strong>
-            <p class="text-[11px] text-slate-400 max-w-sm mx-auto">
-              Bu odada ${name}'ın Başöğretmen Selim Hoca ile olan ikili vazife diyaloglarını görebilir ve doğrudan kendisiyle derin düşünme modunda istişare edebilirsiniz.
-            </p>
-          </div>
-        `;
-        return;
+        feed.innerHTML = '';
+        history.forEach(m => {
+          appendMessageBubbleToFeed(m, false);
+        });
+
+        const badge = document.getElementById('logCountBadge');
+        if (badge) badge.innerText = `${history.length} Mesaj`;
+
+        const sideCount = document.getElementById('sideHistoryCount');
+        if (sideCount) sideCount.innerText = `${history.length} Mesaj`;
+
+        if (data.director_status) {
+          currentActiveWardrobe = data.director_status.active_wardrobe || currentActiveWardrobe;
+          const sideWardrobe = document.getElementById('sideActiveWardrobe');
+          if (sideWardrobe) sideWardrobe.innerText = currentActiveWardrobe;
+        }
+
+        feed.scrollTop = feed.scrollHeight;
+        lucide.createIcons();
+      } catch (e) {
+        console.error('Sohbet geçmişi yüklenemedi:', e);
       }
+    }
 
-      msgs.forEach(m => {
-        appendMessageBubbleToFeed(m, false);
+    function formatMarkdown(text) {
+      if (!text) return '';
+      let html = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      // Code blocks ```code```
+      html = html.replace(/```([a-zA-Z]*)\n([\s\S]*?)```/g, (match, lang, code) => {
+        return `<pre class="my-2 p-2.5 rounded-lg bg-obsidian-950 border border-slate-700 text-gold-300 font-mono text-[11px] overflow-x-auto whitespace-pre"><code>${code}</code></pre>`;
       });
-      feed.scrollTop = feed.scrollHeight;
-      lucide.createIcons();
+
+      // Inline code `code`
+      html = html.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-obsidian-900 text-gold-300 font-mono text-[11px] border border-slate-700">$1</code>');
+
+      // Bold **text**
+      html = html.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-gold-300 font-semibold">$1</strong>');
+
+      // Italic *text*
+      html = html.replace(/\*([^*]+)\*/g, '<em class="text-slate-300 italic">$1</em>');
+
+      // Line breaks
+      html = html.replace(/\n/g, '<br/>');
+
+      return html;
     }
 
     function appendMessageBubbleToFeed(m, shouldScroll = true) {
       const feed = document.getElementById('logFeed');
       if (!feed) return;
 
-      const isUser = m.sender_id === 'user';
+      const isUser = m.role === 'user' || m.sender_id === 'user';
       const item = document.createElement('div');
 
       if (isUser) {
-        item.className = 'p-3 rounded-xl bg-obsidian-900 border border-slate-700 ml-6 text-xs space-y-1 shadow-sm';
+        item.className = 'p-3 rounded-xl bg-obsidian-900/90 border border-slate-700 ml-6 text-xs space-y-1 shadow-sm';
         item.innerHTML = `
           <div class="flex items-center justify-between text-[10px] text-slate-400 mb-0.5">
-            <span class="text-sky-400 font-bold flex items-center gap-1"><span>👤</span> ${m.sender_name || 'Sayın Müdürümüz'}</span>
+            <span class="text-sky-400 font-bold flex items-center gap-1"><span>👤</span> ${m.sender_name || 'Sayın Yönetmenimiz'}</span>
             <span class="font-mono text-slate-500">${m.timestamp || ''}</span>
           </div>
-          <p class="text-slate-100 leading-relaxed whitespace-pre-line">${m.message}</p>
+          <div class="text-slate-100 leading-relaxed">${formatMarkdown(m.message)}</div>
         `;
       } else {
-        const borderColor = getAgentBorderColor(m.sender_id || '');
-        const avatar = getAgentAvatar(m.sender_id || '');
-        item.className = `p-3.5 rounded-xl bg-obsidian-950/95 border-l-4 ${borderColor} border-y border-r border-slate-800 text-xs space-y-2 shadow-lg animate-fade-in transition-all`;
-        
-        let extraTag = '';
-        if (m.payload && m.payload.score) {
-          extraTag = `<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold">${m.payload.score}/100</span>`;
+        const wardrobe = m.wardrobe || currentActiveWardrobe || 'Başyönetmen (Tüm Yetkinlikler)';
+        const modelBadge = m.badge || 'BAŞYÖNETMEN';
+
+        const hasScriptLines = /\d+\.\s+[^\n]+/.test(m.message);
+
+        let scriptActionHtml = '';
+        if (hasScriptLines) {
+          scriptActionHtml = `
+            <div class="pt-2 border-t border-gold-500/20 flex justify-end">
+              <button onclick="loadMessageScriptToStudio(this)" 
+                      class="px-2.5 py-1.5 rounded-lg bg-gold-500/20 hover:bg-gold-500/30 text-gold-300 border border-gold-500/40 text-[11px] font-bold flex items-center gap-1.5 transition shadow">
+                <span>📋</span> <span>Bu Senaryoyu Pre-Render'a Aktar</span>
+              </button>
+            </div>
+          `;
         }
 
+        item.className = 'p-3.5 rounded-xl bg-obsidian-950/95 border-l-4 border-l-gold-500 border-y border-r border-slate-800 text-xs space-y-2 shadow-lg animate-fade-in transition-all';
+        item.dataset.rawMessage = m.message;
         item.innerHTML = `
           <div class="flex items-center justify-between text-[11px] text-slate-400 pb-1 border-b border-slate-800/60">
             <span class="font-bold flex items-center gap-1.5 text-slate-200">
-              <span class="text-base">${avatar}</span>
-              <span class="text-gold-400">${m.sender_name || 'Uzman Hoca'}</span>
-              ${m.receiver_name ? `<span class="text-slate-500 font-normal">➔ ${m.receiver_name}</span>` : ''}
+              <span class="text-base">🎬</span>
+              <span class="text-gold-400 font-display">Başyönetmen Selim Bey</span>
+              <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-gold-500/10 text-gold-400 border border-gold-500/20">${wardrobe}</span>
             </span>
             <span class="font-mono text-slate-500 text-[10px]">${m.timestamp || ''}</span>
           </div>
           <div class="flex items-center gap-2">
-            <span class="inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-gold-300 border border-slate-700/80 shadow-sm">${m.badge || 'GÖREV'}</span>
-            ${extraTag}
+            <span class="inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-gold-300 border border-slate-700/80 shadow-sm">${modelBadge}</span>
           </div>
-          <!-- TAM VE KISALTILMAMIŞ METİN -->
-          <div class="text-slate-200 leading-relaxed whitespace-pre-line text-xs font-normal selection:bg-gold-500/30 break-words">
-            ${m.message}
+          <div class="text-slate-200 leading-relaxed text-xs font-normal selection:bg-gold-500/30 break-words message-content">
+            ${formatMarkdown(m.message)}
           </div>
+          ${scriptActionHtml}
         `;
       }
 
@@ -1148,12 +1215,12 @@
       if (shouldScroll) {
         feed.scrollTop = feed.scrollHeight;
       }
-      document.getElementById('logCountBadge').innerText = `${feed.children.length} Mesaj`;
-    }
 
-    // ===============================================================
-    // MESAJLAŞMA VE DERİN DÜŞÜNME (CHAT ENGINE)
-    // ===============================================================
+      const badge = document.getElementById('logCountBadge');
+      if (badge) badge.innerText = `${feed.children.length} Mesaj`;
+      const sideCount = document.getElementById('sideHistoryCount');
+      if (sideCount) sideCount.innerText = `${feed.children.length} Mesaj`;
+    }
 
     async function sendChatMessage() {
       const input = document.getElementById('chatInput');
@@ -1163,103 +1230,154 @@
       input.value = '';
       const nowStr = new Date().toLocaleTimeString();
 
-      // Kullanıcı mesaj objesi
       const userEntry = {
+        role: 'user',
         timestamp: nowStr,
         sender_id: 'user',
-        sender_name: 'Sayın Müdürümüz (Müdürlük Makamı)',
-        receiver_name: activeChannelId === 'general' ? 'Başöğretmen Selim Hoca' : (TEACHERS_META.find(t=>t.id===activeChannelId)||{}).name || 'Hocamız',
-        phase: 'TALIMAT',
-        badge: 'MÜDÜR TALİMATI',
+        sender_name: 'Sayın Yönetmenimiz',
+        receiver_name: 'Başyönetmen Selim Bey',
+        badge: 'YÖNETMEN TALİMATI',
+        wardrobe: currentActiveWardrobe,
         message: text
       };
 
-      // Aktif kanala kaydet ve ekrana bas
-      channelLogsStore[activeChannelId].push(userEntry);
       appendMessageBubbleToFeed(userEntry, true);
 
-      // Çalışıyor çubuğunu aç
       const workingBar = document.getElementById('agentWorkingBar');
       const workingText = document.getElementById('agentWorkingText');
       const activeModelTag = document.getElementById('activeModelTag');
 
-      const targetTeacher = TEACHERS_META.find(t => t.id === activeChannelId);
-      const teacherName = targetTeacher ? targetTeacher.full_title : 'Başöğretmen Selim Hoca';
-      workingText.innerText = `${teacherName} derin düşünme modunda istişare ediyor...`;
-      activeModelTag.innerText = currentActiveModel;
-      workingBar.classList.remove('hidden');
+      if (workingText) workingText.innerText = 'Başyönetmen Selim Bey canlı Gemini API üzerinden derinlemesine düşünüyor...';
+      if (activeModelTag) activeModelTag.innerText = currentActiveModel;
+      if (workingBar) workingBar.classList.remove('hidden');
 
       const sendBtn = document.getElementById('btnSendChat');
-      sendBtn.disabled = true;
+      if (sendBtn) sendBtn.disabled = true;
 
       try {
-        const historyList = (channelLogsStore[activeChannelId] || []).map(m => ({
-          sender: m.sender_id === 'user' ? 'user' : 'agent',
-          text: m.message
-        }));
-
         const res = await fetch('/api/chat/message', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            channel_id: activeChannelId,
             message: text,
-            history: historyList,
             model: currentActiveModel
           })
         });
 
         if (!res.ok) {
-          throw new Error(`HTTP ${res.status}: Sunucu hatası`);
+          throw new Error(`HTTP ${res.status}: Sunucu yanıt vermedi`);
         }
 
         const data = await res.json();
-        workingBar.classList.add('hidden');
+        if (workingBar) workingBar.classList.add('hidden');
 
-        const replyText = data.reply || data.message || 'Hürmetler Sayın Müdürüm; vazifeyi derinlemesine tetkik ediyorum.';
+        if (data.active_wardrobe) {
+          currentActiveWardrobe = data.active_wardrobe;
+          const sideWardrobe = document.getElementById('sideActiveWardrobe');
+          if (sideWardrobe) sideWardrobe.innerText = currentActiveWardrobe;
+        }
+
         const replyEntry = {
+          role: 'model',
           timestamp: new Date().toLocaleTimeString(),
-          sender_id: data.agent_id || activeChannelId,
-          sender_name: data.agent_name || teacherName,
-          receiver_name: 'Sayın Müdürümüz (Müdürlük Makamı)',
-          phase: 'ISTISARE_YANITI',
+          sender_id: '01_basyonetmen',
+          sender_name: 'Başyönetmen Selim Bey',
+          receiver_name: 'Sayın Yönetmenimiz',
           badge: `DERİN DÜŞÜNCE [${data.model_used || currentActiveModel}]`,
-          message: replyText
+          wardrobe: data.active_wardrobe || currentActiveWardrobe,
+          message: data.reply
         };
 
-        channelLogsStore[activeChannelId].push(replyEntry);
         appendMessageBubbleToFeed(replyEntry, true);
 
-        // Eğer Selim Hoca konu netleştirdiyse konuyu güncelle
         if (data.suggested_topic) {
-          document.getElementById('topicInput').value = data.suggested_topic;
+          const topicInput = document.getElementById('topicInput');
+          if (topicInput) topicInput.value = data.suggested_topic;
         }
 
       } catch (e) {
-        workingBar.classList.add('hidden');
+        if (workingBar) workingBar.classList.add('hidden');
         logSystemError({
           error_type: 'CHAT_REQUEST_ERROR',
-          step: `Sohbet İstişaresi (${activeChannelId})`,
+          step: 'Başyönetmen İstişaresi',
           model: currentActiveModel,
-          agent_id: activeChannelId,
-          message: `Mesaj gönderilemedi: ${e.message || e}`,
+          agent_id: '01_basyonetmen',
+          message: `Mesaj iletilemedi: ${e.message || e}`,
           traceback: String(e.stack || e)
         });
-        alert('İstişare bağlantı hatası oluştu. Detaylar Hata Paneline kaydedildi: ' + e);
+        alert('Canlı istişare bağlantısında bir sorun oluştu: ' + e);
       } finally {
-        sendBtn.disabled = false;
+        if (sendBtn) sendBtn.disabled = false;
         lucide.createIcons();
       }
     }
 
-    function sendQuickPrompt(promptText) {
-      document.getElementById('chatInput').value = promptText;
-      sendChatMessage();
+    async function startNewChatSession() {
+      if (!confirm('Mevcut sohbet oturumu arşive kaldırılacak ve temiz yeni bir istişare oturumu başlatılacak. Onaylıyor musunuz?')) {
+        return;
+      }
+      try {
+        const res = await fetch('/api/chat/new', { method: 'POST' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        await loadChatHistory();
+        await loadDirectorStatus();
+      } catch (e) {
+        alert('Yeni sohbet başlatılamadı: ' + e);
+      }
     }
 
-    function clearCurrentChannelUI() {
-      channelLogsStore[activeChannelId] = [];
-      renderChannelFeed(activeChannelId);
+    async function clearChatHistoryConfirm() {
+      if (!confirm('Sohbet geçmişi ve tüm konuşmalar tamamen silinecek. Emin misiniz?')) {
+        return;
+      }
+      try {
+        const res = await fetch('/api/chat/clear', { method: 'POST' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        await loadChatHistory();
+        await loadDirectorStatus();
+      } catch (e) {
+        alert('Sohbet silinemedi: ' + e);
+      }
+    }
+
+    function wearWardrobePrompt(wardrobeName) {
+      currentActiveWardrobe = wardrobeName;
+      const sideWardrobe = document.getElementById('sideActiveWardrobe');
+      if (sideWardrobe) sideWardrobe.innerText = wardrobeName;
+
+      const input = document.getElementById('chatInput');
+      if (input) {
+        input.value = `Selim Bey, "${wardrobeName}" elbiseni kuşanarak şu konuyu ele alalım: `;
+        input.focus();
+      }
+    }
+
+    function loadMessageScriptToStudio(btn) {
+      const parent = btn.closest('[data-raw-message]');
+      if (!parent) return;
+      const rawText = parent.dataset.rawMessage;
+
+      const lines = [];
+      const rawLines = rawText.split('\n');
+      for (const line of rawLines) {
+        const trimmed = line.trim();
+        const match = trimmed.match(/^\d+[\.\)]\s*(?:\*\*)?(.*?)(?:\*\*)?$/);
+        if (match && match[1].length > 5) {
+          lines.push(match[1].trim());
+        }
+      }
+
+      const scriptEditor = document.getElementById('scriptEditor');
+      if (scriptEditor) {
+        if (lines.length > 0) {
+          scriptEditor.value = lines.join('\n');
+        } else {
+          scriptEditor.value = rawText;
+        }
+        updateScenesCount();
+        alert('Senaryo başarıyla Pre-Render Masası metin editörüne yüklendi!');
+        switchPreRenderTab('script');
+      }
     }
 
     // ===============================================================
@@ -2340,7 +2458,7 @@
         thumb.onclick = () => openLightbox(imgUrl, `Sahne 0${i} (1920x1080 Full HD)`);
         thumb.innerHTML = `
           <div class="aspect-video bg-black relative overflow-hidden">
-            <img src="${imgUrl}" alt="Sahne 0${i}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='production_output/keyframes/keyframe_scene_0${i}_v2.jpg'">
+            <img src="${imgUrl}" alt="Sahne 0${i}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.onerror=null; this.src='/out/hud-112/pano.jpg';">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
               <span class="text-[10px] font-bold text-gold-400">Sahne 0${i}</span>
             </div>

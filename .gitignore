@@ -57,3 +57,7 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+# Local Chat Sessions & Archives
+brain/chat_archives/
+brain/director_chat_history.json

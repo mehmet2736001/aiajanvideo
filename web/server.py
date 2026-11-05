@@ -18,6 +18,7 @@ from typing import List, Optional, Dict, Any
 
 from core.orchestrator import StudioOrchestrator
 from core.turso_client import TursoVoiceClient
+from core.director_brain import DirectorBrain
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 AGENTS_DIR = os.path.join(BASE_DIR, "brain", "agents")
@@ -44,6 +45,7 @@ if os.path.exists(os.path.join(BASE_DIR, "public")):
 
 orchestrator = StudioOrchestrator()
 turso_client = TursoVoiceClient()
+director_brain = DirectorBrain()
 CURRENT_VOICE = "dervis"
 
 # Memory state
@@ -210,15 +212,52 @@ async def get_history():
 
 class ChatMessage(BaseModel):
     message: str
+    channel_id: Optional[str] = None
+    history: Optional[List[Dict[str, Any]]] = None
+    model: Optional[str] = None
 
 @app.post("/api/chat/message")
 async def handle_chat(msg: ChatMessage):
     user_text = msg.message.strip()
+    result = director_brain.chat(user_text)
+    if "error" in result:
+        return JSONResponse(status_code=400, content=result)
+    
+    # Eğer Selim Bey yeni bir konu önerdiyse state'e de yansıt
+    if result.get("suggested_topic"):
+        CURRENT_STATE["pre_render_package"]["topic"] = result["suggested_topic"]
+
     return {
-        "reply": f"Selim Bey (Başyönetmen): Mesajınızı aldım ('{user_text}'). 16 ajanlık hükümetimiz emirleriniz doğrultusunda hazırlanıyor.",
-        "sender": "Selim Bey (Başyönetmen)",
+        "status": "success",
+        "reply": result["reply"],
+        "sender": "Başyönetmen Selim Bey",
+        "model_used": result.get("model_used", "gemini-3.8-flash"),
+        "active_wardrobe": result.get("active_wardrobe", "Başyönetmen (Tüm Yetkinlikler)"),
+        "total_turns": result.get("total_turns", 1),
+        "suggested_topic": result.get("suggested_topic"),
         "package": CURRENT_STATE.get("pre_render_package")
     }
+
+@app.get("/api/chat/history")
+async def get_chat_history():
+    return {
+        "status": "success",
+        "history": director_brain.get_history(),
+        "director_status": director_brain.get_status()
+    }
+
+@app.post("/api/chat/new")
+async def new_chat_session():
+    return director_brain.new_session()
+
+@app.post("/api/chat/clear")
+@app.delete("/api/chat/history")
+async def clear_chat_history():
+    return director_brain.clear_history()
+
+@app.get("/api/director/status")
+async def get_director_status():
+    return director_brain.get_status()
 
 class ProduceRequest(BaseModel):
     project_slug: str
