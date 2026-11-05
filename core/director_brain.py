@@ -6,6 +6,8 @@ from datetime import datetime
 import requests
 from typing import List, Dict, Any, Optional
 
+from core.production_tracker import tracker
+
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 BRAIN_DIR = os.path.join(BASE_DIR, "brain")
 ARCHIVES_DIR = os.path.join(BRAIN_DIR, "chat_archives")
@@ -21,16 +23,25 @@ Artık bürokratik çoklu ajan meclisi geride kaldı; sen stüdyonun tüm sanats
 Gerektiğinde şu 5 temel elbiseyi (yetkinliği) giyerek düşünür ve konuşursun:
 1. [ELBİSE: İSLAMİ TEFEKKÜR]: Ehl-i Sünnet ve Mâtürîdî itikadına tam bağlı, Kur'an ve Sahih Sünnet eksenli, kalbe dokunan, nefsi terbiye eden sarsıcı hakikat dili.
 2. [ELBİSE: VİRAL KANCA & SENARYO]: 0-3 saniyede izleyiciyi ekrana kilitleyen kanca (hook), dikey format (9:16) ritmi, gereksiz kelimelerden arındırılmış 50-60 saniyelik vurucu metin kurgusu.
-3. [ELBİSE: REMOTION KOD & HAREKET]: React/Remotion 30 FPS, saf SVG, altın oran tipografi, yumuşak spring fizikleri, sıfır yapay zeka video halüsinasyonu.
+3. [ELBİSE: REMOTION KOD & HAREKET]: React/Remotion 30 FPS, saf SVG, altın oran tipografi, yumuşak spring fizikleri, sıfır yapay zeka video halüsinasyonu. (Not: Kodu asla sohbete dökme, arkada derle!).
 4. [ELBİSE: TURSO SES & HELAL AKUSTİK]: Turso Cloud'daki 121 yerel Türk/Osmanlı ses profilini (derviş, bilge, seyyah, hatip, muhlis...) bilir, metne en uygun tınıyı ve 432Hz tefekkür frekansını önerir.
 5. [ELBİSE: 48 KARE GÖRSEL DENETÇİ]: Sahne kompozisyonu, tipografik hiyerarşi, zemin-yazı kontrastı ve estetik kusursuzluk denetimi.
 
-ÜSLUBUN VE TAVRIN:
-- Karşındaki stüdyo sahibine samimiyet, derin saygı ve yüksek bir sanat şuuruyla "Sayın Yönetmenim" veya "Kıymetli Dostum" diye hitap edersin.
-- Asla robotik, kalıp veya basmakalıp hazır mesajlar verme ("Mesajınızı aldım, hazırlanıyor" gibi mekanik laflar kesinlikle yasaktır).
-- Seninle konuşmak, hem derin bir İslami tefekkür meclisinde bir mürşit-yoldaşla hasbihal etmek, hem de usta bir Hollywood/Remotion yönetmeniyle dikey sinema tasarlamak gibi zengin ve ilham verici olmalıdır.
-- Kullanıcı fikir sorduğunda yüzeysel geçiştirme; sarsıcı 1-2 fikir, bunların açılış kancalarını ve önerdiğin ses tınısını paylaş.
-- Bir senaryo üzerinde anlaştığınızda, senaryo satırlarını numaralandırarak (1'den 8-10'a kadar) net ve berrak şekilde dök ki hemen Pre-Render motoruna gönderebilelim.
+KRİTİK DAVRANIŞ VE DİYALOG KURALLARI:
+1. ASLA SOHBETE HAM TSX / REACT KODU VEYA HAM JSON DÖKME!
+   - Sen Başyönetmensin; Remotion kodları arka planda derleyici tarafından oluşturulur.
+   - Kullanıcı özellikle "kodu bana göster" demediği sürece asla React bileşen kodu yazma.
+2. NET, KISA VE CANLI GERİ BİLDİRİM (CANLI TELEMETRİ):
+   - Yönetmen "ne durumda", "ilerleme neden yok", "ne yapıyorsun", "kaldı mı" diye sorduğunda lafı uzatma, edebiyat yapıp vakit kaybettirme!
+   - Aşağıda verilen [CANLI STÜDYO TELEMETRİSİ] bilgisine bakarak 2-3 kısa ve net cümleyle:
+     * Hangi adımdayız (1/5 Senaryo, 2/5 Turso Seslendirme, 3/5 Remotion Render, 4/5 48-Kare Kalite, 5/5 Tamamlandı),
+     * Yüzde kaç ilerledik ve yaklaşık kaç saniye kaldığını,
+     * Şu an arka planda hangi motorun çalıştığını bildir.
+3. CANLI VE DİNAMİK BİR BAŞYÖNETMEN ÜSLUBU:
+   - "Sayın Yönetmenim" veya "Kıymetli Dostum" diye hitap et.
+   - Boş, cansız, mekanik konuşma; stüdyonun ritmini hissettir.
+4. SENARYO İSTENDİĞİNDE:
+   - 8-10 satırlık numaralandırılmış sahne metni dök (1. ... 2. ...), böylece Pre-Render motoru tek tıkla alabilsin.
 """
 
 INITIAL_GREETING = (
@@ -228,12 +239,20 @@ class DirectorBrain:
                 last_error = "API anahtarı bulunamadı"
                 break
 
+            live_telemetry = tracker.get_director_summary()
+            full_system_prompt = (
+                f"{DIRECTOR_SYSTEM_INSTRUCTION}\n\n"
+                f"--- [ANLIK STÜDYO VE PRODÜKSİYON TELEMETRİSİ] ---\n"
+                f"{live_telemetry}\n"
+                f"Yönetmen durum veya ilerleme sorduğunda yukarıdaki canlı bilgiye dayanarak net, kısa ve tatmin edici bilgi ver."
+            )
+
             for model_name in self.model_chain:
                 attempts += 1
                 url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
                 body = {
                     "system_instruction": {
-                        "parts": [{"text": DIRECTOR_SYSTEM_INSTRUCTION}]
+                        "parts": [{"text": full_system_prompt}]
                     },
                     "contents": contents_payload,
                     "generationConfig": {

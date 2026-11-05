@@ -377,6 +377,103 @@
       </div>
     </section>
 
+    <!-- 2.5. CANLI PRODÜKSİYON & HAYATİ İLERLEME MASASI (LIVE PRODUCTION HUD) -->
+    <section id="liveProductionHud" class="glass-panel rounded-2xl p-4 border border-gold-500/30 bg-gradient-to-r from-obsidian-950 via-obsidian-900 to-obsidian-950 shadow-2xl relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-64 h-64 bg-gold-500/5 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="flex flex-col gap-3.5 relative z-10">
+        
+        <!-- Üst Satır: Aşama Başlığı, Kalan Süre ve Canlı Durum -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div id="hudPulseDot" class="w-3.5 h-3.5 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/50">
+              <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono font-bold uppercase tracking-wider text-gold-400">Canlı Üretim Hattı:</span>
+                <span id="hudStepTitle" class="font-bold text-sm text-white">Stüdyo Hazır / Beklemede</span>
+                <span id="hudStatusBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">BEKLEMEDE</span>
+              </div>
+              <p id="hudStepDetail" class="text-xs text-slate-400 mt-0.5">Yönetmenden yeni bir tefekkür fikri veya senaryo onayı bekleniyor.</p>
+            </div>
+          </div>
+
+          <!-- Süre ve Yüzde Bilgisi -->
+          <div class="flex items-center gap-4 bg-obsidian-950/80 px-3.5 py-1.5 rounded-xl border border-slate-800 text-xs">
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span class="text-slate-400 text-[11px]">Geçen:</span>
+              <span id="hudTimerElapsed" class="font-mono font-bold text-slate-200">00:00</span>
+            </div>
+            <div class="w-px h-3.5 bg-slate-800"></div>
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="hourglass" class="w-3.5 h-3.5 text-gold-400"></i>
+              <span class="text-slate-400 text-[11px]">Kalan:</span>
+              <span id="hudTimerRemaining" class="font-mono font-bold text-gold-400">--</span>
+            </div>
+            <div class="w-px h-3.5 bg-slate-800"></div>
+            <div class="flex items-center gap-1">
+              <span id="hudPercentBadge" class="font-mono font-bold text-emerald-400 text-sm">%0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- İlerleme Çubuğu -->
+        <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden border border-slate-800/80 p-0.5 relative">
+          <div id="liveProgressBar" style="width: 0%" class="h-full bg-gradient-to-r from-gold-500 via-amber-400 to-emerald-400 rounded-full transition-all duration-500 relative shadow-md shadow-gold-500/20">
+            <span class="absolute right-0 top-0 bottom-0 w-2 bg-white/60 animate-pulse rounded-full"></span>
+          </div>
+        </div>
+
+        <!-- 5 Adım Stepper Haritası -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-1 text-[11px]">
+          
+          <div id="stepCard1" class="flex items-center gap-2 p-2 rounded-xl bg-obsidian-950/60 border border-slate-800/80 transition">
+            <div id="stepIcon1" class="w-6 h-6 rounded-lg bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold">1</div>
+            <div class="truncate">
+              <span class="block font-semibold text-slate-300 truncate">1. Senaryo & Kanca</span>
+              <span id="stepStatus1" class="text-[9px] text-slate-500 block">Bekleniyor</span>
+            </div>
+          </div>
+
+          <div id="stepCard2" class="flex items-center gap-2 p-2 rounded-xl bg-obsidian-950/60 border border-slate-800/80 transition">
+            <div id="stepIcon2" class="w-6 h-6 rounded-lg bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold">2</div>
+            <div class="truncate">
+              <span class="block font-semibold text-slate-300 truncate">2. Turso Seslendirme</span>
+              <span id="stepStatus2" class="text-[9px] text-slate-500 block">Bekleniyor</span>
+            </div>
+          </div>
+
+          <div id="stepCard3" class="flex items-center gap-2 p-2 rounded-xl bg-obsidian-950/60 border border-slate-800/80 transition">
+            <div id="stepIcon3" class="w-6 h-6 rounded-lg bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold">3</div>
+            <div class="truncate">
+              <span class="block font-semibold text-slate-300 truncate">3. Remotion 30 FPS</span>
+              <span id="stepStatus3" class="text-[9px] text-slate-500 block">Bekleniyor</span>
+            </div>
+          </div>
+
+          <div id="stepCard4" class="flex items-center gap-2 p-2 rounded-xl bg-obsidian-950/60 border border-slate-800/80 transition">
+            <div id="stepIcon4" class="w-6 h-6 rounded-lg bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold">4</div>
+            <div class="truncate">
+              <span class="block font-semibold text-slate-300 truncate">4. 48-Kare Kalite</span>
+              <span id="stepStatus4" class="text-[9px] text-slate-500 block">Bekleniyor</span>
+            </div>
+          </div>
+
+          <div id="stepCard5" class="flex items-center gap-2 p-2 rounded-xl bg-obsidian-950/60 border border-slate-800/80 transition">
+            <div id="stepIcon5" class="w-6 h-6 rounded-lg bg-slate-800 text-slate-400 flex items-center justify-center text-xs font-bold">5</div>
+            <div class="truncate">
+              <span class="block font-semibold text-slate-300 truncate">5. Master Video</span>
+              <span id="stepStatus5" class="text-[9px] text-slate-500 block">Bekleniyor</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
     <!-- 3. WORKSPACE: ÇOK KANALLI İLETİŞİM İSTASYONU & PRE-RENDER ONAY MASASI -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
@@ -517,11 +614,19 @@
               <!-- Mesajlar buraya akar -->
             </div>
 
+            <!-- Canlı İlerleme ve Süre Takip Rozeti (Sohbet Üstü) -->
+            <div id="chatLiveFeedbackBanner" class="hidden px-3.5 py-2 mb-2 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-between text-xs animate-pulse">
+              <div class="flex items-center gap-2 text-gold-300">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span id="chatLiveFeedbackText" class="font-medium">Adım 3/5: Remotion 30 FPS Render işleniyor... (Kalan: ~14 sn)</span>
+              </div>
+              <span id="chatLiveFeedbackPercent" class="font-mono font-bold text-emerald-400">%65</span>
+            </div>
             <!-- Canlı Öğretmen Çalışma / İstişare Çubuğu -->
             <div id="agentWorkingBar" class="hidden py-1.5 px-3 rounded-lg bg-gold-500/10 border border-gold-500/20 text-gold-300 text-[11px] flex items-center justify-between mb-2 animate-pulse">
               <div class="flex items-center gap-2">
                 <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i>
-                <span id="agentWorkingText">Başöğretmen Selim Hoca derin düşünme modunda istişare ediyor...</span>
+                <span id="agentWorkingText">Başyönetmen Selim Bey canlı Gemini 3.8 Flash üzerinden derinlemesine düşünüyor...</span>
               </div>
               <span id="activeModelTag" class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-gold-500/20 text-gold-300 border border-gold-500/40">gemini-3.8-flash</span>
             </div>
@@ -530,7 +635,7 @@
             <div class="pt-2 border-t border-slate-800 flex flex-col gap-2">
               <div class="flex items-center gap-2">
                 <input type="text" id="chatInput" onkeydown="if(event.key==='Enter') sendChatMessage()"
-                       placeholder="Sayın Müdürüm, Selim Hoca'ya fikir verin veya talimat yazın (veya 'fikir ver')..."
+                       placeholder="Sayın Yönetmenim, Selim Bey'e talimat verin veya soru sorun (örn: 'ne durumdayız', 'senaryo yaz')..."
                        class="flex-1 bg-obsidian-950 border border-slate-700 focus:border-gold-400 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 outline-none transition" />
                 <button onclick="sendChatMessage()" id="btnSendChat"
                         class="px-3.5 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-obsidian-950 font-bold text-xs flex items-center gap-1.5 transition active:scale-95 shadow">
@@ -1098,6 +1203,8 @@
       loadAudioLibrary();
       loadDirectorStatus();
       loadChatHistory();
+      pollProductionTracker();
+      setInterval(pollProductionTracker, 1200);
     });
 
     // ===============================================================
@@ -1211,10 +1318,14 @@
         let scriptActionHtml = '';
         if (hasScriptLines) {
           scriptActionHtml = `
-            <div class="pt-2 border-t border-gold-500/20 flex justify-end">
+            <div class="pt-2 border-t border-gold-500/20 flex flex-wrap items-center justify-end gap-2">
               <button onclick="loadMessageScriptToStudio(this)" 
                       class="px-2.5 py-1.5 rounded-lg bg-gold-500/20 hover:bg-gold-500/30 text-gold-300 border border-gold-500/40 text-[11px] font-bold flex items-center gap-1.5 transition shadow">
-                <span>📋</span> <span>Bu Senaryoyu Pre-Render'a Aktar</span>
+                <span>📋</span> <span>Pre-Render'a Aktar</span>
+              </button>
+              <button onclick="quickProduceFromMessage(this)" 
+                      class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold flex items-center gap-1.5 transition shadow shadow-emerald-600/30">
+                <span>🚀</span> <span>Tek Tıkla Üretime Başla (Ses + Render)</span>
               </button>
             </div>
           `;
@@ -1968,6 +2079,149 @@
         lucide.createIcons();
       }
     }
+
+    // ===============================================================
+    // CANLI PRODÜKSİYON TELEMETRİSİ & HUD TAKİP MOTORU
+    // ===============================================================
+
+    let lastTrackerStatus = 'IDLE';
+
+    function formatSeconds(secs) {
+      if (!secs || isNaN(secs) || secs < 0) return '00:00';
+      const m = Math.floor(secs / 60).toString().padStart(2, '0');
+      const s = Math.floor(secs % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    async function quickProduceFromMessage(btn) {
+      loadMessageScriptToStudio(btn);
+      const renderBtn = document.getElementById('btnApproveAndRender');
+      if (renderBtn) {
+        await approveAndStartRender();
+      }
+    }
+
+    async function pollProductionTracker() {
+      try {
+        const res = await fetch('/api/production/status');
+        if (!res.ok) return;
+        const data = await res.json();
+
+        // 1. Üst HUD Güncelle
+        const hudTitle = document.getElementById('hudStepTitle');
+        const hudDetail = document.getElementById('hudStepDetail');
+        const hudBadge = document.getElementById('hudStatusBadge');
+        const hudElapsed = document.getElementById('hudTimerElapsed');
+        const hudRemaining = document.getElementById('hudTimerRemaining');
+        const hudPercent = document.getElementById('hudPercentBadge');
+        const liveBar = document.getElementById('liveProgressBar');
+        const hudPulse = document.getElementById('hudPulseDot');
+
+        if (hudTitle) hudTitle.innerText = data.step_title || 'Stüdyo Beklemede';
+        if (hudDetail) hudDetail.innerText = data.step_detail || 'Yönetmenden yeni bir tefekkür fikri veya senaryo onayı bekleniyor.';
+        if (hudPercent) hudPercent.innerText = `%${data.progress_percent}`;
+        if (liveBar) liveBar.style.width = `${data.progress_percent}%`;
+        if (hudElapsed) hudElapsed.innerText = formatSeconds(data.elapsed_seconds);
+        if (hudRemaining) {
+          hudRemaining.innerText = data.status === 'COMPLETED' ? 'Tamamlandı' : 
+            (data.estimated_remaining_seconds > 0 ? `~${data.estimated_remaining_seconds} sn` : '--');
+        }
+
+        // Durum rozeti
+        if (hudBadge) {
+          if (data.status === 'COMPLETED') {
+            hudBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold';
+            hudBadge.innerText = '✓ YAYINDA';
+            if (hudPulse) hudPulse.className = 'w-3.5 h-3.5 rounded-full bg-emerald-500 flex items-center justify-center';
+          } else if (data.status === 'ERROR') {
+            hudBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 font-bold';
+            hudBadge.innerText = '⚠️ HATA';
+            if (hudPulse) hudPulse.className = 'w-3.5 h-3.5 rounded-full bg-red-500 flex items-center justify-center';
+          } else if (data.status === 'IDLE') {
+            hudBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700';
+            hudBadge.innerText = 'BEKLEMEDE';
+            if (hudPulse) hudPulse.className = 'w-3.5 h-3.5 rounded-full bg-slate-600 flex items-center justify-center';
+          } else {
+            hudBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold animate-pulse';
+            hudBadge.innerText = '⏳ İŞLENİYOR';
+            if (hudPulse) hudPulse.className = 'w-3.5 h-3.5 rounded-full bg-amber-400 flex items-center justify-center shadow-lg shadow-amber-400/50';
+          }
+        }
+
+        // 2. 5 Adım Stepper Kartlarını Güncelle
+        for (let i = 1; i <= 5; i++) {
+          const card = document.getElementById(`stepCard${i}`);
+          const icon = document.getElementById(`stepIcon${i}`);
+          const status = document.getElementById(`stepStatus${i}`);
+          if (!card || !icon || !status) continue;
+
+          if (i < data.step) {
+            card.className = 'flex items-center gap-2 p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 transition';
+            icon.className = 'w-6 h-6 rounded-lg bg-emerald-500 text-obsidian-950 flex items-center justify-center text-xs font-bold';
+            icon.innerHTML = '✓';
+            status.innerText = 'Tamamlandı';
+            status.className = 'text-[9px] text-emerald-400 font-semibold block';
+          } else if (i === data.step) {
+            card.className = 'flex items-center gap-2 p-2 rounded-xl bg-gold-500/15 border border-gold-400 shadow-md shadow-gold-500/10 transition animate-pulse';
+            icon.className = 'w-6 h-6 rounded-lg bg-gold-500 text-obsidian-950 flex items-center justify-center text-xs font-bold';
+            icon.innerHTML = `${i}`;
+            status.innerText = 'İşleniyor (Canlı)';
+            status.className = 'text-[9px] text-gold-300 font-bold block';
+          } else {
+            card.className = 'flex items-center gap-2 p-2 rounded-xl bg-obsidian-950/60 border border-slate-800/80 transition opacity-60';
+            icon.className = 'w-6 h-6 rounded-lg bg-slate-800 text-slate-500 flex items-center justify-center text-xs font-bold';
+            icon.innerHTML = `${i}`;
+            status.innerText = 'Sırada';
+            status.className = 'text-[9px] text-slate-500 block';
+          }
+        }
+
+        // 3. Sohbet Girişindeki Canlı Geri Bildirim Bannerı
+        const liveBanner = document.getElementById('chatLiveFeedbackBanner');
+        const liveBannerText = document.getElementById('chatLiveFeedbackText');
+        const liveBannerPercent = document.getElementById('chatLiveFeedbackPercent');
+        if (liveBanner && liveBannerText && liveBannerPercent) {
+          if (data.status !== 'IDLE' && data.status !== 'COMPLETED' && data.status !== 'ERROR') {
+            liveBanner.classList.remove('hidden');
+            liveBannerText.innerText = `Adım ${data.step}/5: ${data.step_title} (${(data.step_detail || '').substring(0, 48)}...)`;
+            liveBannerPercent.innerText = `%${data.progress_percent}`;
+          } else {
+            liveBanner.classList.add('hidden');
+          }
+        }
+
+        // 4. Tamamlanma Anı Reaksiyonu
+        if (data.status === 'COMPLETED' && lastTrackerStatus !== 'COMPLETED' && data.result_package) {
+          const pkg = data.result_package;
+          const masterVid = document.getElementById('masterVideoPlayer');
+          if (masterVid && pkg.video_url) {
+            masterVid.src = pkg.video_url + '?t=' + new Date().getTime();
+            masterVid.load();
+          }
+          const masterPano = document.getElementById('masterPanoImg');
+          if (masterPano && pkg.pano_url) {
+            masterPano.src = pkg.pano_url + '?t=' + new Date().getTime();
+          }
+
+          appendMessageBubbleToFeed({
+            role: 'model',
+            timestamp: new Date().toLocaleTimeString(),
+            sender_id: '01_basyonetmen',
+            sender_name: 'Başyönetmen Selim Bey',
+            receiver_name: 'Sayın Yönetmenimiz',
+            badge: '🎉 PRODÜKSİYON TAMAMLANDI',
+            wardrobe: 'Başyönetmen (Tüm Yetkinlikler)',
+            message: `**Sayın Yönetmenim, müjdeler olsun!**\n\n«${data.project_title}» projemiz 1080x1920 (9:16) dikey sinema formatında, 30 FPS kalitesi ve Turso sesiyle eksiksiz render edildi.\n\n- **Süre:** ${pkg.duration || 55} sn\n- **Kalite Notu:** [${pkg.score || 96}/100]\n\nMaster video ekranınıza aktarılmıştır, oynatıcıdan hemen izleyebilirsiniz.`
+          }, true);
+        }
+
+        lastTrackerStatus = data.status;
+
+      } catch (e) {
+        console.warn('Tracker poll error:', e);
+      }
+    }
+
 
     // Yetenek Gelişim Raporunu UI'ya Doldur
     function renderSkillEvolutionsUI(auditData) {

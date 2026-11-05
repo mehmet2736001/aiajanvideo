@@ -19,6 +19,7 @@ from typing import List, Optional, Dict, Any
 from core.orchestrator import StudioOrchestrator
 from core.turso_client import TursoVoiceClient
 from core.director_brain import DirectorBrain
+from core.production_tracker import tracker
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 AGENTS_DIR = os.path.join(BASE_DIR, "brain", "agents")
@@ -235,6 +236,7 @@ async def handle_chat(msg: ChatMessage):
         "active_wardrobe": result.get("active_wardrobe", "Başyönetmen (Tüm Yetkinlikler)"),
         "total_turns": result.get("total_turns", 1),
         "suggested_topic": result.get("suggested_topic"),
+        "tracker_status": tracker.get_status(),
         "package": CURRENT_STATE.get("pre_render_package")
     }
 
@@ -255,6 +257,16 @@ async def new_chat_session():
 async def clear_chat_history():
     return director_brain.clear_history()
 
+
+@app.get("/api/production/status")
+async def get_production_status():
+    return tracker.get_status()
+
+@app.post("/api/production/reset")
+async def reset_production_status():
+    tracker._init_state()
+    return {"status": "reset", "tracker": tracker.get_status()}
+
 @app.get("/api/director/status")
 async def get_director_status():
     return director_brain.get_status()
@@ -267,7 +279,7 @@ class ProduceRequest(BaseModel):
     voice_id: Optional[str] = None
 
 @app.post("/api/produce")
-async def produce_video(req: ProduceRequest):
+def produce_video(req: ProduceRequest):
     selected_voice = req.voice_id or CURRENT_VOICE
     result = orchestrator.produce_video_from_lines(
         project_slug=req.project_slug,

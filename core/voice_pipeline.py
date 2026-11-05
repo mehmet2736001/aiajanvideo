@@ -53,7 +53,17 @@ def synthesize_and_align(
             comm = edge_tts.Communicate(text, voice, rate="-4%", pitch="-1Hz")
             await comm.save(line_out)
 
-    asyncio.run(_synth())
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = None
+
+    if loop and loop.is_running():
+        import concurrent.futures
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+            executor.submit(lambda: asyncio.run(_synth())).result()
+    else:
+        asyncio.run(_synth())
 
     # 2. faster-whisper ile kelime senkronu çıkar
     model = WhisperModel("base", device="cpu", compute_type="int8")

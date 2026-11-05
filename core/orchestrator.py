@@ -14,6 +14,7 @@ if hasattr(sys.stderr, 'reconfigure'):
 from core.voice_pipeline import synthesize_and_align
 from core.vision_critic import generate_and_evaluate_pano
 from core.auto_cleanup import clean_temp_artifacts
+from core.production_tracker import tracker
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 BRAIN_DIR = os.path.join(BASE_DIR, "brain")
@@ -52,6 +53,8 @@ class StudioOrchestrator:
         print(f"🎙️ Seçilen Turso Sesi: {voice_id or 'dervis (Varsayılan)'}")
         print(f"=======================================================\n")
 
+        tracker.start(project_title=title, voice_name=voice_id or "dervis", total_lines=len(lines))
+
         # 1. Klasörleri hazırla
         proj_dir = os.path.join(PRODUCTION_OUT, project_slug)
         public_dir = os.path.join(BASE_DIR, "public", project_slug)
@@ -60,7 +63,18 @@ class StudioOrchestrator:
 
         # 2. [08_ses_frekans - Bora] Seslendirme ve Senkronizasyon
         print("🎙️ [08_ses_frekans] Seslendirme ve milisaniyelik kelime zamanlaması çıkarılıyor...")
-        voice_result = synthesize_and_align(lines, public_dir, voice_id=voice_id)
+        tracker.update_step(
+            step_num=2,
+            title="Turso Yerel Seslendirme & Senkronizasyon",
+            detail=f"Turso '{voice_id or 'dervis'}' sesi ile {len(lines)} sahne seslendiriliyor (432Hz ney & milisaniyelik hizalama)...",
+            percent=35,
+            est_remaining=25
+        )
+        try:
+            voice_result = synthesize_and_align(lines, public_dir, voice_id=voice_id)
+        except Exception as ve:
+            tracker.fail(f"Seslendirme hatası: {ve}")
+            raise ve
         duration = voice_result["duration_seconds"]
         word_count = voice_result["word_count"]
         print(f"   ✓ Ses tamamlandı: {duration:.2f} saniye, {word_count} kelime")
@@ -75,6 +89,13 @@ class StudioOrchestrator:
 
         # 4. [09_remotion_render - Kerem] Remotion 30 FPS Render
         print("🎨 [09_remotion_render] 1080x1920 30 FPS Remotion motoru çalıştırılıyor...")
+        tracker.update_step(
+            step_num=3,
+            title="30 FPS Remotion Dikey Render",
+            detail="1080x1920 dikey sinema React SVG sahneleri 30 FPS hızında derleniyor...",
+            percent=65,
+            est_remaining=15
+        )
         final_mp4 = os.path.join(proj_dir, f"{project_slug}.mp4")
 
         # Otomatik kompozisyon ID tespiti
@@ -111,10 +132,18 @@ class StudioOrchestrator:
             print(f"   ✓ Video render edildi: {final_mp4} ({os.path.getsize(final_mp4)/1024/1024:.2f} MB)")
         except Exception as e:
             print(f"   ✗ Render hatası: {e}")
+            tracker.fail(f"Remotion render hatası: {e}")
             return {"status": "error", "error": str(e)}
 
         # 5. [10_islami_video_analiz & 13_tarafsiz_denetci] 48 Karelik Pano Çıkarımı ve Kalite Denetimi
         print("🔍 [10_video_analiz] 48 karelik kontrol panosu çıkarılıyor ve denetleniyor...")
+        tracker.update_step(
+            step_num=4,
+            title="48-Kare Kalite & Estetik Denetimi",
+            detail="48 dikey kare tek tek taranıyor, kontrast ve tipografi puanı hesaplanıyor...",
+            percent=88,
+            est_remaining=5
+        )
         pano_path = os.path.join(proj_dir, "pano.jpg")
         critic_res = generate_and_evaluate_pano(final_mp4, pano_path, duration)
         score = critic_res.get("score", 95)
@@ -149,6 +178,19 @@ class StudioOrchestrator:
         print("🧹 [16_sistem_temizlik] Ara sesler ve geçici dosyalar temizleniyor...")
         cleaned = clean_temp_artifacts(public_dir)
         print(f"   ✓ Temizlenen artık dosya: {cleaned/1024:.1f} KB")
+
+        result_pkg = {
+            "project_slug": project_slug,
+            "title": title,
+            "video_url": f"/out/{project_slug}/{project_slug}.mp4",
+            "pano_url": f"/out/{project_slug}/pano.jpg",
+            "audio_url": f"/public/{project_slug}/ses.mp3",
+            "score": score,
+            "duration": duration,
+            "word_count": word_count
+        }
+
+        tracker.complete(result_pkg)
 
         print(f"\n✨ PRODÜKSİYON BAŞARIYLA TAMAMLANDI!")
         print(f"📁 Video Dosyası: {final_mp4}")
