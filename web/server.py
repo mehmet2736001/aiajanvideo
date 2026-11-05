@@ -27,7 +27,7 @@ PROD_DIR = os.path.join(BASE_DIR, "out")
 WEB_DIR = os.path.join(BASE_DIR, "web")
 KEYS_FILE = os.path.join(BASE_DIR, "api_keys.json")
 
-app = FastAPI(title="Nexus AI Video Studio (16 Ajanlı Hükümet)")
+app = FastAPI(title="Nexus AI Video Studio (Tek Başyönetmen Selim Bey)")
 
 app.add_middleware(
     CORSMiddleware,
@@ -186,7 +186,7 @@ async def prepare_materials(req: PrepareMaterialsRequest):
 
     return {
         "status": "success",
-        "message": f"İstişare Heyeti toplandı. «{topic}» için materyaller hazırlandı.",
+        "message": f"Başyönetmen Selim Bey «{topic}» için materyalleri hazırladı.",
         "package": pkg
     }
 
@@ -277,7 +277,7 @@ async def produce_video(req: ProduceRequest):
         voice_id=selected_voice
     )
     if result.get("status") == "success":
-        CURRENT_STATE["pre_render_package"] = {
+        pkg = {
             "topic": req.title,
             "script": "\n".join(req.lines),
             "scenes_count": len(req.lines),
@@ -286,6 +286,11 @@ async def produce_video(req: ProduceRequest):
             "pano_url": f"/out/{req.project_slug}/pano.jpg",
             "quality_score": result.get("score", 95)
         }
+        CURRENT_STATE["pre_render_package"] = pkg
+        result["package"] = pkg
+        result["video_url"] = pkg["video_url"]
+        result["pano_url"] = pkg["pano_url"]
+        result["audio_url"] = pkg["audio_url"]
     return result
 
 @app.post("/api/approve_and_render")
