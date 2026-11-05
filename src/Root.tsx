@@ -1,6 +1,8 @@
 import React from 'react';
 import { Composition } from 'remotion';
 import { NotebookVideo } from './NotebookVideo';
+import { IslamicMotionVideo } from './IslamicMotionVideo';
+import { OlumSonMuVideo } from './olum-son-mu/Video';
 import { defaultVideoData } from './sampleData';
 
 let activeProps = {
@@ -109,6 +111,37 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1080}
         defaultProps={activeProps}
+      />
+
+      {/* 4. Islamic Motion Designer (Sufariq / Visual Deen / Yaqeen Style) */}
+      <Composition
+        id="IslamicMotionVideo"
+        component={IslamicMotionVideo}
+        durationInFrames={2078}
+        fps={30}
+        width={1080}
+        height={1920}
+        calculateMetadata={() => {
+          let frames = 2078;
+          try {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            const c = require('./activeConcept.json');
+            if (c?.totalFrames) frames = c.totalFrames;
+          } catch (e) {
+            // fallback
+          }
+          return { durationInFrames: frames };
+        }}
+      />
+
+      {/* 5. Claude Animasyon Sistemi: Ölüm Gerçekten Son Mu? */}
+      <Composition
+        id="OlumSonMu"
+        component={OlumSonMuVideo}
+        durationInFrames={1323}
+        fps={30}
+        width={1080}
+        height={1920}
       />
     </>
   );

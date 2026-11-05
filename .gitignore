@@ -14,6 +14,8 @@ build/
 *.zip
 
 # Sensitive API Keys & Credentials (CRITICAL)
+api_keys.json
+api_keys.csv
 data/api_keys.json
 data/api_keys.csv
 data/keys.json
@@ -32,6 +34,8 @@ data/frames/
 public/audio*.mp3
 public/test_*.mp3
 public/temp_*
+public/test_frame_*.png
+public/test_zariyat_*.png
 
 
 # Python cache & virtual environments

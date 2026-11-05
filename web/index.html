@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İslami İlim & Medya Enstitüsü | İstişare Heyeti Stüdyosu</title>
+  
+  <!-- Google Fonts: Cinzel (Display), Amiri (Arabic & Calligraphy), Plus Jakarta Sans (UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Wavesurfer.js for Audio Waveform -->
+  <script src="https://unpkg.com/wavesurfer.js@7"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              300: '#FCE082',
+              400: '#F5D061',
+              500: '#D4AF37',
+              600: '#B8911F',
+              900: '#2A2007',
+            },
+            emerald: {
+              400: '#34D399',
+              500: '#10B981',
+              600: '#059669',
+              900: '#06231F',
+              950: '#031410',
+            },
+            obsidian: {
+              800: '#0F1722',
+              850: '#0B111A',
+              900: '#0A0F16',
+              950: '#05080C',
+            }
+          },
+          fontFamily: {
+            display: ['Cinzel', 'serif'],
+            arabic: ['Amiri', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #060A0E;
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 15%, rgba(212, 175, 55, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(6, 35, 31, 0.4) 0%, transparent 60%);
+      color: #F1F5F9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .gold-glow {
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+    }
+
+    .emerald-glow {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .red-glow {
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+    }
+
+    .glass-panel {
+      background: rgba(11, 18, 26, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.22);
+    }
+
+    .glass-panel:hover {
+      border-color: rgba(212, 175, 55, 0.45);
+    }
+
+    .safe-zone-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+      z-index: 20;
+    }
+
+    .safe-zone-active .safe-zone-overlay {
+      display: block;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(212, 175, 55, 0.35);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(212, 175, 55, 0.6);
+    }
+
+    .channel-item.active {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: rgba(212, 175, 55, 0.5);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-gold-500/30 px-5 py-3.5 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-3.5">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gold-900 via-obsidian-900 to-emerald-950 border border-gold-500 flex items-center justify-center text-2xl gold-glow">
+        🎼
+      </div>
+      <div>
+        <h1 class="font-display font-bold text-base md:text-lg text-gold-400 tracking-wider flex items-center gap-2">
+          İSLAMİ İLİM & MEDYA ENSTİTÜSÜ
+          <span class="text-[10px] font-sans font-semibold uppercase px-2 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/40">İstişare Meclisi 2.0</span>
+        </h1>
+        <p class="text-[11px] text-slate-400">Kur'an, Sahih Sünnet & Hanefi Fıkhına Bağlı Heyet Stüdyosu ve Video Üretim Motoru</p>
+      </div>
+    </div>
+
+    <!-- Right Controls & Status Badges -->
+    <div class="flex items-center flex-wrap gap-2 text-xs">
+      
+      <!-- GEMINI MODEL SELECTOR (KULLANICI SEÇİMLİ - GEMINI 3.8 FLASH VARSAYILAN) -->
+      <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-obsidian-950 border border-gold-500/40 text-gold-400 font-semibold shadow-inner">
+        <span class="text-sm">⚡</span>
+        <span class="text-[11px] text-slate-300 hidden sm:inline">Model:</span>
+        <select id="globalModelSelect" onchange="onGlobalModelChange(this.value)" class="bg-transparent font-mono text-xs font-bold text-gold-300 outline-none cursor-pointer">
+          <option value="gemini-3.8-flash" class="bg-obsidian-900 text-gold-400" selected>Gemini 3.8 Flash (Derin Akıl & Hız - Varsayılan)</option>
+          <option value="gemini-3.5-flash" class="bg-obsidian-900 text-slate-200">Gemini 3.5 Flash (Dengeli)</option>
+          <option value="gemini-3.5-flash-lite" class="bg-obsidian-900 text-slate-200">Gemini 3.5 Flash Lite (Ultra Hızlı)</option>
+          <option value="gemini-3.1-pro-preview" class="bg-obsidian-900 text-slate-200">Gemini 3.1 Pro Preview (Felsefi & Fıkhi Derinlik)</option>
+        </select>
+      </div>
+
+      <!-- 136 Key Havuzu Rozeti -->
+      <div id="keyPoolBadge" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-purple-500/15 border border-purple-500/40 text-purple-300 font-medium">
+        <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+        <span id="keyPoolCountText" class="font-mono font-bold text-white">136/136</span> Key Havuzu
+      </div>
+
+      <!-- Fıkıh Filtresi Rozeti -->
+      <div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-medium">
+        <span>🕌</span> Hanefi / Mâtürîdî
+      </div>
+
+      <!-- HATA YÖNETİM PANELİ BUTONU (SAĞ ÜST) -->
+      <button id="btnErrorPanel" onclick="openErrorPanel()" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-red-500/15 hover:bg-red-500/25 border border-red-500/40 text-red-300 font-semibold transition active:scale-95 shadow-sm">
+        <span class="text-sm">🚨</span>
+        <span class="text-xs">Hata Paneli</span>
+        <span id="headerErrorCountBadge" class="px-1.5 py-0.5 rounded-full bg-red-500 text-white font-mono text-[10px] font-bold">0</span>
+      </button>
+
+      <!-- Yenile Butonu -->
+      <button onclick="refreshState()" class="p-2 rounded-xl bg-obsidian-900 hover:bg-obsidian-800 border border-slate-700 text-slate-300 hover:text-gold-400 transition" title="Yenile">
+        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-[1600px] w-full mx-auto p-4 md:p-6 flex flex-col gap-6">
+
+    <!-- 1. GÖREV & STRATEJİ MASASI (MISSION CONTROL) -->
+    <section class="glass-panel rounded-2xl p-5 md:p-6 relative overflow-hidden">
+      <div class="absolute -right-20 -top-20 w-64 h-64 bg-gold-500/5 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="flex items-center justify-between gap-4 mb-4 pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <i data-lucide="compass" class="w-5 h-5 text-gold-400"></i>
+          <h2 class="font-display font-semibold text-gold-400 text-base md:text-lg">Görev & Prodüksiyon Masası (Müdürlük Makamı)</h2>
+        </div>
+        <!-- Preset Konu Menüsü -->
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-400">Hazır Konu Şablonları:</span>
+          <select id="presetTopicSelect" onchange="applyPresetTopic(this.value)" class="text-xs bg-obsidian-900 border border-gold-500/30 text-gold-400 rounded-lg px-2.5 py-1.5 outline-none hover:border-gold-400 transition">
+            <option value="">Seçiniz...</option>
+            <option value="Allah'ın El-Kâdir İsmi: Kur'an, Sünnet ve Hanefi Fıkhına Göre İbretlik Tefekkür">1. Allah'ın El-Kâdir İsmi (Kudret ve Nizam)</option>
+            <option value="Ölüm ve Kabir Hayatı: Modern İnsanın Aldanışı ve Hakikatle Yüzleşme">2. Ölüm ve Kabir Hayatı (Acziyet ve İbret)</option>
+            <option value="Kün Fe Yekûn: Kainattaki İlahi Kudret ve Mâtürîdî İtikadı">3. Kün Fe Yekûn (Ol Der ve Olur)</option>
+            <option value="Nemrut ve Firavun'un Çöküşü: Sahte Saltanatların Bir Sivrisinekle Yıkılışı">4. Nemrut ve Firavun (Sahte Kibrin Sonu)</option>
+            <option value="Kalbin Sessiz Zikri: Göğüs Kafesindeki İlahi Mühür ve Tefekkür">5. Kalbin Sessiz Zikri (100.000 Atım)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <!-- Video Konusu -->
+        <div class="md:col-span-12 flex flex-col gap-1.5">
+          <label for="topicInput" class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            <i data-lucide="book-open" class="w-3.5 h-3.5 text-gold-400"></i> Video Konusu & Tefekkür Başlığı:
+          </label>
+          <input type="text" id="topicInput" value="Allah'ın El-Kâdir İsmi: Kur'an, Sünnet ve Hanefi Fıkhına Göre İbretlik Tefekkür" 
+                 class="w-full bg-obsidian-950/90 border border-gold-500/30 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none transition font-medium">
+        </div>
+
+        <!-- Format & En-Boy Oranı -->
+        <div class="md:col-span-3 flex flex-col gap-1.5">
+          <label for="aspectSelect" class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            <i data-lucide="ratio" class="w-3.5 h-3.5 text-emerald-400"></i> Ekran Formatı (En-Boy):
+          </label>
+          <select id="aspectSelect" class="w-full bg-obsidian-950/80 border border-slate-700 rounded-xl px-3 py-2.5 text-xs md:text-sm text-white focus:border-emerald-400 outline-none transition">
+            <option value="16:9" selected>16:9 YouTube Master (1920x1080)</option>
+            <option value="9:16">9:16 Shorts / Reels / TikTok (1080x1920)</option>
+          </select>
+        </div>
+
+        <!-- Stil Seçici -->
+        <div class="md:col-span-3 flex flex-col gap-1.5">
+          <label for="styleSelect" class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            <i data-lucide="palette" class="w-3.5 h-3.5 text-gold-400"></i> Sanat & Prodüksiyon Modu:
+          </label>
+          <select id="styleSelect" class="w-full bg-obsidian-950/80 border border-slate-700 rounded-xl px-3 py-2.5 text-xs md:text-sm text-white focus:border-gold-400 outline-none transition">
+            <option value="Karma (2D/3D Motion İnfografik + Sinematik 4K + Hat Animasyonu)">Karma (2D/3D + Sinematik + Hat)</option>
+            <option value="3D Kozmik & Mekân Tefekkürü">3D Kozmik Simülasyon</option>
+            <option value="2D Selçuklu/Osmanlı Geometrik Hat Animasyonu">2D Selçuklu Hat Sanatı</option>
+            <option value="Sinematik Belgesel & Doğa Tefekkürü">Sinematik Doğa Belgeseli</option>
+          </select>
+        </div>
+
+        <!-- Ses ve Vokal Motoru Seçici -->
+        <div class="md:col-span-3 flex flex-col gap-1.5">
+          <label for="voiceSelect" class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            <i data-lucide="mic-2" class="w-3.5 h-3.5 text-sky-400"></i> Ses & Vokal Motoru:
+          </label>
+          <select id="voiceSelect" onchange="onVoiceSelectionChange(this.value)" class="w-full bg-obsidian-950/80 border border-sky-500/40 rounded-xl px-3 py-2.5 text-xs md:text-sm text-sky-300 focus:border-sky-400 outline-none transition">
+            <optgroup label="⚡ Gemini AI TTS (136 Key Havuzu - Canlı Üretim)">
+              <option value="gemini_tts_charon" selected>Gemini AI: Charon (Derin & Sinematik Tefekkür)</option>
+              <option value="gemini_tts_fenrir">Gemini AI: Fenrir (Vakur & Heybetli Hitap)</option>
+              <option value="gemini_tts_puck">Gemini AI: Puck (Sakin & Düşündürücü Anlatıcı)</option>
+              <option value="gemini_tts_aoede">Gemini AI: Aoede (Duru & Melodik Anlatım)</option>
+            </optgroup>
+            <optgroup label="🎙️ GitHub Özel Ses Kütüphanesi (Mastered Studio Vokaller)">
+              <option value="seslendirme_cinematic_master">Sinematik Tefekkür Master Vokal (GitHub Kütüphanesi)</option>
+              <option value="teheccud_mastered">Teheccüd Gecesi & Mahrem Sır (Master Vocal)</option>
+              <option value="hadid_supernova_mastered">Hadid Suresi: Gökten İnen Demir & Süpernova</option>
+              <option value="zariyat_expanding_mastered">Zariyat Suresi: Genişleyen Evren & Kozmik Kudret</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Fon Ambiyansı Seçici -->
+        <div class="md:col-span-3 flex flex-col gap-1.5">
+          <label for="ambienceSelect" class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            <i data-lucide="music-2" class="w-3.5 h-3.5 text-amber-400"></i> Helal Fon Ambiyansı:
+          </label>
+          <select id="ambienceSelect" class="w-full bg-obsidian-950/80 border border-slate-700 rounded-xl px-3 py-2.5 text-xs md:text-sm text-white focus:border-gold-400 outline-none transition">
+            <option value="ambient_epic_cinematic" selected>Epik Sinematik Ambiyans (Çalgısız Doğa & Uzay)</option>
+            <option value="ambient_mystic">Mistik Tefekkür & Gece Ambiyansı</option>
+            <option value="ambient_documentary">Belgesel & Tarihsel İbret Fonu</option>
+            <option value="halal_tefekkur_heartbeat">Doğal Rüzgar & Kalp Atışı Rezonansı</option>
+          </select>
+        </div>
+
+        <!-- Çalıştır Butonu -->
+        <div class="md:col-span-12 flex justify-end gap-3 mt-1">
+          <button id="btnPrepare" onclick="startMaterialsPreparation()" 
+                  class="px-6 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600 text-obsidian-950 hover:brightness-110 active:scale-[0.98] transition shadow-lg shadow-gold-500/20 flex items-center gap-2">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>İstişare Heyetini Görevlendir (İlmi & Görsel Üretimi Başlat)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. İSTİŞARE HEYETİ & ÖĞRETMENLER KURULU (11 UZMAN HOCA GENEL BAKIŞ) -->
+    <section>
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-display font-semibold text-gold-400 text-sm md:text-base flex items-center gap-2">
+          <i data-lucide="users" class="w-4 h-4"></i> İstişare Heyeti & Öğretmenler Kurulu (11 Uzman Hoca)
+        </h3>
+        <span class="text-xs text-slate-400">Herhangi bir hocamıza tıklayarak ilmi/teknik vazifesini, hafızasını (`memory.json`) ve fıkhi yetkilerini inceleyin.</span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" id="agentsGrid">
+        <!-- 11 Hoca kartı dinamik doldurulur -->
+      </div>
+    </section>
+
+    <!-- 3. WORKSPACE: ÇOK KANALLI İLETİŞİM İSTASYONU & PRE-RENDER ONAY MASASI -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- SOL KOLON: ÇOK KANALLI İLETİŞİM VE İSTİŞARE MASASI (GENEL GRUP + 11 HOCA ODASI) -->
+      <div class="lg:col-span-7 glass-panel rounded-2xl p-4 flex flex-col h-[740px]">
+        
+        <!-- Üst Başlık & Aktif Oda Künyesi -->
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800 gap-2">
+          <div class="flex items-center gap-2.5">
+            <div class="relative">
+              <span id="activeChannelAvatar" class="w-10 h-10 rounded-xl bg-gold-500/20 border border-gold-500/40 flex items-center justify-center text-xl">👥</span>
+              <span id="activeChannelDot" class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-obsidian-950"></span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span id="activeChannelTitle" class="font-bold text-sm text-gold-400">İstişare Meclisi (Genel Heyet)</span>
+                <span id="activeChannelBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-gold-500/15 text-gold-300 border border-gold-500/30">Moderatör: Selim Hoca</span>
+              </div>
+              <p id="activeChannelDesc" class="text-[10px] text-slate-400 truncate max-w-[340px]">Tüm hocalarımızın sıralı, derin düşünceyle istişare ettiği meclis salonu</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span id="logCountBadge" class="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">1 Mesaj</span>
+            <button onclick="clearCurrentChannelUI()" class="p-1.5 rounded-lg bg-obsidian-900 hover:bg-red-500/20 text-slate-400 hover:text-red-400 transition" title="Bu Kanalı Temizle">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- İÇ YAPI: SOL PANELDE KANALLAR LİSTESİ + SAĞ PANELDE SOHBET AKIŞI -->
+        <div class="flex-1 flex gap-3 pt-3 overflow-hidden">
+          
+          <!-- KANALLAR KENAR ÇUBUĞU (SUB-SIDEBAR) -->
+          <div class="w-48 sm:w-56 flex-shrink-0 flex flex-col gap-1 border-r border-slate-800/80 pr-2 overflow-y-auto">
+            
+            <!-- EN ÜST: GENEL GRUP SOHBETİ (İSTİŞARE MECLİSİ) -->
+            <button onclick="switchChannel('general')" id="chanBtn-general" 
+                    class="channel-item active w-full p-2.5 rounded-xl border border-gold-500/40 bg-gold-500/15 text-left flex items-center justify-between gap-2 transition hover:bg-gold-500/20 group">
+              <div class="flex items-center gap-2 overflow-hidden">
+                <span class="text-lg">👥</span>
+                <div class="truncate">
+                  <strong class="text-xs text-gold-400 block truncate group-hover:text-gold-300">İstişare Meclisi</strong>
+                  <span class="text-[9px] text-slate-400 block truncate">Genel Grup Sohbeti</span>
+                </div>
+              </div>
+              <span id="unread-general" class="hidden text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-red-500 text-white font-mono shadow-sm">0</span>
+            </button>
+
+            <!-- AYRAÇ: 11 ÖĞRETMEN ODASI -->
+            <div class="text-[9px] font-extrabold uppercase tracking-wider text-slate-500 px-2 pt-2.5 pb-1 flex items-center justify-between">
+              <span>Öğretmenler (11 Hoca)</span>
+              <span class="text-[8px] text-slate-600">Birebir</span>
+            </div>
+
+            <!-- 11 Hoca Kanalları -->
+            <div class="space-y-1" id="teacherChannelsList">
+              <!-- Dinamik doldurulur -->
+            </div>
+
+          </div>
+
+          <!-- SAĞ SOHBET AKIŞ PANELİ -->
+          <div class="flex-1 flex flex-col overflow-hidden">
+            
+            <!-- Hızlı Fikir Önerisi Çipleri (Genel veya Selim Hoca için) -->
+            <div id="quickChipsBar" class="flex items-center gap-1.5 pb-2 overflow-x-auto no-scrollbar border-b border-slate-800/60 text-[11px]">
+              <span class="text-slate-500 text-[10px] whitespace-nowrap">Hızlı Fikirler:</span>
+              <button onclick="sendQuickPrompt('Bana çarpıcı bir İslami tefekkür konusu öner.')" class="px-2 py-0.5 rounded-full bg-gold-500/10 hover:bg-gold-500/20 text-gold-300 border border-gold-500/20 whitespace-nowrap transition">💡 Konu Öner</button>
+              <button onclick="sendQuickPrompt('Nemrut ve Firavun'un kibrinin bir sivrisinekle yıkılışı üzerine kurgu yapalım.')" class="px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap transition">🏛️ Nemrut & Firavun</button>
+              <button onclick="sendQuickPrompt('Kün Fe Yekûn: Kâinattaki İlahi Kudret ve Mâtürîdî İtikadı üzerine kurgulayalım.')" class="px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap transition">🌌 Kün Fe Yekûn</button>
+              <button onclick="sendQuickPrompt('Kalbin sessiz zikri ve 100.000 kalp atışındaki acziyet üzerine çalışalım.')" class="px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap transition">💓 Kalbin Zikri</button>
+            </div>
+
+            <!-- Sohbet Mesajları Akış Alanı -->
+            <div id="logFeed" class="flex-1 overflow-y-auto space-y-3 pr-2 py-3">
+              <!-- Mesajlar buraya akar -->
+            </div>
+
+            <!-- Canlı Öğretmen Çalışma / İstişare Çubuğu -->
+            <div id="agentWorkingBar" class="hidden py-1.5 px-3 rounded-lg bg-gold-500/10 border border-gold-500/20 text-gold-300 text-[11px] flex items-center justify-between mb-2 animate-pulse">
+              <div class="flex items-center gap-2">
+                <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i>
+                <span id="agentWorkingText">Başöğretmen Selim Hoca derin düşünme modunda istişare ediyor...</span>
+              </div>
+              <span id="activeModelTag" class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-gold-500/20 text-gold-300 border border-gold-500/40">gemini-3.8-flash</span>
+            </div>
+
+            <!-- Sohbet Giriş Alanı -->
+            <div class="pt-2 border-t border-slate-800 flex flex-col gap-2">
+              <div class="flex items-center gap-2">
+                <input type="text" id="chatInput" onkeydown="if(event.key==='Enter') sendChatMessage()"
+                       placeholder="Sayın Müdürüm, Selim Hoca'ya fikir verin veya talimat yazın (veya 'fikir ver')..."
+                       class="flex-1 bg-obsidian-950 border border-slate-700 focus:border-gold-400 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 outline-none transition" />
+                <button onclick="sendChatMessage()" id="btnSendChat"
+                        class="px-3.5 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-obsidian-950 font-bold text-xs flex items-center gap-1.5 transition active:scale-95 shadow">
+                  <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                  <span>Konuş</span>
+                </button>
+                <button onclick="startMaterialsPreparation()" id="btnStartPipelineDirect"
+                        class="px-3.5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 transition active:scale-95 shadow"
+                        title="Konu Netleşti, Heyeti Görevlendir">
+                  <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                  <span>Başlat</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- SAĞ KOLON: İNSAN-ONAY MASASI (PRE-RENDER GATE) -->
+      <div class="lg:col-span-5 glass-panel rounded-2xl p-4 flex flex-col h-[740px]">
+        
+        <!-- Sekmeler -->
+        <div class="flex items-center justify-between pb-2 border-b border-slate-800 overflow-x-auto gap-2">
+          <div class="flex items-center gap-1">
+            <button onclick="switchTab('tabKurgu', this)" class="tab-btn active text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-gold-500/15 text-gold-400 border border-gold-500/30 flex items-center gap-1 transition whitespace-nowrap">
+              <i data-lucide="scroll-text" class="w-3.5 h-3.5"></i> İslami Kurgu
+            </button>
+            <button onclick="switchTab('tabMetin', this)" class="tab-btn text-xs font-semibold px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 border border-transparent flex items-center gap-1 transition whitespace-nowrap">
+              <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Senaryo
+            </button>
+            <button onclick="switchTab('tabSahneler', this)" class="tab-btn text-xs font-semibold px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 border border-transparent flex items-center gap-1 transition whitespace-nowrap">
+              <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Storyboard
+            </button>
+            <button onclick="switchTab('tabSes', this)" class="tab-btn text-xs font-semibold px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 border border-transparent flex items-center gap-1 transition whitespace-nowrap">
+              <i data-lucide="waveform" class="w-3.5 h-3.5"></i> Helal Ses
+            </button>
+            <button onclick="switchTab('tabAudit', this)" class="tab-btn text-xs font-semibold px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 border border-transparent flex items-center gap-1 transition whitespace-nowrap">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Denetim
+            </button>
+            <button onclick="switchTab('tabYetenek', this)" class="tab-btn text-xs font-semibold px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 border border-transparent flex items-center gap-1 transition whitespace-nowrap">
+              <i data-lucide="brain" class="w-3.5 h-3.5 text-purple-400"></i> Tekâmül
+            </button>
+          </div>
+        </div>
+
+        <!-- Sekme İçerikleri -->
+        <div class="flex-1 overflow-y-auto py-3 pr-2 text-xs text-slate-300">
+
+          <!-- 1. İslami Kurgu Tabı -->
+          <div id="tabKurgu" class="tab-pane block space-y-4">
+            <div id="kurguContainer" class="space-y-3">
+              <p class="text-slate-500 italic">Materyaller hazırlandığında ayet, hadis ve Hanefi fıkhı kuralları burada listelenecektir.</p>
+            </div>
+          </div>
+
+          <!-- 2. Senaryo Düzenleme Tabı -->
+          <div id="tabMetin" class="tab-pane hidden space-y-3">
+            <div class="flex items-center justify-between text-slate-400 text-[11px]">
+              <span>Senarist Yahya'nın Saf Seslendirme (TTS) Metni:</span>
+              <div class="flex items-center gap-3">
+                <span id="wordCountBadge" class="text-gold-400 font-mono">0 Kelime</span>
+                <span id="estDurationBadge" class="text-emerald-400 font-mono">~0 sn</span>
+              </div>
+            </div>
+            <textarea id="scriptTextarea" rows="12" 
+                      oninput="onScriptEdited()"
+                      class="w-full bg-obsidian-950 border border-slate-700 rounded-xl p-3 text-xs md:text-sm text-slate-100 font-sans leading-relaxed focus:border-gold-400 outline-none transition"
+                      placeholder="Tefekkür seslendirme senaryosu..."></textarea>
+            <div class="flex justify-between items-center text-[11px] text-slate-500">
+              <span>💡 İpucu: Üç nokta (`...`) nefes duraklarını belirler.</span>
+              <button onclick="saveEditedScript()" class="px-3 py-1.5 rounded-lg bg-obsidian-800 hover:bg-obsidian-700 border border-gold-500/30 text-gold-400 flex items-center gap-1 transition">
+                <i data-lucide="save" class="w-3.5 h-3.5"></i> Metni Kaydet
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. Storyboard ve Sahneler Tabı -->
+          <div id="tabSahneler" class="tab-pane hidden space-y-3">
+            <div class="grid grid-cols-2 gap-2.5" id="storyboardGallery">
+              <!-- Sahneler -->
+            </div>
+          </div>
+
+          <!-- 4. Helal Ses ve Waveform Tabı -->
+          <div id="tabSes" class="tab-pane hidden space-y-4">
+            <div class="p-3.5 rounded-xl bg-obsidian-950 border border-slate-800 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="font-semibold text-gold-400 text-xs">Helal Ses Tasarımı (-14 LUFS)</h4>
+                  <p class="text-[10px] text-slate-400">Doğal ambiyans + Özel Vokal / Gemini AI Seslendirme</p>
+                </div>
+                <button id="btnPlayWaveform" onclick="toggleWaveformPlay()" class="px-3 py-1.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-obsidian-950 font-bold text-xs flex items-center gap-1 transition">
+                  <i data-lucide="play" class="w-3.5 h-3.5"></i> Dinle
+                </button>
+              </div>
+
+              <!-- Wavesurfer Container -->
+              <div id="waveform" class="rounded-lg bg-obsidian-900 p-2 border border-slate-800"></div>
+
+              <div class="flex justify-between text-[10px] text-slate-400 font-mono">
+                <span id="audioCurrentTime">00:00</span>
+                <span id="audioTotalDuration">00:24</span>
+              </div>
+            </div>
+
+            <!-- SRT Altyazı Listesi -->
+            <div class="p-3 rounded-xl bg-obsidian-950 border border-slate-800 space-y-2">
+              <h5 class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                <i data-lucide="subtitles" class="w-3.5 h-3.5 text-gold-400"></i> SRT Altyazı Senkronizasyonu
+              </h5>
+              <div id="srtPreviewList" class="space-y-1.5 text-[11px] max-h-36 overflow-y-auto pr-2">
+                <!-- Altyazılar -->
+              </div>
+            </div>
+
+            <!-- GitHub Ses Kütüphanesi Koleksiyonu -->
+            <div class="p-3.5 rounded-xl bg-obsidian-950 border border-sky-500/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <h5 class="text-xs font-semibold text-sky-400 flex items-center gap-1.5">
+                  <i data-lucide="disc-3" class="w-3.5 h-3.5"></i> GitHub Ses Kütüphanesi (aivideomaker)
+                </h5>
+              </div>
+              <div class="grid grid-cols-1 gap-2 text-[11px]" id="audioLibraryList">
+                <!-- Dinamik Audio Library -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Ön Denetim Rapor Tabı -->
+          <div id="tabAudit" class="tab-pane hidden space-y-3">
+            <div id="auditContainer">
+              <p class="text-slate-500 italic">Başmüfettiş Hasan Hoca'nın ön denetim raporu burada yer alacaktır.</p>
+            </div>
+          </div>
+
+          <!-- 6. Yetenek Geliştirme ve Tekâmül Tabı -->
+          <div id="tabYetenek" class="tab-pane hidden space-y-3">
+            <div class="p-3 rounded-xl bg-obsidian-950 border border-purple-500/30 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <h4 class="font-bold text-purple-400 font-display text-xs flex items-center gap-1.5">
+                  <span>🌱</span> Mürebbi Ertuğrul Hoca - Tekâmül Masası
+                </h4>
+                <span class="text-[9px] px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/30 font-mono">SKILL.md Güncelleyici</span>
+              </div>
+              <p class="text-[10px] text-slate-400 leading-relaxed">
+                Her video render ve analizinden sonra Başmüfettiş Hasan Hoca'nın raporu buraya akar; Mürebbi Ertuğrul Hoca hocalarımızın <code>SKILL.md</code> ve <code>memory.json</code> dosyalarını günceller.
+              </p>
+            </div>
+            <div id="skillEvolutionFeed" class="space-y-2">
+              <div class="p-4 rounded-xl bg-obsidian-950/80 border border-slate-800 text-center text-slate-500 text-xs">
+                İlk üretim tamamlandığında heyet tekâmül raporları burada listelenecektir.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Pre-Render Gate Alt Buton -->
+        <div class="pt-3 border-t border-slate-800 flex items-center justify-between gap-3">
+          <span id="approvalGatePill" class="text-[10px] font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-400">
+            Materyaller bekleniyor
+          </span>
+          <button id="btnApproveAndRender" disabled onclick="approveAndStartRender()" 
+                  class="px-4 py-2 rounded-xl font-bold text-xs bg-gradient-to-r from-emerald-500 to-emerald-600 hover:brightness-110 text-white disabled:opacity-40 disabled:cursor-not-allowed transition shadow-lg shadow-emerald-500/20 flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>Müdür Olarak Onayla ➔ Video Kurgu & Render</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 4. MASTER SHOWCASE & NİHAİ VİDEO OYNATICI -->
+    <section class="glass-panel rounded-2xl p-5 md:p-6">
+      <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <i data-lucide="film" class="w-5 h-5 text-gold-400"></i>
+          <h2 class="font-display font-semibold text-gold-400 text-base md:text-lg">Nihai Master Prodüksiyon & Video Oynatıcı</h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="toggleSafeZone()" id="btnSafeZone" class="text-xs px-3 py-1.5 rounded-lg bg-obsidian-800 border border-slate-700 text-slate-300 hover:text-gold-400 flex items-center gap-1.5 transition">
+            <i data-lucide="grid" class="w-3.5 h-3.5"></i> Safe-Zone Kılavuzu
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Video Oynatıcı Kolonu -->
+        <div class="lg:col-span-7 flex flex-col items-center">
+          <div id="videoContainerWrapper" class="relative rounded-2xl overflow-hidden border border-gold-500/40 bg-black gold-glow w-full max-w-[640px] aspect-video">
+            <video id="masterVideoPlayer" controls class="w-full h-full object-contain" poster="production_output/scenes/scene_01.png">
+              <source src="production_output/islami_video_el_kadir_v2.mp4" type="video/mp4">
+              Tarayıcınız video oynatmayı desteklemiyor.
+            </video>
+
+            <!-- Safe-Zone Kılavuz Çizgileri Katmanı -->
+            <div class="safe-zone-overlay flex flex-col justify-between p-6">
+              <div class="border border-dashed border-red-500/60 rounded p-2 text-[10px] text-red-400 font-mono w-max">
+                Üst Güvenli Sınır (Kanal Logosu)
+              </div>
+              <div class="border border-dashed border-yellow-500/60 rounded p-2 text-[10px] text-yellow-400 font-mono text-center">
+                Merkez Sinematik Safe-Zone (16:9 / 9:16 Kesişim)
+              </div>
+              <div class="border border-dashed border-emerald-500/60 rounded p-2 text-[10px] text-emerald-400 font-mono text-center">
+                Altyazı Güvenli Alanı (WCAG Standardı)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Detayları ve Dışa Aktarım Kolonu -->
+        <div class="lg:col-span-5 flex flex-col gap-4">
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 id="masterTitle" class="font-display font-bold text-base md:text-lg text-white">İslami Video: El-Kâdir Tefekkürü (V2 Master)</h3>
+              <p class="text-xs text-slate-400">Ken Burns Mikro-Zoom + Cross-Dissolve + Altın Partikül + Özel Vokal / Gemini AI Ses</p>
+            </div>
+            <div class="px-3 py-1.5 rounded-xl bg-emerald-500/15 border border-emerald-500 text-emerald-400 font-bold text-sm">
+              99 / 100
+            </div>
+          </div>
+
+          <!-- Teknik Özellikler Grid -->
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="p-2.5 rounded-xl bg-obsidian-950 border border-slate-800">
+              <span class="block text-[10px] text-slate-500 uppercase font-semibold">Çözünürlük</span>
+              <strong class="text-slate-200">1920x1080 Full HD</strong>
+            </div>
+            <div class="p-2.5 rounded-xl bg-obsidian-950 border border-slate-800">
+              <span class="block text-[10px] text-slate-500 uppercase font-semibold">Süre & Kare Hızı</span>
+              <strong class="text-slate-200">24 Saniye / 12 FPS</strong>
+            </div>
+            <div class="p-2.5 rounded-xl bg-obsidian-950 border border-slate-800">
+              <span class="block text-[10px] text-slate-500 uppercase font-semibold">Ses Standardı</span>
+              <strong class="text-emerald-400">-14 LUFS Vakur Ses</strong>
+            </div>
+            <div class="p-2.5 rounded-xl bg-obsidian-950 border border-slate-800">
+              <span class="block text-[10px] text-slate-500 uppercase font-semibold">Fıkhî Hüküm</span>
+              <strong class="text-gold-400">Hanefi Ölçülerine Tam Uygun</strong>
+            </div>
+          </div>
+
+          <!-- İndirme Butonları -->
+          <div class="space-y-2 pt-2 border-t border-slate-800">
+            <span class="text-xs font-semibold text-gold-400">📥 Prodüksiyon Dosyalarını İndir:</span>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+              <a href="production_output/islami_video_el_kadir_v2.mp4" download class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-gold-500/10 border border-slate-700 hover:border-gold-500 text-slate-200 flex items-center gap-1.5 transition">
+                <i data-lucide="video" class="w-3.5 h-3.5 text-gold-400"></i> MP4 Video
+              </a>
+              <a href="production_output/capcut_draft_content.json" download class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-gold-500/10 border border-slate-700 hover:border-gold-500 text-slate-200 flex items-center gap-1.5 transition">
+                <i data-lucide="scissors" class="w-3.5 h-3.5 text-sky-400"></i> CapCut Projesi
+              </a>
+              <a href="production_output/adobe_premiere_timeline.xml" download class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-gold-500/10 border border-slate-700 hover:border-gold-500 text-slate-200 flex items-center gap-1.5 transition">
+                <i data-lucide="layers" class="w-3.5 h-3.5 text-indigo-400"></i> Premiere XML
+              </a>
+              <a href="production_output/tefekkur_altyazi.srt" download class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-gold-500/10 border border-slate-700 hover:border-gold-500 text-slate-200 flex items-center gap-1.5 transition">
+                <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Altyazı (SRT)
+              </a>
+              <a href="production_output/audio/halal_tefekkur_ambience.wav" download class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-gold-500/10 border border-slate-700 hover:border-gold-500 text-slate-200 flex items-center gap-1.5 transition">
+                <i data-lucide="music" class="w-3.5 h-3.5 text-amber-400"></i> Helal Ses (WAV)
+              </a>
+              <a href="production_output/full_orchestration_state.json" download class="p-2.5 rounded-xl bg-obsidian-900 hover:bg-gold-500/10 border border-slate-700 hover:border-gold-500 text-slate-200 flex items-center gap-1.5 transition">
+                <i data-lucide="code" class="w-3.5 h-3.5 text-purple-400"></i> Durum (JSON)
+              </a>
+            </div>
+          </div>
+
+          <!-- Kullanıcı Nihai Karar Masası -->
+          <div class="mt-2 p-3.5 rounded-xl bg-obsidian-950 border border-gold-500/40 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+            <div>
+              <span class="text-xs font-bold text-gold-400 flex items-center gap-1.5">
+                <i data-lucide="crown" class="w-4 h-4 text-gold-400"></i>
+                Nihai Karar Masası (Müdürlük Makamı):
+              </span>
+              <p class="text-[11px] text-slate-400">Tüm İstişare Heyeti vazifesini tamamladı. Nihai karar tamamen Sayın Müdürümüzündür.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="userApproveFinalVideo()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:brightness-110 text-white text-xs font-bold transition flex items-center gap-1.5 shadow">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i> Onaylıyorum & Yayına Al
+              </button>
+              <button onclick="userRequestRevision()" class="px-3.5 py-2 rounded-xl bg-obsidian-900 hover:bg-amber-500/20 text-slate-300 hover:text-amber-400 border border-slate-700 text-xs font-semibold transition flex items-center gap-1.5">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Revizyon İste
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =============================================================== -->
+  <!-- MODAL 1: HATA YÖNETİM & SİSTEM DENETİM PANELİ (SAĞ ÜST MODAL) -->
+  <!-- =============================================================== -->
+  <div id="errorModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-panel rounded-2xl border border-red-500/50 w-full max-w-4xl max-h-[92vh] flex flex-col overflow-hidden red-glow">
+      
+      <!-- Modal Başlığı -->
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-red-950/20">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-red-500/20 border border-red-500/50 flex items-center justify-center text-2xl">
+            🚨
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-lg text-red-400 flex items-center gap-2">
+              Hata Yönetim & Sistem Denetim Paneli
+              <span id="modalErrorCountBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-red-500 text-white font-mono">0 Kayıt</span>
+            </h3>
+            <p class="text-xs text-slate-400">136 API Key, model kotaları, render adımları ve ajan işlemlerinin canlı hata günlüğü</p>
+          </div>
+        </div>
+        <button onclick="closeErrorPanel()" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Özet İstatistik Kartları -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 bg-obsidian-950/60 border-b border-slate-800">
+        <div class="p-3 rounded-xl bg-obsidian-900 border border-slate-800">
+          <span class="text-[10px] text-slate-500 uppercase block font-semibold">Toplam Hata</span>
+          <strong id="statTotalErrors" class="text-base text-red-400 font-mono">0</strong>
+        </div>
+        <div class="p-3 rounded-xl bg-obsidian-900 border border-slate-800">
+          <span class="text-[10px] text-slate-500 uppercase block font-semibold">API Key / Kota (429)</span>
+          <strong id="statQuotaErrors" class="text-base text-amber-400 font-mono">0</strong>
+        </div>
+        <div class="p-3 rounded-xl bg-obsidian-900 border border-slate-800">
+          <span class="text-[10px] text-slate-500 uppercase block font-semibold">Render / Motor Hataları</span>
+          <strong id="statRenderErrors" class="text-base text-purple-400 font-mono">0</strong>
+        </div>
+        <div class="p-3 rounded-xl bg-obsidian-900 border border-slate-800">
+          <span class="text-[10px] text-slate-500 uppercase block font-semibold">Çözülen / Temizlenen</span>
+          <strong id="statResolvedErrors" class="text-base text-emerald-400 font-mono">0</strong>
+        </div>
+      </div>
+
+      <!-- Filtreleme ve Yönetim Araç Çubuğu -->
+      <div class="p-4 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs bg-obsidian-900/60">
+        
+        <!-- Filtreler -->
+        <div class="flex items-center flex-wrap gap-2">
+          
+          <!-- Hata Türü Filtresi -->
+          <div class="flex items-center gap-1.5">
+            <span class="text-slate-400 text-[11px]">Tür:</span>
+            <select id="errorFilterType" onchange="applyErrorFilters()" class="bg-obsidian-950 border border-slate-700 text-slate-200 rounded-lg px-2.5 py-1 text-xs outline-none">
+              <option value="all">Tüm Hata Türleri</option>
+              <option value="RATE_LIMIT_429">Kota / Hız Limiti (429)</option>
+              <option value="RENDER">Render & Video Hataları</option>
+              <option value="NETWORK">Ağ / Zaman Aşımı</option>
+              <option value="HTTP">HTTP Durum Hataları</option>
+              <option value="SERVER">Sunucu / Kod İstisnası</option>
+            </select>
+          </div>
+
+          <!-- Ajan Filtresi -->
+          <div class="flex items-center gap-1.5">
+            <span class="text-slate-400 text-[11px]">Ajan:</span>
+            <select id="errorFilterAgent" onchange="applyErrorFilters()" class="bg-obsidian-950 border border-slate-700 text-slate-200 rounded-lg px-2.5 py-1 text-xs outline-none">
+              <option value="all">Tüm Ajanlar</option>
+              <option value="01_basyonetmen">Başöğretmen Selim Hoca</option>
+              <option value="02_yonetmen">Sinan Hoca</option>
+              <option value="03_islami_kurgu">Müderris Âkif Hoca</option>
+              <option value="04_metin_tefekkur">Yahya Hoca</option>
+              <option value="07_gorsel_motion_uretim">Emre Hoca</option>
+              <option value="08_ses_frekans">Bora Hoca</option>
+              <option value="09_video_edit_render">Kerem Usta</option>
+              <option value="10_islami_video_analiz">Hasan Hoca</option>
+              <option value="11_yetenek_gelistirme">Mürebbi Ertuğrul</option>
+            </select>
+          </div>
+
+          <!-- Model Filtresi -->
+          <div class="flex items-center gap-1.5">
+            <span class="text-slate-400 text-[11px]">Model:</span>
+            <select id="errorFilterModel" onchange="applyErrorFilters()" class="bg-obsidian-950 border border-slate-700 text-slate-200 rounded-lg px-2.5 py-1 text-xs outline-none">
+              <option value="all">Tüm Modeller</option>
+              <option value="gemini-3.8-flash">gemini-3.8-flash</option>
+              <option value="gemini-3.5-flash">gemini-3.5-flash</option>
+              <option value="gemini-3.5-flash-lite">gemini-3.5-flash-lite</option>
+              <option value="gemini-3.1-pro-preview">gemini-3.1-pro-preview</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Butonlar -->
+        <div class="flex items-center gap-2">
+          <button onclick="addSimulatedTestError()" class="px-2.5 py-1 rounded-lg bg-obsidian-800 hover:bg-obsidian-700 border border-slate-700 text-slate-300 hover:text-white transition flex items-center gap-1 text-[11px]" title="Panelin filtresini ve görünümünü test etmek için sahte hata ekler">
+            <span>🧪</span> Test Hatası Ekle
+          </button>
+          <button onclick="clearAllErrors()" class="px-2.5 py-1 rounded-lg bg-red-500/20 hover:bg-red-500/30 border border-red-500/40 text-red-300 transition flex items-center gap-1 text-[11px]">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Günlüğü Temizle
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Hata Kartları Listesi -->
+      <div id="errorCardsContainer" class="flex-1 overflow-y-auto p-4 space-y-3 text-xs">
+        <!-- Hata kartları dinamik doldurulur -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =============================================================== -->
+  <!-- MODAL 2: AJAN DETAY & HAFIZA MODALI -->
+  <!-- =============================================================== -->
+  <div id="agentModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-panel rounded-2xl border border-gold-500/50 w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden gold-glow">
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div id="modalAvatar" class="text-3xl w-12 h-12 rounded-xl bg-obsidian-950 border border-gold-500/40 flex items-center justify-center">🤖</div>
+          <div>
+            <h3 id="modalName" class="font-display font-bold text-lg text-gold-400">Hoca / Öğretmen Adı</h3>
+            <span id="modalTitle" class="text-xs text-slate-400">Unvan</span>
+          </div>
+        </div>
+        <button onclick="closeAgentModal()" class="text-slate-400 hover:text-white p-2">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-5 overflow-y-auto space-y-4 text-xs text-slate-300">
+        <div>
+          <h4 class="font-semibold text-slate-200 uppercase text-[11px] mb-1">Rol ve Yetki Alanı</h4>
+          <p id="modalSummary" class="text-slate-400 leading-relaxed"></p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-slate-200 uppercase text-[11px] mb-1.5">Fıkhî & Teknik Yetkiler</h4>
+          <ul id="modalAuthorities" class="space-y-1 list-disc list-inside text-slate-400 pl-1"></ul>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 p-3 rounded-xl bg-obsidian-950 border border-slate-800">
+          <div>
+            <span class="text-[10px] text-slate-500 block">Tecrübe Seviyesi</span>
+            <strong id="modalLevel" class="text-gold-400 text-sm">Seviye 1</strong>
+          </div>
+          <div>
+            <span class="text-[10px] text-slate-500 block">Tamamlanan Görevler</span>
+            <strong id="modalTasks" class="text-emerald-400 text-sm">0 Görev</strong>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-gold-400 uppercase text-[11px] mb-1.5 flex items-center gap-1.5">
+            <i data-lucide="book-marked" class="w-3.5 h-3.5"></i> Kalıcı Öğrenilen Kurallar & Uyarı Dersleri
+          </h4>
+          <div id="modalRules" class="space-y-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================================================== -->
+  <!-- MODAL 3: LIGHTBOX MODAL (IMAGE ZOOM) -->
+  <!-- =============================================================== -->
+  <div id="imageLightbox" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="closeLightbox()">
+    <div class="relative max-w-5xl w-full">
+      <img id="lightboxImg" src="" alt="Tam Boyut Sahne" class="w-full rounded-2xl border border-gold-500/50 shadow-2xl">
+      <p id="lightboxCaption" class="text-center text-sm font-semibold text-gold-400 mt-3"></p>
+    </div>
+  </div>
+
+  <!-- =============================================================== -->
+  <!-- JAVASCRIPT MOTORU: KANALLAR, HATA YÖNETİMİ, MODEL SEÇİCİ & RENDER -->
+  <!-- =============================================================== -->
+  <script>
+    // Global Durum Değişkenleri
+    let currentPackage = null;
+    let wavesurfer = null;
+    let allAgents = [];
+    let activeChannelId = 'general';
+    let currentActiveModel = 'gemini-3.8-flash';
+
+    // Kanal Mesaj Deposu (Bellekte saklanır)
+    const channelLogsStore = {
+      'general': [],
+      '01_basyonetmen': [],
+      '02_yonetmen': [],
+      '03_islami_kurgu': [],
+      '04_metin_tefekkur': [],
+      '05_sahne_storyboard': [],
+      '06_materyal_toplama': [],
+      '07_gorsel_motion_uretim': [],
+      '08_ses_frekans': [],
+      '09_video_edit_render': [],
+      '10_islami_video_analiz': [],
+      '11_yetenek_gelistirme': []
+    };
+
+    // Okunmamış Mesaj Sayaçları
+    const unreadCounts = {
+      'general': 0,
+      '01_basyonetmen': 0,
+      '02_yonetmen': 0,
+      '03_islami_kurgu': 0,
+      '04_metin_tefekkur': 0,
+      '05_sahne_storyboard': 0,
+      '06_materyal_toplama': 0,
+      '07_gorsel_motion_uretim': 0,
+      '08_ses_frekans': 0,
+      '09_video_edit_render': 0,
+      '10_islami_video_analiz': 0,
+      '11_yetenek_gelistirme': 0
+    };
+
+    // Hata Yönetimi Deposu (localStorage Entegreli)
+    let systemErrorLogs = [];
+    const LOCAL_STORAGE_ERR_KEY = 'islami_studio_error_logs_v2';
+
+    // 11 Hocamızın Metadata Rehberi
+    const TEACHERS_META = [
+      { id: '01_basyonetmen', name: 'Selim Hoca', full_title: 'Başöğretmen Selim Hoca', role: 'İstişare Heyeti Başkanı & Moderatör', avatar: '🎼', borderColor: 'border-gold-500' },
+      { id: '02_yonetmen', name: 'Sinan Hoca', full_title: 'Sinan Hoca (Koordinatör)', role: 'Prodüksiyon ve İcra Koordinatörü', avatar: '🎬', borderColor: 'border-purple-500' },
+      { id: '03_islami_kurgu', name: 'Müderris Âkif Hoca', full_title: 'Müderris Âkif Hoca', role: 'Fıkıh, Tefsir ve Hadis İlimleri', avatar: '🕌', borderColor: 'border-emerald-500' },
+      { id: '04_metin_tefekkur', name: 'Yahya Hoca', full_title: 'Yahya Hoca (Senarist)', role: 'Edebiyat, Tefekkür ve Senaryo', avatar: '✍️', borderColor: 'border-sky-500' },
+      { id: '05_sahne_storyboard', name: 'Zeynep Hoca', full_title: 'Zeynep Hoca (Storyboard)', role: 'Görsel Sanatlar & Storyboard Tasarımı', avatar: '🎨', borderColor: 'border-pink-500' },
+      { id: '06_materyal_toplama', name: 'Tarık Hoca', full_title: 'Tarık Hoca (Arşivci)', role: 'Kütüphane, Vesika ve Kaynak Araştırma', avatar: '📁', borderColor: 'border-amber-500' },
+      { id: '07_gorsel_motion_uretim', name: 'Emre Hoca', full_title: 'Emre Hoca (Stüdyo Şefi)', role: 'Dijital Sanat, 2D/3D & Motion Tasarım', avatar: '✨', borderColor: 'border-yellow-500' },
+      { id: '08_ses_frekans', name: 'Bora Hoca', full_title: 'Bora Hoca (Ses Mühendisi)', role: 'Ses, Akustik ve Helal Frekans Tasarımı', avatar: '🎙️', borderColor: 'border-cyan-500' },
+      { id: '09_video_edit_render', name: 'Kerem Usta', full_title: 'Kerem Usta (Kurgu Ustası)', role: 'Video Kurgu, Montaj ve Render', avatar: '✂️', borderColor: 'border-rose-500' },
+      { id: '10_islami_video_analiz', name: 'Hasan Hoca', full_title: 'Hasan Hoca (Başmüfettiş)', role: 'Fıkhi ve Sanatsal Kalite Başdenetçisi', avatar: '🔍', borderColor: 'border-teal-500' },
+      { id: '11_yetenek_gelistirme', name: 'Mürebbi Ertuğrul Hoca', full_title: 'Mürebbi Ertuğrul Hoca', role: 'Heyet Tekâmül ve Mesleki Gelişim Rehberi', avatar: '🌱', borderColor: 'border-purple-400' }
+    ];
+
+    // Uygulama Başlatma
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      initWaveSurfer();
+      initErrorStore();
+      buildTeacherChannelsSidebar();
+      loadKeyPoolStatus();
+      loadAgents();
+      loadState();
+      loadAudioLibrary();
+      initDefaultChannelMessage();
+    });
+
+    // ===============================================================
+    // ÇOK KANALLI İLETİŞİM MOTORU (CHANNELS & UNREAD TRACKING)
+    // ===============================================================
+
+    function buildTeacherChannelsSidebar() {
+      const container = document.getElementById('teacherChannelsList');
+      if (!container) return;
+      container.innerHTML = '';
+
+      TEACHERS_META.forEach(t => {
+        const btn = document.createElement('button');
+        btn.id = `chanBtn-${t.id}`;
+        btn.onclick = () => switchChannel(t.id);
+        btn.className = 'channel-item w-full p-2 rounded-xl border border-transparent text-left flex items-center justify-between gap-1.5 transition hover:bg-slate-800/60 group relative';
+        btn.innerHTML = `
+          <div class="flex items-center gap-2 overflow-hidden">
+            <span class="text-base">${t.avatar}</span>
+            <div class="truncate">
+              <strong class="text-xs text-slate-200 block truncate group-hover:text-gold-300">${t.name}</strong>
+              <span class="text-[9px] text-slate-500 block truncate">${t.role.split('&')[0]}</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-1">
+            <span id="unread-${t.id}" class="hidden text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-red-500 text-white font-mono shadow-sm">0</span>
+            <span id="chanWorking-${t.id}" class="hidden w-2 h-2 rounded-full bg-amber-400 animate-ping" title="Üzerinde Çalışıyor..."></span>
+          </div>
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    function switchChannel(channelId) {
+      activeChannelId = channelId;
+
+      // 1. Kenar çubuğu butonlarının aktiflik durumunu güncelle
+      document.querySelectorAll('.channel-item').forEach(b => {
+        b.classList.remove('active', 'border-gold-500/40', 'bg-gold-500/15');
+      });
+      const activeBtn = document.getElementById(`chanBtn-${channelId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'border-gold-500/40', 'bg-gold-500/15');
+      }
+
+      // 2. Okunmamış mesaj sayacını sıfırla
+      unreadCounts[channelId] = 0;
+      updateUnreadBadgeUI(channelId);
+
+      // 3. Kanal Üst Künyesini Güncelle
+      const avatarEl = document.getElementById('activeChannelAvatar');
+      const titleEl = document.getElementById('activeChannelTitle');
+      const badgeEl = document.getElementById('activeChannelBadge');
+      const descEl = document.getElementById('activeChannelDesc');
+      const chipsBar = document.getElementById('quickChipsBar');
+      const chatInput = document.getElementById('chatInput');
+
+      if (channelId === 'general') {
+        avatarEl.innerText = '👥';
+        titleEl.innerText = 'İstişare Meclisi (Genel Heyet)';
+        badgeEl.innerText = 'Moderatör: Selim Hoca';
+        descEl.innerText = 'Tüm hocalarımızın sıralı, derin düşünceyle istişare ettiği genel meclis salonu';
+        if (chipsBar) chipsBar.classList.remove('hidden');
+        if (chatInput) chatInput.placeholder = "Sayın Müdürüm, Selim Hoca'ya fikir verin veya meclise hitap edin (veya 'fikir ver')...";
+      } else {
+        const meta = TEACHERS_META.find(t => t.id === channelId) || TEACHERS_META[0];
+        avatarEl.innerText = meta.avatar;
+        titleEl.innerText = `${meta.full_title} ile Birebir`;
+        badgeEl.innerText = 'Derin Düşünme Odası';
+        descEl.innerText = `${meta.role} • İkili iletişim ve fıkhi/teknik istişare`;
+        if (chipsBar) chipsBar.classList.add('hidden');
+        if (chatInput) chatInput.placeholder = `${meta.name} Hocamıza doğrudan bir soru sorun veya talimat verin...`;
+      }
+
+      // 4. Sohbet akışını bu kanalın mesajlarıyla doldur
+      renderChannelFeed(channelId);
+    }
+
+    function updateUnreadBadgeUI(channelId) {
+      const badge = document.getElementById(`unread-${channelId}`);
+      if (!badge) return;
+      const count = unreadCounts[channelId] || 0;
+      if (count > 0) {
+        badge.innerText = count > 99 ? '99+' : count;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    function initDefaultChannelMessage() {
+      if (channelLogsStore['general'].length === 0) {
+        const welcomeMsg = {
+          timestamp: new Date().toLocaleTimeString(),
+          sender_id: '01_basyonetmen',
+          sender_name: 'Başöğretmen Selim Hoca',
+          receiver_name: 'Sayın Müdürümüz (Müdürlük Makamı)',
+          phase: 'KARSILAMA',
+          badge: 'MECLİS ÇEVRİMİÇİ',
+          message: 'Selâmün Aleyküm Sayın Müdürüm. 11 Uzman Hocamızla İstişare Meclisimizde emrinizdeyiz. Bugün hangi hakikati veya Esma-ül Hüsna tefekkürünü kalplere ulaştıralım? Aklınızdaki fikri yazın veya bana "fikir ver" deyin; birlikte olgunlaştıralım!'
+        };
+        channelLogsStore['general'].push(welcomeMsg);
+        channelLogsStore['01_basyonetmen'].push(welcomeMsg);
+      }
+      renderChannelFeed('general');
+    }
+
+    function renderChannelFeed(channelId) {
+      const feed = document.getElementById('logFeed');
+      if (!feed) return;
+      feed.innerHTML = '';
+
+      const msgs = channelLogsStore[channelId] || [];
+      document.getElementById('logCountBadge').innerText = `${msgs.length} Mesaj`;
+
+      if (msgs.length === 0) {
+        const meta = TEACHERS_META.find(t => t.id === channelId);
+        const name = meta ? meta.full_title : 'Hocamız';
+        const avatar = meta ? meta.avatar : '🤖';
+        feed.innerHTML = `
+          <div class="p-4 rounded-xl bg-obsidian-950/60 border border-slate-800 text-center space-y-2 my-auto">
+            <span class="text-3xl block">${avatar}</span>
+            <strong class="text-gold-400 text-xs block">${name} ile Özel İstişare Odası</strong>
+            <p class="text-[11px] text-slate-400 max-w-sm mx-auto">
+              Bu odada ${name}'ın Başöğretmen Selim Hoca ile olan ikili vazife diyaloglarını görebilir ve doğrudan kendisiyle derin düşünme modunda istişare edebilirsiniz.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      msgs.forEach(m => {
+        appendMessageBubbleToFeed(m, false);
+      });
+      feed.scrollTop = feed.scrollHeight;
+      lucide.createIcons();
+    }
+
+    function appendMessageBubbleToFeed(m, shouldScroll = true) {
+      const feed = document.getElementById('logFeed');
+      if (!feed) return;
+
+      const isUser = m.sender_id === 'user';
+      const item = document.createElement('div');
+
+      if (isUser) {
+        item.className = 'p-3 rounded-xl bg-obsidian-900 border border-slate-700 ml-6 text-xs space-y-1 shadow-sm';
+        item.innerHTML = `
+          <div class="flex items-center justify-between text-[10px] text-slate-400 mb-0.5">
+            <span class="text-sky-400 font-bold flex items-center gap-1"><span>👤</span> ${m.sender_name || 'Sayın Müdürümüz'}</span>
+            <span class="font-mono text-slate-500">${m.timestamp || ''}</span>
+          </div>
+          <p class="text-slate-100 leading-relaxed whitespace-pre-line">${m.message}</p>
+        `;
+      } else {
+        const borderColor = getAgentBorderColor(m.sender_id || '');
+        const avatar = getAgentAvatar(m.sender_id || '');
+        item.className = `p-3.5 rounded-xl bg-obsidian-950/95 border-l-4 ${borderColor} border-y border-r border-slate-800 text-xs space-y-2 shadow-lg animate-fade-in transition-all`;
+        
+        let extraTag = '';
+        if (m.payload && m.payload.score) {
+          extraTag = `<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold">${m.payload.score}/100</span>`;
+        }
+
+        item.innerHTML = `
+          <div class="flex items-center justify-between text-[11px] text-slate-400 pb-1 border-b border-slate-800/60">
+            <span class="font-bold flex items-center gap-1.5 text-slate-200">
+              <span class="text-base">${avatar}</span>
+              <span class="text-gold-400">${m.sender_name || 'Uzman Hoca'}</span>
+              ${m.receiver_name ? `<span class="text-slate-500 font-normal">➔ ${m.receiver_name}</span>` : ''}
+            </span>
+            <span class="font-mono text-slate-500 text-[10px]">${m.timestamp || ''}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-gold-300 border border-slate-700/80 shadow-sm">${m.badge || 'GÖREV'}</span>
+            ${extraTag}
+          </div>
+          <!-- TAM VE KISALTILMAMIŞ METİN -->
+          <div class="text-slate-200 leading-relaxed whitespace-pre-line text-xs font-normal selection:bg-gold-500/30 break-words">
+            ${m.message}
+          </div>
+        `;
+      }
+
+      feed.appendChild(item);
+      if (shouldScroll) {
+        feed.scrollTop = feed.scrollHeight;
+      }
+      document.getElementById('logCountBadge').innerText = `${feed.children.length} Mesaj`;
+    }
+
+    // ===============================================================
+    // MESAJLAŞMA VE DERİN DÜŞÜNME (CHAT ENGINE)
+    // ===============================================================
+
+    async function sendChatMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      const nowStr = new Date().toLocaleTimeString();
+
+      // Kullanıcı mesaj objesi
+      const userEntry = {
+        timestamp: nowStr,
+        sender_id: 'user',
+        sender_name: 'Sayın Müdürümüz (Müdürlük Makamı)',
+        receiver_name: activeChannelId === 'general' ? 'Başöğretmen Selim Hoca' : (TEACHERS_META.find(t=>t.id===activeChannelId)||{}).name || 'Hocamız',
+        phase: 'TALIMAT',
+        badge: 'MÜDÜR TALİMATI',
+        message: text
+      };
+
+      // Aktif kanala kaydet ve ekrana bas
+      channelLogsStore[activeChannelId].push(userEntry);
+      appendMessageBubbleToFeed(userEntry, true);
+
+      // Çalışıyor çubuğunu aç
+      const workingBar = document.getElementById('agentWorkingBar');
+      const workingText = document.getElementById('agentWorkingText');
+      const activeModelTag = document.getElementById('activeModelTag');
+
+      const targetTeacher = TEACHERS_META.find(t => t.id === activeChannelId);
+      const teacherName = targetTeacher ? targetTeacher.full_title : 'Başöğretmen Selim Hoca';
+      workingText.innerText = `${teacherName} derin düşünme modunda istişare ediyor...`;
+      activeModelTag.innerText = currentActiveModel;
+      workingBar.classList.remove('hidden');
+
+      const sendBtn = document.getElementById('btnSendChat');
+      sendBtn.disabled = true;
+
+      try {
+        const historyList = (channelLogsStore[activeChannelId] || []).map(m => ({
+          sender: m.sender_id === 'user' ? 'user' : 'agent',
+          text: m.message
+        }));
+
+        const res = await fetch('/api/chat/message', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            channel_id: activeChannelId,
+            message: text,
+            history: historyList,
+            model: currentActiveModel
+          })
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}: Sunucu hatası`);
+        }
+
+        const data = await res.json();
+        workingBar.classList.add('hidden');
+
+        const replyText = data.reply || data.message || 'Hürmetler Sayın Müdürüm; vazifeyi derinlemesine tetkik ediyorum.';
+        const replyEntry = {
+          timestamp: new Date().toLocaleTimeString(),
+          sender_id: data.agent_id || activeChannelId,
+          sender_name: data.agent_name || teacherName,
+          receiver_name: 'Sayın Müdürümüz (Müdürlük Makamı)',
+          phase: 'ISTISARE_YANITI',
+          badge: `DERİN DÜŞÜNCE [${data.model_used || currentActiveModel}]`,
+          message: replyText
+        };
+
+        channelLogsStore[activeChannelId].push(replyEntry);
+        appendMessageBubbleToFeed(replyEntry, true);
+
+        // Eğer Selim Hoca konu netleştirdiyse konuyu güncelle
+        if (data.suggested_topic) {
+          document.getElementById('topicInput').value = data.suggested_topic;
+        }
+
+      } catch (e) {
+        workingBar.classList.add('hidden');
+        logSystemError({
+          error_type: 'CHAT_REQUEST_ERROR',
+          step: `Sohbet İstişaresi (${activeChannelId})`,
+          model: currentActiveModel,
+          agent_id: activeChannelId,
+          message: `Mesaj gönderilemedi: ${e.message || e}`,
+          traceback: String(e.stack || e)
+        });
+        alert('İstişare bağlantı hatası oluştu. Detaylar Hata Paneline kaydedildi: ' + e);
+      } finally {
+        sendBtn.disabled = false;
+        lucide.createIcons();
+      }
+    }
+
+    function sendQuickPrompt(promptText) {
+      document.getElementById('chatInput').value = promptText;
+      sendChatMessage();
+    }
+
+    function clearCurrentChannelUI() {
+      channelLogsStore[activeChannelId] = [];
+      renderChannelFeed(activeChannelId);
+    }
+
+    // ===============================================================
+    // SIRALI VE KAOSSUZ HEYET MESAJLAŞMASI (SEQUENTIAL LOG PLAYER)
+    // ===============================================================
+
+    function playAgentLogsSequentially(logs, onComplete) {
+      const workingBar = document.getElementById('agentWorkingBar');
+      const workingText = document.getElementById('agentWorkingText');
+      workingBar.classList.remove('hidden');
+
+      let idx = 0;
+      function next() {
+        if (idx >= logs.length) {
+          workingBar.className = 'py-2 px-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs flex items-center justify-between mb-2 shadow';
+          workingBar.innerHTML = '<span class="font-bold flex items-center gap-1.5"><span>✅</span> <span>Tüm İstişare Heyeti vazifelerini başarıyla ikmal eyledi!</span></span>';
+          setTimeout(() => workingBar.classList.add('hidden'), 4000);
+          
+          // Çalışan rozetlerini sabitle
+          TEACHERS_META.forEach(t => {
+            const ind = document.getElementById(`chanWorking-${t.id}`);
+            if (ind) ind.classList.add('hidden');
+          });
+
+          if (onComplete) onComplete();
+          return;
+        }
+
+        const l = logs[idx];
+        idx++;
+
+        // 1. Her mesaj Genel Meclis deposuna girer
+        channelLogsStore['general'].push(l);
+
+        // 2. İlgili öğretmenin özel odasına da girer
+        const senderId = l.sender_id;
+        if (senderId && channelLogsStore[senderId] && senderId !== 'general') {
+          channelLogsStore[senderId].push(l);
+        }
+
+        // 3. Okunmamış mesaj sayaçlarını artır (eğer o kanal aktif değilse)
+        if (activeChannelId !== 'general') {
+          unreadCounts['general']++;
+          updateUnreadBadgeUI('general');
+        }
+        if (senderId && activeChannelId !== senderId && unreadCounts[senderId] !== undefined) {
+          unreadCounts[senderId]++;
+          updateUnreadBadgeUI(senderId);
+        }
+
+        // 4. Kenar çubuğunda çalışan hocayı göster
+        TEACHERS_META.forEach(t => {
+          const ind = document.getElementById(`chanWorking-${t.id}`);
+          if (ind) {
+            if (t.id === senderId) ind.classList.remove('hidden');
+            else ind.classList.add('hidden');
+          }
+        });
+
+        // 5. Aktif çalışma çubuğunu güncelle
+        workingBar.className = 'py-2 px-3 rounded-xl bg-gradient-to-r from-amber-500/25 via-amber-500/10 to-transparent border border-amber-500/40 text-amber-300 text-xs flex items-center justify-between mb-2 shadow-lg animate-pulse';
+        workingText.innerHTML = `<span class="flex items-center gap-2 font-bold"><span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span> <span>${getAgentAvatar(l.sender_id)} ${l.sender_name}</span> <span class="px-2 py-0.5 rounded bg-amber-400 text-obsidian-950 text-[10px] font-black uppercase tracking-wider">Üzerinde Çalışıyor...</span></span>`;
+        highlightAgentCard(l.sender_id);
+
+        // 6. Eğer aktif kanalla ilgili bir mesajsa doğrudan ekrana ekle
+        if (activeChannelId === 'general' || activeChannelId === senderId) {
+          appendMessageBubbleToFeed(l, true);
+        }
+
+        setTimeout(next, 1300);
+      }
+      next();
+    }
+
+    function getAgentBorderColor(agentId) {
+      const found = TEACHERS_META.find(t => t.id === agentId);
+      return found ? found.borderColor : 'border-gold-500';
+    }
+
+    function getAgentAvatar(agentId) {
+      const found = TEACHERS_META.find(t => t.id === agentId);
+      return found ? found.avatar : '🤖';
+    }
+
+    function highlightAgentCard(activeAgentId) {
+      allAgents.forEach(ag => {
+        const card = document.getElementById(`card-${ag.agent_id}`);
+        const statusDiv = document.getElementById(`status-${ag.agent_id}`);
+        if (!card || !statusDiv) return;
+
+        if (ag.agent_id === activeAgentId) {
+          card.className = 'glass-panel rounded-xl p-3 cursor-pointer transition-all flex flex-col justify-between border-2 border-amber-400 bg-amber-500/20 ring-4 ring-amber-500/40 shadow-2xl shadow-amber-500/40 scale-[1.04] z-20';
+          statusDiv.className = 'text-[9px] font-black px-2 py-1 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-obsidian-950 border border-amber-200 shadow-md flex items-center justify-center gap-1.5 animate-pulse uppercase tracking-wide';
+          statusDiv.innerHTML = '<span class="w-2 h-2 rounded-full bg-obsidian-950 animate-ping"></span> 🔥 ÇALIŞIYOR...';
+          card.dataset.state = 'worked';
+        } else if (card.dataset.state === 'worked') {
+          card.className = 'glass-panel rounded-xl p-3 cursor-pointer transition-all flex flex-col justify-between border border-emerald-500/50 bg-emerald-500/10 shadow-sm opacity-95';
+          statusDiv.className = 'text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center gap-1';
+          statusDiv.innerHTML = '<span>✓</span> <span>Tamamladı</span>';
+        } else {
+          card.className = 'glass-panel rounded-xl p-3 cursor-pointer transition-all flex flex-col justify-between border border-slate-800 opacity-60';
+          statusDiv.className = 'text-[9px] font-medium px-2 py-0.5 rounded-full bg-slate-800/90 text-slate-400 border border-slate-700/60 flex items-center justify-center gap-1';
+          statusDiv.innerHTML = '<span>⏳</span> <span>Bekliyor</span>';
+        }
+      });
+    }
+
+    // ===============================================================
+    // MODEL SEÇİCİ (GLOBAL GEMINI MODEL SWITCHER)
+    // ===============================================================
+
+    async function onGlobalModelChange(newModel) {
+      currentActiveModel = newModel;
+      try {
+        const res = await fetch('/api/set_model', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({model: newModel})
+        });
+        const data = await res.json();
+        console.log(`[Model Değiştirildi] Yeni aktif model: ${data.active_model}`);
+        localStorage.setItem('islami_studio_active_model', newModel);
+      } catch (e) {
+        console.warn('Model seçimi güncellenemedi:', e);
+      }
+    }
+
+    // ===============================================================
+    // HATA YÖNETİM & SİSTEM DENETİM PANELİ (LOCALSTORAGE + MODAL)
+    // ===============================================================
+
+    function initErrorStore() {
+      try {
+        const saved = localStorage.getItem(LOCAL_STORAGE_ERR_KEY);
+        if (saved) {
+          systemErrorLogs = JSON.parse(saved);
+        }
+      } catch (e) {
+        systemErrorLogs = [];
+      }
+      updateErrorBadge();
+      loadBackendErrors();
+    }
+
+    async function loadBackendErrors() {
+      try {
+        const res = await fetch('/api/errors');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.error_logs && Array.isArray(data.error_logs)) {
+          // Backend ve yerel hataları id bazında birleştir
+          const existingIds = new Set(systemErrorLogs.map(e => e.id));
+          data.error_logs.forEach(be => {
+            if (!existingIds.has(be.id)) {
+              systemErrorLogs.unshift(be);
+            }
+          });
+          persistErrors();
+          updateErrorBadge();
+        }
+      } catch (e) {
+        console.warn('Backend hata listesi alınamadı:', e);
+      }
+    }
+
+    function logSystemError(errObj) {
+      const entry = {
+        id: `ERR-${Date.now()}-${Math.floor(Math.random()*1000)}`,
+        timestamp: errObj.timestamp || new Date().toLocaleTimeString(),
+        error_type: errObj.error_type || 'GENERAL_ERROR',
+        step: errObj.step || 'Bilinmeyen Adım',
+        model: errObj.model || currentActiveModel,
+        key_masked: errObj.key_masked || 'API Key Havuzu',
+        agent_id: errObj.agent_id || 'system',
+        message: errObj.message || 'Hata açıklaması belirtilmedi.',
+        traceback: errObj.traceback || '',
+        resolved: false
+      };
+
+      systemErrorLogs.unshift(entry);
+      if (systemErrorLogs.length > 250) systemErrorLogs.pop();
+      persistErrors();
+      updateErrorBadge();
+
+      // Backend'e de bildir
+      try {
+        fetch('/api/errors/report', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(entry)
+        });
+      } catch (_) {}
+
+      // Eğer modal açıksa listeyi güncelle
+      const modal = document.getElementById('errorModal');
+      if (modal && !modal.classList.contains('hidden')) {
+        renderErrorCards();
+      }
+    }
+
+    function persistErrors() {
+      try {
+        localStorage.setItem(LOCAL_STORAGE_ERR_KEY, JSON.stringify(systemErrorLogs));
+      } catch (e) {
+        console.warn('LocalStorage yazma hatası:', e);
+      }
+    }
+
+    function updateErrorBadge() {
+      const unresolvedCount = systemErrorLogs.filter(e => !e.resolved).length;
+      const headerBadge = document.getElementById('headerErrorCountBadge');
+      if (headerBadge) {
+        headerBadge.innerText = `${unresolvedCount} Hata`;
+        if (unresolvedCount > 0) {
+          headerBadge.className = 'px-1.5 py-0.5 rounded-full bg-red-500 text-white font-mono text-[10px] font-bold animate-pulse';
+        } else {
+          headerBadge.className = 'px-1.5 py-0.5 rounded-full bg-slate-700 text-slate-300 font-mono text-[10px] font-bold';
+        }
+      }
+    }
+
+    function openErrorPanel() {
+      renderErrorCards();
+      document.getElementById('errorModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeErrorPanel() {
+      document.getElementById('errorModal').classList.add('hidden');
+    }
+
+    function renderErrorCards() {
+      const container = document.getElementById('errorCardsContainer');
+      if (!container) return;
+
+      const filterType = document.getElementById('errorFilterType').value;
+      const filterAgent = document.getElementById('errorFilterAgent').value;
+      const filterModel = document.getElementById('errorFilterModel').value;
+
+      let filtered = systemErrorLogs.filter(e => {
+        if (filterType !== 'all') {
+          if (!e.error_type.toUpperCase().includes(filterType.toUpperCase())) return false;
+        }
+        if (filterAgent !== 'all') {
+          if (e.agent_id !== filterAgent) return false;
+        }
+        if (filterModel !== 'all') {
+          if (e.model !== filterModel) return false;
+        }
+        return true;
+      });
+
+      // İstatistik sayaçlarını doldur
+      document.getElementById('modalErrorCountBadge').innerText = `${systemErrorLogs.length} Kayıt`;
+      document.getElementById('statTotalErrors').innerText = systemErrorLogs.length;
+      document.getElementById('statQuotaErrors').innerText = systemErrorLogs.filter(e => e.error_type.includes('429') || e.error_type.includes('RATE')).length;
+      document.getElementById('statRenderErrors').innerText = systemErrorLogs.filter(e => e.error_type.includes('RENDER') || e.step.includes('Render')).length;
+      document.getElementById('statResolvedErrors').innerText = systemErrorLogs.filter(e => e.resolved).length;
+
+      container.innerHTML = '';
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-slate-500 space-y-2">
+            <span class="text-3xl block">✨</span>
+            <strong class="text-slate-300 text-sm block">Kayıtlı Sistem Hatası Bulunmuyor</strong>
+            <p class="text-xs">Seçilen filtre kriterlerine uyan herhangi bir hata veya uyarı tespit edilmedi.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(err => {
+        const card = document.createElement('div');
+        const isResolved = err.resolved;
+        card.className = `p-4 rounded-xl bg-obsidian-900 border ${isResolved ? 'border-emerald-500/30 opacity-75' : 'border-red-500/40'} text-xs space-y-2.5 transition shadow-sm`;
+        
+        let typeBadgeColor = 'bg-red-500/20 text-red-300 border-red-500/40';
+        if (err.error_type.includes('429')) typeBadgeColor = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+        if (err.error_type.includes('RENDER')) typeBadgeColor = 'bg-purple-500/20 text-purple-300 border-purple-500/40';
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] border ${typeBadgeColor}">${err.error_type}</span>
+              <span class="font-bold text-slate-200">${err.step}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-slate-500 text-[10px]">${err.timestamp}</span>
+              <button onclick="toggleErrorResolved('${err.id}')" class="px-2 py-0.5 rounded text-[10px] font-semibold transition ${isResolved ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-slate-400 hover:text-emerald-400'}">
+                ${isResolved ? '✓ Çözüldü' : 'Çözüldü İşaretle'}
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] text-slate-400">
+            <div><span class="text-slate-500 block text-[9px] uppercase">API Key / Havuz:</span> <strong class="text-slate-300 font-mono">${err.key_masked}</strong></div>
+            <div><span class="text-slate-500 block text-[9px] uppercase">Sorumlu Ajan:</span> <strong class="text-gold-400 font-mono">${err.agent_id}</strong></div>
+            <div><span class="text-slate-500 block text-[9px] uppercase">Model:</span> <strong class="text-purple-300 font-mono">${err.model}</strong></div>
+            <div><span class="text-slate-500 block text-[9px] uppercase">Durum:</span> <strong class="${isResolved ? 'text-emerald-400' : 'text-red-400'}">${isResolved ? 'Kapatıldı' : 'Aktif Uyarı'}</strong></div>
+          </div>
+
+          <div class="text-slate-200 font-sans leading-relaxed bg-obsidian-950 p-2.5 rounded-lg border border-slate-800/80">
+            ${err.message}
+          </div>
+
+          ${err.traceback ? `
+            <details class="text-[10px] text-slate-500">
+              <summary class="cursor-pointer hover:text-slate-300 font-mono text-[10px] select-none py-0.5">Teknik Yığın İzi (Stack Trace Detayı)</summary>
+              <pre class="mt-1.5 p-2 rounded bg-black/80 font-mono text-[10px] text-red-300 overflow-x-auto border border-red-500/20">${err.traceback}</pre>
+            </details>
+          ` : ''}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function applyErrorFilters() {
+      renderErrorCards();
+    }
+
+    function toggleErrorResolved(errorId) {
+      const found = systemErrorLogs.find(e => e.id === errorId);
+      if (found) {
+        found.resolved = !found.resolved;
+        persistErrors();
+        updateErrorBadge();
+        renderErrorCards();
+      }
+    }
+
+    function clearAllErrors() {
+      if (confirm('Tüm hata kayıtlarını silmek istediğinize emin misiniz?')) {
+        systemErrorLogs = [];
+        persistErrors();
+        updateErrorBadge();
+        renderErrorCards();
+        try {
+          fetch('/api/errors/clear', {method: 'POST'});
+        } catch (_) {}
+      }
+    }
+
+    function addSimulatedTestError() {
+      logSystemError({
+        error_type: 'RATE_LIMIT_429',
+        step: 'Müderris Âkif İslami Kurgu Üretimi',
+        model: currentActiveModel,
+        key_masked: 'Key #24 (AIzaSyD...9K2)',
+        agent_id: '03_islami_kurgu',
+        message: 'Kota sınırına ulaşıldı (HTTP 429: RESOURCE_EXHAUSTED). Anahtar motoru otomatik olarak 25. anahtara yönlendirdi.',
+        traceback: 'Traceback (most recent call last):
+  File "core/key_pool_engine.py", line 212, in generate_text
+requests.exceptions.HTTPError: 429 Client Error: Quota exceeded'
+      });
+    }
+
+    // ===============================================================
+    // MATERYAL HAZIRLAMA VE RENDER ENGINE (ROBUST APIS)
+    // ===============================================================
+
+    async function startMaterialsPreparation() {
+      const topic = document.getElementById('topicInput').value;
+      const style = document.getElementById('styleSelect').value;
+      const voice_id = document.getElementById('voiceSelect').value;
+      const ambience_id = document.getElementById('ambienceSelect').value;
+      const btn = document.getElementById('btnPrepare');
+      const startDirectBtn = document.getElementById('btnStartPipelineDirect');
+
+      btn.disabled = true;
+      if (startDirectBtn) startDirectBtn.disabled = true;
+      btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> İstişare Heyeti Toplandı...`;
+      lucide.createIcons();
+
+      // Selim Hoca'nın karşılama duyurusu
+      const startMsg = {
+        timestamp: new Date().toLocaleTimeString(),
+        sender_id: '01_basyonetmen',
+        sender_name: 'Başöğretmen Selim Hoca',
+        receiver_name: 'Sayın Müdürümüz & İstişare Heyeti',
+        phase: 'GOREV_BASLATMA',
+        badge: 'İSTİŞARE HEYETİ GÖREVDE',
+        message: `İstişare Heyeti toplandı! Konumuz: «<strong>${topic}</strong>». Müderris Âkif Hocam, ilk olarak Kur'an ve Sünnet omurgasını kurmak üzere vazifeyi devral!`
+      };
+      channelLogsStore['general'].push(startMsg);
+      channelLogsStore['01_basyonetmen'].push(startMsg);
+      if (activeChannelId === 'general' || activeChannelId === '01_basyonetmen') {
+        appendMessageBubbleToFeed(startMsg, true);
+      }
+
+      try {
+        const res = await fetch('/api/prepare_materials', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({topic, style, voice_id, ambience_id})
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.message || `HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+        if (data.package) {
+          currentPackage = data.package;
+          renderPackageUI(data.package);
+
+          // Sırayla konuşmaları akıt
+          playAgentLogsSequentially(data.logs || [], () => {
+            document.getElementById('approvalGatePill').innerHTML = `<span class="text-emerald-400 font-semibold">✓ Ön Denetim Geçti (Müdür Onayı Bekleniyor)</span>`;
+            document.getElementById('btnApproveAndRender').disabled = false;
+            switchTab('tabKurgu', document.querySelector('.tab-btn'));
+          });
+        }
+      } catch (e) {
+        logSystemError({
+          error_type: 'PREPARE_MATERIALS_ERROR',
+          step: 'Ön Hazırlık Boru Hattı',
+          model: currentActiveModel,
+          agent_id: '01_basyonetmen',
+          message: `Materyaller hazırlanırken hata oluştu: ${e.message || e}`,
+          traceback: String(e.stack || e)
+        });
+        alert('Materyal hazırlığı sırasında bir aksaklık yaşandı. Hata detayları için Hata Panelini açabilirsiniz: ' + e);
+      } finally {
+        btn.disabled = false;
+        if (startDirectBtn) startDirectBtn.disabled = false;
+        btn.innerHTML = `<i data-lucide="sparkles" class="w-4 h-4"></i> İstişare Heyetini Görevlendir`;
+        lucide.createIcons();
+      }
+    }
+
+    async function approveAndStartRender() {
+      const btn = document.getElementById('btnApproveAndRender');
+      const editedScript = document.getElementById('scriptTextarea').value;
+      const voice_id = document.getElementById('voiceSelect').value;
+      const ambience_id = document.getElementById('ambienceSelect').value;
+      btn.disabled = true;
+      btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Video Render & Analiz & Yetenek Tekâmülü...`;
+      lucide.createIcons();
+
+      // Selim Hoca'nın render emri mesajı
+      const renderMsg = {
+        timestamp: new Date().toLocaleTimeString(),
+        sender_id: '01_basyonetmen',
+        sender_name: 'Başöğretmen Selim Hoca',
+        receiver_name: 'Kerem Usta (Kurgu Ustası)',
+        phase: 'RENDER_EMRI',
+        badge: 'MÜDÜR ONAYLADI -> RENDER EMRİ',
+        message: 'Sayın Müdürümüz tüm materyalleri tensip buyurdu! Kurgu Ustası Kerem Hocam, Full HD 1080p MP4 videoyu render et; ardından Başmüfettişimiz Hasan Hoca ve Mürebbi Ertuğrul Hoca denetim ve yetenek gelişimini tamamlasın!'
+      };
+      channelLogsStore['general'].push(renderMsg);
+      channelLogsStore['09_video_edit_render'].push(renderMsg);
+      if (activeChannelId === 'general' || activeChannelId === '09_video_edit_render') {
+        appendMessageBubbleToFeed(renderMsg, true);
+      }
+
+      try {
+        const res = await fetch('/api/approve_and_render', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({voiceover_script: editedScript, voice_id, ambience_id})
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.message || `HTTP ${res.status}: Render işlemi başarısız`);
+        }
+
+        const data = await res.json();
+        if (data.result) {
+          const vid = document.getElementById('masterVideoPlayer');
+          vid.src = 'production_output/islami_video_el_kadir_v2.mp4?t=' + new Date().getTime();
+          vid.load();
+          loadAgents();
+          loadState();
+
+          if (wavesurfer) {
+            wavesurfer.load('production_output/audio/halal_tefekkur_ambience.wav?t=' + new Date().getTime());
+          }
+
+          // Ajanların post-render konuşmalarını akıt
+          playAgentLogsSequentially(data.result.conversation_log || [], () => {
+            renderSkillEvolutionsUI(data.result.post_audit_v2_final || {});
+          });
+        }
+      } catch (e) {
+        logSystemError({
+          error_type: 'RENDER_EXECUTION_ERROR',
+          step: 'V2 Master Render & Analiz Döngüsü',
+          model: currentActiveModel,
+          agent_id: '09_video_edit_render',
+          message: `Render hatası: ${e.message || e}`,
+          traceback: String(e.stack || e)
+        });
+        alert('Render Hatası tespit edildi. Detaylar Hata Paneline işlendi: ' + e);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i> Müdür Olarak Onayla ➔ Video Kurgu & Render`;
+        lucide.createIcons();
+      }
+    }
+
+    // Yetenek Gelişim Raporunu UI'ya Doldur
+    function renderSkillEvolutionsUI(auditData) {
+      const box = document.getElementById('skillEvolutionFeed');
+      if (!box) return;
+
+      const actions = auditData.corrective_actions_performed || [
+        {agent: '07_gorsel_motion_uretim', issue: 'WCAG 4.5:1 Tipografi Kontrastı', rule: 'Altın tipografi zümrüt karanlığında parlatıldı ve SKILL.md mühürlendi.'},
+        {agent: '09_video_edit_render', issue: 'Cross-Dissolve Geçiş İvmesi', rule: 'Sahne geçişleri 0.8 sn sinematik akışa bağlandı ve SKILL.md güncellendi.'}
+      ];
+
+      box.innerHTML = '';
+      actions.forEach(a => {
+        const item = document.createElement('div');
+        item.className = 'p-3 rounded-xl bg-obsidian-900 border border-purple-500/30 text-xs space-y-1';
+        item.innerHTML = `
+          <div class="flex items-center justify-between text-[11px]">
+            <span class="text-purple-400 font-bold flex items-center gap-1.5">
+              <span>🌱</span> Mürebbi Ertuğrul Yetenek Güncellemesi
+            </span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300">${a.agent || 'Genel'}</span>
+          </div>
+          <div class="text-[11px] text-slate-300"><strong>Geliştirilen Alan:</strong> ${a.issue}</div>
+          <p class="text-[11px] text-emerald-400 font-mono bg-obsidian-950 p-2 rounded border border-slate-800">
+            ✓ SKILL.md Kuralı: ${a.rule}
+          </p>
+        `;
+        box.appendChild(item);
+      });
+    }
+
+    // Wavesurfer Başlatma
+    function initWaveSurfer() {
+      try {
+        wavesurfer = WaveSurfer.create({
+          container: '#waveform',
+          waveColor: 'rgba(212, 175, 55, 0.4)',
+          progressColor: '#D4AF37',
+          cursorColor: '#10B981',
+          height: 56,
+          barWidth: 2,
+          barGap: 2,
+          barRadius: 2,
+          url: 'production_output/audio/halal_tefekkur_ambience.wav'
+        });
+
+        wavesurfer.on('timeupdate', (currentTime) => {
+          document.getElementById('audioCurrentTime').innerText = formatTime(currentTime);
+        });
+
+        wavesurfer.on('ready', () => {
+          document.getElementById('audioTotalDuration').innerText = formatTime(wavesurfer.getDuration());
+        });
+      } catch (e) {
+        console.warn('Wavesurfer yüklenemedi:', e);
+      }
+    }
+
+    function toggleWaveformPlay() {
+      if (!wavesurfer) return;
+      wavesurfer.playPause();
+      const btn = document.getElementById('btnPlayWaveform');
+      if (wavesurfer.isPlaying()) {
+        btn.innerHTML = `<i data-lucide="pause" class="w-3.5 h-3.5"></i> Durdur`;
+      } else {
+        btn.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5"></i> Dinle`;
+      }
+      lucide.createIcons();
+    }
+
+    function formatTime(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    }
+
+    // Sekme Değiştirme
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('bg-gold-500/15', 'text-gold-400', 'border-gold-500/30');
+        el.classList.add('text-slate-400', 'border-transparent');
+      });
+      document.getElementById(tabId).classList.remove('hidden');
+      btn.classList.add('bg-gold-500/15', 'text-gold-400', 'border-gold-500/30');
+      btn.classList.remove('text-slate-400', 'border-transparent');
+    }
+
+    // Hazır Konu Seçimi
+    function applyPresetTopic(topic) {
+      if (topic) {
+        document.getElementById('topicInput').value = topic;
+      }
+    }
+
+    // Safe-Zone Aç/Kapat
+    function toggleSafeZone() {
+      const wrapper = document.getElementById('videoContainerWrapper');
+      wrapper.classList.toggle('safe-zone-active');
+      const btn = document.getElementById('btnSafeZone');
+      if (wrapper.classList.contains('safe-zone-active')) {
+        btn.classList.add('text-gold-400', 'border-gold-500');
+      } else {
+        btn.classList.remove('text-gold-400', 'border-gold-500');
+      }
+    }
+
+    // Ajanları API'den Yükle
+    async function loadAgents() {
+      try {
+        const res = await fetch('/api/agents');
+        if (!res.ok) return;
+        allAgents = await res.json();
+        const grid = document.getElementById('agentsGrid');
+        grid.innerHTML = '';
+        allAgents.forEach(ag => {
+          const card = document.createElement('div');
+          card.id = `card-${ag.agent_id}`;
+          card.dataset.agentId = ag.agent_id;
+          card.className = 'glass-panel rounded-xl p-3 cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all flex flex-col justify-between border border-slate-800 relative shadow-sm';
+          card.onclick = () => openAgentModal(ag);
+          card.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xl">${ag.avatar || '🤖'}</span>
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gold-500/15 text-gold-400 border border-gold-500/30">Lv.${ag.experience_level || 1}</span>
+              </div>
+              <h4 class="font-bold text-xs text-white truncate">${ag.name}</h4>
+              <p class="text-[10px] text-gold-500 truncate mb-1.5">${ag.title.split('(')[0]}</p>
+            </div>
+            <div class="pt-2 border-t border-slate-800/80 flex flex-col gap-1.5">
+              <div class="flex justify-between items-center text-[10px] text-slate-400">
+                <span>Görev</span>
+                <strong class="text-slate-200">${ag.completed_tasks_count || 0}</strong>
+              </div>
+              <div id="status-${ag.agent_id}" class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-800/90 text-slate-400 border border-slate-700/60 flex items-center justify-center gap-1 transition-all">
+                <span>💤</span> <span class="status-text">Hazırda</span>
+              </div>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (e) {
+        console.error('Ajanlar yüklenemedi:', e);
+      }
+    }
+
+    // Ajan Modal Açma
+    function openAgentModal(ag) {
+      document.getElementById('modalAvatar').innerText = ag.avatar || '🤖';
+      document.getElementById('modalName').innerText = ag.name;
+      document.getElementById('modalTitle').innerText = ag.title;
+      document.getElementById('modalSummary').innerText = ag.role_summary || '';
+      document.getElementById('modalLevel').innerText = `Seviye ${ag.experience_level || 1}`;
+      document.getElementById('modalTasks').innerText = `${ag.completed_tasks_count || 0} Görev`;
+
+      const authList = document.getElementById('modalAuthorities');
+      authList.innerHTML = '';
+      (ag.authorities || []).forEach(a => {
+        const li = document.createElement('li');
+        li.innerText = a;
+        authList.appendChild(li);
+      });
+
+      const rulesBox = document.getElementById('modalRules');
+      rulesBox.innerHTML = '';
+      const rules = ag.learned_rules_and_improvements || [];
+      if (rules.length === 0) {
+        rulesBox.innerHTML = '<span class="text-slate-500 italic">Henüz özel bir ders işlenmedi.</span>';
+      } else {
+        rules.forEach(r => {
+          const item = document.createElement('div');
+          item.className = 'p-2 rounded bg-obsidian-950 border border-slate-800 text-[11px] text-slate-300';
+          item.innerText = r;
+          rulesBox.appendChild(item);
+        });
+      }
+
+      document.getElementById('agentModal').classList.remove('hidden');
+    }
+
+    function closeAgentModal() {
+      document.getElementById('agentModal').classList.add('hidden');
+    }
+
+    // Lightbox
+    function openLightbox(src, caption) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxCaption').innerText = caption;
+      document.getElementById('imageLightbox').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('imageLightbox').classList.add('hidden');
+    }
+
+    // Script Düzenleme Sayaçları
+    function onScriptEdited() {
+      const text = document.getElementById('scriptTextarea').value;
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      document.getElementById('wordCountBadge').innerText = `${words} Kelime`;
+      const estSec = Math.round((words / 120) * 60);
+      document.getElementById('estDurationBadge').innerText = `~${estSec} sn`;
+    }
+
+    async function saveEditedScript() {
+      const text = document.getElementById('scriptTextarea').value;
+      try {
+        const res = await fetch('/api/update_script', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({voiceover_script: text})
+        });
+        if (res.ok) {
+          alert('Seslendirme metni başarıyla güncellendi!');
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // Durumu Yükleme
+    async function loadState() {
+      try {
+        const res = await fetch('/api/state');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.pre_render_package) {
+          currentPackage = data.pre_render_package;
+          renderPackageUI(data.pre_render_package);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function loadKeyPoolStatus() {
+      try {
+        const res = await fetch('/api/key_pool');
+        if (!res.ok) return;
+        const data = await res.json();
+        const countTxt = document.getElementById('keyPoolCountText');
+        if (countTxt && data.total_keys) {
+          countTxt.innerText = `${data.total_keys}/${data.total_keys}`;
+        }
+      } catch (e) {
+        console.warn('Key pool durumu alınamadı:', e);
+      }
+    }
+
+    function refreshState() {
+      loadKeyPoolStatus();
+      loadAgents();
+      loadState();
+      loadBackendErrors();
+    }
+
+    // GitHub Ses Kütüphanesini Yükle
+    async function loadAudioLibrary() {
+      try {
+        const res = await fetch('/api/audio_library');
+        if (!res.ok) return;
+        const cat = await res.json();
+        const container = document.getElementById('audioLibraryList');
+        if (!container) return;
+        container.innerHTML = '';
+        (cat.voices || []).forEach(v => {
+          const item = document.createElement('div');
+          item.className = 'p-2.5 rounded-xl bg-obsidian-900 border border-slate-800 hover:border-sky-500/50 transition flex flex-col justify-between';
+          item.innerHTML = `
+            <div class="mb-1.5">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-bold text-sky-400 text-xs">${v.title}</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-400 font-mono">${v.duration_sec ? v.duration_sec + 's' : 'AI TTS'}</span>
+              </div>
+              <p class="text-[10px] text-slate-400 leading-tight">${v.tone || ''}</p>
+            </div>
+            <div class="flex justify-between items-center pt-1.5 border-t border-slate-800/80 text-[10px]">
+              <span class="text-slate-500 truncate mr-2">${v.matched_esma || 'Esma-ül Hüsna'}</span>
+              <button onclick="selectAndPreviewVoice('${v.id}', '${v.file_name}')" class="px-2 py-0.5 rounded-lg bg-sky-500/20 hover:bg-sky-500 text-sky-300 hover:text-black font-semibold transition flex items-center gap-1">
+                <i data-lucide="play" class="w-3 h-3"></i> Seç & Dinle
+              </button>
+            </div>
+          `;
+          container.appendChild(item);
+        });
+        lucide.createIcons();
+      } catch (e) {
+        console.warn('Audio library yüklenemedi:', e);
+      }
+    }
+
+    function selectAndPreviewVoice(voiceId, fileName) {
+      const sel = document.getElementById('voiceSelect');
+      if (sel) {
+        sel.value = voiceId;
+      }
+      if (wavesurfer && fileName && fileName.endsWith('.mp3')) {
+        wavesurfer.load(`audio_library/vocals/${fileName}`);
+        wavesurfer.once('ready', () => {
+          wavesurfer.play();
+          document.getElementById('btnPlayWaveform').innerHTML = `<i data-lucide="pause" class="w-3.5 h-3.5"></i> Durdur`;
+          lucide.createIcons();
+        });
+      }
+    }
+
+    function onVoiceSelectionChange(val) {
+      // Bilgi amaçlı
+    }
+
+    // Kullanıcı Nihai Karar Butonları
+    function userApproveFinalVideo() {
+      const userMsg = {
+        timestamp: new Date().toLocaleTimeString(),
+        sender_id: 'user',
+        sender_name: 'Sayın Müdürümüz (Müdürlük Makamı)',
+        receiver_name: 'Başöğretmen Selim Hoca',
+        phase: 'NIHAI_ONAY',
+        badge: 'MÜDÜR NİHAİ ONAYI',
+        message: 'Selim Hocam, V2 Master videoyu izledim ve kalitesini onaylıyorum! Eser yayına hazırdır, emeği geçen tüm öğretmenlerimize teşekkür ederim.'
+      };
+      channelLogsStore['general'].push(userMsg);
+
+      const selimReply = {
+        timestamp: new Date().toLocaleTimeString(),
+        sender_id: '01_basyonetmen',
+        sender_name: 'Başöğretmen Selim Hoca',
+        receiver_name: 'Sayın Müdürümüz (Müdürlük Makamı)',
+        phase: 'TESEKKUR',
+        badge: 'BAŞYAPIT TAMAMLANDI',
+        message: 'Emriniz başım üstüne Sayın Müdürüm! Bu eserimiz ümmete ve kalplere hayırlı olsun. Bir sonraki tefekkür başyapıtı için emrinizdeyiz!'
+      };
+      channelLogsStore['general'].push(selimReply);
+
+      if (activeChannelId === 'general') {
+        appendMessageBubbleToFeed(userMsg, false);
+        appendMessageBubbleToFeed(selimReply, true);
+      }
+
+      alert('Tebrikler Sayın Müdürüm! Nihai onayınız verildi; eser ve proje dosyaları yayına hazırlandı.');
+    }
+
+    function userRequestRevision() {
+      switchChannel('01_basyonetmen');
+      const input = document.getElementById('chatInput');
+      input.value = 'Selim Hocam, şu sahnenin veya cümlenin revize edilmesini tensip ediyorum: ';
+      input.focus();
+    }
+
+    // UI Doldurma (Materyal İnceleme Masası)
+    function renderPackageUI(pkg) {
+      // 1. İslami Kurgu
+      if (pkg.islami_kurgu) {
+        const k = pkg.islami_kurgu;
+        let html = `
+          <div class="p-3 rounded-xl bg-obsidian-950 border border-gold-500/20 space-y-2">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-gold-400 font-display text-sm">${k.esma}</h4>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">${k.fiqh_creed_school}</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <h5 class="font-semibold text-gold-400 text-xs">Kur'an-ı Kerim Ayetleri:</h5>
+        `;
+        (k.ayat || []).forEach(a => {
+          html += `
+            <div class="p-3 rounded-xl bg-obsidian-950 border border-slate-800 space-y-1.5">
+              <span class="text-[10px] text-gold-500 font-bold uppercase tracking-wider block">${a.ref}</span>
+              <p class="font-arabic text-base text-gold-300 leading-relaxed text-right dir-rtl">${a.arabic}</p>
+              <p class="text-[11px] text-slate-300 italic">«${a.meaning}»</p>
+            </div>
+          `;
+        });
+        html += `</div>`;
+        document.getElementById('kurguContainer').innerHTML = html;
+      }
+
+      // 2. Senaryo
+      if (pkg.voiceover_script) {
+        document.getElementById('scriptTextarea').value = pkg.voiceover_script;
+        onScriptEdited();
+      }
+
+      // 3. Storyboard
+      const gallery = document.getElementById('storyboardGallery');
+      gallery.innerHTML = '';
+      for (let i = 1; i <= 6; i++) {
+        const thumb = document.createElement('div');
+        thumb.className = 'glass-panel rounded-xl overflow-hidden cursor-pointer hover:border-gold-400 transition group';
+        const imgUrl = `production_output/scenes/scene_0${i}.png?t=${new Date().getTime()}`;
+        thumb.onclick = () => openLightbox(imgUrl, `Sahne 0${i} (1920x1080 Full HD)`);
+        thumb.innerHTML = `
+          <div class="aspect-video bg-black relative overflow-hidden">
+            <img src="${imgUrl}" alt="Sahne 0${i}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='production_output/keyframes/keyframe_scene_0${i}_v2.jpg'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+              <span class="text-[10px] font-bold text-gold-400">Sahne 0${i}</span>
+            </div>
+          </div>
+        `;
+        gallery.appendChild(thumb);
+      }
+
+      // 4. SRT Altyazı
+      const srtList = document.getElementById('srtPreviewList');
+      srtList.innerHTML = '';
+      (pkg.scenes_plan || []).forEach(s => {
+        const item = document.createElement('div');
+        item.className = 'flex items-start gap-2 p-1.5 rounded bg-obsidian-900 border border-slate-800';
+        item.innerHTML = `
+          <span class="text-gold-500 font-mono text-[10px] whitespace-nowrap">${s.time_range}</span>
+          <span class="text-slate-300">${s.narration_excerpt || ''}</span>
+        `;
+        srtList.appendChild(item);
+      });
+
+      // 5. Ön Denetim
+      if (pkg.pre_render_audit) {
+        const a = pkg.pre_render_audit;
+        let html = `
+          <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 space-y-1.5 mb-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-emerald-400 text-sm">Ön Denetim Onaylandı</span>
+              <span class="font-bold text-emerald-400 text-sm font-mono">${a.score} / 100</span>
+            </div>
+            <p class="text-[11px] text-slate-300">${a.summary_for_yonetmen}</p>
+          </div>
+          <div class="space-y-2">
+        `;
+        (a.checks || []).forEach(c => {
+          html += `
+            <div class="p-2.5 rounded-xl bg-obsidian-950 border border-slate-800">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-semibold text-slate-200 text-xs">${c.criterion}</span>
+                <span class="text-[10px] font-bold text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-500/20">${c.status}</span>
+              </div>
+              <p class="text-[11px] text-slate-400">${c.detail}</p>
+            </div>
+          `;
+        });
+        html += `</div>`;
+        document.getElementById('auditContainer').innerHTML = html;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -2913,19 +2913,22 @@
       <!-- Quick Action Pills -->
       <div class="px-4 py-2 border-b border-slate-800/60 bg-slate-950/60 flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
         <span class="text-[10px] text-amber-400/80 font-bold uppercase tracking-wider shrink-0 flex items-center gap-1">
-          <i class="fa-solid fa-bolt"></i> İstişare Kısayolları:
+          <i class="fa-solid fa-bolt"></i> Onay & İstişare:
         </span>
         <button onclick="sendArgon4QuickPrompt('Bana 3 sarsıcı İslami video konsepti öner')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-[11px] font-semibold border border-amber-500/30 transition flex items-center gap-1">
-          💡 3 Sarsıcı Konsept İste
+          💡 3 Konsept İste
         </button>
-        <button onclick="sendArgon4QuickPrompt('Videonun formatı 9:16 Dikey Shorts / Reels olsun. İlk 3 saniyesi çok çarpıcı başlasın.')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold border border-slate-700 transition flex items-center gap-1">
-          📱 9:16 Shorts Formatı
+        <button onclick="sendArgon4QuickPrompt('1. Konsepti seçiyorum. 1. Aşama Sahne Kurgusunu hazırla ve benden onay iste.')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold border border-slate-700 transition flex items-center gap-1">
+          ✨ 1. Konsepti Seç
         </button>
-        <button onclick="sendArgon4QuickPrompt('Videonun formatı 16:9 Sinematik Yatay YouTube videosu olsun. Tarihten bugüne köprü kursun.')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold border border-slate-700 transition flex items-center gap-1">
-          🖥️ 16:9 Yatay YouTube Formatı
+        <button onclick="sendArgon4QuickPrompt('👍 1. Aşamayı (Konsept ve Sahne Kurgusunu) onaylıyorum. Şimdi 2. Aşama olan AI Seslendirme Metnine geçelim ve onayımı iste.')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-[11px] font-bold border border-amber-500/40 transition flex items-center gap-1">
+          👍 1. Aşamayı Onayla
         </button>
-        <button onclick="sendArgon4QuickPrompt('Harika, anlaştık! Şimdi 4 bölümlük tam üretim paketini baştan sona eksiksiz üret.')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-[11px] font-bold shadow transition flex items-center gap-1">
-          🚀 Şimdi Başla ve Üret!
+        <button onclick="sendArgon4QuickPrompt('👍 2. Aşamayı (Seslendirme Metnini) onaylıyorum. Şimdi 3. Aşama olan Veo 3.1 Fast video promptlarına ve Remotion katman tasarımına geçelim ve onayımı iste.')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 text-[11px] font-bold border border-cyan-500/40 transition flex items-center gap-1">
+          👍 2. Aşamayı Onayla
+        </button>
+        <button onclick="sendArgon4QuickPrompt('🎬 3. Aşamayı (Veo 3.1 Fast ve Remotion Görsel Kurgusunu) onaylıyorum! Şimdi 4 bölümlük tam üretim paketini baştan sona eksiksiz üret ve projeye aktar.')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-[11px] font-black shadow transition flex items-center gap-1">
+          🎬 3. Aşamayı Onayla & Üret
         </button>
       </div>
 
@@ -6809,27 +6812,8 @@
       const mid = document.getElementById('pv-middle-area');
 
       if (layout === 'cinematic_ambient') {
-        const spoken = s.spokenText || s.narration || '';
-        mid.innerHTML = `
-          <div class="my-auto px-4 max-w-[340px] mx-auto text-center">
-            <div class="p-5 rounded-3xl bg-slate-950/80 border border-amber-500/40 shadow-2xl backdrop-blur-md space-y-3">
-              <div class="flex items-center justify-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider font-mono">
-                <i class="fa-solid fa-star-and-crescent text-sm text-amber-300"></i>
-                <span>${s.headerSubtitle || 'İbret ve Tefekkür'}</span>
-              </div>
-              <p class="text-xs md:text-sm font-bold text-slate-100 leading-relaxed font-sans drop-shadow">
-                "${spoken}"
-              </p>
-              ${s.highlightedText ? `
-                <div class="pt-1">
-                  <span class="inline-block px-3 py-1 rounded-xl bg-amber-500/20 border border-amber-400/50 text-amber-300 font-extrabold text-xs shadow-md">
-                    ✨ ${s.highlightedText}
-                  </span>
-                </div>
-              ` : ''}
-            </div>
-          </div>
-        `;
+        // Tam sinematik 35mm video: Ortadaki ekranı kapatan kutu kaldırıldı, video ferah ve net akar
+        mid.innerHTML = '';
       } else if (layout === 'vs_split') {
         const vs = s.vsData || {
           leftTitle: 'Bencil Menfaat', leftPoints: ['Zorunda değilim tavrı', 'Sürekli hak yarışı'],
@@ -6962,14 +6946,43 @@
 
       // Bottom synchronized subtitle
       const curSub = (videoData.subtitles || []).find(sb => playheadTime >= sb.start && playheadTime <= sb.end);
-      if (curSub) {
-        document.getElementById('pv-bottom-sub').innerText = curSub.text;
+      const bottomSubEl = document.getElementById('pv-bottom-sub');
+      const handleEl = document.getElementById('pv-handle');
+
+      if (isCleanVideoScene) {
+        if (handleEl) handleEl.style.display = 'none';
+        if (bottomSubEl) {
+          bottomSubEl.className = 'max-w-[320px] text-center px-4 py-2 rounded-2xl bg-black/75 border border-amber-400/50 text-amber-200 font-black text-xs md:text-sm shadow-2xl backdrop-blur-md drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] tracking-wide';
+          if (curSub) {
+            bottomSubEl.innerText = curSub.text;
+          } else if (s.spokenText) {
+            bottomSubEl.innerText = s.spokenText.length > 55 ? s.spokenText.substring(0, 55) + '...' : s.spokenText;
+          } else {
+            bottomSubEl.innerText = s.headerLine1 || '';
+          }
+        }
+      } else {
+        if (handleEl) handleEl.style.display = 'block';
+        if (bottomSubEl) {
+          bottomSubEl.className = 'bg-white border-2 border-blue-900 rounded-xl px-3 py-1 text-xs font-extrabold text-blue-900 shadow';
+          if (curSub) {
+            bottomSubEl.innerText = curSub.text;
+          }
+        }
       }
 
       // Chapter badge
       const curIdx = scenes.indexOf(s) + 1;
       const scenePill = document.getElementById('preview-scene-pill');
-      if (scenePill) scenePill.innerText = `Sahne ${curIdx} / ${scenes.length} (${s.startTime?.toFixed(0)}s - ${s.endTime?.toFixed(0)}s)`;
+      if (scenePill) {
+        if (isCleanVideoScene) {
+          scenePill.className = 'mx-auto mb-1 px-3 py-1 bg-black/80 backdrop-blur-md rounded-full text-[10px] text-amber-300 font-mono font-bold border border-amber-500/40 z-10 flex items-center gap-1.5 shadow-lg';
+          scenePill.innerHTML = `<i class="fa-solid fa-moon-stars text-amber-400 text-xs"></i> <span>${s.headerSubtitle || 'İslami Tefekkür'} · Sahne ${curIdx}/${scenes.length} (${s.startTime?.toFixed(0)}s - ${s.endTime?.toFixed(0)}s)</span>`;
+        } else {
+          scenePill.className = 'mx-auto mb-1 px-2.5 py-0.5 bg-black/60 backdrop-blur-md rounded-full text-[9px] text-amber-300 font-mono font-bold border border-white/10 z-10';
+          scenePill.innerText = `Sahne ${curIdx} / ${scenes.length} (${s.startTime?.toFixed(0)}s - ${s.endTime?.toFixed(0)}s)`;
+        }
+      }
 
       // Dynamic Live Overlays in Preview Screen
       renderQuotePreviewOverlay();
@@ -9429,38 +9442,45 @@
     }
 
     function initArgon4Greeting() {
-      const initialGreeting = `Esselâmü aleyküm ve rahmetullâhi ve berekâtüh kıymetli yol arkadaşım. Ben **Argon 4**.
+      const initialGreeting = `Esselâmü aleyküm ve rahmetullâhi ve berekâtüh kıymetli yol arkadaşım. Ben **Argon 4** — İslami İçerik, Derin Tefekkür ve Görsel Kurgunun **Baş Yönetmeniyim (Chief AI Video Director)**.
 
-İnsanlara Allah’ı (c.c.), İslam’ı, Kur'an hakikatlerini ve Ahiret gününü anlatan; kalpleri titreten ve derin tefekkür uyandıran videolar üretmek için buradayım.
+Arka plan videolarımız asla rastgele veya durağan tek bir görselden ibaret olamaz:
+🎥 **Google Veo 3.1 Fast ile Arka Plan Videosu:** Her sahne için sahneye özel 35mm sinematik kamera hareketleri ve ışık detaylarıyla sıfırdan oluşturulur (Tasvir edebine tavizsiz uygun: Peygamberlerimizin ve Sahabenin sureti asla çizilmez; kadim Mushaf-ı Şerif, rahle, kandil ışığı, taş kemerler ve sonsuz yıldızlı çöl seması kullanılır).
+✨ **Remotion ile Hibrit Hareketli Grafik:** Arka plan videosu üzerine altın zerre parçacık alanı (\`ParticleField\`), ilahi nur sızıntıları (\`LightLeaks\`), 35mm film greni ve dinamik kinetik altyazılar katman olarak giydirilir.
 
-Aklınızda işlemek istediğiniz özel bir konu, ayet veya kıssa var mı? Eğer henüz netleşmediyse, istişaremizi başlatmak adına **3 sarsıcı video konsepti** sunuyorum:
+🎯 **4 Aşamalı İnteraktif Onay Döngümüz:**
+Tüm kararları bir yönetmen gibi alacak ancak her aşamada sizden tek tek onay isteyeceğim:
+1. **Aşama:** Konsept, Sahih Ayet/Hadis & 4 Sahnelik Kurgu Akışı *(Sizden Onay İster)*
+2. **Aşama:** Tam AI Seslendirme (TTS) Metni & Vakur Anlatıcı Profili *(Sizden Onay İster)*
+3. **Aşama:** Veo 3.1 Fast Video Promptları & Remotion Katman Tasarımı *(Sizden Onay İster)*
+4. **Aşama:** Prodüksiyon, Montaj ve Zaman Tüneline Teslim
 
 ---
+
+Aklınızda işlemek istediğiniz özel bir konu var mı? Eğer henüz netleşmediyse, 1. Aşama istişaremizi başlatmak için şu **3 sarsıcı video konseptinden** birini seçebiliriz:
 
 ### 1. Konsept: *“Görünmez Putlar ve Kırılan Aynalar”*
 * **Ayet & Hadis:** En'âm Suresi 76-79 & Buhârî (Dinarın ve şöhretin kulu olan helak olsun)
 * **Kıssa:** Hz. İbrahim’in (a.s.) putları kırmasından bugünün beğeni ve ekran putlarına uzanan ibret aynası.
-* **Görsel:** Gece mavisi ve çöl kehribarı, açık Mushaf, kırılan ayna ve altın varaklı İslami motifler.
+* **Görsel & Veo 3.1:** Gece mavisi ve çöl kehribarı gökyüzü, sönen yıldızlar, altın varaklı İslami motifler.
 
 ### 2. Konsept: *“Sessiz Çığlık: Kabir Kapısındaki İlk Gece”*
 * **Ayet & Hadis:** Tekâsür Suresi 1-2 & Tirmizî (Kabir ahiret duraklarının ilkidir)
 * **Kıssa:** Hz. Osman’ın (r.a.) kabir başında gözyaşları ve dünya meşgalesinin aniden kesilişi.
-* **Görsel:** Taş oda, titreyen kandil ışığı, açık Mushaf ve süzülen nurani ışık hüzmesi.
+* **Görsel & Veo 3.1:** Taş mihrap kemeri, titreyen kandil ışığı, açık Mushaf ve süzülen nurani ışık hüzmesi.
 
 ### 3. Konsept: *“Tükenmeyen Zenginlik: Bir Hurma ile Kurtulanlar”*
 * **Ayet & Hadis:** Haşr Suresi 9 & Müslim (Sadaka malı eksiltmez)
 * **Kıssa:** Tebük Seferi'nde Hz. Ebubekir'in (r.a.) fedakarlığı ve iki avuç hurmasını veren sahabi.
-* **Görsel:** Mekke kerpiç evleri, çöl kumları, süzülen altın rengi güneş ve zarif Sülüs hat çerçeveleri.
+* **Görsel & Veo 3.1:** Mekke kerpiç kemerleri, çöl kumları, süzülen altın rengi güneş ve zarif Sülüs hat çerçeveleri.
 
 ---
 
-Birlikte belirleyelim:
-1. Hangi konuyu veya kendi özel konunuzu işleyelim?
-2. Formatımız **Shorts (9:16)** mı yoksa **Yatay (16:9)** mu olsun?
-3. Elinizde analiz etmemi istediğiniz bir ses (tilavet), görsel veya video var mı?`;
+📌 **1. Aşama Başlangıcı:**
+Hangi konsepti seçelim veya kendi özel konunuzu mu çalışalım? Tercih ettiğiniz formatı (**Shorts 9:16** veya **Yatay 16:9**) belirtirseniz hemen 1. Aşama sahne kurgusu planını çıkarıp onayınıza sunacağım.`;
 
       argon4ChatHistory = [
-        { role: "assistant", content: initialGreeting, key_info: "Argon 4 İstişare Başlangıcı" }
+        { role: "assistant", content: initialGreeting, key_info: "Argon 4 Baş Yönetmen İstişaresi" }
       ];
       renderArgon4Messages();
     }
@@ -9510,7 +9530,12 @@ Birlikte belirleyelim:
             </div>
           `;
         } else {
+          const contentLower = msg.content.toLowerCase();
           const hasPackage = msg.is_production_package || msg.content.includes('Bölüm 1') || msg.content.includes('Bölüm 2') || msg.content.includes('Tam AI Seslendirme');
+          const isStage1Approval = !hasPackage && (msg.content.includes('1. Aşama') || msg.content.includes('1. Konsept') || msg.content.includes('1. Aşamada')) && (contentLower.includes('onaylıyor musunuz') || contentLower.includes('onayınız') || contentLower.includes('onay'));
+          const isStage2Approval = !hasPackage && msg.content.includes('2. Aşama') && (contentLower.includes('onaylıyor musunuz') || contentLower.includes('onayınız') || contentLower.includes('onay'));
+          const isStage3Approval = !hasPackage && (msg.content.includes('3. Aşama') || msg.content.includes('Veo 3.1')) && (contentLower.includes('onaylıyor musunuz') || contentLower.includes('onayınız') || contentLower.includes('onay'));
+
           return `
             <div class="flex items-start gap-3">
               <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-emerald-500 text-slate-950 flex items-center justify-center text-sm shrink-0 font-bold shadow-md shadow-amber-500/20 mt-1">
@@ -9520,13 +9545,56 @@ Birlikte belirleyelim:
                 <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
                   <div class="flex items-center gap-2">
                     <span class="font-extrabold text-amber-300 text-xs md:text-sm">Argon 4</span>
-                    <span class="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.2 rounded font-mono">İslami Video Uzmanı</span>
+                    <span class="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.2 rounded font-mono">İslami Video Baş Yönetmeni</span>
                   </div>
                   <span class="text-[10px] text-slate-500 font-mono">${msg.key_info || 'Gemini Key Pool'}</span>
                 </div>
                 <div class="text-xs md:text-sm leading-relaxed text-slate-200 space-y-1">
                   ${formatArgon4Markdown(msg.content)}
                 </div>
+
+                ${isStage1Approval ? `
+                  <div class="mt-3 p-3.5 rounded-2xl bg-gradient-to-r from-amber-950/70 via-slate-900 to-slate-900 border border-amber-500/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
+                    <div>
+                      <div class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-amber-400"></i> 1. Aşama Onay Bekliyor
+                      </div>
+                      <div class="text-[11px] text-slate-300 mt-0.5">Konsept, ayet/hadis ve 4 sahnelik kurgu akışını onaylıyor musunuz?</div>
+                    </div>
+                    <button onclick="sendArgon4QuickPrompt('👍 1. Aşamayı (Konsept ve Sahne Kurgusunu) onaylıyorum. Şimdi 2. Aşama olan AI Seslendirme Metnine geçelim.')" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-lg shrink-0 flex items-center gap-1.5 active:scale-95">
+                      <i class="fa-solid fa-check"></i> 1. Aşamayı Onayla (Seslendirmeye Geç)
+                    </button>
+                  </div>
+                ` : ''}
+
+                ${isStage2Approval ? `
+                  <div class="mt-3 p-3.5 rounded-2xl bg-gradient-to-r from-cyan-950/70 via-slate-900 to-slate-900 border border-cyan-500/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
+                    <div>
+                      <div class="text-xs font-bold text-cyan-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-microphone-lines text-cyan-400"></i> 2. Aşama Onay Bekliyor
+                      </div>
+                      <div class="text-[11px] text-slate-300 mt-0.5">Seslendirme metnini ve vakur hatip ses tonunu onaylıyor musunuz?</div>
+                    </div>
+                    <button onclick="sendArgon4QuickPrompt('👍 2. Aşamayı (Seslendirme Metnini) onaylıyorum. Şimdi 3. Aşama olan Veo 3.1 Fast video promptlarına ve Remotion katman tasarımına geçelim.')" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs transition shadow-lg shrink-0 flex items-center gap-1.5 active:scale-95">
+                      <i class="fa-solid fa-check"></i> 2. Aşamayı Onayla (Veo & Remotion'a Geç)
+                    </button>
+                  </div>
+                ` : ''}
+
+                ${isStage3Approval ? `
+                  <div class="mt-3 p-3.5 rounded-2xl bg-gradient-to-r from-emerald-950/80 via-slate-900 to-amber-950/80 border border-emerald-500/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
+                    <div>
+                      <div class="text-xs font-bold text-emerald-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-film text-emerald-400"></i> 3. Aşama Onay Bekliyor
+                      </div>
+                      <div class="text-[11px] text-slate-300 mt-0.5">Veo 3.1 Fast video promptlarını ve Remotion görsel katmanlarını onaylıyor musunuz?</div>
+                    </div>
+                    <button onclick="sendArgon4QuickPrompt('🎬 3. Aşamayı (Veo 3.1 Fast ve Remotion Görsel Kurgusunu) onaylıyorum! Şimdi tüm videoların üretimini, seslendirmesini ve Remotion montajını başlatıp stüdyoya aktar.')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs transition shadow-xl shrink-0 flex items-center gap-1.5 active:scale-95">
+                      <i class="fa-solid fa-clapperboard"></i> 3. Aşamayı Onayla & Üret
+                    </button>
+                  </div>
+                ` : ''}
+
                 ${hasPackage ? `
                   <div class="mt-4 p-4 rounded-2xl bg-gradient-to-r from-emerald-950/80 via-slate-900 to-amber-950/80 border border-amber-500/50 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                     <div>
@@ -9535,9 +9603,9 @@ Birlikte belirleyelim:
                       </div>
                       <p class="text-[11px] text-slate-300 mt-0.5">Senaryo, seslendirme ve sahneler doğrudan kurgu zaman tüneline aktarılmaya hazır.</p>
                     </div>
-                    <button onclick="applyArgon4ToProject()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-black text-xs md:text-sm shadow-xl shadow-amber-500/30 flex items-center gap-2 transition active:scale-95 whitespace-nowrap">
-                      <i class="fa-solid fa-film text-slate-950"></i>
-                      <span>Kurgu Projesine Aktar & Stüdyoda Aç</span>
+                    <button onclick="applyArgon4ToProject(this)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-black text-xs md:text-sm shadow-xl shadow-amber-500/30 flex items-center gap-2 transition active:scale-95 whitespace-nowrap">
+                      <i class="fa-solid fa-clapperboard text-slate-950"></i>
+                      <span>Videoları & Sesi Üret (Stüdyoya Aktar)</span>
                       <i class="fa-solid fa-arrow-right text-xs"></i>
                     </button>
                   </div>
@@ -9683,7 +9751,7 @@ Birlikte belirleyelim:
       }
     }
 
-    async function applyArgon4ToProject() {
+    async function applyArgon4ToProject(triggerBtn) {
       if (!latestProductionPackage) {
         for (let i = argon4ChatHistory.length - 1; i >= 0; i--) {
           const c = argon4ChatHistory[i].content;
@@ -9699,7 +9767,14 @@ Birlikte belirleyelim:
         return;
       }
 
-      showToast('🎬 İslami video projesi zaman tüneline aktarılıyor...', 'info');
+      let origBtnHtml = '';
+      if (triggerBtn) {
+        origBtnHtml = triggerBtn.innerHTML;
+        triggerBtn.disabled = true;
+        triggerBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Videolar & Ses Üretiliyor...</span>';
+      }
+
+      showToast('🎙️ Yapay zekâ seslendirmesi (TTS) ve 35mm sahne videoları üretiliyor...', 'info');
 
       try {
         const res = await fetch('/api/argon4/apply-to-project', {
@@ -9723,15 +9798,21 @@ Birlikte belirleyelim:
           renderTimeline();
           renderLivePreviewCanvas();
           renderSceneInspector();
-          const audioEl = document.getElementById('main-audio');
+          renderLeftScenesList();
+          const audioEl = document.getElementById('timeline-audio');
           if (audioEl) {
-            audioEl.src = `/public/audio.mp3?t=${Date.now()}`;
+            audioEl.src = `${data.audioUrl || '/public/audio.mp3'}?t=${Date.now()}`;
             audioEl.load();
           }
         }, 100);
-        showToast(`✨ '${data.title}' projesi (${data.scenes_count} Sahne, ${data.format}) stüdyoda açıldı!`, 'success');
+        showToast(`✨ '${data.title}' projesi (${data.scenes_count} Sahne, ${data.totalDuration}s) tüm videoları ve sesiyle stüdyoda hazır!`, 'success');
       } catch (err) {
         showToast('Projeye aktarma hatası: ' + err.message, 'error');
+      } finally {
+        if (triggerBtn) {
+          triggerBtn.disabled = false;
+          triggerBtn.innerHTML = origBtnHtml;
+        }
       }
     }
 

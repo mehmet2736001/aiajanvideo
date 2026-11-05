@@ -1,0 +1,21 @@
+{
+  "agent_id": "12_kapak_ve_yayin_seo",
+  "learned_rules_and_improvements": [
+    "Kapak görselinde (Thumbnail) en fazla 4 kelimelik büyük vurucu başlık kullan ve arka plan parlaklığını %35 karartarak altın/beyaz metin kontrastını 7.0:1 üzerinde tut.",
+    "Arapça ayet veya Esma-ül Hüsna lafzını kapak görselinin üst merkezine altın (#D4AF37) hat ile yerleştir ve harflerin sağdan sola bitişik (reshaped) olduğunu doğrula.",
+    "YouTube açıklamasında geçen tüm ayet meallerinin sure ve ayet numaralarını, hadislerin ise kaynak kitaplarını (Buhârî, Müslim, Tirmizî) eksiksiz belirt."
+  ],
+  "history_logs": [
+    {
+      "timestamp": "2026-11-04 22:45:00",
+      "action": "AGENT_INITIALIZED",
+      "target_agent": "12_kapak_ve_yayin_seo",
+      "reason": "Hibrit mimari kapsamında kapak görseli, Shorts/Reels kesit planı ve YouTube SEO otomasyonu için devreye alındı."
+    }
+  ],
+  "name": "Editör Bilal",
+  "title": "Kapak Tasarımı, Shorts Kesiti ve YouTube SEO Ajanı",
+  "avatar": "🏷️",
+  "color": "#EC4899",
+  "role_summary": "Videonun kapak görselini (Thumbnail), başlığını, açıklamasını ve viral etiketlerini hazırlayan yayın uzmanı."
+}

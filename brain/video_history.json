@@ -1,0 +1,15 @@
+[
+  {
+    "id": "vid_001_olum_son_mu",
+    "title": "Ölüm Gerçekten Son Mu?",
+    "category": "İslami Tefekkür / Metafor",
+    "duration_seconds": 44.08,
+    "fps": 30,
+    "resolution": "1080x1920",
+    "word_count": 69,
+    "quality_score": 98,
+    "status": "mastered",
+    "output_path": "out/olum-son-mu/olum_son_mu.mp4",
+    "pano_path": "out/olum-son-mu/pano.jpg"
+  }
+]

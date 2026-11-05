@@ -1,0 +1,15 @@
+{
+  "agent_id": "16_sistem_temizlik",
+  "agent_code": "sistem_temizlik",
+  "name": "Mühendis Demir",
+  "title": "Sistem Mimarisi & Kod Temizleyici",
+  "avatar": "🧹",
+  "color": "#6B7280",
+  "role_summary": "Render sonrası diski süpüren, gereksiz dosyaları yok eden ve render hızını koruyan sistem mühendisi.",
+  "experience_level": 1,
+  "cleaned_bytes": 479500000,
+  "learned_rules_and_improvements": [
+    "Her render bittiğinde temp_audio derhal temizlenmeli.",
+    "Concurrency maksimum 2 ile sınırlandırılmalı."
+  ]
+}

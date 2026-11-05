@@ -1,0 +1,32 @@
+[Script Info]
+Title: Dynamic Motion Viral Subtitles
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+PlayResX: 720
+PlayResY: 1280
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: KineticGold,Arial,48,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,3.5,2.0,2,40,40,160,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.58,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}Musa{\c&H00FFFFFF\b0} bin umeyir
+Dialogue: 0,0:00:00.58,0:00:00.78,KineticGold,,0,0,0,,Musa {\c&H0000D7FF\b1}bin{\c&H00FFFFFF\b0} umeyir
+Dialogue: 0,0:00:00.78,0:00:01.36,KineticGold,,0,0,0,,Musa bin {\c&H0000D7FF\b1}umeyir{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:01.36,0:00:02.32,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}efendimizin{\c&H00FFFFFF\b0} meki dönemindeki
+Dialogue: 0,0:00:02.32,0:00:02.66,KineticGold,,0,0,0,,efendimizin {\c&H0000D7FF\b1}meki{\c&H00FFFFFF\b0} dönemindeki
+Dialogue: 0,0:00:02.66,0:00:03.52,KineticGold,,0,0,0,,efendimizin meki {\c&H0000D7FF\b1}dönemindeki{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:03.52,0:00:04.74,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}zenginliki.{\c&H00FFFFFF\b0} Ardindan her
+Dialogue: 0,0:00:04.86,0:00:05.38,KineticGold,,0,0,0,,zenginliki. {\c&H0000D7FF\b1}Ardindan{\c&H00FFFFFF\b0} her
+Dialogue: 0,0:00:05.38,0:00:05.66,KineticGold,,0,0,0,,zenginliki. Ardindan {\c&H0000D7FF\b1}her{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:05.66,0:00:06.12,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}seyden{\c&H00FFFFFF\b0} vazgeçip medinye
+Dialogue: 0,0:00:06.12,0:00:06.78,KineticGold,,0,0,0,,seyden {\c&H0000D7FF\b1}vazgeçip{\c&H00FFFFFF\b0} medinye
+Dialogue: 0,0:00:06.78,0:00:07.24,KineticGold,,0,0,0,,seyden vazgeçip {\c&H0000D7FF\b1}medinye{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:07.24,0:00:07.66,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}hijret{\c&H00FFFFFF\b0} etmesi ve
+Dialogue: 0,0:00:07.66,0:00:08.16,KineticGold,,0,0,0,,hijret {\c&H0000D7FF\b1}etmesi{\c&H00FFFFFF\b0} ve
+Dialogue: 0,0:00:08.16,0:00:08.42,KineticGold,,0,0,0,,hijret etmesi {\c&H0000D7FF\b1}ve{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:08.42,0:00:08.78,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}kutlu{\c&H00FFFFFF\b0} teblig mujaderesi.
+Dialogue: 0,0:00:08.78,0:00:09.12,KineticGold,,0,0,0,,kutlu {\c&H0000D7FF\b1}teblig{\c&H00FFFFFF\b0} mujaderesi.
+Dialogue: 0,0:00:09.12,0:00:09.80,KineticGold,,0,0,0,,kutlu teblig {\c&H0000D7FF\b1}mujaderesi.{\c&H00FFFFFF\b0}

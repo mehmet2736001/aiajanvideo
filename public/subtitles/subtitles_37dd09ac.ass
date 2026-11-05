@@ -1,0 +1,33 @@
+[Script Info]
+Title: Dynamic Motion Viral Subtitles
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+PlayResX: 720
+PlayResY: 1280
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: KineticGold,Arial,48,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,3.5,2.0,2,40,40,160,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.44,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}Mus'ab{\c&H00FFFFFF\b0} bin Umeyr
+Dialogue: 0,0:00:00.44,0:00:00.88,KineticGold,,0,0,0,,Mus'ab {\c&H0000D7FF\b1}bin{\c&H00FFFFFF\b0} Umeyr
+Dialogue: 0,0:00:00.88,0:00:01.32,KineticGold,,0,0,0,,Mus'ab bin {\c&H0000D7FF\b1}Umeyr{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:01.32,0:00:01.77,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}Mekke'nin{\c&H00FFFFFF\b0} en zengin
+Dialogue: 0,0:00:01.77,0:00:02.21,KineticGold,,0,0,0,,Mekke'nin {\c&H0000D7FF\b1}en{\c&H00FFFFFF\b0} zengin
+Dialogue: 0,0:00:02.21,0:00:02.65,KineticGold,,0,0,0,,Mekke'nin en {\c&H0000D7FF\b1}zengin{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:02.65,0:00:03.09,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}genciydi.{\c&H00FFFFFF\b0} Bütün servetini
+Dialogue: 0,0:00:03.09,0:00:03.53,KineticGold,,0,0,0,,genciydi. {\c&H0000D7FF\b1}Bütün{\c&H00FFFFFF\b0} servetini
+Dialogue: 0,0:00:03.53,0:00:03.97,KineticGold,,0,0,0,,genciydi. Bütün {\c&H0000D7FF\b1}servetini{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:03.97,0:00:04.42,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}geride{\c&H00FFFFFF\b0} bıraktı. Kısıtlamalara
+Dialogue: 0,0:00:04.42,0:00:04.86,KineticGold,,0,0,0,,geride {\c&H0000D7FF\b1}bıraktı.{\c&H00FFFFFF\b0} Kısıtlamalara
+Dialogue: 0,0:00:04.86,0:00:05.30,KineticGold,,0,0,0,,geride bıraktı. {\c&H0000D7FF\b1}Kısıtlamalara{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:05.30,0:00:05.74,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}rağmen{\c&H00FFFFFF\b0} Medine'ye hicret
+Dialogue: 0,0:00:05.74,0:00:06.18,KineticGold,,0,0,0,,rağmen {\c&H0000D7FF\b1}Medine'ye{\c&H00FFFFFF\b0} hicret
+Dialogue: 0,0:00:06.18,0:00:06.62,KineticGold,,0,0,0,,rağmen Medine'ye {\c&H0000D7FF\b1}hicret{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:06.62,0:00:07.07,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}etti{\c&H00FFFFFF\b0} ve sancağı
+Dialogue: 0,0:00:07.07,0:00:07.51,KineticGold,,0,0,0,,etti {\c&H0000D7FF\b1}ve{\c&H00FFFFFF\b0} sancağı
+Dialogue: 0,0:00:07.51,0:00:07.95,KineticGold,,0,0,0,,etti ve {\c&H0000D7FF\b1}sancağı{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:07.95,0:00:08.39,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}taşıdı.{\c&H00FFFFFF\b0}

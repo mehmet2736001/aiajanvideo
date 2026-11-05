@@ -1,0 +1,30 @@
+{
+  "system_name": "Nexus Video AI Studio",
+  "version": "2.0.0",
+  "total_agents": 16,
+  "core_philosophy": "Zero AI visual artifacts. 100% Remotion code-based SVG & Bezier physics. AI only in speech and alignment.",
+  "golden_rules": [
+    "Metin 70-100 kelime arasında tutulmalı, saniyede 1.6-1.8 kelime konuşulmalı.",
+    "İlk cümle herkesin anlayacağı çelişki veya dev merak içermeli.",
+    "Sahneler nesneyle bağlanmalı, yapay slayt/wipe geçişi kullanılmamalı.",
+    "Renk paleti disiplini: Derin Gece Obsidyen (#05070E) %70, 24K Altın Varak (#D4AF37/#F3D081) %20, Saf Beyaz (#F8FAFC) %10.",
+    "Altyazı en alt güvenli alanda (y: 1550-1650) kelime kelime yanan buzlu cam kutuda olmalı.",
+    "Kamera hareketleri en az 0.7-1.2 saniye yumuşak Bezier süzülmesi (0.45, 0, 0.55, 1) ile yapılmalı.",
+    "Karakterler ve nesneler durağan donmamalı, Math.sin ile mikro nefes almalı."
+  ],
+  "anti_patterns_to_avoid": [
+    "Durağan görsele ağız yaması koymak yasaktır.",
+    "Metinde olmayan veya kaynaksız rastgele rakam yazmak yasaktır.",
+    "Kamera saniyede 12 kare gibi takılmamalı, 30 veya 60 FPS olmalı.",
+    "Altyazının altından çizgi veya grafik geçerek okunmayı zorlaştırmamalı.",
+    "Karakter yüz hatları (göz, ağız, burun) tasvir edilmemeli, minimalist yüzsüz silüet olmalı."
+  ],
+  "learned_svg_components": [
+    "HalalSilhouettes (yolcu, secde, dua, tefekkür, cenin)",
+    "CosmicWomb (daralan ve çatlayan kozmik membran)",
+    "PortalOfEternity (aralanan antik altın kemer kapı)",
+    "StardustParticles (24K altın toz zerrecikleri)",
+    "AscendingSoul (göğe yükselen nur küresi)",
+    "CelestialDawn (ebedi vuslat şafağı ve hilal diski)"
+  ]
+}

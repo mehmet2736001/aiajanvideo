@@ -7,7 +7,8 @@ export type LayoutType =
   | 'grid_explosion'
   | 'tri_concept'
   | 'pip_split'
-  | 'cinematic_ambient';
+  | 'cinematic_ambient'
+  | 'modern_islamic';
 
 export type LanguageCode = 'tr' | 'en' | 'ar' | 'es';
 export type TextDirection = 'ltr' | 'rtl';
@@ -221,6 +222,18 @@ export interface VideoScene {
   language?: LanguageCode;
   direction?: TextDirection;
   isRTL?: boolean;
+  scientificGraphicType?: 'pie_chart' | 'tectonic_map' | 'thermal_gauge' | 'vent_window' | 'etymology_card' | 'balance_scale' | 'matrix_table' | 'stardust_constellation';
+  pieChart?: { primaryPercentage?: number; primaryLabel?: string; secondaryLabel?: string; title?: string; subtitle?: string; primaryColor?: string; secondaryColor?: string };
+  tectonicMap?: { title?: string; metricNumber?: string; metricLabel?: string; glowColor?: string };
+  thermalGauge?: { currentTemp?: number; title?: string; subtitle?: string };
+  ventWindow?: { title?: string; magmaTempText?: string; waterTempText?: string };
+  etymologyCard?: { arabicWord?: string; transliteration?: string; rootWord?: string; definition?: string; significance?: string };
+  balanceScale?: { leftLabel?: string; rightLabel?: string; leftCount?: number; rightCount?: number; leftSubtext?: string; rightSubtext?: string; title?: string; isBalanced?: boolean; themeColor?: string };
+  matrixTable?: { title?: string; mode?: 'scroll' | 'grid'; subtitle?: string };
+  citation?: string;
+  stardustPrimary?: string;
+  stardustSecondary?: string;
+  stardustSymbol?: string;
 }
 
 export interface ViralMetadata {

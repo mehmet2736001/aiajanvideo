@@ -14,6 +14,8 @@ import { StrikethroughText } from './effects/StrikethroughText';
 import { TriConceptView } from './effects/TriConceptView';
 import { HanddrawnAccents } from './effects/HanddrawnAccents';
 import { PipSplitView } from './effects/PipSplitView';
+import { ModernIslamicScientificScene } from './effects/ModernIslamicScientificScene';
+import { CaveSilhouetteFrame } from './effects/CaveSilhouetteFrame';
 
 interface SceneBlockProps {
   scene: VideoScene;
@@ -120,11 +122,16 @@ export const SceneBlock: React.FC<SceneBlockProps> = ({
           />
         </div>
       ) : null}
+
+      {/* Organic Thematic Silhouette Frame (Masterclass Standard) */}
+      {(isDarkMotion || theme === 'gold_luxury' || layout === 'modern_islamic') && (
+        <CaveSilhouetteFrame />
+      )}
       {/* Top Spacer */}
       <div style={{ height: theme === 'chalkboard' ? 30 : isQuoteLayout ? 35 : 55 }} />
 
       {/* Chapter indicator badge if multi-scene */}
-      {totalScenes > 1 && (
+      {totalScenes > 1 && layout !== 'modern_islamic' && (
         <div
           style={{
             position: 'absolute',
@@ -166,69 +173,13 @@ export const SceneBlock: React.FC<SceneBlockProps> = ({
             {scene.headerSubtitle || 'HİKMET VE MANEVİYAT'}
           </div>
         </div>
-      ) : isCinematicAmbient ? (
-        /* Cinematic ambient layout - Breathing room, no heavy banners */
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flex: 1,
-            padding: '0 60px',
-            textAlign: 'center',
-            marginTop: 60,
-          }}
-        >
-          {scene.headerSubtitle && (
-            <div
-              style={{
-                padding: '6px 22px',
-                borderRadius: 9999,
-                backgroundColor: 'rgba(245, 158, 11, 0.18)',
-                border: '1px solid rgba(245, 158, 11, 0.45)',
-                color: '#facc15',
-                fontSize: 22,
-                fontWeight: 800,
-                letterSpacing: '2.5px',
-                textTransform: 'uppercase',
-                marginBottom: 24,
-                backdropFilter: 'blur(10px)',
-              }}
-            >
-              {scene.headerSubtitle}
-            </div>
-          )}
-          <div
-            style={{
-              fontSize: 58,
-              fontWeight: 900,
-              color: '#ffffff',
-              lineHeight: 1.25,
-              textShadow: '0 4px 30px rgba(0,0,0,0.9), 0 0 35px rgba(245, 158, 11, 0.3)',
-              maxWidth: 860,
-            }}
-          >
-            {title1 || scene.headerSubtitle || ''}
-          </div>
-          {scene.highlightedText && (
-            <div
-              style={{
-                marginTop: 28,
-                padding: '10px 30px',
-                borderRadius: 20,
-                backgroundColor: 'rgba(245, 158, 11, 0.22)',
-                border: '1.5px solid rgba(245, 158, 11, 0.55)',
-                color: '#fef08a',
-                fontSize: 30,
-                fontWeight: 800,
-                boxShadow: '0 8px 30px rgba(245, 158, 11, 0.35)',
-              }}
-            >
-              {scene.highlightedText}
-            </div>
-          )}
-        </div>
+      ) : (isCinematicAmbient || layout === 'modern_islamic') ? (
+        /* Modern Islamic Scientific Motion Graphics Layout */
+        <ModernIslamicScientificScene
+          scene={scene}
+          theme={theme}
+          sceneIndex={sceneIndex}
+        />
       ) : isDarkMotion ? (
         /* Clean minimalist header for dark themes (no 5 stacked banners!) */
         <div

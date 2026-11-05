@@ -1,80 +1,79 @@
-# Notebook Video AI · Pro Video Editor & Shorts Stüdyosu 🎬📖
+# 🏛️ Nexus AI Video Studio — 16 Ajanlı Otonom Video Hükümeti 🎬
 
-> 🔗 **Canlı GitHub Deposu:** [https://github.com/mehmet2736001/aivideomaker](https://github.com/mehmet2736001/aivideomaker)  
-> 🔄 **Otomatik Yedekleme:** Aktif (Her kod değişikliğinde otomatik commit & push)
-
-Yapay zekâ destekli, çok kanallı zaman tüneli (multi-track timeline), Whisper ses senkronizasyonu ve **'Spiral Not Defteri'** estetiğinde dikey (1080x1920) YouTube Shorts, Instagram Reels ve TikTok videoları üreten tam otomatik video oluşturucu ve profesyonel editör.
+> **Sıfır Yapay Zeka Görsel Halüsinasyonu · %100 Kod Tabanlı Remotion (React + SVG) · 30 FPS Full HD (1080x1920) Dikey Video Motoru**  
+> Kendini denetleyen, tarafsız eleştiren, arayüzünü sadeleştiren ve her videoda öğrenen dünyanın ilk 16 ajanlı video stüdyosu.
 
 ---
 
-## 🚀 Özellikler
+## 🌟 Çekirdek Felsefe
 
-- 📓 **Otantik Defter Estetiği:** Üstten telli spiral delikler, sol kırmızı kenar çizgisi, kareli defter kağıdı ve hafif kağıt dokusu.
-- ✍️ **El Yazısı & Vurgular:** Kalam / Caveat el yazısı fontları, animasyonlu kırmızı daire çizimi, fosforlu sarı kalem (*highlighter*) vurgusu.
-- 🗂️ **Kartlar ve Vektör İkonlar:** Yuvarlak hatlı renkli bilgi kutucukları, yay animasyonları (*spring*), elle çizilmiş SVG ikonlar (galaksi, hücre bölünmesi, kitap, ampul, fidan vb.).
-- ⏳ **Zaman Çizelgesi & Alıntı Kartı:** Yıllara göre çizilen cetvel aksı, ayet/hadis Arapça kaligrafisi ve yapışkan sarı post-it notu.
-- 🎙️ **Ses & Dinamik Altyazı:** Konuşmayla eşzamanlı kelime kelime yanan yuvarlak köşeli altyazı kutusu.
-- ⚡ **Yüksek Hızlı Render:** React ve Remotion motoru sayesinde saniyeler içinde 1080x1920 Full HD MP4 çıktısı.
+* **Görüntü Tamamen Kod:** Midjourney, Kling veya durağan slayt gösterileri yok. Bütün karakterler, membranlar, ışıklar ve geçişler matematiksel SVG ve Bezier fizik eğrileriyle kodlanır.
+* **Yapay Zeka Yalnızca Seste:** Edge-TTS (`tr-TR-AhmetNeural`) + Stüdyo Mastering + `faster-whisper` milisaniyelik kelime senkronu (`kelimeler.json`).
+* **Kinetik Tipografi:** Konuşulan her kelime anında altın sarısıyla parıldar, satır zıplamaz.
+* **Bağımsız Çift Denetim:** 48 karelik pano (`pano.jpg`) hem Başdenetçi Hasan hem de veto yetkisine sahip Müfettiş Nuri tarafından incelenir.
 
 ---
 
-## 🛠️ Kurulum ve Kullanım
+## 🏛️ 16 Ajanlı Hükümet Kadrosu (4x4 Matris)
 
-### 1. Canlı Önizleme (Web Studio)
-Videoyu tarayıcında açıp kare kare oynatmak, metinleri canlı değiştirmek için:
+### I. Strateji ve Hikmet Katmanı
+1. **`01_basyonetmen` – Selim Bey:** Orkestra Şefi ve Ajan Hükümeti Başkanı.
+2. **`03_islami_kurgu` – Müderris Âkif:** Kur'an, Sünnet ve Hanefi Fıkhı edep sınırları denetçisi.
+3. **`04_metin_tefekkur` – Senarist Yahya:** 70-100 kelimelik, acele etmeyen kancalı konuşma metni yazarı.
+4. **`15_viral_strateji` – Stratejist Kaya:** İlk 3 saniye kancasını ve izleyici tutundurma (retention) eğrilerini denetleyen algoritma uzmanı.
+
+### II. Görsel ve Ses Üretim Katmanı
+5. **`05_sahne_storyboard` – Yönetmen Zeynep:** Saniye saniye SVG nesne ve kamera süzülüş planı.
+6. **`06_materyal_toplama` – Arşivci Tarık:** Hat levhaları, 24K altın ve obsidyen renk kodları arşivi.
+7. **`07_gorsel_motion_uretim` – Stüdyo Şefi Emre:** Parametrik SVG Rig kütüphanesi yöneticisi.
+8. **`08_ses_frekans` – Ses Mühendisi Bora:** Stüdyo EQ, compand, loudnorm (-16 LUFS) ve kelime zamanlaması.
+9. **`09_video_edit_render` – Kurgu Ustası Kerem:** 30 FPS Full HD (1080x1920) Remotion render motoru şefi.
+
+### III. Bağımsız Denetim ve Yargı Katmanı
+10. **`10_islami_video_analiz` – Başdenetçi Hasan:** 48 karelik panoyu (`pano.jpg`) kare kare denetleyen Vision uzmanı.
+11. **`13_tarafsiz_denetci` – Müfettiş Nuri:** Şeytanın Avukatı; grup içi körlüğü engelleyen, zayıf işleri veto etme yetkisine sahip bağımsız hakem.
+12. **`12_kapak_ve_yayin_seo` – Editör Bilal:** Kapak görseli (Thumbnail), viral başlık ve YouTube SEO uzmanı.
+13. **`02_yonetmen` – Sinan Bey:** Üretim ajanlarının ara teslimat koordinatörü.
+
+### IV. Evrim, Sadelik ve Sistem Sağlığı Katmanı
+14. **`11_yetenek_gelistirme` – Muallim Farabi:** Analiz raporlarını okuyup `SKILL.md` ve hafıza dosyalarını güncelleyen meta-öğrenme şefi.
+15. **`14_zen_arayuz` – Mimar Sinan:** Arayüzü tek tıkla çalışacak Apple/Dieter Rams sadeliğinde tutan UI/UX mimarı.
+16. **`16_sistem_temizlik` – Mühendis Demir:** Render sonrası ara wav ve temp dosyalarını süpüren, render hızını koruyan sistem mühendisi.
+
+---
+
+## 🚀 Nasıl Çalıştırılır?
+
+### 1. Tek Tıkla Konsol Menüsü
+Klasördeki **`BASLAT.bat`** dosyasına çift tıkla:
+* `[1]` Web Stüdyo Panelini Başlat (`http://localhost:8000`)
+* `[2]` Remotion Canlı Önizleme Player'ı Başlat (`http://localhost:3000`)
+* `[3]` Hızlı Otonom Video Üret (Terminalden 16 ajanla)
+* `[4]` Sistem Sağlık Denetimi ve Çöp Temizliği (Mühendis Demir)
+
+### 2. Doğrudan Web Arayüzü
 ```bash
-cd C:\Users\xd\.gemini\antigravity\scratch\notebook-video-ai
-npm run start
+python -m web_ui.server
 ```
-Tarayıcında `http://localhost:3000` açılacak ve Remotion Player üzerinden videoyu gerçek zamanlı inceleyebileceksin.
+Tarayıcında `http://localhost:8000` adresini aç.
 
----
-
-### 2. Yapay Zekâ ile Yeni Bir Konu Üretme
-Python pipeline scriptini çalıştırarak dilediğin konuda senaryo, seslendirme ve altyazıyı saniyeler içinde oluşturabilirsin:
-
+### 3. Doğrudan Otonom Terminal Motoru
 ```bash
-# İbn-i Sina Konusu İçin:
-python scripts/ai_pipeline.py --topic ibnisina
-
-# Evren Neden 6 Günde Yaratıldı Konusu İçin:
-python scripts/ai_pipeline.py --topic kainat
+python engine/orchestrator.py
 ```
-
-Bu komut:
-1. Senaryoyu ve sahne şemasını hazırlar.
-2. `public/audio.mp3` ses dosyasını üretir.
-3. Kelime seviyesinde zaman damgalarını (`subtitles`) hesaplar.
-4. `src/generatedData.json` dosyasına kaydeder.
 
 ---
 
-### 3. MP4 Olarak Render Alma
-```bash
-npm run build
-```
-Oluşan video `out/video.mp4` konumuna kaydedilir.
-
----
-
-## 📁 Proje Yapısı
+## 📁 Proje Klasör Mimarisi
 
 ```
-notebook-video-ai/
-├── src/
-│   ├── components/
-│   │   ├── NotebookBackground.tsx  # Spiral teller ve kareli zemin
-│   │   ├── HanddrawnHeader.tsx     # Daire ve fosforlu sarı vurgulu başlık
-│   │   ├── CardGrid.tsx            # Yay animasyonlu 3'lü bilgi kartı
-│   │   ├── TimelineView.tsx        # Çizgisel zaman tüneli ve alıntı kartı
-│   │   ├── SubtitlesBar.tsx        # Sesle senkron kinetik altyazı
-│   │   └── Icons.tsx               # Elle çizilmiş minimalist SVG'ler
-│   ├── NotebookVideo.tsx           # Ana sahne bileşeni
-│   ├── Root.tsx                    # Remotion kompozisyon kökü
-│   ├── sampleData.ts               # Örnek veri şablonu
-│   └── types.ts                    # TypeScript veri modelleri
-├── scripts/
-│   └── ai_pipeline.py              # TTS, altyazı ve şema üreten Python motoru
-├── public/                         # Üretilen ses ve statik varlıklar
-└── out/                            # Render edilen test kareleri ve video.mp4
+e:\aivideoyap/
+├── 🏛️ agents/               # 16 Ajanın SKILL.md ve memory.json dosyaları
+├── 🧠 brain/                # Merkezi hafıza (experience_memory.json & video_history.json)
+├── ⚙️ engine/               # Python seslendirme, render, denetim ve temizlik motoru
+├── 🌐 web_ui/               # Tailwind + FastAPI modern stüdyo kontrol paneli
+├── 📦 production_output/    # Üretilen her videonun klasörü (video.mp4 + pano.jpg)
+├── 🎬 src/                  # Remotion TypeScript & SVG bileşenleri
+├── 📁 public/               # Fontlar, seslendirmeler ve kelimeler.json
+└── 🚀 BASLAT.bat            # Tek tıkla kontrol merkezi
 ```

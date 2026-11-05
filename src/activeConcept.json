@@ -1,0 +1,121 @@
+{
+  "id": "zariyat_expanding_universe_bespoke",
+  "title": "GENİŞLEYEN EVREN VE ZÂRİYÂT 47",
+  "theme": "Kozmik Şişme, Doppler Kırmızıya Kayma ve Zâriyât 47 Mizanı",
+  "source": "Zâriyât Sûresi, 47. Ayet (وَإِنَّا لَمُوسِعُونَ)",
+  "totalDurationSec": 69.17,
+  "totalFrames": 2075,
+  "scenes": [
+    {
+      "scene": 1,
+      "startFrame": 0,
+      "endFrame": 200,
+      "image": "scenes/zariyat/zariyat_01_observatory.jpg",
+      "motion": "zoom-in",
+      "infographic": "none",
+      "tag": "1929 · EDWIN HUBBLE",
+      "headline": "EVREN DURAĞAN DEĞİL!",
+      "subtext": "İnsanlık asırlarca evrenin sabit olduğunu sandı. 1929'da Mount Wilson'da her şey değişti!"
+    },
+    {
+      "scene": 2,
+      "startFrame": 200,
+      "endFrame": 410,
+      "image": "scenes/zariyat/zariyat_02_redshift.jpg",
+      "motion": "pan-right",
+      "infographic": "doppler_spectrum",
+      "tag": "DOPPLER ETKİSİ",
+      "headline": "KIRMIZIYA KAYMA",
+      "subtext": "Uzaklaşan galaksilerin ışığı kırmızıya kayıyordu. Evren akılalmaz bir hızla genişliyordu!"
+    },
+    {
+      "scene": 3,
+      "startFrame": 410,
+      "endFrame": 620,
+      "image": "scenes/zariyat/zariyat_03_manuscript.jpg",
+      "motion": "zoom-in",
+      "infographic": "none",
+      "tag": "ZÂRİYÂT SÛRESİ · 47",
+      "arabic": "وَالسَّمَاءَ بَنَيْنَاهَا بِأَيْدٍ وَإِنَّا لَمُوسِعُونَ",
+      "headline": "'BİZ ONU GENİŞLETMEKTEYİZ'",
+      "subtext": "'Biz göğü kudretimizle bina ettik ve şüphesiz biz onu genişletmekteyiz!'"
+    },
+    {
+      "scene": 4,
+      "startFrame": 620,
+      "endFrame": 830,
+      "image": "scenes/zariyat/zariyat_04_musiun.jpg",
+      "motion": "zoom-out",
+      "infographic": "arabic_etymology",
+      "tag": "LİSAN MUCİZESİ",
+      "headline": "'MÛSİ'ÛN' NE DEMEK?",
+      "subtext": "Arapça 'mûsi'ûn' kelimesi geçmişi değil; şu anda aralıksız devam eden genişlemeyi bildirir!"
+    },
+    {
+      "scene": 5,
+      "startFrame": 830,
+      "endFrame": 1040,
+      "image": "scenes/zariyat/zariyat_05_spacetime.jpg",
+      "motion": "pan-right",
+      "infographic": "none",
+      "tag": "UZAY KUMAŞI",
+      "headline": "HER AN GERİLİYOR",
+      "subtext": "Sadece cisimler hareket etmiyor; uzayın ve zamanın kendi kumaşı gerilerek genişliyor!"
+    },
+    {
+      "scene": 6,
+      "startFrame": 1040,
+      "endFrame": 1250,
+      "image": "scenes/zariyat/zariyat_06_hubble.jpg",
+      "motion": "zoom-in",
+      "infographic": "none",
+      "tag": "HUBBLE KANUNU",
+      "headline": "v = H₀ · d MİZANI",
+      "subtext": "Uzaklık arttıkça uzaklaşma hızı artar. Trilyonlarca galaksi tek bir kozmik mizanla uçar."
+    },
+    {
+      "scene": 7,
+      "startFrame": 1250,
+      "endFrame": 1460,
+      "image": "scenes/zariyat/zariyat_07_deepfield.jpg",
+      "motion": "zoom-out",
+      "infographic": "none",
+      "tag": "TRİLYONLARCA GALAKSİ",
+      "headline": "AKILALMAZ BÜYÜKLÜK",
+      "subtext": "Her biri yüz milyarlarca yıldız barındıran sayısız galaksi kümesi birbirinden uzaklaşıyor."
+    },
+    {
+      "scene": 8,
+      "startFrame": 1460,
+      "endFrame": 1670,
+      "image": "scenes/zariyat/zariyat_08_inflation.jpg",
+      "motion": "zoom-in",
+      "infographic": "none",
+      "tag": "BAŞLANGIÇ VE ŞİŞME",
+      "headline": "KUSURSUZ İNCE AYAR",
+      "subtext": "Genişleme trilyonda bir daha yavaş olsaydı evren çökerdi; daha hızlı olsaydı yıldızlar var olamazdı!"
+    },
+    {
+      "scene": 9,
+      "startFrame": 1670,
+      "endFrame": 1880,
+      "image": "scenes/zariyat/zariyat_09_desert.jpg",
+      "motion": "tilt-up",
+      "infographic": "none",
+      "tag": "1400 YIL ÖNCE ÇÖLDE",
+      "headline": "KİM FISILDADI?",
+      "subtext": "Teleskopların, spektroskopların ve nükleer fiziğin olmadığı o çağda bu hakikati kim fısıldadı?"
+    },
+    {
+      "scene": 10,
+      "startFrame": 1880,
+      "endFrame": 2075,
+      "image": "scenes/zariyat/zariyat_10_seal.jpg",
+      "motion": "zoom-out",
+      "infographic": "astrolabe_mandala",
+      "tag": "İ'CÂZÜ'L-KUR'ÂN",
+      "headline": "HÂLÂ TESADÜF DİYEBİLİR MİSİN?",
+      "subtext": "'O, gökleri ve yeri bir hakikat ve ölçü üzere yaratandır.' Aklını ve kalbini tefekküre aç..."
+    }
+  ]
+}

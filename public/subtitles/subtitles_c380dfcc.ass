@@ -1,0 +1,36 @@
+[Script Info]
+Title: Dynamic Motion Viral Subtitles
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+PlayResX: 720
+PlayResY: 1280
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: KineticGold,Arial,48,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,3.5,2.0,2,40,40,160,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.41,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}Karanlık{\c&H00FFFFFF\b0} kainatın derinliklerinde
+Dialogue: 0,0:00:00.41,0:00:00.82,KineticGold,,0,0,0,,Karanlık {\c&H0000D7FF\b1}kainatın{\c&H00FFFFFF\b0} derinliklerinde
+Dialogue: 0,0:00:00.82,0:00:01.23,KineticGold,,0,0,0,,Karanlık kainatın {\c&H0000D7FF\b1}derinliklerinde{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:01.23,0:00:01.65,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}dönen{\c&H00FFFFFF\b0} galaksiler ve
+Dialogue: 0,0:00:01.65,0:00:02.06,KineticGold,,0,0,0,,dönen {\c&H0000D7FF\b1}galaksiler{\c&H00FFFFFF\b0} ve
+Dialogue: 0,0:00:02.06,0:00:02.47,KineticGold,,0,0,0,,dönen galaksiler {\c&H0000D7FF\b1}ve{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:02.47,0:00:02.88,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}yıldız{\c&H00FFFFFF\b0} tozları. Kadim
+Dialogue: 0,0:00:02.88,0:00:03.29,KineticGold,,0,0,0,,yıldız {\c&H0000D7FF\b1}tozları.{\c&H00FFFFFF\b0} Kadim
+Dialogue: 0,0:00:03.29,0:00:03.70,KineticGold,,0,0,0,,yıldız tozları. {\c&H0000D7FF\b1}Kadim{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:03.70,0:00:04.11,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}el{\c&H00FFFFFF\b0} yazması mushafın
+Dialogue: 0,0:00:04.11,0:00:04.53,KineticGold,,0,0,0,,el {\c&H0000D7FF\b1}yazması{\c&H00FFFFFF\b0} mushafın
+Dialogue: 0,0:00:04.53,0:00:04.94,KineticGold,,0,0,0,,el yazması {\c&H0000D7FF\b1}mushafın{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:04.94,0:00:05.35,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}üzerinde{\c&H00FFFFFF\b0} beliren ilahi
+Dialogue: 0,0:00:05.35,0:00:05.76,KineticGold,,0,0,0,,üzerinde {\c&H0000D7FF\b1}beliren{\c&H00FFFFFF\b0} ilahi
+Dialogue: 0,0:00:05.76,0:00:06.17,KineticGold,,0,0,0,,üzerinde beliren {\c&H0000D7FF\b1}ilahi{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:06.17,0:00:06.58,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}ışık{\c&H00FFFFFF\b0} huzmeleri ve
+Dialogue: 0,0:00:06.58,0:00:06.99,KineticGold,,0,0,0,,ışık {\c&H0000D7FF\b1}huzmeleri{\c&H00FFFFFF\b0} ve
+Dialogue: 0,0:00:06.99,0:00:07.40,KineticGold,,0,0,0,,ışık huzmeleri {\c&H0000D7FF\b1}ve{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:07.40,0:00:07.82,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}parmak{\c&H00FFFFFF\b0} izindeki mucizevi
+Dialogue: 0,0:00:07.82,0:00:08.23,KineticGold,,0,0,0,,parmak {\c&H0000D7FF\b1}izindeki{\c&H00FFFFFF\b0} mucizevi
+Dialogue: 0,0:00:08.23,0:00:08.64,KineticGold,,0,0,0,,parmak izindeki {\c&H0000D7FF\b1}mucizevi{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:08.64,0:00:09.05,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}nizam.{\c&H00FFFFFF\b0}

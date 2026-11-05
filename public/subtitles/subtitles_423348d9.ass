@@ -1,0 +1,28 @@
+[Script Info]
+Title: Dynamic Motion Viral Subtitles
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+PlayResX: 720
+PlayResY: 1280
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: KineticGold,Arial,48,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,3.5,2.0,2,40,40,160,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.36,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}Hay{\c&H00FFFFFF\b0} kibyat20 yusendası,
+Dialogue: 0,0:00:00.36,0:00:00.94,KineticGold,,0,0,0,,Hay {\c&H0000D7FF\b1}kibyat20{\c&H00FFFFFF\b0} yusendası,
+Dialogue: 0,0:00:00.94,0:00:01.78,KineticGold,,0,0,0,,Hay kibyat20 {\c&H0000D7FF\b1}yusendası,{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:01.86,0:00:02.02,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}sabır{\c&H00FFFFFF\b0} ve tefei
+Dialogue: 0,0:00:02.02,0:00:02.24,KineticGold,,0,0,0,,sabır {\c&H0000D7FF\b1}ve{\c&H00FFFFFF\b0} tefei
+Dialogue: 0,0:00:02.24,0:00:02.70,KineticGold,,0,0,0,,sabır ve {\c&H0000D7FF\b1}tefei{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:02.70,0:00:03.06,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}kuruğin{\c&H00FFFFFF\b0} rolu bullüktüs
+Dialogue: 0,0:00:03.06,0:00:03.28,KineticGold,,0,0,0,,kuruğin {\c&H0000D7FF\b1}rolu{\c&H00FFFFFF\b0} bullüktüs
+Dialogue: 0,0:00:03.28,0:00:03.90,KineticGold,,0,0,0,,kuruğin rolu {\c&H0000D7FF\b1}bullüktüs{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:03.90,0:00:04.58,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}Ekran{\c&H00FFFFFF\b0} AWS volcanic
+Dialogue: 0,0:00:04.58,0:00:04.94,KineticGold,,0,0,0,,Ekran {\c&H0000D7FF\b1}AWS{\c&H00FFFFFF\b0} volcanic
+Dialogue: 0,0:00:04.94,0:00:04.96,KineticGold,,0,0,0,,Ekran AWS {\c&H0000D7FF\b1}volcanic{\c&H00FFFFFF\b0}
+Dialogue: 0,0:00:04.96,0:00:05.20,KineticGold,,0,0,0,,{\c&H0000D7FF\b1}bandsin{\c&H00FFFFFF\b0} Gerçekler
+Dialogue: 0,0:00:05.20,0:00:06.00,KineticGold,,0,0,0,,bandsin {\c&H0000D7FF\b1}Gerçekler{\c&H00FFFFFF\b0}

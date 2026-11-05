@@ -24,8 +24,13 @@ export const BRollOverlay: React.FC<BRollOverlayProps> = ({
 
   // Resolve video path
   let videoPath = brollUrl;
-  if (!videoPath && type && type !== 'none') {
-    videoPath = `broll/${type}.mp4`;
+  const validBrollList = ['cosmic', 'clouds', 'waves', 'ink', 'gold_dust'];
+  if (!videoPath) {
+    if (type && validBrollList.includes(type)) {
+      videoPath = 'broll/' + type + '.mp4';
+    } else {
+      videoPath = 'broll/gold_dust.mp4';
+    }
   }
 
   if (!videoPath) return null;
