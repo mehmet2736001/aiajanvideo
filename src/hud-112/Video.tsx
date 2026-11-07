@@ -8,6 +8,7 @@ import {
   staticFile,
   useCurrentFrame,
 } from 'remotion';
+import { SERIF } from '../fonts';
 import veri from '../../public/hud-112/kelimeler.json';
 
 export type Kelime = { w: string; s: number; e: number; c: number };
@@ -48,7 +49,7 @@ export const Altyazi: React.FC<{ t: number }> = ({ t }) => {
         right: 60,
         bottom: 240,
         textAlign: 'center',
-        fontFamily: "'Cinzel', 'Georgia', 'Playfair Display', serif",
+        fontFamily: SERIF,
         fontWeight: 600,
         fontSize: 48,
         lineHeight: 1.4,
@@ -82,7 +83,6 @@ export const Altyazi: React.FC<{ t: number }> = ({ t }) => {
                 transform: suAn ? 'scale(1.08)' : 'scale(1)',
                 display: 'inline-block',
                 margin: '4px 10px',
-                transition: 'all 0.12s ease',
               }}
             >
               {kel.w}
@@ -282,7 +282,7 @@ export const Hud112Video: React.FC = () => {
               y={1340}
               textAnchor="middle"
               fill="#E2E8F0"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={700}
               fontSize={42}
               letterSpacing="0.12em"
@@ -295,7 +295,7 @@ export const Hud112Video: React.FC = () => {
               y={1400}
               textAnchor="middle"
               fill="#D4AF37"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={600}
               fontSize={28}
               letterSpacing="0.25em"
@@ -356,7 +356,7 @@ export const Hud112Video: React.FC = () => {
               y={930}
               textAnchor="middle"
               fill="#FFFDF0"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={700}
               fontSize={44}
               letterSpacing="0.08em"
@@ -369,7 +369,7 @@ export const Hud112Video: React.FC = () => {
               y={990}
               textAnchor="middle"
               fill="#94A3B8"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={500}
               fontSize={26}
               letterSpacing="0.18em"
@@ -453,7 +453,7 @@ export const Hud112Video: React.FC = () => {
                 y={235}
                 textAnchor="middle"
                 fill="#FFDF73"
-                fontFamily="'Cinzel', 'Playfair Display', serif"
+                fontFamily={SERIF}
                 fontWeight={800}
                 fontSize={32}
                 letterSpacing="0.14em"
@@ -466,7 +466,7 @@ export const Hud112Video: React.FC = () => {
                 y={295}
                 textAnchor="middle"
                 fill="#CBD5E1"
-                fontFamily="'Cinzel', 'Playfair Display', serif"
+                fontFamily={SERIF}
                 fontWeight={600}
                 fontSize={24}
                 letterSpacing="0.18em"
@@ -553,7 +553,7 @@ export const Hud112Video: React.FC = () => {
                 y={80}
                 textAnchor="middle"
                 fill="#FFDF73"
-                fontFamily="'Cinzel', 'Playfair Display', serif"
+                fontFamily={SERIF}
                 fontWeight={800}
                 fontSize={38}
                 letterSpacing="0.14em"
@@ -566,7 +566,7 @@ export const Hud112Video: React.FC = () => {
                 y={130}
                 textAnchor="middle"
                 fill="#CBD5E1"
-                fontFamily="'Cinzel', 'Playfair Display', serif"
+                fontFamily={SERIF}
                 fontWeight={600}
                 fontSize={24}
                 letterSpacing="0.25em"
@@ -618,7 +618,7 @@ export const Hud112Video: React.FC = () => {
                 x={0}
                 y={0}
                 fill="#F87171"
-                fontFamily="'Cinzel', 'Georgia', serif"
+                fontFamily={SERIF}
                 fontWeight={600}
                 fontSize={28}
                 letterSpacing="0.08em"
@@ -633,7 +633,7 @@ export const Hud112Video: React.FC = () => {
                 x={0}
                 y={0}
                 fill="#F87171"
-                fontFamily="'Cinzel', 'Georgia', serif"
+                fontFamily={SERIF}
                 fontWeight={600}
                 fontSize={28}
                 letterSpacing="0.08em"
@@ -649,7 +649,7 @@ export const Hud112Video: React.FC = () => {
               y={580}
               textAnchor="middle"
               fill="#FFDF73"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={800}
               fontSize={40}
               letterSpacing="0.1em"
@@ -725,7 +725,7 @@ export const Hud112Video: React.FC = () => {
               y={1180}
               textAnchor="middle"
               fill="#FFFDF0"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={700}
               fontSize={44}
               letterSpacing="0.08em"
@@ -738,7 +738,7 @@ export const Hud112Video: React.FC = () => {
               y={1240}
               textAnchor="middle"
               fill="#D4AF37"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={600}
               fontSize={28}
               letterSpacing="0.22em"
@@ -782,7 +782,7 @@ export const Hud112Video: React.FC = () => {
               y={880}
               textAnchor="middle"
               fill="#FFFDF0"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={800}
               fontSize={52}
               letterSpacing="0.12em"
@@ -795,7 +795,7 @@ export const Hud112Video: React.FC = () => {
               y={945}
               textAnchor="middle"
               fill="#D4AF37"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={600}
               fontSize={30}
               letterSpacing="0.25em"
@@ -853,7 +853,7 @@ export const Hud112Video: React.FC = () => {
               y={1080}
               textAnchor="middle"
               fill="#E2E8F0"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={700}
               fontSize={40}
               letterSpacing="0.1em"
@@ -866,7 +866,7 @@ export const Hud112Video: React.FC = () => {
               y={1150}
               textAnchor="middle"
               fill="#FFDF73"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={800}
               fontSize={54}
               letterSpacing="0.12em"
@@ -902,7 +902,7 @@ export const Hud112Video: React.FC = () => {
               y={1325}
               textAnchor="middle"
               fill="#94A3B8"
-              fontFamily="'Cinzel', 'Playfair Display', serif"
+              fontFamily={SERIF}
               fontWeight={600}
               fontSize={24}
               letterSpacing="0.25em"
@@ -921,7 +921,7 @@ export const Hud112Video: React.FC = () => {
 
 // Toplam Süre: Ses dosyasının bitişi + 2 saniye kapanış payı
 const sonKelime = K[K.length - 1];
-const sureKare = Math.ceil((sonKelime.e + 2.5) * FPS);
+export const sureKare = Math.ceil((sonKelime.e + 2.5) * FPS);
 
 export const Root: React.FC = () => (
   <Composition

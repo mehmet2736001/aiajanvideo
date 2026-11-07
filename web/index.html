@@ -2059,7 +2059,7 @@
           }
 
           if (gatePill) {
-            gatePill.innerHTML = `<span class="text-emerald-400 font-bold">✅ Prodüksiyon Tamamlandı (Skor: ${data.score || 95}/100)</span>`;
+            gatePill.innerHTML = `<span class="text-emerald-400 font-bold">✅ Prodüksiyon Tamamlandı (Skor: ${data.score != null ? data.score + '/100' : 'hesaplanamadı'})</span>`;
           }
 
           alert(`Tebrikler Sayın Yönetmenim! «${topic}» videosu 30 FPS Full HD olarak render edildi ve oynatıcıya yüklendi.`);
@@ -2228,10 +2228,7 @@
       const box = document.getElementById('skillEvolutionFeed');
       if (!box) return;
 
-      const actions = auditData.corrective_actions_performed || [
-        {agent: '07_gorsel_motion_uretim', issue: 'WCAG 4.5:1 Tipografi Kontrastı', rule: 'Altın tipografi zümrüt karanlığında parlatıldı ve SKILL.md mühürlendi.'},
-        {agent: '09_video_edit_render', issue: 'Cross-Dissolve Geçiş İvmesi', rule: 'Sahne geçişleri 0.8 sn sinematik akışa bağlandı ve SKILL.md güncellendi.'}
-      ];
+      const actions = auditData.corrective_actions_performed || [];
 
       box.innerHTML = '';
       actions.forEach(a => {

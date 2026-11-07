@@ -2,123 +2,102 @@ import React from 'react';
 import { Composition } from 'remotion';
 import { NotebookVideo } from './NotebookVideo';
 import { IslamicMotionVideo } from './IslamicMotionVideo';
-import { OlumSonMuVideo } from './olum-son-mu/Video';
-import { defaultVideoData } from './sampleData';
+import { OlumSonMuVideo, sure as OLUM_FRAMES } from './olum-son-mu/Video';
+import { Hud112Video, sureKare as HUD112_FRAMES } from './hud-112/Video';
+import { TefekkurVideo, TefekkurProps, computeDurationFrames } from './templates/TefekkurVideo';
+import generatedJson from './generatedData.json';
+import olumWords from '../public/olum-son-mu/kelimeler.json';
+import type { VideoData } from './types';
 
-let activeProps = {
-  is_empty: true,
-  scenes: [],
-  subtitles: [],
-  words: [],
-  totalDuration: 0.0,
-  theme: 'dark_minimalist'
-};
-try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const generated = require('./generatedData.json');
-  if (generated) {
-    activeProps = generated;
+const FPS = 30;
+const activeProps = generatedJson as unknown as VideoData;
+
+/** NotebookVideo'daki tüm izleri (sahne, alıntı videoları, PIP, altyazı, ses) tarayıp süreyi saniye olarak verir. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const notebookSeconds = (p: any): number => {
+  let max = 5.0;
+  for (const s of p?.scenes ?? []) if (typeof s.endTime === 'number') max = Math.max(max, s.endTime);
+  for (const q of p?.quoteVideos ?? []) {
+    const start = q.timelineStart || 0;
+    max = Math.max(max, start + (q.duration || Math.max(1, (q.trimEnd || 6) - (q.trimStart || 0))));
   }
-} catch (e) {
-  // fallback
-}
+  for (const v of p?.pipVideos ?? []) {
+    const start = v.timelineStart || 0;
+    max = Math.max(max, start + (v.duration || Math.max(1, (v.trimEnd || 5) - (v.trimStart || 0))));
+  }
+  for (const sub of p?.subtitles ?? []) if (typeof sub.end === 'number') max = Math.max(max, sub.end);
+  if (typeof p?.totalDuration === 'number') max = Math.max(max, p.totalDuration);
+  return max;
+};
+
+const notebookFrames = (p: unknown): number => Math.max(150, Math.ceil((notebookSeconds(p) + 0.5) * FPS));
+
+const notebookMeta = ({ props }: { props: VideoData }) => ({ durationInFrames: notebookFrames(props) });
+
+const tefekkurDefaults: TefekkurProps = {
+  slug: 'olum-son-mu',
+  title: 'Ölüm Gerçekten Son Mu?',
+  words: olumWords as TefekkurProps['words'],
+  audioDurationSec: 44.11,
+};
 
 export const RemotionRoot: React.FC = () => {
-  // Dynamically calculate duration considering ALL tracks: Scenes, Quote Videos, PIPs, Subtitles, Audio
-  let maxTrackSec = 5.0;
-  if (activeProps) {
-    if (activeProps.scenes) {
-      for (const s of activeProps.scenes) {
-        if (typeof s.endTime === 'number') maxTrackSec = Math.max(maxTrackSec, s.endTime);
-      }
-    }
-    if (activeProps.quoteVideos) {
-      for (const q of activeProps.quoteVideos) {
-        const start = q.timelineStart || 0;
-        const dur = q.duration || Math.max(1, (q.trimEnd || 6) - (q.trimStart || 0));
-        maxTrackSec = Math.max(maxTrackSec, start + dur);
-      }
-    }
-    if (activeProps.pipVideos) {
-      for (const p of activeProps.pipVideos) {
-        const start = p.timelineStart || 0;
-        const dur = p.duration || Math.max(1, (p.trimEnd || 5) - (p.trimStart || 0));
-        maxTrackSec = Math.max(maxTrackSec, start + dur);
-      }
-    }
-    if (activeProps.subtitles) {
-      for (const sub of activeProps.subtitles) {
-        if (typeof sub.end === 'number') maxTrackSec = Math.max(maxTrackSec, sub.end);
-      }
-    }
-    if (typeof (activeProps as any).totalDuration === 'number') {
-      maxTrackSec = Math.max(maxTrackSec, (activeProps as any).totalDuration);
-    }
-  }
-  const dynamicDuration = Math.max(150, Math.ceil((maxTrackSec + 0.5) * 30));
-
   return (
     <>
-      {/* 1. 9:16 Vertical (TikTok, Instagram Reels, YouTube Shorts) */}
+      {/* 0. Veri güdümlü genel şablon: orkestratör yeni senaryoları bununla render eder */}
+      <Composition
+        id="TefekkurVideo"
+        component={TefekkurVideo}
+        durationInFrames={computeDurationFrames(tefekkurDefaults, FPS)}
+        fps={FPS}
+        width={1080}
+        height={1920}
+        defaultProps={tefekkurDefaults}
+        calculateMetadata={({ props }) => ({ durationInFrames: computeDurationFrames(props, FPS) })}
+      />
+
+      {/* 1. 9:16 Dikey (TikTok, Reels, Shorts) */}
       <Composition
         id="NotebookVideo"
         component={NotebookVideo}
-        durationInFrames={dynamicDuration}
-        fps={30}
+        durationInFrames={notebookFrames(activeProps)}
+        fps={FPS}
         width={1080}
         height={1920}
         defaultProps={activeProps}
-        calculateMetadata={({ props }) => {
-          let maxTrackSec = 5.0;
-          const p = props || activeProps;
-          if (p.scenes) {
-            for (const s of p.scenes) {
-              if (typeof s.endTime === 'number') maxTrackSec = Math.max(maxTrackSec, s.endTime);
-            }
-          }
-          if (p.quoteVideos) {
-            for (const q of p.quoteVideos) {
-              const start = q.timelineStart || 0;
-              const dur = q.duration || Math.max(1, (q.trimEnd || 6) - (q.trimStart || 0));
-              maxTrackSec = Math.max(maxTrackSec, start + dur);
-            }
-          }
-          if (typeof p.totalDuration === 'number') {
-            maxTrackSec = Math.max(maxTrackSec, p.totalDuration);
-          }
-          const durFrames = Math.max(150, Math.ceil((maxTrackSec + 0.5) * 30));
-          return { durationInFrames: durFrames };
-        }}
+        calculateMetadata={notebookMeta}
       />
 
-      {/* 2. 16:9 Landscape (YouTube Long-form, Desktop, TV) */}
+      {/* 2. 16:9 Yatay */}
       <Composition
         id="NotebookVideo-Horizontal"
         component={NotebookVideo}
-        durationInFrames={dynamicDuration}
-        fps={30}
+        durationInFrames={notebookFrames(activeProps)}
+        fps={FPS}
         width={1920}
         height={1080}
         defaultProps={activeProps}
+        calculateMetadata={notebookMeta}
       />
 
-      {/* 3. 1:1 Square (Instagram Feed, LinkedIn, Twitter/X) */}
+      {/* 3. 1:1 Kare */}
       <Composition
         id="NotebookVideo-Square"
         component={NotebookVideo}
-        durationInFrames={dynamicDuration}
-        fps={30}
+        durationInFrames={notebookFrames(activeProps)}
+        fps={FPS}
         width={1080}
         height={1080}
         defaultProps={activeProps}
+        calculateMetadata={notebookMeta}
       />
 
-      {/* 4. Islamic Motion Designer (Sufariq / Visual Deen / Yaqeen Style) */}
+      {/* 4. İslami hareket tasarımı */}
       <Composition
         id="IslamicMotionVideo"
         component={IslamicMotionVideo}
         durationInFrames={2078}
-        fps={30}
+        fps={FPS}
         width={1080}
         height={1920}
         calculateMetadata={() => {
@@ -128,21 +107,15 @@ export const RemotionRoot: React.FC = () => {
             const c = require('./activeConcept.json');
             if (c?.totalFrames) frames = c.totalFrames;
           } catch (e) {
-            // fallback
+            // varsayılan süre
           }
           return { durationInFrames: frames };
         }}
       />
 
-      {/* 5. Claude Animasyon Sistemi: Ölüm Gerçekten Son Mu? */}
-      <Composition
-        id="OlumSonMu"
-        component={OlumSonMuVideo}
-        durationInFrames={1323}
-        fps={30}
-        width={1080}
-        height={1920}
-      />
+      {/* 5. Elle hazırlanmış özel videolar (kendi index.ts dosyalarıyla da render edilebilir) */}
+      <Composition id="OlumSonMu" component={OlumSonMuVideo} durationInFrames={OLUM_FRAMES} fps={FPS} width={1080} height={1920} />
+      <Composition id="Hud112" component={Hud112Video} durationInFrames={HUD112_FRAMES} fps={FPS} width={1080} height={1920} />
     </>
   );
 };

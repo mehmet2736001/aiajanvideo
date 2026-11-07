@@ -61,3 +61,8 @@ Thumbs.db
 # Local Chat Sessions & Archives
 brain/chat_archives/
 brain/director_chat_history.json
+
+# Üretim çıktıları ve yerel durum
+turso_credentials.json
+props.json
+.pytest_cache/

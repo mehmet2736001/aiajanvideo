@@ -21,8 +21,8 @@
     "quality_score": 95,
     "status": "mastered",
     "created_at": "2026-11-05T21:14:05.287312",
-    "output_path": "E:\\aivideoyap\\out\\hud-112\\hud-112.mp4",
-    "pano_path": "E:\\aivideoyap\\out\\hud-112\\pano.jpg"
+    "output_path": "out/hud-112/hud-112.mp4",
+    "pano_path": "out/hud-112/pano.jpg"
   },
   {
     "id": "vid_1793914214_hud-canli-test",
@@ -33,7 +33,7 @@
     "quality_score": 95,
     "status": "mastered",
     "created_at": "2026-11-06T00:30:14.896563",
-    "output_path": "E:\\aivideoyap\\out\\hud-canli-test\\hud-canli-test.mp4",
-    "pano_path": "E:\\aivideoyap\\out\\hud-canli-test\\pano.jpg"
+    "output_path": "out/hud-canli-test/hud-canli-test.mp4",
+    "pano_path": "out/hud-canli-test/pano.jpg"
   }
 ]

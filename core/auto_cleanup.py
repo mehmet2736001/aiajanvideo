@@ -1,35 +1,54 @@
 import os
 import shutil
-import glob
 
-def clean_temp_artifacts(target_dir: str = None) -> int:
+# Yalnızca üretimin kendi oluşturduğu geçici dosyalar silinir.
+TEMP_DIR_NAMES = ("temp_voice", "temp_audio")
+
+
+def clean_temp_artifacts(target_dir: str) -> int:
     """
     16. Ajan (Mühendis Demir):
-    Render tamamlandıktan sonra diskte biriken ara wav/mp3 ve temp klasörlerini temizler.
+    Üretim sonrası `target_dir` içindeki geçici klasörleri (temp_voice, temp_audio) ve *.tmp
+    dosyalarını siler. Başka hiçbir dosyaya (ör. SFX .wav dosyaları) dokunmaz.
+
+    `target_dir` zorunludur; boş/kök/çalışma dizini gibi tehlikeli hedefler reddedilir.
+    Silinen bayt sayısını döndürür.
     """
-    cleaned_bytes = 0
-    patterns = [
-        "**/temp_voice",
-        "**/temp_audio",
-        "**/*.wav",
-        "**/*.tmp"
-    ]
+    if not target_dir:
+        raise ValueError("clean_temp_artifacts için hedef klasör zorunludur.")
+    base = os.path.abspath(target_dir)
+    if base in (os.path.abspath(os.sep), os.path.abspath(os.path.expanduser("~"))):
+        raise ValueError(f"Güvensiz temizlik hedefi: {base}")
+    if not os.path.isdir(base):
+        return 0
 
-    base = target_dir or os.path.abspath(".")
-    for p in patterns:
-        for f in glob.glob(os.path.join(base, p), recursive=True):
-            if "node_modules" in f:
-                continue
+    cleaned = 0
+    for root, dirs, files in os.walk(base, topdown=True):
+        if "node_modules" in dirs:
+            dirs.remove("node_modules")
+        for d in list(dirs):
+            if d in TEMP_DIR_NAMES:
+                full = os.path.join(root, d)
+                cleaned += _dir_size(full)
+                shutil.rmtree(full, ignore_errors=True)
+                dirs.remove(d)
+        for fn in files:
+            if fn.endswith(".tmp"):
+                full = os.path.join(root, fn)
+                try:
+                    cleaned += os.path.getsize(full)
+                    os.remove(full)
+                except OSError:
+                    pass
+    return cleaned
+
+
+def _dir_size(path: str) -> int:
+    total = 0
+    for root, _dirs, files in os.walk(path):
+        for fn in files:
             try:
-                if os.path.isdir(f):
-                    for root, dirs, files in os.walk(f):
-                        for file in files:
-                            cleaned_bytes += os.path.getsize(os.path.join(root, file))
-                    shutil.rmtree(f, ignore_errors=True)
-                elif os.path.isfile(f):
-                    cleaned_bytes += os.path.getsize(f)
-                    os.remove(f)
-            except Exception:
+                total += os.path.getsize(os.path.join(root, fn))
+            except OSError:
                 pass
-
-    return cleaned_bytes
+    return total

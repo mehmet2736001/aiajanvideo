@@ -1,79 +1,91 @@
-# 🏛️ Nexus AI Video Studio — 16 Ajanlı Otonom Video Hükümeti 🎬
+# Nexus AI Video Studio
 
-> **Sıfır Yapay Zeka Görsel Halüsinasyonu · %100 Kod Tabanlı Remotion (React + SVG) · 30 FPS Full HD (1080x1920) Dikey Video Motoru**  
-> Kendini denetleyen, tarafsız eleştiren, arayüzünü sadeleştiren ve her videoda öğrenen dünyanın ilk 16 ajanlı video stüdyosu.
+Türkçe, dikey (1080×1920, 30 FPS) tefekkür/kısa video üretim hattı.
+Görüntü **tamamen kodla** (Remotion + SVG) çizilir; yapay zeka yalnızca metin sohbetinde (Gemini) ve seslendirmede (edge-tts) kullanılır.
 
----
+## Nasıl çalışır?
 
-## 🌟 Çekirdek Felsefe
+```
+Senaryo satırları ─► edge-tts seslendirme ─► faster-whisper kelime zamanları
+                  ─► FFmpeg mastering (EQ + compand + -16 LUFS) ─► ses.mp3 + kelimeler.json
+                  ─► Remotion render ─► 48 karelik pano + kalite denetimi ─► out/<slug>/<slug>.mp4
+```
 
-* **Görüntü Tamamen Kod:** Midjourney, Kling veya durağan slayt gösterileri yok. Bütün karakterler, membranlar, ışıklar ve geçişler matematiksel SVG ve Bezier fizik eğrileriyle kodlanır.
-* **Yapay Zeka Yalnızca Seste:** Edge-TTS (`tr-TR-AhmetNeural`) + Stüdyo Mastering + `faster-whisper` milisaniyelik kelime senkronu (`kelimeler.json`).
-* **Kinetik Tipografi:** Konuşulan her kelime anında altın sarısıyla parıldar, satır zıplamaz.
-* **Bağımsız Çift Denetim:** 48 karelik pano (`pano.jpg`) hem Başdenetçi Hasan hem de veto yetkisine sahip Müfettiş Nuri tarafından incelenir.
+* **Yeni bir slug** için video, veri güdümlü genel şablonla (`TefekkurVideo`, `src/templates/`) otomatik üretilir.
+* `src/<slug>/index.ts` varsa (`hud-112`, `olum-son-mu` gibi elle tasarlanmış videolar) o kompozisyon render edilir.
+* Başka bir projenin videosuna asla sessizce geri dönülmez; bulunamazsa hata verilir.
 
----
+## Gereksinimler
 
-## 🏛️ 16 Ajanlı Hükümet Kadrosu (4x4 Matris)
+| Araç | Not |
+|---|---|
+| Python 3.10+ | `pip install -r requirements.txt` |
+| Node.js 18+ | `npm install` |
+| FFmpeg + ffprobe | PATH'te olmalı |
+| Gemini API anahtarı | Başyönetmen sohbeti için; `api_keys.json` veya `GEMINI_API_KEYS` |
 
-### I. Strateji ve Hikmet Katmanı
-1. **`01_basyonetmen` – Selim Bey:** Orkestra Şefi ve Ajan Hükümeti Başkanı.
-2. **`03_islami_kurgu` – Müderris Âkif:** Kur'an, Sünnet ve Hanefi Fıkhı edep sınırları denetçisi.
-3. **`04_metin_tefekkur` – Senarist Yahya:** 70-100 kelimelik, acele etmeyen kancalı konuşma metni yazarı.
-4. **`15_viral_strateji` – Stratejist Kaya:** İlk 3 saniye kancasını ve izleyici tutundurma (retention) eğrilerini denetleyen algoritma uzmanı.
+İlk `faster-whisper` çalıştırmasında "base" modeli indirilir (internet gerekir).
 
-### II. Görsel ve Ses Üretim Katmanı
-5. **`05_sahne_storyboard` – Yönetmen Zeynep:** Saniye saniye SVG nesne ve kamera süzülüş planı.
-6. **`06_materyal_toplama` – Arşivci Tarık:** Hat levhaları, 24K altın ve obsidyen renk kodları arşivi.
-7. **`07_gorsel_motion_uretim` – Stüdyo Şefi Emre:** Parametrik SVG Rig kütüphanesi yöneticisi.
-8. **`08_ses_frekans` – Ses Mühendisi Bora:** Stüdyo EQ, compand, loudnorm (-16 LUFS) ve kelime zamanlaması.
-9. **`09_video_edit_render` – Kurgu Ustası Kerem:** 30 FPS Full HD (1080x1920) Remotion render motoru şefi.
+## Kurulum ve çalıştırma
 
-### III. Bağımsız Denetim ve Yargı Katmanı
-10. **`10_islami_video_analiz` – Başdenetçi Hasan:** 48 karelik panoyu (`pano.jpg`) kare kare denetleyen Vision uzmanı.
-11. **`13_tarafsiz_denetci` – Müfettiş Nuri:** Şeytanın Avukatı; grup içi körlüğü engelleyen, zayıf işleri veto etme yetkisine sahip bağımsız hakem.
-12. **`12_kapak_ve_yayin_seo` – Editör Bilal:** Kapak görseli (Thumbnail), viral başlık ve YouTube SEO uzmanı.
-13. **`02_yonetmen` – Sinan Bey:** Üretim ajanlarının ara teslimat koordinatörü.
-
-### IV. Evrim, Sadelik ve Sistem Sağlığı Katmanı
-14. **`11_yetenek_gelistirme` – Muallim Farabi:** Analiz raporlarını okuyup `SKILL.md` ve hafıza dosyalarını güncelleyen meta-öğrenme şefi.
-15. **`14_zen_arayuz` – Mimar Sinan:** Arayüzü tek tıkla çalışacak Apple/Dieter Rams sadeliğinde tutan UI/UX mimarı.
-16. **`16_sistem_temizlik` – Mühendis Demir:** Render sonrası ara wav ve temp dosyalarını süpüren, render hızını koruyan sistem mühendisi.
-
----
-
-## 🚀 Nasıl Çalıştırılır?
-
-### 1. Tek Tıkla Konsol Menüsü
-Klasördeki **`BASLAT.bat`** dosyasına çift tıkla:
-* `[1]` Web Stüdyo Panelini Başlat (`http://localhost:8000`)
-* `[2]` Remotion Canlı Önizleme Player'ı Başlat (`http://localhost:3000`)
-* `[3]` Hızlı Otonom Video Üret (Terminalden 16 ajanla)
-* `[4]` Sistem Sağlık Denetimi ve Çöp Temizliği (Mühendis Demir)
-
-### 2. Doğrudan Web Arayüzü
 ```bash
-python -m web_ui.server
-```
-Tarayıcında `http://localhost:8000` adresini aç.
+pip install -r requirements.txt
+npm install
+cp api_keys.example.json api_keys.json   # anahtarlarınızı yazın (git'e girmez)
 
-### 3. Doğrudan Otonom Terminal Motoru
+python -m web.server                      # http://127.0.0.1:8000
+npm start                                 # Remotion önizleme: http://localhost:3000
+```
+
+Windows'ta `BASLAT.bat` aynı işlemler için menü sunar.
+
+Sağlık kontrolü: `GET /api/health` (ffmpeg, node, node_modules, anahtar sayısı).
+
+## Yapılandırma
+
+* `api_keys.json`: `{"keys": [...], "models": [...]}`; ya da `GEMINI_API_KEYS` / `GEMINI_MODELS` ortam değişkenleri (bkz. `.env.example`).
+* Model zinciri soldan sağa denenir. 429'da sıradaki anahtara, 404'te sıradaki modele geçilir.
+* Turso ses kütüphanesi `core/turso_client.py` içinde ayarlanır (`turso_credentials.json` ile geçersiz kılınabilir).
+
+## API özeti
+
+| Uç nokta | Açıklama |
+|---|---|
+| `POST /api/produce` | `{project_slug, title, lines[]}` — üretimi çalıştırır, bitince sonucu döner (aynı anda tek üretim, aksi halde 409) |
+| `GET /api/production/status` | Canlı ilerleme (adım, yüzde, kalan süre, log) |
+| `POST /api/chat/message` | Başyönetmen ile sohbet |
+| `GET /api/audio_library` | Turso ses listesi |
+| `GET/POST /api/errors…` | Sunucu hata günlüğü |
+
+`project_slug` yalnızca `[a-z0-9_-]` (en çok 64 karakter) olabilir.
+
+## Bilinen sınırlar
+
+* edge-tts'te Türkçe için yalnızca iki ses vardır (Ahmet / Emel). Turso kaydı yalnızca cinsiyet seçimini etkiler.
+* Kalite denetimi, panodaki karelerin boşluk/kontrast/hareket sinyallerini ölçen bir sezgiseldir; görsel estetiği yargılamaz.
+* Gemini model adları `api_keys.json` içinden ayarlanır; geçersiz (404) modeller oturum boyunca atlanır.
+* Arayüz (`web/index.html`) Tailwind CDN'i ve unpkg üzerinden betik yükler; internet gerekir.
+
+## Geliştirme
+
 ```bash
-python engine/orchestrator.py
+pip install -r requirements-dev.txt
+python -m pytest -q        # Python testleri
+npm run typecheck          # TypeScript tip denetimi
 ```
 
----
+CI (`.github/workflows/ci.yml`) bu iki denetimi her push'ta çalıştırır.
 
-## 📁 Proje Klasör Mimarisi
+## Klasörler
 
 ```
-e:\aivideoyap/
-├── 🏛️ agents/               # 16 Ajanın SKILL.md ve memory.json dosyaları
-├── 🧠 brain/                # Merkezi hafıza (experience_memory.json & video_history.json)
-├── ⚙️ engine/               # Python seslendirme, render, denetim ve temizlik motoru
-├── 🌐 web_ui/               # Tailwind + FastAPI modern stüdyo kontrol paneli
-├── 📦 production_output/    # Üretilen her videonun klasörü (video.mp4 + pano.jpg)
-├── 🎬 src/                  # Remotion TypeScript & SVG bileşenleri
-├── 📁 public/               # Fontlar, seslendirmeler ve kelimeler.json
-└── 🚀 BASLAT.bat            # Tek tıkla kontrol merkezi
+core/        üretim hattı (orchestrator, ses, denetim, Gemini sohbeti, Turso)
+web/         FastAPI sunucusu + arayüz
+src/         Remotion kompozisyonları (templates/, hud-112/, olum-son-mu/, components/)
+brain/       ajan tanımları (agents/), hafıza ve üretim geçmişi
+public/      ses, kelime zamanları, SFX, görseller (Remotion staticFile)
+out/         üretilen videolar (git'e girmez)
+tests/       pytest testleri
 ```
+
+`brain/agents/*` içindeki SKILL/memory dosyaları belge niteliğindedir; kod yalnızca `memory.json` dosyalarını arayüzde listeler.

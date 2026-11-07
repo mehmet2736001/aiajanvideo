@@ -1,18 +1,21 @@
 {
-  "name": "notebook-video-ai",
+  "name": "nexus-ai-video-studio",
   "version": "1.0.0",
-  "description": "AI-Powered Notebook Explainer Shorts Video Generator",
+  "description": "Nexus AI Video Studio: Türkçe dikey (9:16) tefekkür videoları için Remotion + Python üretim hattı",
   "main": "src/index.ts",
   "scripts": {
     "start": "remotion preview src/index.ts",
+    "studio": "python -m web.server",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
     "build": "remotion render src/index.ts NotebookVideo out/video.mp4",
     "build:horizontal": "remotion render src/index.ts NotebookVideo-Horizontal out/video_horizontal.mp4",
     "build:square": "remotion render src/index.ts NotebookVideo-Square out/video_square.mp4",
     "build:all": "npm run build && npm run build:horizontal && npm run build:square",
-    "generate": "node scripts/generate.js"
+    "render:olum": "remotion render src/olum-son-mu/index.ts OlumSonMu out/olum-son-mu/olum-son-mu.mp4",
+    "render:hud112": "remotion render src/hud-112/index.ts Hud112 out/hud-112/hud-112.mp4"
   },
   "dependencies": {
-    "@remotion/google-fonts": "^4.0.538",
+    "@remotion/google-fonts": "4.0.538",
     "@remotion/player": "4.0.538",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -23,5 +26,9 @@
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "typescript": "^5.5.4"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=18"
   }
 }

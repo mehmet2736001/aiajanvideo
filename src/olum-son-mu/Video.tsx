@@ -8,6 +8,7 @@ import {
   staticFile,
   useCurrentFrame,
 } from 'remotion';
+import { SERIF } from '../fonts';
 import veri from '../../public/olum-son-mu/kelimeler.json';
 
 export type Kelime = { w: string; s: number; e: number; c: number };
@@ -48,7 +49,7 @@ export const Altyazi: React.FC<{ t: number }> = ({ t }) => {
         right: 80,
         bottom: 220,
         textAlign: 'center',
-        fontFamily: "'Cinzel', 'Georgia', 'Playfair Display', serif",
+        fontFamily: SERIF,
         fontWeight: 600,
         fontSize: 52,
         lineHeight: 1.35,
@@ -79,7 +80,6 @@ export const Altyazi: React.FC<{ t: number }> = ({ t }) => {
                 textShadow: isCurrent
                   ? '0 0 20px rgba(243, 208, 129, 0.8), 0 2px 8px rgba(0,0,0,0.9)'
                   : '0 2px 6px rgba(0,0,0,0.8)',
-                transition: 'color 0.15s ease, opacity 0.15s ease',
               }}
             >
               {k.w}{' '}
@@ -283,7 +283,7 @@ export const OlumSonMuVideo: React.FC = () => {
                   y={570}
                   textAnchor="middle"
                   fill="rgba(212, 175, 55, 0.75)"
-                  fontFamily="'Cinzel', serif"
+                  fontFamily={SERIF}
                   fontSize={28}
                   letterSpacing="0.2em"
                   opacity={karis(0, 0.9, g01) * (1 - g12)}
@@ -419,7 +419,7 @@ export const OlumSonMuVideo: React.FC = () => {
                 y={620}
                 textAnchor="middle"
                 fill="#FFF2B2"
-                fontFamily="'Cinzel', serif"
+                fontFamily={SERIF}
                 fontSize={36}
                 letterSpacing="0.25em"
                 filter="url(#softGlow)"
@@ -492,7 +492,7 @@ export const OlumSonMuVideo: React.FC = () => {
                 y={460}
                 textAnchor="middle"
                 fill="#FFF2B2"
-                fontFamily="'Cinzel', serif"
+                fontFamily={SERIF}
                 fontSize={32}
                 letterSpacing="0.25em"
               >
@@ -519,7 +519,7 @@ export const OlumSonMuVideo: React.FC = () => {
                   y={40}
                   textAnchor="middle"
                   fill="rgba(212, 175, 55, 0.7)"
-                  fontFamily="'Cinzel', serif"
+                  fontFamily={SERIF}
                   fontSize={22}
                 >
                   BEDEN TOPRAĞA
@@ -542,7 +542,7 @@ export const OlumSonMuVideo: React.FC = () => {
                   y={-50}
                   textAnchor="middle"
                   fill="#FFFDF0"
-                  fontFamily="'Cinzel', serif"
+                  fontFamily={SERIF}
                   fontSize={26}
                   letterSpacing="0.15em"
                 >
@@ -581,7 +581,7 @@ export const OlumSonMuVideo: React.FC = () => {
                 y={1180}
                 textAnchor="middle"
                 fill="#FFFDF0"
-                fontFamily="'Cinzel', 'Playfair Display', serif"
+                fontFamily={SERIF}
                 fontWeight={700}
                 fontSize={46}
                 letterSpacing="0.12em"
@@ -594,7 +594,7 @@ export const OlumSonMuVideo: React.FC = () => {
                 y={1260}
                 textAnchor="middle"
                 fill="#F3D081"
-                fontFamily="'Cinzel', 'Playfair Display', serif"
+                fontFamily={SERIF}
                 fontWeight={600}
                 fontSize={56}
                 letterSpacing="0.18em"
@@ -613,7 +613,7 @@ export const OlumSonMuVideo: React.FC = () => {
   );
 };
 
-const sure = Math.ceil((K[K.length - 1].e + 2.4) * FPS);
+export const sure = Math.ceil((K[K.length - 1].e + 2.4) * FPS);
 
 export const Root: React.FC = () => (
   <Composition

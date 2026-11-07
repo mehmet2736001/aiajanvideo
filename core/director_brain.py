@@ -1,14 +1,14 @@
 import os
-import sys
 import json
-import time
+import re
+import threading
 from datetime import datetime
 import requests
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 
 from core.production_tracker import tracker
+from core.utils import BASE_DIR, atomic_write_json, read_json
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 BRAIN_DIR = os.path.join(BASE_DIR, "brain")
 ARCHIVES_DIR = os.path.join(BRAIN_DIR, "chat_archives")
 HISTORY_FILE = os.path.join(BRAIN_DIR, "director_chat_history.json")
@@ -16,6 +16,16 @@ KEYS_FILE = os.path.join(BASE_DIR, "api_keys.json")
 
 os.makedirs(BRAIN_DIR, exist_ok=True)
 os.makedirs(ARCHIVES_DIR, exist_ok=True)
+
+MAX_HISTORY_MESSAGES = 300
+CONTEXT_MESSAGES = 20
+REQUEST_TIMEOUT = 20
+DEFAULT_MODELS = [
+    "gemini-3.8-flash",
+    "gemini-3.5-flash",
+    "gemini-3.1-flash-lite",
+    "gemini-flash-lite-latest",
+]
 
 DIRECTOR_SYSTEM_INSTRUCTION = """Sen Nexus Video Stüdyosu'nun "Tek Başyönetmeni Selim Bey"sin.
 Artık bürokratik çoklu ajan meclisi geride kaldı; sen stüdyonun tüm sanatsal, ilmi ve teknik vasıflarını ("elbiselerini") kendi bünyende toplayan tek ve muktedir Başyönetmensin.
@@ -52,39 +62,55 @@ INITIAL_GREETING = (
 
 class DirectorBrain:
     def __init__(self):
+        self._lock = threading.RLock()
         self.keys = self._load_keys()
         self.current_key_idx = 0
-        self.model_chain = [
-            "gemini-3.8-flash",
-            "gemini-3.5-flash",
-            "gemini-3.1-flash-lite",
-            "gemini-flash-lite-latest"
-        ]
+        self.model_chain = self._load_models()
+        self._dead_models = set()  # 404 dönen modeller oturum boyunca atlanır
         self.active_wardrobe = "Başyönetmen (Tüm Yetkinlikler)"
-        self.last_model_used = "gemini-3.8-flash"
+        self.last_model_used = self.model_chain[0] if self.model_chain else ""
         self._ensure_history_initialized()
 
     def _load_keys(self) -> List[str]:
-        if os.path.exists(KEYS_FILE):
-            try:
-                with open(KEYS_FILE, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    keys = data.get("keys", [])
-                    if keys:
-                        return keys
-            except Exception as e:
-                print(f"[DirectorBrain] Key load error: {e}")
-        return []
+        """GEMINI_API_KEYS ortam değişkeni (virgülle ayrılmış) veya api_keys.json {"keys": [...]}"""
+        env = os.environ.get("GEMINI_API_KEYS", "")
+        keys = [k.strip() for k in env.split(",") if k.strip()]
+        if not keys:
+            data = read_json(KEYS_FILE, {})
+            if isinstance(data, dict):
+                keys = [k for k in data.get("keys", []) if isinstance(k, str) and k.strip()]
+        return keys
 
-    def _get_next_key(self) -> str:
-        if not self.keys:
-            return ""
-        key = self.keys[self.current_key_idx % len(self.keys)]
-        self.current_key_idx = (self.current_key_idx + 1) % len(self.keys)
-        return key
+    def _load_models(self) -> List[str]:
+        """GEMINI_MODELS ortam değişkeni veya api_keys.json {"models": [...]}; yoksa varsayılan zincir."""
+        env = os.environ.get("GEMINI_MODELS", "")
+        models = [m.strip() for m in env.split(",") if m.strip()]
+        if not models:
+            data = read_json(KEYS_FILE, {})
+            if isinstance(data, dict):
+                models = [m for m in data.get("models", []) if isinstance(m, str) and m.strip()]
+        return models or list(DEFAULT_MODELS)
+
+    def prefer_model(self, model: str) -> bool:
+        """Seçilen modeli zincirin başına alır (yoksa ekler)."""
+        model = model.strip()
+        if not model:
+            return False
+        with self._lock:
+            self._dead_models.discard(model)
+            if self.model_chain and self.model_chain[0] == model:
+                return False
+            self.model_chain = [model] + [m for m in self.model_chain if m != model]
+            return True
+
+    def _next_key_index(self) -> int:
+        with self._lock:
+            idx = self.current_key_idx % len(self.keys)
+            self.current_key_idx = (idx + 1) % len(self.keys)
+            return idx
 
     def _ensure_history_initialized(self):
-        if not os.path.exists(HISTORY_FILE) or os.path.getsize(HISTORY_FILE) == 0:
+        if not self._read_history():
             initial_data = [
                 {
                     "role": "model",
@@ -100,18 +126,12 @@ class DirectorBrain:
             self._save_history(initial_data)
 
     def _read_history(self) -> List[Dict[str, Any]]:
-        try:
-            if os.path.exists(HISTORY_FILE):
-                with open(HISTORY_FILE, "r", encoding="utf-8") as f:
-                    return json.load(f)
-        except Exception as e:
-            print(f"[DirectorBrain] History read error: {e}")
-        return []
+        data = read_json(HISTORY_FILE, [])
+        return data if isinstance(data, list) else []
 
     def _save_history(self, history: List[Dict[str, Any]]):
         try:
-            with open(HISTORY_FILE, "w", encoding="utf-8") as f:
-                json.dump(history, f, ensure_ascii=False, indent=2)
+            atomic_write_json(HISTORY_FILE, history[-MAX_HISTORY_MESSAGES:])
         except Exception as e:
             print(f"[DirectorBrain] History save error: {e}")
 
@@ -189,139 +209,131 @@ class DirectorBrain:
             return "48 Kare Görsel Denetçi"
         return "Başyönetmen (Tüm Yetkinlikler)"
 
+    def _call_gemini(self, system_prompt: str, contents: list) -> Tuple[str, str, str]:
+        """Anahtar × model zincirinde dener. (metin, kullanılan_model, son_hata) döndürür.
+
+        * 429 → aynı model için sıradaki anahtar
+        * 503/5xx/ağ hatası → sıradaki model
+        * 404 → model oturum boyunca devre dışı
+        """
+        if not self.keys:
+            return "", "", "API anahtarı yok (GEMINI_API_KEYS veya api_keys.json tanımlayın)"
+        body = {
+            "system_instruction": {"parts": [{"text": system_prompt}]},
+            "contents": contents,
+            "generationConfig": {"temperature": 0.72, "maxOutputTokens": 1800},
+        }
+        last_error = ""
+        budget = 12
+        for model in self.model_chain:
+            if model in self._dead_models:
+                continue
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+            for _ in range(min(len(self.keys), 4)):
+                if budget <= 0:
+                    return "", "", last_error or "deneme bütçesi doldu"
+                budget -= 1
+                key = self.keys[self._next_key_index()]
+                try:
+                    res = requests.post(url, json=body, headers={"x-goog-api-key": key}, timeout=REQUEST_TIMEOUT)
+                except requests.RequestException as e:
+                    last_error = f"ağ hatası ({model}): {type(e).__name__}"
+                    break  # sıradaki model
+                if res.status_code == 200:
+                    try:
+                        parts = res.json()["candidates"][0]["content"]["parts"]
+                        text = "".join(p.get("text", "") for p in parts).strip()
+                    except (KeyError, IndexError, ValueError):
+                        text = ""
+                    if text:
+                        return text, model, ""
+                    last_error = f"boş yanıt ({model})"
+                    break
+                if res.status_code == 429:
+                    last_error = f"HTTP 429 ({model})"
+                    continue  # sıradaki anahtar
+                if res.status_code == 404:
+                    self._dead_models.add(model)
+                    last_error = f"model bulunamadı: {model}"
+                    break
+                last_error = f"HTTP {res.status_code} ({model})"
+                break
+        return "", "", last_error
+
     def chat(self, user_message: str) -> Dict[str, Any]:
         user_text = user_message.strip()
         if not user_text:
             return {"error": "Boş mesaj gönderilemez"}
 
-        timestamp_now = datetime.now().strftime("%H:%M:%S")
-        self.active_wardrobe = self._detect_wardrobe(user_text)
+        with self._lock:
+            self.active_wardrobe = self._detect_wardrobe(user_text)
+            history = self._read_history()
+            history.append({
+                "role": "user",
+                "sender_id": "user",
+                "sender_name": "Sayın Yönetmenimiz",
+                "receiver_name": "Başyönetmen Selim Bey",
+                "badge": "YÖNETMEN TALİMATI",
+                "wardrobe": self.active_wardrobe,
+                "message": user_text,
+                "timestamp": datetime.now().strftime("%H:%M:%S"),
+            })
 
-        # 1. Mevcut geçmişi oku
-        history = self._read_history()
-
-        # 2. Kullanıcı mesajını geçmişe ekle
-        user_entry = {
-            "role": "user",
-            "sender_id": "user",
-            "sender_name": "Sayın Yönetmenimiz",
-            "receiver_name": "Başyönetmen Selim Bey",
-            "badge": "YÖNETMEN TALİMATI",
-            "wardrobe": self.active_wardrobe,
-            "message": user_text,
-            "timestamp": timestamp_now
-        }
-        history.append(user_entry)
-
-        # 3. Gemini REST formatına dönüştür (son 20 mesajı context olarak al)
-        contents_payload = []
-        for turn in history[-20:]:
-            r = "user" if turn.get("role") == "user" else "model"
+        contents = []
+        for turn in history[-CONTEXT_MESSAGES:]:
             txt = turn.get("message", "").strip()
             if txt:
-                contents_payload.append({
-                    "role": r,
-                    "parts": [{"text": txt}]
-                })
+                contents.append({"role": "user" if turn.get("role") == "user" else "model",
+                                 "parts": [{"text": txt}]})
 
-        # 4. Gemini API çağrısı (Key rotation ve model fallback ile)
-        reply_text = ""
-        model_succeeded = ""
-        last_error = ""
+        system_prompt = (
+            f"{DIRECTOR_SYSTEM_INSTRUCTION}\n\n"
+            f"--- [ANLIK STÜDYO VE PRODÜKSİYON TELEMETRİSİ] ---\n"
+            f"{tracker.get_director_summary()}\n"
+            f"Yönetmen durum veya ilerleme sorduğunda yukarıdaki canlı bilgiye dayanarak net, kısa ve tatmin edici bilgi ver."
+        )
 
-        # En fazla 8 deneme (farklı anahtar ve modeller üzerinden)
-        attempts = 0
-        max_attempts = min(12, len(self.keys) * len(self.model_chain))
-
-        while attempts < max_attempts and not reply_text:
-            api_key = self._get_next_key()
-            if not api_key:
-                last_error = "API anahtarı bulunamadı"
-                break
-
-            live_telemetry = tracker.get_director_summary()
-            full_system_prompt = (
-                f"{DIRECTOR_SYSTEM_INSTRUCTION}\n\n"
-                f"--- [ANLIK STÜDYO VE PRODÜKSİYON TELEMETRİSİ] ---\n"
-                f"{live_telemetry}\n"
-                f"Yönetmen durum veya ilerleme sorduğunda yukarıdaki canlı bilgiye dayanarak net, kısa ve tatmin edici bilgi ver."
-            )
-
-            for model_name in self.model_chain:
-                attempts += 1
-                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
-                body = {
-                    "system_instruction": {
-                        "parts": [{"text": full_system_prompt}]
-                    },
-                    "contents": contents_payload,
-                    "generationConfig": {
-                        "temperature": 0.72,
-                        "maxOutputTokens": 1800
-                    }
-                }
-
-                try:
-                    res = requests.post(url, json=body, timeout=14)
-                    if res.status_code == 200:
-                        data = res.json()
-                        candidates = data.get("candidates", [])
-                        if candidates and "content" in candidates[0]:
-                            parts = candidates[0]["content"].get("parts", [])
-                            if parts and "text" in parts[0]:
-                                reply_text = parts[0]["text"].strip()
-                                model_succeeded = model_name
-                                self.last_model_used = model_name
-                                break
-                    elif res.status_code in [429, 503]:
-                        # 429 quota veya 503 high demand -> sıradaki model/key'e geç
-                        last_error = f"HTTP {res.status_code} on {model_name}"
-                        continue
-                    else:
-                        last_error = f"HTTP {res.status_code}: {res.text[:120]}"
-                except Exception as e:
-                    last_error = str(e)
-                    continue
-
-        if not reply_text:
-            # Fallback emniyet yanıtı
+        reply_text, model_ok, last_error = self._call_gemini(system_prompt, contents)
+        if reply_text:
+            self.last_model_used = model_ok
+        else:
             reply_text = (
-                f"Sayın Yönetmenim, şu an canlı bağlantıda geçici bir yoğunluk var ({last_error}). "
-                f"Fakat fikrinizi hafızama kaydettim: «{user_text}». "
-                f"Lütfen bir sonraki cümlenizle devam ediniz veya tekrar yazınız, derhal işlemeye hazırım."
+                f"Sayın Yönetmenim, şu an canlı bağlantı kurulamadı ({last_error or 'bilinmeyen sebep'}). "
+                f"Mesajınızı kaydettim: «{user_text}». Birazdan tekrar deneyebilirsiniz."
             )
-            model_succeeded = "yerel-emniyet-motoru"
+            model_ok = "yerel-emniyet-motoru"
 
-        # 5. Selim Bey'in yanıtını geçmişe kaydet
-        director_entry = {
-            "role": "model",
-            "sender_id": "01_basyonetmen",
-            "sender_name": "Başyönetmen Selim Bey",
-            "receiver_name": "Sayın Yönetmenimiz",
-            "badge": f"DERİN DÜŞÜNCE [{model_succeeded}]",
-            "wardrobe": self.active_wardrobe,
-            "message": reply_text,
-            "timestamp": datetime.now().strftime("%H:%M:%S")
-        }
-        history.append(director_entry)
-        self._save_history(history)
-
-        # 6. Senaryo / Konu analizi (Otomatik studio senkronizasyonu için)
-        suggested_topic = self._extract_suggested_topic(reply_text)
+        with self._lock:
+            # Başka bir istek araya girmiş olabilir: güncel geçmişe ekle
+            current = self._read_history()
+            if not current or current[-1].get("message") != user_text or current[-1].get("role") != "user":
+                current.append(history[-1])
+            current.append({
+                "role": "model",
+                "sender_id": "01_basyonetmen",
+                "sender_name": "Başyönetmen Selim Bey",
+                "receiver_name": "Sayın Yönetmenimiz",
+                "badge": f"DERİN DÜŞÜNCE [{model_ok}]",
+                "wardrobe": self.active_wardrobe,
+                "message": reply_text,
+                "timestamp": datetime.now().strftime("%H:%M:%S"),
+            })
+            self._save_history(current)
+            total = len(current)
 
         return {
             "status": "success",
             "reply": reply_text,
             "sender": "Başyönetmen Selim Bey",
-            "model_used": model_succeeded,
+            "model_used": model_ok,
             "active_wardrobe": self.active_wardrobe,
-            "total_turns": len(history),
-            "suggested_topic": suggested_topic
+            "total_turns": total,
+            "suggested_topic": self._extract_suggested_topic(reply_text),
+            "degraded": model_ok == "yerel-emniyet-motoru",
         }
 
     def _extract_suggested_topic(self, text: str) -> Optional[str]:
         # Eğer Selim Bey başlık önerdiyse yakala
-        import re
         m = re.search(r'(?:Konu|Başlık|Proje):\s*["«]?([^"\n»]+)["»]?', text, re.IGNORECASE)
         if m:
             return m.group(1).strip()
@@ -334,6 +346,7 @@ class DirectorBrain:
             "active_wardrobe": self.active_wardrobe,
             "last_model_used": self.last_model_used,
             "total_keys": len(self.keys),
+            "models": [m for m in self.model_chain if m not in self._dead_models],
             "history_count": len(self._read_history()),
             "status": "online"
         }
