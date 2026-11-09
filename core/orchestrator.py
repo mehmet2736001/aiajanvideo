@@ -122,15 +122,16 @@ class StudioOrchestrator:
         category: str = "İslami Tefekkür",
         comp_id: Optional[str] = None,
         voice_id: Optional[str] = None,
+        animation_style: str = "2d_canvas",
     ) -> dict:
         try:
-            return self._produce(project_slug, title, lines, category, comp_id, voice_id)
+            return self._produce(project_slug, title, lines, category, comp_id, voice_id, animation_style)
         except Exception as e:  # tracker'ı her durumda hataya çek
             tracker.fail(str(e))
             print(f"   ✗ Üretim hatası: {e}")
             return {"status": "error", "error": str(e)}
 
-    def _produce(self, project_slug, title, lines, category, comp_id, voice_id) -> dict:
+    def _produce(self, project_slug, title, lines, category, comp_id, voice_id, animation_style: str = "2d_canvas") -> dict:
         from core.vision_critic import generate_and_evaluate_pano
         from core.voice_pipeline import clean_for_speech, synthesize_and_align
 
@@ -177,7 +178,7 @@ class StudioOrchestrator:
         if target["generic"]:
             with open(voice_result["kelimeler_path"], "r", encoding="utf-8") as f:
                 words = json.load(f)
-            props = {"slug": project_slug, "title": title, "words": words, "audioDurationSec": duration}
+            props = {"slug": project_slug, "title": title, "words": words, "audioDurationSec": duration, "animationStyle": animation_style or "2d_canvas"}
             props_file = os.path.join(proj_dir, "props.json")
             atomic_write_json(props_file, props)
         _render(target["entry"], target["composition"], final_mp4, props_file)

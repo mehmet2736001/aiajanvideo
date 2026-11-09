@@ -365,6 +365,7 @@ class PrepareMaterialsRequest(BaseModel):
     topic: str = Field(default="", max_length=300)
     style: Optional[str] = "Karma"
     voice_id: Optional[str] = None
+    animation_style: Optional[str] = "2d_canvas"
     ambience_id: Optional[str] = None
 
 
@@ -464,6 +465,7 @@ class ProduceRequest(BaseModel):
     lines: List[str] = Field(min_length=1, max_length=60)
     category: Optional[str] = "İslami Tefekkür"
     voice_id: Optional[str] = None
+    animation_style: Optional[str] = "2d_canvas"
 
 
 @app.post("/api/produce")
@@ -486,6 +488,7 @@ def produce_video(req: ProduceRequest):
             lines=req.lines,
             category=req.category,
             voice_id=chosen_voice,
+            animation_style=req.animation_style or "2d_canvas",
         )
     finally:
         _produce_lock.release()

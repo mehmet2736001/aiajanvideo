@@ -137,7 +137,7 @@
       </div>
 
       <!-- Scrollable Sidebar Content -->
-      <div class="flex-1 overflow-y-auto p-3 space-y-5">
+      <div class="flex-1 overflow-y-auto p-3 space-y-4">
         
         <!-- Action Button: Yeni Proje -->
         <button onclick="newSession()" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center justify-center space-x-2 shadow-lg shadow-indigo-600/25 transition">
@@ -145,31 +145,330 @@
           <span>Yeni Proje & Sohbet</span>
         </button>
 
-        <!-- HAZIR SKILLS SECTION -->
+        <!-- ANİMASYON BECERİLERİ (SKILLS) -->
         <div>
           <div class="flex items-center justify-between px-1 mb-2">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Hazır Beceriler (Skills)</span>
-            <span id="active-skill-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Aktif</span>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Animasyon Motoru (Skills)</span>
+            <span id="active-style-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 font-medium">2D Canvas</span>
           </div>
 
-          <div id="skills-list" class="space-y-1.5">
-            <!-- Rendered dynamically via JS -->
-            <div class="text-center py-4 text-xs text-slate-500">Yetenekler yükleniyor...</div>
+          <div class="grid grid-cols-1 gap-2">
+            <!-- 2D Canvas Animasyon Kartı -->
+            <button id="skill-card-2d" onclick="setAnimationStyle('2d_canvas')" class="w-full text-left p-3 rounded-xl transition border bg-brand-600/15 border-brand-500/40 text-white shadow-lg shadow-brand-500/10 flex flex-col space-y-1.5 group relative">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold flex items-center space-x-2 text-brand-300">
+                  <i data-lucide="palette" class="w-4 h-4 text-brand-400"></i>
+                  <span>2D Canvas Animasyon</span>
+                </span>
+                <span id="badge-2d" class="text-[9px] px-2 py-0.5 rounded-full bg-brand-500/30 text-white font-mono font-bold">✓ Aktif</span>
+              </div>
+              <p class="text-[11px] text-slate-300 leading-snug">Kutsal Geometri · Usturlap Mandalas· Mizan Terazisi · Altın Tozlar</p>
+              <div class="flex items-center gap-1.5 pt-0.5">
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Parçacıklar</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Kinetik Hat</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Mizan</span>
+              </div>
+            </button>
+
+            <!-- 3D Animasyon Kartı -->
+            <button id="skill-card-3d" onclick="setAnimationStyle('3d_motion')" class="w-full text-left p-3 rounded-xl transition border bg-white/[0.02] hover:bg-white/[0.06] border-white/5 text-slate-300 flex flex-col space-y-1.5 group relative">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold flex items-center space-x-2 text-slate-200 group-hover:text-purple-300">
+                  <i data-lucide="box" class="w-4 h-4 text-purple-400"></i>
+                  <span>3D Animasyon</span>
+                </span>
+                <span id="badge-3d" class="text-[9px] px-2 py-0.5 rounded-full bg-white/5 text-slate-500 font-mono">Seç</span>
+              </div>
+              <p class="text-[11px] text-slate-400 leading-snug">Warp Yıldız Seyahati · 3D Holo Atom Fe-26 · Doppler Spektrumu</p>
+              <div class="flex items-center gap-1.5 pt-0.5">
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Stardust</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Holo Model</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Doppler HUD</span>
+              </div>
+            </button>
           </div>
         </div>
 
-        <!-- RECENT VIDEOS SECTION -->
+        <!-- AÇILIR KAPANIR KURGU FİKİRLERİ (ACCORDION) -->
         <div>
           <div class="flex items-center justify-between px-1 mb-2">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Üretilen Videolar</span>
-            <button onclick="loadVideos()" title="Yenile" class="text-slate-500 hover:text-slate-300 transition">
-              <i data-lucide="refresh-cw" class="w-3 h-3"></i>
-            </button>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Kurgu ve Senaryo Fikirleri</span>
+            <span class="text-[10px] text-slate-500 font-mono">5 Kategori</span>
           </div>
 
-          <div id="videos-list" class="space-y-2">
-            <!-- Rendered dynamically -->
-            <div class="text-xs text-slate-500 text-center py-3">Henüz video yok</div>
+          <div class="space-y-2" id="kurgu-accordion">
+
+            <!-- Sekme 1: Kozmoloji & Bilim -->
+            <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
+              <button onclick="toggleAccordion('acc-kozmoloji')" class="w-full p-2.5 flex items-center justify-between hover:bg-white/[0.04] transition text-left">
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm">🪐</span>
+                  <span class="text-xs font-semibold text-slate-200">Kozmoloji & Bilim</span>
+                  <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-purple-500/20 text-purple-300 font-mono">3</span>
+                </div>
+                <i id="icon-acc-kozmoloji" data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200"></i>
+              </button>
+              <div id="acc-kozmoloji" class="hidden p-2 pt-0 space-y-1.5 border-t border-white/5">
+                <!-- Kurgu 1.1 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Zâriyât 47: Kâinatın Genişlemesi</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300">3D Doppler</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">"Göğü kudretimizle biz kurduk ve onu genişletmekteyiz." Genişleyen evren dalgaları ve kozmik yolculuk.</p>
+                  <button onclick="loadConcept('Kâinatın Genişlemesi (Zâriyât 47)', 'Zâriyât 47 ayeti ekseninde sarsıcı 45 saniyelik bir dikey video senaryosu kurgulayalım. Evrenin genişlemesi ve insanın acziyeti vurgulansın.', '3d_motion', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+                <!-- Kurgu 1.2 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Hadîd 25: Demirin İndirilişi</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300">3D Holo Atom</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">Yıldızların kalbinde üretilip dünyaya indirilen demir mucizesi ve Fe-26 kuantum atom modeli.</p>
+                  <button onclick="loadConcept('Demirin Gökten İndirilişi (Hadîd 25)', 'Hadîd 25 ayeti ekseninde demirin yeryüzünde oluşamayacağını, süpernovalardan indiğini anlatan şok kancalı dikey video kurgula.', '3d_motion', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+                <!-- Kurgu 1.3 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Enbiyâ 30: Bitişik Kâinat & Big Bang</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-brand-500/20 text-brand-300">2D Geometri</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">"Göklerle yer bitişik iken onları ayırdık..." Tekillikten varoluşa ilahi kudret.</p>
+                  <button onclick="loadConcept('Bitişik Gökler ve Büyük Yaratılış', 'Enbiyâ 30 ayeti ekseninde kâinatın tek bir noktadan ayrılışını ve ilahi düzeni anlatan tefekkür senaryosu yaz.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sekme 2: Zaman, Ömür & Fanilik -->
+            <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
+              <button onclick="toggleAccordion('acc-zaman')" class="w-full p-2.5 flex items-center justify-between hover:bg-white/[0.04] transition text-left">
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm">⏳</span>
+                  <span class="text-xs font-semibold text-slate-200">Zaman & Fanilik</span>
+                  <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 font-mono">3</span>
+                </div>
+                <i id="icon-acc-zaman" data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200"></i>
+              </button>
+              <div id="acc-zaman" class="hidden p-2 pt-0 space-y-1.5 border-t border-white/5">
+                <!-- Kurgu 2.1 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Zamanın İpi: Avuçtan Kayan Ömür</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">2D Altın Kum</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">"Zamanın ipini tutabiliyor musun? Avuçlarından kayıp giden sadece saniyeler değil, ebediyet sermayen."</p>
+                  <button onclick="loadConcept('Zamanın İpini Tutabiliyor musun?', 'Zamanın su gibi akıp gittiğini, ömür sermayesinin telafisi olmadığını kalbe vuran sarsıcı bir tefekkür metni kurgula.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+                <!-- Kurgu 2.2 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Bir Nefeslik Hayat</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">2D Nabız</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">Aldığın her nefes, seni ebediyete bir adım daha yaklaştırır. Son nefesin garantisi var mı?</p>
+                  <button onclick="loadConcept('Bir Nefeslik Hayat', 'Bir nefeslik ömrün kıymetini ve her nefeste Allahı hatırlamayı işleyen sade ve kalbe dokunan bir metin hazırla.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+                <!-- Kurgu 2.3 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">İkindi Vakti: Asr Suresi</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">2D Mandala</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">"Asra yemin olsun ki insan ziyan içindedir..." Gün batarken sermayesini tüketen tacir.</p>
+                  <button onclick="loadConcept('Asr Suresi ve Ömür Sermayesi', 'Asr suresi tefsiri ışığında ömür sermayesinin ziyan oluşunu ve kurtuluş reçetesini anlatan 45 saniyelik video kurgula.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sekme 3: İstikamet, Mizan & Adalet -->
+            <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
+              <button onclick="toggleAccordion('acc-istikamet')" class="w-full p-2.5 flex items-center justify-between hover:bg-white/[0.04] transition text-left">
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm">⚖️</span>
+                  <span class="text-xs font-semibold text-slate-200">İstikamet & Mizan</span>
+                  <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 font-mono">3</span>
+                </div>
+                <i id="icon-acc-istikamet" data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200"></i>
+              </button>
+              <div id="acc-istikamet" class="hidden p-2 pt-0 space-y-1.5 border-t border-white/5">
+                <!-- Kurgu 3.1 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Hûd 112: Dosdoğru Ol!</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">2D Lazer</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">"Festekim kemâ umirt! Gönlünce değil, emrolunduğun gibi dosdoğru ol." Peygamberimizi ihtiyarlatan emir.</p>
+                  <button onclick="loadConcept('Hûd 112: Emrolunduğun Gibi Dosdoğru Ol', 'Hûd 112 ayetinin ağırlığını, istikamet çizgisini ve sapkın yollardan korunmayı anlatan vurucu bir senaryo kurgula.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+                <!-- Kurgu 3.2 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Zilzâl: Zerrelerin Mizan Terazisi</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">2D Mizan</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">"Kim zerre ağırlığınca hayır işlerse görür..." İlahi adalet terazisinin kusursuz dengesi.</p>
+                  <button onclick="loadConcept('Zilzâl Suresi ve Zerrelerin Terazisi', 'Zilzâl suresi ekseninde zerre ağırlığınca amellerin kaybolmayacağını anlatan etkileyici Mizan senaryosu yaz.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+                <!-- Kurgu 3.3 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Bir Ömrü Hizalamak</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">2D Geometri</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">Kalbin pusulası nereyi gösteriyor? Geçici hevesler mi, ebedi rıza mı?</p>
+                  <button onclick="loadConcept('Bir Ömrü Hakikate Hizalamak', 'Kişinin kendi iç pusulasını sorgulatan ve niyetlerini gözden geçirmesini sağlayan bir istikamet tefekkürü yaz.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sekme 4: Ölüm, Kabir & Ebediyet -->
+            <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
+              <button onclick="toggleAccordion('acc-olum')" class="w-full p-2.5 flex items-center justify-between hover:bg-white/[0.04] transition text-left">
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm">⚰️</span>
+                  <span class="text-xs font-semibold text-slate-200">Ölüm & Ebediyet</span>
+                  <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-rose-500/20 text-rose-300 font-mono">3</span>
+                </div>
+                <i id="icon-acc-olum" data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200"></i>
+              </button>
+              <div id="acc-olum" class="hidden p-2 pt-0 space-y-1.5 border-t border-white/5">
+                <!-- Kurgu 4.1 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Ölüm Gerçekten Son Mu?</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300">2D Nur Geçişi</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">Tohumun toprağa girmesi son mudur, yoksa sümbülün başlangıcı mı? Ölüm bir terhistir.</p>
+                  <button onclick="loadConcept('Ölüm Gerçekten Son Mu?', 'Ölümün yok oluş değil, ebedi bahara açılan bir kapı olduğunu anlatan derin tefekkür senaryosu hazırla.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+                <!-- Kurgu 4.2 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Son Günün Olsaydı</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300">2D Nabız</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">"Yarın tövbe ederim diyenler helak oldu." Bugün son günün olsaydı neyi ertelerdin?</p>
+                  <button onclick="loadConcept('Son Günün Olsaydı Ne Yapardın?', 'Kullanıcıyı son günüyle yüzleştiren, ertelemeyi bıraktıran şok kancalı dikey video senaryosu yaz.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+                <!-- Kurgu 4.3 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Kabir Kapısı ve İlk Aydınlık</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300">3D Menfez</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">Dünya karanlığından berzah alemine açılan kapı ve amellerin yoldaşlığı.</p>
+                  <button onclick="loadConcept('Kabir Kapısı ve İlk Aydınlık', 'Kabir kapısının mümin için cennet bahçesine açılan ilk pencere olduğunu anlatan dingin tefekkür kurgula.', '3d_motion', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sekme 5: Nefis, Kalp & Hikmet -->
+            <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
+              <button onclick="toggleAccordion('acc-kalp')" class="w-full p-2.5 flex items-center justify-between hover:bg-white/[0.04] transition text-left">
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm">🌿</span>
+                  <span class="text-xs font-semibold text-slate-200">Kalp & Hikmet</span>
+                  <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-300 font-mono">3</span>
+                </div>
+                <i id="icon-acc-kalp" data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200"></i>
+              </button>
+              <div id="acc-kalp" class="hidden p-2 pt-0 space-y-1.5 border-t border-white/5">
+                <!-- Kurgu 5.1 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Kalbin Mutmain Oluşu</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300">2D Usturlap</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">"Kalpler ancak Allah'ı anmakla mutmain olur." Dünyanın gürültüsünde kaybolan kalbe şifa.</p>
+                  <button onclick="loadConcept('Kalbin Mutmain Oluşu', 'Kalbin huzurunu arayan modern insana zikrin ve tefekkürün dinginliğini anlatan fısıltılı bir senaryo yaz.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+                <!-- Kurgu 5.2 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Nimet ve Gaflet Perdesi</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300">2D Nur Tozu</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">Her gün akıp giden binlerce görünmeyen lütuf... Gözün görmediğini kalp hisseder mi?</p>
+                  <button onclick="loadConcept('Nimet ve Gaflet Perdesi', 'İnsanın kanıksadığı nimetleri fark ettiren ve kalbini şükre açan derin bir tefekkür senaryosu kurgula.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+                <!-- Kurgu 5.3 -->
+                <div class="p-2.5 rounded-lg bg-dark-950/80 border border-white/5 hover:border-brand-500/30 transition flex flex-col space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-200">Fısıltılı Hakikat</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300">2D Geometri</span>
+                  </div>
+                  <p class="text-[11px] text-slate-400 leading-tight">Gecenin sessizliğinde nefisle baş başa kalış ve iç muhasebe.</p>
+                  <button onclick="loadConcept('Fısıltılı Hakikat ve Gece Muhasebesi', 'Gecenin sessizliğinde insanı kendi kalbiyle baş başa bırakan içsel bir tefekkür senaryosu kurgula.', '2d_canvas', '0001')" class="mt-1 text-[10px] font-semibold text-brand-300 hover:text-white flex items-center space-x-1 py-1 px-2 rounded bg-brand-500/10 hover:bg-brand-500/20 transition self-start">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    <span>Bu Kurguyu Yükle</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RECENT VIDEOS SECTION (Açılır Kapanır) -->
+        <div class="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
+          <button onclick="toggleAccordion('acc-recent-videos')" class="w-full p-2.5 flex items-center justify-between hover:bg-white/[0.04] transition text-left">
+            <div class="flex items-center space-x-2">
+              <i data-lucide="video" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span class="text-xs font-semibold text-slate-200">Üretilen Videolar</span>
+            </div>
+            <div class="flex items-center space-x-1.5">
+              <span onclick="event.stopPropagation(); loadVideos();" title="Yenile" class="p-1 hover:text-white text-slate-500 transition">
+                <i data-lucide="refresh-cw" class="w-3 h-3"></i>
+              </span>
+              <i id="icon-acc-recent-videos" data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200"></i>
+            </div>
+          </button>
+          <div id="acc-recent-videos" class="hidden p-2 pt-0 space-y-2 border-t border-white/5">
+            <div id="videos-list" class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+              <div class="text-xs text-slate-500 text-center py-2">Henüz video yok</div>
+            </div>
           </div>
         </div>
 
@@ -731,21 +1030,25 @@
       model: 'gemini-3.8-flash'
     };
 
-    function updateFooterVoiceBadge() {
+    function updateFooterVoiceBadge(voiceId, voiceTitle) {
       const badge = document.getElementById('footer-voice-badge');
       if (!badge) return;
-      const curVoice = appSettings.voice || 'dervis';
-      const v = allVoices.find(x => x.id === curVoice || x.ses_id === curVoice);
+      const curVoice = voiceId || (window.appSettings && appSettings.voice) || 'dervis';
+      const v = (typeof allVoices !== 'undefined' && Array.isArray(allVoices))
+        ? allVoices.find(x => x.id === curVoice || x.ses_id === curVoice)
+        : null;
       if (v) {
-        const idStr = v.ses_id ? `#${v.ses_id} ` : '';
-        badge.innerText = `${idStr}${v.display_name}`;
-        badge.title = `${v.unvan || v.turkish_title || v.display_name} (${v.api_voice_name || ''} · ${v.pitch_hz ? Math.round(v.pitch_hz) + ' Hz' : ''})`;
+        const idStr = v.ses_id ? ('#' + v.ses_id + ' ') : '';
+        badge.innerText = idStr + (v.display_name || '');
+        const hzStr = v.pitch_hz ? (' · ' + Math.round(v.pitch_hz) + ' Hz') : '';
+        const titleStr = v.unvan || v.turkish_title || v.display_name || '';
+        badge.title = titleStr + ' (' + (v.api_voice_name || '') + hzStr + ')';
       } else {
-        badge.innerText = appSettings.voice_title || 'Derviş (114 Hz)';
+        badge.innerText = voiceTitle || (window.appSettings && appSettings.voice_title) || 'Derviş (114 Hz)';
         badge.title = 'Aktif Ses';
       }
     }
-
+    window.updateFooterVoiceBadge = updateFooterVoiceBadge;
     async function loadAppSettings() {
       try {
         const res = await fetch('/api/settings');
@@ -771,7 +1074,7 @@
         });
         const data = await res.json();
         if (data.status === 'success') {
-          updateFooterVoiceBadge();
+          if (typeof updateFooterVoiceBadge === 'function') updateFooterVoiceBadge();
           return true;
         }
       } catch (e) {
@@ -781,6 +1084,102 @@
     }
 
     // Initialize App
+    
+    // --- ANIMATION STYLE & ACCORDION SYSTEM ---
+    let currentAnimationStyle = '2d_canvas';
+
+    function setAnimationStyle(style) {
+      currentAnimationStyle = style;
+      updateAnimationStyleUI();
+      showToast(`🎬 Animasyon Motoru: ${style === '3d_motion' ? '3D Animasyon (Holo/Doppler)' : '2D Canvas (Kutsal Geometri/Mizan)'} seçildi!`);
+    }
+
+    function updateAnimationStyleUI() {
+      const card2d = document.getElementById('skill-card-2d');
+      const card3d = document.getElementById('skill-card-3d');
+      const badge2d = document.getElementById('badge-2d');
+      const badge3d = document.getElementById('badge-3d');
+      const activeBadge = document.getElementById('active-style-badge');
+
+      if (currentAnimationStyle === '2d_canvas') {
+        if (card2d) {
+          card2d.className = 'w-full text-left p-3 rounded-xl transition border bg-brand-600/15 border-brand-500/40 text-white shadow-lg shadow-brand-500/10 flex flex-col space-y-1.5 group relative';
+        }
+        if (card3d) {
+          card3d.className = 'w-full text-left p-3 rounded-xl transition border bg-white/[0.02] hover:bg-white/[0.06] border-white/5 text-slate-300 flex flex-col space-y-1.5 group relative';
+        }
+        if (badge2d) {
+          badge2d.className = 'text-[9px] px-2 py-0.5 rounded-full bg-brand-500/30 text-white font-mono font-bold';
+          badge2d.innerText = '✓ Aktif';
+        }
+        if (badge3d) {
+          badge3d.className = 'text-[9px] px-2 py-0.5 rounded-full bg-white/5 text-slate-500 font-mono';
+          badge3d.innerText = 'Seç';
+        }
+        if (activeBadge) {
+          activeBadge.innerText = '2D Canvas';
+          activeBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 font-medium';
+        }
+      } else {
+        if (card2d) {
+          card2d.className = 'w-full text-left p-3 rounded-xl transition border bg-white/[0.02] hover:bg-white/[0.06] border-white/5 text-slate-300 flex flex-col space-y-1.5 group relative';
+        }
+        if (card3d) {
+          card3d.className = 'w-full text-left p-3 rounded-xl transition border bg-purple-600/15 border-purple-500/40 text-white shadow-lg shadow-purple-500/10 flex flex-col space-y-1.5 group relative';
+        }
+        if (badge2d) {
+          badge2d.className = 'text-[9px] px-2 py-0.5 rounded-full bg-white/5 text-slate-500 font-mono';
+          badge2d.innerText = 'Seç';
+        }
+        if (badge3d) {
+          badge3d.className = 'text-[9px] px-2 py-0.5 rounded-full bg-purple-500/30 text-white font-mono font-bold';
+          badge3d.innerText = '✓ Aktif';
+        }
+        if (activeBadge) {
+          activeBadge.innerText = '3D Motion';
+          activeBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/30 font-medium';
+        }
+      }
+    }
+
+    function toggleAccordion(id) {
+      const panel = document.getElementById(id);
+      const icon = document.getElementById('icon-' + id);
+      if (!panel) return;
+      const isHidden = panel.classList.contains('hidden');
+      if (isHidden) {
+        panel.classList.remove('hidden');
+        if (icon) icon.classList.add('rotate-180');
+      } else {
+        panel.classList.add('hidden');
+        if (icon) icon.classList.remove('rotate-180');
+      }
+    }
+
+    function loadConcept(title, promptText, style, voiceId) {
+      if (style) {
+        setAnimationStyle(style);
+      }
+      if (voiceId) {
+        selectedVoiceId = voiceId;
+        appSettings.voice = voiceId;
+        if (typeof updateFooterVoiceBadge === 'function') {
+          updateFooterVoiceBadge(voiceId, 'Derviş (Charon 114 Hz)');
+        }
+        if (typeof updateActiveVoiceDisplay === 'function') {
+          updateActiveVoiceDisplay();
+        }
+        saveAppSettings();
+      }
+      const chatInput = document.getElementById('chat-input');
+      if (chatInput) {
+        chatInput.value = promptText;
+        autoResize(chatInput);
+        chatInput.focus();
+      }
+      showToast(`✦ "${title}" kurgusu yüklendi! (${style === '3d_motion' ? '3D Animasyon' : '2D Canvas'})`);
+    }
+
     window.addEventListener('DOMContentLoaded', async () => {
       lucide.createIcons();
       await fetchAudioLibrary();
@@ -1316,7 +1715,7 @@
         }
 
         const ok = await saveAppSettings();
-        updateFooterVoiceBadge();
+        if (typeof updateFooterVoiceBadge === 'function') updateFooterVoiceBadge();
         closeSettingsModal();
         showToast(`🎙️ Ses "${appSettings.voice_title}" başarıyla kaydedildi!`);
       } catch (e) {
@@ -1806,7 +2205,8 @@
             project_slug: slug,
             title: title,
             lines: lines,
-            voice_id: voice_id
+            voice_id: voice_id,
+            animation_style: currentAnimationStyle || '2d_canvas'
           })
         });
         const result = await res.json();
