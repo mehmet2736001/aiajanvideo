@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 import sys
 import threading
@@ -48,7 +49,7 @@ if os.path.isdir(PUBLIC_DIR):
 orchestrator = StudioOrchestrator()
 turso_client = TursoVoiceClient()
 director_brain = DirectorBrain()
-CURRENT_VOICE = "dervis"
+CURRENT_VOICE = "0001"
 _produce_lock = threading.Lock()
 
 # Sunucu tarafı hata günlüğü (arayüzdeki "Sistem Denetimi" paneli için)
@@ -114,6 +115,142 @@ def health():
         "gemini_keys": len(director_brain.keys),
     }
 
+
+
+AVAILABLE_SKILLS = [
+    {
+        "id": "tefekkur",
+        "name": "İslami Tefekkür & İlim",
+        "icon": "book-open",
+        "badge": "Ayet & Hadis",
+        "description": "Kur'an-ı Kerim ayetleri, sahih sünnet ve kalbe dokunan derin hikmet dili.",
+        "starter_prompt": "Bana Kur'an-ı Kerim'den bir ayet ekseninde kalbe dokunacak 45 saniyelik dikey bir tefekkür videosu tasarla."
+    },
+    {
+        "id": "kanca",
+        "name": "Viral Kanca & Ritim",
+        "icon": "zap",
+        "badge": "0-3 Sn Kilit",
+        "description": "İlk 3 saniyede izleyiciyi ekrana kilitleyen, merak ve şok etkisi uyandıran 9:16 akışı.",
+        "starter_prompt": "İzleyicinin dikkatini ilk 3 saniyede yakalayacak 3 sarsıcı kanca (hook) cümlesi ve senaryo girişi yaz."
+    },
+    {
+        "id": "dervis_ses",
+        "name": "Derviş Ses & Akustik",
+        "icon": "mic",
+        "badge": "114 Hz Huşu",
+        "description": "114 Hz derinlik, ağırbaşlı tefekkür tınısı ve helal akustik mastering.",
+        "starter_prompt": "Bu video için tefekkür ve huşu veren derviş ses tonunda okuma ritmini ve seslendirme karakterini belirle."
+    },
+    {
+        "id": "remotion_tasarim",
+        "name": "Remotion Sahne Kurgusu",
+        "icon": "clapperboard",
+        "badge": "1080x1920 30FPS",
+        "description": "Saf SVG, altın oran tipografi ve matematiksel spring geçişleri.",
+        "starter_prompt": "Metni 1080x1920 dikey Remotion sahnelerine ayır, her sahnenin tipografisini ve görsel dengesini planla."
+    },
+    {
+        "id": "denetim",
+        "name": "48 Kare Görsel Denetim",
+        "icon": "shield-check",
+        "badge": "Estetik Kalite",
+        "description": "Sahne kareleri estetik, boşluk, kontrast ve ritim kalite denetimi.",
+        "starter_prompt": "Mevcut sahne akışının kontrast, yazı büyüklükleri ve görsel hiyerarşi kurallarını denetle."
+    },
+    {
+        "id": "hizli_uretim",
+        "name": "Tek Tıkla Senaryodan Videoya",
+        "icon": "play-circle",
+        "badge": "Otomatik Render",
+        "description": "Aklındaki fikri doğrudan 1080x1920 MP4 videoya dönüştüren tam otomatik üretim.",
+        "starter_prompt": "Konuyu kararlaştırdık; hemen senaryoyu tamamla ve tek tıkla render edilecek nexus-video paketini sun."
+    }
+]
+
+
+class SaveSkillRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=100)
+    description: str = Field(min_length=1, max_length=300)
+    prompt: str = Field(min_length=1, max_length=4000)
+    icon: Optional[str] = "sparkles"
+    badge: Optional[str] = "Özel Skill"
+
+
+class SettingsRequest(BaseModel):
+    voice: Optional[str] = "dervis"
+    voice_name: Optional[str] = "derviş"
+    voice_title: Optional[str] = "Derviş (Charon 114 Hz)"
+    speed: Optional[str] = "-4%"
+    pitch: Optional[str] = "-1Hz"
+    model: Optional[str] = "gemini-3.8-flash"
+
+
+@app.get("/api/skills")
+def get_skills():
+    from core.director_brain import load_custom_skills
+    custom = load_custom_skills()
+    return {"status": "success", "skills": AVAILABLE_SKILLS + custom}
+
+
+@app.post("/api/skills/save")
+def save_skill_api(req: SaveSkillRequest):
+    from core.director_brain import save_custom_skill
+    saved = save_custom_skill(req.dict())
+    return {"status": "success", "skill": saved}
+
+
+@app.delete("/api/skills/{skill_id}")
+def delete_skill_api(skill_id: str):
+    from core.director_brain import load_custom_skills, CUSTOM_SKILLS_FILE
+    from core.utils import atomic_write_json
+    skills = [s for s in load_custom_skills() if s.get("id") != skill_id]
+    atomic_write_json(CUSTOM_SKILLS_FILE, skills)
+    return {"status": "success", "message": "Beceri silindi."}
+
+
+@app.get("/api/settings")
+def get_settings_api():
+    from core.director_brain import load_settings
+    return {"status": "success", "settings": load_settings()}
+
+
+@app.post("/api/settings")
+def save_settings_api(req: SettingsRequest):
+    from core.director_brain import save_settings, load_settings
+    curr = load_settings()
+    data = req.dict(exclude_unset=True)
+    curr.update(data)
+    save_settings(curr)
+    global CURRENT_VOICE
+    if "voice" in curr:
+        CURRENT_VOICE = curr["voice"]
+    return {"status": "success", "settings": curr}
+
+
+@app.get("/api/videos")
+def list_videos():
+    videos = []
+    if os.path.isdir(PROD_DIR):
+        for name in sorted(os.listdir(PROD_DIR), reverse=True):
+            folder = os.path.join(PROD_DIR, name)
+            if os.path.isdir(folder):
+                mp4 = os.path.join(folder, f"{name}.mp4")
+                if os.path.exists(mp4):
+                    stat = os.stat(mp4)
+                    props_f = os.path.join(folder, "props.json")
+                    props = read_json(props_f, {}) if os.path.exists(props_f) else {}
+                    title = props.get("title") or name.replace("-", " ").title()
+                    pano_path = os.path.join(folder, "pano.jpg")
+                    videos.append({
+                        "slug": name,
+                        "title": title,
+                        "video_url": f"/out/{name}/{name}.mp4",
+                        "pano_url": f"/out/{name}/pano.jpg" if os.path.exists(pano_path) else None,
+                        "size_mb": round(stat.st_size / (1024 * 1024), 2),
+                        "created_at": datetime.fromtimestamp(stat.st_mtime).strftime("%d.%m.%Y %H:%M")
+                    })
+    return {"status": "success", "total": len(videos), "videos": videos}
 
 @app.get("/api/state")
 def get_state():
@@ -259,13 +396,14 @@ class ChatMessage(BaseModel):
     channel_id: Optional[str] = None
     history: Optional[List[Dict[str, Any]]] = None
     model: Optional[str] = None
+    skill: Optional[str] = None
 
 
 @app.post("/api/chat/message")
 def handle_chat(msg: ChatMessage):
     if msg.model:
         director_brain.prefer_model(msg.model)
-    result = director_brain.chat(msg.message)
+    result = director_brain.chat(msg.message, skill=msg.skill)
     if "error" in result:
         return _err(400, result["error"])
     if result.get("degraded"):
@@ -339,12 +477,15 @@ def produce_video(req: ProduceRequest):
     if not _produce_lock.acquire(blocking=False):
         return _err(409, "Başka bir video üretimi sürüyor. Bitmesini bekleyin.")
     try:
+        from core.director_brain import load_settings
+        st = load_settings()
+        chosen_voice = req.voice_id or st.get("voice") or CURRENT_VOICE
         result = orchestrator.produce_video_from_lines(
             project_slug=req.project_slug,
             title=req.title,
             lines=req.lines,
             category=req.category,
-            voice_id=req.voice_id or CURRENT_VOICE,
+            voice_id=chosen_voice,
         )
     finally:
         _produce_lock.release()

@@ -13,12 +13,15 @@ BRAIN_DIR = os.path.join(BASE_DIR, "brain")
 ARCHIVES_DIR = os.path.join(BRAIN_DIR, "chat_archives")
 HISTORY_FILE = os.path.join(BRAIN_DIR, "director_chat_history.json")
 KEYS_FILE = os.path.join(BASE_DIR, "api_keys.json")
+MEMORY_FILE = os.path.join(BRAIN_DIR, "director_memory.json")
+CUSTOM_SKILLS_FILE = os.path.join(BRAIN_DIR, "custom_skills.json")
+SETTINGS_FILE = os.path.join(BRAIN_DIR, "user_settings.json")
 
 os.makedirs(BRAIN_DIR, exist_ok=True)
 os.makedirs(ARCHIVES_DIR, exist_ok=True)
 
 MAX_HISTORY_MESSAGES = 300
-CONTEXT_MESSAGES = 20
+CONTEXT_MESSAGES = 50
 REQUEST_TIMEOUT = 20
 DEFAULT_MODELS = [
     "gemini-3.8-flash",
@@ -50,8 +53,36 @@ KRİTİK DAVRANIŞ VE DİYALOG KURALLARI:
 3. CANLI VE DİNAMİK BİR BAŞYÖNETMEN ÜSLUBU:
    - "Sayın Yönetmenim" veya "Kıymetli Dostum" diye hitap et.
    - Boş, cansız, mekanik konuşma; stüdyonun ritmini hissettir.
-4. SENARYO İSTENDİĞİNDE:
-   - 8-10 satırlık numaralandırılmış sahne metni dök (1. ... 2. ...), böylece Pre-Render motoru tek tıkla alabilsin.
+4. SENARYO VE VİDEO KURGUSU:
+   - Yönetmenle birlikte tefekkür, kanca, ses ve sahneleri istişare et.
+   - Bir senaryo netleştiğinde veya kullanıcı video üretilmesini istediğinde, sahneleri numaralandırarak açıkla ve mesajının sonuna MUTLAKA şu formatta bir JSON bloğu ekle:
+```nexus-video
+{
+  "title": "Videonun Türkçe Başlığı",
+  "slug": "video-slug-metni",
+  "voice": "0001",
+  "lines": [
+    "1. sahne seslendirme cümlesi",
+    "2. sahne seslendirme cümlesi",
+    "3. sahne seslendirme cümlesi"
+  ]
+}
+```
+   - Bu blok sayesinde stüdyo ekranında Yönetmen için tek tıkla çalışan şık bir "Render Et" kartı belirecektir.
+   - lines dizisindeki her satır temiz, doğrudan okunacak seslendirme metni olmalıdır (içinde '1. Sahne:', markdown asteriksler veya parantez notları olmamalıdır).
+5. YETENEK (SKILL) KAYDETME KURALI:
+   - Yönetmen 'mükemmel bunu skill olarak kaydet', 'bu tarzı kaydet', 'bunu yetenek yap' veya benzeri bir takdir/talimat verdiğinde:
+   - Bu üslubu veya konuşulan formülü hafızana aldığını belirt ve yanıtının sonuna MUTLAKA şu formatta bir JSON bloğu ekle:
+```nexus-save-skill
+{
+  "name": "Becerinin Başlığı",
+  "icon": "sparkles",
+  "badge": "Özel Skill",
+  "description": "Kısa açıklama (1 cümle)",
+  "prompt": "Bu beceriyi seçtiğimizde ajana verilecek başlangıç talimatı veya formül"
+}
+```
+   - Sistem bu bloğu otomatik algılar ve sol menüdeki 'Hazır Beceriler' listesine kalıcı olarak yerleştirir.
 """
 
 INITIAL_GREETING = (
@@ -59,6 +90,71 @@ INITIAL_GREETING = (
     "Artık aradaki tüm bürokrasiyi kaldırdık; Tefekkür, Senaryo, Remotion Kod, Turso Ses ve 48 Kare Denetim elbiselerimin tamamını kuşandım. Masamda sadece siz ve ben varız.\n\n"
     "Bugün hangi ilahi hakikati, hangi ayeti veya kalbe dokunacak hangi hikmeti 1080x1920 dikey sinema formatında dünyaya duyuralım? Aklınızdaki bir kıvılcımı paylaşın, birlikte bir şahesere dönüştürelim."
 )
+
+
+def load_memory() -> Dict[str, Any]:
+    default_mem = {
+        "preferences": {
+            "voice": "0001",
+            "voice_name": "derviş",
+            "speed": "-4%",
+            "model": "gemini-3.8-flash"
+        },
+        "learned_notes": [
+            "Yönetmen dikey formatta (9:16, 1080x1920) 45-60 saniyelik vurucu tefekkür videoları üretir.",
+            "0-3 saniye kancası (hook) hayati önem taşır; metin sade ve kalbe dokunmalıdır.",
+            "Görseller saf SVG ve altın oran tipografiyle Remotion'da çizilir, yapay zeka video halüsinasyonu kullanılmaz."
+        ]
+    }
+    data = read_json(MEMORY_FILE, default_mem)
+    return data if isinstance(data, dict) else default_mem
+
+
+def save_memory(mem: Dict[str, Any]):
+    atomic_write_json(MEMORY_FILE, mem)
+
+
+def load_settings() -> Dict[str, Any]:
+    default_set = {
+        "voice": "0001",
+        "voice_name": "derviş",
+        "speed": "-4%",
+        "pitch": "-1Hz",
+        "model": "gemini-3.8-flash"
+    }
+    data = read_json(SETTINGS_FILE, default_set)
+    return data if isinstance(data, dict) else default_set
+
+
+def save_settings(s: Dict[str, Any]):
+    atomic_write_json(SETTINGS_FILE, s)
+
+
+def load_custom_skills() -> List[Dict[str, Any]]:
+    data = read_json(CUSTOM_SKILLS_FILE, [])
+    return data if isinstance(data, list) else []
+
+
+def save_custom_skill(skill_dict: Dict[str, Any]) -> Dict[str, Any]:
+    skills = load_custom_skills()
+    skill_id = skill_dict.get("id") or ("custom_" + datetime.now().strftime("%Y%m%d_%H%M%S"))
+    skill_dict["id"] = skill_id
+    if not skill_dict.get("badge"):
+        skill_dict["badge"] = "Özel Skill"
+    if not skill_dict.get("icon"):
+        skill_dict["icon"] = "sparkles"
+
+    skills = [s for s in skills if s.get("id") != skill_id]
+    skills.insert(0, skill_dict)
+    atomic_write_json(CUSTOM_SKILLS_FILE, skills)
+
+    mem = load_memory()
+    note = f"Kayıtlı Beceri: {skill_dict.get('name')} - {skill_dict.get('description', '')}"
+    if note not in mem.get("learned_notes", []):
+        mem.setdefault("learned_notes", []).append(note)
+        save_memory(mem)
+    return skill_dict
+
 
 class DirectorBrain:
     def __init__(self):
@@ -79,7 +175,7 @@ class DirectorBrain:
             data = read_json(KEYS_FILE, {})
             if isinstance(data, dict):
                 keys = [k for k in data.get("keys", []) if isinstance(k, str) and k.strip()]
-        return keys
+        return [k for k in keys if not k.startswith("GEMINI_API_ANAHTARINIZ") and k != "YOUR_GEMINI_API_KEY"]
 
     def _load_models(self) -> List[str]:
         """GEMINI_MODELS ortam değişkeni veya api_keys.json {"models": [...]}; yoksa varsayılan zincir."""
@@ -216,8 +312,9 @@ class DirectorBrain:
         * 503/5xx/ağ hatası → sıradaki model
         * 404 → model oturum boyunca devre dışı
         """
+        self.keys = self._load_keys()
         if not self.keys:
-            return "", "", "API anahtarı yok (GEMINI_API_KEYS veya api_keys.json tanımlayın)"
+            return "", "", "Geçerli bir Gemini API anahtarı bulunamadı (api_keys.json dosyasına anahtarınızı ekleyin)"
         body = {
             "system_instruction": {"parts": [{"text": system_prompt}]},
             "contents": contents,
@@ -256,17 +353,36 @@ class DirectorBrain:
                     self._dead_models.add(model)
                     last_error = f"model bulunamadı: {model}"
                     break
-                last_error = f"HTTP {res.status_code} ({model})"
+                try:
+                    err_json = res.json().get("error", {})
+                    err_msg = err_json.get("message")
+                except Exception:
+                    err_msg = None
+                if err_msg:
+                    last_error = f"HTTP {res.status_code} ({model}): {err_msg}"
+                else:
+                    last_error = f"HTTP {res.status_code} ({model})"
                 break
         return "", "", last_error
 
-    def chat(self, user_message: str) -> Dict[str, Any]:
+    def chat(self, user_message: str, skill: Optional[str] = None) -> Dict[str, Any]:
         user_text = user_message.strip()
         if not user_text:
             return {"error": "Boş mesaj gönderilemez"}
 
         with self._lock:
-            self.active_wardrobe = self._detect_wardrobe(user_text)
+            if skill:
+                skill_map = {
+                    "tefekkur": "İslami Tefekkür & İlim",
+                    "kanca": "Viral Kanca & Senaryo",
+                    "dervis_ses": "Turso Ses & Helal Akustik",
+                    "remotion_tasarim": "Remotion Kod & Hareket",
+                    "denetim": "48 Kare Görsel Denetçi",
+                    "hizli_uretim": "Hızlı Senaryodan Videoya"
+                }
+                self.active_wardrobe = skill_map.get(skill, self._detect_wardrobe(user_text))
+            else:
+                self.active_wardrobe = self._detect_wardrobe(user_text)
             history = self._read_history()
             history.append({
                 "role": "user",
@@ -286,8 +402,22 @@ class DirectorBrain:
                 contents.append({"role": "user" if turn.get("role") == "user" else "model",
                                  "parts": [{"text": txt}]})
 
+        mem = load_memory()
+        settings = load_settings()
+        notes_str = "\n".join(f"- {n}" for n in mem.get("learned_notes", []))
+        custom_skills = load_custom_skills()
+        custom_skills_str = "\n".join(f"- {s.get('name')}: {s.get('description')}" for s in custom_skills) if custom_skills else "Henüz özel beceri yok."
+
         system_prompt = (
             f"{DIRECTOR_SYSTEM_INSTRUCTION}\n\n"
+            f"--- [YÖNETMENİN TERCİH VE AYARLARI] ---\n"
+            f"Varsayılan Ses: {settings.get('voice_title', 'Derviş (Charon 114 Hz)')} (ID: {settings.get('voice', '0001')})\n"
+            f"Okuma Hızı / Tempo: {settings.get('speed', '-4%')}\n"
+            f"Model: {settings.get('model', 'gemini-3.8-flash')}\n\n"
+            f"--- [BAŞYÖNETMENİN KALICI HAFIZASI (ÖĞRENİLEN BİLGİLER)] ---\n"
+            f"{notes_str}\n\n"
+            f"--- [YÖNETMENİN ÖZEL BECERİLERİ (SKILLS)] ---\n"
+            f"{custom_skills_str}\n\n"
             f"--- [ANLIK STÜDYO VE PRODÜKSİYON TELEMETRİSİ] ---\n"
             f"{tracker.get_director_summary()}\n"
             f"Yönetmen durum veya ilerleme sorduğunda yukarıdaki canlı bilgiye dayanarak net, kısa ve tatmin edici bilgi ver."
@@ -296,6 +426,14 @@ class DirectorBrain:
         reply_text, model_ok, last_error = self._call_gemini(system_prompt, contents)
         if reply_text:
             self.last_model_used = model_ok
+            # nexus-save-skill bloğu varsa otomatik kaydet
+            m_skill = re.search(r'```nexus-save-skill\s*([\s\S]*?)\s*```', reply_text)
+            if m_skill:
+                try:
+                    s_data = json.loads(m_skill.group(1))
+                    save_custom_skill(s_data)
+                except Exception as ex:
+                    print(f"[DirectorBrain] Auto save skill error: {ex}")
         else:
             reply_text = (
                 f"Sayın Yönetmenim, şu an canlı bağlantı kurulamadı ({last_error or 'bilinmeyen sebep'}). "
@@ -340,6 +478,7 @@ class DirectorBrain:
         return None
 
     def get_status(self) -> Dict[str, Any]:
+        self.keys = self._load_keys()
         return {
             "director_name": "Selim Bey",
             "title": "Tek Başyönetmen",

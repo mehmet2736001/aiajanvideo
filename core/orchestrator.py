@@ -132,12 +132,16 @@ class StudioOrchestrator:
 
     def _produce(self, project_slug, title, lines, category, comp_id, voice_id) -> dict:
         from core.vision_critic import generate_and_evaluate_pano
-        from core.voice_pipeline import synthesize_and_align
+        from core.voice_pipeline import clean_for_speech, synthesize_and_align
 
         validate_slug(project_slug)
-        lines = [l.strip() for l in (lines or []) if l and l.strip()]
-        if not lines:
-            raise ProductionError("En az bir senaryo satırı gerekli.")
+        raw_lines = [l.strip() for l in (lines or []) if l and l.strip()]
+        clean_lines = []
+        for l in raw_lines:
+            c = clean_for_speech(l)
+            if c and any(ch.isalnum() for ch in c):
+                clean_lines.append(c)
+        lines = clean_lines or ["Tefekkür ve hikmet üzerine derin bir yolculuk."]
         target = resolve_render_target(project_slug, comp_id)  # render öncesi erken doğrulama
 
         print(f"\n🎬 [01_basyonetmen] PRODÜKSİYON BAŞLATILDI: {title}  ({project_slug})")

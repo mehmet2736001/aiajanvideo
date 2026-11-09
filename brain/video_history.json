@@ -35,5 +35,140 @@
     "created_at": "2026-11-06T00:30:14.896563",
     "output_path": "out/hud-canli-test/hud-canli-test.mp4",
     "pano_path": "out/hud-canli-test/pano.jpg"
+  },
+  {
+    "id": "vid_1794164787_zariyat-47-evrenin-genislemesi",
+    "title": "Zâriyât 47 - Evrenin Genişlemesi ve Tefekkür",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 23.41,
+    "word_count": 36,
+    "quality_score": 100,
+    "quality_notes": [
+      "Kareler dolu, kontrast ve hareket yeterli."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-08T22:06:27.267966",
+    "output_path": "out/zariyat-47-evrenin-genislemesi/zariyat-47-evrenin-genislemesi.mp4",
+    "pano_path": "out/zariyat-47-evrenin-genislemesi/pano.jpg"
+  },
+  {
+    "id": "vid_1794164912_zariyat-47-evrenin-genislemesi",
+    "title": "Zâriyât 47 - Evrenin Genişlemesi ve Tefekkür",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 23.41,
+    "word_count": 36,
+    "quality_score": 100,
+    "quality_notes": [
+      "Kareler dolu, kontrast ve hareket yeterli."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-08T22:08:32.149388",
+    "output_path": "out/zariyat-47-evrenin-genislemesi/zariyat-47-evrenin-genislemesi.mp4",
+    "pano_path": "out/zariyat-47-evrenin-genislemesi/pano.jpg"
+  },
+  {
+    "id": "vid_1794168527_bir-nefeslik-hayat",
+    "title": "Bir Nefeslik Hayat",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 11.9,
+    "word_count": 16,
+    "quality_score": 88,
+    "quality_notes": [
+      "Ardışık 20 kare neredeyse aynı: hareket yetersiz olabilir."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-08T23:08:47.783321",
+    "output_path": "out/bir-nefeslik-hayat/bir-nefeslik-hayat.mp4",
+    "pano_path": "out/bir-nefeslik-hayat/pano.jpg"
+  },
+  {
+    "id": "vid_1794170318_tefekkur-test-v3",
+    "title": "Zâriyât 47 Tefekkürü",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 8.64,
+    "word_count": 10,
+    "quality_score": 88,
+    "quality_notes": [
+      "Ardışık 27 kare neredeyse aynı: hareket yetersiz olabilir."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-08T23:38:38.621668",
+    "output_path": "out/tefekkur-test-v3/tefekkur-test-v3.mp4",
+    "pano_path": "out/tefekkur-test-v3/pano.jpg"
+  },
+  {
+    "id": "vid_1794174386_olum-bir-son-mu",
+    "title": "Ölüm Bir Son Mu?",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 31.76,
+    "word_count": 51,
+    "quality_score": 100,
+    "quality_notes": [
+      "Kareler dolu, kontrast ve hareket yeterli."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-09T00:46:26.131866",
+    "output_path": "out/olum-bir-son-mu/olum-bir-son-mu.mp4",
+    "pano_path": "out/olum-bir-son-mu/pano.jpg"
+  },
+  {
+    "id": "vid_1794175290_olum-bir-son-mu",
+    "title": "Ölüm Bir Son Mu?",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 31.76,
+    "word_count": 51,
+    "quality_score": 100,
+    "quality_notes": [
+      "Kareler dolu, kontrast ve hareket yeterli."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-09T01:01:30.573171",
+    "output_path": "out/olum-bir-son-mu/olum-bir-son-mu.mp4",
+    "pano_path": "out/olum-bir-son-mu/pano.jpg"
+  },
+  {
+    "id": "vid_1794255174_zamanin-ipini-tutabiliyor-musun",
+    "title": "Zamanın İpini Tutabiliyor Musun?",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 28.0,
+    "word_count": 46,
+    "quality_score": 100,
+    "quality_notes": [
+      "Kareler dolu, kontrast ve hareket yeterli."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-09T23:12:54.920389",
+    "output_path": "out/zamanin-ipini-tutabiliyor-musun/zamanin-ipini-tutabiliyor-musun.mp4",
+    "pano_path": "out/zamanin-ipini-tutabiliyor-musun/pano.jpg"
+  },
+  {
+    "id": "vid_1794256185_demo-hakikat-yolcusu",
+    "title": "Zaman ve Ebediyet Tefekkürü",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 16.81,
+    "word_count": 26,
+    "quality_score": 100,
+    "quality_notes": [
+      "Kareler dolu, kontrast ve hareket yeterli."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-09T23:29:45.155486",
+    "output_path": "out/demo-hakikat-yolcusu/demo-hakikat-yolcusu.mp4",
+    "pano_path": "out/demo-hakikat-yolcusu/pano.jpg"
+  },
+  {
+    "id": "vid_1794257088_son-gunun-olsaydi",
+    "title": "Son Günün Olsaydı",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 32.56,
+    "word_count": 61,
+    "quality_score": 100,
+    "quality_notes": [
+      "Kareler dolu, kontrast ve hareket yeterli."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-09T23:44:48.197410",
+    "output_path": "out/son-gunun-olsaydi/son-gunun-olsaydi.mp4",
+    "pano_path": "out/son-gunun-olsaydi/pano.jpg"
   }
 ]

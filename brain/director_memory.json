@@ -1,0 +1,15 @@
+{
+  "preferences": {
+    "voice": "dervis",
+    "voice_name": "tr-TR-AhmetNeural",
+    "speed": "-4%",
+    "model": "gemini-3.8-flash"
+  },
+  "learned_notes": [
+    "Yönetmen dikey formatta (9:16, 1080x1920) 45-60 saniyelik vurucu tefekkür videoları üretir.",
+    "0-3 saniye kancası (hook) hayati önem taşır; metin sade ve kalbe dokunmalıdır.",
+    "Görseller saf SVG ve altın oran tipografiyle Remotion'da çizilir, yapay zeka video halüsinasyonu kullanılmaz.",
+    "Kayıtlı Beceri: Kozmolojik Tefekkür & Zâriyât 47 - Kâinatın genişlemesi ve 0-3 saniyelik şok kancası formülü",
+    "Kayıtlı Beceri: Sarsıcı Tefekkür & Şok Kanca Kurgusu - 0-3 saniyelik şok kancasıyla başlayan, ilahi hakikatleri vurucu dikey ritim ve kalbe dokunan dille sunan senaryo formülü."
+  ]
+}

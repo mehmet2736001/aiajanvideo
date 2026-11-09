@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Sarsıcı Tefekkür & Şok Kanca Kurgusu",
+    "icon": "sparkles",
+    "badge": "Özel Skill",
+    "description": "0-3 saniyelik şok kancasıyla başlayan, ilahi hakikatleri vurucu dikey ritim ve kalbe dokunan dille sunan senaryo formülü.",
+    "prompt": "Senaryoları 0-3 saniyelik sarsıcı ve merak uyandıran bir kanca (hook) ile başlat. Ehl-i Sünnet / Mâtürîdî hassasiyetiyle kalbe dokunan, nefsi uyandıran sade ve vurucu bir tefekkür dili kullan. Dikey format (9:16) ritmine uygun, 45-60 saniyelik tempolu metin ve sahne yapısı kurgula.",
+    "id": "custom_20261108_221234"
+  },
+  {
+    "name": "Kozmolojik Tefekkür & Zâriyât 47",
+    "description": "Kâinatın genişlemesi ve 0-3 saniyelik şok kancası formülü",
+    "prompt": "Zâriyât 47 ayeti ekseninde sarsıcı 45 saniyelik bir dikey video senaryosu kurgulayalım.",
+    "icon": "sparkles",
+    "badge": "Özel Skill",
+    "id": "custom_20261108_221209"
+  }
+]

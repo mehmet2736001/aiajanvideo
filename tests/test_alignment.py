@@ -39,9 +39,9 @@ def test_empty_script():
 
 
 def test_pick_voice_and_pauses():
-    assert pick_voice({"gender": "female"}).endswith("EmelNeural")
-    assert pick_voice({"gender": "male"}).endswith("AhmetNeural")
-    assert pick_voice(None).endswith("AhmetNeural")
+    assert pick_voice({"gender": "female"}, default="Aoede") == "Aoede"
+    assert pick_voice({"gender": "male"}, default="Charon") == "Charon"
+    assert pick_voice(None, default="Charon") == "Charon"
     p = default_pauses(6)
     assert p[3] == 0.75 and p[-1] == 1.20 and p[0] == 0.45
     assert default_pauses(0) == []

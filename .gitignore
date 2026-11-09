@@ -37,6 +37,13 @@ public/test_*.mp3
 public/temp_*
 public/test_frame_*.png
 public/test_zariyat_*.png
+public/*/temp_voice/
+
+# SQLite & Databases (>100MB cannot be pushed to GitHub)
+*.db
+*.sqlite
+*.sqlite3
+web/index.legacy.html
 
 
 # Python cache & virtual environments
