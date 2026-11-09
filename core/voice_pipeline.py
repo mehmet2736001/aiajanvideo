@@ -71,8 +71,8 @@ def pick_voice(turso_meta: Optional[dict], default: str = VOICE_DEFAULT) -> str:
         return turso_meta["api_voice_name"]
     gender = str(turso_meta.get("cinsiyet") or turso_meta.get("gender") or "").lower()
     if any(k in gender for k in ["female", "kadın", "kız", "anne", "nine"]):
-        return "Aoede" if "Neural" not in default else VOICE_FEMALE
-    return "Charon" if "Neural" not in default else VOICE_MALE
+        return VOICE_FEMALE
+    return VOICE_MALE
 
 
 def default_pauses(count: int) -> List[float]:
@@ -249,6 +249,14 @@ def synthesize_and_align(
     os.makedirs(temp_dir, exist_ok=True)
 
     turso_meta = None
+    if not voice_id:
+        try:
+            from core.director_brain import load_settings
+            st = load_settings()
+            voice_id = st.get("voice") or "0001"
+        except Exception:
+            voice_id = "0001"
+
     if voice_id:
         try:
             from core.turso_client import TursoVoiceClient
@@ -256,19 +264,26 @@ def synthesize_and_align(
         except Exception as e:
             print(f"   ⚠️ Turso ses bilgisi alınamadı: {e}")
 
-    # Ses kimliği tespiti
+    if not turso_meta:
+        try:
+            from core.turso_client import TursoVoiceClient
+            turso_meta = TursoVoiceClient().get_voice("0001")
+        except Exception:
+            pass
+
+    # Ses kimliği tespiti: Sadece Turso veritabanı sesleri devrededir
     if turso_meta:
-        ses_num = str(turso_meta.get("ses_id") or "").zfill(4)
-        disp_name = turso_meta.get("display_name") or voice_id
+        ses_num = str(turso_meta.get("ses_id") or "0001").zfill(4)
+        disp_name = turso_meta.get("display_name") or voice_id or "derviş"
         api_voice = turso_meta.get("api_voice_name") or "Charon"
         cinsiyet = turso_meta.get("cinsiyet") or "Erkek"
         unvan = turso_meta.get("unvan") or turso_meta.get("turkish_title") or disp_name
-        print(f"   🎙️ [VoxAtelier TTS] Gerçek Ses Devrede: #{ses_num} '{disp_name}' ({api_voice} · {cinsiyet})")
+        print(f"   🎙️ [Turso DB] Gerçek Turso Sesi Devrede: #{ses_num} '{disp_name}' ({api_voice} · {cinsiyet})")
     else:
-        api_voice = voice if voice and voice != VOICE_MALE else "Charon"
-        disp_name = voice_id or api_voice
+        api_voice = "Charon"
+        disp_name = "derviş"
         cinsiyet = "Erkek"
-        print(f"   🎙️ [Gemini TTS] Ses: {api_voice}")
+        print(f"   🎙️ [Turso DB] Varsayılan Turso Derviş Sesi (114 Hz Charon)")
 
     # VoxAtelier v3.0 DSP EQ & Perde Filtre Zinciri
     try:

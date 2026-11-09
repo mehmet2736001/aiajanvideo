@@ -1,9 +1,10 @@
 {
   "preferences": {
-    "voice": "dervis",
-    "voice_name": "tr-TR-AhmetNeural",
+    "voice": "0001",
+    "voice_name": "dervis",
     "speed": "-4%",
-    "model": "gemini-3.8-flash"
+    "model": "gemini-3.8-flash",
+    "voice_title": "Derviş (114 Hz)"
   },
   "learned_notes": [
     "Yönetmen dikey formatta (9:16, 1080x1920) 45-60 saniyelik vurucu tefekkür videoları üretir.",
