@@ -119,6 +119,14 @@ def health():
 
 AVAILABLE_SKILLS = [
     {
+        "id": "canvas_story",
+        "name": "Canvas Story Animation",
+        "icon": "palette",
+        "badge": "2D Deterministic",
+        "description": "Tek zaman değişkeni (t=0..DUR), Hermite smoothstep ve deterministik PRNG ile sinematik 2D görsel hikaye anlatımı.",
+        "starter_prompt": "Canvas Story Animation mimarisiyle; çözünürlükten bağımsız U birimi, Hermite geçişleri ve çok katmanlı 2D Canvas görsel akışıyla sarsıcı bir tefekkür senaryosu tasarla."
+    },
+    {
         "id": "tefekkur",
         "name": "İslami Tefekkür & İlim",
         "icon": "book-open",

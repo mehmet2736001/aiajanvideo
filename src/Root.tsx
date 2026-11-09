@@ -8,6 +8,7 @@ import { TefekkurVideo, TefekkurProps, computeDurationFrames } from './templates
 import generatedJson from './generatedData.json';
 import olumWords from '../public/olum-son-mu/kelimeler.json';
 import type { VideoData } from './types';
+import { CanvasStoryVideo, TOTAL_FRAMES as CANVAS_STORY_FRAMES } from './canvas-story-demo/CanvasStoryVideo';
 
 const FPS = 30;
 const activeProps = generatedJson as unknown as VideoData;
@@ -116,6 +117,7 @@ export const RemotionRoot: React.FC = () => {
       {/* 5. Elle hazırlanmış özel videolar (kendi index.ts dosyalarıyla da render edilebilir) */}
       <Composition id="OlumSonMu" component={OlumSonMuVideo} durationInFrames={OLUM_FRAMES} fps={FPS} width={1080} height={1920} />
       <Composition id="Hud112" component={Hud112Video} durationInFrames={HUD112_FRAMES} fps={FPS} width={1080} height={1920} />
+      <Composition id="CanvasStoryDemo" component={CanvasStoryVideo} durationInFrames={CANVAS_STORY_FRAMES} fps={FPS} width={1080} height={1920} />
     </>
   );
 };

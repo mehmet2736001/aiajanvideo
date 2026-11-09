@@ -1,5 +1,13 @@
 [
   {
+    "id": "canvas_story_animation",
+    "name": "Canvas Story Animation",
+    "icon": "palette",
+    "badge": "2D Timeline",
+    "description": "Zaman güdümlü (t=0..DUR), harici kütüphanesiz, deterministik PRNG ve Hermite smoothstep geçişli sinematik 2D Canvas görsel hikaye kurgusu.",
+    "prompt": "Canvas Story Animation prensipleriyle (tek zaman değişkeni t, Hermite smoothstep, çözünürlükten bağımsız U birimi, deterministik parçacıklar ve çok katmanlı sahne kurgusu) 1080x1920 dikey 45-60 saniyelik sinematik bir tefekkür videosu tasarla."
+  },
+  {
     "name": "Sarsıcı Tefekkür & Şok Kanca Kurgusu",
     "icon": "sparkles",
     "badge": "Özel Skill",
