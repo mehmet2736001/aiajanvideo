@@ -127,6 +127,14 @@ AVAILABLE_SKILLS = [
         "starter_prompt": "Canvas Story Animation mimarisiyle; çözünürlükten bağımsız U birimi, Hermite geçişleri ve çok katmanlı 2D Canvas görsel akışıyla sarsıcı bir tefekkür senaryosu tasarla."
     },
     {
+        "id": "3d_canvas_story",
+        "name": "3D Stories Canvas Animasyon",
+        "icon": "box",
+        "badge": "3D Perspective",
+        "description": "3D perspektif izdüşümü (focal/depth), 3D kamera matrisleri (yaw/pitch/dolly), derinlik sıralaması ve 3D holo modellerle sinematik görsel hikaye anlatımı.",
+        "starter_prompt": "3D Stories Canvas Animasyon mimarisiyle; tek zaman t değişkeni, 3D perspektif kamera izdüşümü, derinlik sisi, 3D stardust tüneli ve 3D dönen holo modellerle (Fe-26 / Jiroskop Mizan) sarsıcı bir tefekkür senaryosu tasarla."
+    },
+    {
         "id": "tefekkur",
         "name": "İslami Tefekkür & İlim",
         "icon": "book-open",

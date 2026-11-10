@@ -8,6 +8,14 @@
     "prompt": "Canvas Story Animation prensipleriyle (tek zaman değişkeni t, Hermite smoothstep, çözünürlükten bağımsız U birimi, deterministik parçacıklar ve çok katmanlı sahne kurgusu) 1080x1920 dikey 45-60 saniyelik sinematik bir tefekkür videosu tasarla."
   },
   {
+    "id": "3d_stories_canvas_animation",
+    "name": "3D Stories Canvas Animasyon",
+    "icon": "box",
+    "badge": "3D Perspective",
+    "description": "3D perspektif izdüşümü (focal/depth), 3D kamera matrisleri (yaw/pitch/dolly), derinlik sıralaması ve 3D holo telkafes modellerle (Fe-26 atom, jiroskop mizan) sinematik görsel hikaye kurgusu.",
+    "prompt": "3D Stories Canvas Animasyon mimarisiyle; tek zaman t değişkeni, 3D perspektif kamera izdüşümü, derinlik sisi, 3D stardust tüneli ve 3D dönen holo modellerle (Fe-26 / Jiroskop Mizan) 1080x1920 dikey 45-60 saniyelik sinematik bir tefekkür senaryosu kurgula."
+  },
+  {
     "name": "Sarsıcı Tefekkür & Şok Kanca Kurgusu",
     "icon": "sparkles",
     "badge": "Özel Skill",

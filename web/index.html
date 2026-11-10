@@ -170,20 +170,20 @@
               </div>
             </button>
 
-            <!-- 3D Animasyon Kartı -->
+            <!-- 3D Stories Canvas Animasyon Kartı -->
             <button id="skill-card-3d" onclick="setAnimationStyle('3d_motion')" class="w-full text-left p-3 rounded-xl transition border bg-white/[0.02] hover:bg-white/[0.06] border-white/5 text-slate-300 flex flex-col space-y-1.5 group relative">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold flex items-center space-x-2 text-slate-200 group-hover:text-purple-300">
                   <i data-lucide="box" class="w-4 h-4 text-purple-400"></i>
-                  <span>3D Animasyon</span>
+                  <span>3D Stories Canvas Animasyon</span>
                 </span>
                 <span id="badge-3d" class="text-[9px] px-2 py-0.5 rounded-full bg-white/5 text-slate-500 font-mono">Seç</span>
               </div>
-              <p class="text-[11px] text-slate-400 leading-snug">Warp Yıldız Seyahati · 3D Holo Atom Fe-26 · Doppler Spektrumu</p>
+              <p class="text-[11px] text-slate-400 leading-snug">3D Perspektif Kamera · 3D Holo Atom Fe-26 · Jiroskop Mizan · Warp Tüneli</p>
               <div class="flex items-center gap-1.5 pt-0.5">
-                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Stardust</span>
-                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Holo Model</span>
-                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Doppler HUD</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/25">3D Canvas</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Perspektif</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">3D Holo</span>
               </div>
             </button>
           </div>
@@ -1091,7 +1091,7 @@
     function setAnimationStyle(style) {
       currentAnimationStyle = style;
       updateAnimationStyleUI();
-      showToast(`🎬 Animasyon Motoru: ${style === '3d_motion' ? '3D Animasyon (Holo/Doppler)' : '2D Canvas (Kutsal Geometri/Mizan)'} seçildi!`);
+      showToast(`🎬 Animasyon Motoru: ${style === '3d_motion' ? '3D Stories Canvas Animasyon (Holo/Warp/Jiroskop)' : '2D Canvas Animasyon (Kutsal Geometri/Mizan)'} seçildi!`);
     }
 
     function updateAnimationStyleUI() {
@@ -1136,7 +1136,7 @@
           badge3d.innerText = '✓ Aktif';
         }
         if (activeBadge) {
-          activeBadge.innerText = '3D Motion';
+          activeBadge.innerText = '3D Canvas Story';
           activeBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/30 font-medium';
         }
       }
@@ -1177,7 +1177,7 @@
         autoResize(chatInput);
         chatInput.focus();
       }
-      showToast(`✦ "${title}" kurgusu yüklendi! (${style === '3d_motion' ? '3D Animasyon' : '2D Canvas'})`);
+      showToast(`✦ "${title}" kurgusu yüklendi! (${style === '3d_motion' ? '3D Stories Canvas Animasyon' : '2D Canvas Animasyon'})`);
     }
 
     window.addEventListener('DOMContentLoaded', async () => {
