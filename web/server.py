@@ -135,6 +135,14 @@ AVAILABLE_SKILLS = [
         "starter_prompt": "3D Stories Canvas Animasyon mimarisiyle; tek zaman t değişkeni, 3D perspektif kamera izdüşümü, derinlik sisi, 3D stardust tüneli ve 3D dönen holo modellerle (Fe-26 / Jiroskop Mizan) sarsıcı bir tefekkür senaryosu tasarla."
     },
     {
+        "id": "3d_clay_character",
+        "name": "3D Clay Karakter Animasyon",
+        "icon": "user",
+        "badge": "Clay / Vinyl 3D",
+        "description": "Normal haritalama, analitik küre kafa, 2 kemikli IK ve Sobel derinlik gölgelendirmesiyle beyaz vinil karakter ibretlik hikaye anlatımı.",
+        "starter_prompt": "3D Clay Karakter Animasyon mimarisiyle; uykudan uyanış, panik, göğe bakış, batıdan doğan güneş, tövbe gözyaşları ve secde sahneleri içeren 12 sahnelik derin bir ibret filmi kurgula."
+    },
+    {
         "id": "tefekkur",
         "name": "İslami Tefekkür & İlim",
         "icon": "book-open",

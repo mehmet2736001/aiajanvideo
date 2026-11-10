@@ -186,6 +186,23 @@
                 <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">3D Holo</span>
               </div>
             </button>
+
+            <!-- 3D Clay Karakter Animasyon Kartı -->
+            <button id="skill-card-clay" onclick="setAnimationStyle('3d_character')" class="w-full text-left p-3 rounded-xl transition border bg-white/[0.02] hover:bg-white/[0.06] border-white/5 text-slate-300 flex flex-col space-y-1.5 group relative">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold flex items-center space-x-2 text-slate-200 group-hover:text-amber-300">
+                  <i data-lucide="user" class="w-4 h-4 text-amber-400"></i>
+                  <span>3D Clay Karakter Animasyon</span>
+                </span>
+                <span id="badge-clay" class="text-[9px] px-2 py-0.5 rounded-full bg-white/5 text-slate-500 font-mono">Seç</span>
+              </div>
+              <p class="text-[11px] text-slate-400 leading-snug">Normal Haritası Gölgelendirme · Beyaz Vinil Karakter · 2 Kemikli IK · Secde & Tevbe</p>
+              <div class="flex items-center gap-1.5 pt-0.5">
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/25">Clay / Vinil</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">İbretlik Hikaye</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400">Ters Kinematik</span>
+              </div>
+            </button>
           </div>
         </div>
 
@@ -1094,46 +1111,45 @@
       if (isManual) window.userManualStyleSelected = true;
       currentAnimationStyle = style;
       updateAnimationStyleUI();
-      showToast(`🎬 Animasyon Motoru: ${style === '3d_motion' ? '3D Stories Canvas Animasyon (Holo/Warp/Jiroskop)' : '2D Canvas Animasyon (Kutsal Geometri/Mizan)'} seçildi!`);
+      const styleNames = {
+        '2d_canvas': '2D Canvas Animasyon (Kutsal Geometri / Mizan)',
+        '3d_motion': '3D Stories Canvas Animasyon (Holo / Warp / Jiroskop)',
+        '3d_character': '3D Clay Karakter Animasyon (Clay / Vinil / Secde)'
+      };
+      showToast(`🎬 Animasyon Motoru: ${styleNames[style] || style} seçildi!`);
     }
 
     function updateAnimationStyleUI() {
       const card2d = document.getElementById('skill-card-2d');
       const card3d = document.getElementById('skill-card-3d');
+      const cardClay = document.getElementById('skill-card-clay');
       const badge2d = document.getElementById('badge-2d');
       const badge3d = document.getElementById('badge-3d');
+      const badgeClay = document.getElementById('badge-clay');
       const activeBadge = document.getElementById('active-style-badge');
 
+      const normalClass = 'w-full text-left p-3 rounded-xl transition border bg-white/[0.02] hover:bg-white/[0.06] border-white/5 text-slate-300 flex flex-col space-y-1.5 group relative';
+      const normalBadgeClass = 'text-[9px] px-2 py-0.5 rounded-full bg-white/5 text-slate-500 font-mono';
+
+      if (card2d) card2d.className = normalClass;
+      if (card3d) card3d.className = normalClass;
+      if (cardClay) cardClay.className = normalClass;
+      if (badge2d) { badge2d.className = normalBadgeClass; badge2d.innerText = 'Seç'; }
+      if (badge3d) { badge3d.className = normalBadgeClass; badge3d.innerText = 'Seç'; }
+      if (badgeClay) { badgeClay.className = normalBadgeClass; badgeClay.innerText = 'Seç'; }
+
       if (currentAnimationStyle === '2d_canvas') {
-        if (card2d) {
-          card2d.className = 'w-full text-left p-3 rounded-xl transition border bg-brand-600/15 border-brand-500/40 text-white shadow-lg shadow-brand-500/10 flex flex-col space-y-1.5 group relative';
-        }
-        if (card3d) {
-          card3d.className = 'w-full text-left p-3 rounded-xl transition border bg-white/[0.02] hover:bg-white/[0.06] border-white/5 text-slate-300 flex flex-col space-y-1.5 group relative';
-        }
+        if (card2d) card2d.className = 'w-full text-left p-3 rounded-xl transition border bg-brand-600/15 border-brand-500/40 text-white shadow-lg shadow-brand-500/10 flex flex-col space-y-1.5 group relative';
         if (badge2d) {
           badge2d.className = 'text-[9px] px-2 py-0.5 rounded-full bg-brand-500/30 text-white font-mono font-bold';
           badge2d.innerText = '✓ Aktif';
-        }
-        if (badge3d) {
-          badge3d.className = 'text-[9px] px-2 py-0.5 rounded-full bg-white/5 text-slate-500 font-mono';
-          badge3d.innerText = 'Seç';
         }
         if (activeBadge) {
           activeBadge.innerText = '2D Canvas';
           activeBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 font-medium';
         }
-      } else {
-        if (card2d) {
-          card2d.className = 'w-full text-left p-3 rounded-xl transition border bg-white/[0.02] hover:bg-white/[0.06] border-white/5 text-slate-300 flex flex-col space-y-1.5 group relative';
-        }
-        if (card3d) {
-          card3d.className = 'w-full text-left p-3 rounded-xl transition border bg-purple-600/15 border-purple-500/40 text-white shadow-lg shadow-purple-500/10 flex flex-col space-y-1.5 group relative';
-        }
-        if (badge2d) {
-          badge2d.className = 'text-[9px] px-2 py-0.5 rounded-full bg-white/5 text-slate-500 font-mono';
-          badge2d.innerText = 'Seç';
-        }
+      } else if (currentAnimationStyle === '3d_motion') {
+        if (card3d) card3d.className = 'w-full text-left p-3 rounded-xl transition border bg-purple-600/15 border-purple-500/40 text-white shadow-lg shadow-purple-500/10 flex flex-col space-y-1.5 group relative';
         if (badge3d) {
           badge3d.className = 'text-[9px] px-2 py-0.5 rounded-full bg-purple-500/30 text-white font-mono font-bold';
           badge3d.innerText = '✓ Aktif';
@@ -1141,6 +1157,16 @@
         if (activeBadge) {
           activeBadge.innerText = '3D Canvas Story';
           activeBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/30 font-medium';
+        }
+      } else if (currentAnimationStyle === '3d_character') {
+        if (cardClay) cardClay.className = 'w-full text-left p-3 rounded-xl transition border bg-amber-600/15 border-amber-500/40 text-white shadow-lg shadow-amber-500/10 flex flex-col space-y-1.5 group relative';
+        if (badgeClay) {
+          badgeClay.className = 'text-[9px] px-2 py-0.5 rounded-full bg-amber-500/30 text-white font-mono font-bold';
+          badgeClay.innerText = '✓ Aktif';
+        }
+        if (activeBadge) {
+          activeBadge.innerText = '3D Clay Karakter';
+          activeBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 font-medium';
         }
       }
     }
