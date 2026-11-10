@@ -16,7 +16,7 @@ import { AtomFe26HoloModel } from '../components/effects/AtomFe26HoloModel';
 import { IslamicBalanceScale } from '../components/effects/IslamicBalanceScale';
 import { DopplerExpansionHUD } from '../components/effects/DopplerExpansionHUD';
 import { StardustConstellation } from '../components/effects/StardustConstellation';
-import { ClayHumanoid, ClayPose } from '../components/character/ClayHumanoid';
+import { RiggedClayCharacter, RigAction } from '../components/character/RiggedClayCharacter';
 
 export type Kelime = { w: string; s: number; e: number; c: number };
 
@@ -578,13 +578,8 @@ const SceneVisual3D: React.FC<{
 
 
 /**
- * GERÇEK 3D VİNİL KARAKTER (ÖN, YAN, ARKA, SECDE, DİZ ÇÖKME)
- * + HER SAHNEYE ÖZEL ZENGİN CANVAS EFEKTLERİ KATMANI
- * 
- * 1. Katman: 9:16 Yüksek Çözünürlüklü Sinematik Arka Plan
- * 2. Katman: Arka Planla Uyumlu Dinamik Canvas Efektleri (Çarklar, Güneş Huzmeleri, Sis, Siren Işıkları, Toz Zerreleri, Zikir Halesi)
- * 3. Katman: Zemin Temas Gölgesi
- * 4. Katman: GERÇEK 3D VİNİL KARAKTER (Turnaround Model Sheet'ten Üretilmiş Orijinal 3D Render)
+ * İSKELETLİ (RIGGED) 3D VİNİL KARAKTER MOTORU (WALK CYCLE, EL/KOL HAREKETLERİ, SECDE)
+ * + ARKA PLANLA UYUMLU DİNAMİK CANVAS EFEKTLERİ
  */
 const BG_FILES = [
   'scene1_bedroom.jpg',
@@ -601,19 +596,19 @@ const BG_FILES = [
   'scene12_mosque.jpg',
 ];
 
-const CHAR_FILES = [
-  'char_side.png',     // 0: Yatakta/odada şaşkınlıkla saate bakan 3D profil
-  'char_side.png',     // 1: Perdeye ve karanlık şehre bakan 3D profil
-  'char_front.png',    // 2: Sisli sokakta göğe bakan 3D ön görünüm
-  'char_phone.png',    // 3: 12:30 mavi telefon ışığına bakan 3D profil
-  'char_front.png',    // 4: Sirenler altında panik ve dehşetteki 3D ön görünüm
-  'char_side.png',     // 5: Antik çarklar ve zaman derinliğindeki 3D profil
-  'char_back.png',     // 6: Ufuktaki devasa güneş doğuşuna arkadan bakan 3D arka görünüm
-  'char_front.png',    // 7: Kızıl fırtınada dehşetle titreyen 3D ön görünüm
-  'char_kneeling.png', // 8: Çölde diz çöken 3D karakter
-  'char_kneeling.png', // 9: Spot ışığı altında tövbe eden, gözyaşı döken 3D karakter
-  'char_waving.png',   // 10: Sabah nurunda şükürle ayakta duran 3D karakter (Referans Görsel)
-  'char_secde.png',    // 11: Huşu içinde seccadede tam SECDEDEKİ 3D karakter
+const SCENE_RIG_ACTIONS: RigAction[] = [
+  'walk',        // 0: Yataktan kalkıp adım atarak yürüyen karakter
+  'reach',       // 1: Perdeye uzanan canlı kol ve el
+  'walk',        // 2: Sisli sokakta adım atarak yürüyen karakter (bacaklar/kollar salınır)
+  'idle_stand',  // 3: Mavi telefon ışığında canlı nefes alan karakter
+  'panic',       // 4: Sirenler altında elleri başında titreyen karakter
+  'walk',        // 5: Dönen saat çarkları önünde yürüyen karakter
+  'look_up',     // 6: Ufuktaki devasa güneşe kollarını açarak bakan karakter
+  'panic',       // 7: Kızıl fırtınada dehşetle titreyen karakter
+  'kneel',       // 8: Çölde diz çöken karakter
+  'kneel',       // 9: Spot ışığı altında diz çökmüş tövbe eden karakter
+  'wave',        // 10: Sabah nurunda şükürle el sallayan karakter
+  'secde',       // 11: Huşu içinde seccadede tam SECDEDEKİ karakter
 ];
 
 const SceneVisualClay: React.FC<{
@@ -627,46 +622,34 @@ const SceneVisualClay: React.FC<{
   const t = frame / fps;
 
   const bgFile = BG_FILES[m] || BG_FILES[0];
-  const charFile = CHAR_FILES[m] || 'char_front.png';
+  const action = SCENE_RIG_ACTIONS[m] || 'idle_stand';
 
-  // Yavaş sinematik dolly/zoom
+  // Yürüyüş ve kamera ilerlemesi
+  const walkProgress = interpolate(localFrame, [0, sceneDurationFrames], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
   const zoomScale = interpolate(localFrame, [0, sceneDurationFrames], [1.0, 1.05], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  // Karakter nefes ve titreme animasyonu
-  const breath = Math.sin(t * 3) * 4;
-  const shake = (m === 4 || m === 7) ? Math.sin(localFrame * 1.8) * 5 : 0;
-
-  // Karakter dikey konumu ve ölçeği
+  // Pozisyon ve parlama rengi
   let charX = 540;
-  let charY = 1200;
-  let charWidth = 360;
-  let charHeight = 600;
-  let shadowWidth = 140;
+  let charY = 1380;
+  let glowColor = undefined;
 
-  if (m === 11) {
-    // SECDE
-    charX = 520;
-    charY = 1260;
-    charWidth = 480;
-    charHeight = 310;
-    shadowWidth = 240;
-  } else if (m === 8 || m === 9) {
-    // DİZ ÇÖKME
-    charX = 540;
-    charY = 1250;
-    charWidth = 340;
-    charHeight = 480;
-    shadowWidth = 160;
-  } else if (m === 10) {
-    // WAVING POZ
-    charX = 540;
-    charY = 1210;
-    charWidth = 460;
-    charHeight = 560;
-    shadowWidth = 150;
+  if (action === 'secde') {
+    charY = 1380;
+    glowColor = 'rgba(255, 223, 115, 0.65)';
+  } else if (action === 'kneel') {
+    charY = 1420;
+    glowColor = (m === 9) ? 'rgba(56, 189, 248, 0.45)' : undefined;
+  } else if (m === 6) {
+    glowColor = 'rgba(255, 223, 115, 0.45)';
+  } else if (m === 4 || m === 7) {
+    glowColor = 'rgba(239, 68, 68, 0.45)';
   }
 
   return (
@@ -687,7 +670,7 @@ const SceneVisualClay: React.FC<{
             position: 'absolute',
             inset: 0,
             background:
-              'radial-gradient(circle at center, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%)',
+              'radial-gradient(circle at center, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.52) 100%)',
           }}
         />
       </AbsoluteFill>
@@ -711,11 +694,10 @@ const SceneVisualClay: React.FC<{
             </linearGradient>
           </defs>
 
-          {/* S1: Gece Yatak Odası - Kırmızı Dijital Saat Işıması & Gece Tozları */}
+          {/* S1: Gece Yatak Odası - Kırmızı Saat Işıması & Gece Tozları */}
           {m === 0 && (
             <g>
               <circle cx="210" cy="850" r={40 + Math.sin(t * 4) * 8} fill="rgba(239, 68, 68, 0.25)" />
-              {/* Uçuşan Gece Zerreleri */}
               {Array.from({ length: 18 }).map((_, i) => (
                 <circle
                   key={i}
@@ -850,12 +832,11 @@ const SceneVisualClay: React.FC<{
             </g>
           )}
 
-          {/* S10: Tövbe ve Spot Işığı - 60+ Uçuşan Altın Zerre ve Zemin Işık Havuzu */}
+          {/* S10: Tövbe ve Spot Işığı - 45+ Uçuşan Altın Zerre ve Zemin Işık Havuzu */}
           {m === 9 && (
             <g>
               <polygon points="540,150 200,1450 880,1450" fill="url(#spotlightCone)" />
               <ellipse cx="540" cy="1450" rx="340" ry="65" fill="rgba(255, 223, 115, 0.2)" />
-              {/* Uçuşan Altın Tövbe Parçacıkları */}
               {Array.from({ length: 45 }).map((_, i) => (
                 <circle
                   key={i}
@@ -889,15 +870,12 @@ const SceneVisualClay: React.FC<{
           {/* S12: Huşu Dolu SECDE - Dönen 16 Köşeli Selçuklu Zikir Halesi & İlahî Işık Dalgaları */}
           {m === 11 && (
             <g transform="translate(540, 1120)">
-              {/* Başın Üstündeki Dönen Altın Selçuklu Zikir Halesi */}
               <g transform={`rotate(${(t * 20) % 360})`}>
                 <circle cx="0" cy="0" r="160" stroke="#FFDF73" strokeWidth="2.5" fill="none" strokeDasharray="14 8" opacity={0.75} />
                 <circle cx="0" cy="0" r="110" stroke="#D4AF37" strokeWidth="1.5" fill="none" opacity={0.6} />
               </g>
-              {/* Genişleyen Zikir Dalgaları */}
               <circle cx="0" cy="0" r={80 + ((localFrame * 3.5) % 220)} stroke="#FFDF73" strokeWidth="2" fill="none" opacity={0.4} />
               <circle cx="0" cy="0" r={140} fill="url(#divineHalo)" />
-              {/* Göğe Yükselen Zikir Parçacıkları */}
               {Array.from({ length: 28 }).map((_, i) => (
                 <circle
                   key={i}
@@ -913,57 +891,17 @@ const SceneVisualClay: React.FC<{
         </svg>
       </AbsoluteFill>
 
-      {/* 3. KATMAN: ZEMİN TEMAS GÖLGESİ */}
-      <AbsoluteFill style={{ pointerEvents: 'none' }}>
-        <svg viewBox="0 0 1080 1920" style={{ width: '100%', height: '100%', position: 'absolute' }}>
-          <ellipse
-            cx={charX + shake}
-            cy={charY + charHeight * 0.48}
-            rx={shadowWidth}
-            ry={shadowWidth * 0.18}
-            fill="rgba(0, 0, 0, 0.72)"
-            filter="blur(10px)"
-          />
-        </svg>
-      </AbsoluteFill>
-
-      {/* 4. KATMAN: MODEL SHEET'TEN GELEN GERÇEK 3D VİNİL KARAKTER ASSETİ */}
-      <AbsoluteFill
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          pointerEvents: 'none',
-        }}
-      >
-        <div
-          style={{
-            position: 'absolute',
-            left: charX - charWidth / 2 + shake,
-            top: charY - charHeight / 2 + breath,
-            width: charWidth,
-            height: charHeight,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            filter:
-              m === 11
-                ? 'drop-shadow(0 0 35px rgba(255, 223, 115, 0.65))'
-                : m === 9
-                ? 'drop-shadow(0 0 25px rgba(56, 189, 248, 0.45))'
-                : 'drop-shadow(0 15px 30px rgba(0, 0, 0, 0.65))',
-          }}
-        >
-          <Img
-            src={staticFile(`character/${charFile}`)}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
-            }}
-          />
-        </div>
-      </AbsoluteFill>
+      {/* 3. KATMAN: İSKELETLİ (RIGGED) 3D VİNİL KARAKTER MOTORU (GERÇEK ADIM ATMA & KOL HAREKETLERİ) */}
+      <RiggedClayCharacter
+        action={action}
+        x={charX}
+        y={charY}
+        scale={1.08}
+        time={t}
+        walkProgress={walkProgress}
+        walkSpeed={7.5}
+        glowColor={glowColor}
+      />
     </AbsoluteFill>
   );
 };
