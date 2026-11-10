@@ -170,5 +170,35 @@
     "created_at": "2026-11-09T23:44:48.197410",
     "output_path": "out/son-gunun-olsaydi/son-gunun-olsaydi.mp4",
     "pano_path": "out/son-gunun-olsaydi/pano.jpg"
+  },
+  {
+    "id": "vid_1794338724_aynadaki-emanet-genclik-zaman",
+    "title": "Aynadaki Emanet: Gençlik Nereye Gidiyor?",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 45.45,
+    "word_count": 83,
+    "quality_score": 100,
+    "quality_notes": [
+      "Kareler dolu, kontrast ve hareket yeterli."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-10T22:25:24.228533",
+    "output_path": "out/aynadaki-emanet-genclik-zaman/aynadaki-emanet-genclik-zaman.mp4",
+    "pano_path": "out/aynadaki-emanet-genclik-zaman/pano.jpg"
+  },
+  {
+    "id": "vid_1794339713_kainatin-12-sirri",
+    "title": "Kâinatın 12 Sırrı: Kalp, Zaman ve Hakikat",
+    "category": "İslami Tefekkür & Kozmoloji",
+    "duration_seconds": 71.15,
+    "word_count": 123,
+    "quality_score": 100,
+    "quality_notes": [
+      "Kareler dolu, kontrast ve hareket yeterli."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-10T22:41:53.406270",
+    "output_path": "out/kainatin-12-sirri/kainatin-12-sirri.mp4",
+    "pano_path": "out/kainatin-12-sirri/pano.jpg"
   }
 ]
