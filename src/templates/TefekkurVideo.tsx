@@ -578,10 +578,13 @@ const SceneVisual3D: React.FC<{
 
 
 /**
- * 12 SAHNE İÇİN ÖZEL ARKA PLAN GÖRSELLERİ VE SABİT TAM ANATOMİK 3D CLAY KARAKTER MOTORU
- * Her sahnede:
- * 1. O sahneye özel yüksek çözünürlüklü 9:16 arkaplan görseli (yatak odası, pencere, sokak, ufuk, mescid vb.)
- * 2. Sabit, değişmeyen, elleri (5 parmak) ve ayakları tam görünen 3D beyaz clay karakter!
+ * GERÇEK 3D VİNİL KARAKTER (ÖN, YAN, ARKA, SECDE, DİZ ÇÖKME)
+ * + HER SAHNEYE ÖZEL ZENGİN CANVAS EFEKTLERİ KATMANI
+ * 
+ * 1. Katman: 9:16 Yüksek Çözünürlüklü Sinematik Arka Plan
+ * 2. Katman: Arka Planla Uyumlu Dinamik Canvas Efektleri (Çarklar, Güneş Huzmeleri, Sis, Siren Işıkları, Toz Zerreleri, Zikir Halesi)
+ * 3. Katman: Zemin Temas Gölgesi
+ * 4. Katman: GERÇEK 3D VİNİL KARAKTER (Turnaround Model Sheet'ten Üretilmiş Orijinal 3D Render)
  */
 const BG_FILES = [
   'scene1_bedroom.jpg',
@@ -598,19 +601,19 @@ const BG_FILES = [
   'scene12_mosque.jpg',
 ];
 
-const SCENE_POSES: ClayPose[] = [
-  'waving',             // 0: Sabah uyanış / Referans duruşu (elleri ve ayakları tam)
-  'reaching_curtain',   // 1: Perdeye uzanan 5 parmaklı el, ayaklar yerde
-  'looking_up_street',  // 2: Sokakta göğe açık iki el, ayaklar yerde
-  'holding_phone',      // 3: İki eliyle parlayan telefonu tutan karakter, ayaklar yerde
-  'panic',              // 4: İki eli başında panik, ayaklar yerde
-  'shock_mouth',        // 5: Göz/zaman idraki, eller ağızda
-  'facing_horizon',     // 6: Batıdan yükselen güneşe bakan karakter, ayaklar yerde
-  'shock_mouth',        // 7: Dehşet ve hakikat şoku, eller ağızda titriyor
-  'praying_repentance', // 8: Kibrin kırılışı / diz çökme
-  'praying_repentance', // 9: Samimi tövbe, duada birleşen eller, parlayan gözyaşı
-  'morning_relief',     // 10: Sabah nurunda kollarını iki yana açmış tebessüm eden karakter
-  'secde',              // 11: HUŞU İÇİNDE SECDE (Alın yerde, eller seccadede, dizler/ayaklar seccadede)
+const CHAR_FILES = [
+  'char_side.png',     // 0: Yatakta/odada şaşkınlıkla saate bakan 3D profil
+  'char_side.png',     // 1: Perdeye ve karanlık şehre bakan 3D profil
+  'char_front.png',    // 2: Sisli sokakta göğe bakan 3D ön görünüm
+  'char_phone.png',    // 3: 12:30 mavi telefon ışığına bakan 3D profil
+  'char_front.png',    // 4: Sirenler altında panik ve dehşetteki 3D ön görünüm
+  'char_side.png',     // 5: Antik çarklar ve zaman derinliğindeki 3D profil
+  'char_back.png',     // 6: Ufuktaki devasa güneş doğuşuna arkadan bakan 3D arka görünüm
+  'char_front.png',    // 7: Kızıl fırtınada dehşetle titreyen 3D ön görünüm
+  'char_kneeling.png', // 8: Çölde diz çöken 3D karakter
+  'char_kneeling.png', // 9: Spot ışığı altında tövbe eden, gözyaşı döken 3D karakter
+  'char_waving.png',   // 10: Sabah nurunda şükürle ayakta duran 3D karakter (Referans Görsel)
+  'char_secde.png',    // 11: Huşu içinde seccadede tam SECDEDEKİ 3D karakter
 ];
 
 const SceneVisualClay: React.FC<{
@@ -624,36 +627,51 @@ const SceneVisualClay: React.FC<{
   const t = frame / fps;
 
   const bgFile = BG_FILES[m] || BG_FILES[0];
-  const pose = SCENE_POSES[m] || 'waving';
+  const charFile = CHAR_FILES[m] || 'char_front.png';
 
-  // Sinematik yavaş kamera yaklaşması
+  // Yavaş sinematik dolly/zoom
   const zoomScale = interpolate(localFrame, [0, sceneDurationFrames], [1.0, 1.05], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  // Pozlara göre dikey zemin konumu ve ölçek
-  let charY = 1420;
-  let charScale = 1.08;
-  let rimColor = 'rgba(255, 255, 255, 0.5)';
+  // Karakter nefes ve titreme animasyonu
+  const breath = Math.sin(t * 3) * 4;
+  const shake = (m === 4 || m === 7) ? Math.sin(localFrame * 1.8) * 5 : 0;
 
-  if (pose === 'secde') {
-    charY = 1380;
-    charScale = 1.15;
-    rimColor = '#FFDF73'; // Altın ilahi nur
-  } else if (pose === 'praying_repentance') {
-    charY = 1390;
-    charScale = 1.12;
-    rimColor = '#38BDF8'; // Tövbe nuru
-  } else if (m === 6) {
-    rimColor = '#FFDF73'; // Güneş ışığı vurgusu
-  } else if (m === 4 || m === 7) {
-    rimColor = '#EF4444'; // Kırmızı alarm vurgusu
+  // Karakter dikey konumu ve ölçeği
+  let charX = 540;
+  let charY = 1200;
+  let charWidth = 360;
+  let charHeight = 600;
+  let shadowWidth = 140;
+
+  if (m === 11) {
+    // SECDE
+    charX = 520;
+    charY = 1260;
+    charWidth = 480;
+    charHeight = 310;
+    shadowWidth = 240;
+  } else if (m === 8 || m === 9) {
+    // DİZ ÇÖKME
+    charX = 540;
+    charY = 1250;
+    charWidth = 340;
+    charHeight = 480;
+    shadowWidth = 160;
+  } else if (m === 10) {
+    // WAVING POZ
+    charX = 540;
+    charY = 1210;
+    charWidth = 460;
+    charHeight = 560;
+    shadowWidth = 150;
   }
 
   return (
     <AbsoluteFill>
-      {/* 1. KATMAN: O SAHNEYE ÖZEL YÜKSEK ÇÖZÜNÜRLÜKLÜ SİNEMATİK ARKA PLAN GÖRSELİ */}
+      {/* 1. KATMAN: SİNEMATİK ARKA PLAN GÖRSELİ */}
       <AbsoluteFill style={{ overflow: 'hidden' }}>
         <Img
           src={staticFile(`backgrounds/${bgFile}`)}
@@ -664,37 +682,292 @@ const SceneVisualClay: React.FC<{
             transform: `scale(${zoomScale})`,
           }}
         />
-        {/* Karakter ve tipografi kontrastı için hafif sinematik vinyet */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
             background:
-              'radial-gradient(circle at center, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.55) 100%)',
+              'radial-gradient(circle at center, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%)',
           }}
         />
       </AbsoluteFill>
 
-      {/* 2. KATMAN: SABİT KALAN, ELLERİ (5 PARMAK) VE AYAKLARI TAM 3D BEYAZ CLAY KARAKTER */}
-      <AbsoluteFill>
-        <svg
-          viewBox="0 0 1080 1920"
-          style={{ width: '100%', height: '100%', position: 'absolute' }}
-        >
-          <ClayHumanoid
-            pose={pose}
-            x={540}
-            y={charY}
-            scale={charScale}
-            time={t}
-            tearProgress={localFrame}
-            rimColor={rimColor}
+      {/* 2. KATMAN: ARKA PLANLA UYUMLU DİNAMİK CANVAS VE SVG EFEKTLERİ */}
+      <AbsoluteFill style={{ pointerEvents: 'none' }}>
+        <svg viewBox="0 0 1080 1920" style={{ width: '100%', height: '100%', position: 'absolute' }}>
+          <defs>
+            <radialGradient id="sunbeamGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="rgba(255, 223, 115, 0.45)" />
+              <stop offset="100%" stopColor="rgba(255, 223, 115, 0)" />
+            </radialGradient>
+            <radialGradient id="divineHalo" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="rgba(255, 223, 115, 0.85)" />
+              <stop offset="40%" stopColor="rgba(212, 175, 55, 0.4)" />
+              <stop offset="100%" stopColor="rgba(212, 175, 55, 0)" />
+            </radialGradient>
+            <linearGradient id="spotlightCone" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="rgba(255, 223, 115, 0.55)" />
+              <stop offset="100%" stopColor="rgba(255, 223, 115, 0.05)" />
+            </linearGradient>
+          </defs>
+
+          {/* S1: Gece Yatak Odası - Kırmızı Dijital Saat Işıması & Gece Tozları */}
+          {m === 0 && (
+            <g>
+              <circle cx="210" cy="850" r={40 + Math.sin(t * 4) * 8} fill="rgba(239, 68, 68, 0.25)" />
+              {/* Uçuşan Gece Zerreleri */}
+              {Array.from({ length: 18 }).map((_, i) => (
+                <circle
+                  key={i}
+                  cx={(i * 59 + t * 25) % 1080}
+                  cy={(i * 97 + t * 18) % 1920}
+                  r={(i % 3) + 1.5}
+                  fill="#94A3B8"
+                  opacity={0.35 + Math.sin(t * 2 + i) * 0.2}
+                />
+              ))}
+            </g>
+          )}
+
+          {/* S2: Pencere & Gece Şehir Bokeh Işıkları */}
+          {m === 1 && (
+            <g>
+              {Array.from({ length: 22 }).map((_, i) => (
+                <circle
+                  key={i}
+                  cx={180 + (i * 38) % 720}
+                  cy={380 + (i * 47) % 520}
+                  r={(i % 4) * 4 + 6}
+                  fill={i % 2 === 0 ? '#F59E0B' : '#38BDF8'}
+                  opacity={0.25 + Math.sin(t * 2 + i) * 0.15}
+                />
+              ))}
+            </g>
+          )}
+
+          {/* S3: Sisli Sokak - Sokak Lambası Işık Konileri ve Sokak Sisi */}
+          {m === 2 && (
+            <g>
+              <polygon points="180,450 80,1400 280,1400" fill="url(#sunbeamGlow)" opacity={0.6} />
+              <polygon points="900,450 800,1400 1000,1400" fill="url(#sunbeamGlow)" opacity={0.5} />
+              {Array.from({ length: 25 }).map((_, i) => (
+                <ellipse
+                  key={i}
+                  cx={(i * 48 + t * 35) % 1080}
+                  cy={1100 + (i * 18) % 350}
+                  rx={40 + (i % 3) * 20}
+                  ry={8}
+                  fill="#CBD5E1"
+                  opacity={0.12 + Math.sin(t + i) * 0.08}
+                />
+              ))}
+            </g>
+          )}
+
+          {/* S4: Mavi Telefon Işığı - Genişleyen Siber Dalgalar */}
+          {m === 3 && (
+            <g transform="translate(540, 1080)">
+              <circle cx="0" cy="0" r={80 + ((localFrame * 3) % 180)} stroke="#38BDF8" strokeWidth="2.5" fill="none" opacity={0.4} />
+              <circle cx="0" cy="0" r={40 + ((localFrame * 4) % 140)} stroke="#60A5FA" strokeWidth="1.5" fill="none" opacity={0.5} />
+              <circle cx="0" cy="0" r={160} fill="rgba(56, 189, 248, 0.15)" />
+            </g>
+          )}
+
+          {/* S5: Panik & Dönen Kırmızı/Mavi Acil Durum Sirenleri */}
+          {m === 4 && (
+            <g transform={`translate(540, 960) rotate(${(t * 260) % 360})`}>
+              <polygon points="0,0 -500,-900 500,-900" fill="rgba(239, 68, 68, 0.35)" />
+              <polygon points="0,0 -500,900 500,900" fill="rgba(59, 130, 246, 0.35)" />
+            </g>
+          )}
+
+          {/* S6: Makro Saat - Dönen Altın Dişliler ve Zaman Dalgaları */}
+          {m === 5 && (
+            <g transform="translate(540, 750)">
+              <g transform={`rotate(${(t * 30) % 360})`}>
+                <circle cx="0" cy="0" r="380" stroke="#D4AF37" strokeWidth="3" fill="none" strokeDasharray="16 10" opacity={0.65} />
+                <circle cx="0" cy="0" r="280" stroke="#FFDF73" strokeWidth="2" fill="none" opacity={0.5} />
+              </g>
+              <g transform={`rotate(${(-t * 45) % 360})`}>
+                <line x1="0" y1="0" x2="0" y2="-220" stroke="#FFDF73" strokeWidth="4" strokeLinecap="round" />
+                <line x1="0" y1="0" x2="160" y2="0" stroke="#FFF" strokeWidth="3" strokeLinecap="round" />
+              </g>
+            </g>
+          )}
+
+          {/* S7: Batıdan Doğan Güneş - 360 Derece Yayılan Altın Huzmeler */}
+          {m === 6 && (
+            <g transform="translate(540, 1080)">
+              <circle cx="0" cy="0" r={320 + Math.sin(t * 3) * 25} fill="url(#sunbeamGlow)" opacity={0.85} />
+              {Array.from({ length: 16 }).map((_, i) => (
+                <line
+                  key={i}
+                  x1="0"
+                  y1="0"
+                  x2={Math.cos(i * (Math.PI / 8)) * 900}
+                  y2={Math.sin(i * (Math.PI / 8)) * 900}
+                  stroke="#FFDF73"
+                  strokeWidth="3.5"
+                  strokeDasharray="40 20"
+                  opacity={0.35 + Math.sin(t * 3 + i) * 0.2}
+                />
+              ))}
+            </g>
+          )}
+
+          {/* S8: Kızıl Fırtına - Şimşekler ve Türbülans */}
+          {m === 7 && (
+            <g>
+              <rect x="0" y="0" width="1080" height="1920" fill="rgba(225, 29, 72, 0.22)" opacity={0.6 + Math.sin(t * 8) * 0.3} />
+              {Array.from({ length: 30 }).map((_, i) => (
+                <circle
+                  key={i}
+                  cx={(i * 37 + t * 80) % 1080}
+                  cy={(i * 67 + t * 50) % 1300}
+                  r={(i % 3) + 2}
+                  fill="#FDA4AF"
+                  opacity={0.4}
+                />
+              ))}
+            </g>
+          )}
+
+          {/* S9: Çöl Kum Fırtınası - Rüzgar Çizgileri ve Uçuşan Amber Tozları */}
+          {m === 8 && (
+            <g>
+              {Array.from({ length: 35 }).map((_, i) => (
+                <line
+                  key={i}
+                  x1={(i * 35 + t * 240) % 1300 - 150}
+                  y1={850 + (i * 28) % 650}
+                  x2={(i * 35 + t * 240) % 1300 + 40}
+                  y2={850 + (i * 28) % 650 + 6}
+                  stroke="#F59E0B"
+                  strokeWidth={(i % 3) + 1.5}
+                  opacity={0.4}
+                />
+              ))}
+            </g>
+          )}
+
+          {/* S10: Tövbe ve Spot Işığı - 60+ Uçuşan Altın Zerre ve Zemin Işık Havuzu */}
+          {m === 9 && (
+            <g>
+              <polygon points="540,150 200,1450 880,1450" fill="url(#spotlightCone)" />
+              <ellipse cx="540" cy="1450" rx="340" ry="65" fill="rgba(255, 223, 115, 0.2)" />
+              {/* Uçuşan Altın Tövbe Parçacıkları */}
+              {Array.from({ length: 45 }).map((_, i) => (
+                <circle
+                  key={i}
+                  cx={360 + (i * 23 + Math.sin(t * 2 + i) * 35) % 360}
+                  cy={350 + (i * 33 + t * 45) % 1000}
+                  r={(i % 3) + 2}
+                  fill="#FFDF73"
+                  opacity={0.5 + Math.sin(t * 3 + i) * 0.3}
+                />
+              ))}
+            </g>
+          )}
+
+          {/* S11: Sabah Nurunda Kurtuluş - Görkemli Güneş Huzmeleri & Beyaz Orblar */}
+          {m === 10 && (
+            <g>
+              <polygon points="900,100 1080,100 350,1550 0,1550" fill="url(#spotlightCone)" opacity={0.7} />
+              {Array.from({ length: 30 }).map((_, i) => (
+                <circle
+                  key={i}
+                  cx={(i * 45 + t * 40) % 1080}
+                  cy={(i * 65 + t * 30) % 1500}
+                  r={(i % 4) * 3 + 3}
+                  fill="#FFFFFF"
+                  opacity={0.3 + Math.sin(t * 2 + i) * 0.2}
+                />
+              ))}
+            </g>
+          )}
+
+          {/* S12: Huşu Dolu SECDE - Dönen 16 Köşeli Selçuklu Zikir Halesi & İlahî Işık Dalgaları */}
+          {m === 11 && (
+            <g transform="translate(540, 1120)">
+              {/* Başın Üstündeki Dönen Altın Selçuklu Zikir Halesi */}
+              <g transform={`rotate(${(t * 20) % 360})`}>
+                <circle cx="0" cy="0" r="160" stroke="#FFDF73" strokeWidth="2.5" fill="none" strokeDasharray="14 8" opacity={0.75} />
+                <circle cx="0" cy="0" r="110" stroke="#D4AF37" strokeWidth="1.5" fill="none" opacity={0.6} />
+              </g>
+              {/* Genişleyen Zikir Dalgaları */}
+              <circle cx="0" cy="0" r={80 + ((localFrame * 3.5) % 220)} stroke="#FFDF73" strokeWidth="2" fill="none" opacity={0.4} />
+              <circle cx="0" cy="0" r={140} fill="url(#divineHalo)" />
+              {/* Göğe Yükselen Zikir Parçacıkları */}
+              {Array.from({ length: 28 }).map((_, i) => (
+                <circle
+                  key={i}
+                  cx={-150 + (i * 18) % 300}
+                  cy={-20 - (t * 70 + i * 25) % 400}
+                  r={(i % 3) + 2}
+                  fill="#FFDF73"
+                  opacity={0.6}
+                />
+              ))}
+            </g>
+          )}
+        </svg>
+      </AbsoluteFill>
+
+      {/* 3. KATMAN: ZEMİN TEMAS GÖLGESİ */}
+      <AbsoluteFill style={{ pointerEvents: 'none' }}>
+        <svg viewBox="0 0 1080 1920" style={{ width: '100%', height: '100%', position: 'absolute' }}>
+          <ellipse
+            cx={charX + shake}
+            cy={charY + charHeight * 0.48}
+            rx={shadowWidth}
+            ry={shadowWidth * 0.18}
+            fill="rgba(0, 0, 0, 0.72)"
+            filter="blur(10px)"
           />
         </svg>
+      </AbsoluteFill>
+
+      {/* 4. KATMAN: MODEL SHEET'TEN GELEN GERÇEK 3D VİNİL KARAKTER ASSETİ */}
+      <AbsoluteFill
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          pointerEvents: 'none',
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            left: charX - charWidth / 2 + shake,
+            top: charY - charHeight / 2 + breath,
+            width: charWidth,
+            height: charHeight,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            filter:
+              m === 11
+                ? 'drop-shadow(0 0 35px rgba(255, 223, 115, 0.65))'
+                : m === 9
+                ? 'drop-shadow(0 0 25px rgba(56, 189, 248, 0.45))'
+                : 'drop-shadow(0 15px 30px rgba(0, 0, 0, 0.65))',
+          }}
+        >
+          <Img
+            src={staticFile(`character/${charFile}`)}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+            }}
+          />
+        </div>
       </AbsoluteFill>
     </AbsoluteFill>
   );
 };
+
 
 export const TefekkurVideo: React.FC<TefekkurProps> = ({
   slug,
