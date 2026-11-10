@@ -1088,7 +1088,10 @@
     // --- ANIMATION STYLE & ACCORDION SYSTEM ---
     let currentAnimationStyle = '2d_canvas';
 
-    function setAnimationStyle(style) {
+    window.userManualStyleSelected = false;
+
+    function setAnimationStyle(style, isManual = true) {
+      if (isManual) window.userManualStyleSelected = true;
       currentAnimationStyle = style;
       updateAnimationStyleUI();
       showToast(`🎬 Animasyon Motoru: ${style === '3d_motion' ? '3D Stories Canvas Animasyon (Holo/Warp/Jiroskop)' : '2D Canvas Animasyon (Kutsal Geometri/Mizan)'} seçildi!`);
@@ -2007,6 +2010,12 @@
         const slug = payload.slug || "tefekkur-video";
         const voice = payload.voice || appSettings.voice || "dervis";
         const lines = payload.lines || [];
+        const suggestedStyle = payload.animation_style || (window.userManualStyleSelected ? currentAnimationStyle : '2d_canvas');
+
+        // Auto-sync style if user hasn't manually overridden
+        if (!window.userManualStyleSelected && payload.animation_style) {
+          setAnimationStyle(payload.animation_style, false);
+        }
 
         // Find voice display title
         const foundVoice = allVoices.find(v => v.id === voice);
@@ -2025,9 +2034,14 @@
                 </div>
               </div>
 
-              <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-mono truncate max-w-[140px]" title="${voiceDisplay}">
-                ${voiceDisplay}
-              </span>
+              <div class="flex items-center space-x-1.5">
+                <span class="px-2 py-0.5 rounded-full ${suggestedStyle === '3d_motion' ? 'bg-purple-500/15 text-purple-300 border-purple-500/30' : 'bg-brand-500/15 text-brand-300 border-brand-500/30'} border text-[10px] font-mono">
+                  ${suggestedStyle === '3d_motion' ? '🟣 3D Stories' : '🔵 2D Canvas'}
+                </span>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-mono truncate max-w-[140px]" title="${voiceDisplay}">
+                  ${voiceDisplay}
+                </span>
+              </div>
             </div>
 
             <!-- Lines Preview Dropdown -->
@@ -2182,6 +2196,7 @@
       const title = pkg.title || "Yeni Tefekkür Videosu";
       const lines = pkg.lines || [];
       const voice_id = pkg.voice || appSettings.voice || "dervis";
+      const finalStyle = window.userManualStyleSelected ? (currentAnimationStyle || '2d_canvas') : (pkg.animation_style || currentAnimationStyle || '2d_canvas');
 
       if (lines.length === 0) {
         showToast("Üretilecek senaryo satırı bulunamadı!", true);
@@ -2206,7 +2221,7 @@
             title: title,
             lines: lines,
             voice_id: voice_id,
-            animation_style: currentAnimationStyle || '2d_canvas'
+            animation_style: finalStyle
           })
         });
         const result = await res.json();
