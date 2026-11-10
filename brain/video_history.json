@@ -245,5 +245,20 @@
     "created_at": "2026-11-11T01:17:37.270669",
     "output_path": "out/gunes-dogmadiginda/gunes-dogmadiginda.mp4",
     "pano_path": "out/gunes-dogmadiginda/pano.jpg"
+  },
+  {
+    "id": "vid_1794350211_gunes-dogmadiginda",
+    "title": "Güneş Doğmadığında: Tövbe ve Secde",
+    "category": "İslami Tefekkür",
+    "duration_seconds": 81.07,
+    "word_count": 134,
+    "quality_score": 100,
+    "quality_notes": [
+      "Kareler dolu, kontrast ve hareket yeterli."
+    ],
+    "status": "mastered",
+    "created_at": "2026-11-11T01:36:51.810096",
+    "output_path": "out/gunes-dogmadiginda/gunes-dogmadiginda.mp4",
+    "pano_path": "out/gunes-dogmadiginda/pano.jpg"
   }
 ]
